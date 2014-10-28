@@ -1,8 +1,8 @@
 package edu.gaed.modelo;
 
 public class Turma {
-	private int ID,Serie,Ano_letivo,Bimestre;
-	private String Nome,Periodo;
+	private int ID,serie,ano,bimestre;
+	private String nome,periodo;
 	public int getID() {
 		return ID;
 	}
@@ -10,40 +10,40 @@ public class Turma {
 		ID = iD;
 	}
 	public int getSerie() {
-		return Serie;
+		return serie;
 	}
 	public void setSerie(int serie) {
-		Serie = serie;
+		this.serie = serie;
 	}
 	public int getAno_letivo() {
-		return Ano_letivo;
+		return ano;
 	}
 	public void setAno_letivo(int ano_letivo) {
-		Ano_letivo = ano_letivo;
+		ano = ano_letivo;
 	}
 	public int getBimestre() {
-		return Bimestre;
+		return bimestre;
 	}
 	public void setBimestre(int bimestre) {
-		Bimestre = bimestre;
+		this.bimestre = bimestre;
 	}
 	public String getNome() {
-		return Nome;
+		return nome;
 	}
 	public void setNome(String nome) {
-		Nome = nome;
+		this.nome = nome;
 	}
 	public String getPeriodo() {
-		return Periodo;
+		return periodo;
 	}
 	public void setPeriodo(String periodo) {
-		Periodo = periodo;
+		this.periodo = periodo;
 	}
 	@Override
 	public String toString() {
-		return "Turma [ID=" + ID + ", Serie=" + Serie + ", Ano_letivo="
-				+ Ano_letivo + ", Bimestre=" + Bimestre + ", Nome=" + Nome
-				+ ", Periodo=" + Periodo + "]";
+		return "Turma [ID=" + ID + ", Serie=" + serie + ", Ano_letivo="
+				+ ano + ", Bimestre=" + bimestre + ", Nome=" + nome
+				+ ", Periodo=" + periodo + "]";
 	}
 	
 	

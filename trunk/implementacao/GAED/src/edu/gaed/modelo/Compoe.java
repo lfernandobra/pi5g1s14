@@ -1,37 +1,37 @@
 package edu.gaed.modelo;
 
 public class Compoe {
-	private Disciplina Disciplina;
-	private Boletim Boletim;
-	private float Nota;
-	private int Faltas;
+	private Disciplina disciplina;
+	private Boletim boletim;
+	private float nota;
+	private int faltas;
 	public Disciplina getDisciplina() {
-		return Disciplina;
+		return disciplina;
 	}
 	public void setDisciplina(Disciplina disciplina) {
-		Disciplina = disciplina;
+		this.disciplina = disciplina;
 	}
 	public Boletim getBoletim() {
-		return Boletim;
+		return boletim;
 	}
 	public void setBoletim(Boletim boletim) {
-		Boletim = boletim;
+		this.boletim = boletim;
 	}
 	public float getNota() {
-		return Nota;
+		return nota;
 	}
 	public void setNota(float nota) {
-		Nota = nota;
+		this.nota = nota;
 	}
 	public int getFaltas() {
-		return Faltas;
+		return faltas;
 	}
 	public void setFaltas(int faltas) {
-		Faltas = faltas;
+		this.faltas = faltas;
 	}
 	@Override
 	public String toString() {
-		return "Compoe [Disciplina=" + Disciplina + ", Boletim=" + Boletim
-				+ ", Nota=" + Nota + ", Faltas=" + Faltas + "]";
+		return "Compoe [Disciplina=" + disciplina + ", Boletim=" + boletim
+				+ ", Nota=" + nota + ", Faltas=" + faltas + "]";
 	}
 }

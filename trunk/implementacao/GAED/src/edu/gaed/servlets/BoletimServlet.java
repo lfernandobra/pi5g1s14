@@ -10,7 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import edu.gaed.dao.BoletimDao;
-import edu.gaed.modelo.BoletimTurma;
+import edu.gaed.modelo.Boletim;
+//import edu.gaed.modelo.BoletimTurma;
 
 
 /**
@@ -42,7 +43,7 @@ public class BoletimServlet extends HttpServlet {
 		
 		//obtem a lista de contatos do banco com base no identificador do usuario
 		BoletimDao boletimDao = new BoletimDao();
-		List<BoletimTurma> boletim = boletimDao.obterBoletimTurma(1, 1); //teste
+		List<Boletim> boletim = boletimDao.obterBoletimTurma(1, 1); //teste
 						
 		System.out.println(boletim);				
 		//coloca agenda no escopo de requisição para ser exibido no agenda.jsp
