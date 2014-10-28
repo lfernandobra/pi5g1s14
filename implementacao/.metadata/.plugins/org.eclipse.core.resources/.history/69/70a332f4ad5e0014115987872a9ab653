@@ -1,0 +1,91 @@
+package edu.gaed.dao;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+import edu.gaed.modelo.Aluno;
+import edu.gaed.modelo.Boletim;
+import edu.gaed.modelo.Compoe;
+import edu.gaed.modelo.Disciplina;
+import edu.gaed.modelo.Estuda;
+import edu.gaed.modelo.Inserido;
+import edu.gaed.modelo.Turma;
+
+
+public class BoletimDao extends BaseDao{
+	public List<BoletimTurma> obterBoletimTurma(int ID_Turma,int serie) {
+		
+		List<String> boletimTurma = new ArrayList<Compoe>();
+		Connection conn = null;
+		
+		try {
+			conn = this.getConnection();
+			
+			String sql = "select u.nome,t.Serie,t.Nome_Turma,d.ID_Disciplina,d.nome_disciplina,b.ID_Boletim,b.bimestre,c.nota,c.faltas from usuario u,turma t,disciplina d,boletim b,compoe c,aluno a ,estuda e,inserido i where u.ID_Usuario = a.ID_Usuario and a.ID_Aluno = e.ID_Aluno and e.ID_Turma = t.ID_Turma and b.ID_Boletim = c.ID_Boletim and c.ID_Disciplina = d.ID_Disciplina and b.ID_Boletim = i.ID_Boletim and i.ID_Aluno = a.ID_Aluno and e.ID_Turma = ? and b.Bimestre = ?";
+			PreparedStatement stmt = conn.prepareStatement(sql);
+			
+			stmt.setInt(1, ID_Turma);
+			stmt.setInt(2, serie);
+			
+			ResultSet resultado = stmt.executeQuery();
+			
+			while (resultado.next()) {
+				
+				Disciplina disciplina = new Disciplina();
+				disciplina.setID(resultado.getInt("ID_Disciplina"));
+				disciplina.setNome(resultado.getString("nome_disciplina"));
+				
+				Boletim boletim = new Boletim();
+				boletim.setID(resultado.getInt("ID_Boletim"));
+				boletim.setBimestre(resultado.getInt("bimestre"));
+				
+				Compoe compoe = new Compoe();
+				compoe.setDisciplina(disciplina);
+				compoe.setBoletim(boletim);
+				compoe.setNota(resultado.getFloat("nota"));
+				compoe.setFaltas(resultado.getInt("faltas"));
+				
+				Aluno aluno = new Aluno();
+				aluno.setNome(resultado.getString("nome"));
+								
+				Inserido inserido = new Inserido();
+				
+				inserido.setBoletim(boletim);
+				inserido.setAluno(aluno);
+				
+				Turma turma = new Turma();
+				
+				turma.setID(ID_Turma);
+				turma.setSerie(serie);
+				turma.setNome("Nome_Turma");
+				
+				Estuda estuda = new Estuda();
+				estuda.setAluno(aluno);
+				estuda.setTurma(turma);
+				
+				boletimTurma.add(compoe);
+			}
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+		finally {
+			try {
+				if (conn != null) {
+					conn.close();
+				}				
+			}
+			catch (Exception e) {
+				//do nothing
+			}
+		}
+		
+		System.out.println(boletimTurma);
+		
+		return boletimTurma;
+	}
+}
