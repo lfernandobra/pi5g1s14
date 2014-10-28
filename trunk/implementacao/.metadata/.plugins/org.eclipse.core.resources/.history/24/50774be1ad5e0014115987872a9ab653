@@ -1,0 +1,10 @@
+package edu.gaed.modelo;
+
+public class BoletimTurma {
+	private Aluno aluno;
+	private Turma turma;
+	private Disciplina disciplina;
+	private Boletim boletim;
+	private Compoe compoe;
+	
+}
