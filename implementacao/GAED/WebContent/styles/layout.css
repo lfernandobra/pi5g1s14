@@ -1,0 +1,380 @@
+@CHARSET "ISO-8859-1";
+
+body {
+				margin:10px 15px;
+				font: 12px Arial;
+				background:#ffe;
+	 }
+
+#cabecalho {
+				width:980px;	
+				height:100px;
+			}
+#identificacao {
+				right: 600px;
+		    	width: 100px;
+		    	background-color: #b0e0e6;
+}
+.image_contact {
+			    position: fixed;
+			    top: 55px;
+			    left:720px;
+}
+.info_contact {
+				font:12px Verdana, Arial, Helvetica, sans-serif;
+			    position: fixed;
+			    top: 180px;
+			    left:720px;
+}
+.info_contact a{
+				position:fixed;
+				right: 390px;
+	
+}
+.image_banner {
+	position:fixed;
+}
+.logout {
+	font:12px Verdana, Arial, Helvetica, sans-serif;
+	position: fixed;
+	top: 200px;
+	left:720px;
+}						
+#header {
+				position: absolute;
+	    		left: 0px;
+	    		width: 1000px;
+   			
+		}
+
+
+
+table label{
+				font: 13px Verdana, Arial, Helvetica, sans-serif;
+				width: 10px;
+}
+
+#noticias{
+				position:relative;
+				top:100px;
+				float:left;
+				left:5px;
+				border: 1px solid black; 
+				width:250px;
+				height:250px;
+				background:#a7d6da;
+				-moz-border-radius:20px;
+				-webkit-border-radius:20px;
+		 		border-radius:20px;
+}
+#documentos{
+				position:relative;
+				top:100px;
+				border: 1px solid black; 
+				width:250px;
+				height:250px;
+				float:left;
+				left:20px;
+				background:#ffb66c;
+				-moz-border-radius:20px;
+				-webkit-border-radius:20px;
+		 		border-radius:20px;
+}
+
+#help{
+				position:relative;
+				top:100px;
+				border: 1px solid black; 
+				width:250px;
+				height:250px;
+				float:left;
+				left:30px;
+				background:#86e6a8;
+				-moz-border-radius:20px;
+				-webkit-border-radius:20px;
+			 	border-radius:20px;
+	
+}
+
+ h2{
+				text-align: center;
+}
+
+.logo{
+	left:0px;
+	top:0px;
+	position:relative;
+}
+
+#pagina {  
+		 		width:980px;
+				height:600px;
+				background-color: #ffffff;
+		}
+#conteudo {
+				position:relative;
+				left:155px;
+				width:52%;
+				height:80%;
+				font-size: 12px;
+				background-color: #ffffff;
+				top:140px;
+		  }
+fieldset { 
+				border-color: #ccc;  
+				background-color:#f0f0f0;
+				padding: 3px;
+				 
+		} 
+fieldset legend { 
+				background: #0080ff;
+				-moz-border-radius:10px;
+				-webkit-border-radius:10px;
+				border-radius:10px;
+		}		  
+.evento {
+				background: #0080ff;
+				-moz-border-radius:10px;
+				-webkit-border-radius:10px;
+				border-radius:10px;
+}
+.pos_evento{
+				position: fixed;
+			    top: 170px;
+			    left: 155px;
+			    width: 250px;
+			    height: 150px;
+			    color:#ffffff;
+			    border-color: #ccc;
+			    background-color:#f0f0f0;
+}
+.notificacoes {
+				background: #0080ff;
+				-moz-border-radius:10px;
+				-webkit-border-radius:10px;
+				border-radius:10px;
+}
+.pos_notificacoes{
+				position: fixed;
+			    top: 170px;
+			    left: 450px;
+			    width: 250px;
+			    height: 150px;
+			    color:#ffffff;
+			    border-color: #ccc;
+			   	background-color:#f0f0f0;
+}		  
+.noticias {
+				background: #0080ff;
+				-moz-border-radius:10px;
+				-webkit-border-radius:10px;
+				border-radius:10px;
+}
+.pos_noticias{
+				position: fixed;
+			    top: 350px;
+			    left: 155px;
+			    width: 250px;
+			    height: 150px;
+			    color:#ffffff;
+			    border-color: #ccc;
+			    background-color:#f0f0f0;
+}
+.acesso{
+				background: #0080ff;
+				width: 300px;
+				text-align: center;
+				font: 15px Verdana, Arial, Helvetica, sans-serif,bold;
+				-moz-border-radius:10px;
+				-webkit-border-radius:10px;
+				border-radius:10px;
+		
+}
+.bor_login{
+				position:relative;
+				left:200px;
+				width:300px;
+				height:200px;		
+				top:55px;
+				font: 12px Verdana, Arial, Helvetica, sans-serif;
+	
+}
+
+.senha{
+				font: 9px Verdana, Arial, Helvetica, sans-serif;
+}
+
+.fld_ano{
+				position: fixed;
+			    top: 150px;
+			    left: 175px;
+			    width: 50px;
+}
+.fld_escola{
+				position: fixed;
+			    top: 220px;
+			    left: 175px;
+			    width: 200px;
+}
+.fld_bimestre{
+				position: fixed;
+			    top: 290px;
+			    left: 175px;
+			    width: 200px;
+}
+.fld_bimestre_aluno{
+				position: fixed;
+			    top: 150px;
+			    left: 175px;
+			    width: 200px;
+}
+.fld_disciplina{
+				position: fixed;
+			    top: 150px;
+			    left: 500px;
+			    width: 150px;
+}
+.fld_turma{
+				position: fixed;
+			    top: 220px;
+			    left: 500px;
+			    width: 100px;
+}
+
+.fld_tarefas_turma{
+				position: fixed;
+			    top: 150px;
+			    left: 175px;
+			    width: 250px;
+}
+.fld_tarefas_anexar{
+				position: fixed;
+			    top: 290px;
+			    left: 175px;
+			    width: 250px;
+}
+.fld_tarefas_anexada{
+				position: fixed;
+			    top: 150px;
+			    left: 450px;
+			    width: 250px;
+}		
+.fld_ocorrencias_escola{
+				position: fixed;
+			    top: 190px;
+			    left: 175px;
+			    width: 200px;
+}
+.fld_ocorrencias_turmas{
+				position: fixed;
+			    top: 190px;
+			    left: 390px;
+			    width: 100px;
+}
+.fld_ocorrencias_aluno{
+				position: fixed;
+			    top: 190px;
+			    left: 515px;
+			    width: 100px;
+}
+.fld_txtarea_ocorrencia{
+				position: fixed;
+			    top: 250px;
+			    left: 175px;
+			    width: 200px;
+}
+.btn_visualizar{
+				position: fixed;
+			    top: 150px;
+			    left: 175px;
+}
+.btn_inserir{
+				position: fixed;
+			    top: 150px;
+			    left: 260px;
+}
+.btn_salvar{
+				position: fixed;
+			    top: 330px;
+			    left: 630px;
+}
+#rodape {
+				background-color: #0080ff;
+				color:#ffff00;
+				
+			}
+			
+#opcoes{
+				position:relative;
+				font: 12px Verdana, Arial, Helvetica, sans-serif;
+				top: 60px;
+				left:120px;
+}			
+			
+#menu_dropdown {
+				position:fixed;
+				font: 12px Verdana, Arial, Helvetica, sans-serif;
+				width:150px;
+				left:0px;
+				height:100px;
+				top: 150px;
+				background-color: #ffffff;
+			   }
+#menu_dropdown ul {
+				margin: 0;
+				padding: 0;	
+				list-style: none; 
+				list-style: none;
+				width: 150px;
+			}
+#menu_dropdown ul li {	
+				position: relative;
+			}
+#menu_dropdown li ul { 
+				position: absolute; 
+				left: 149px; 
+				top: 0; 
+				display: none; 
+			}
+#menu_dropdown ul li a { 
+				display:block; 
+				text-decoration: none; 
+				color: #646464; 
+				background: #fff; 
+				padding:5px; 
+				border: 1px solid #ccc; 
+				
+			}
+#menu_dropdown a:hover { 
+				background-color: #ddd;
+				text-decoration:blink;
+    			font-weight: bold;
+   				background: #ccc; 
+			}
+#menu_dropdown li:hover ul { 
+				display: block; 
+			}
+
+.boletim table{
+				width: 50%;
+				font: 12px Verdana, Arial, Helvetica, sans-serif;
+}			
+
+.boletim table td{
+				height: 40px;
+				background-color: #ddddff;
+				text-align: center;
+	
+}
+.boletim table th{
+				background-color:#acacac; ;
+			   	color: white;
+			   	height: 35px;
+}
+
+			
+
+			
+
+	
+	
