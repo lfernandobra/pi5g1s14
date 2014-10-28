@@ -2,7 +2,7 @@
     pageEncoding="ISO-8859-1"%>
 <!--  Diretiva Page Import -->
 
-<%@ page import="edu.gaed.modelo.BoletimTurma"%>
+<%@ page import="edu.gaed.modelo.Boletim"%>
 
 <!--  Diretiva TagLib -->
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -24,6 +24,7 @@
 		<table border="1">
 			<thead>
 				<tr>
+					<td>ID Boletim</td>
 					<td>Nome</td>
 					<td>Turma</td>
 					<td>Serie</td>
@@ -36,13 +37,14 @@
 			<tbody>			
 				<c:forEach var="linha" items="${boletim}">
 				<tr>
-					<td>${linha.nomealuno}</td>
-					<td>${linha.nometurma}</td>
-					<td>${linha.serie}</td>
-					<td>${linha.bimestre}</td>
-					<td>${linha.nomedisciplina}</td>
-					<td>${linha.nota}</td>
-					<td>${linha.faltas}</td>
+					<td>${linha.ID}</td>
+					<td>${linha.aluno.nome}</td>
+					<td>${linha.turma.nome}</td>
+					<td>${linha.turma.serie}</td>
+					<td>${linha.turma.bimestre}</td>
+					<td>${linha.compoe.disciplina.nome}</td>
+					<td>${linha.compoe.nota}</td>
+					<td>${linha.compoe.faltas}</td>
 				</tr>
 				</c:forEach>
 			</tbody>
