@@ -19,7 +19,6 @@ public class ListaTurmaServlet extends HttpServlet {
      */
     public ListaTurmaServlet() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**

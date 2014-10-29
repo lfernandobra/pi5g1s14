@@ -25,10 +25,12 @@
 			<thead>
 				<tr>
 					<td>ID Boletim</td>
+					<td>ID Aluno</td>
 					<td>Nome</td>
 					<td>Turma</td>
 					<td>Serie</td>
 					<td>Bimestre</td>
+					<td>ID Disciplina</td>
 					<td>Disciplina</td>
 					<td>Nota</td>
 					<td>Faltas</td>			
@@ -38,13 +40,28 @@
 				<c:forEach var="linha" items="${boletim}">
 				<tr>
 					<td>${linha.ID}</td>
+					<td>${linha.aluno.ID}</td>
 					<td>${linha.aluno.nome}</td>
 					<td>${linha.turma.nome}</td>
 					<td>${linha.turma.serie}</td>
-					<td>${linha.turma.bimestre}</td>
+					<td>${linha.bimestre}</td>
+					<td>${linha.compoe.disciplina.ID}</td>
 					<td>${linha.compoe.disciplina.nome}</td>
 					<td>${linha.compoe.nota}</td>
 					<td>${linha.compoe.faltas}</td>
+					<td class="acao_agenda">
+						<form action="ObterBoletim" method="post">
+								<input type="hidden" name="idAluno" value="${linha.aluno.ID}"/>
+								<input type="hidden" name="idBoletim" value="${linha.ID}"/>
+								<input type="hidden" name="idDisciplina" value="${linha.compoe.disciplina.ID}"/>
+								<input type="submit" value="Editar" class="botao_editar" />
+						</form>
+						<form action="RemoverDoador" method="post">
+								<input type="hidden" name="id" value="${linha.aluno.id}"/>
+								<input type="hidden" name="id" value="${linha.ID}"/>
+								<input type="submit" value="Excluir" class="botao_excluir" />
+						</form>							
+					</td>
 				</tr>
 				</c:forEach>
 			</tbody>

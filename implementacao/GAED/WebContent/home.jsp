@@ -25,7 +25,7 @@
 							<li><a href="#" onclick="loadContent('tarefas.jsp')">Tarefas</a></li>
 						</c:when>
 						<c:otherwise>						
-							<li><a href="#" onclick="loadContent('boletim.jsp')">Boletim</a></li>
+							<li><a href="#" onclick="loadContent('ListaBoletimServlet')">Boletim</a></li>
 							<li><a href="#" onclick="loadContent('tarefas.jsp')">Tarefas</a></li>
 						</c:otherwise>
 					</c:choose>	 				
