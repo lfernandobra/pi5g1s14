@@ -6,11 +6,10 @@ public class Aluno extends Usuario{
 	
 	private int ID;
 	private Responsavel responsavel;
-	private Date Data_Ingresso;
+	private Date dataingresso;
 	
 	public Aluno() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public int getID() {
@@ -29,18 +28,18 @@ public class Aluno extends Usuario{
 		this.responsavel = responsavel;
 	}
 
-	public Date getData_Ingresso() {
-		return Data_Ingresso;
+	public Date getDataingresso() {
+		return dataingresso;
 	}
 
-	public void setData_Ingresso(Date data_Ingresso) {
-		Data_Ingresso = data_Ingresso;
+	public void setDataingresso(Date data_Ingresso) {
+		dataingresso = data_Ingresso;
 	}
 
 	@Override
 	public String toString() {
 		return "Aluno [ID=" + ID + ", responsavel=" + responsavel
-				+ ", Data_Ingresso=" + Data_Ingresso + "]";
+				+ ", Data_Ingresso=" + dataingresso + "]";
 	}
 
 	
