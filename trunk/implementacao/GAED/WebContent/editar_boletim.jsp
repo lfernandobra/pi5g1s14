@@ -12,9 +12,12 @@
 	<link href="styles/cadastro.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
-	<form id="boletim" method="post" action="adicionar_boletim.jsp" >
+	<div id = "login_erro">
+		<jsp:include page="erro.jsp" />
+	</div>
+	<form id="boletim" method="post" action="SalvarBoletim" >
 		<c:if test="${not empty boletim}">
-			<input type="hidden" name="id" value="${boletim.ID}"/>
+			<input type="text" name="id" value="${boletim.ID}"/>
 		</c:if>
 		<fieldset>
 		<legend id = "legenda">Boletim</legend>
@@ -44,8 +47,7 @@
 					<td>${boletim.compoe.disciplina.ID}</td>
 					<td>${boletim.compoe.disciplina.nome}</td>
 					<td><input type="text" id="txt_nota" name="nota" value="${boletim.compoe.nota}" tabindex="1"/></td>
-					<td><input type="text" id="txt_faltas" name="faltas" value="${boletim.compoe.faltas}" tabindex="2"/></td>
-        			
+					<td><input type="text" id="txt_faltas" name="faltas" value="${boletim.compoe.faltas}" tabindex="2"/></td>        			
         		</tr>
          	</tbody>
         </table>

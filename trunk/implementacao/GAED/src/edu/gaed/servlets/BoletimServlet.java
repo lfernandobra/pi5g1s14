@@ -23,7 +23,6 @@ public class BoletimServlet extends HttpServlet {
      */
     public BoletimServlet() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**
@@ -34,7 +33,7 @@ public class BoletimServlet extends HttpServlet {
 		
 		if (request.getServletPath().equals("/SalvarBoletim"))
 		{
-			salvarBoletim(request, response);
+			//salvarBoletim(request, response);
 		}
 		
 		
@@ -96,68 +95,4 @@ public class BoletimServlet extends HttpServlet {
 			getServletContext().getRequestDispatcher("/editar_boletim.jsp").forward(request, response);
 		}
 	}
-	
-	private void salvarBoletim(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		Boletim boletim = (Boletim) request.getAttribute("boletim");
-		//int faltas = (int)request.getAttribute("faltas");
-		//float nota = (float)request.getAttribute("nota");
-				
-		//String confirmaSenha = request.getParameter("confirmasenha");
-		String erro = null;
-		
-		//se não existir usuario, retorna para página de cadastro
-		if (boletim == null)
-		{
-			erro = "Favor informar notas ou faltas do boletim.";						
-		}
-		else
-		{
-			//se não houver erro, salva usuario
-			if (erro == null)
-			{
-				BoletimDao boletimDao = new BoletimDao();
-				boolean sucesso = false;
-				
-				//se houver indice definido na requisição, altera usuario. caso contrário, insere
-				//este valor é definido em usuarios.jsp
-				if (boletim.getID() == 0)
-				{
-					System.out.println(boletim);
-					sucesso = boletimDao.atualizaBoletim(boletim);
-				}
-				else
-				{
-					sucesso = boletimDao.atualizaBoletim(boletim);
-					/*
-					//se o usuario for o mesmo logado, atualiza dados do usuario na sessão.
-					Usuario usuarioLogado = (Usuario) request.getSession().getAttribute("login");					
-					if (usuarioLogado.getId() == doador.getId())
-					{
-						request.getSession().setAttribute("login", doador);
-					}*/
-				}
-				
-				if (!sucesso)
-				{
-					erro = "Não foi possível salvar doador.";
-				}
-			}
-		}
-		
-		if (erro != null)
-		{
-			//se houver erro, encaminha para página de cadastro
-
-			request.setAttribute("mensagem_erro", erro);
-			getServletContext().getRequestDispatcher("/usuario.jsp").forward(request, response);			
-		}
-		else
-		{
-			//caso contrario, redireciona para agenda
-
-			response.sendRedirect(getServletContext().getContextPath() + "/ListaDoadoresServlet");
-		}
-	}
-
 }
