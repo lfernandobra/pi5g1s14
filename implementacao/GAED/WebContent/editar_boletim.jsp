@@ -17,7 +17,8 @@
 	</div>
 	<form id="boletim" method="post" action="SalvarBoletim" >
 		<c:if test="${not empty boletim}">
-			<input type="text" name="id" value="${boletim.ID}"/>
+			<input type="text" name="idBoletim" value="${boletim.ID}"/>
+			<input type="text" name="idDisciplina" value="${boletim.compoe.disciplina.ID}"/>
 		</c:if>
 		<fieldset>
 		<legend id = "legenda">Boletim</legend>

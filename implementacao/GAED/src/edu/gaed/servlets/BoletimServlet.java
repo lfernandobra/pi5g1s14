@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import edu.gaed.dao.BoletimDao;
 import edu.gaed.modelo.Boletim;
+import edu.gaed.modelo.Compoe;
+import edu.gaed.modelo.Disciplina;
 
 /**
  * Servlet implementation class BoletimServlet
@@ -33,7 +35,7 @@ public class BoletimServlet extends HttpServlet {
 		
 		if (request.getServletPath().equals("/SalvarBoletim"))
 		{
-			//salvarBoletim(request, response);
+			salvarBoletim(request, response);
 		}
 		
 		
@@ -51,48 +53,102 @@ public class BoletimServlet extends HttpServlet {
 	
 	private void obterBoletim(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String strIndiceAluno = request.getParameter("idAluno");
-		String strIndiceBoletim = request.getParameter("idBoletim");
-		String strIndiceDisciplina = request.getParameter("idDisciplina");
+			String strIndiceAluno = request.getParameter("idAluno");
+			String strIndiceBoletim = request.getParameter("idBoletim");
+			String strIndiceDisciplina = request.getParameter("idDisciplina");
 		
-		int indiceAluno = Integer.parseInt(strIndiceAluno);
-		int indiceBoletim = Integer.parseInt(strIndiceBoletim);
-		int indiceDisciplina = Integer.parseInt(strIndiceDisciplina);
+			int indiceAluno = Integer.parseInt(strIndiceAluno);
+			int indiceBoletim = Integer.parseInt(strIndiceBoletim);
+			int indiceDisciplina = Integer.parseInt(strIndiceDisciplina);
 		
-		System.out.println(indiceDisciplina);
+			System.out.println(indiceDisciplina);
 		
-		String erro = null;
+			String erro = null;
 		
-		BoletimDao boletimDao = new BoletimDao();
+			BoletimDao boletimDao = new BoletimDao();
 		
-		//obtem contato e envia usuario para formulario de edição do contato
-		Boletim boletim = (Boletim) boletimDao.obterBoletim(indiceAluno, indiceBoletim,indiceDisciplina);
+			//obtem contato e envia usuario para formulario de edição do contato
+			Boletim boletim = (Boletim) boletimDao.obterBoletim(indiceAluno, indiceBoletim,indiceDisciplina);
 				
 				
-		//se nao houver agenda ou indice contato não estiver na agenda, informa erro
-		if (boletim == null)
-		{
-			erro = "Boletim não encontrado.";
-		}
-		else
-		{			
-			//seta contato no escopo de requisição para ser exibido pelo jsp 
-			request.setAttribute("boletim", boletim);
-		}
+			//se nao houver agenda ou indice contato não estiver na agenda, informa erro
+			if (boletim == null)
+			{
+				erro = "Boletim não encontrado.";
+			}
+			else
+			{			
+				//seta contato no escopo de requisição para ser exibido pelo jsp 
+				request.setAttribute("boletim", boletim);
+			}
 		
-		if (erro != null)
-		{
-			//se houver erro, envia o usuario de volta para a página de agenda
+			if (erro != null)
+			{
+				//se houver erro, envia o usuario de volta para a página de agenda
 		
-			request.setAttribute("mensagem_erro", erro);
-			getServletContext().getRequestDispatcher("/boletim_turma.jsp").forward(request, response);
-		}
-		else
-		{
-			System.out.println(boletim);
-			request.setAttribute("conteudo", "editar_boletim.jsp"); //verificar
+				request.setAttribute("mensagem_erro", erro);
+				getServletContext().getRequestDispatcher("/boletim_turma.jsp").forward(request, response);
+			}
+			else
+			{
+				System.out.println(boletim);
+				request.setAttribute("conteudo", "editar_boletim.jsp"); //verificar
 			
-			getServletContext().getRequestDispatcher("/editar_boletim.jsp").forward(request, response);
-		}
+				getServletContext().getRequestDispatcher("/editar_boletim.jsp").forward(request, response);
+			}
+	}	
+	private void salvarBoletim(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+			try {    
+				String strIndiceBoletim = request.getParameter("idBoletim");
+				String strIndiceDisciplina = request.getParameter("idDisciplina");
+				String strNota = request.getParameter("nota");
+				String strFaltas = request.getParameter("faltas");
+				
+				int indiceBoletim = Integer.parseInt(strIndiceBoletim);
+				int indiceDisciplina = Integer.parseInt(strIndiceDisciplina);
+				int faltas = Integer.parseInt(strFaltas);
+				float nota = Float.parseFloat(strNota);
+							
+		        Boletim boletim = new Boletim();
+		        boletim.setID(indiceBoletim);
+		        
+		        Disciplina disciplina = new Disciplina();
+		        
+		        disciplina.setID(indiceDisciplina);
+		        
+		        Compoe compoe = new Compoe();
+		        
+		        compoe.setBoletim(boletim);
+		        compoe.setDisciplina(disciplina);
+		        compoe.setNota(nota);
+		        compoe.setFaltas(faltas);
+		        
+		        BoletimDao boletimDao = new BoletimDao();
+		        
+		        
+	                  
+		        boolean sucesso = false;
+		        
+		        sucesso = boletimDao.atualizaBoletim(compoe);
+		         
+		        if (sucesso)
+		        {
+		          //requisição foi bem sucedida, vamos finaliza-la e redirecionar o usuario para outro servlet
+		          response.sendRedirect(getServletContext().getContextPath() + "/ListaBoletimServlet");                            
+		        }
+		        else
+		        {
+		          request.setAttribute("mensagemErro", "Não foi possível salvar dados do aluno.");
+		          getServletContext().getRequestDispatcher("/index.jsp").forward(request, response);
+		        }
+		      }
+		    catch (Exception e) {
+		      request.setAttribute("mensagemErro", "Informações do aluno estão inválidas.");
+		      getServletContext().getRequestDispatcher("/index.jsp").forward(request, response);
+		    }
+
 	}
+	
 }
+
+
