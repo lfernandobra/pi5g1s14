@@ -17,8 +17,7 @@
 	</div>
 	<form id="boletim" method="post" action="SalvarBoletim" >
 		<c:if test="${not empty boletim}">
-			<input type="text" name="idBoletim" value="${boletim.ID}"/>
-			<input type="text" name="idDisciplina" value="${boletim.compoe.disciplina.ID}"/>
+			
 		</c:if>
 		<fieldset>
 		<legend id = "legenda">Boletim</legend>
@@ -50,12 +49,13 @@
 					<td><input type="text" id="txt_nota" name="nota" value="${boletim.compoe.nota}" tabindex="1"/></td>
 					<td><input type="text" id="txt_faltas" name="faltas" value="${boletim.compoe.faltas}" tabindex="2"/></td>        			
         		</tr>
+        		<tr>
+        			<td><input type="submit" value="Salvar"/></td>
+        			<td><input type="reset" value="Resetar"/></td>
+        		</tr>
          	</tbody>
         </table>
-        </fieldset>
-        <fieldset id = "botoes">
-				<input type="submit" value="Salvar"></input><input type="reset" value="Resetar"></input>
-		</fieldset> 	
+        </fieldset> 	
 	</form>
 
 </body>

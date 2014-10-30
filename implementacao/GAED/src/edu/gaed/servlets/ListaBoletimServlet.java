@@ -33,9 +33,12 @@ public class ListaBoletimServlet extends HttpServlet {
 	 */
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		//String strIndiceProfessor = request.getParameter("idProfessor");
+		//int indiceProfessor = Integer.parseInt(strIndiceProfessor);
+		
 		//obtem a lista de contatos do banco com base no identificador do usuario
 		BoletimDao boletimDao = new BoletimDao();
-		List<Boletim> boletim = boletimDao.obterBoletimTurma(1, 1); //teste
+		List<Boletim> boletim = boletimDao.obterBoletimProfessor(1); //teste
 						
 		System.out.println(boletim);				
 		//coloca agenda no escopo de requisição para ser exibido no agenda.jsp
