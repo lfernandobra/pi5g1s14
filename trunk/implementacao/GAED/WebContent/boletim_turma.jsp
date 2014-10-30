@@ -11,6 +11,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+	<script type="text/javascript" src="scripts/script.js"></script>
 <title>Boletim</title>
 </head>
 <body>
@@ -55,11 +56,6 @@
 								<input type="hidden" name="idBoletim" value="${linha.ID}"/>
 								<input type="hidden" name="idDisciplina" value="${linha.compoe.disciplina.ID}"/>
 								<input type="submit" value="Editar" class="botao_editar" />
-						</form>
-						<form action="RemoverDoador" method="post">
-								<input type="hidden" name="id" value="${linha.aluno.id}"/>
-								<input type="hidden" name="id" value="${linha.ID}"/>
-								<input type="submit" value="Excluir" class="botao_excluir" />
 						</form>							
 					</td>
 				</tr>
