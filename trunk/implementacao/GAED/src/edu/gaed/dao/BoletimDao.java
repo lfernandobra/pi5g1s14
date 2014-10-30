@@ -154,7 +154,7 @@ public class BoletimDao extends BaseDao{
 		
 	}
 	
-	public boolean atualizaBoletim(Boletim boletim) {
+	public boolean atualizaBoletim(Compoe compoe) {
 		Connection conn = null;
 		
 		try {
@@ -164,10 +164,10 @@ public class BoletimDao extends BaseDao{
 			
 			PreparedStatement stmt = conn.prepareStatement(sql);
 			
-			stmt.setFloat(1, boletim.getCompoe().getNota());
-			stmt.setInt(2, boletim.getCompoe().getFaltas());
-			stmt.setInt(3, boletim.getCompoe().getBoletim().getID());
-			stmt.setInt(4, boletim.getCompoe().getDisciplina().getID());
+			stmt.setFloat(1, compoe.getNota());
+			stmt.setInt(2, compoe.getFaltas());
+			stmt.setInt(3, compoe.getBoletim().getID());
+			stmt.setInt(4, compoe.getDisciplina().getID());
 			
 			int id = stmt.executeUpdate();
 						
