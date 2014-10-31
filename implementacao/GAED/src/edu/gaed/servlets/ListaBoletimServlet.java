@@ -38,7 +38,7 @@ public class ListaBoletimServlet extends HttpServlet {
 		
 		//obtem a lista de contatos do banco com base no identificador do usuario
 		BoletimDao boletimDao = new BoletimDao();
-		List<Boletim> boletim = boletimDao.obterBoletimProfessor(1); //teste
+		List<Boletim> boletim = boletimDao.obterBoletim(); //teste
 						
 		System.out.println(boletim);				
 		//coloca agenda no escopo de requisição para ser exibido no agenda.jsp
