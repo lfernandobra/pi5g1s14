@@ -16,7 +16,7 @@ import edu.gaed.modelo.Turma;
 
 public class BoletimDao extends BaseDao{
 	
-	public List<Boletim> obterBoletimProfessor(int ID_Professor) {
+	public List<Boletim> obterBoletim() {
 		
 		List<Boletim> boletimTurma = new ArrayList<Boletim>();
 		Connection conn = null;
@@ -24,11 +24,9 @@ public class BoletimDao extends BaseDao{
 		try {
 			conn = this.getConnection();
 			
-			String sql = "select u.nome,a.ID_Aluno,t.Serie,t.Nome_Turma,p.ID_Professor,d.ID_Disciplina,d.nome_disciplina,b.ID_Boletim,t.Bimestre,c.nota,c.faltas from usuario u,turma t,disciplina d,boletim b,compoe c,aluno a ,estuda e,inserido i,professor p , ministra m where u.ID_Usuario = a.ID_Usuario and a.ID_Aluno = e.ID_Aluno and e.ID_Turma = t.ID_Turma and b.ID_Boletim = c.ID_Boletim and c.ID_Disciplina = d.ID_Disciplina and d.ID_Disciplina = m.ID_Disciplina and m.ID_Professor = p.ID_Professor and b.ID_Boletim = i.ID_Boletim and i.ID_Aluno = a.ID_Aluno and p.ID_Professor = ? order by u.Nome,d.Nome_Disciplina";
+			String sql = "select u.nome,a.ID_Aluno,t.Serie,t.Nome_Turma,p.ID_Professor,d.ID_Disciplina,d.nome_disciplina,b.ID_Boletim,t.Bimestre,c.nota,c.faltas from usuario u,turma t,disciplina d,boletim b,compoe c,aluno a ,estuda e,inserido i,professor p , ministra m where u.ID_Usuario = a.ID_Usuario and a.ID_Aluno = e.ID_Aluno and e.ID_Turma = t.ID_Turma and b.ID_Boletim = c.ID_Boletim and c.ID_Disciplina = d.ID_Disciplina and d.ID_Disciplina = m.ID_Disciplina and m.ID_Professor = p.ID_Professor and b.ID_Boletim = i.ID_Boletim and i.ID_Aluno = a.ID_Aluno order by u.Nome,d.Nome_Disciplina";
 			PreparedStatement stmt = conn.prepareStatement(sql);
-			
-			stmt.setInt(1, ID_Professor);
-			
+					
 			ResultSet resultado = stmt.executeQuery();
 			
 			while (resultado.next()) {
