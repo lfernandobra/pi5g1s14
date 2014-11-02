@@ -7,15 +7,13 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import edu.gaed.modelo.Aluno;
-import edu.gaed.modelo.Boletim;
-import edu.gaed.modelo.Compoe;
-import edu.gaed.modelo.Disciplina;
-import edu.gaed.modelo.Turma;
+import edu.gaed.vo.Boletim;
+import edu.gaed.vo.Compoe;
 
 
 public class BoletimDao extends BaseDao{
 	
+	/*
 	public List<Boletim> obterBoletim() {
 		
 		List<Boletim> boletimTurma = new ArrayList<Boletim>();
@@ -32,7 +30,7 @@ public class BoletimDao extends BaseDao{
 			while (resultado.next()) {
 				
 				Boletim bolAluno = new Boletim();
-				bolAluno.setBimestre(resultado.getInt("Bimestre"));
+				//bolAluno.getCompoe().getBoletim().setBimestre(resultado.getInt("Bimestre"));
 				System.out.println(resultado.getInt("Bimestre"));
 				bolAluno.setID(resultado.getInt("ID_Boletim"));
 				
@@ -98,7 +96,7 @@ public class BoletimDao extends BaseDao{
 			if (resultado.next())
 			{
 				
-				bolAluno.setBimestre(resultado.getInt("bimestre"));
+				//bolAluno.setBimestre(resultado.getInt("bimestre"));
 				bolAluno.setID(resultado.getInt("ID_Boletim"));
 				
 				Aluno aluno = new Aluno();
@@ -150,7 +148,7 @@ public class BoletimDao extends BaseDao{
 		}
 		
 	}
-	
+	*/
 	public boolean atualizaBoletim(Compoe compoe) {
 		Connection conn = null;
 		
@@ -184,4 +182,44 @@ public class BoletimDao extends BaseDao{
 			}
 		}		
 	}
+	
+	public List<Boletim> obterBoletins() {
+		
+		List<Boletim> boletins = new ArrayList<Boletim>();
+		Connection conn = null;
+		
+		try {
+			conn = this.getConnection();
+			
+			String sql = "select b.ID_Boletim,b.Data_Boletim from Boletim b";
+			PreparedStatement stmt = conn.prepareStatement(sql);
+					
+			ResultSet resultado = stmt.executeQuery();
+			
+			while (resultado.next()) {
+				
+				Boletim bolAluno = new Boletim();
+				
+				bolAluno.setID(resultado.getInt("ID_Boletim"));
+				bolAluno.setDataBoletim(resultado.getDate("Data_Boletim"));
+				
+				boletins.add(bolAluno);
+			}
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+		finally {
+			try {
+				if (conn != null) {
+					conn.close();
+				}				
+			}
+			catch (Exception e) {
+				//do nothing
+			}
+		}		
+		return boletins;
+	}
+	
 }

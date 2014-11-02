@@ -2,7 +2,7 @@
     pageEncoding="ISO-8859-1"%>
 <!--  Diretiva Page Import -->
 
-<%@ page import="edu.gaed.modelo.Boletim"%>
+<%@ page import="edu.gaed.vo.*"%>
 
 <!--  Diretiva TagLib -->
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -16,50 +16,50 @@
 </head>
 <body>
 	<c:choose>
-		<c:when test="${empty boletim}">
+		<c:when test="${empty compoe}">
 			<p>Não há boletins cadastrados</p>
 		</c:when>
 	<c:otherwise>
 		<fieldset>
 		<legend id = "legenda">Boletim</legend>
 		<table border="1">
-			<thead>
+						
+				<c:forEach var="linhainserido" items="${alunos}">
+				<thead>
+				<tr>
+					<td>ID</td> 
+					<td>Nome</td>
+					<td>Sobrenome</td>
+				</tr>
+				</thead>
+				<tr>
+					<td>${linhainserido.aluno.ID}</td>
+					<td>${linhainserido.aluno.nome}</td>
+					<td>${linhainserido.aluno.sobrenome}</td>
+				<tr>	
+				<tbody>
 				<tr>
 					<td>ID Boletim</td>
-					<td>ID Aluno</td>
-					<td>Nome</td>
-					<td>Turma</td>
-					<td>Serie</td>
-					<td>Bimestre</td>
-					<td>ID Disciplina</td>
 					<td>Disciplina</td>
-					<td>Nota</td>
-					<td>Faltas</td>			
+					<td>Notas</td>
+					<td>Faltas</td>
 				</tr>
-			</thead>
-			<tbody>			
-				<c:forEach var="linha" items="${boletim}">
-				<tr>
-					<td>${linha.ID}</td>
-					<td>${linha.aluno.ID}</td>
-					<td>${linha.aluno.nome}</td>
-					<td>${linha.turma.nome}</td>
-					<td>${linha.turma.serie}</td>
-					<td>${linha.bimestre}</td>
-					<td>${linha.compoe.disciplina.ID}</td>
-					<td>${linha.compoe.disciplina.nome}</td>
-					<td>${linha.compoe.nota}</td>
-					<td>${linha.compoe.faltas}</td>
-					<td class="acao_agenda">
-						<form action="ObterBoletim" method="post">
-								<input type="hidden" name="idAluno" value="${linha.aluno.ID}"/>
-								<input type="hidden" name="idBoletim" value="${linha.ID}"/>
-								<input type="hidden" name="idDisciplina" value="${linha.compoe.disciplina.ID}"/>
-								<input type="submit" value="Editar" class="botao_editar" />
-						</form>							
-					</td>
-				</tr>
+					<c:forEach var="linha" items="${compoe}">
+						<c:choose>
+							<c:when test= "${linha.boletim.ID == linhainserido.boletim.ID}">
+							<tr>
+								<td>${linha.boletim.ID}</td>
+								<td>${linha.disciplina.nome}</td>
+								<td>${linha.nota}</td>
+							    <td>${linha.faltas}</td>
+							</tr>
+						</c:when>
+						</c:choose>
+						
+					</c:forEach>
 				</c:forEach>
+			
+				
 			</tbody>
 			</table>
 		</fieldset>		

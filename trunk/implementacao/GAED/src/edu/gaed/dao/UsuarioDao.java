@@ -10,8 +10,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-import edu.gaed.modelo.PerfilUsuario;
-import edu.gaed.modelo.Usuario;
+
+import edu.gaed.vo.PerfilUsuario;
+import edu.gaed.vo.Usuario;
 
 public class UsuarioDao extends BaseDao{
 	//Obter usuario para login

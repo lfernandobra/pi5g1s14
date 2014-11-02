@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import edu.gaed.dao.UsuarioDao;
-import edu.gaed.modelo.Usuario;
+import edu.gaed.vo.Usuario;
 
 
 /**
