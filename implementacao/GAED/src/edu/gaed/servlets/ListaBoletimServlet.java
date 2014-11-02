@@ -10,8 +10,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import edu.gaed.dao.BoletimDao;
-import edu.gaed.modelo.Boletim;
-//import edu.gaed.modelo.BoletimTurma;
+import edu.gaed.dao.CompoeDao;
+import edu.gaed.dao.DisciplinaDao;
+import edu.gaed.dao.EstudaDao;
+import edu.gaed.dao.InseridoDao;
+import edu.gaed.dao.UsuarioDao;
+import edu.gaed.vo.Aluno;
+import edu.gaed.vo.Boletim;
+import edu.gaed.vo.Boletim;
+import edu.gaed.vo.Compoe;
+import edu.gaed.vo.Disciplina;
+import edu.gaed.vo.Estuda;
+import edu.gaed.vo.Inserido;
+import edu.gaed.vo.Turma;
+import edu.gaed.vo.Usuario;
 
 
 /**
@@ -36,16 +48,34 @@ public class ListaBoletimServlet extends HttpServlet {
 		//String strIndiceProfessor = request.getParameter("idProfessor");
 		//int indiceProfessor = Integer.parseInt(strIndiceProfessor);
 		
-		//obtem a lista de contatos do banco com base no identificador do usuario
+		//obtem a lista de todo os boletins armazenados no banco
 		BoletimDao boletimDao = new BoletimDao();
-		List<Boletim> boletim = boletimDao.obterBoletim(); //teste
-						
-		System.out.println(boletim);				
+		List<Boletim> boletins = boletimDao.obterBoletins(); //teste
+							
+		System.out.println(boletins);				
+		
+		CompoeDao compoeDao = new CompoeDao();
+		List<Compoe> compoe = compoeDao.obterComposicao(boletins);
+		
+		InseridoDao inseridoDao = new InseridoDao();
+		List<Inserido> alunosinseridos = inseridoDao.obterComposicao(boletins);
+		
+		EstudaDao estudaDao = new EstudaDao();
+		List<Estuda> estudaTurma = estudaDao.obterComposicao(alunosinseridos);
+		
+		System.out.println(compoe);
+		System.out.println(alunosinseridos);
+		System.out.println(estudaTurma);
+		
 		//coloca agenda no escopo de requisição para ser exibido no agenda.jsp
-		request.setAttribute("boletim", boletim);
-			
+		//request.setAttribute("boletim", boletim);
+		request.setAttribute("compoe",compoe);
+		request.setAttribute("alunos",alunosinseridos);
+		request.setAttribute("turmas", estudaTurma);	
+		
 		//encaminha para agenda_entidades.jsp exibir a agenda
 		getServletContext().getRequestDispatcher("/boletim_turma.jsp").forward(request, response);
+		
 		
 		
 	}

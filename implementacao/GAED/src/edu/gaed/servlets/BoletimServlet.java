@@ -9,9 +9,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import edu.gaed.dao.BoletimDao;
-import edu.gaed.modelo.Boletim;
-import edu.gaed.modelo.Compoe;
-import edu.gaed.modelo.Disciplina;
+import edu.gaed.vo.Boletim;
+import edu.gaed.vo.Compoe;
+import edu.gaed.vo.Disciplina;
 
 /**
  * Servlet implementation class BoletimServlet
@@ -41,7 +41,7 @@ public class BoletimServlet extends HttpServlet {
 		
 		else if (request.getServletPath().equals("/ObterBoletim"))
 		{
-			obterBoletim(request, response);
+			//obterBoletim(request, response);
 		}
 				
 		else if (request.getServletPath().equals("/EditarBoletim"))
@@ -50,7 +50,7 @@ public class BoletimServlet extends HttpServlet {
 		}
 	
 	}
-	
+	/*
 	private void obterBoletim(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 			String strIndiceAluno = request.getParameter("idAluno");
@@ -96,7 +96,7 @@ public class BoletimServlet extends HttpServlet {
 			
 				getServletContext().getRequestDispatcher("/editar_boletim.jsp").forward(request, response);
 			}
-	}	
+	}*/	
 	private void salvarBoletim(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 			try {    
 				String strIndiceBoletim = request.getParameter("idBoletim");

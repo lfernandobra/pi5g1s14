@@ -2,7 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 
-<jsp:useBean id="usuario" class="edu.gaed.modelo.Usuario"
+<jsp:useBean id="usuario" class="edu.gaed.vo.Usuario"
 	scope="request"></jsp:useBean>
 <jsp:setProperty property="*" name="usuario" />
 
