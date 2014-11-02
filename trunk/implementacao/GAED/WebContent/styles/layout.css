@@ -90,8 +90,8 @@ table label{
 				float:left;
 				left:30px;
 				background:#86e6a8;
-				-moz-border-radius:20px;
-				-webkit-border-radius:20px;
+				
+				
 			 	border-radius:20px;
 	
 }
@@ -108,8 +108,8 @@ table label{
 
 #pagina {  
 		 		width:980px;
-				height:600px;
-				background-color: #ffffff;
+				height:700px;
+				background-color: #F0F8FF;
 		}
 #conteudo {
 				position:relative;

@@ -8,7 +8,7 @@
 <title>Login</title>
 	<link href="Bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen" />
     <link href="Bootstrap/css/bootstrap-theme.min.css" rel="stylesheet" media="screen" />
-    <link href="Bootstrap/css/bootstrap.js" rel="stylesheet" media="screen" />
+    <link href="Bootstrap/css/bootstrap.css" rel="stylesheet" media="screen" />
     
 </head>
 <body>
@@ -17,8 +17,8 @@
 		<jsp:include page="erro.jsp" />
 	</div>
 
-	<nav class="navbar navbar-default" role="navigation">
-	  <div class="container">
+	<nav class="navbar navbar-default col-sm-offset-0 col-sm-12" role="navigation">
+	  <div class="container ">
 	    <div class="navbar-header">
 	      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
 	        <span class="sr-only">Toggle navigation</span>
@@ -29,7 +29,7 @@
 	    </div>
 
     	<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
- 		  	<a class="navbar-brand"><img src =""></a>
+ 		  	<a class="nav navbar-nav navbar-right "><img src ="images\logo_gaed_1.png"></a>
 		      <ul class="nav navbar-nav">
 		        <li><a href="http://www.saopaulo.sp.gov.br/" target="_blank">Portal do Governo</a></li>
 		        <li><a href="http://www.cidadao.sp.gov.br/" target="_blank">Cidadao SP</a></li>
@@ -164,7 +164,7 @@
 				
 	<!--/. Documentos -->
 	
-	<!--Help -->		
+	<!-- /.Help -->		
 			<div class="col-md-4">
 	        	<div class="panel panel-default">
 	            	<div class="panel-heading"><h3>Help</h3></div>
@@ -181,15 +181,7 @@
 	</div>	
 </div>
 
-
-  <div class="container">
-  	<div class="row">
-      <div class="col-md-12 text-right"><p>&nbsp;©Copyright 2013 ACME<sup>TM</sup> Brand.</p></div> 
-    </div>
-  </div>
-
-
-  
+ 
 </body>
 </html>
 
