@@ -20,49 +20,34 @@
 			<p>Não há boletins cadastrados</p>
 		</c:when>
 	<c:otherwise>
-		<fieldset>
-		<legend id = "legenda">Boletim</legend>
 		<table border="1">
-						
-				<c:forEach var="linhainserido" items="${alunos}">
+				
 				<thead>
-				<tr>
-					<td>ID</td> 
-					<td>Nome</td>
-					<td>Sobrenome</td>
-				</tr>
+					<tr>
+						<td>RA</td><td>Nome Completo</td><td>Serie</td><td>Turma</td><td>Periodo</td><td>Nota</td><td>Faltas</td></tr>
 				</thead>
-				<tr>
-					<td>${linhainserido.aluno.ID}</td>
-					<td>${linhainserido.aluno.nome}</td>
-					<td>${linhainserido.aluno.sobrenome}</td>
-				<tr>	
-				<tbody>
-				<tr>
-					<td>ID Boletim</td>
-					<td>Disciplina</td>
-					<td>Notas</td>
-					<td>Faltas</td>
-				</tr>
-					<c:forEach var="linha" items="${compoe}">
+					<c:forEach var="linhainserido" items="${alunos}"> 
+					<tr><td>${linhainserido.aluno.ID}</td>
+						<td>${linhainserido.aluno.nome} ${linhainserido.aluno.sobrenome}</td>
+						<c:forEach var ="estudaturma" items="${turmas}">
+							<c:choose> 
+								<c:when test= "${linhainserido.aluno.ID == estudaturma.aluno.ID}">
+									<td>${estudaturma.turma.serie}</td>
+									<td>${estudaturma.turma.nome}</td>
+									<td>${estudaturma.turma.periodo}</td>
+								</c:when>
+							</c:choose>
+						</c:forEach>
+						<c:forEach var="linha" items="${compoe}">
 						<c:choose>
-							<c:when test= "${linha.boletim.ID == linhainserido.boletim.ID}">
-							<tr>
-								<td>${linha.boletim.ID}</td>
-								<td>${linha.disciplina.nome}</td>
+							<c:when test= "${linha.boletim.ID == linhainserido.boletim.ID && linha.disciplina.ID == 2}">
 								<td>${linha.nota}</td>
 							    <td>${linha.faltas}</td>
-							</tr>
 						</c:when>
-						</c:choose>
-						
+						</c:choose>	
 					</c:forEach>
-				</c:forEach>
-			
-				
-			</tbody>
+					</c:forEach>	
 			</table>
-		</fieldset>		
 	</c:otherwise>
 	</c:choose>
 

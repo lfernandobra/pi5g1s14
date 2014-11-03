@@ -11,20 +11,13 @@ import javax.servlet.http.HttpServletResponse;
 
 import edu.gaed.dao.BoletimDao;
 import edu.gaed.dao.CompoeDao;
-import edu.gaed.dao.DisciplinaDao;
+
 import edu.gaed.dao.EstudaDao;
 import edu.gaed.dao.InseridoDao;
-import edu.gaed.dao.UsuarioDao;
-import edu.gaed.vo.Aluno;
-import edu.gaed.vo.Boletim;
 import edu.gaed.vo.Boletim;
 import edu.gaed.vo.Compoe;
-import edu.gaed.vo.Disciplina;
 import edu.gaed.vo.Estuda;
 import edu.gaed.vo.Inserido;
-import edu.gaed.vo.Turma;
-import edu.gaed.vo.Usuario;
-
 
 /**
  * Servlet implementation class BoletimServlet

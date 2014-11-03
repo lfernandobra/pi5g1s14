@@ -25,7 +25,7 @@ public class CompoeDao extends BaseDao{
 			try {
 				conn = this.getConnection();
 				
-				String sql = "select c.ID_Boletim,c.ID_Disciplina,d.Nome_Disciplina,c.Nota,c.Faltas from Compoe c,Boletim b ,Disciplina d where b.ID_Boletim = c.ID_Boletim and c.ID_Disciplina = d.ID_Disciplina and b.ID_Boletim =?";
+				String sql = "select c.ID_Boletim,b.Bimestre,c.ID_Disciplina,d.Nome_Disciplina,c.Nota,c.Faltas from Compoe c,Boletim b ,Disciplina d where b.ID_Boletim = c.ID_Boletim and c.ID_Disciplina = d.ID_Disciplina and b.ID_Boletim =?";
 				PreparedStatement stmt = conn.prepareStatement(sql);
 				
 				stmt.setInt(1, boletins.get(i).getID());
@@ -35,6 +35,7 @@ public class CompoeDao extends BaseDao{
 				while (resultado.next()) {
 					Boletim boletim = new Boletim();
 					boletim.setID(resultado.getInt("ID_Boletim"));
+					boletim.setBimestre(resultado.getInt("Bimestre"));
 					
 					Disciplina disciplina = new Disciplina();
 					disciplina.setID(resultado.getInt("ID_Disciplina"));
