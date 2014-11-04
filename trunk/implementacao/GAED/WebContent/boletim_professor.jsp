@@ -16,13 +16,6 @@
   				<option value="2014">2014</option>
 			</select>
  	</fieldset>
-	<fieldset class = "fld_escola">
-  		<legend>Escola</legend>
-  			<select>
-  				<option value="EESJ">E.E São Judas Tadeu</option>
-  				<option value="EEML">E.E Maria de Lourdes</option>
-			</select>
- 	</fieldset>
  	<fieldset class = "fld_bimestre">
   		<legend>Bimestre</legend>
   			<select>
@@ -30,15 +23,6 @@
   				<option value="2">2º Bimestre</option>
   				<option value="3">3º Bimestre</option>
   				<option value="4">4º Bimestre</option>
-			</select>
- 	</fieldset>
- 	<fieldset class = "fld_disciplina">
-  		<legend>Disciplinas</legend>
-  			<select>
-  				<option value="artes">Artes</option>
-  				<option value="portugues">Português</option>
-  				<option value="matematica">Matemática</option>
-  				<option value="biologia">Biologia</option>
 			</select>
  	</fieldset>
  	<fieldset class = "fld_turma">
