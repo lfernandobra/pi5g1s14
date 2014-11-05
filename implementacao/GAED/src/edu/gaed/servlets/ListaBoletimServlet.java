@@ -38,12 +38,15 @@ public class ListaBoletimServlet extends HttpServlet {
 	 */
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String strIndiceTurma = request.getParameter("id");
+		String strIndiceTurma = request.getParameter("idTurma");
 		int indiceTurma = Integer.parseInt(strIndiceTurma);
+		
+		String strIndiceDisciplina = request.getParameter("idDisciplina");
+		int indiceDisciplina = Integer.parseInt(strIndiceDisciplina);
 		
 		//obtem a lista de todo os boletins armazenados no banco
 		BoletimDao boletimDao = new BoletimDao();
-		List<Boletim> boletins = boletimDao.obterBoletinsTurma(indiceTurma); //teste
+		List<Boletim> boletins = boletimDao.obterBoletinsTurma(indiceTurma,indiceDisciplina); //teste
 							
 		System.out.println(boletins);				
 		
@@ -56,12 +59,7 @@ public class ListaBoletimServlet extends HttpServlet {
 		EstudaDao estudaDao = new EstudaDao();
 		List<Estuda> estudaTurma = estudaDao.obterComposicao(alunosinseridos);
 		
-		System.out.println(compoe);
-		System.out.println(alunosinseridos);
-		System.out.println(estudaTurma);
-		
-		//coloca agenda no escopo de requisição para ser exibido no agenda.jsp
-		//request.setAttribute("boletim", boletim);
+		request.setAttribute("idDisciplina", indiceDisciplina);
 		request.setAttribute("compoe",compoe);
 		request.setAttribute("alunos",alunosinseridos);
 		request.setAttribute("turmas", estudaTurma);	

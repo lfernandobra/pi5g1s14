@@ -41,7 +41,7 @@ public class BoletimServlet extends HttpServlet {
 		
 		else if (request.getServletPath().equals("/ObterBoletim"))
 		{
-			//obterBoletim(request, response);
+			obterBoletim(request, response);
 		}
 				
 		else if (request.getServletPath().equals("/EditarBoletim"))
@@ -50,7 +50,7 @@ public class BoletimServlet extends HttpServlet {
 		}
 	
 	}
-	/*
+	
 	private void obterBoletim(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 			String strIndiceAluno = request.getParameter("idAluno");
@@ -68,8 +68,9 @@ public class BoletimServlet extends HttpServlet {
 			BoletimDao boletimDao = new BoletimDao();
 		
 			//obtem contato e envia usuario para formulario de edição do contato
-			Boletim boletim = (Boletim) boletimDao.obterBoletim(indiceAluno, indiceBoletim,indiceDisciplina);
-				
+			Compoe boletim = boletimDao.obterBoletim(indiceAluno, indiceBoletim,indiceDisciplina);
+			
+			System.out.println(boletim);
 				
 			//se nao houver agenda ou indice contato não estiver na agenda, informa erro
 			if (boletim == null)
@@ -79,7 +80,7 @@ public class BoletimServlet extends HttpServlet {
 			else
 			{			
 				//seta contato no escopo de requisição para ser exibido pelo jsp 
-				request.setAttribute("boletim", boletim);
+				request.setAttribute("compoe", boletim);
 			}
 		
 			if (erro != null)
@@ -91,12 +92,13 @@ public class BoletimServlet extends HttpServlet {
 			}
 			else
 			{
-				System.out.println(boletim);
+				
 				request.setAttribute("conteudo", "editar_boletim.jsp"); //verificar
 			
 				getServletContext().getRequestDispatcher("/editar_boletim.jsp").forward(request, response);
 			}
-	}*/	
+	}
+	
 	private void salvarBoletim(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 			try {    
 				String strIndiceBoletim = request.getParameter("idBoletim");
@@ -134,7 +136,7 @@ public class BoletimServlet extends HttpServlet {
 		        if (sucesso)
 		        {
 		          //requisição foi bem sucedida, vamos finaliza-la e redirecionar o usuario para outro servlet
-		          response.sendRedirect(getServletContext().getContextPath() + "/ListaBoletimServlet");                            
+		          response.sendRedirect(getServletContext().getContextPath() + "/ObterBoletim");                            
 		        }
 		        else
 		        {

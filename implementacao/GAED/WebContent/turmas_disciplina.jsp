@@ -33,7 +33,8 @@
 						<td>${turma.ano}</td>
 						<td>${turma.bimestre}</td>
 						<td><form class="form-horizontal" action="ListaBoletimServlet" method="post">
-								<input type="hidden" class="form-control" name="id"  value="${turma.ID}"/>
+								<input type="hidden" class="form-control" name="idTurma"  value="${turma.ID}"/>
+								<input type="hidden" class="form-control" name="idDisciplina"  value="${disciplina.ID}"/>
 								<input type="submit" value="Visualizar">
 							</form>
 						</td>

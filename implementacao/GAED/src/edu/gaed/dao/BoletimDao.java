@@ -9,6 +9,7 @@ import java.util.List;
 
 import edu.gaed.vo.Boletim;
 import edu.gaed.vo.Compoe;
+import edu.gaed.vo.Disciplina;
 
 
 public class BoletimDao extends BaseDao{
@@ -76,9 +77,9 @@ public class BoletimDao extends BaseDao{
 		}		
 		return boletimTurma;
 	}
-	
-	public Boletim obterBoletim(int ID_Aluno,int ID_Boletim,int ID_Disciplina){
-		Boletim bolAluno = new Boletim();
+	*/
+	public Compoe obterBoletim(int ID_Aluno,int ID_Boletim,int ID_Disciplina){
+		Compoe compoe = new Compoe();
 		Connection conn = null;
 		
 		try
@@ -96,36 +97,22 @@ public class BoletimDao extends BaseDao{
 			if (resultado.next())
 			{
 				
-				//bolAluno.setBimestre(resultado.getInt("bimestre"));
-				bolAluno.setID(resultado.getInt("ID_Boletim"));
-				
-				Aluno aluno = new Aluno();
-				aluno.setID(resultado.getInt("ID_Aluno"));
-				aluno.setNome(resultado.getString("nome"));
-				
-				bolAluno.setAluno(aluno);
-				
-				Turma turma = new Turma();
-				turma.setNome(resultado.getString("Nome_Turma"));
-				turma.setSerie(resultado.getInt("Serie"));
-				
-				bolAluno.setTurma(turma);
+				Boletim boletim = new Boletim();
+				 
+				boletim.setID(resultado.getInt("ID_Boletim"));
 														
 				Disciplina disciplina = new Disciplina();
 				disciplina.setID(resultado.getInt("ID_Disciplina"));
 				disciplina.setNome(resultado.getString("nome_disciplina"));
 				
-				Compoe compoe = new Compoe();
 				
+				compoe.setBoletim(boletim);
 				compoe.setDisciplina(disciplina);
 				compoe.setFaltas(resultado.getInt("faltas"));
-				compoe.setNota(resultado.getFloat("nota"));
-				
-				bolAluno.setCompoe(compoe);
-				
+				compoe.setNota(resultado.getFloat("nota"));	
 			}
 			
-			return bolAluno;
+			return compoe;
 		}
 		catch (Exception ex)
 		{
@@ -148,7 +135,7 @@ public class BoletimDao extends BaseDao{
 		}
 		
 	}
-	*/
+	
 	public boolean atualizaBoletim(Compoe compoe) {
 		Connection conn = null;
 		
@@ -183,7 +170,7 @@ public class BoletimDao extends BaseDao{
 		}		
 	}
 	
-	public List<Boletim> obterBoletinsTurma(int idTurma) {
+	public List<Boletim> obterBoletinsTurma(int idTurma, int idDisciplina) {
 		
 		List<Boletim> boletins = new ArrayList<Boletim>();
 		Connection conn = null;
@@ -191,10 +178,12 @@ public class BoletimDao extends BaseDao{
 		try {
 			conn = this.getConnection();
 			
-			String sql = "select b.ID_Boletim,b.Data_Boletim from Boletim b,Inserido i,Aluno a,Estuda e,Turma t where b.ID_Boletim = i.ID_Boletim and i.ID_Aluno = a.ID_Aluno and a.ID_Aluno = e.ID_Aluno and e.ID_Turma = t.ID_Turma and t.ID_Turma = ?";
+			String sql = "select b.ID_Boletim,b.Data_Boletim from Boletim b,Inserido i,Aluno a,Estuda e,Turma t,Possui p,Disciplina d where b.ID_Boletim = i.ID_Boletim and i.ID_Aluno = a.ID_Aluno and a.ID_Aluno = e.ID_Aluno and e.ID_Turma = t.ID_Turma and t.ID_Turma = p.ID_Turma and p.ID_Disciplina = d.ID_Disciplina and d.ID_Disciplina = ? and t.ID_Turma = ?";
 			PreparedStatement stmt = conn.prepareStatement(sql);
 			
-			stmt.setInt(1, idTurma);
+			
+			stmt.setInt(1, idDisciplina);
+			stmt.setInt(2, idTurma);
 			
 			ResultSet resultado = stmt.executeQuery();
 			
