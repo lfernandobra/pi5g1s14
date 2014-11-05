@@ -1,7 +1,6 @@
 package edu.gaed.servlets;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,10 +8,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import edu.gaed.dao.TurmaDao;
-import edu.gaed.dao.UsuarioDao;
-import edu.gaed.vo.Turma;
-import edu.gaed.vo.Usuario;
 
 
 

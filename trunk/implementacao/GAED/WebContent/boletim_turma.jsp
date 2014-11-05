@@ -40,19 +40,20 @@
 						</c:forEach>
 						<c:forEach var="linha" items="${compoe}">
 							<c:choose>
-								<c:when test= "${linha.boletim.ID == linhainserido.boletim.ID && linha.disciplina.ID == 2}">
+								<c:when test= "${linha.boletim.ID == linhainserido.boletim.ID && linha.disciplina.ID == idDisciplina}">
 									<td>${linha.nota}</td>
 							    	<td>${linha.faltas}</td>
+							    	<td class="acao_agenda">
+										<form action="ObterBoletim" method="post">
+											<input type="hidden" name="idAluno" value="${linhainserido.aluno.ID}"/>
+											<input type="hidden" name="idBoletim" value="${linha.boletim.ID}"/>
+											<input type="hidden" name="idDisciplina" value="${linha.disciplina.ID}"/>
+											<input type="submit" value="Editar" class="botao_editar" />
+										</form>	
 								</c:when>
 							</c:choose>	
 						</c:forEach>
-						<td class="acao_agenda">
-						<form action="ObterBoletim" method="post">
-								<input type="hidden" name="idAluno" value="${linha.aluno.ID}"/>
-								<input type="hidden" name="idBoletim" value="${linha.ID}"/>
-								<input type="hidden" name="idDisciplina" value="${linha.compoe.disciplina.ID}"/>
-								<input type="submit" value="Editar" class="botao_editar" />
-						</form>
+						
 					</c:forEach>	
 			</table>
 	</c:otherwise>

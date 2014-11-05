@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import edu.gaed.vo.Disciplina;
+import edu.gaed.vo.Professor;
 
 public class DisciplinaDao extends BaseDao{
 	
@@ -49,5 +50,43 @@ public class DisciplinaDao extends BaseDao{
 			}
 		}		
 		return disciplinas;
+	}
+
+	public Disciplina obtemDisciplinaProfessor(Professor professor) {
+		
+		Disciplina disciplina = new Disciplina();
+		Connection conn = null;
+		
+		try {
+			conn = this.getConnection();
+			
+			String sql = "select d.ID_Disciplina,d.Nome_Disciplina,d.Conteudo_Disciplina from Disciplina d,Ministra m,Professor p where d.ID_Disciplina = m.ID_Disciplina and m.ID_Professor = p.ID_Professor and p.ID_Professor = ?";
+			PreparedStatement stmt = conn.prepareStatement(sql);
+			stmt.setInt(1, professor.getIdProfessor());
+			
+			ResultSet resultado = stmt.executeQuery();
+			
+			while (resultado.next()) {
+				
+				disciplina.setID(resultado.getInt("ID_Disciplina"));
+				disciplina.setNome(resultado.getString("Nome_Disciplina"));
+				disciplina.setConteudo(resultado.getString("Conteudo_Disciplina"));
+				
+			}
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+		finally {
+			try {
+				if (conn != null) {
+					conn.close();
+				}				
+			}
+			catch (Exception e) {
+				//do nothing
+			}
+		}		
+		return disciplina;
 	}
 }	

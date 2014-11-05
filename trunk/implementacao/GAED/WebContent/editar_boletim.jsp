@@ -1,4 +1,4 @@
-<%@ page import="edu.gaed.vo.Boletim"%>
+<%@ page import="edu.gaed.vo.*"%>
 
 <!--  Diretiva TagLib -->
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -16,8 +16,9 @@
 		<jsp:include page="erro.jsp" />
 	</div>
 	<form id="boletim" method="post" action="SalvarBoletim" >
-		<c:if test="${not empty boletim}">
-			
+		<c:if test="${not empty compoe}">
+			<input type="hidden" name="idBoletim" value="${compoe.boletim.ID}"/>
+			<input type="hidden" name="idDisciplina" value="${compoe.disciplina.ID}"/>
 		</c:if>
 		<fieldset>
 		<legend id = "legenda">Boletim</legend>
@@ -25,12 +26,6 @@
 			<thead>
 				<tr>
 					<td>ID Boletim</td>
-					<td>ID Aluno</td>
-					<td>Nome</td>
-					<td>Turma</td>
-					<td>Serie</td>
-					<td>Bimestre</td>
-					<td>ID Disciplina</td>
 					<td>Disciplina</td>
 					<td>Nota</td>
 					<td>Faltas</td>			
@@ -38,24 +33,19 @@
 			</thead>
 			<tbody>			
 				<tr>
-             		<td>${boletim.ID}</td>
-					<td>${boletim.aluno.ID}</td>
-					<td>${boletim.aluno.nome}</td>
-					<td>${boletim.turma.nome}</td>
-					<td>${boletim.turma.serie}</td>
-					<td>${boletim.bimestre}</td>
-					<td>${boletim.compoe.disciplina.ID}</td>
-					<td>${boletim.compoe.disciplina.nome}</td>
-					<td><input type="text" id="txt_nota" name="nota" value="${boletim.compoe.nota}" tabindex="1"/></td>
-					<td><input type="text" id="txt_faltas" name="faltas" value="${boletim.compoe.faltas}" tabindex="2"/></td>        			
-        		</tr>
-        		<tr>
-        			<td><input type="submit" value="Salvar"/></td>
-        			<td><input type="reset" value="Resetar"/></td>
+             		<td>${compoe.boletim.ID}</td>
+					<td>${compoe.disciplina.nome}</td>
+					
+					<td><input type="text" id="txt_nota" name="nota" value="${compoe.nota}" tabindex="1"/></td>
+					<td><input type="text" id="txt_faltas" name="faltas" value="${compoe.faltas}" tabindex="2"/></td>        			
+					
         		</tr>
          	</tbody>
         </table>
-        </fieldset> 	
+        </fieldset> 
+        <fieldset id = "botoes">
+				<input type="submit" value="Salvar"></input><input type="reset" value="Resetar"></input>
+		</fieldset> 		
 	</form>
 
 </body>

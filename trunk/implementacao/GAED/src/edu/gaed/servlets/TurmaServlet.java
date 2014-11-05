@@ -9,8 +9,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import edu.gaed.dao.DisciplinaDao;
 import edu.gaed.dao.ProfessorDao;
 import edu.gaed.dao.TurmaDao;
+import edu.gaed.vo.Disciplina;
 import edu.gaed.vo.Professor;
 import edu.gaed.vo.Turma;
 
@@ -50,13 +52,16 @@ public class TurmaServlet extends HttpServlet {
 		ProfessorDao professorDao = new ProfessorDao();
 		Professor professor = professorDao.obterProfessor(idUsuario);
 		
+		DisciplinaDao disciplinaDao = new DisciplinaDao();
+		Disciplina disciplina = disciplinaDao.obtemDisciplinaProfessor(professor);
+		
 		TurmaDao turmaDao = new TurmaDao();
 		List<Turma> turmas = turmaDao.obterTurmas(professor.getIdProfessor());
 						
 						
-		
+		request.setAttribute("disciplina", disciplina);
 		request.setAttribute("turmas", turmas);
-	
+		
 		
 		getServletContext().getRequestDispatcher("/turmas_disciplina.jsp").forward(request, response);
 	}
