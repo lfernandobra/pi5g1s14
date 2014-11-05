@@ -39,7 +39,7 @@ public class EstudaDao extends BaseDao{
 					turma.setNome(resultado.getString("Nome_Turma"));
 					turma.setPeriodo(resultado.getString("Periodo"));
 					turma.setSerie(resultado.getInt("Serie"));
-					turma.setAno_letivo(resultado.getInt("Ano_Letivo"));
+					turma.setAno(resultado.getInt("Ano_Letivo"));
 					turma.setBimestre(resultado.getInt("Bimestre"));
 									
 					Aluno aluno = new Aluno();

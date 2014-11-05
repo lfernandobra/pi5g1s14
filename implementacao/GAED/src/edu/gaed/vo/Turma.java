@@ -15,11 +15,11 @@ public class Turma {
 	public void setSerie(int serie) {
 		this.serie = serie;
 	}
-	public int getAno_letivo() {
+	public int getAno() {
 		return ano;
 	}
-	public void setAno_letivo(int ano_letivo) {
-		ano = ano_letivo;
+	public void setAno(int ano) {
+		this.ano = ano;
 	}
 	public int getBimestre() {
 		return bimestre;

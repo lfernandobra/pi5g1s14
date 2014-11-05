@@ -183,7 +183,7 @@ public class BoletimDao extends BaseDao{
 		}		
 	}
 	
-	public List<Boletim> obterBoletins() {
+	public List<Boletim> obterBoletinsTurma(int idTurma) {
 		
 		List<Boletim> boletins = new ArrayList<Boletim>();
 		Connection conn = null;
@@ -191,9 +191,11 @@ public class BoletimDao extends BaseDao{
 		try {
 			conn = this.getConnection();
 			
-			String sql = "select b.ID_Boletim,b.Data_Boletim from Boletim b";
+			String sql = "select b.ID_Boletim,b.Data_Boletim from Boletim b,Inserido i,Aluno a,Estuda e,Turma t where b.ID_Boletim = i.ID_Boletim and i.ID_Aluno = a.ID_Aluno and a.ID_Aluno = e.ID_Aluno and e.ID_Turma = t.ID_Turma and t.ID_Turma = ?";
 			PreparedStatement stmt = conn.prepareStatement(sql);
-					
+			
+			stmt.setInt(1, idTurma);
+			
 			ResultSet resultado = stmt.executeQuery();
 			
 			while (resultado.next()) {
