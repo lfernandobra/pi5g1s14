@@ -38,12 +38,12 @@ public class ListaBoletimServlet extends HttpServlet {
 	 */
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		//String strIndiceProfessor = request.getParameter("idProfessor");
-		//int indiceProfessor = Integer.parseInt(strIndiceProfessor);
+		String strIndiceTurma = request.getParameter("id");
+		int indiceTurma = Integer.parseInt(strIndiceTurma);
 		
 		//obtem a lista de todo os boletins armazenados no banco
 		BoletimDao boletimDao = new BoletimDao();
-		List<Boletim> boletins = boletimDao.obterBoletins(); //teste
+		List<Boletim> boletins = boletimDao.obterBoletinsTurma(indiceTurma); //teste
 							
 		System.out.println(boletins);				
 		

@@ -16,7 +16,7 @@ import edu.gaed.vo.Turma;
 
 public class TurmaDao extends BaseDao {
 
-    public List<Turma> getTurmas(int idProfessor) {
+    public List<Turma> obterTurmas(int idProfessor) {
      
     	Connection conn = null;
         List<Turma> turmaList = new ArrayList<Turma>();
@@ -24,7 +24,7 @@ public class TurmaDao extends BaseDao {
         try {
         	conn = this.getConnection();
 			
-			String sql = "select t.ID_Turma,t.Nome_Turma,t.Periodo,t.Serie,t.Ano_Letivo,t.Bimestre from turma t,possui p,disciplina d,ministra m,professor pr where t.ID_Turma = p.ID_Turma and p.ID_Disciplina = d.ID_Disciplina and d.ID_Disciplina = m.ID_Disciplina and m.ID_Professor = pr.ID_Professor and pr.ID_Professor = ?";
+			String sql = "select t.ID_Turma,t.Nome_Turma,t.Periodo,t.Serie,t.Ano_Letivo,t.Bimestre from turma t,possui p,disciplina d,ministra m,professor pr where t.ID_Turma = p.ID_Turma and p.ID_Disciplina = d.ID_Disciplina and d.ID_Disciplina = m.ID_Disciplina and m.ID_Professor = pr.ID_Professor and pr.ID_Professor = ? order by t.ID_Turma";
 			PreparedStatement stmt = conn.prepareStatement(sql);
 			
 			stmt.setInt(1, idProfessor);
@@ -37,7 +37,7 @@ public class TurmaDao extends BaseDao {
              turma.setNome(rs.getString("Nome_Turma"));
              turma.setPeriodo(rs.getString("Periodo"));
              turma.setSerie(rs.getInt("Serie"));
-             turma.setAno_letivo(rs.getInt("Ano_Letivo"));
+             turma.setAno(rs.getInt("Ano_Letivo"));
              turma.setBimestre(rs.getInt("Bimestre"));
              
              turmaList.add(turma);
