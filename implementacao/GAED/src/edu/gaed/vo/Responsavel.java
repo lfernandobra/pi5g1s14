@@ -1,6 +1,6 @@
 package edu.gaed.vo;
 
-public class Responsavel {
+public class Responsavel extends Usuario{
 	
 	private Usuario Usuario;
 	private int ID_Responsavel;

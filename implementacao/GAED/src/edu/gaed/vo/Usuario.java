@@ -1,13 +1,15 @@
 package edu.gaed.vo;
 
+import java.util.Date;
+
 
 
 public class Usuario {
 	
 	private int id;
-	private String login,nome,sobrenome,sexo,rua,numero,bairro,cidade,estado,cep,telefone;
+	private String login,senha,nome,sobrenome,sexo,rua,numero,bairro,cidade,estado,CEP,telefone,email;
 	private PerfilUsuario perfil;
-	//private Date datanasc;
+	private Date datanasc;
 	//private String foto;
 	
 			
@@ -63,14 +65,6 @@ public class Usuario {
 		this.sexo = sexo;
 	}
 	/*
-	public Date getDatanasc() {
-		return datanasc;
-	}
-
-	public void setDatanasc(Date datanasc) {
-		this.datanasc = datanasc;
-	}
-	
 	public String getFoto() {
 		return foto;
 	}
@@ -119,12 +113,12 @@ public class Usuario {
 		this.estado = estado;
 	}
 
-	public String getCep() {
-		return cep;
+	public String getCEP() {
+		return CEP;
 	}
 
-	public void setCep(String cep) {
-		this.cep = cep;
+	public void setCEP(String cep) {
+		this.CEP = cep;
 	}
 
 	public String getTelefone() {
@@ -141,5 +135,29 @@ public class Usuario {
 
 	public void setPerfil(PerfilUsuario perfil) {
 		this.perfil = perfil;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public Date getDatanasc() {
+		return datanasc;
+	}
+
+	public void setDatanasc(Date datanasc) {
+		this.datanasc = datanasc;
+	}
+
+	public String getSenha() {
+		return senha;
+	}
+
+	public void setSenha(String senha) {
+		this.senha = senha;
 	}
 }

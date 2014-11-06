@@ -66,7 +66,7 @@ public class UsuarioDao extends BaseDao{
 			}
 		}
 	}
-	
+	/*
 	public boolean insereUsuario(Usuario usuario,String senha)
 	{
 		Connection conn = null;
@@ -111,6 +111,58 @@ public class UsuarioDao extends BaseDao{
 			}
 		}		
 	}
+	*/
+	public boolean insereUsuario(Usuario usuario,String senha)
+	{
+		Connection conn = null;
+		
+		try
+		{
+			conn = getConnection();
+			String sql = "insert into usuario (Login,Senha,Nome,Sobrenome,Sexo,Email,Rua,Numero,Bairro,Cidade,Estado,CEP,Telefone) values (?,?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
+			PreparedStatement stmt = conn.prepareStatement(sql);
+			
+			stmt.setString(1, usuario.getLogin());
+			stmt.setString(2, usuario.getSenha());
+			stmt.setString(3, usuario.getNome());
+			stmt.setString(4, usuario.getSobrenome());
+			//stmt.setDate(5, (Date) usuario.getDatanasc());
+			stmt.setString(5, usuario.getSexo());
+			stmt.setString(6, usuario.getEmail());
+			stmt.setString(7, usuario.getRua());
+			stmt.setString(8, usuario.getNumero());
+			stmt.setString(9, usuario.getBairro());
+			stmt.setString(10, usuario.getCidade());
+			stmt.setString(11, usuario.getEstado());
+			stmt.setString(12, usuario.getCEP());
+			stmt.setString(13, usuario.getTelefone());
+			
+			int id = stmt.executeUpdate();
+			usuario.setId(id);
+			
+			return id > 0;
+		}
+		catch (Exception ex)
+		{
+			ex.printStackTrace();
+			return false;
+		}
+		finally
+		{
+			if (conn != null)
+			{
+				try
+				{
+					conn.close();
+				}
+				catch(Exception closeEx)
+				{
+					//do nothing
+				}
+			}
+		}		
+	}	
+	
 		
 	public Usuario obterUsuario(int codUsuario)
 	{

@@ -15,7 +15,7 @@ import edu.gaed.vo.Usuario;
 /**
  * Servlet implementation class UsuarioServlet
  */
-@WebServlet({ "/UsuarioServlet","/SalvarUsuario","/ObterUsuario","/RemoverUsuario","/ObterDoador","/SalvarDoador","/RemoverDoador"})
+@WebServlet({ "/UsuarioServlet","/SalvarUsuario","/ObterUsuario","/RemoverUsuario"})
 public class UsuarioServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -43,6 +43,7 @@ public class UsuarioServlet extends HttpServlet {
 			salvarUsuario(request, response);
 		
 		}
+		
 	}
 	
 	private void obterUsuario(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -149,5 +150,6 @@ public class UsuarioServlet extends HttpServlet {
 			response.sendRedirect(getServletContext().getContextPath() + "/ListaUsuariosServlet");
 		}
 	}
+	
 }
 
