@@ -1,7 +1,5 @@
 package edu.gaed.dao;
 
-
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -9,8 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-
-
+import edu.gaed.vo.Data;
 import edu.gaed.vo.PerfilUsuario;
 import edu.gaed.vo.Usuario;
 
@@ -119,23 +116,23 @@ public class UsuarioDao extends BaseDao{
 		try
 		{
 			conn = getConnection();
-			String sql = "insert into usuario (Login,Senha,Nome,Sobrenome,Sexo,Email,Rua,Numero,Bairro,Cidade,Estado,CEP,Telefone) values (?,?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
+			String sql = "insert into usuario (Login,Senha,Nome,Sobrenome,Sexo,Data_Nascimento,Email,Rua,Numero,Bairro,Cidade,Estado,CEP,Telefone) values (?,SHA1(?), ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?);";
 			PreparedStatement stmt = conn.prepareStatement(sql);
 			
 			stmt.setString(1, usuario.getLogin());
-			stmt.setString(2, usuario.getSenha());
+			stmt.setString(2, senha);
 			stmt.setString(3, usuario.getNome());
 			stmt.setString(4, usuario.getSobrenome());
-			//stmt.setDate(5, (Date) usuario.getDatanasc());
 			stmt.setString(5, usuario.getSexo());
-			stmt.setString(6, usuario.getEmail());
-			stmt.setString(7, usuario.getRua());
-			stmt.setString(8, usuario.getNumero());
-			stmt.setString(9, usuario.getBairro());
-			stmt.setString(10, usuario.getCidade());
-			stmt.setString(11, usuario.getEstado());
-			stmt.setString(12, usuario.getCEP());
-			stmt.setString(13, usuario.getTelefone());
+			stmt.setDate(6, new Data().formata(usuario.getDatanasc()));
+			stmt.setString(7, usuario.getEmail());
+			stmt.setString(8, usuario.getRua());
+			stmt.setString(9, usuario.getNumero());
+			stmt.setString(10, usuario.getBairro());
+			stmt.setString(11, usuario.getCidade());
+			stmt.setString(12, usuario.getEstado());
+			stmt.setString(13, usuario.getCEP());
+			stmt.setString(14, usuario.getTelefone());
 			
 			int id = stmt.executeUpdate();
 			usuario.setId(id);

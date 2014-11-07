@@ -49,7 +49,6 @@ public class UsuarioServlet extends HttpServlet {
 	private void obterUsuario(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 			
 			String strIndiceUsuario = request.getParameter("id");
-			System.out.println(strIndiceUsuario);
 			int indiceUsuario = Integer.parseInt(strIndiceUsuario);
 			String erro = null;
 			
