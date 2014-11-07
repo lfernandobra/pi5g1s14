@@ -1,15 +1,17 @@
 package edu.gaed.vo;
 
-import java.util.Date;
+import java.sql.Date;
+
+
 
 
 
 public class Usuario {
 	
 	private int id;
-	private String login,senha,nome,sobrenome,sexo,rua,numero,bairro,cidade,estado,CEP,telefone,email;
+	private String login,senha,nome,sobrenome,sexo,datanasc,rua,numero,bairro,cidade,estado,CEP,telefone,email;
 	private PerfilUsuario perfil;
-	private Date datanasc;
+
 	//private String foto;
 	
 			
@@ -145,11 +147,12 @@ public class Usuario {
 		this.email = email;
 	}
 
-	public Date getDatanasc() {
+	public String getDatanasc() {
 		return datanasc;
 	}
 
-	public void setDatanasc(Date datanasc) {
+	public void setDatanasc(String datanasc) {
+		
 		this.datanasc = datanasc;
 	}
 
