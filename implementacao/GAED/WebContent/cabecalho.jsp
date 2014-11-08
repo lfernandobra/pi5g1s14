@@ -4,10 +4,10 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 
-<nav class="navbar navbar-default  col-sm-offset-1 col-sm-10" role="navigation">
+<nav class="navbar navbar-default col-sm-12" role="navigation">
 	  <div class="container">
 	    <div class="navbar-header">
-	      <div class="col-lg-10">
+	      <div class="col-lg-10 col-sm-offset-0 ">
      		 <p class="nav navbar-nav "><img src ="images\logo_gaed_100px.png"></p>
 
 			<c:choose>
@@ -32,8 +32,9 @@
 			  <c:otherwise>
 			  
 			  <div class="nav navbar-nav navbar-right" >
+			   <div class="col-lg-2 col-sm-offset-0 col-sm-3 navbar-right" >
 			    <p ><img src ="images\photo_avatar_100px.png"></p>  
-			   
+			  </div> 
 			  </div>
 			  
 			  <div class="col-lg-3 col-sm-offset-1 col-sm-4 navbar-right" >

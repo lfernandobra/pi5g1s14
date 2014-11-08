@@ -12,16 +12,24 @@
 <title>GAED - Home</title>
 </head>
 <body>
-	<div class="col-md-12">
+
+<div class="container ">
+	<div class="row">
+	<div class="col-lg-12">
 			<div id="cabecalho">
 				<!--  Diretiva Include -->
 				<%@include file="cabecalho.jsp"%>				
 			</div>
-			
+	</div>	
+	</div>
+		
+	 <hr>
+	 		
+	<div class="row">		
 	<c:if test="${not empty login}">  
-		 <div class="container ">
-      		<div class="row row-offcanvas row-offcanvas-left">
-       			 <div class="col-xs-6 col-sm-offset-0 col-sm-2 sidebar-offcanvas" id="sidebar" role="navigation"><br>
+		 <div class="col-lg-2 col-sm-offset-1">
+      		<div class="list-group navmenu-nav nav">
+       			 
        			 <ul class="nav">
 					<li><a href="#" onclick="loadContent('')"><span class="glyphicon glyphicon-home"></span> Home</a></li>
 					<c:choose>
@@ -43,40 +51,42 @@
 							<li>
 								<form name=form3 action='' method="post">
 									<input type="hidden" class="form-control" name="id"  value="${login.id}"/>
-									<a href="#" onclick="loadContent('tarefas.jsp')"><i class="glyphicon glyphicon-ok"></i> Tarefas <span class="badge badge-info"> 10</span></a>
+									<a href="#" onclick="loadContent('tarefas.jsp')"><i class="glyphicon glyphicon-book"></i> Tarefas <span class="badge badge-info"> 10</span></a>
 								</form>
 							</li>	
 							
 						</c:when>
 						<c:when test="${login.perfil.secretaria}">
 							<li><a href="#" onclick="loadContent('cadastrar_usuario.jsp')"><i class="glyphicon glyphicon-user"></i> Usuários </a></li>
-							<li><a href="#" onclick=""><i class="glyphicon glyphicon-book"></i> Boletins </a></li>
+							<li><a href="#" onclick=""><i class="glyphicon glyphicon-file"></i> Boletins </a></li>
 							<li><a href="#" onclick=""><i class="glyphicon glyphicon-exclamation-sign"></i> Ocorrências </a></li>
 						</c:when>
 						<c:when test="${login.perfil.responsavel}">
-							<li><a href="#" onclick=""><i class="glyphicon glyphicon-book"></i> Boletim</a></li>
-							<li><a href="#" onclick=""><i class="glyphicon glyphicon-ok"></i> Tarefas </a></li>
+							<li><a href="#" onclick=""><i class="glyphicon glyphicon-file"></i> Boletim</a></li>
+							<li><a href="#" onclick=""><i class="glyphicon glyphicon-book"></i> Tarefas </a></li>
 							<li><a href="#" onclick=""><i class="glyphicon glyphicon-exclamation-sign"></i> Ocorrências </a></li>
 						</c:when>
 						<c:when test="${login.perfil.aluno}">
-							<li><a href="#" onclick=""><i class="glyphicon glyphicon-book"></i> Boletim </a></li>
-							<li><a href="#" onclick=""><i class="glyphicon glyphicon-ok"></i> Tarefas </a></li>
+							<li><a href="#" onclick=""><i class="glyphicon glyphicon-file"></i> Boletim </a></li>
+							<li><a href="#" onclick=""><i class="glyphicon glyphicon-book"></i> Tarefas </a></li>
 						</c:when>
 					</c:choose>	 				
 				</ul>
-				</div>
+			</div>	
 			</div>
+			
+			 
+			<div class="col-lg-9">	
 			<div id="conteudo"> 
-       			
 				<!--  Diretiva Include -->
 				<%@include file="conteudo_aluno.jsp"%>
 			</div>
+			</div>
 			
-		</div>
 	</c:if>	
 	
-	
 </div>	
-	
+
+</div>	
 </body>
 </html>
