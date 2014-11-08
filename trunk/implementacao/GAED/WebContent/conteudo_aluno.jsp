@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<link href="Bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen" />
+	<link href="Bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen" />
     <link href="Bootstrap/css/bootstrap-theme.min.css" rel="stylesheet" media="screen" />
     <link href="Bootstrap/css/bootstrap.css" rel="stylesheet" media="screen" />
 <title>Conteudo</title>
@@ -13,8 +13,8 @@
 
  <div class="container" id="main"> 
   <div class="row ">
-  	<div class="col-md-12">
-  	    <div class="col-md-4 col-sm-4 col-sm-offset-2 ">
+  	<div class="col-sm-9">
+  	    <div class="col xs-9 col-sm-5 col-sm-offset-1 ">
     	<div class="panel panel-default">
            <div class="panel-heading"><a href="#" class="pull-right">Ver mais</a> <h4>Eventos</h4></div>
    			<div class="panel-body">
@@ -22,34 +22,10 @@
               <div class="clearfix"></div>
               <hr>
               <p>Informações de eventos relacionados a educação</p>
-              
-              
             </div>
          </div> 
-    </div>
-    
-    <div class="col-md-4 col-sm-4 col-sm-offset-1">
-    	<div class="panel panel-default">
-           <div class="panel-heading"><a href="#" class="pull-right">Ver mais</a> <h4>Noticias</h4></div>
-   			<div class="panel-body">
-              <img src="//placehold.it/150" class="img-circle pull-right"> <a href="#">Noticias</a>
-              <div class="clearfix"></div>
-              <hr>
-              <div class="clearfix"></div>
-              <img src="http://placehold.it/120x90/3333CC/FFF" class="img-responsive img-thumbnail pull-right">
-              <p>Noticias</p>
-              <div class="clearfix"></div>
-              <hr>
-              <div class="clearfix"></div>
-              <img src="http://placehold.it/120x90/33CC33/FFF" class="img-responsive img-thumbnail pull-left" style="margin-right:5px;">
-              <p>Noticias</p>
-            </div>
-         </div> 
-     </div>
-    
-	    
-	    <div class="col-md-4 col-sm-4 col-sm-offset-2">
-	    	<div class="panel panel-default">
+         
+         <div class="panel panel-default">
 	           <div class="panel-heading"><a href="#" class="pull-right">Ver mais</a> <h4>Notificações</h4></div>
 	   			<div class="panel-body">
 	             <p> <a href =>Reunião de pais </a><br></p>
@@ -59,8 +35,27 @@
 	             <p><a href =>Novos trabalhos disponíveis</a></p>
 	            </div>
 	         </div> 
-	    </div>
-	    
+    </div>
+    
+    <div class="col xs-9 col-sm-4 col-sm-offset-1 ">
+    	<div class="panel panel-default">
+           <div class="panel-heading"><a href="#" class="pull-right">Ver mais</a> <h4>Noticias</h4></div>
+   			<div class="panel-body">
+              <img src="" class="img-circle pull-right"> <a href="#">Três irmãoes morrem eletrocutados no quintal de casa, no interior de SC</a>
+              <div class="clearfix"></div>
+              <hr>
+              <div class="clearfix"></div>
+              <img src="" class="img-responsive img-thumbnail pull-right">
+              <a href="#">Vingança anunciada expõe uso sinistro do Whatsapp</a>
+              <div class="clearfix"></div>
+              <hr>
+              <div class="clearfix"></div>
+              <img src="" class="img-responsive img-thumbnail pull-left" style="margin-right:5px;">
+              <a href="#">Professor do ES pede desculpas por declaração considerada racista</a>
+            </div>
+         </div> 
+     </div>
+    
 	    
 	</div>    
   </div>  
