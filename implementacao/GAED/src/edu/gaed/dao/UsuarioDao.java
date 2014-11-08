@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import edu.gaed.vo.Data;
+import edu.gaed.vo.Foto;
 import edu.gaed.vo.PerfilUsuario;
 import edu.gaed.vo.Usuario;
 
@@ -20,7 +21,7 @@ public class UsuarioDao extends BaseDao{
 		try {
 			conn = this.getConnection();
 			
-			String sql = "SELECT u.ID_usuario,u.Login,u.Nome,u.Perfil_Usuario FROM usuario u where u.Login=? AND u.Senha=SHA1(?)";
+			String sql = "SELECT u.ID_usuario,u.Login,u.Nome,u.Perfil_Usuario,f.cod_foto,f.img_foto FROM usuario u,foto f where u.Foto = f.cod_foto and u.Login=? AND u.Senha=SHA1(?)";
 			
 			PreparedStatement stmt = conn.prepareStatement(sql);
 			
@@ -40,7 +41,11 @@ public class UsuarioDao extends BaseDao{
 				short perfil = resultado.getShort("perfil_usuario");
 		        usuario.setPerfil(PerfilUsuario.fromValue(perfil));
 		        
-		        System.out.println(usuario.getId());
+		        Foto foto = new Foto();
+				foto.setId(resultado.getInt("cod_foto"));
+				foto.setImagem(resultado.getBytes("img_foto"));
+		        
+				usuario.setFoto(foto);
 				
 		        return usuario;
 			}
@@ -216,12 +221,16 @@ public class UsuarioDao extends BaseDao{
 		try {
 			conn = this.getConnection();
 			
-			String sql = "select * from usuario";
+			String sql = "select u.ID_Usuario,u.Login,u.Nome,u.Sobrenome,u.Sexo,f.cod_foto,f.img_foto from usuario u,foto f where u.Foto = f.cod_foto";
 			PreparedStatement stmt = conn.prepareStatement(sql);
 			
 			ResultSet resultado = stmt.executeQuery();
 			
 			while (resultado.next()) {
+				Foto foto = new Foto();
+				foto.setId(resultado.getInt("cod_foto"));
+				foto.setImagem(resultado.getBytes("img_foto"));
+				
 				Usuario usuario = new Usuario();
 				
 				usuario.setId(resultado.getInt("ID_Usuario"));
@@ -229,7 +238,8 @@ public class UsuarioDao extends BaseDao{
 				usuario.setNome(resultado.getString("Nome"));
 				usuario.setSobrenome(resultado.getString("Sobrenome"));
 				usuario.setSexo(resultado.getString("Sexo"));
-				//usuario.setDatanasc(resultado.getDate("Data_Nascimento"));
+				usuario.setFoto(foto);
+				
 								
 				usuarios.add(usuario);
 			}
