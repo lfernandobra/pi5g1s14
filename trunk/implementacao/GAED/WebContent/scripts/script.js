@@ -43,7 +43,7 @@ function MascaraTelefone(tel){
     if(mascaraInteiro(tel)==false){
             event.returnValue = false;
     }       
-    return formataCampo(tel, '(00) 0000-0000', event);
+    return formataCampo(tel, '(00) 00000-0000', event);
 }
 
 //adiciona mascara ao CPF
@@ -56,7 +56,7 @@ function MascaraCPF(cpf){
 
 //valida telefone
 function ValidaTelefone(tel){
-    exp = /\(\d{2}\)\ \d{4}\-\d{4}/;
+    exp = /\(\d{2}\)\ \d{5}\-\d{4}/;
     if(!exp.test(tel.value))
             alert('Numero de Telefone Invalido!');
 }

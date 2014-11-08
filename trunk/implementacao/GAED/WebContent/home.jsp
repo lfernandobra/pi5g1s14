@@ -57,7 +57,7 @@
 							
 						</c:when>
 						<c:when test="${login.perfil.secretaria}">
-							<li><a href="#" onclick="loadContent('cadastrar_usuario.jsp')"><i class="glyphicon glyphicon-user"></i> Usuários </a></li>
+							<li><a href="#" onclick="loadContent('gerencia_usuarios.jsp')"><i class="glyphicon glyphicon-user"></i> Usuários </a></li>
 							<li><a href="#" onclick=""><i class="glyphicon glyphicon-file"></i> Boletins </a></li>
 							<li><a href="#" onclick=""><i class="glyphicon glyphicon-exclamation-sign"></i> Ocorrências </a></li>
 						</c:when>

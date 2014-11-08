@@ -66,8 +66,8 @@
 				<label id="lbl_telefone" for="txt_telefone">Telefone:</label>  
                 <input type="text" id="txt_telefone" name="telefone" value="${usuario.telefone}"
                 			onKeyPress="MascaraTelefone(usuario.telefone);" 
-   							maxlength="14" value="${usuario.telefone}" 
-   							tabindex="7"  onBlur="ValidaTelefone(usuario.txt_telefone);"/>
+   							maxlength="20" value="${usuario.telefone}" 
+   							tabindex="7"  onBlur="ValidaTelefone(txt_telefone);"/>
 			</p>
 			<p>               
                 <label id="lbl_rua" for="txt_rua">Rua:</label>  
@@ -80,8 +80,13 @@
                 <input type="text" id="txt_cidade" name="cidade" value="${usuario.cidade}" tabindex="11"/><p>
                 <label id="lbl_estado" for="txt_estado">Estado:</label>  
                 <input type="text" id="txt_estado" name="estado" value="${usuario.estado}" tabindex="12"/><p>
+                
                 <label id="lbl_CEP" for="txt_endereco">CEP :</label> 
-                <input type="text" id="txt_CEP" name="CEP" value="${usuario.CEP}" tabindex="13"/>
+                <input type="text" id="txt_CEP" name="CEP" value="${usuario.CEP}" tabindex="13"
+                	   maxlength="10"
+                	   onKeyPress="MascaraCep(usuario.CEP);"
+                	   onBlur="ValidaCep(usuario.CEP);"
+                />
 			</p>
 			
 			</fieldset>
