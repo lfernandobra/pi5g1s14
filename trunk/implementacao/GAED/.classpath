@@ -16,5 +16,7 @@
 	<classpathentry kind="lib" path="WebContent/Extras/jstl-api-1.2.jar.zip"/>
 	<classpathentry kind="lib" path="WebContent/Extras/jstl-impl.jar.zip"/>
 	<classpathentry kind="lib" path="WebContent/Extras/mysql-connector-java-5.1.16-bin.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/commons-fileupload-1.2.2.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/commons-io-2.0.1.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

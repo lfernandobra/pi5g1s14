@@ -1,16 +1,12 @@
 package edu.gaed.vo;
 
-import java.sql.Date;
-
-
-
-
 
 public class Usuario {
 	
 	private int id;
 	private String login,senha,nome,sobrenome,sexo,datanasc,rua,numero,bairro,cidade,estado,CEP,telefone,email;
 	private PerfilUsuario perfil;
+	private Foto foto;
 
 	//private String foto;
 	
@@ -34,15 +30,6 @@ public class Usuario {
 	public void setLogin(String login) {
 		this.login = login;
 	}
-/*
-	public String getSenha() {
-		return senha;
-	}
-
-	public void setSenha(String senha) {
-		this.senha = senha;
-	}
-*/
 	public String getNome() {
 		return nome;
 	}
@@ -66,15 +53,6 @@ public class Usuario {
 	public void setSexo(String sexo) {
 		this.sexo = sexo;
 	}
-	/*
-	public String getFoto() {
-		return foto;
-	}
-
-	public void setFoto(String foto) {
-		this.foto = foto;
-	}
-	*/
 	public String getRua() {
 		return rua;
 	}
@@ -162,5 +140,13 @@ public class Usuario {
 
 	public void setSenha(String senha) {
 		this.senha = senha;
+	}
+
+	public Foto getFoto() {
+		return foto;
+	}
+
+	public void setFoto(Foto foto) {
+		this.foto = foto;
 	}
 }

@@ -24,6 +24,7 @@
 		<table border="1">
 			<thead>
 				<tr>
+					<td>Foto</td>
 					<td>ID</td>
 					<td>Login</td>
 					<td>Nome</td>
@@ -35,6 +36,7 @@
 			<tbody>			
 				<c:forEach var="usuario" items="${usuarios}">
 				<tr>
+					<td><img src="${pageContext.request.contextPath}/FotoServlet?foto=${usuario.foto.id}"/></td>
 					<td>${usuario.id}</td>
 					<td>${usuario.login}</td>
 					<td>${usuario.nome}</td>
