@@ -11,16 +11,16 @@
 </head>
 <body>
 	<fieldset>
-		<legend class = "col-lg-9">Aluno</legend>
+		<legend>Aluno</legend>
 			<ul class="nav">
-				<li><a href="#" onclick=""><i class="glyphicon glyphicon-pencil"></i> Inserir Aluno</a></li>
+				<li><a href="cadastrar_aluno.jsp"><i class="glyphicon glyphicon-pencil"></i> Inserir Aluno</a></li>
 				<li><a href="#" onclick=""><i class="glyphicon glyphicon-eye-open"></i> Visualizar Alunos</a></li>
 			</ul>
 	</fieldset>
 	<fieldset>
 		<legend>Responsável</legend>
 			<ul class="nav">
-				<li><a href="#" onclick=""><i class="glyphicon glyphicon-pencil"></i> Inserir  Responsável</a></li>
+				<li><a href="cadastrar_responsavel.jsp"><i class="glyphicon glyphicon-pencil"></i> Inserir  Responsável</a></li>
 			</ul>
 	</fieldset>
 
