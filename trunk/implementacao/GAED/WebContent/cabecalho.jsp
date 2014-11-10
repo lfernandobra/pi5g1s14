@@ -33,7 +33,7 @@
 			  
 			  <div class="nav navbar-nav navbar-right" >
 			   <div class="col-lg-2 col-sm-offset-0 col-sm-3 navbar-right" >
-			    <p><img src="${pageContext.request.contextPath}/FotoServlet?foto=${login.foto.id}" width="30" height="40"/></p>  
+			    <p><img src="${pageContext.request.contextPath}/FotoServlet?foto=${login.foto.id}" style="width:128px;height:128px"/></p>  
 			  </div> 
 			  </div>
 			  

@@ -8,14 +8,18 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import edu.gaed.dao.AlunoDao;
+import edu.gaed.dao.ResponsavelDao;
 import edu.gaed.dao.UsuarioDao;
+import edu.gaed.vo.Aluno;
+import edu.gaed.vo.Responsavel;
 import edu.gaed.vo.Usuario;
 
 
 /**
  * Servlet implementation class UsuarioServlet
  */
-@WebServlet({ "/UsuarioServlet","/SalvarUsuario","/ObterUsuario","/RemoverUsuario"})
+@WebServlet({ "/UsuarioServlet","/SalvarUsuario","/ObterUsuario","/RemoverUsuario","/SalvarResponsavel","/SalvarAluno"})
 public class UsuarioServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -41,6 +45,16 @@ public class UsuarioServlet extends HttpServlet {
 		else if (request.getServletPath().equals("/SalvarUsuario"))
 		{		
 			salvarUsuario(request, response);
+		
+		}
+		else if (request.getServletPath().equals("/SalvarResponsavel"))
+		{		
+			salvarResponsavel(request, response);
+		
+		}
+		else if (request.getServletPath().equals("/SalvarAluno"))
+		{		
+			salvarAluno(request, response);
 		
 		}
 		
@@ -147,6 +161,130 @@ public class UsuarioServlet extends HttpServlet {
 			//caso contrario, redireciona para agenda
 
 			response.sendRedirect(getServletContext().getContextPath() + "/ListaUsuariosServlet");
+		}
+	}
+	
+	private void salvarResponsavel(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		Responsavel responsavel = (Responsavel) request.getAttribute("responsavel");
+		
+		String senha = request.getParameter("senha");
+		
+		String erro = null;
+		
+		//se não existir responsavel, retorna para página de cadastro
+		if (responsavel == null)
+		{
+			erro = "Favor informar dados do Responsavel.";						
+		}
+		else
+		{
+			//se não houver erro, salva Responsavel
+			if (erro == null)
+			{
+				ResponsavelDao ResponsavelDao = new ResponsavelDao();
+				boolean sucesso = false;
+				
+				//se houver indice definido na requisição, altera responsavel. caso contrário, insere
+				//este valor é definido em responsavels.jsp
+				if (responsavel.getId() == 0)
+				{
+					sucesso = ResponsavelDao.insereResponsavel(responsavel,senha);
+				}
+				/* Implementar depois
+				else
+				{
+					sucesso = ResponsavelDao.atualizaResponsavel(Responsavel);
+					
+					//se o responsavel for o mesmo logado, atualiza dados do responsavel na sessão.
+					Responsavel responsavelLogado = (Responsavel) request.getSession().getAttribute("login");					
+					if (responsavelLogado.getId() == Responsavel.getId())
+					{
+						request.getSession().setAttribute("login", Responsavel);
+					}
+				}*/
+				
+				if (!sucesso)
+				{
+					erro = "Não foi possível salvar responsavel.";
+				}
+			}
+		}
+		
+		if (erro != null)
+		{
+			//se houver erro, encaminha para página de cadastro
+
+			request.setAttribute("mensagem_erro", erro);
+			getServletContext().getRequestDispatcher("/responsavel.jsp").forward(request, response);			
+		}
+		else
+		{
+			//caso contrario, redireciona para agenda
+
+			response.sendRedirect(getServletContext().getContextPath() + "/ListaResponsavelsServlet");
+		}
+	}
+	
+	private void salvarAluno(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		Aluno aluno = (Aluno) request.getAttribute("aluno");
+		
+		String senha = request.getParameter("senha");
+		
+		String erro = null;
+		
+		//se não existir aluno, retorna para página de cadastro
+		if (aluno == null)
+		{
+			erro = "Favor informar dados do Aluno.";						
+		}
+		else
+		{
+			//se não houver erro, salva Aluno
+			if (erro == null)
+			{
+				AlunoDao AlunoDao = new AlunoDao();
+				boolean sucesso = false;
+				
+				//se houver indice definido na requisição, altera aluno. caso contrário, insere
+				//este valor é definido em alunos.jsp
+				if (aluno.getId() == 0)
+				{
+					sucesso = AlunoDao.insereAluno(aluno,senha);
+				}
+				/* Implementar depois
+				else
+				{
+					sucesso = AlunoDao.atualizaAluno(Aluno);
+					
+					//se o aluno for o mesmo logado, atualiza dados do aluno na sessão.
+					Aluno alunoLogado = (Aluno) request.getSession().getAttribute("login");					
+					if (alunoLogado.getId() == Aluno.getId())
+					{
+						request.getSession().setAttribute("login", Aluno);
+					}
+				}*/
+				
+				if (!sucesso)
+				{
+					erro = "Não foi possível salvar aluno.";
+				}
+			}
+		}
+		
+		if (erro != null)
+		{
+			//se houver erro, encaminha para página de cadastro
+
+			request.setAttribute("mensagem_erro", erro);
+			getServletContext().getRequestDispatcher("/aluno.jsp").forward(request, response);			
+		}
+		else
+		{
+			//caso contrario, redireciona para agenda
+
+			response.sendRedirect(getServletContext().getContextPath() + "/ListaAlunosServlet");
 		}
 	}
 	
