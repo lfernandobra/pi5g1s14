@@ -15,6 +15,7 @@ import edu.gaed.dao.TurmaDao;
 import edu.gaed.vo.Disciplina;
 import edu.gaed.vo.Professor;
 import edu.gaed.vo.Turma;
+import edu.gaed.vo.Usuario;
 
 /**
  * Servlet implementation class TurmaServlet
@@ -46,11 +47,10 @@ public class TurmaServlet extends HttpServlet {
 	
 	private void obterTurmaProfessor(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String strIDUsuario = request.getParameter("id");
-		int idUsuario = Integer.parseInt(strIDUsuario);
-				
+		Usuario usuario = (Usuario) request.getSession().getAttribute("login"); //colocado pelo professor
+			
 		ProfessorDao professorDao = new ProfessorDao();
-		Professor professor = professorDao.obterProfessor(idUsuario);
+		Professor professor = professorDao.obterProfessor(usuario.getId());
 		
 		DisciplinaDao disciplinaDao = new DisciplinaDao();
 		Disciplina disciplina = disciplinaDao.obtemDisciplinaProfessor(professor);

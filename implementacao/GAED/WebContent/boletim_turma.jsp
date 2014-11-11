@@ -43,8 +43,11 @@
 								<c:when test= "${linha.boletim.ID == linhainserido.boletim.ID && linha.disciplina.ID == idDisciplina}">
 									<td>${linha.nota}</td>
 							    	<td>${linha.faltas}</td>
+							    	${linhainserido.aluno.ID}
+							    	${linha.boletim.ID}
+							    	${linha.disciplina.ID}
 							    	<td class="acao_agenda">
-										<form action="ObterBoletim" method="post">
+										<form id="boletim" action="ObterBoletim" method="post" >
 											<input type="hidden" name="idAluno" value="${linhainserido.aluno.ID}"/>
 											<input type="hidden" name="idBoletim" value="${linha.boletim.ID}"/>
 											<input type="hidden" name="idDisciplina" value="${linha.disciplina.ID}"/>

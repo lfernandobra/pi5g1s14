@@ -36,7 +36,7 @@
 			<tbody>			
 				<c:forEach var="usuario" items="${usuarios}">
 				<tr>
-					<td><img src="${pageContext.request.contextPath}/FotoServlet?foto=${usuario.foto.id}"/></td>
+					<td><img src="${pageContext.request.contextPath}/FotoServlet?foto=${usuario.foto.id}" style="width:128px;height:128px"/></td>
 					<td>${usuario.id}</td>
 					<td>${usuario.login}</td>
 					<td>${usuario.nome}</td>

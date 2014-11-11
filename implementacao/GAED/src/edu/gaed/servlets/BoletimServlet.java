@@ -56,12 +56,10 @@ public class BoletimServlet extends HttpServlet {
 			String strIndiceAluno = request.getParameter("idAluno");
 			String strIndiceBoletim = request.getParameter("idBoletim");
 			String strIndiceDisciplina = request.getParameter("idDisciplina");
-		
+			
 			int indiceAluno = Integer.parseInt(strIndiceAluno);
 			int indiceBoletim = Integer.parseInt(strIndiceBoletim);
 			int indiceDisciplina = Integer.parseInt(strIndiceDisciplina);
-		
-			System.out.println(indiceDisciplina);
 		
 			String erro = null;
 		
