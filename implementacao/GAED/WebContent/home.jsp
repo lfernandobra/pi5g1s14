@@ -36,23 +36,13 @@
 						<c:when test="${login.perfil.professor}">
 							
 							<li>
-								<form name=form1 action='ObterTurmaProfessor' method="post">
-									<input type="hidden" class="form-control" name="id"  value="${login.id}"/>
-									<a href="javascript:document.form1.submit()"><span class="glyphicon glyphicon-file"></span> Boletim - Turma</a> 
-								</form>
-								
+								<a href="boletim.jsp"><span class="glyphicon glyphicon-file"></span> Boletim</a> 								
 							</li>
 							<li>
-								<form name=form2 action='' method="post">
-									<input type="hidden" class="form-control" name="id"  value="${login.id}"/>
-									<a href="javascript:document.form2.submit()"><span class="glyphicon glyphicon-exclamation-sign"></span> Ocorrências <span class="badge badge-info"> 4</span></a> 
-								</form>
+								<a href="javascript:document.form2.submit()"><span class="glyphicon glyphicon-exclamation-sign"></span> Ocorrências <span class="badge badge-info"> 4</span></a> 
 							</li>
 							<li>
-								<form name=form3 action='' method="post">
-									<input type="hidden" class="form-control" name="id"  value="${login.id}"/>
-									<a href="#" onclick="loadContent('tarefas.jsp')"><i class="glyphicon glyphicon-book"></i> Tarefas <span class="badge badge-info"> 10</span></a>
-								</form>
+								<a href="#"><i class="glyphicon glyphicon-book"></i> Tarefas <span class="badge badge-info"> 10</span></a>
 							</li>	
 							
 						</c:when>
