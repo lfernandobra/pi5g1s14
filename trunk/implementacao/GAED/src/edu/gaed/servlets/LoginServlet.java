@@ -32,7 +32,7 @@ public class LoginServlet extends HttpServlet {
 	      //em caso de erro, grava mensagem de erro na requisição e retorna para página inicial
 	      String mensagem = "Login ou senha inválidos!";
 	      request.setAttribute("mensagemErro", mensagem);
-	      getServletContext().getRequestDispatcher("/index.jsp").forward(request, response);
+	      getServletContext().getRequestDispatcher("/erro.jsp").forward(request, response);
 	    }
 	    else
 	    {
@@ -51,7 +51,7 @@ public class LoginServlet extends HttpServlet {
 	        String mensagem = "Login ou senha inválidos!";
 	        request.setAttribute("mensagemErro", mensagem);
 	        
-	        getServletContext().getRequestDispatcher("/index.jsp").forward(request, response);
+	        getServletContext().getRequestDispatcher("/erro.jsp").forward(request, response);
 	      }
 	    }
 	  }

@@ -6,6 +6,9 @@
 
 <!--  Diretiva TagLib -->
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ page import="java.io.*,java.util.*,java.sql.*"%>
+<%@ page import="javax.servlet.http.*,javax.servlet.*" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql"%>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -14,22 +17,42 @@
 <title>Boletim</title>
 </head>
 <body>
+	
+	<sql:setDataSource var="snapshot" driver="com.mysql.jdbc.Driver"
+     url="jdbc:mysql://localhost:3306/bd_gaed"
+     user="root"  password=""/>
+     
+     <sql:query dataSource="${snapshot}" var="result">
+		SELECT * from turma;
+	 </sql:query>
+     
+     
 	<fieldset class = "fld_turma">
-  		<legend>Escolha a turma</legend>
+  		<legend>Turma</legend>
+  			<select>
+  				<c:forEach var="row" items="${result.rows}">
+  					<option value="$row.ID_Turma">Turma : ${row.Nome_Turma} - ${row.Bimestre}° Bimestre</option>
+  				</c:forEach>
+			</select>
+ 	</fieldset>
+ 	<fieldset class = "fld_bimestre">
+  		<legend>Bimestre</legend>
   			<select>
   				<option value="1">1º Bimestre</option>
   				<option value="2">2º Bimestre</option>
   				<option value="3">3º Bimestre</option>
   				<option value="4">4º Bimestre</option>
 			</select>
-			<input type="submit" value="Buscar">
  	</fieldset>
- 	
- 	<fieldset class = "fld_turma">
- 		<!--  Diretiva Include -->
-		<%@include file="home.jsp"%> <!-- inserir a lista_alunos_turma -->
- 	</fieldset>
-	
+ 	<fieldset class = "fld_disciplina">
+  		<legend>Disciplina</legend>
+  			<select>
+  				<option value="1">1º Bimestre</option>
+  				<option value="2">2º Bimestre</option>
+  				<option value="3">3º Bimestre</option>
+  				<option value="4">4º Bimestre</option>
+			</select>
+	</fieldset>
 	<div class="boletim">
 	<table>
 		<tr> 
