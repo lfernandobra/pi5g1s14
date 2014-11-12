@@ -15,7 +15,7 @@
 	<div id = "login_erro">
 		<jsp:include page="erro.jsp" />
 	</div>
-	<form id="boletim" method="post" action="SalvarBoletim" >
+	<form id="boletim" method="post" action="AtualizarBoletim" >
 		<c:if test="${not empty compoe}">
 			<input type="hidden" name="idBoletim" value="${compoe.boletim.ID}"/>
 			<input type="hidden" name="idDisciplina" value="${compoe.disciplina.ID}"/>

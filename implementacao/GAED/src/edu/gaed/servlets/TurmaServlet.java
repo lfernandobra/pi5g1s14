@@ -36,35 +36,8 @@ public class TurmaServlet extends HttpServlet {
 	 * @see HttpServlet#service(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		if (request.getServletPath().equals("/ObterTurmaProfessor"))
-		{		
-			obterTurmaProfessor(request, response);
-		
-		}
-		
-	}
-	
-	private void obterTurmaProfessor(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		Usuario usuario = (Usuario) request.getSession().getAttribute("login"); //colocado pelo professor
-			
-		ProfessorDao professorDao = new ProfessorDao();
-		Professor professor = professorDao.obterProfessor(usuario.getId());
-		
-		DisciplinaDao disciplinaDao = new DisciplinaDao();
-		Disciplina disciplina = disciplinaDao.obtemDisciplinaProfessor(professor);
-		
-		TurmaDao turmaDao = new TurmaDao();
-		List<Turma> turmas = turmaDao.obterTurmas(professor.getIdProfessor());
-						
-						
-		request.setAttribute("disciplina", disciplina);
-		request.setAttribute("turmas", turmas);
-		
-		
-		getServletContext().getRequestDispatcher("/turmas_disciplina.jsp").forward(request, response);
-	}
 	
 
+	}
+	
 }

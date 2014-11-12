@@ -22,71 +22,35 @@
      url="jdbc:mysql://localhost:3306/bd_gaed"
      user="root"  password=""/>
      
-     <sql:query dataSource="${snapshot}" var="result">
-		SELECT * from turma;
+     <sql:query dataSource="${snapshot}" var="resultTurma">
+		SELECT t.ID_Turma,t.Nome_Turma,t.Bimestre,t.Periodo,t.Serie from turma t,professor p,possui ps 
+		where t.ID_Turma = ps.ID_Turma and ps.ID_Professor = p.ID_Professor and p.ID_Professor = ${professor.idProfessor};
 	 </sql:query>
-     
-     
-	<fieldset class = "fld_turma">
-  		<legend>Turma</legend>
-  			<select>
-  				<c:forEach var="row" items="${result.rows}">
-  					<option value="$row.ID_Turma">Turma : ${row.Nome_Turma} - ${row.Bimestre}° Bimestre</option>
-  				</c:forEach>
-			</select>
+	 
+	 <sql:query dataSource="${snapshot}" var="resultDisciplina">
+			select d.ID_Disciplina,d.Nome_Disciplina,d.Conteudo_Disciplina from disciplina d,ministra m,professor p
+			where d.ID_Disciplina =  m.ID_Disciplina and m.ID_Professor = p.ID_Professor and p.ID_Professor = ${professor.idProfessor};
+	 </sql:query>
+	 	
+     <fieldset>
+     	<legend>Visualizar Boletim</legend>
+    <form action = "ObterBoletimTurma" method = "post">
+		<p><label id="lbl_turma" for="txt_turma">Selecione a turma:</label> 			
+  				<select id="sel_turma" name="idTurma" value="${turma.ID}">
+  					<c:forEach var="rowT" items="${resultTurma.rows}">
+  						<option value="${rowT.ID_Turma}">Turma : ${rowT.Nome_Turma} - ${rowT.Bimestre}° Bimestre - ${rowT.Periodo}</option>
+  					</c:forEach>
+				</select>	 	
+  		<p><label id="lbl_disciplina" for="txt_disciplina">Selecione a disciplina:</label> 
+  				<select id="sel_disciplina" name="idDisciplina" value="${disciplina.ID}">
+  					<c:forEach var="rowD" items="${resultDisciplina.rows}">
+  						<option value="${rowD.ID_Disciplina}"> ${rowD.Nome_Disciplina}</option>
+  					</c:forEach>
+				</select>
+ 		<p><input type = submit value = "Obter Boletim"/></p>
+ 		
+ 		
+ 	</form>
  	</fieldset>
- 	<fieldset class = "fld_bimestre">
-  		<legend>Bimestre</legend>
-  			<select>
-  				<option value="1">1º Bimestre</option>
-  				<option value="2">2º Bimestre</option>
-  				<option value="3">3º Bimestre</option>
-  				<option value="4">4º Bimestre</option>
-			</select>
- 	</fieldset>
- 	<fieldset class = "fld_disciplina">
-  		<legend>Disciplina</legend>
-  			<select>
-  				<option value="1">1º Bimestre</option>
-  				<option value="2">2º Bimestre</option>
-  				<option value="3">3º Bimestre</option>
-  				<option value="4">4º Bimestre</option>
-			</select>
-	</fieldset>
-	<div class="boletim">
-	<table>
-		<tr> 
-			<th>Disciplinas</th>
-			<th>Notas</th>
-			<th>Faltas</th>
-		</tr>
-		<tr> 
-			<td>Português</td>
-			<td>10</td>
-			<td>5</td>
-		</tr>
-		<tr> 
-			<td>Matemática</td>
-			<td>8</td>
-			<td>3</td>
-		</tr>
-		<tr> 
-			<td>História</td>
-			<td>5</td>
-			<td>8</td>
-		</tr>
-		<tr> 
-			<td>Geográfia</td>
-			<td>7</td>
-			<td>5</td>
-		</tr>
-		<tr> 
-			<td>Total de faltas</td>
-			<td></td>
-			<td>22</td>
-		</tr>	
-	</table>
-	</div>
-
 </body>
 </html>
