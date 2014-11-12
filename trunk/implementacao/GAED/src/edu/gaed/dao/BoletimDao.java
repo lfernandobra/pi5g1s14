@@ -178,7 +178,10 @@ public class BoletimDao extends BaseDao{
 		try {
 			conn = this.getConnection();
 			
-			String sql = "select b.ID_Boletim,b.Data_Boletim from Boletim b,Inserido i,Aluno a,Estuda e,Turma t,Possui p,Disciplina d where b.ID_Boletim = i.ID_Boletim and i.ID_Aluno = a.ID_Aluno and a.ID_Aluno = e.ID_Aluno and e.ID_Turma = t.ID_Turma and t.ID_Turma = p.ID_Turma and p.ID_Disciplina = d.ID_Disciplina and d.ID_Disciplina = ? and t.ID_Turma = ?";
+			String sql = "select b.ID_Boletim,b.Data_Boletim from Boletim b,Inserido i,Aluno a,Estuda e,Turma t,"+
+			"Possui p,Disciplina d,Ministra m where b.ID_Boletim = i.ID_Boletim and i.ID_Aluno = a.ID_Aluno and a.ID_Aluno = e.ID_Aluno and e.ID_Turma = t.ID_Turma and t.ID_Turma = p.ID_Turma and "+
+			"p.ID_Professor = m.ID_Professor and m.ID_Disciplina = d.ID_Disciplina and d.ID_Disciplina = ? and t.ID_Turma = ?;";
+			
 			PreparedStatement stmt = conn.prepareStatement(sql);
 			
 			

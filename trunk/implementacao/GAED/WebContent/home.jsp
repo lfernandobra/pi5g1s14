@@ -36,7 +36,7 @@
 						<c:when test="${login.perfil.professor}">
 							
 							<li>
-								<a href="boletim.jsp"><span class="glyphicon glyphicon-file"></span> Boletim</a> 								
+								<a href="#" onclick="loadContent('ObterProfessor')"><span class="glyphicon glyphicon-file"></span> Boletim</a> 								
 							</li>
 							<li>
 								<a href="javascript:document.form2.submit()"><span class="glyphicon glyphicon-exclamation-sign"></span> Ocorrências <span class="badge badge-info"> 4</span></a> 

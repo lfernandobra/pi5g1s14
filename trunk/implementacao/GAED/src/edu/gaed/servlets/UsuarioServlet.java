@@ -9,9 +9,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import edu.gaed.dao.AlunoDao;
+import edu.gaed.dao.ProfessorDao;
 import edu.gaed.dao.ResponsavelDao;
 import edu.gaed.dao.UsuarioDao;
 import edu.gaed.vo.Aluno;
+import edu.gaed.vo.Professor;
 import edu.gaed.vo.Responsavel;
 import edu.gaed.vo.Usuario;
 
@@ -19,7 +21,7 @@ import edu.gaed.vo.Usuario;
 /**
  * Servlet implementation class UsuarioServlet
  */
-@WebServlet({ "/UsuarioServlet","/SalvarUsuario","/ObterUsuario","/RemoverUsuario","/SalvarResponsavel","/SalvarAluno"})
+@WebServlet({ "/UsuarioServlet","/SalvarUsuario","/ObterUsuario","/ObterProfessor","/SalvarResponsavel","/SalvarAluno"})
 public class UsuarioServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -34,7 +36,7 @@ public class UsuarioServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		
 		if (request.getServletPath().equals("/ObterUsuario"))
@@ -55,6 +57,11 @@ public class UsuarioServlet extends HttpServlet {
 		else if (request.getServletPath().equals("/SalvarAluno"))
 		{		
 			salvarAluno(request, response);
+		
+		}
+		else if (request.getServletPath().equals("/ObterProfessor"))
+		{		
+			obterProfessor(request, response);
 		
 		}
 		
@@ -286,6 +293,18 @@ public class UsuarioServlet extends HttpServlet {
 
 			response.sendRedirect(getServletContext().getContextPath() + "/ListaAlunosServlet");
 		}
+	}
+	
+	private void obterProfessor(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		Usuario usuario = (Usuario) request.getSession().getAttribute("login"); //colocado pelo professor
+		
+		ProfessorDao professorDao = new ProfessorDao();
+		Professor professor = professorDao.obterProfessor(usuario.getId());		
+					
+		request.setAttribute("professor", professor);
+			
+		getServletContext().getRequestDispatcher("/boletim.jsp").forward(request, response);
 	}
 	
 }
