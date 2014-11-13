@@ -57,9 +57,9 @@
      </div>
     
 	    
-	</div>    
-  </div>  
-</div>    
+	</div>  <!-- colsm9 --> 
+   </div> <!-- row -->
+</div>  <!-- Container -->   
     
     
    

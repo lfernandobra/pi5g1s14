@@ -10,19 +10,36 @@
 <title>Gerencia Usuários</title>
 </head>
 <body>
-	<fieldset>
-		<legend>Aluno</legend>
-			<ul class="nav">
-				<li><a href="cadastrar_aluno.jsp"><i class="glyphicon glyphicon-pencil"></i> Inserir Aluno</a></li>
-				<li><a href="#" onclick=""><i class="glyphicon glyphicon-eye-open"></i> Visualizar Alunos</a></li>
-			</ul>
-	</fieldset>
-	<fieldset>
-		<legend>Responsável</legend>
-			<ul class="nav">
-				<li><a href="cadastrar_responsavel.jsp"><i class="glyphicon glyphicon-pencil"></i> Inserir  Responsável</a></li>
-			</ul>
-	</fieldset>
+<div class="container" id="main"> 
+  <div class="row ">
+  	<div class="col-sm-9">
+  	    <div class="col xs-8 col-sm-5 col-sm-offset-0 ">
+	            <div class="panel panel-default">
+	                <div class="panel-heading"> <h4>Aluno</h4></div>
+							<ul class="nav">
+								<li><a href="cadastrar_aluno.jsp"><i class="glyphicon glyphicon-pencil"></i> Inserir Aluno</a></li>
+								<li><a href="#" onclick=""><i class="glyphicon glyphicon-eye-open"></i> Visualizar Alunos</a></li>
+							</ul>
+				</div>
+			</div>  <!-- colxs9 -->
+			
+				<div class="col xs-9 col-sm-4 col-sm-offset-1 ">
+			            <div class="panel panel-default">
+			                <div class="panel-heading"> 
+			               		 <h4>Responsável</h4>
+			                </div>
+							<ul class="nav">
+								<li><a href="cadastrar_responsavel.jsp"><i class="glyphicon glyphicon-pencil"></i> Inserir  Responsável</a></li>
+							</ul>
+					    </div>
+			
+				
+				</div>  <!-- colxs9 -->
+			</div>  <!-- colsm9 -->
+	  </div> <!-- row -->
+</div>  <!-- Container -->
+
+
 
 </body>
 </html>

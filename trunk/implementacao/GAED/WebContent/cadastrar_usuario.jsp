@@ -16,6 +16,12 @@
 	<script type="text/javascript" src="scripts/script.js"></script>
 </head>
 <body>
+<div class="container" id="main"> 
+  <div class="row ">
+  	<div class="col-sm-9">
+  	    <div class="col xs-9 col-sm-5 col-sm-offset-1 ">
+    	<div class="panel panel-default">
+
 	<form id="usuario" method="post" action="adiciona_usuario.jsp" >
 		<c:if test="${not empty usuario}">
 			<input type="hidden" name="id" value="${usuario.id}"/>
@@ -95,6 +101,6 @@
 			</fieldset>
         
 	</form>
-
+</div></div></div></div></div>
 </body>
 </html>
