@@ -193,8 +193,31 @@ public class BoletimDao extends BaseDao{
 			
 			stmt3.setInt(1, qtyBoletim);
 			stmt3.setInt(2, inserido.getAluno().getID());
-			
+					
 			id = stmt3.executeUpdate();
+			//
+			String sql4 = "select d.ID_Disciplina,d.Nome_disciplina from Aluno a,Estuda e,Turma t,Possui p,Professor pf,"
+					+ "Ministra m,Disciplina d where a.ID_Aluno = e.ID_Aluno and e.ID_Turma = t.ID_Turma and "
+					+ "t.ID_Turma = p.ID_Turma and p.ID_Professor = pf.ID_Professor "
+					+ "and pf.ID_Professor = m.ID_Professor and m.ID_Disciplina = d.ID_Disciplina and a.ID_Aluno = ?;";
+			
+			PreparedStatement stmt4 = conn.prepareStatement(sql4);
+			
+			stmt4.setInt(1, inserido.getAluno().getID());
+			
+			ResultSet resultado4 = stmt4.executeQuery();
+			
+			while (resultado4.next())
+			{
+				String sql5 = "insert into compoe (ID_Boletim,ID_Disciplina) values (?,?);";
+				PreparedStatement stmt5 = conn.prepareStatement(sql5);
+				
+				stmt5.setInt(1, qtyBoletim);
+				stmt5.setInt(2, resultado4.getInt("ID_Disciplina"));
+				
+				id = stmt5.executeUpdate();
+				
+			}
 			
 			
 			return id > 0;
