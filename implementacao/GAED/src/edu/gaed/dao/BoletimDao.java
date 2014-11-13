@@ -9,61 +9,35 @@ import java.util.List;
 
 import edu.gaed.vo.Boletim;
 import edu.gaed.vo.Compoe;
+import edu.gaed.vo.Data;
 import edu.gaed.vo.Disciplina;
+import edu.gaed.vo.Inserido;
+import edu.gaed.vo.Usuario;
 
 
 public class BoletimDao extends BaseDao{
 	
-	/*
-	public List<Boletim> obterBoletim() {
-		
-		List<Boletim> boletimTurma = new ArrayList<Boletim>();
+	public boolean atualizaBoletim(Compoe compoe) {
 		Connection conn = null;
 		
 		try {
 			conn = this.getConnection();
 			
-			String sql = "select u.nome,a.ID_Aluno,t.Serie,t.Nome_Turma,p.ID_Professor,d.ID_Disciplina,d.nome_disciplina,b.ID_Boletim,t.Bimestre,c.nota,c.faltas from usuario u,turma t,disciplina d,boletim b,compoe c,aluno a ,estuda e,inserido i,professor p , ministra m where u.ID_Usuario = a.ID_Usuario and a.ID_Aluno = e.ID_Aluno and e.ID_Turma = t.ID_Turma and b.ID_Boletim = c.ID_Boletim and c.ID_Disciplina = d.ID_Disciplina and d.ID_Disciplina = m.ID_Disciplina and m.ID_Professor = p.ID_Professor and b.ID_Boletim = i.ID_Boletim and i.ID_Aluno = a.ID_Aluno order by u.Nome,d.Nome_Disciplina";
-			PreparedStatement stmt = conn.prepareStatement(sql);
-					
-			ResultSet resultado = stmt.executeQuery();
+			String sql = "update compoe set nota = ?, faltas = ? where ID_Boletim = ? and ID_Disciplina = ?";			
 			
-			while (resultado.next()) {
-				
-				Boletim bolAluno = new Boletim();
-				//bolAluno.getCompoe().getBoletim().setBimestre(resultado.getInt("Bimestre"));
-				System.out.println(resultado.getInt("Bimestre"));
-				bolAluno.setID(resultado.getInt("ID_Boletim"));
-				
-				Aluno aluno = new Aluno();
-				aluno.setID(resultado.getInt("ID_Aluno"));
-				aluno.setNome(resultado.getString("nome"));
-				
-				bolAluno.setAluno(aluno);
-				
-				Turma turma = new Turma();
-				turma.setNome(resultado.getString("Nome_Turma"));
-				turma.setSerie(resultado.getInt("Serie"));
-				
-				bolAluno.setTurma(turma);
-														
-				Disciplina disciplina = new Disciplina();
-				disciplina.setID(resultado.getInt("ID_Disciplina"));
-				disciplina.setNome(resultado.getString("nome_disciplina"));
-				
-				Compoe compoe = new Compoe();
-				
-				compoe.setDisciplina(disciplina);
-				compoe.setFaltas(resultado.getInt("faltas"));
-				compoe.setNota(resultado.getFloat("nota"));
-				
-				bolAluno.setCompoe(compoe);
-								
-				boletimTurma.add(bolAluno);
-			}
+			PreparedStatement stmt = conn.prepareStatement(sql);
+			
+			stmt.setFloat(1, compoe.getNota());
+			stmt.setInt(2, compoe.getFaltas());
+			stmt.setInt(3, compoe.getBoletim().getID());
+			stmt.setInt(4, compoe.getDisciplina().getID());
+			
+			int id = stmt.executeUpdate();
+						
+			return id > 0;
 		}
 		catch (SQLException e) {
-			e.printStackTrace();
+			return false;
 		}
 		finally {
 			try {
@@ -75,9 +49,8 @@ public class BoletimDao extends BaseDao{
 				//do nothing
 			}
 		}		
-		return boletimTurma;
 	}
-	*/
+	
 	public Compoe obterBoletim(int ID_Aluno,int ID_Boletim,int ID_Disciplina){
 		Compoe compoe = new Compoe();
 		Connection conn = null;
@@ -136,40 +109,6 @@ public class BoletimDao extends BaseDao{
 		
 	}
 	
-	public boolean atualizaBoletim(Compoe compoe) {
-		Connection conn = null;
-		
-		try {
-			conn = this.getConnection();
-			
-			String sql = "update compoe set nota = ?, faltas = ? where ID_Boletim = ? and ID_Disciplina = ?";			
-			
-			PreparedStatement stmt = conn.prepareStatement(sql);
-			
-			stmt.setFloat(1, compoe.getNota());
-			stmt.setInt(2, compoe.getFaltas());
-			stmt.setInt(3, compoe.getBoletim().getID());
-			stmt.setInt(4, compoe.getDisciplina().getID());
-			
-			int id = stmt.executeUpdate();
-						
-			return id > 0;
-		}
-		catch (SQLException e) {
-			return false;
-		}
-		finally {
-			try {
-				if (conn != null) {
-					conn.close();
-				}				
-			}
-			catch (Exception e) {
-				//do nothing
-			}
-		}		
-	}
-	
 	public List<Boletim> obterBoletinsTurma(int idTurma, int idDisciplina) {
 		
 		List<Boletim> boletins = new ArrayList<Boletim>();
@@ -215,5 +154,71 @@ public class BoletimDao extends BaseDao{
 		}		
 		return boletins;
 	}
+	
+	public boolean insereBoletim(Inserido inserido)
+	{
+		Connection conn = null;
+		
+		try
+		{
+			conn = getConnection();
+					
+			String sql1 = "insert into boletim (Bimestre) values (?);";
+			
+			PreparedStatement stmt1 = conn.prepareStatement(sql1);
+			
+			stmt1.setInt(1, inserido.getBoletim().getBimestre());
+			
+			//ResultSet resultado1 = stmt1.executeQuery();
+			
+			int id = stmt1.executeUpdate();
+			
+			//Obter quantidade de boletins cadastrados no sistema
+			
+			String sqlCount = "SELECT COUNT(*) as Quantidade_Boletins FROM boletim u ";
+			
+			PreparedStatement stmt2 = conn.prepareStatement(sqlCount);
+			
+			ResultSet resultado2 = stmt2.executeQuery();
+			
+			int qtyBoletim = 0;
+			
+			if (resultado2.next()) {
+				qtyBoletim = resultado2.getInt("Quantidade_Boletins"); 
+			}
+			
+			String sql3 = "insert into inserido (ID_Boletim,ID_Aluno) values (?,?);";
+			
+			PreparedStatement stmt3 = conn.prepareStatement(sql3);
+			
+			stmt3.setInt(1, qtyBoletim);
+			stmt3.setInt(2, inserido.getAluno().getID());
+			
+			id = stmt3.executeUpdate();
+			
+			
+			return id > 0;
+		}
+		catch (Exception ex)
+		{
+			ex.printStackTrace();
+			return false;
+		}
+		finally
+		{
+			if (conn != null)
+			{
+				try
+				{
+					conn.close();
+				}
+				catch(Exception closeEx)
+				{
+					//do nothing
+				}
+			}
+		}		
+	}	
+
 	
 }
