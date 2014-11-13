@@ -6,94 +6,131 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+	<link href="Bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen" />
+    <link href="Bootstrap/css/bootstrap-theme.min.css" rel="stylesheet" media="screen" />
+    <link href="Bootstrap/css/bootstrap.css" rel="stylesheet" media="screen" />
 	<title>Cadastro Aluno</title>
 	<script type="text/javascript" src="scripts/script.js"></script>
 </head>
 <body>
-	<form id="aluno" method="post" action="adiciona_aluno.jsp" >
-		<c:if test="${not empty aluno}">
-			<input type="hidden" name="id" value="${aluno.id}"/>
-		</c:if>
-		<fieldset id = "identficacao">
-        	<legend>Identificação</legend>
-			<p>
-			<label id="lbl_login" for="txt_login">Login:</label> 
-            <input type="text" id="txt_login" name="login" value="${aluno.login}" tabindex="1"/>
-			</p>
-			<p>
-			<label id="lbl_senha" for="txt_senha">Senha:</label>  
-            <input type="password" id="txt_senha" name="senha" value="${aluno.senha}" tabindex="2"/>
-			</p>
-        </fieldset>
-        <fieldset id = "aluno_dados">
-        	<legend>Dados</legend>
-			<p>
-				<label id="lbl_nome" for="txt_nome">Nome:</label>  
-                <input type="text" id="txt_nome" name="nome" value="${aluno.nome}" tabindex="3"/>
-			</p>
-			<p>
-				<label id="lbl_sobrenome" for="txt_nome">Sobrenome:</label> 
-                <input type="text" id="txt_sobrenome" name="sobrenome" value="${aluno.sobrenome}" tabindex="4"/>
-			</p>
-			
-			<p>
-				<label id="lbl_datanascimento" for="txt_data">Data de nascimento:</label>  
-                <input type="text" id="txt_datanasc" name="datanasc" 
-               	   	   onKeyPress="MascaraData(aluno.datanasc);"
-                	   onBlur="ValidaData(aluno.datanasc);"
-                	   value="${aluno.datanasc}" tabindex="4"/>
-			</p>
-			
-			<p>
-				<label id="lbl_sexo" for="txt_sexo">Sexo:</label>  
-                
-                <select id="txt_sexo" name="sexo" value="${aluno.sexo}" tabindex="5">
-  					<option value="Feminino">Feminino</option>
-  					<option value="Masculino">Masculino</option>
-				</select>
-			</p>
-			<p>
-				<label id="lbl_email" for="txt_email">Email:</label> 
-                <input type="text" id="txt_email" name="email" value="${aluno.email}" tabindex="6"/>
-			</p>
-			<p>
-				<label id="lbl_telefone" for="txt_telefone">Telefone:</label>  
-                <input type="text" id="txt_telefone" name="telefone" value="${aluno.telefone}"
-                			onKeyPress="MascaraTelefone(aluno.telefone);" 
-   							maxlength="20" value="${aluno.telefone}" 
-   							tabindex="7"  onBlur="ValidaTelefone(txt_telefone);"/>
-			</p>
-			<p>               
-                <label id="lbl_rua" for="txt_rua">Rua:</label>  
-                <input type="text" id="txt_rua" name="rua" value="${aluno.rua}" tabindex="8"/><p>
-                <label id="lbl_numero" for="txt_numero">Numero:</label>  
-                <input type="text" id="txt_numero" name="numero" value="${aluno.numero}" tabindex="9"/><p>
-                <label id="lbl_bairro" for="txt_cidade">Bairro:</label>  
-                <input type="text" id="txt_bairro" name="bairro" value="${aluno.bairro}" tabindex="10"/><p>
-                <label id="lbl_cidade" for="txt_cidade">Cidade:</label>  
-                <input type="text" id="txt_cidade" name="cidade" value="${aluno.cidade}" tabindex="11"/><p>
-                <label id="lbl_estado" for="txt_estado">Estado:</label>  
-                <input type="text" id="txt_estado" name="estado" value="${aluno.estado}" tabindex="12"/><p>
-                
-                <label id="lbl_CEP" for="txt_endereco">CEP :</label> 
-                <input type="text" id="txt_CEP" name="CEP" value="${aluno.CEP}" tabindex="13"
-                	   maxlength="10"
-                	   onKeyPress="MascaraCep(aluno.CEP);"
-                	   onBlur="ValidaCep(aluno.CEP);"/>
-			</p>
-			
+<div class="container" id="main"> 
+  <div class="row ">
+  	<div class="col-sm-7">
+  	   
+    		<div class="panel panel-default">
+    			<div class="panel-heading"> <h3>Cadastro de Aluno</h3></div>
+    			<br>
+
+				<form  class="form-horizontal" id="aluno" method="post" action="adiciona_aluno.jsp" >
+				
+					<c:if test="${not empty aluno}">
+						<input type="hidden" name="id" value="${aluno.id}"/>
+					</c:if>
+		 		
+  				<fieldset class="fsStyle">  				
+  				<legend class="legendStyle">Identificação</legend>
+			    <div class="form-group">
+			     <label class="col-sm-2 control-label" for="login">Email</label>
+			     <div class="col-sm-6"><input type="text" class="form-control" name="login" value="${aluno.login}" tabindex="1"/> </div> 
+			    </div>
+			    
+			    <div class="form-group">
+			      <label class="col-sm-2 control-label" for="txt_senha">Senha</label>
+			      <div class="col-sm-6"> <input type="password" class="form-control" name="senha" value="${aluno.senha}" tabindex="2"/> </div> 
+			    </div>
 			</fieldset>
-			<fieldset id = "botoes">
-				<input type="submit" value="Salvar"></input><input type="reset" value="Resetar"></input>
-			</fieldset>
-        
-	</form>
+			
+				
+		<fieldset class="fsStyle">  				
+  				<legend class="legendStyle">Dados Pessoais</legend>
+				<div class="form-group">
+			      	<label class="col-sm-2 control-label" for="txt_nome">Nome:</label>
+					<div class="col-sm-6"> <input type="text" class="form-control" name="nome" value="${aluno.nome}" tabindex="3"/> </div>
+				</div>
+		
+				<div class="form-group">
+			      	<label class="col-sm-2 control-label" for="txt_sobrenome">Sobrenome:</label>
+					<div class="col-sm-6"> <input type="text" class="form-control" name="sobrenome" value="${aluno.sobrenome}" tabindex="4"/> </div>
+				</div>
+		
+				<div class="form-group">
+			      	<label class="col-sm-2 control-label" for="txt_data">Data de Nascimento:</label>
+					<div class="col-sm-6"> <input type="text" class="form-control" name="datanasc" onKeyPress="MascaraData(aluno.datanasc);"
+                	 onBlur="ValidaData(aluno.datanasc);" value="${aluno.datanasc}" tabindex="5"/></div>
+				</div>
+		
+				<div class="form-group">
+			      	<label class="col-sm-2 control-label" for="txt_sexo">Sexo:</label>
+					<div class="col-sm-6"><select id="txt_sexo" name="sexo" value="${aluno.sexo}" tabindex="6" class="form-control">
+				      <option value="Feminino">Feminino</option>
+				      <option value="Masculino">Masculino</option>
+  					</select></div>
+				</div>
+		 		
+		 		<div class="form-group">
+			      	<label class="col-sm-2 control-label" for="inputEmail1">Email:</label>
+					<div class="col-sm-6"> <input type="text" class="form-control" name="email" value="${aluno.email}" tabindex="7"/> </div>
+				</div>
+		
+				<div class="form-group">
+			      	<label class="col-sm-2 control-label" for="txt_data">Telefone:</label>
+					<div class="col-sm-6"> <input type="text" class="form-control"  name="telefone" value="${aluno.telefone}"
+                	onKeyPress="MascaraTelefone(aluno.telefone);" maxlength="20" value="${aluno.telefone}" 
+   					tabindex="8"  onBlur="ValidaTelefone(txt_telefone);"/></div>
+				</div>
+		
+				<div class="form-group">
+			      	<label class="col-sm-2 control-label" for="txt_rua">Rua:</label>
+					<div class="col-sm-6"> <input type="text" class="form-control" name="rua" value="${aluno.rua}" tabindex="9"/> </div>
+				</div>
+				
+								
+				<div class="form-group">
+					<label class="col-sm-2 control-label" for="txt_numero">Numero:</label>
+					<div class="col-sm-2"> <input type="text" class="form-control" name="numero" value="${aluno.numero}" tabindex="10"/> </div>
+			      	<label class="col-sm-1 control-label" for="txt_numero">Bairro:</label>
+					<div class="col-sm-3"> <input type="text" class="form-control" name="bairro" value="${aluno.bairro}"  tabindex="11"/> </div>
+				</div>
+				
+				<div class="form-group">
+					<label class="col-sm-2 control-label" for="txt_numero">Cidade:</label>
+					<div class="col-sm-3"> <input type="text" class="form-control" name="cidade" value="${aluno.cidade}" tabindex="12"/> </div>
+			      	<label class="col-sm-1 control-label" for="txt_numero">Estado:</label>
+					<div class="col-sm-2"> <input type="text" class="form-control" name="estado" value="${aluno.estado}"  tabindex="13"/> </div>
+				</div>
+				
+				<div class="form-group">
+			      	<label class="col-sm-2 control-label" for="txt_rua">CEP:</label>
+					<div class="col-sm-6"> <input type="text" class="form-control" name="CEP" value="${aluno.CEP}" tabindex="13"
+                	   maxlength="10" onKeyPress="MascaraCep(aluno.CEP);" onBlur="ValidaCep(aluno.CEP);"/> </div>
+				</div>
+				
+				<div class="form-group last">
+			        <div class="col-sm-offset-8 col-sm-9">
+			         <input type="submit" value="Salvar" class="btn btn-success btn-sm"/>
+			         <input type="reset" value="Limpar" class="btn btn-default btn-sm"/>
+			        </div>
+			   </div>
+				
+				
+				
+				</fieldset>
+				</form>
+		  </div>
+		</div> 
+	  </div>
+	</div>
+
+		
+		
+		
+		
+		
+		
 
 </body>
 </html>
