@@ -13,16 +13,18 @@ import edu.gaed.dao.BoletimDao;
 import edu.gaed.dao.CompoeDao;
 import edu.gaed.dao.EstudaDao;
 import edu.gaed.dao.InseridoDao;
+import edu.gaed.vo.Aluno;
 import edu.gaed.vo.Boletim;
 import edu.gaed.vo.Compoe;
 import edu.gaed.vo.Disciplina;
 import edu.gaed.vo.Estuda;
 import edu.gaed.vo.Inserido;
+import edu.gaed.vo.Possui;
 
 /**
  * Servlet implementation class BoletimServlet
  */
-@WebServlet({ "/BoletimServlet","/ObterBoletim","/ObterBoletimTurma", "/EditarBoletim", "/AtualizarBoletim" })
+@WebServlet({ "/BoletimServlet","/ObterBoletim","/ObterBoletimTurma", "/EditarBoletim", "/AtualizarBoletim","/InserirBoletim"})
 public class BoletimServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -42,6 +44,11 @@ public class BoletimServlet extends HttpServlet {
 		if (request.getServletPath().equals("/AtualizarBoletim"))
 		{
 			atualizarBoletim(request, response);
+		}
+		
+		else if (request.getServletPath().equals("/InserirBoletim"))
+		{
+			inserirBoletim(request, response);
 		}
 		
 		else if (request.getServletPath().equals("/ObterBoletim"))
@@ -83,6 +90,7 @@ public class BoletimServlet extends HttpServlet {
 			else
 			{			
 				//seta contato no escopo de requisição para ser exibido pelo jsp 
+				System.out.println("Setado");
 				request.setAttribute("compoe", boletim);
 			}
 		
@@ -146,7 +154,8 @@ public class BoletimServlet extends HttpServlet {
 			int indiceDisciplina = Integer.parseInt(strIndiceDisciplina);
 			int faltas = Integer.parseInt(strFaltas);
 			float nota = Float.parseFloat(strNota);
-						
+			
+			
 	        Boletim boletim = new Boletim();
 	        boletim.setID(indiceBoletim);
 	        
@@ -160,6 +169,8 @@ public class BoletimServlet extends HttpServlet {
 	        compoe.setDisciplina(disciplina);
 	        compoe.setNota(nota);
 	        compoe.setFaltas(faltas);
+	        
+	        System.out.println("Recebido"+compoe);
 	        
 	        BoletimDao boletimDao = new BoletimDao();
 	        
@@ -182,6 +193,50 @@ public class BoletimServlet extends HttpServlet {
 	      }
 	    catch (Exception e) {
 	      request.setAttribute("mensagemErro", "Informações do aluno estão inválidas.");
+	      getServletContext().getRequestDispatcher("/index.jsp").forward(request, response);
+	    }
+
+	}
+	
+	private void inserirBoletim(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		try {    
+			
+			String strIndiceAluno = request.getParameter("idAluno");
+			String strIndiceBimestre = request.getParameter("idBimestre");
+			
+			
+			int indiceAluno = Integer.parseInt(strIndiceAluno);
+			int indiceBimestre = Integer.parseInt(strIndiceBimestre);
+						
+			Boletim boletim = new Boletim();
+	        boletim.setBimestre(indiceBimestre);
+	        
+	        Aluno aluno = new Aluno();
+	        aluno.setID(indiceAluno);
+	        
+	        Inserido inserido = new Inserido();
+	        inserido.setAluno(aluno);
+	        inserido.setBoletim(boletim);
+	        
+	        BoletimDao boletimDao = new BoletimDao();
+                  
+	        boolean sucesso = false;
+	        
+	        sucesso = boletimDao.insereBoletim(inserido);
+	         
+	        if (sucesso)
+	        {
+	          //requisição foi bem sucedida, vamos finaliza-la e redirecionar o usuario para outro servlet
+	          response.sendRedirect(getServletContext().getContextPath() + "/inserir_boletim.jsp");                            
+	        }
+	        else
+	        {
+	          request.setAttribute("mensagemErro", "Não foi possível salvar boletim");
+	          getServletContext().getRequestDispatcher("/index.jsp").forward(request, response);
+	        }
+	      }
+	    catch (Exception e) {
+	      request.setAttribute("mensagemErro", "Informações do boletim estão inválidas.");
 	      getServletContext().getRequestDispatcher("/index.jsp").forward(request, response);
 	    }
 
