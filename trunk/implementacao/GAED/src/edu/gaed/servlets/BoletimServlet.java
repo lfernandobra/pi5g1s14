@@ -68,19 +68,17 @@ public class BoletimServlet extends HttpServlet {
 			String strIndiceAluno = request.getParameter("idAluno");
 			String strIndiceBoletim = request.getParameter("idBoletim");
 			String strIndiceDisciplina = request.getParameter("idDisciplina");
-			
+							
 			int indiceAluno = Integer.parseInt(strIndiceAluno);
 			int indiceBoletim = Integer.parseInt(strIndiceBoletim);
 			int indiceDisciplina = Integer.parseInt(strIndiceDisciplina);
-		
+								
 			String erro = null;
 		
 			BoletimDao boletimDao = new BoletimDao();
 		
 			//obtem contato e envia usuario para formulario de edição do contato
 			Compoe boletim = boletimDao.obterBoletim(indiceAluno, indiceBoletim,indiceDisciplina);
-			
-			System.out.println(boletim);
 				
 			//se nao houver agenda ou indice contato não estiver na agenda, informa erro
 			if (boletim == null)
@@ -90,7 +88,6 @@ public class BoletimServlet extends HttpServlet {
 			else
 			{			
 				//seta contato no escopo de requisição para ser exibido pelo jsp 
-				System.out.println("Setado");
 				request.setAttribute("compoe", boletim);
 			}
 		
@@ -183,7 +180,7 @@ public class BoletimServlet extends HttpServlet {
 	        if (sucesso)
 	        {
 	          //requisição foi bem sucedida, vamos finaliza-la e redirecionar o usuario para outro servlet
-	          response.sendRedirect(getServletContext().getContextPath() + "/ObterBoletim");                            
+	          response.sendRedirect(getServletContext().getContextPath() + "/boletim_turma.jsp");                            
 	        }
 	        else
 	        {
