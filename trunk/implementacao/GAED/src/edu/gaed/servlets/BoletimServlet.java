@@ -19,12 +19,12 @@ import edu.gaed.vo.Compoe;
 import edu.gaed.vo.Disciplina;
 import edu.gaed.vo.Estuda;
 import edu.gaed.vo.Inserido;
-import edu.gaed.vo.Possui;
+
 
 /**
  * Servlet implementation class BoletimServlet
  */
-@WebServlet({ "/BoletimServlet","/ObterBoletim","/ObterBoletimTurma", "/EditarBoletim", "/AtualizarBoletim","/InserirBoletim"})
+@WebServlet({ "/BoletimServlet","/ObterBoletim","/ObterBoletimTurma","/VisualizarBoletimAluno","/EditarBoletim", "/AtualizarBoletim","/InserirBoletim"})
 public class BoletimServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -60,6 +60,11 @@ public class BoletimServlet extends HttpServlet {
 		{
 			obterBoletimTurma(request, response);
 		}
+		else if (request.getServletPath().equals("/VisualizarBoletimAluno"))
+		{
+			visualizarBoletimAluno(request, response);
+		}
+		
 	
 	}
 	
@@ -237,6 +242,24 @@ public class BoletimServlet extends HttpServlet {
 	      getServletContext().getRequestDispatcher("/index.jsp").forward(request, response);
 	    }
 
+	}
+	
+	private void visualizarBoletimAluno(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		String strIndiceBoletim = request.getParameter("idBoletim");
+		int indiceBoletim = Integer.parseInt(strIndiceBoletim);
+		
+		//obter o boletim
+				
+		CompoeDao compoeDao = new CompoeDao();
+		List<Compoe> compoe = compoeDao.obterComposicao(indiceBoletim);
+		
+		request.setAttribute("compoe",compoe);
+			
+		//encaminha para agenda_entidades.jsp exibir a agenda
+		request.setAttribute("conteudo", "boletim_aluno.jsp"); //verificar
+		getServletContext().getRequestDispatcher("/boletim_aluno.jsp").forward(request, response);		
+		
 	}
 	
 }

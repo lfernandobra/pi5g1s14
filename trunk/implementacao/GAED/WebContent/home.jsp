@@ -39,7 +39,7 @@
 								<a href="#" onclick="loadContent('ObterProfessor')"><span class="glyphicon glyphicon-file"></span> Boletim</a> 								
 							</li>
 							<li>
-								<a href="javascript:document.form2.submit()"><span class="glyphicon glyphicon-exclamation-sign"></span> Ocorrências <span class="badge badge-info"> 4</span></a> 
+								<a href="#"><span class="glyphicon glyphicon-exclamation-sign"></span> Ocorrências <span class="badge badge-info"> 4</span></a> 
 							</li>
 							<li>
 								<a href="#"><i class="glyphicon glyphicon-book"></i> Tarefas <span class="badge badge-info"> 10</span></a>
@@ -52,12 +52,12 @@
 							<li><a href="#" onclick=""><i class="glyphicon glyphicon-exclamation-sign"></i> Ocorrências </a></li>
 						</c:when>
 						<c:when test="${login.perfil.responsavel}">
-							<li><a href="#" onclick=""><i class="glyphicon glyphicon-file"></i> Boletim</a></li>
+							<li><a href="#" onclick="loadContent('boletim.jsp')"><i class="glyphicon glyphicon-file"></i> Boletim</a></li>
 							<li><a href="#" onclick=""><i class="glyphicon glyphicon-book"></i> Tarefas </a></li>
 							<li><a href="#" onclick=""><i class="glyphicon glyphicon-exclamation-sign"></i> Ocorrências </a></li>
 						</c:when>
 						<c:when test="${login.perfil.aluno}">
-							<li><a href="#" onclick=""><i class="glyphicon glyphicon-file"></i> Boletim </a></li>
+							<li><a href="#" onclick="loadContent('boletim.jsp')"><i class="glyphicon glyphicon-file"></i> Boletim </a></li>
 							<li><a href="#" onclick=""><i class="glyphicon glyphicon-book"></i> Tarefas </a></li>
 						</c:when>
 					</c:choose>	 				
