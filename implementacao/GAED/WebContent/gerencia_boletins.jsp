@@ -10,13 +10,24 @@
 <title>Gerencia Boletins</title>
 </head>
 <body>
-	<fieldset>
-		<legend>Boletim</legend>
-			<ul class="nav">
-				<li><a href="inserir_boletim.jsp"><i class="glyphicon glyphicon-pencil"></i> Inserir Boletim</a></li>
-				<li><a href="editar_boletim.jsp" onclick=""><i class="glyphicon glyphicon-eye-open"></i> Editar Boletim</a></li>
-				<li><a href="visualizar_boletim.jsp" onclick=""><i class="glyphicon glyphicon-eye-open"></i> Visualizar Boletim</a></li>
-			</ul>
-	</fieldset>
+
+	 <div class="container" id="main"> 
+  		<div class="row ">
+  			<div class="col-sm-5">
+	    		<div class="panel panel-default">
+    				<div class="panel-heading"> <h4>Boletim</h4></div>
+    				
+				<fieldset class="fsStyle">
+						<ul class="nav">
+							<li><a href="#" onclick="loadContent('inserir_boletim.jsp')"><i class="glyphicon glyphicon-pencil"></i> Inserir Boletim</a></li>
+							<li><a href="#" onclick="loadContent('editar_boletim.jsp')"><i class="glyphicon glyphicon-eye-open"></i> Editar Boletim</a></li>
+							<li><a href="#" onclick="loadContent('visualizar_boletim.jsp')"><i class="glyphicon glyphicon-eye-open"></i> Visualizar Boletim</a></li>
+						</ul>
+				</fieldset>
+				
+				</div>
+			</div>
+		</div>
+	</div>			
 </body>
 </html>

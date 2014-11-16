@@ -31,7 +31,7 @@
       		<div class="list-group navmenu-nav nav">
        			 
        			 <ul class="nav">
-					<li><a href="#" onclick="loadContent('')"><span class="glyphicon glyphicon-home"></span> Home</a></li>
+					<li><a href="#" onclick="loadContent('conteudo_aluno.jsp')"><span class="glyphicon glyphicon-home"></span> Home</a></li>
 					<c:choose>
 						<c:when test="${login.perfil.professor}">
 							

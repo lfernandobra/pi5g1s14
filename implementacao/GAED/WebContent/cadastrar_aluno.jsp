@@ -22,7 +22,7 @@
   	<div class="col-sm-7">
   	   
     		<div class="panel panel-default">
-    			<div class="panel-heading"> <h3>Cadastro de Aluno</h3></div>
+    			<div class="panel-heading"> <h4>Cadastro de Aluno</h4></div>
     			<br>
 
 				<form  class="form-horizontal" id="aluno" method="post" action="adiciona_aluno.jsp" >
@@ -34,7 +34,7 @@
   				<fieldset class="fsStyle">  				
   				<legend class="legendStyle">Identificação</legend>
 			    <div class="form-group">
-			     <label class="col-sm-2 control-label" for="login">Email</label>
+			     <label class="col-sm-2 control-label" for="login">Login</label>
 			     <div class="col-sm-6"><input type="text" class="form-control" name="login" value="${aluno.login}" tabindex="1"/> </div> 
 			    </div>
 			    

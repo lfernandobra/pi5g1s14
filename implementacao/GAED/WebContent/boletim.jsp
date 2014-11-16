@@ -14,6 +14,10 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<script type="text/javascript" src="scripts/script.js"></script>
+	<link href="Bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen" />
+    <link href="Bootstrap/css/bootstrap-theme.min.css" rel="stylesheet" media="screen" />
+    <link href="Bootstrap/css/bootstrap.css" rel="stylesheet" media="screen" />
 <title>Boletim</title>
 </head>
 <body>
@@ -75,25 +79,50 @@
  			and a.ID_Usuario = u.ID_Usuario and u.ID_Usuario = ${login.id};
 	 		
 	 		</sql:query>
-	 		<form method="post" action="VisualizarBoletimAluno">
-	 		<p><label id="lbl_bimestre_boletim" for="txt_bimestre_boletim">Selecione o Bimestre - Ano</label> 
-  				<select id="sel_bimestre_boletim" name="idBoletim" value="${boletim.ID}">
-  					<c:forEach var="rowB" items="${resultBimestre.rows}">
-  						<option value="${rowB.ID_Boletim}">${rowB.Bimestre}º Bimestre - ${rowB.Ano_Letivo} </option>
-  					</c:forEach>
-				</select>
-				<input type = "submit" value = "Visualizar Boletim"/>	
-	 		</form>
-	 		<table border = "1">
-	 			<thead><tr><td>Bimestre </td><td>Disciplina </td><td>Nota </td><td>Faltas </td></tr></thead>
-	 			<tbody>
-	 			<c:forEach var="rowB" items="${resultAluno.rows}">
-  					 <tr><td>${rowB.bimestre}</td><td>${rowB.nome_disciplina}</td><td>${rowB.nota}</td><td>${rowB.faltas}</td></tr>
-  				</c:forEach>
-  				</tbody>
-  			</table>
-	 			
-	 			
+	 		
+	 <div class="container" id="main"> 
+		<div class="row ">
+			<div class="col-sm-7">
+	 		<div class="form-group" action = "VisualizarBoletimAluno" method = "post">
+		 		<label class="col-sm-5 control-label" id="lbl_bimestre_boletim" for="txt_bimestre_boletim">Selecione o Bimestre - Ano :</label> 
+	  				<div class="col-sm-4"><select id="sel_bimestre_boletim" name="idBoletim" value="${boletim.ID}" class="form-control">
+	  					<c:forEach var="rowB" items="${resultBimestre.rows}">
+	  						<option value="${rowB.ID_Boletim}">${rowB.Bimestre}º Bimestre - ${rowB.Ano_Letivo} </option>
+	  					</c:forEach></select>
+	  				</div>
+	  				
+	  				<div class="form-group last">
+					 	<div class="col-sm-offset-0 col-sm-2">
+					    	<input type = "submit" value = "Visualizar Boletim" class="btn btn-success"/>
+		 			 	</div>
+		 			</div>
+	 		</div>
+	 	</div>
+	 </div>
+	 		<br>
+	 	
+	 	<div class="row ">
+			<div class="col-sm-7">	
+		 		<table class="table table-striped table-bordered">
+		 			<thead>
+			 			<tr class="info">
+			 				<td>Bimestre </td>
+			 				<td>Disciplina </td>
+			 				<td>Nota </td>
+			 				<td>Faltas </td>
+			 			</tr>
+		 			</thead>
+		 			
+		 			<tbody>
+		 			<c:forEach var="rowB" items="${resultAluno.rows}">
+	  					 <tr><td>${rowB.bimestre}</td><td>${rowB.nome_disciplina}</td><td>${rowB.nota}</td><td>${rowB.faltas}</td></tr>
+	  				</c:forEach>
+	  				</tbody>
+	  			</table>
+	  		</div>
+	  	</div>	
+</div>	  		
+		
  		</c:when>
  	</c:choose>
 </body>
