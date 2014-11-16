@@ -13,6 +13,10 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+	<script type="text/javascript" src="scripts/script.js"></script>
+	<link href="Bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen" />
+    <link href="Bootstrap/css/bootstrap-theme.min.css" rel="stylesheet" media="screen" />
+    <link href="Bootstrap/css/bootstrap.css" rel="stylesheet" media="screen" />
 <title>Insert title here</title>
 </head>
 <body>
@@ -27,28 +31,52 @@
 		and a.ID_Aluno = e.ID_Aluno and e.ID_Turma = t.ID_Turma;
 	 </sql:query>
 	 
-	<fieldset>
-     	<legend>Inserir Boletim</legend>
-    <form action = "InserirBoletim" method = "post">
-		<p><label id="lbl_aluno" for="txt_aluno">Aluno :</label> 			
-  				<select id="sel_turma" name="idAluno">
-  					<c:forEach var="row" items="${resultAlunos.rows}">
-  						<option value="${row.ID_Aluno}">${row.Nome} ${row.Sobrenome}</option>
-  					</c:forEach>
-				</select></p>
-		<p><label id="lbl_bimestre" for="txt_bimestre">Bimestre :</label>	
-				<select id="sel_bimestre" name="idBimestre">
-  					<option value="1">1º Bimestre</option>
-  					<option value="2">2º Bimestre</option>
-  					<option value="3">3º Bimestre</option>
-  					<option value="4">4º Bimestre</option>
-				</select></p>
-					 	
-  		<p><input type = submit value = "Inserir Boletim"/></p>
- 		
- 		
- 	</form>
- 	</fieldset>
+	 
+	 <div class="container" id="main"> 
+  		<div class="row ">
+  			<div class="col-sm-7">
+	    		<div class="panel panel-default">
+    				<div class="panel-heading"> <h4>Inserir Boletim</h4></div>
+    				<br>
+    				
+		<form  class="form-horizontal" id="boletim" method="post" action="inserir_boletim.jsp" >
+			<fieldset class="fsStyle"> 	
+			
+			<div class="form-group" action = "InserirBoletim" method = "post">
+				<label class="col-sm-2 control-label" id="lbl_aluno" for="txt_aluno">Aluno :</label> 
+					<div class="col-sm-5"><select id="sel_turma" name="idAluno" class="form-control">
+		  				<c:forEach var="row" items="${resultAlunos.rows}">
+		  					<option value="${row.ID_Aluno}">${row.Nome} ${row.Sobrenome}</option>
+		  				</c:forEach></select>
+					</div>
+			</div>
+		
+	    
+		    <div class="form-group" action = "InserirBoletim" method = "post">
+		    	<label class="col-sm-2 control-label" id="lbl_bimestre" for="txt_bimestre">Bimestre :</label>
+					<div class="col-sm-6"><select id="sel_bimestre" name="idBimestre" class="form-control">
+		  					<option value="1º Bimestre">1º Bimestre</option>
+		  					<option value="2º Bimestre">2º Bimestre</option>
+		  					<option value="3º Bimestre">3º Bimestre</option>
+		  					<option value="4º Bimestre">4º Bimestre</option>
+						</select>
+					</div>	
+			</div>
+					
+	 		<div class="form-group last">
+				 <div class="col-sm-offset-1 col-sm-2">
+				    <input type="submit" value="Inserir Boletim" class="btn btn-success"/>
+	 			 </div>
+	 		</div>
+	 
+	 </fieldset>
+	 </form>
+ 
+			</div> 
+		</div>
+	</div>
+</div>		
+	
 	
 
 </body>
