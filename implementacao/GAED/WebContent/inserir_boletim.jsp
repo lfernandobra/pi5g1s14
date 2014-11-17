@@ -17,11 +17,9 @@
 	<link href="Bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen" />
     <link href="Bootstrap/css/bootstrap-theme.min.css" rel="stylesheet" media="screen" />
     <link href="Bootstrap/css/bootstrap.css" rel="stylesheet" media="screen" />
-<title>Insert title here</title>
+<title>Inserir Boletim</title>
 </head>
 <body>
-
-		
 	<sql:setDataSource var="snapshot" driver="com.mysql.jdbc.Driver"
      url="jdbc:mysql://localhost:3306/bd_gaed"
      user="root"  password=""/>
@@ -38,46 +36,35 @@
 	    		<div class="panel panel-default">
     				<div class="panel-heading"> <h4>Inserir Boletim</h4></div>
     				<br>
-    				
-		<form  class="form-horizontal" id="boletim"  action = "InserirBoletim" method = "post">
-			<fieldset class="fsStyle"> 	
-			
-			<div class="form-group">
-				<label class="col-sm-2 control-label" id="lbl_aluno" for="txt_aluno">Aluno :</label> 
-					<div class="col-sm-5"><select id="sel_turma" name="idAluno" class="form-control">
-		  				<c:forEach var="row" items="${resultAlunos.rows}">
-		  					<option value="${row.ID_Aluno}">${row.Nome} ${row.Sobrenome}</option>
-		  				</c:forEach></select>
-					</div>
-			</div>
-		
-	    
-		    <div class="form-group" action = "InserirBoletim" method = "post">
-		    	<label class="col-sm-2 control-label" id="lbl_bimestre" for="txt_bimestre">Bimestre :</label>
-					<div class="col-sm-6"><select id="sel_bimestre" name="idBimestre" class="form-control">
-		  					<option value="1º Bimestre">1º Bimestre</option>
-		  					<option value="2º Bimestre">2º Bimestre</option>
-		  					<option value="3º Bimestre">3º Bimestre</option>
-		  					<option value="4º Bimestre">4º Bimestre</option>
-						</select>
-					</div>	
-			</div>
-					
-	 		<div class="form-group last">
-				 <div class="col-sm-offset-1 col-sm-2">
-				    <input type="submit" value="Inserir Boletim" class="btn btn-success"/>
-	 			 </div>
-	 		</div>
-	 
-	 </fieldset>
-	 </form>
- 
-			</div> 
+		<fieldset class="fsStyle">
+    		<form action = "InserirBoletim" method = "post" class="form-horizontal">
+				<div class="form-group">
+				<label class="col-sm-2 control-label" id="lbl_aluno" for="txt_aluno">Aluno :</label> 			
+				<div class="col-sm-5"><select id="sel_turma" name="idAluno" class="form-control">
+  					<c:forEach var="row" items="${resultAlunos.rows}">
+  						<option value="${row.ID_Aluno}">${row.Nome} ${row.Sobrenome}</option>
+  					</c:forEach>
+				</select></div>
+				</div>	
+			<p><label class="col-sm-2 control-label" id="lbl_bimestre" for="txt_bimestre">Bimestre :</label>	
+				<div class="col-sm-6">
+				<select id="sel_bimestre" name="idBimestre" class="form-control">
+					<option value="1">1º Bimestre</option>
+  					<option value="2">2º Bimestre</option>
+  					<option value="3">3º Bimestre</option>
+  					<option value="4">4º Bimestre</option>
+				</select>
+				</div>
+				<div class="form-group last">
+				 	<div class="col-sm-offset-1 col-sm-2">
+				    	<input type="submit" value="Inserir Boletim" class="btn btn-success"/>
+	 			 	</div>
+	 			</div> 		
+ 			</form>
+ 		</fieldset>
+		</div> 
 		</div>
-	</div>
-</div>		
-	
-	
-
+		</div>
+		</div>
 </body>
 </html>

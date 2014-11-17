@@ -34,7 +34,6 @@
 						<table class="table table-bordered">
 							<thead>
 								<tr class="info">
-									<td>ID Ocorrencia</td>
 									<td>Assunto</td>
 									<td>Descrição</td>
 									<td>Data</td>			
@@ -43,7 +42,6 @@
 							
 						<tbody>			
 							<tr>
-			             		<td>${ocorrencia.ID}</td>
 								<td><input class="form-control" type="text" id="txt_nota" name="assunto" value="${ocorrencia.assunto}" tabindex="1"/></td>
 								<td>
 								<input class="form-control"id="txt_descricao" name="descricao" value="${ocorrencia.descricao}" tabindex="2"/>
