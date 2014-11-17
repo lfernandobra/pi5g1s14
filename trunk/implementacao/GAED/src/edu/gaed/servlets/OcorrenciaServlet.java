@@ -14,7 +14,7 @@ import edu.gaed.vo.Ocorrencia;
 /**
  * Servlet implementation class OcorrenciaServlet
  */
-@WebServlet({"/OcorrenciaServlet","/InserirOcorrencia"})
+@WebServlet({"/OcorrenciaServlet","/InserirOcorrencia","/ObterOcorrencia","/AtualizaOcorrencia"})
 public class OcorrenciaServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -35,6 +35,13 @@ public class OcorrenciaServlet extends HttpServlet {
 		{		
 			inserirOcorrencia(request, response);
 		
+		}else if(request.getServletPath().equals("/ObterOcorrencia")){
+			
+			obterOcorrencia(request, response);
+		}
+		else if(request.getServletPath().equals("/AtualizaOcorrencia")){
+		
+			atualizarOcorrencia(request, response);
 		}
 	}
 	
@@ -105,8 +112,96 @@ public class OcorrenciaServlet extends HttpServlet {
 		{
 			//caso contrario, redireciona para agenda
 
-			response.sendRedirect(getServletContext().getContextPath() + "/ListaUsuariosServlet");
+			response.sendRedirect(getServletContext().getContextPath() + "/ListaOcorrenciasServlet");
 		}
+	}
+	
+	private void obterOcorrencia(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		String strIndiceAluno = request.getParameter("idAluno");
+		int indiceAluno = Integer.parseInt(strIndiceAluno);
+		
+		String strIndiceOcorrencia = request.getParameter("idOcorrencia");
+		int indiceOcorrencia = Integer.parseInt(strIndiceOcorrencia);
+		
+		String erro = null;
+		
+		OcorrenciaDao ocorrenciaDao = new OcorrenciaDao();
+		
+		//obtem contato e envia usuario para formulario de edição do contato
+		Ocorrencia ocorrencia = (Ocorrencia) ocorrenciaDao.obterOcorrencia(indiceAluno, indiceOcorrencia);
+				
+				
+		//se nao houver agenda ou indice contato não estiver na agenda, informa erro
+		if (ocorrencia == null)
+		{
+			erro = "Ocorrência não encontrada.";
+		}
+		else
+		{			
+			//seta contato no escopo de requisição para ser exibido pelo jsp 
+			request.setAttribute("ocorrencia", ocorrencia);
+		}
+		
+		if (erro != null)
+		{
+			//se houver erro, envia o usuario de volta para a página de agenda
+		
+			request.setAttribute("mensagem_erro", erro);
+			getServletContext().getRequestDispatcher("/agenda_ocorrencias.jsp").forward(request, response);
+		}
+		else
+		{
+			//caso contrário, encaminha usuario para a página de cadastro de contato
+			
+			//getServletContext().getRequestDispatcher("/cadastrar_Usuario.jsp").forward(request, response);
+			
+			request.setAttribute("conteudo", "editar_ocorrencia.jsp");
+			
+			getServletContext().getRequestDispatcher("/editar_ocorrencia.jsp").forward(request, response);
+		}
+	}
+	private void atualizarOcorrencia(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		try {    
+			
+			String strIndiceOcorrencia = request.getParameter("idOcorrencia");
+			String strAssunto = request.getParameter("assunto");
+			String strDescricao = request.getParameter("descricao");
+			String strData = request.getParameter("data");
+			
+			int indiceOcorrencia = Integer.parseInt(strIndiceOcorrencia);
+						
+	        Ocorrencia ocorrencia = new Ocorrencia();
+	        
+			ocorrencia.setID(indiceOcorrencia);
+			ocorrencia.setAssunto(strAssunto);
+			ocorrencia.setDescricao(strDescricao);
+			ocorrencia.setData(strData);
+			      
+			System.out.println(ocorrencia.getAssunto());
+			
+	        OcorrenciaDao ocorrenciaDao = new OcorrenciaDao();
+	        	                         
+	        boolean sucesso = false;
+	        
+	        sucesso = ocorrenciaDao.atualizaOcorrencia(ocorrencia);
+	         
+	        if (sucesso)
+	        {
+	          //requisição foi bem sucedida, vamos finaliza-la e redirecionar o usuario para outro servlet
+	          response.sendRedirect(getServletContext().getContextPath() + "/agenda_ocorrencias.jsp");                            
+	        }
+	        else
+	        {
+	          request.setAttribute("mensagemErro", "Não foi possível salvar dados do aluno.");
+	          getServletContext().getRequestDispatcher("/index.jsp").forward(request, response);
+	        }
+	      }
+	    catch (Exception e) {
+	      request.setAttribute("mensagemErro", "Informações do aluno estão inválidas.");
+	      getServletContext().getRequestDispatcher("/index.jsp").forward(request, response);
+	    }
+
 	}
 
 }
