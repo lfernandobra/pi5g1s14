@@ -59,8 +59,10 @@
 		
 				<div class="form-group">
 			      	<label class="col-sm-2 control-label" for="txt_data">Data de Nascimento:</label>
-					<div class="col-sm-6"> <input type="text" class="form-control" name="datanasc" onKeyPress="MascaraData(aluno.datanasc);"
-                	 onBlur="ValidaData(aluno.datanasc);" value="${responsavel.datanasc}" tabindex="5"/></div>
+					<div class="col-sm-6"> <input type="text" class="form-control" name="datanasc" 
+						onKeyPress="MascaraData(aluno.datanasc);"
+                	 	onBlur="ValidaData(aluno.datanasc);" value="${responsavel.datanasc}" tabindex="5"/>
+                	 </div>
 				</div>
 		
 				<div class="form-group">
