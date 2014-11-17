@@ -1,34 +1,32 @@
 package edu.gaed.vo;
 
-import java.util.Date;
 
 public class Ocorrencia {
 	private int ID;
-	private Date data;
-	private String Assunto,Descricao;
+	private String assunto,descricao,data;
 	public int getID() {
 		return ID;
 	}
 	public void setID(int iD) {
 		ID = iD;
 	}
-	public Date getData() {
+	public String getData() {
 		return data;
 	}
-	public void setData(Date data) {
+	public void setData(String data) {
 		this.data = data;
 	}
 	public String getAssunto() {
-		return Assunto;
+		return assunto;
 	}
 	public void setAssunto(String assunto) {
-		Assunto = assunto;
+		this.assunto = assunto;
 	}
 	public String getDescricao() {
-		return Descricao;
+		return descricao;
 	}
 	public void setDescricao(String descricao) {
-		Descricao = descricao;
+		this.descricao = descricao;
 	}
 	
 	

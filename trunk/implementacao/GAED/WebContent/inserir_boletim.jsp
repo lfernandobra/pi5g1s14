@@ -39,10 +39,10 @@
     				<div class="panel-heading"> <h4>Inserir Boletim</h4></div>
     				<br>
     				
-		<form  class="form-horizontal" id="boletim" method="post" action="inserir_boletim.jsp" >
+		<form  class="form-horizontal" id="boletim"  action = "InserirBoletim" method = "post">
 			<fieldset class="fsStyle"> 	
 			
-			<div class="form-group" action = "InserirBoletim" method = "post">
+			<div class="form-group">
 				<label class="col-sm-2 control-label" id="lbl_aluno" for="txt_aluno">Aluno :</label> 
 					<div class="col-sm-5"><select id="sel_turma" name="idAluno" class="form-control">
 		  				<c:forEach var="row" items="${resultAlunos.rows}">
