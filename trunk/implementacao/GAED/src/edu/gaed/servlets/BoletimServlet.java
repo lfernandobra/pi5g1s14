@@ -209,7 +209,9 @@ public class BoletimServlet extends HttpServlet {
 			
 			int indiceAluno = Integer.parseInt(strIndiceAluno);
 			int indiceBimestre = Integer.parseInt(strIndiceBimestre);
-						
+
+			System.out.println(indiceAluno);
+			System.out.println(indiceBimestre);
 			Boletim boletim = new Boletim();
 	        boletim.setBimestre(indiceBimestre);
 	        
@@ -229,17 +231,17 @@ public class BoletimServlet extends HttpServlet {
 	        if (sucesso)
 	        {
 	          //requisição foi bem sucedida, vamos finaliza-la e redirecionar o usuario para outro servlet
-	          response.sendRedirect(getServletContext().getContextPath() + "/inserir_boletim.jsp");                            
+	          response.sendRedirect(getServletContext().getContextPath() + "/index.jsp");                            
 	        }
 	        else
 	        {
 	          request.setAttribute("mensagemErro", "Não foi possível salvar boletim");
-	          getServletContext().getRequestDispatcher("/index.jsp").forward(request, response);
+	          getServletContext().getRequestDispatcher("/erro.jsp").forward(request, response);
 	        }
 	      }
 	    catch (Exception e) {
 	      request.setAttribute("mensagemErro", "Informações do boletim estão inválidas.");
-	      getServletContext().getRequestDispatcher("/index.jsp").forward(request, response);
+	      getServletContext().getRequestDispatcher("/erro.jsp").forward(request, response);
 	    }
 
 	}
