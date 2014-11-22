@@ -100,28 +100,7 @@
 	 	</div>
 	 </div>
 	 		<br>
-	 	
-	 	<div class="row ">
-			<div class="col-sm-7">	
-		 		<table class="table table-striped table-bordered">
-		 			<thead>
-			 			<tr class="info">
-			 				<td>Bimestre </td>
-			 				<td>Disciplina </td>
-			 				<td>Nota </td>
-			 				<td>Faltas </td>
-			 			</tr>
-		 			</thead>
-		 			
-		 			<tbody>
-		 			<c:forEach var="rowB" items="${resultAluno.rows}">
-	  					 <tr><td>${rowB.bimestre}</td><td>${rowB.nome_disciplina}</td><td>${rowB.nota}</td><td>${rowB.faltas}</td></tr>
-	  				</c:forEach>
-	  				</tbody>
-	  			</table>
-	  		</div>
-	  	</div>	
-</div>	  		
+	 </div>	  		
 		
  		</c:when>
  	</c:choose>

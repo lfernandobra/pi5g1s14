@@ -43,8 +43,16 @@
 			      <div class="col-sm-6"> <input type="password" class="form-control" name="senha" value="${responsavel.senha}" tabindex="2"/> </div> 
 			    </div>
 			</fieldset>
-			
-				
+		<fieldset class="fsStyle">
+			<legend class="legendStyle">Foto</legend>
+			<label>Imagem:</label>
+		    <input type="file" name="imagem"/>
+		    <c:choose>
+		        <c:when test="${not empty foto}">
+		           	<input type="hidden" name="id" value="${foto.id}"/>
+		    	</c:when>
+		    </c:choose>            	
+		</fieldset>						
 		<fieldset class="fsStyle">  				
   				<legend class="legendStyle">Dados Pessoais</legend>
 				<div class="form-group">

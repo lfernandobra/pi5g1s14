@@ -18,7 +18,7 @@
     	<div class="panel panel-default">
            <div class="panel-heading"><a href="#" class="pull-right">Ver mais</a> <h4>Eventos</h4></div>
    			<div class="panel-body">
-              <img src="https://lh5.googleusercontent.com/-b0-k99FZlyE/AAAAAAAAAAI/AAAAAAAAAAA/eu7opA4byxI/photo.jpg?sz=70" class="img-circle pull-right"> <a href="#">Eventos inportantes</a>
+              <img src="https://lh5.googleusercontent.com/-b0-k99FZlyE/AAAAAAAAAAI/AAAAAAAAAAA/eu7opA4byxI/photo.jpg?sz=70" class="img-circle pull-right"> <a href="#">Eventos importantes</a>
               <div class="clearfix"></div>
               <hr>
               <p>Informações de eventos relacionados a educação</p>
@@ -41,7 +41,7 @@
     	<div class="panel panel-default">
            <div class="panel-heading"><a href="#" class="pull-right">Ver mais</a> <h4>Noticias</h4></div>
    			<div class="panel-body">
-              <img src="" class="img-circle pull-right"> <a href="#">Três irmãoes morrem eletrocutados no quintal de casa, no interior de SC</a>
+              <img src="" class="img-circle pull-right"> <a href="#">Três irmãos morrem eletrocutados no quintal de casa, no interior de SC</a>
               <div class="clearfix"></div>
               <hr>
               <div class="clearfix"></div>
