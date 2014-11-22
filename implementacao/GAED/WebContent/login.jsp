@@ -140,8 +140,8 @@
 				            <div class="panel-heading"><h3>Noticias</h3></div>
 				            <div class="panel-body">
 								<p><a href="#"> Festa junina teve quadrilha e pipoca</a> </p>
-								<p><a href="#"> Famílias ligadas ao MTST invadem área em Carapicuíba</a> </p>
-								<p><a href="#"> Bancários optam por greve dia 30</a> </p>
+								<p><a href="#"> Familias ligadas ao MTST invadem area em Carapicuiba</a> </p>
+								<p><a href="#"> Bancarios optam por greve dia 30</a> </p>
 								<a href="#" class="btn btn-default"> Leia mais >></a>
 							</div>
 						</div>
@@ -154,8 +154,8 @@
 		          <div class="panel panel-default">
 		            <div class="panel-heading"><h3>Documentos</h3></div>
 		           		 <div class="panel-body">
-							<p><a href="#"> Documentos necessário para matricula escolar</a> </p>
-							<p><a href="#"> Documentos para cadastro ou renovação de bolsa escola</a> </p>
+							<p><a href="#"> Documentos necessario para matricula escolar</a> </p>
+							<p><a href="#"> Documentos para cadastro ou renovacao de bolsa escola</a> </p>
 							<p><a href="#"> Documentos para cadastro do Jovem Aprendiz</a> </p>
 							<a href="#" class="btn btn-default"> Leia mais >></a>
 						</div>
@@ -170,8 +170,8 @@
 	            	<div class="panel-heading"><h3>Help</h3></div>
 			            <div class="panel-body">
 							<p><a href="#"> Como redefinir sua senha</a> </p>
-							<p><a href="#"> Saiba como utilizar nosso sistema de uma forma ágil e fácil</a></p>
-							<p><a href="#"> Procure a escola mais perto de você</a> </p>
+							<p><a href="#"> Saiba como utilizar nosso sistema de uma forma agil e facil</a></p>
+							<p><a href="#"> Procure a escola mais perto de voca</a> </p>
 							<a href="#" class="btn btn-default"> Leia mais >></a>
 						</div>
 				</div>	

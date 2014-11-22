@@ -20,39 +20,41 @@
 	<div class="container" id="main"> 
   <div class="row ">
   	<div class="col-sm-7">
-  	   
-    		<div class="panel panel-default">
-    			<div class="panel-heading"> <h3>Cadastro do Responsavel</h3></div>
-    			<br>
+   		<div class="panel panel-default">
+    		<div class="panel-heading"> <h3>Cadastro do Responsavel</h3></div>
+    		<br>
 
-				<form  class="form-horizontal" id="aluno" method="post" action="adiciona_responsavel.jsp" >
+			<form  class="form-horizontal" id="aluno" method="post" action="adiciona_responsavel.jsp" >
 				
-					<c:if test="${not empty responsavel}">
-						<input type="hidden" name="id" value="${responsavel.id}"/>
-					</c:if>
+			<c:if test="${not empty responsavel}">
+				<input type="hidden" name="id" value="${responsavel.id}"/>
+			</c:if>
 		 		
-  				<fieldset class="fsStyle">  				
-  				<legend class="legendStyle">Identificação</legend>
-			    <div class="form-group">
-			     <label class="col-sm-2 control-label" for="login">Email</label>
-			     <div class="col-sm-6"><input type="text" class="form-control" name="login" value="${responsavel.login}" tabindex="1"/> </div> 
-			    </div>
+			<fieldset class="fsStyle">  				
+				<legend class="legendStyle">Identificação</legend>
+	   				 <div class="form-group">
+		    			 <label class="col-sm-2 control-label" for="login">Email</label>
+		    			 <div class="col-sm-6"><input type="text" class="form-control" name="login" value="${responsavel.login}" tabindex="1"/> </div> 
+	   				 </div>
 			    
-			    <div class="form-group">
-			      <label class="col-sm-2 control-label" for="txt_senha">Senha</label>
-			      <div class="col-sm-6"> <input type="password" class="form-control" name="senha" value="${responsavel.senha}" tabindex="2"/> </div> 
-			    </div>
+				    <div class="form-group">
+				      <label class="col-sm-2 control-label" for="txt_senha">Senha</label>
+				      <div class="col-sm-6"> <input type="password" class="form-control" name="senha" value="${responsavel.senha}" tabindex="2"/> </div> 
+				    </div>
+				    
+				   <div class="form-group">
+				    	<label class="col-sm-2 control-label" for="txt_senha">Foto</label>
+				    	<div class="col-sm-6"><input type="file" name="imagem"/></div>
+					    <c:choose>
+					        <c:when test="${not empty foto}">
+					           	<input type="hidden" name="id" value="${foto.id}"/>
+					    	</c:when>
+		    			</c:choose>   
+		    		</div> 
+				  
 			</fieldset>
-		<fieldset class="fsStyle">
-			<legend class="legendStyle">Foto</legend>
-			<label>Imagem:</label>
-		    <input type="file" name="imagem"/>
-		    <c:choose>
-		        <c:when test="${not empty foto}">
-		           	<input type="hidden" name="id" value="${foto.id}"/>
-		    	</c:when>
-		    </c:choose>            	
-		</fieldset>						
+		
+						
 		<fieldset class="fsStyle">  				
   				<legend class="legendStyle">Dados Pessoais</legend>
 				<div class="form-group">
