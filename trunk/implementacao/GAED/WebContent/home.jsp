@@ -42,7 +42,7 @@
 								<a href="#" onclick="loadContent('inserir_ocorrencia.jsp')"><span class="glyphicon glyphicon-exclamation-sign"></span> Ocorrências</a> 
 							</li>
 							<li>
-								<a href="#"><i class="glyphicon glyphicon-book"></i> Tarefas <span class="badge badge-info"> 10</span></a>
+								<a href="#"><i class="glyphicon glyphicon-book"></i> Tarefas </a>
 							</li>	
 							
 						</c:when>

@@ -17,7 +17,7 @@
 	            <div class="panel panel-default">
 	                <div class="panel-heading"> <h4>Aluno</h4></div>
 							<ul class="nav">
-								<li><a href="#" onclick="loadContent('cadastrar_aluno.jsp')"><i class="glyphicon glyphicon-pencil"></i> Inserir Aluno</a></li>
+								<li><a href="#" onclick="loadContent('inserir_aluno.jsp')"><i class="glyphicon glyphicon-pencil"></i> Inserir Aluno</a></li>
 								<li><a href="#" onclick=""><i class="glyphicon glyphicon-eye-open"></i> Visualizar Alunos</a></li>
 							</ul>
 				</div>
@@ -29,7 +29,7 @@
 			               		 <h4>Responsável</h4>
 			                </div>
 							<ul class="nav">
-								<li><a href="#" onclick="loadContent('cadastrar_responsavel.jsp')"><i class="glyphicon glyphicon-pencil"></i> Inserir  Responsável</a></li>
+								<li><a href="#" onclick="loadContent('inserir_responsavel.jsp')"><i class="glyphicon glyphicon-pencil"></i> Inserir  Responsável</a></li>
 							</ul>
 					    </div>
 			
