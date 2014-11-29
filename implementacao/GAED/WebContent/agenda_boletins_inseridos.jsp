@@ -37,7 +37,18 @@
 					<td>${linha.boletim.dataBoletim}</td>
 					<td>${linha.aluno.ID}</td>
 					<td>${linha.aluno.nome}</td>
-				</tr>
+					<td>
+					<form action="" method="post">
+						<input type="hidden" name="id" value="${linha.boletim.ID}"/>
+						<input type="submit" value="Editar" class="botao_editar" />
+					</form>
+					</td>
+					<td>
+					<form action="" method="post">
+						<input type="hidden" name="id" value="${linha.boletim.ID}"/>
+						<input type="submit" value="Excluir" class="botao_excluir" />
+					</form>							
+					</td>
 				</c:forEach>
 			</tbody>
 			</table>
