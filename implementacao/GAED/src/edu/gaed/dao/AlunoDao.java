@@ -3,9 +3,16 @@ package edu.gaed.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import edu.gaed.vo.Aluno;
 import edu.gaed.vo.Data;
+import edu.gaed.vo.Estuda;
+import edu.gaed.vo.Foto;
+import edu.gaed.vo.Turma;
+
 
 public class AlunoDao extends BaseDao{
 	
@@ -84,6 +91,68 @@ public class AlunoDao extends BaseDao{
 				}
 			}
 		}		
-	}	
+	}
+	
+	public List<Estuda> obterAlunos() {
+		
+		List<Estuda> alunos = new ArrayList<Estuda>();
+		Connection conn = null;
+		
+		try {
+			conn = this.getConnection();
+			
+			String sql = "select a.ID_Aluno,u.Login,u.Nome,u.Sobrenome,u.Sexo,f.cod_foto,f.img_foto,t.ID_Turma,t.Nome_Turma,t.Periodo,"
+					+ "t.Serie,t.Ano_Letivo,t.Bimestre from usuario u,aluno a,foto f,estuda e,turma t where "
+					+ "u.ID_Usuario = a.ID_Usuario and a.ID_Aluno = e.ID_Aluno and e.ID_Turma = t.ID_Turma and "
+					+ "u.Foto = f.cod_foto group by a.ID_Aluno";
+			PreparedStatement stmt = conn.prepareStatement(sql);
+			
+			ResultSet resultado = stmt.executeQuery();
+			
+			while (resultado.next()) {
+				Foto foto = new Foto();
+				foto.setId(resultado.getInt("cod_foto"));
+				foto.setImagem(resultado.getBytes("img_foto"));
+				
+				Aluno aluno = new Aluno();
+				
+				aluno.setID(resultado.getInt("ID_Aluno"));
+				aluno.setNome(resultado.getString("Nome"));
+				aluno.setSobrenome(resultado.getString("Sobrenome"));
+				aluno.setSexo(resultado.getString("Sexo"));
+				aluno.setFoto(foto);
+				
+				Turma turma = new Turma();
+				
+				turma.setID(resultado.getInt("ID_Turma"));
+				turma.setNome(resultado.getString("Nome_Turma"));
+				turma.setPeriodo(resultado.getString("Periodo"));
+				turma.setSerie(resultado.getInt("Serie"));
+				turma.setAno(resultado.getInt("Ano_Letivo"));
+				turma.setBimestre(resultado.getInt("Bimestre"));
+				
+				Estuda estuda = new Estuda();
+				estuda.setAluno(aluno);
+				estuda.setTurma(turma);
+								
+				alunos.add(estuda);
+			}
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+		finally {
+			try {
+				if (conn != null) {
+					conn.close();
+				}				
+			}
+			catch (Exception e) {
+				//do nothing
+			}
+		}
+		
+		return alunos;
+	}
 
 }

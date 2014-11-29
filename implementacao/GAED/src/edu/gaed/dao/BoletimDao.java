@@ -7,12 +7,11 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import edu.gaed.vo.Aluno;
 import edu.gaed.vo.Boletim;
 import edu.gaed.vo.Compoe;
-import edu.gaed.vo.Data;
 import edu.gaed.vo.Disciplina;
 import edu.gaed.vo.Inserido;
-import edu.gaed.vo.Usuario;
 
 
 public class BoletimDao extends BaseDao{
@@ -242,6 +241,53 @@ public class BoletimDao extends BaseDao{
 			}
 		}		
 	}	
-
+	
+	public List<Inserido> obterBoletinsInseridos() {
+		
+		List<Inserido> boletinsInseridos = new ArrayList<Inserido>();
+		Connection conn = null;
+		
+		try {
+			conn = this.getConnection();
+			
+			String sql = "select b.ID_Boletim,b.Data_Boletim,a.ID_Aluno,a.ID_Usuario,u.Nome from Boletim b,Inserido i,Usuario u,Aluno a,Estuda e,Turma t where a.ID_Usuario = u.ID_Usuario and b.ID_Boletim = i.ID_Boletim and i.ID_Aluno = a.ID_Aluno and a.ID_Aluno = e.ID_Aluno and e.ID_Turma = t.ID_Turma order by b.ID_Boletim;";
+			
+			PreparedStatement stmt = conn.prepareStatement(sql);
+						
+			ResultSet resultado = stmt.executeQuery();
+			
+			while (resultado.next()) {
+				
+				Boletim boletim = new Boletim();
+				
+				boletim.setID(resultado.getInt("ID_Boletim"));
+				boletim.setDataBoletim(resultado.getDate("Data_Boletim"));
+				
+				Aluno aluno = new Aluno();
+				aluno.setID(resultado.getInt("ID_Aluno"));
+				aluno.setNome(resultado.getString("Nome"));
+		
+				Inserido inserido = new Inserido();
+				inserido.setBoletim(boletim);
+				inserido.setAluno(aluno);
+				
+				boletinsInseridos.add(inserido);
+			}
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+		finally {
+			try {
+				if (conn != null) {
+					conn.close();
+				}				
+			}
+			catch (Exception e) {
+				//do nothing
+			}
+		}		
+		return boletinsInseridos;
+	}
 	
 }

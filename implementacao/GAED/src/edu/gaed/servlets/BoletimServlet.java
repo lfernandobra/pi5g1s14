@@ -230,8 +230,7 @@ public class BoletimServlet extends HttpServlet {
 	         
 	        if (sucesso)
 	        {
-	          //requisição foi bem sucedida, vamos finaliza-la e redirecionar o usuario para outro servlet
-	          response.sendRedirect(getServletContext().getContextPath() + "/index.jsp");                            
+	          response.sendRedirect(getServletContext().getContextPath() + "/ListaBoletinsServlet");                            
 	        }
 	        else
 	        {
