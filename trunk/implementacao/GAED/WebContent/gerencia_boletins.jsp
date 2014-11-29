@@ -20,8 +20,7 @@
 				<fieldset class="fsStyle">
 						<ul class="nav">
 							<li><a href="#" onclick="loadContent('inserir_boletim.jsp')"><i class="glyphicon glyphicon-pencil"></i> Inserir Boletim</a></li>
-							<li><a href="#" onclick="loadContent('editar_boletim.jsp')"><i class="glyphicon glyphicon-eye-open"></i> Editar Boletim</a></li>
-							<li><a href="#" onclick="loadContent('visualizar_boletim.jsp')"><i class="glyphicon glyphicon-eye-open"></i> Visualizar Boletim</a></li>
+							<li><a href="#" onclick="loadContent('ListaBoletinsServlet')"><i class="glyphicon glyphicon-eye-open"></i> Visualizar Boletins</a></li>
 						</ul>
 				</fieldset>
 				

@@ -18,7 +18,7 @@
 	                <div class="panel-heading"> <h4>Aluno</h4></div>
 							<ul class="nav">
 								<li><a href="#" onclick="loadContent('inserir_aluno.jsp')"><i class="glyphicon glyphicon-pencil"></i> Inserir Aluno</a></li>
-								<li><a href="#" onclick=""><i class="glyphicon glyphicon-eye-open"></i> Visualizar Alunos</a></li>
+								<li><a href="#" onclick="loadContent('ListaAlunosServlet')"><i class="glyphicon glyphicon-eye-open"></i> Visualizar Alunos</a></li>
 							</ul>
 				</div>
 			</div>  <!-- colxs9 -->
