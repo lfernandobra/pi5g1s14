@@ -32,7 +32,7 @@
 	 
 	 <div class="container" id="main"> 
   		<div class="row ">
-  			<div class="col-sm-7">
+  			<div class="col-sm-8">
 	    		<div class="panel panel-default">
     				<div class="panel-heading"> <h4>Inserir Boletim</h4></div>
     				<br>
@@ -57,7 +57,7 @@
 				</div>
 				<div class="form-group last">
 				 	<div class="col-sm-offset-1 col-sm-2">
-				    	<input type="submit" value="Inserir Boletim" class="btn btn-success"/>
+				 		<button type="submit"  class="btn btn-success">Inserir Boletim</button>
 	 			 	</div>
 	 			</div> 		
  			</form>
