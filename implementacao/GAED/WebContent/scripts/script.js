@@ -15,6 +15,12 @@ function loadContent(contentUrl) {
 	
 }
 
+//Abri na mesma página
+
+function Boletim() {
+    document.getElementById("conteudo").innerHTML = "agenda_boletins_inseridos.jsp";
+}
+
 function MascaraCNPJ(cnpj){
     if(mascaraInteiro(cnpj)==false){
             event.returnValue = false;
@@ -161,3 +167,7 @@ function formataCampo(campo, Mascara, evento) {
             return true; 
     }
 }
+
+
+
+
