@@ -18,7 +18,7 @@
 </head>
 <body>
 	<sql:setDataSource var="snapshot" driver="com.mysql.jdbc.Driver"
-     url="jdbc:mysql://localhost:3306/bd_gaed"
+     url="jdbc:mysql://localhost:3306/bd_gaed_official"
      user="root"  password=""/>
 	
 <div class="container" id="main"> 
