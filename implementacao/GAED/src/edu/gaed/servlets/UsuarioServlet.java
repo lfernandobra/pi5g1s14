@@ -198,18 +198,6 @@ public class UsuarioServlet extends HttpServlet {
 				{
 					sucesso = ResponsavelDao.insereResponsavel(responsavel,senha);
 				}
-				/* Implementar depois
-				else
-				{
-					sucesso = ResponsavelDao.atualizaResponsavel(Responsavel);
-					
-					//se o responsavel for o mesmo logado, atualiza dados do responsavel na sessão.
-					Responsavel responsavelLogado = (Responsavel) request.getSession().getAttribute("login");					
-					if (responsavelLogado.getId() == Responsavel.getId())
-					{
-						request.getSession().setAttribute("login", Responsavel);
-					}
-				}*/
 				
 				if (!sucesso)
 				{
@@ -220,16 +208,14 @@ public class UsuarioServlet extends HttpServlet {
 		
 		if (erro != null)
 		{
-			//se houver erro, encaminha para página de cadastro
-
 			request.setAttribute("mensagem_erro", erro);
 			getServletContext().getRequestDispatcher("/responsavel.jsp").forward(request, response);			
 		}
 		else
 		{
-			//caso contrario, redireciona para agenda
-
-			response.sendRedirect(getServletContext().getContextPath() + "/ListaResponsavelsServlet");
+			request.setAttribute("conteudo", "/sucesso.jsp");
+        	request.setAttribute("sucesso", "Responsável inserido com sucesso.");
+        	getServletContext().getRequestDispatcher("/home.jsp").forward(request, response);
 		}
 	}
 	
@@ -260,19 +246,6 @@ public class UsuarioServlet extends HttpServlet {
 				{
 					sucesso = AlunoDao.insereAluno(aluno,senha);
 				}
-				/* Implementar depois
-				else
-				{
-					sucesso = AlunoDao.atualizaAluno(Aluno);
-					
-					//se o aluno for o mesmo logado, atualiza dados do aluno na sessão.
-					Aluno alunoLogado = (Aluno) request.getSession().getAttribute("login");					
-					if (alunoLogado.getId() == Aluno.getId())
-					{
-						request.getSession().setAttribute("login", Aluno);
-					}
-				}*/
-				
 				if (!sucesso)
 				{
 					erro = "Não foi possível salvar aluno.";
@@ -290,8 +263,9 @@ public class UsuarioServlet extends HttpServlet {
 		else
 		{
 			//caso contrario, redireciona para agenda
-
-			response.sendRedirect(getServletContext().getContextPath() + "/ListaAlunosServlet");
+			request.setAttribute("conteudo", "/sucesso.jsp");
+        	request.setAttribute("sucesso", "Aluno inserido com sucesso.");
+        	getServletContext().getRequestDispatcher("/home.jsp").forward(request, response);
 		}
 	}
 	
