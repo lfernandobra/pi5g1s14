@@ -20,11 +20,10 @@
 			<p>Não há boletins cadastrados</p>
 		</c:when>
 	<c:otherwise>
-		<form action = "ObterBoletim" method = "post">
 		<table border="1">	
 				<thead>
 					<tr>
-						<td>RA</td><td>Nome Completo</td><td>Serie</td><td>Turma</td><td>Periodo</td><td>Nota</td><td>Faltas</td></tr>
+						<td>RA</td><td>Nome completo</td><td>Serie</td><td>Turma</td><td>Periodo</td><td>Nota</td><td>Faltas</td></tr>
 				</thead>
 					<c:forEach var="linhainserido" items="${alunos}"> 
 					<tr><td>${linhainserido.aluno.ID}</td>
@@ -44,18 +43,19 @@
 									<td>${linha.nota}</td>
 							    	<td>${linha.faltas}</td>
 							    	<td class="acao_agenda">
-									<input type="hidden" name="idAluno" value="${linhainserido.aluno.ID}"/>
-									<input type="hidden" name="idBoletim" value="${linha.boletim.ID}"/>
-									<input type="hidden" name="idDisciplina" value="${linha.disciplina.ID}"/>
-									<input type="submit" value="Editar" class="botao_editar" />
-								
+							    	<form action = "ObterBoletim" method = "post">
+										<input type="hidden" name="idAluno" value="${linhainserido.aluno.ID}"/>
+										<input type="hidden" name="idBoletim" value="${linha.boletim.ID}"/>
+										<input type="hidden" name="idDisciplina" value="${linha.disciplina.ID}"/>
+										<input type="submit" value="Editar" class="botao_editar" />
+									</form>	
 								</c:when>
 							</c:choose>	
 						</c:forEach>
 						
 					</c:forEach>	
 			</table>
-			</form>	
+			
 	</c:otherwise>
 	</c:choose>
 

@@ -44,6 +44,11 @@ public class LoginServlet extends HttpServlet {
 	      if (usuario != null)
 	      {
 	        request.getSession().setAttribute("login", usuario);
+	        if(usuario.getPerfil().isProfessor()){
+	        	request.setAttribute("conteudo", "/conteudo_professor.jsp");
+	        }else if(usuario.getPerfil().isAluno()){
+	        	request.setAttribute("conteudo", "/conteudo_aluno.jsp");
+	        }
 	        getServletContext().getRequestDispatcher("/home.jsp").forward(request, response);
 	      }
 	      else

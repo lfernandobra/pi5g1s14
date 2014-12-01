@@ -3,6 +3,8 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<!--  Diretiva Page Import -->
+<%@ page import="edu.gaed.vo.*"%>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 	<link href="Bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen" />
@@ -36,7 +38,7 @@
 						<c:when test="${login.perfil.professor}">
 							
 							<li>
-								<a href="#" onclick="loadContent('ObterProfessor')"><span class="glyphicon glyphicon-file"></span> Boletim</a> 								
+								<a href="#" onclick="loadContent('gerencia_boletins.jsp')"><span class="glyphicon glyphicon-file"></span> Boletim</a> 								
 							</li>
 							<li>
 								<a href="#" onclick="loadContent('inserir_ocorrencia.jsp')"><span class="glyphicon glyphicon-exclamation-sign"></span> Ocorrências</a> 
@@ -68,8 +70,9 @@
 			 
 			<div class="col-lg-9">	
 			<div id="conteudo"> 
-				<!--  Diretiva Include -->
-				<%@include file="conteudo_aluno.jsp"%>
+				
+				<jsp:include page="${conteudo}"/>
+				
 			</div>
 			</div>
 			

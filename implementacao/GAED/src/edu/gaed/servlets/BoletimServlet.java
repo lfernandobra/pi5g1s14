@@ -77,7 +77,9 @@ public class BoletimServlet extends HttpServlet {
 			int indiceAluno = Integer.parseInt(strIndiceAluno);
 			int indiceBoletim = Integer.parseInt(strIndiceBoletim);
 			int indiceDisciplina = Integer.parseInt(strIndiceDisciplina);
-								
+			
+			System.out.println(indiceBoletim);
+			
 			String erro = null;
 		
 			BoletimDao boletimDao = new BoletimDao();
@@ -106,9 +108,9 @@ public class BoletimServlet extends HttpServlet {
 			else
 			{
 				
-				request.setAttribute("conteudo", "editar_boletim.jsp"); //verificar
+				request.setAttribute("conteudo", "/editar_boletim.jsp");
 			
-				getServletContext().getRequestDispatcher("/editar_boletim.jsp").forward(request, response);
+				getServletContext().getRequestDispatcher("/home.jsp").forward(request, response);
 			}
 	}
 		
@@ -138,9 +140,9 @@ public class BoletimServlet extends HttpServlet {
 		request.setAttribute("alunos",alunosinseridos);
 		request.setAttribute("turmas", estudaTurma);	
 		
-		//encaminha para agenda_entidades.jsp exibir a agenda
-		request.setAttribute("conteudo", "boletim_turma.jsp"); //verificar
-		getServletContext().getRequestDispatcher("/boletim_turma.jsp").forward(request, response);		
+		request.setAttribute("conteudo", "/boletim_turma.jsp");
+		
+		getServletContext().getRequestDispatcher("/home.jsp").forward(request, response);		
 		
 	}
 	
@@ -172,10 +174,8 @@ public class BoletimServlet extends HttpServlet {
 	        compoe.setNota(nota);
 	        compoe.setFaltas(faltas);
 	        
-	        System.out.println("Recebido"+compoe);
 	        
 	        BoletimDao boletimDao = new BoletimDao();
-	        
 	        
                   
 	        boolean sucesso = false;
@@ -183,9 +183,9 @@ public class BoletimServlet extends HttpServlet {
 	        sucesso = boletimDao.atualizaBoletim(compoe);
 	         
 	        if (sucesso)
-	        {
-	          //requisição foi bem sucedida, vamos finaliza-la e redirecionar o usuario para outro servlet
-	          response.sendRedirect(getServletContext().getContextPath() + "/boletim_turma.jsp");                            
+	        {	        	
+	        	request.setAttribute("conteudo", "/boletim_turma.jsp");	        	
+	        	getServletContext().getRequestDispatcher("/home.jsp").forward(request, response);
 	        }
 	        else
 	        {
@@ -257,9 +257,9 @@ public class BoletimServlet extends HttpServlet {
 		
 		request.setAttribute("compoe",compoe);
 			
-		//encaminha para agenda_entidades.jsp exibir a agenda
 		request.setAttribute("conteudo", "boletim_aluno.jsp"); //verificar
-		getServletContext().getRequestDispatcher("/boletim_aluno.jsp").forward(request, response);		
+		
+		getServletContext().getRequestDispatcher("/home.jsp").forward(request, response);		
 		
 	}
 	
