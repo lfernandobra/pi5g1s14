@@ -41,20 +41,7 @@
 				      <label class="col-sm-2 control-label" for="txt_senha">Senha</label>
 				      <div class="col-sm-6"> <input type="password" class="form-control" name="senha" value="${responsavel.senha}" tabindex="2"/> </div> 
 				    </div>
-				    
-				   <div class="form-group">
-				    	<label class="col-sm-2 control-label" for="txt_senha">Foto</label>
-				    	<div class="col-sm-6"><input type="file" name="imagem"/></div>
-					    <c:choose>
-					        <c:when test="${not empty foto}">
-					           	<input type="hidden" name="id" value="${foto.id}"/>
-					    	</c:when>
-		    			</c:choose>   
-		    		</div> 
-				  
-			</fieldset>
-		
-						
+			</fieldset>						
 		<fieldset class="fsStyle">  				
   				<legend class="legendStyle">Dados Pessoais</legend>
 				<div class="form-group">

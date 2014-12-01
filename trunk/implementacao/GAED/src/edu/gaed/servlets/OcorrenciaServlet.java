@@ -81,18 +81,6 @@ public class OcorrenciaServlet extends HttpServlet {
 				{
 					sucesso = ocorrenciaDao.insereOcorrencia(idAluno, ocorrencia);
 				}
-				/* Implementar depois
-				else
-				{
-					sucesso = UsuarioDao.atualizaUsuario(Usuario);
-					
-					//se o usuario for o mesmo logado, atualiza dados do usuario na sessão.
-					Usuario usuarioLogado = (Usuario) request.getSession().getAttribute("login");					
-					if (usuarioLogado.getId() == Usuario.getId())
-					{
-						request.getSession().setAttribute("login", Usuario);
-					}
-				}*/
 				
 				if (!sucesso)
 				{
@@ -111,8 +99,9 @@ public class OcorrenciaServlet extends HttpServlet {
 		else
 		{
 			//caso contrario, redireciona para agenda
-
-			response.sendRedirect(getServletContext().getContextPath() + "/ListaOcorrenciasServlet");
+			request.setAttribute("conteudo", "/sucesso.jsp");
+        	request.setAttribute("sucesso", "Ocorrência registrada com sucesso.");
+        	getServletContext().getRequestDispatcher("/home.jsp").forward(request, response);
 		}
 	}
 	

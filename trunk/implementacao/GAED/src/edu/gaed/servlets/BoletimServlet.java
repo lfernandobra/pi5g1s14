@@ -184,7 +184,8 @@ public class BoletimServlet extends HttpServlet {
 	         
 	        if (sucesso)
 	        {	        	
-	        	request.setAttribute("conteudo", "/boletim_turma.jsp");	        	
+	        	request.setAttribute("conteudo", "/sucesso.jsp");
+	        	request.setAttribute("sucesso", "Notas e Faltas inseridas com sucesso");
 	        	getServletContext().getRequestDispatcher("/home.jsp").forward(request, response);
 	        }
 	        else
@@ -229,8 +230,11 @@ public class BoletimServlet extends HttpServlet {
 	        sucesso = boletimDao.insereBoletim(inserido);
 	         
 	        if (sucesso)
-	        {
-	          response.sendRedirect(getServletContext().getContextPath() + "/ListaBoletinsServlet");                            
+	        {          
+	          request.setAttribute("conteudo", "/sucesso.jsp");
+	          request.setAttribute("sucesso", "Boletim inserido para o aluno com sucesso");
+	          getServletContext().getRequestDispatcher("/home.jsp").forward(request, response);
+	          
 	        }
 	        else
 	        {
