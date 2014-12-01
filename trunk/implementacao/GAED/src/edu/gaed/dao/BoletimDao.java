@@ -60,6 +60,8 @@ public class BoletimDao extends BaseDao{
 			
 			String sql = "select u.nome,a.ID_Aluno,t.Nome_Turma,t.Serie,d.ID_Disciplina,d.nome_disciplina,b.bimestre,b.ID_Boletim,c.nota,c.faltas from usuario u,turma t,disciplina d,boletim b,compoe c,aluno a ,estuda e,inserido i where u.ID_Usuario = a.ID_Usuario and a.ID_Aluno = e.ID_Aluno and e.ID_Turma = t.ID_Turma and b.ID_Boletim = c.ID_Boletim and c.ID_Disciplina = d.ID_Disciplina and b.ID_Boletim = i.ID_Boletim and i.ID_Aluno = a.ID_Aluno and a.ID_Aluno = ? and b.ID_Boletim = ? and c.ID_Disciplina = ?";			
 			
+			System.out.println(ID_Boletim);
+			
 			PreparedStatement stmt = conn.prepareStatement(sql);
 			stmt.setInt(1, ID_Aluno);
 			stmt.setInt(2, ID_Boletim);

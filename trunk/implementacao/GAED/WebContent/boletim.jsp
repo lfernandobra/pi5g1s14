@@ -83,19 +83,21 @@
 	 <div class="container" id="main"> 
 		<div class="row ">
 			<div class="col-sm-7">
-	 		<div class="form-group" action = "VisualizarBoletimAluno" method = "post">
+	 		<div class="form-group">
+	 		<form action = "VisualizarBoletimAluno" method = "post">
 		 		<label class="col-sm-5 control-label" id="lbl_bimestre_boletim" for="txt_bimestre_boletim">Selecione o Bimestre - Ano :</label> 
-	  				<div class="col-sm-4"><select id="sel_bimestre_boletim" name="idBoletim" value="${boletim.ID}" class="form-control">
+	  				<div class="col-sm-4">
+	  				<select id="sel_bimestre_boletim" name="idBoletim" value="${boletim.ID}" class="form-control">
 	  					<c:forEach var="rowB" items="${resultBimestre.rows}">
 	  						<option value="${rowB.ID_Boletim}">${rowB.Bimestre}º Bimestre - ${rowB.Ano_Letivo} </option>
 	  					</c:forEach></select>
 	  				</div>
-	  				
 	  				<div class="form-group last">
 					 	<div class="col-sm-offset-0 col-sm-2">
 					    	<input type = "submit" value = "Visualizar Boletim" class="btn btn-success"/>
 		 			 	</div>
 		 			</div>
+		 	</form>		
 	 		</div>
 	 	</div>
 	 </div>
