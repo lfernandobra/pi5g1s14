@@ -47,7 +47,7 @@
 				</select></div>
 				</div>	
 			<p><label class="col-sm-2 control-label" id="lbl_bimestre" for="txt_bimestre">Bimestre :</label>	
-				<div class="col-sm-6">
+				<div class="col-sm-3">
 				<select id="sel_bimestre" name="idBimestre" class="form-control">
 					<option value="1">1º Bimestre</option>
   					<option value="2">2º Bimestre</option>

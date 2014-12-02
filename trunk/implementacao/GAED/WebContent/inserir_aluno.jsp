@@ -104,7 +104,7 @@
 				
 				<div class="form-group">
 			      	<label class="col-sm-2 control-label" for="txt_rua">CEP:</label>
-					<div class="col-sm-6"> <input type="text" class="form-control" name="CEP" value="${aluno.CEP}" tabindex="13"
+					<div class="col-sm-3"> <input type="text" class="form-control" name="CEP" value="${aluno.CEP}" tabindex="13"
                 	   maxlength="10" onKeyPress="MascaraCep(aluno.CEP);" onBlur="ValidaCep(aluno.CEP);"/> </div>
 				</div>
 				
