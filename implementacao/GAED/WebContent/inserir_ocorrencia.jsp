@@ -66,7 +66,7 @@
 			   					</div>
 			    	    		<div class="form-group">
 			    	 				<label class="control-label col-sm-2" for="descricao">Descrição</label>
-			       					<textarea class="col-xs-9" id="descricao" name="nova_ocorrencia" 
+			       					<textarea class="col-xs-9" id="descricao" name="descricao" 
 			       							  placeholder="Digite a ocorrência" rows="4"
 			       							  value="${param.descricao}" 
 			       							  tabindex="3"></textarea> 

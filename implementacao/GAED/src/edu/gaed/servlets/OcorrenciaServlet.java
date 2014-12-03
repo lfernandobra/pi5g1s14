@@ -1,6 +1,7 @@
 package edu.gaed.servlets;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,11 +11,12 @@ import javax.servlet.http.HttpServletResponse;
 
 import edu.gaed.dao.OcorrenciaDao;
 import edu.gaed.vo.Ocorrencia;
+import edu.gaed.vo.Recebe;
 
 /**
  * Servlet implementation class OcorrenciaServlet
  */
-@WebServlet({"/OcorrenciaServlet","/InserirOcorrencia","/ObterOcorrencia","/AtualizaOcorrencia"})
+@WebServlet({"/OcorrenciaServlet","/InserirOcorrencia","/ObterOcorrencia","/ObterOcorrenciasAluno","/AtualizaOcorrencia"})
 public class OcorrenciaServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -39,10 +41,17 @@ public class OcorrenciaServlet extends HttpServlet {
 			
 			obterOcorrencia(request, response);
 		}
+		
+		else if(request.getServletPath().equals("/ObterOcorrenciasAluno")){
+		
+			obterOcorrenciasAluno(request, response);
+		}
+		
 		else if(request.getServletPath().equals("/AtualizaOcorrencia")){
 		
 			atualizarOcorrencia(request, response);
 		}
+		
 	}
 	
 	private void inserirOcorrencia(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -150,6 +159,7 @@ public class OcorrenciaServlet extends HttpServlet {
 			getServletContext().getRequestDispatcher("/editar_ocorrencia.jsp").forward(request, response);
 		}
 	}
+	
 	private void atualizarOcorrencia(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {    
 			
@@ -192,5 +202,41 @@ public class OcorrenciaServlet extends HttpServlet {
 	    }
 
 	}
+	
+	private void obterOcorrenciasAluno(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		String strIndiceAluno = request.getParameter("idAluno");
+										
+		int indiceAluno = Integer.parseInt(strIndiceAluno);
+						
+		String erro = null;
+	
+		OcorrenciaDao ocorrenciaDao = new OcorrenciaDao();
+	
+		//obtem contato e envia usuario para formulario de edição do contato
+		List<Recebe> listaocorrencias = ocorrenciaDao.obterOcorrenciasAluno(indiceAluno);
+			
+		//se nao houver agenda ou indice contato não estiver na agenda, informa erro
+		if (listaocorrencias == null)
+		{
+			erro = "Ocorrências não encontradas.";
+		}
+		else
+		{			 
+			request.setAttribute("ocorrencias", listaocorrencias);
+		}
+	
+		if (erro != null)
+		{
+			request.setAttribute("mensagem_erro", erro);
+			getServletContext().getRequestDispatcher("/ocorrencias_aluno.jsp").forward(request, response);
+		}
+		else
+		{
+			request.setAttribute("conteudo", "/ocorrencias_aluno.jsp");
+			getServletContext().getRequestDispatcher("/home.jsp").forward(request, response);
+		}
+	}
+	
 
 }

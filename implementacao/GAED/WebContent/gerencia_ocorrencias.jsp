@@ -35,7 +35,7 @@
 					<c:when test="${login.perfil.responsavel}">
 						<fieldset class="fsStyle">
 							<ul class="nav">
-								<li><a href="#" onclick="loadContent('ListaOcorrenciasServlet')"><i class="glyphicon glyphicon-eye-open"></i> Visualizar Ocorrências</a></li>
+								<li><a href="#" onclick="loadContent('visualizar_ocorrencia.jsp')"><i class="glyphicon glyphicon-eye-open"></i> Visualizar Ocorrências</a></li>
 							</ul>
 						</fieldset>
 					</c:when>

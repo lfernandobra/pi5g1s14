@@ -136,6 +136,63 @@ public class OcorrenciaDao extends BaseDao{
 		return ocorrencias;
 	}
 	
+	public List<Recebe> obterOcorrenciasAluno(int ID_Aluno) {
+		
+		List<Recebe> ocorrencias = new ArrayList<Recebe>();
+		Connection conn = null;
+		
+		try {
+			conn = this.getConnection();
+			
+			String sql = "select o.ID_Ocorrencia,o.Assunto_Ocorrencia,o.Descricao_Ocorrencia,o.Data_Ocorrencia,a.ID_Aluno,"
+					+ "u.Nome,u.Sobrenome,t.Nome_Turma from usuario u,aluno a,turma t,recebe r,ocorrencia o,estuda e where "
+					+ "u.ID_Usuario = a.ID_Usuario and a.ID_Aluno = e.ID_Aluno and e.ID_Turma = t.ID_Turma and a.ID_Aluno = "
+					+ "r.ID_Aluno and r.ID_Aluno = ? order by o.ID_Ocorrencia;";
+			
+			PreparedStatement stmt = conn.prepareStatement(sql);
+			stmt.setInt(1, ID_Aluno);
+			
+			ResultSet resultado = stmt.executeQuery();
+			
+			while (resultado.next()) {
+				
+				Recebe recebe = new Recebe();
+				
+				Ocorrencia ocorrencia = new Ocorrencia();
+								
+				ocorrencia.setID(resultado.getInt("ID_Ocorrencia"));
+				ocorrencia.setAssunto(resultado.getString("Assunto_Ocorrencia"));
+				ocorrencia.setDescricao(resultado.getString("Descricao_Ocorrencia"));
+				ocorrencia.setData(resultado.getString("Data_Ocorrencia"));
+				
+				Aluno aluno = new Aluno();
+				aluno.setID(resultado.getInt("ID_Aluno"));
+				aluno.setNome(resultado.getString("Nome"));
+				aluno.setSobrenome(resultado.getString("Sobrenome"));
+				
+				recebe.setOcorrencia(ocorrencia);
+				recebe.setAluno(aluno);
+				
+				ocorrencias.add(recebe);
+			}
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+		finally {
+			try {
+				if (conn != null) {
+					conn.close();
+				}				
+			}
+			catch (Exception e) {
+				//do nothing
+			}
+		}
+		
+		return ocorrencias;
+	}
+	
 	public Ocorrencia obterOcorrencia(int idAluno,int idOcorrencia)
 	{
 		Ocorrencia ocorrencia = new Ocorrencia();
