@@ -46,9 +46,9 @@
 							<li><a href="#" onclick="loadContent('gerencia_ocorrencias.jsp')"><i class="glyphicon glyphicon-exclamation-sign"></i> Ocorrências </a></li>
 						</c:when>
 						<c:when test="${login.perfil.responsavel}">
-							<li><a href="#" onclick="loadContent('boletim.jsp')"><i class="glyphicon glyphicon-file"></i> Boletim</a></li>
+							<li><a href="#" onclick="loadContent('gerencia_boletins.jsp')"><i class="glyphicon glyphicon-file"></i> Boletim</a></li>
 							<li><a href="#" onclick=""><i class="glyphicon glyphicon-book"></i> Tarefas </a></li>
-							<li><a href="#" onclick="loadContent('ListaOcorrenciasServlet')"><i class="glyphicon glyphicon-exclamation-sign"></i> Ocorrências </a></li>
+							<li><a href="#" onclick="loadContent('gerencia_ocorrencias.jsp')"><i class="glyphicon glyphicon-exclamation-sign"></i> Ocorrências </a></li>
 						</c:when>
 						<c:when test="${login.perfil.aluno}">
 							<li><a href="#" onclick="loadContent('boletim.jsp')"><i class="glyphicon glyphicon-file"></i> Boletim </a></li>

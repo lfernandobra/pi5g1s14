@@ -291,5 +291,71 @@ public class BoletimDao extends BaseDao{
 		}		
 		return boletinsInseridos;
 	}
+
+	public List<Compoe> obterBoletim(int ID_Aluno, int ID_Bimestre) {
+		
+		List<Compoe> boletimcompoe = new ArrayList<Compoe>();
+		Connection conn = null;
+		
+		try
+		{
+			conn = getConnection();
+			
+			String sql = "select u.nome,a.ID_Aluno,t.Nome_Turma,t.Serie,d.ID_Disciplina,d.nome_disciplina,"
+					+ "b.bimestre,b.ID_Boletim,c.nota,c.faltas from usuario u,turma t,disciplina d,boletim b"
+					+ ",compoe c,aluno a ,estuda e,inserido i where u.ID_Usuario = a.ID_Usuario and "
+					+ "a.ID_Aluno = e.ID_Aluno and e.ID_Turma = t.ID_Turma and b.ID_Boletim = c.ID_Boletim "
+					+ "and c.ID_Disciplina = d.ID_Disciplina and b.ID_Boletim = i.ID_Boletim and i.ID_Aluno = a.ID_Aluno "
+					+ "and a.ID_Aluno = ? and b.Bimestre = ?";			
+			
+			PreparedStatement stmt = conn.prepareStatement(sql);
+			stmt.setInt(1, ID_Aluno);
+			stmt.setInt(2, ID_Bimestre);
+			
+			ResultSet resultado = stmt.executeQuery();			
+			
+			while (resultado.next()) {
+				
+				Boletim boletim = new Boletim();
+				 
+				boletim.setID(resultado.getInt("ID_Boletim"));
+														
+				Disciplina disciplina = new Disciplina();
+				disciplina.setID(resultado.getInt("ID_Disciplina"));
+				disciplina.setNome(resultado.getString("nome_disciplina"));
+				
+				Compoe compoe = new Compoe();
+				
+				compoe.setBoletim(boletim);
+				compoe.setDisciplina(disciplina);
+				compoe.setFaltas(resultado.getInt("faltas"));
+				compoe.setNota(resultado.getFloat("nota"));
+				
+				boletimcompoe.add(compoe);
+			}
+						
+			return boletimcompoe;
+		}
+		catch (Exception ex)
+		{
+			ex.printStackTrace();
+			return null;
+		}
+		finally
+		{
+			if (conn != null)
+			{
+				try
+				{
+					conn.close();
+				}
+				catch(Exception closeEx)
+				{
+					//do nothing
+				}
+			}
+		}
+	
+	}
 	
 }
