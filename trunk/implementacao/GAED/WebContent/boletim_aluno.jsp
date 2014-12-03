@@ -12,30 +12,47 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 	<script type="text/javascript" src="scripts/script.js"></script>
+	<link href="Bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen" />
+    <link href="Bootstrap/css/bootstrap-theme.min.css" rel="stylesheet" media="screen" />
+    <link href="Bootstrap/css/bootstrap.css" rel="stylesheet" media="screen" />
 <title>Boletim</title>
 </head>
 <body>
+
+<div class="container" id="main"> 
+		<div class="row ">
+			<div class="col-sm-7">
+
 	<c:choose>
 		<c:when test="${empty compoe}">
 			<p>Não há boletins cadastrados</p>
 		</c:when>
+		
 		<c:otherwise>
-			<table border="1">	
-			<thead>
-				<tr>
-					<td>Disciplina</td><td>Nota</td><td>Faltas</td>
-				</tr>
-			</thead>
-			<tbody>
-				<c:forEach var="linha" items="${compoe}">
-					<tr>
-					<td>${linha.disciplina.nome}
-					<td>${linha.nota}</td>
-					<td>${linha.faltas}</td></tr>	
-				</c:forEach>
-			</tbody>				
-		</table>
+			<fieldset>
+				<legend id = "legenda">Boletim</legend>
+					<table class="table table-bordered table-striped">
+						<thead>
+						<tr class="info">
+							<td>Disciplina</td><td>Notas</td><td>Faltas</td>
+						</tr>
+					</thead>
+					
+					<tbody>
+						<c:forEach var="linha" items="${compoe}">
+							<tr>
+							<td>${linha.disciplina.nome}
+							<td>${linha.nota}</td>
+							<td>${linha.faltas}</td></tr>	
+						</c:forEach>
+					</tbody>				
+				</table>
+				</fieldset>
 		</c:otherwise>
 	</c:choose>
+	</div>
+</div>
+</div>
+
 </body>
 </html>

@@ -24,44 +24,69 @@
 	<sql:setDataSource var="snapshot" driver="com.mysql.jdbc.Driver"
      url="jdbc:mysql://localhost:3306/bd_gaed_official"
      user="root"  password=""/>
+     
      <c:choose>
 			<c:when test="${login.perfil.professor}">		
      			<sql:query dataSource="${snapshot}" var="resultTurma">
 					SELECT t.ID_Turma,t.Nome_Turma,t.Bimestre,t.Periodo,t.Serie from turma t,professor p,possui ps 
 					where t.ID_Turma = ps.ID_Turma and ps.ID_Professor = p.ID_Professor and p.ID_Professor = ${professor.idProfessor};
 	 			</sql:query>
+	 			
 	 			 <sql:query dataSource="${snapshot}" var="resultDisciplina">
 					select d.ID_Disciplina,d.Nome_Disciplina,d.Conteudo_Disciplina from disciplina d,ministra m,professor p
 					where d.ID_Disciplina =  m.ID_Disciplina and m.ID_Professor = p.ID_Professor and p.ID_Professor = ${professor.idProfessor};
 	 			</sql:query>
-	 	     	<fieldset>
-     				<legend>Visualizar Boletim</legend>
-    				<form action = "ObterBoletimTurma" method = "post">
-						<p><label id="lbl_turma" for="txt_turma">Selecione a turma:</label> 			
-  						<select id="sel_turma" name="idTurma" value="${turma.ID}">
-  							<c:forEach var="rowT" items="${resultTurma.rows}">
-  								<option value="${rowT.ID_Turma}">Turma : ${rowT.Nome_Turma} - ${rowT.Bimestre}° Bimestre - ${rowT.Periodo}</option>
-  							</c:forEach>
-						</select>	 	
-  						<p><label id="lbl_disciplina" for="txt_disciplina">Selecione a disciplina:</label> 
-  						<select id="sel_disciplina" name="idDisciplina" value="${disciplina.ID}">
-  						<c:forEach var="rowD" items="${resultDisciplina.rows}">
-  							<option value="${rowD.ID_Disciplina}"> ${rowD.Nome_Disciplina}</option>
-  						</c:forEach>
-						</select>
- 					<p><input type = submit value = "Obter Boletim"/></p>
+	 			
+	 <div class="container" id="main"> 
+		<div class="row ">
+			<div class="col-sm-7">
+		    		<div class="panel panel-default">
+    					<div class="panel-heading"> <h4>Visualizar Boletim</h4></div>
+    					<br>
+						<fieldset class="fsStyle">
+    					<form action = "ObterBoletimTurma" method ="post" class="form-horizontal">
+							<div class="form-group">
+							<label class="col-sm-3 control-label" id="lbl_turma" for="txt_turma">Selecione a turma:</label> 
+	 							<div class="col-sm-5"><select id="sel_turma" name="idTurma" value="${turma.ID}">
+		 							<c:forEach var="rowT" items="${resultTurma.rows}">
+	  									<option value="${rowT.ID_Turma}">Turma : ${rowT.Nome_Turma} - ${rowT.Bimestre}° Bimestre - ${rowT.Periodo}</option>
+	  								</c:forEach>
+									</select>
+								</div>	 	
+	 						</div>
+	 						
+	 						<div class="form-group">	
+	 						<label class="col-sm-4 control-label" id="lbl_disciplina" for="txt_disciplina">Selecione a disciplina:</label> 
+	 							<div class="col-sm-4"><select id="sel_disciplina" name="idDisciplina" value="${disciplina.ID}">
+			  						<c:forEach var="rowD" items="${resultDisciplina.rows}">
+			  							<option value="${rowD.ID_Disciplina}"> ${rowD.Nome_Disciplina}</option>
+			  						</c:forEach>
+									</select>
+								</div>
+	 			
+  							<div class="form-group last">
+				 				<div class="col-sm-offset-1 col-sm-2">
+				 					<button type="submit"  class="btn btn-success">Obter Boletim</button>
+	 			 				</div>
+							</div>
+	 						</div> 
  		 			</form>
  	 			</fieldset>
- 		</c:when>
+ 	 			</div>
+ 	 		</div>
+ 	 	</div>
+ 	</div>
+ 	 			
+ </c:when>
+ 		
  		<c:when test="${login.perfil.responsavel}">
  			Teste
  			<sql:query dataSource="${snapshot}" var="resultResponsavelAluno">
 					select a.ID_Aluno,r.ID_Responsavel from aluno a,responsavel r,usuario u 
 					where a.ID_Responsavel = r.ID_Responsavel and r.ID_Usuario = u.ID_Usuario and u.ID_Usuario = ${login.id};
 	 		</sql:query>
- 			
- 			
  		</c:when>
+ 		
  		<c:when test="${login.perfil.aluno}">
  			<sql:query dataSource="${snapshot}" var="resultAluno">
 					select d.nome_disciplina,b.bimestre,c.nota,c.faltas from
@@ -80,27 +105,27 @@
 	 		
 	 		</sql:query>
 	 		
-	 <div class="container" id="main"> 
-		<div class="row ">
-			<div class="col-sm-7">
-	 		<div class="form-group">
-	 		<form action = "VisualizarBoletimAluno" method = "post">
-		 		<label class="col-sm-5 control-label" id="lbl_bimestre_boletim" for="txt_bimestre_boletim">Selecione o Bimestre - Ano :</label> 
-	  				<div class="col-sm-4">
-	  				<select id="sel_bimestre_boletim" name="idBoletim" value="${boletim.ID}" class="form-control">
-	  					<c:forEach var="rowB" items="${resultBimestre.rows}">
-	  						<option value="${rowB.ID_Boletim}">${rowB.Bimestre}º Bimestre - ${rowB.Ano_Letivo} </option>
-	  					</c:forEach></select>
-	  				</div>
-	  				<div class="form-group last">
-					 	<div class="col-sm-offset-0 col-sm-2">
-					    	<input type = "submit" value = "Visualizar Boletim" class="btn btn-success"/>
-		 			 	</div>
-		 			</div>
-		 	</form>		
-	 		</div>
-	 	</div>
-	 </div>
+			 <div class="container" id="main"> 
+				<div class="row ">
+					<div class="col-sm-7">
+			 		<div class="form-group">
+			 		<form action = "VisualizarBoletimAluno" method = "post">
+				 		<label class="col-sm-5 control-label" id="lbl_bimestre_boletim" for="txt_bimestre_boletim">Selecione o Bimestre - Ano :</label> 
+			  				<div class="col-sm-4">
+			  				<select id="sel_bimestre_boletim" name="idBoletim" value="${boletim.ID}" class="form-control">
+			  					<c:forEach var="rowB" items="${resultBimestre.rows}">
+			  						<option value="${rowB.ID_Boletim}">${rowB.Bimestre}º Bimestre - ${rowB.Ano_Letivo} </option>
+			  					</c:forEach></select>
+			  				</div>
+			  				<div class="form-group last">
+							 	<div class="col-sm-offset-0 col-sm-2">
+							    	<input type = "submit" value = "Visualizar Boletim" class="btn btn-success"/>
+				 			 	</div>
+				 			</div>
+				 	</form>		
+			 		</div>
+			 	</div>
+			 </div>
 	 		<br>
 	 </div>	  		
 		

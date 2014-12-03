@@ -13,7 +13,7 @@
 </c:choose>
 
 <c:if test="${not empty sucesso}">
-	<div id="erro">
+	<div id="erro" class="bg-success">
 		${sucesso}
 		
 	</div>

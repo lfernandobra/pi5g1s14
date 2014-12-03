@@ -11,6 +11,9 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<link href="Bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen" />
+    <link href="Bootstrap/css/bootstrap-theme.min.css" rel="stylesheet" media="screen" />
+    <link href="Bootstrap/css/bootstrap.css" rel="stylesheet" media="screen" />
 <title>Ocorrencias</title>
 </head>
 <body>
@@ -20,17 +23,17 @@
 		</c:when>
 	<c:otherwise>
 		<fieldset>
-		<legend id = "legenda">Ocorrencias cadastradas</legend>
-		<table border="1">
-			<thead>
-				<tr>
-					<td>ID Ocorrência</td>
-					<td>Assunto</td>
-					<td>Descrição</td>
-					<td>Data</td>
-					<td>Nome</td>
-					<td>Sobrenome</td>			
-				</tr>
+			<legend id = "legenda">Ocorrencias cadastradas</legend>
+			<table class="table table-bordered">
+				<thead>
+					<tr class="danger">
+						<td>ID Ocorrência</td>
+						<td>Assunto</td>
+						<td>Descrição</td>
+						<td>Data</td>
+						<td>Nome</td>
+						<td>Sobrenome</td>			
+						</tr>
 			</thead>
 			<tbody>			
 				<c:forEach var="linha" items="${ocorrencias}">
@@ -46,7 +49,7 @@
 					<form action="ObterOcorrencia" method="post">
 						<input type="hidden" name="idAluno" value="${linha.aluno.ID}"/>
 						<input type="hidden" name="idOcorrencia" value="${linha.ocorrencia.ID}"/>
-						<input type="submit" value="Editar" class="botao_editar" />
+						<input type="submit" value="Editar" class="btn btn-success btn-sm"/>
 					</form>				
 					</td>
 				</tr>

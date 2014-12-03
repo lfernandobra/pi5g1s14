@@ -32,7 +32,7 @@
 	 
 	 <div class="container" id="main"> 
   		<div class="row ">
-  			<div class="col-sm-8">
+  			<div class="col-sm-7">
 	    		<div class="panel panel-default">
     				<div class="panel-heading"> <h4>Inserir Boletim</h4></div>
     				<br>
@@ -44,9 +44,10 @@
   					<c:forEach var="row" items="${resultAlunos.rows}">
   						<option value="${row.ID_Aluno}">${row.Nome} ${row.Sobrenome}</option>
   					</c:forEach>
-				</select></div>
+					</select>
+				</div>
 				</div>	
-			<p><label class="col-sm-2 control-label" id="lbl_bimestre" for="txt_bimestre">Bimestre :</label>	
+			<label class="col-sm-2 control-label" id="lbl_bimestre" for="txt_bimestre">Bimestre :</label>	
 				<div class="col-sm-3">
 				<select id="sel_bimestre" name="idBimestre" class="form-control">
 					<option value="1">1º Bimestre</option>
@@ -55,8 +56,9 @@
   					<option value="4">4º Bimestre</option>
 				</select>
 				</div>
+				
 				<div class="form-group last">
-				 	<div class="col-sm-offset-1 col-sm-2">
+				 	<div class="col-sm-offset-3 col-sm-2">
 				 		<button type="submit"  class="btn btn-success">Inserir Boletim</button>
 	 			 	</div>
 	 			</div> 		
