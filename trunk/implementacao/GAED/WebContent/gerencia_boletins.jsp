@@ -32,6 +32,13 @@
 							</ul>
 						</fieldset>
 					</c:when>
+					<c:when test="${login.perfil.responsavel}">
+						<fieldset class="fsStyle">
+							<ul class="nav">
+								<li><a href="#" onclick="loadContent('visualizar_boletim.jsp')"><i class="glyphicon glyphicon-eye-open"></i> Visualizar Boletim</a></li>
+							</ul>
+						</fieldset>
+					</c:when>
 					</c:choose>						
 				</div>
 			</div>

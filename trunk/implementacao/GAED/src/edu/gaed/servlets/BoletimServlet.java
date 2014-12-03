@@ -24,7 +24,7 @@ import edu.gaed.vo.Inserido;
 /**
  * Servlet implementation class BoletimServlet
  */
-@WebServlet({ "/BoletimServlet","/ObterBoletim","/ObterBoletimTurma","/VisualizarBoletimAluno","/EditarBoletim", "/AtualizarBoletim","/InserirBoletim"})
+@WebServlet({ "/BoletimServlet","/ObterBoletim","/ObterBoletimAluno","/ObterBoletimTurma","/VisualizarBoletimAluno","/EditarBoletim", "/AtualizarBoletim","/InserirBoletim"})
 public class BoletimServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -55,7 +55,12 @@ public class BoletimServlet extends HttpServlet {
 		{
 			obterBoletim(request, response);
 		}
-				
+		
+		else if (request.getServletPath().equals("/ObterBoletimAluno"))
+		{
+			obterBoletimAluno(request, response);
+		}
+						
 		else if (request.getServletPath().equals("/ObterBoletimTurma"))
 		{
 			obterBoletimTurma(request, response);
@@ -265,6 +270,43 @@ public class BoletimServlet extends HttpServlet {
 		
 		getServletContext().getRequestDispatcher("/home.jsp").forward(request, response);		
 		
+	}
+	
+	private void obterBoletimAluno(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		String strIndiceAluno = request.getParameter("idAluno");
+		String strIndiceBimestre = request.getParameter("idBimestre");
+								
+		int indiceAluno = Integer.parseInt(strIndiceAluno);
+		int indiceBimestre = Integer.parseInt(strIndiceBimestre);
+				
+		String erro = null;
+	
+		BoletimDao boletimDao = new BoletimDao();
+	
+		//obtem contato e envia usuario para formulario de edição do contato
+		List<Compoe> boletim = boletimDao.obterBoletim(indiceAluno, indiceBimestre);
+			
+		//se nao houver agenda ou indice contato não estiver na agenda, informa erro
+		if (boletim == null)
+		{
+			erro = "Boletim não encontrado.";
+		}
+		else
+		{			 
+			request.setAttribute("compoe", boletim);
+		}
+	
+		if (erro != null)
+		{
+			request.setAttribute("mensagem_erro", erro);
+			getServletContext().getRequestDispatcher("/boletim_aluno.jsp").forward(request, response);
+		}
+		else
+		{
+			request.setAttribute("conteudo", "/boletim_aluno.jsp");
+			getServletContext().getRequestDispatcher("/home.jsp").forward(request, response);
+		}
 	}
 	
 }
