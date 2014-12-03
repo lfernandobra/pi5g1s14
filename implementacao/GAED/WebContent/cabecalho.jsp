@@ -8,7 +8,7 @@
 	  <div class="container">
 	    <div class="navbar-header">
 	      <div class="col-lg-10 col-sm-offset-0 ">
-     		 <p class="nav navbar-nav "><img src ="images\logo_gaed_150px.png"></p>
+     		 <p class="nav navbar-nav "><img src ="images\logo_gaed_150px_transp.png"></p>
 
 			<c:choose>
 			  <c:when test="${empty login}">
@@ -38,7 +38,7 @@
 			  </div>
 			  
 			  <div class="col-lg-4 col-sm-offset-0 col-sm-6 navbar-right" >
-			   <p>Olá, ${login.perfil} ${login.nome}. <a href="LogoutServlet">(sair)</a></p>
+			   <p>Olá, ${login.perfil} ${login.nome} ${login.sobrenome} <a href="LogoutServlet">(sair)</a></p>
 			  </div>
 			  
 			  
