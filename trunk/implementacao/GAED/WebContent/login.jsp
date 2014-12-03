@@ -2,6 +2,7 @@
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
@@ -9,7 +10,15 @@
 	<link href="Bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen" />
     <link href="Bootstrap/css/bootstrap-theme.min.css" rel="stylesheet" media="screen" />
     <link href="Bootstrap/css/bootstrap.css" rel="stylesheet" media="screen" />
-    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function() {
+    		$('#myCarousel').carousel({
+    		//options here
+    		});
+		});
+	</script> 
 </head>
 <body>
     
@@ -69,8 +78,8 @@
 					 
 				</div>
 					        
-				<a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>
-			  	<a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>
+				<a class="carousel-control left" href="#myCarousel" role = "button" data-slide="prev">&lsaquo;</a>
+			  	<a class="carousel-control right" href="#myCarousel" role = "button" data-slide="next">&rsaquo;</a>
 			</div>
 	</div>	
 	   
@@ -183,7 +192,9 @@
 
  
 </body>
+
 </html>
+
 
 	
 
