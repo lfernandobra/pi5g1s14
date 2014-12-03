@@ -5,6 +5,9 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+	<link href="Bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen" />
+    <link href="Bootstrap/css/bootstrap-theme.min.css" rel="stylesheet" media="screen" />
+    <link href="Bootstrap/css/bootstrap.css" rel="stylesheet" media="screen" />
 <title>Agenda Usuários</title>
 </head>
 <body>
@@ -15,9 +18,9 @@
 	<c:otherwise>
 		<fieldset>
 		<legend id = "legenda">Alunos</legend>
-		<table border="1">
+		<table class="table table-bordered">
 			<thead>
-				<tr>
+				<tr class="warning">
 					<td>Foto</td>
 					<td>ID</td>
 					<td>Nome</td>
@@ -43,15 +46,15 @@
 					<td>${estuda.turma.serie}</td>
 					<td>${estuda.turma.ano}</td>
 					<td>${estuda.turma.bimestre}</td>
-					
+
 					<td class="acao_agenda">
 					<form action="ObterAluno" method="post">
 						<input type="hidden" name="id" value="${aluno.ID}"/>
-						<input type="submit" value="Editar" class="botao_editar" />
+						<input type="submit" value="Editar" class="btn btn-success btn-sm"/>
 					</form>
 					<form action="Removerusuario" method="post">
 						<input type="hidden" name="id" value="${aluno.ID}"/>
-						<input type="submit" value="Excluir" class="botao_excluir" />
+						<input type="submit" value="Excluir" class="btn btn-default btn-sm"/>
 					</form>							
 					</td>
 				</tr>
