@@ -30,27 +30,29 @@
 	<div class="row">		
 	<c:if test="${not empty login}">  
 		 <div class="col-lg-2 col-sm-offset-1">
-      		<div class="list-group navmenu-nav nav">
-       			 
+      		<div class="list-group navmenu-nav nav"> 
        			 <ul class="nav">
-					<li><a href="#" onclick="loadContent('conteudo_aluno.jsp')"><span class="glyphicon glyphicon-home"></span> Home</a></li>
 					<c:choose>
 						<c:when test="${login.perfil.professor}">
+							<li><a href="#" onclick="loadContent('conteudo_professor.jsp')"><span class="glyphicon glyphicon-home"></span> Home</a></li>
 							<li><a href="#" onclick="loadContent('gerencia_boletins.jsp')"><span class="glyphicon glyphicon-file"></span> Boletim</a></li>
 							<li><a href="#" onclick="loadContent('gerencia_ocorrencias.jsp')"><span class="glyphicon glyphicon-exclamation-sign"></span> Ocorrências</a></li>
 							<li><a href="#"><i class="glyphicon glyphicon-book"></i> Tarefas </a></li>	
 						</c:when>
 						<c:when test="${login.perfil.secretaria}">
+							<li><a href="#" onclick="loadContent('conteudo_secretaria.jsp')"><span class="glyphicon glyphicon-home"></span> Home</a></li>
 							<li><a href="#" onclick="loadContent('gerencia_usuarios.jsp')"><i class="glyphicon glyphicon-user"></i> Usuários </a></li>
 							<li><a href="#" onclick="loadContent('gerencia_boletins.jsp')"><i class="glyphicon glyphicon-file"></i> Boletins </a></li>
 							<li><a href="#" onclick="loadContent('gerencia_ocorrencias.jsp')"><i class="glyphicon glyphicon-exclamation-sign"></i> Ocorrências </a></li>
 						</c:when>
 						<c:when test="${login.perfil.responsavel}">
+							<li><a href="#" onclick="loadContent('conteudo_responsavel.jsp')"><span class="glyphicon glyphicon-home"></span> Home</a></li>
 							<li><a href="#" onclick="loadContent('gerencia_boletins.jsp')"><i class="glyphicon glyphicon-file"></i> Boletim</a></li>
 							<li><a href="#" onclick=""><i class="glyphicon glyphicon-book"></i> Tarefas </a></li>
 							<li><a href="#" onclick="loadContent('gerencia_ocorrencias.jsp')"><i class="glyphicon glyphicon-exclamation-sign"></i> Ocorrências </a></li>
 						</c:when>
 						<c:when test="${login.perfil.aluno}">
+							<li><a href="#" onclick="loadContent('conteudo_aluno.jsp')"><span class="glyphicon glyphicon-home"></span> Home</a></li>
 							<li><a href="#" onclick="loadContent('boletim.jsp')"><i class="glyphicon glyphicon-file"></i> Boletim </a></li>
 							<li><a href="#" onclick=""><i class="glyphicon glyphicon-book"></i> Tarefas </a></li>
 						</c:when>
