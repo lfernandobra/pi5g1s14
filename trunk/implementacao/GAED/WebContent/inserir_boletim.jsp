@@ -46,7 +46,9 @@
   					</c:forEach>
 					</select>
 				</div>
-				</div>	
+				</div>
+				
+			<div class="form-group">		
 			<label class="col-sm-2 control-label" id="lbl_bimestre" for="txt_bimestre">Bimestre :</label>	
 				<div class="col-sm-3">
 				<select id="sel_bimestre" name="idBimestre" class="form-control">
@@ -56,7 +58,7 @@
   					<option value="4">4º Bimestre</option>
 				</select>
 				</div>
-				
+			</div>	
 				<div class="form-group last">
 				 	<div class="col-sm-offset-3 col-sm-2">
 				 		<button type="submit"  class="btn btn-success">Inserir Boletim</button>
