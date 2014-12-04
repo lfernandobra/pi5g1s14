@@ -93,6 +93,48 @@ public class AlunoDao extends BaseDao{
 		}		
 	}
 	
+	public Aluno obterAluno(int idAluno){
+		Aluno aluno = new Aluno();
+		Connection conn = null;
+		
+		try  {
+			conn = getConnection();
+		
+			String sql = "select u.Nome,u.Sobrenome,a.ID_Aluno from usuario u,aluno a "
+					+ "where u.ID_Usuario = a.ID_Usuario and a.ID_Aluno = ?;";	
+				
+			PreparedStatement stmt = conn.prepareStatement(sql);
+			stmt.setInt(1, idAluno);
+		
+			ResultSet resultSet = stmt.executeQuery();			
+			if (resultSet.next())
+			{
+				aluno.setID(resultSet.getInt("ID_Aluno"));
+				aluno.setNome(resultSet.getString("Nome"));
+				aluno.setSobrenome(resultSet.getString("Sobrenome"));
+			}
+			return aluno;
+		}		
+		catch (Exception ex)
+		{
+			ex.printStackTrace();
+			return null;
+		}
+		finally
+		{
+			if (conn != null)
+			{
+				try
+				{
+					conn.close();
+				}
+				catch(Exception closeEx)
+				{
+					//do nothing
+				}
+			}
+		}
+	}
 	public List<Estuda> obterAlunos() {
 		
 		List<Estuda> alunos = new ArrayList<Estuda>();

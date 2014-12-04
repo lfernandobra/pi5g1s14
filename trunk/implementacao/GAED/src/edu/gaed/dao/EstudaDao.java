@@ -73,4 +73,59 @@ public class EstudaDao extends BaseDao{
 		
 		return estudaturma;
 	}
+	
+	public Estuda obterComposicao(int idAluno){
+		
+		Estuda estuda = new Estuda();
+		Connection conn = null;
+		
+		try  {
+			conn = getConnection();
+		
+			String sql = "select e.ID_Turma,t.Nome_Turma,t.Periodo,t.Serie,t.Ano_Letivo,t.Bimestre,a.ID_Aluno "
+					+ "from estuda e,turma t,aluno a where t.ID_Turma = e.ID_Turma and e.ID_Aluno = a.ID_Aluno "
+					+ "and a.ID_Aluno = ?;";	
+				
+			PreparedStatement stmt = conn.prepareStatement(sql);
+			stmt.setInt(1, idAluno);
+		
+			ResultSet resultSet = stmt.executeQuery();			
+			if (resultSet.next())
+			{
+				Aluno aluno = new Aluno();
+				aluno.setID(resultSet.getInt("ID_Aluno"));
+				
+				Turma turma = new Turma();
+				turma.setID(resultSet.getInt("ID_Turma"));
+				turma.setNome(resultSet.getString("Nome_Turma"));
+				turma.setPeriodo(resultSet.getString("Periodo"));
+				turma.setSerie(resultSet.getInt("Serie"));
+				turma.setAno(resultSet.getInt("Ano_Letivo"));
+				turma.setBimestre(resultSet.getInt("Bimestre"));
+				
+				estuda.setAluno(aluno);
+				estuda.setTurma(turma);
+			}
+			return estuda;
+		}		
+		catch (Exception ex)
+		{
+			ex.printStackTrace();
+			return null;
+		}
+		finally
+		{
+			if (conn != null)
+			{
+				try
+				{
+					conn.close();
+				}
+				catch(Exception closeEx)
+				{
+					//do nothing
+				}
+			}
+		}
+	}
 }

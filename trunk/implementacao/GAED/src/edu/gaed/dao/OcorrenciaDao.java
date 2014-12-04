@@ -49,7 +49,7 @@ public class OcorrenciaDao extends BaseDao{
 			
 			//Insere ocorrencia á tabela de "recebe" com o numero da ultima ocorrencia inserida
 			
-			System.out.println(qtyOcorrencia);
+			System.out.println("Quantidades de ocorrencias no banco"+qtyOcorrencia);
 			
 			String sqlrecebeOcorrencia = "insert into recebe (ID_Aluno,ID_Ocorrencia) values (?,?);";
 			PreparedStatement stmt3 = conn.prepareStatement(sqlrecebeOcorrencia);
@@ -144,10 +144,9 @@ public class OcorrenciaDao extends BaseDao{
 		try {
 			conn = this.getConnection();
 			
-			String sql = "select o.ID_Ocorrencia,o.Assunto_Ocorrencia,o.Descricao_Ocorrencia,o.Data_Ocorrencia,a.ID_Aluno,"
-					+ "u.Nome,u.Sobrenome,t.Nome_Turma from usuario u,aluno a,turma t,recebe r,ocorrencia o,estuda e where "
-					+ "u.ID_Usuario = a.ID_Usuario and a.ID_Aluno = e.ID_Aluno and e.ID_Turma = t.ID_Turma and a.ID_Aluno = "
-					+ "r.ID_Aluno and r.ID_Aluno = ? order by o.ID_Ocorrencia;";
+			String sql = "select o.ID_Ocorrencia,o.Assunto_Ocorrencia,o.Descricao_Ocorrencia,o.Data_Ocorrencia,"
+					+ "a.ID_Aluno,u.Nome,u.Sobrenome from usuario u,aluno a,recebe r,ocorrencia o where u.ID_Usuario = a.ID_Usuario "
+					+ "and a.ID_Aluno = r.ID_Aluno and r.ID_Ocorrencia = o.ID_Ocorrencia and a.ID_Aluno = ? order by o.ID_Ocorrencia";
 			
 			PreparedStatement stmt = conn.prepareStatement(sql);
 			stmt.setInt(1, ID_Aluno);

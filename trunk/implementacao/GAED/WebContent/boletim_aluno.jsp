@@ -34,6 +34,19 @@
 					<table class="table table-bordered table-striped">
 						<thead>
 						<tr class="info">
+							<td>Nome Completo : </td><td>${aluno.nome} ${aluno.sobrenome}</td>
+						</tr>
+						<tr>	
+							<td>Turma</td><td>Periodo</td><td>Serie</td><td>Ano Letivo</td><td>Bimestre</td>
+						</tr>
+						<tr>	
+							<td>${estudaTurma.turma.nome}</td>
+							<td>${estudaTurma.turma.periodo}</td>
+							<td>${estudaTurma.turma.serie}</td>
+							<td>${estudaTurma.turma.ano}</td>
+							<td>${estudaTurma.turma.bimestre}</td>
+						</tr>
+						<tr class="info">
 							<td>Disciplina</td><td>Notas</td><td>Faltas</td>
 						</tr>
 					</thead>

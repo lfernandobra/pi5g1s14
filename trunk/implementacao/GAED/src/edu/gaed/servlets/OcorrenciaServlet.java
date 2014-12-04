@@ -9,7 +9,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import edu.gaed.dao.AlunoDao;
+import edu.gaed.dao.EstudaDao;
 import edu.gaed.dao.OcorrenciaDao;
+import edu.gaed.vo.Aluno;
+import edu.gaed.vo.Estuda;
 import edu.gaed.vo.Ocorrencia;
 import edu.gaed.vo.Recebe;
 
@@ -67,7 +71,7 @@ public class OcorrenciaServlet extends HttpServlet {
 		ocorrencia.setAssunto(assunto);
 		ocorrencia.setDescricao(descricao);
 		ocorrencia.setData(data);
-		
+		System.out.println(idAluno);
 		
 		String erro = null;
 		
@@ -212,9 +216,12 @@ public class OcorrenciaServlet extends HttpServlet {
 		String erro = null;
 	
 		OcorrenciaDao ocorrenciaDao = new OcorrenciaDao();
+		AlunoDao alunoDao = new AlunoDao();
+		EstudaDao estudaDao = new EstudaDao();
 	
-		//obtem contato e envia usuario para formulario de edição do contato
 		List<Recebe> listaocorrencias = ocorrenciaDao.obterOcorrenciasAluno(indiceAluno);
+		Aluno aluno = alunoDao.obterAluno(indiceAluno);
+		Estuda estudaTurma = estudaDao.obterComposicao(indiceAluno);
 			
 		//se nao houver agenda ou indice contato não estiver na agenda, informa erro
 		if (listaocorrencias == null)
@@ -224,6 +231,8 @@ public class OcorrenciaServlet extends HttpServlet {
 		else
 		{			 
 			request.setAttribute("ocorrencias", listaocorrencias);
+			request.setAttribute("aluno", aluno);
+			request.setAttribute("estudaTurma", estudaTurma);
 		}
 	
 		if (erro != null)
