@@ -74,7 +74,7 @@ public class EstudaDao extends BaseDao{
 		return estudaturma;
 	}
 	
-	public Estuda obterComposicao(int idAluno){
+	public Estuda obterComposicao(int idUsuario){
 		
 		Estuda estuda = new Estuda();
 		Connection conn = null;
@@ -82,12 +82,12 @@ public class EstudaDao extends BaseDao{
 		try  {
 			conn = getConnection();
 		
-			String sql = "select e.ID_Turma,t.Nome_Turma,t.Periodo,t.Serie,t.Ano_Letivo,t.Bimestre,a.ID_Aluno "
-					+ "from estuda e,turma t,aluno a where t.ID_Turma = e.ID_Turma and e.ID_Aluno = a.ID_Aluno "
-					+ "and a.ID_Aluno = ?;";	
+			String sql = "select u.ID_Usuario,e.ID_Turma,t.Nome_Turma,t.Periodo,t.Serie,t.Ano_Letivo,t.Bimestre"
+					+ ",a.ID_Aluno from estuda e,turma t,aluno a,usuario u where t.ID_Turma = e.ID_Turma and "
+					+ "e.ID_Aluno = a.ID_Aluno and a.ID_Usuario = u.ID_Usuario and a.ID_Usuario = ?;";	
 				
 			PreparedStatement stmt = conn.prepareStatement(sql);
-			stmt.setInt(1, idAluno);
+			stmt.setInt(1, idUsuario);
 		
 			ResultSet resultSet = stmt.executeQuery();			
 			if (resultSet.next())

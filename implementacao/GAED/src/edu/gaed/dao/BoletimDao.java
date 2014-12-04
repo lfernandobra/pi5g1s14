@@ -292,7 +292,7 @@ public class BoletimDao extends BaseDao{
 		return boletinsInseridos;
 	}
 
-	public List<Compoe> obterBoletim(int ID_Aluno, int ID_Bimestre) {
+	public List<Compoe> obterBoletim(int ID_Usuario, int ID_Bimestre) {
 		
 		List<Compoe> boletimcompoe = new ArrayList<Compoe>();
 		Connection conn = null;
@@ -306,10 +306,10 @@ public class BoletimDao extends BaseDao{
 					+ ",compoe c,aluno a ,estuda e,inserido i where u.ID_Usuario = a.ID_Usuario and "
 					+ "a.ID_Aluno = e.ID_Aluno and e.ID_Turma = t.ID_Turma and b.ID_Boletim = c.ID_Boletim "
 					+ "and c.ID_Disciplina = d.ID_Disciplina and b.ID_Boletim = i.ID_Boletim and i.ID_Aluno = a.ID_Aluno "
-					+ "and a.ID_Aluno = ? and b.Bimestre = ?";			
+					+ "and u.ID_Usuario = ? and b.Bimestre = ?";			
 			
 			PreparedStatement stmt = conn.prepareStatement(sql);
-			stmt.setInt(1, ID_Aluno);
+			stmt.setInt(1, ID_Usuario);
 			stmt.setInt(2, ID_Bimestre);
 			
 			ResultSet resultado = stmt.executeQuery();			

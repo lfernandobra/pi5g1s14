@@ -112,6 +112,7 @@
 			 		<form action = "VisualizarBoletimAluno" method = "post">
 				 		<label class="col-sm-5 control-label" id="lbl_bimestre_boletim" for="txt_bimestre_boletim">Selecione o Bimestre - Ano :</label> 
 			  				<div class="col-sm-4">
+			  				<input type = hidden name="idUsuario" value="${login.id}"/>
 			  				<select id="sel_bimestre_boletim" name="idBoletim" value="${boletim.ID}" class="form-control">
 			  					<c:forEach var="rowB" items="${resultBimestre.rows}">
 			  						<option value="${rowB.ID_Boletim}">${rowB.Bimestre}º Bimestre - ${rowB.Ano_Letivo} </option>

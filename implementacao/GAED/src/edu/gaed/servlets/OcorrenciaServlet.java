@@ -209,9 +209,9 @@ public class OcorrenciaServlet extends HttpServlet {
 	
 	private void obterOcorrenciasAluno(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String strIndiceAluno = request.getParameter("idAluno");
+		String strIndiceUsuario = request.getParameter("idUsuario");
 										
-		int indiceAluno = Integer.parseInt(strIndiceAluno);
+		int indiceUsuario = Integer.parseInt(strIndiceUsuario);
 						
 		String erro = null;
 	
@@ -219,9 +219,9 @@ public class OcorrenciaServlet extends HttpServlet {
 		AlunoDao alunoDao = new AlunoDao();
 		EstudaDao estudaDao = new EstudaDao();
 	
-		List<Recebe> listaocorrencias = ocorrenciaDao.obterOcorrenciasAluno(indiceAluno);
-		Aluno aluno = alunoDao.obterAluno(indiceAluno);
-		Estuda estudaTurma = estudaDao.obterComposicao(indiceAluno);
+		List<Recebe> listaocorrencias = ocorrenciaDao.obterOcorrenciasAluno(indiceUsuario);
+		Aluno aluno = alunoDao.obterAluno(indiceUsuario);
+		Estuda estudaTurma = estudaDao.obterComposicao(indiceUsuario);
 			
 		//se nao houver agenda ou indice contato não estiver na agenda, informa erro
 		if (listaocorrencias == null)

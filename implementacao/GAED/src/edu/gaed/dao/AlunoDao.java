@@ -93,7 +93,7 @@ public class AlunoDao extends BaseDao{
 		}		
 	}
 	
-	public Aluno obterAluno(int idAluno){
+	public Aluno obterAluno(int idUsuario){
 		Aluno aluno = new Aluno();
 		Connection conn = null;
 		
@@ -101,10 +101,10 @@ public class AlunoDao extends BaseDao{
 			conn = getConnection();
 		
 			String sql = "select u.Nome,u.Sobrenome,a.ID_Aluno from usuario u,aluno a "
-					+ "where u.ID_Usuario = a.ID_Usuario and a.ID_Aluno = ?;";	
+					+ "where u.ID_Usuario = a.ID_Usuario and a.ID_Usuario = ?;";	
 				
 			PreparedStatement stmt = conn.prepareStatement(sql);
-			stmt.setInt(1, idAluno);
+			stmt.setInt(1, idUsuario);
 		
 			ResultSet resultSet = stmt.executeQuery();			
 			if (resultSet.next())
