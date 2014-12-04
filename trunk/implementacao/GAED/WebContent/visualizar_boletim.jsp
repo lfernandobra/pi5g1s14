@@ -40,9 +40,9 @@
 				<div class="form-group">
 					<label class="col-sm-4 control-label" id="lbl_aluno" for="txt_aluno">Selecione o aluno :</label> 			
 					<div class="col-sm-5">
-					<select id="sel_alunos" name="idAluno" class="form-control">
+					<select id="sel_alunos" name="idUsuario" class="form-control">
   						<c:forEach var="row" items="${resultAlunos.rows}">
-  							<option value="${row.ID_Aluno}">${row.Nome} ${row.Sobrenome}</option>
+  							<option value="${row.ID_Usuario}">${row.Nome} ${row.Sobrenome}</option>
   						</c:forEach>
 					</select>
 					</div>

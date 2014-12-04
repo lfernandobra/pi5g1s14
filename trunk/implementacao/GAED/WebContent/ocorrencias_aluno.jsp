@@ -31,22 +31,19 @@
 		<c:otherwise>
 			<fieldset>
 				<legend id = "legenda">Ocorrências</legend>
+					<div class="well well-lg">
+					<div class="form-group">
+						<p><label>Aluno :</label> ${aluno.nome} ${aluno.sobrenome}
+						<label class=" control-label">Serie:</label> ${estudaTurma.turma.serie}
+						<label class=" control-label">Turma:</label> ${estudaTurma.turma.nome}</p>
+						<p><label class=" control-label">Bimestre:</label> ${estudaTurma.turma.bimestre}
+						<p><label class=" control-label">Periodo:</label>${estudaTurma.turma.periodo}</p>
+						<p><label class=" control-label">Ano Letivo:</label>${estudaTurma.turma.ano}</p>
+					</div>
+					</div>
+					
 					<table class="table table-bordered table-striped">
 						<thead>
-						<tr class="info">
-							<td>Nome Completo : </td><td>${aluno.nome} ${aluno.sobrenome}</td>
-						</tr>
-						<tr>	
-							<td>Turma</td><td>Periodo</td><td>Serie</td><td>Ano Letivo</td><td>Bimestre</td>
-						</tr>
-						<tr>	
-							<td>${estudaTurma.turma.nome}</td>
-							<td>${estudaTurma.turma.periodo}</td>
-							<td>${estudaTurma.turma.serie}</td>
-							<td>${estudaTurma.turma.ano}</td>
-							<td>${estudaTurma.turma.bimestre}</td>
-						</tr>
-						
 						<tr class="info">
 							<td>ID Ocorrencia</td><td>Assunto</td><td>Descrição</td><td>Data</td>
 						</tr>

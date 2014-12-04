@@ -136,7 +136,7 @@ public class OcorrenciaDao extends BaseDao{
 		return ocorrencias;
 	}
 	
-	public List<Recebe> obterOcorrenciasAluno(int ID_Aluno) {
+	public List<Recebe> obterOcorrenciasAluno(int ID_Usuario) {
 		
 		List<Recebe> ocorrencias = new ArrayList<Recebe>();
 		Connection conn = null;
@@ -145,11 +145,11 @@ public class OcorrenciaDao extends BaseDao{
 			conn = this.getConnection();
 			
 			String sql = "select o.ID_Ocorrencia,o.Assunto_Ocorrencia,o.Descricao_Ocorrencia,o.Data_Ocorrencia,"
-					+ "a.ID_Aluno,u.Nome,u.Sobrenome from usuario u,aluno a,recebe r,ocorrencia o where u.ID_Usuario = a.ID_Usuario "
-					+ "and a.ID_Aluno = r.ID_Aluno and r.ID_Ocorrencia = o.ID_Ocorrencia and a.ID_Aluno = ? order by o.ID_Ocorrencia";
+					+ "a.ID_Aluno,u.Nome,u.Sobrenome,u.ID_Usuario from usuario u,aluno a,recebe r,ocorrencia o where u.ID_Usuario = a.ID_Usuario "
+					+ "and a.ID_Aluno = r.ID_Aluno and r.ID_Ocorrencia = o.ID_Ocorrencia and u.ID_Usuario = ? order by o.ID_Ocorrencia";
 			
 			PreparedStatement stmt = conn.prepareStatement(sql);
-			stmt.setInt(1, ID_Aluno);
+			stmt.setInt(1, ID_Usuario);
 			
 			ResultSet resultado = stmt.executeQuery();
 			
@@ -201,7 +201,11 @@ public class OcorrenciaDao extends BaseDao{
 		{
 			conn = getConnection();
 			
-			String sql = "select u.Nome,t.Nome_Turma,o.ID_Ocorrencia,o.Assunto_Ocorrencia,o.Descricao_Ocorrencia,o.Data_Ocorrencia from usuario u,aluno a,turma t,recebe r,ocorrencia o,estuda e where u.ID_Usuario = a.ID_Usuario and a.ID_Aluno = e.ID_Aluno and e.ID_Turma = t.ID_Turma and a.ID_Aluno = r.ID_Aluno and r.ID_Ocorrencia = o.ID_Ocorrencia and a.ID_Aluno = ? and o.ID_Ocorrencia = ?;";	
+			String sql = "select u.Nome,t.Nome_Turma,o.ID_Ocorrencia,o.Assunto_Ocorrencia,o.Descricao_Ocorrencia,"
+					+ "o.Data_Ocorrencia from usuario u,aluno a,turma t,recebe r,ocorrencia o,estuda e where"
+					+ " u.ID_Usuario = a.ID_Usuario and a.ID_Aluno = e.ID_Aluno and e.ID_Turma = t.ID_Turma "
+					+ "and a.ID_Aluno = r.ID_Aluno and r.ID_Ocorrencia = o.ID_Ocorrencia and a.ID_Aluno = ? "
+					+ "and o.ID_Ocorrencia = ?;";	
 			
 			
 			PreparedStatement stmt = conn.prepareStatement(sql);

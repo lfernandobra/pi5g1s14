@@ -259,13 +259,25 @@ public class BoletimServlet extends HttpServlet {
 		
 		String strIndiceBoletim = request.getParameter("idBoletim");
 		int indiceBoletim = Integer.parseInt(strIndiceBoletim);
+		String strIndiceUsuario = request.getParameter("idUsuario");
+		int indiceUsuario = Integer.parseInt(strIndiceUsuario);
 		
 		//obter o boletim
 				
 		CompoeDao compoeDao = new CompoeDao();
 		List<Compoe> compoe = compoeDao.obterComposicao(indiceBoletim);
 		
+		//obtem o aluno
+		
+		AlunoDao alunoDao = new AlunoDao();
+		Aluno aluno = alunoDao.obterAluno(indiceUsuario);
+		
+		EstudaDao estudaDao = new EstudaDao();
+		Estuda estudaTurma = estudaDao.obterComposicao(indiceUsuario);
+		
 		request.setAttribute("compoe",compoe);
+		request.setAttribute("aluno", aluno);
+		request.setAttribute("estudaTurma", estudaTurma);
 			
 		request.setAttribute("conteudo", "boletim_aluno.jsp"); //verificar
 		
@@ -275,10 +287,10 @@ public class BoletimServlet extends HttpServlet {
 	
 	private void obterBoletimAluno(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String strIndiceAluno = request.getParameter("idAluno");
+		String strIndiceUsuario = request.getParameter("idUsuario");
 		String strIndiceBimestre = request.getParameter("idBimestre");
 								
-		int indiceAluno = Integer.parseInt(strIndiceAluno);
+		int indiceUsuario = Integer.parseInt(strIndiceUsuario);
 		int indiceBimestre = Integer.parseInt(strIndiceBimestre);
 				
 		String erro = null;
@@ -288,9 +300,9 @@ public class BoletimServlet extends HttpServlet {
 		EstudaDao estudaDao = new EstudaDao();
 		
 		//obtem contato e envia usuario para formulario de edição do contato
-		List<Compoe> boletim = boletimDao.obterBoletim(indiceAluno, indiceBimestre);
-		Aluno aluno = alunoDao.obterAluno(indiceAluno);
-		Estuda estudaTurma = estudaDao.obterComposicao(indiceAluno);
+		List<Compoe> boletim = boletimDao.obterBoletim(indiceUsuario, indiceBimestre);
+		Aluno aluno = alunoDao.obterAluno(indiceUsuario);
+		Estuda estudaTurma = estudaDao.obterComposicao(indiceUsuario);
 		
 		
 		//se nao houver agenda ou indice contato não estiver na agenda, informa erro

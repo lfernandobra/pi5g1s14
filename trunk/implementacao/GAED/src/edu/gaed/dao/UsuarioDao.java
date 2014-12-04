@@ -21,7 +21,7 @@ public class UsuarioDao extends BaseDao{
 		try {
 			conn = this.getConnection();
 			
-			String sql = "SELECT u.ID_usuario,u.Login,u.Nome,u.Sobrenome,u.Perfil_Usuario,f.cod_foto,f.img_foto FROM usuario u,foto f where u.Foto = f.cod_foto and u.Login=? AND u.Senha=SHA1(?)";
+			String sql = "select u.ID_usuario,u.Login,u.Nome,u.Sobrenome,u.Perfil_Usuario,f.cod_foto,f.img_foto FROM usuario u,foto f where u.Foto = f.cod_foto and u.Login=? AND u.Senha=SHA1(?)";
 			
 			PreparedStatement stmt = conn.prepareStatement(sql);
 			
