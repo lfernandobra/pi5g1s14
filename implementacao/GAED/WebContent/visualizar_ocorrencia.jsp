@@ -25,10 +25,17 @@
 		order by u.Nome;
 	 </sql:query>
 	 
+	  <div class="container" id="main"> 
+  		<div class="row ">
+  			<div class="col-sm-6">
+	    		<div class="panel panel-default">
+    				<div class="panel-heading"> <h4>Visualizar Ocorrências</h4></div>
+    				<br>
+	 
 	 <fieldset class="fsStyle">
     		<form action = "ObterOcorrenciasAluno" method = "post" class="form-horizontal">
 				<div class="form-group">
-					<label class="col-sm-3 control-label" id="lbl_aluno" for="txt_aluno">Selecione o aluno :</label> 			
+					<label class="col-sm-4 control-label" id="lbl_aluno" for="txt_aluno">Selecione o aluno :</label> 			
 					<div class="col-sm-5">
 					<select id="sel_alunos" name="idAluno" class="form-control">
   						<c:forEach var="row" items="${resultAlunos.rows}">
@@ -36,13 +43,19 @@
   						</c:forEach>
 					</select>
 					</div>
+					</div>
 					<div class="form-group last">
-				 		<div class="col-sm-offset-1 col-sm-2">
+				 		<div class="col-sm-offset-7 col-sm-2">
 				 			<button type="submit"  class="btn btn-success">Visualizar Ocorrências</button>
 	 			 		</div>
 	 				</div>
-				</div>
 			</form>
-	</fieldset>		
+	</fieldset>
+</div>
+</div>
+</div>
+</div>	
+	
+			
 </body>
 </html>
