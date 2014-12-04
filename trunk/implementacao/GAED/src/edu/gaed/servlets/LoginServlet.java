@@ -30,9 +30,9 @@ public class LoginServlet extends HttpServlet {
 	    if (login == null || login.isEmpty() || senha == null || senha.isEmpty())
 	    {
 	      //em caso de erro, grava mensagem de erro na requisição e retorna para página inicial
-	      String mensagem = "Login ou senha inválidos!";
-	      request.setAttribute("mensagemErro", mensagem);
-	      getServletContext().getRequestDispatcher("/erro.jsp").forward(request, response);
+	    	String mensagem = "Login ou senha vazio!";
+	        request.setAttribute("login_erro", mensagem);
+	      getServletContext().getRequestDispatcher("/login.jsp").forward(request, response);
 	    }
 	    else
 	    {
@@ -55,10 +55,10 @@ public class LoginServlet extends HttpServlet {
 	      }
 	      else
 	      {
-	        String mensagem = "Login ou senha inválidos!";
-	        request.setAttribute("mensagemErro", mensagem);
+	        String mensagem = "Login ou senha incorretos!";
+	        request.setAttribute("login_erro", mensagem);
 	        
-	        getServletContext().getRequestDispatcher("/erro.jsp").forward(request, response);
+	        getServletContext().getRequestDispatcher("/login.jsp").forward(request, response);
 	      }
 	    }
 	  }
