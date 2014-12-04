@@ -13,8 +13,9 @@
 </c:choose>
 
 <c:if test="${not empty sucesso}">
-	<div id="erro" class="bg-success">
-		${sucesso}
-		
+	<div class="col-sm-6">
+		<div id="erro" class="alert alert-success" role="alert">
+			<label>${sucesso}</label>
+		</div>		
 	</div>
 </c:if>

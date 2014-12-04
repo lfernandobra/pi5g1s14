@@ -19,7 +19,12 @@
 <body>
 	<c:choose>
 		<c:when test="${empty ocorrencias}">
-			<p>Não há ocorrencias cadastradas</p>
+		<div class="col-sm-6">
+				<div class="alert alert-info" role="alert">
+		  			<label>Não há ocorrencias cadastradas!</label>
+				</div>
+			</div>
+		
 		</c:when>
 	<c:otherwise>
 		<fieldset>
@@ -59,6 +64,11 @@
 		</fieldset>		
 	</c:otherwise>
 	</c:choose>
+	
+	<div class="form-group last">
+ 		<button type="submit" class="btn btn-primary" onclick="loadContent('gerencia_ocorrencias.jsp')">Voltar</button>
+ 	</div>
+	
 
 </body>
 </html>

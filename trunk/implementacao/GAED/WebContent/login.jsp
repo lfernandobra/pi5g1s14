@@ -101,7 +101,8 @@
 			                            </div>
 			                    </div>
 			                    <div id = "login_erro">
-									${login_erro}
+			                    <span class="label label-danger">${login_erro}</span>
+									
 								</div>
 			 				<div class="form-group">
 			                     <div class="col-sm-offset-3 col-sm-9">

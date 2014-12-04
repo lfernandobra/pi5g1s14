@@ -32,14 +32,14 @@
 	 
 	 <div class="container" id="main"> 
   		<div class="row ">
-  			<div class="col-sm-7">
+  			<div class="col-sm-6">
 	    		<div class="panel panel-default">
     				<div class="panel-heading"> <h4>Inserir Boletim</h4></div>
     				<br>
 		<fieldset class="fsStyle">
     		<form action = "InserirBoletim" method = "post" class="form-horizontal">
 				<div class="form-group">
-				<label class="col-sm-2 control-label" id="lbl_aluno" for="txt_aluno">Aluno :</label> 			
+				<label class="col-sm-3 control-label" id="lbl_aluno" for="txt_aluno">Aluno :</label> 			
 				<div class="col-sm-5"><select id="sel_turma" name="idAluno" class="form-control">
   					<c:forEach var="row" items="${resultAlunos.rows}">
   						<option value="${row.ID_Aluno}">${row.Nome} ${row.Sobrenome}</option>
@@ -49,8 +49,8 @@
 				</div>
 				
 			<div class="form-group">		
-			<label class="col-sm-2 control-label" id="lbl_bimestre" for="txt_bimestre">Bimestre :</label>	
-				<div class="col-sm-3">
+			<label class="col-sm-3 control-label" id="lbl_bimestre" for="txt_bimestre">Bimestre :</label>	
+				<div class="col-sm-5">
 				<select id="sel_bimestre" name="idBimestre" class="form-control">
 					<option value="1">1º Bimestre</option>
   					<option value="2">2º Bimestre</option>
@@ -60,15 +60,21 @@
 				</div>
 			</div>	
 				<div class="form-group last">
-				 	<div class="col-sm-offset-3 col-sm-2">
+				 	<div class="col-sm-offset-8 col-sm-2">
 				 		<button type="submit"  class="btn btn-success">Inserir Boletim</button>
 	 			 	</div>
 	 			</div> 		
  			</form>
  		</fieldset>
 		</div> 
-		</div>
-		</div>
-		</div>
+		</div>  <!-- col-sm-6 -->
+	</div> <!-- Class row -->
+			
+	<div class="form-group last">
+ 				<button type="submit" class="btn btn-primary" onclick="loadContent('gerencia_boletins.jsp')">Voltar</button>
+ 	</div>
+
+
+</div> <!-- Class container /main -->
 </body>
 </html>

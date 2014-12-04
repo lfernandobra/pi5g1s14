@@ -25,23 +25,26 @@
 
 	<c:choose>
 		<c:when test="${empty compoe}">
-			<p>Não há boletins cadastrados</p>
+			<div class="col-sm-6">
+				<div class="alert alert-info" role="alert">
+		  			<label>Não há boletins cadastrados!</label>
+				</div>
+			</div>
 		</c:when>
 		
 		<c:otherwise>
 			<fieldset>
-				<legend id = "legenda">Boletim</legend>
+				<legend id = "legenda">Boletim Escolar</legend>
 				
-				<div class="well well-lg">
-				<div class="form-group">
-				<p><label>Aluno :</label> ${aluno.nome} ${aluno.sobrenome}
-				<label class=" control-label">Serie:</label> ${estudaTurma.turma.serie}
-				<label class=" control-label">Turma:</label> ${estudaTurma.turma.nome}</p>
-				<p><label class=" control-label">Bimestre:</label> ${estudaTurma.turma.bimestre}
-				<p><label class=" control-label">Periodo:</label>${estudaTurma.turma.periodo}</p>
-				<p><label class=" control-label">Ano Letivo:</label>${estudaTurma.turma.ano}</p>
+			<div class="panel-footer clearfix">
+    			<div class="panel-body">
+					<p><label class=" control-label">Aluno :</label> ${aluno.nome} ${aluno.sobrenome}</p>
+					<p><label class=" control-label">Turma:</label> ${estudaTurma.turma.serie}${estudaTurma.turma.nome} ${estudaTurma.turma.periodo}</p>
+					<p><label class=" control-label">Bimestre:</label> ${estudaTurma.turma.bimestre} </p>
+					<p><label class=" control-label">Ano Letivo:</label> ${estudaTurma.turma.ano}</p>
 				</div>
-				</div>
+			</div>
+			<br>
 					<table class="table table-bordered table-striped">
 						<thead>
 						<tr class="info">
@@ -62,9 +65,26 @@
 				</fieldset>
 		</c:otherwise>
 	</c:choose>
-	</div>
-</div>
-</div>
+	
+	</div> <!-- col-sm-7 -->
+</div> <!-- Class row -->
+	
+	<c:choose>
+			<c:when test="${login.perfil.responsavel}">
+				<div class="form-group last">
+	 	 				<button type="submit" class="btn btn-primary" onclick="loadContent('visualizar_boletim.jsp')">Voltar</button>
+	 	 		</div>
+ 			</c:when>
+ 			
+ 			<c:when test="${login.perfil.aluno}">
+				<div class="form-group last">
+	 	 				<button type="submit" class="btn btn-primary" onclick="loadContent('boletim.jsp')">Voltar</button>
+	 	 		</div>
+ 			</c:when>
+ 		</c:choose>	
+ 		
+ 		
+</div> <!-- Class container /main -->
 
 </body>
 </html>

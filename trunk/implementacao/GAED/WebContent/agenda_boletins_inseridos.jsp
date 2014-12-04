@@ -23,48 +23,55 @@
 	
 	<c:choose>
 		<c:when test="${empty boletins}">
-			<p>Não há boletins cadastrados</p>
+		<div class="col-sm-6">
+				<div class="alert alert-info" role="alert">
+		  			<label>Não há boletins cadastrados!</label>
+				</div>
+		</div>
 		</c:when>
-	<c:otherwise>
-	
-	<fieldset class="fsStyle">
-		<legend id = "legenda">Boletins inseridos</legend>
-			<table class="table table-striped table-bordered">
-			 	<thead>
-				 	<tr class="info">
-						<td>ID Boletim</td>
-						<td>Data</td>
-						<td>ID Aluno</td>
-						<td>Nome</td>			
-					</tr>
-			</thead>
-			
-			<tbody>			
-				<c:forEach var="linha" items="${boletins}">
-				<tr>
-					<td>${linha.boletim.ID}</td>
-					<td>${linha.boletim.dataBoletim}</td>
-					<td>${linha.aluno.ID}</td>
-					<td>${linha.aluno.nome}</td>
-					
-					<td>
-						<input type="hidden" name="id" value="${linha.boletim.ID}"/>
-						<input type="submit" value="Editar" class="btn btn-primary btn-sm" />
-						<input type="hidden" name="id" value="${linha.boletim.ID}"/>
-						<input type="submit" value="Excluir" class="btn btn-default btn-sm" />
-					</td>
+		
+		<c:otherwise>
+		<fieldset class="fsStyle">
+			<legend id = "legenda">Boletins inseridos</legend>
+				<table class="table table-striped table-bordered">
+				 	<thead>
+					 	<tr class="info">
+							<td>ID Boletim</td>
+							<td>Data</td>
+							<td>ID Aluno</td>
+							<td>Nome</td>			
+						</tr>
+				</thead>
 				
-				</tr>
-				</c:forEach>
-			</tbody>
-			</table>
-		</fieldset>		
-	</c:otherwise>
+				<tbody>			
+					<c:forEach var="linha" items="${boletins}">
+					<tr>
+						<td>${linha.boletim.ID}</td>
+						<td>${linha.boletim.dataBoletim}</td>
+						<td>${linha.aluno.ID}</td>
+						<td>${linha.aluno.nome}</td>
+						
+						<td>
+							<input type="hidden" name="id" value="${linha.boletim.ID}"/>
+							<input type="submit" value="Editar" class="btn btn-primary btn-sm" />
+							<input type="hidden" name="id" value="${linha.boletim.ID}"/>
+							<input type="submit" value="Excluir" class="btn btn-default btn-sm" />
+						</td>
+					
+					</tr>
+					</c:forEach>
+				</tbody>
+				</table>
+			</fieldset>		
+		</c:otherwise>
 	</c:choose>
 	
-	
 	</div>
-	</div>
+</div>
+
+<div class="form-group last">
+ 		<button type="submit" class="btn btn-primary" onclick="loadContent('gerencia_boletins.jsp')">Voltar</button>
+ 	</div>
 
 </body>
 </html>
