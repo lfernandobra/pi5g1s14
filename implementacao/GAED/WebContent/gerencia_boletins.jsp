@@ -13,7 +13,7 @@
 <body>
 	 <div class="container" id="main"> 
   		<div class="row ">
-  			<div class="col-sm-5">
+  			<div class="col-sm-4">
 	    		<div class="panel panel-default">
     				<div class="panel-heading"> <h4>Boletim</h4></div>
     				<c:choose>

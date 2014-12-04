@@ -65,5 +65,10 @@
 	</c:otherwise>
 	</c:choose>
 
+<div class="form-group last">
+			<button type="submit" class="btn btn-primary" onclick="loadContent('gerencia_usuarios.jsp')">Voltar</button>
+		</div>
+
+
 </body>
 </html>

@@ -26,12 +26,26 @@
 
 	<c:choose>
 		<c:when test="${empty compoe}">
-			<p>Não há boletins cadastrados</p>
+			<div class="col-sm-6">
+				<div class="alert alert-info" role="alert">
+		  			<label>Não há boletins cadastrados!</label>
+				</div>
+			</div>
 		</c:when>
 	<c:otherwise>
 	
 	<fieldset>
 		<legend id = "legenda">Boletim</legend>
+		
+		<div class="panel-footer clearfix">
+    			<div class="panel-body">
+					<p><label class=" control-label">Turma:</label> ${estudaTurma.turma.serie}${estudaTurma.turma.nome} ${estudaTurma.turma.periodo}</p>
+					<p><label class=" control-label">Bimestre:</label> ${estudaTurma.turma.bimestre} </p>
+					<p><label class=" control-label">Ano Letivo:</label> ${estudaTurma.turma.ano}</p>
+				</div>
+			</div>
+			<br>
+		
 			<table class="table table-bordered table-striped">
 				<thead>
 					<tr class="info">
@@ -73,9 +87,15 @@
 	</c:otherwise>
 	</c:choose>
 
-</div>
-</div>
-</div>
+	</div> <!-- col-sm-7 -->
+</div> <!-- Class row -->
+
+				<div class="form-group last">
+	 	 				<button type="submit" class="btn btn-primary" onclick="loadContent('ObterProfessor')">Voltar</button>
+	 	 		</div>
+
+
+</div> <!-- Class container /main -->
 
 
 

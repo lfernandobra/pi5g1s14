@@ -117,8 +117,13 @@
 				</fieldset>
 				</form>
 		  </div>
-		</div> 
-	  </div>
-	</div>
+		</div> <!-- col-sm-7 -->
+	</div> <!-- Class row -->
+	  
+	  <div class="form-group last">
+			<button type="submit" class="btn btn-primary" onclick="loadContent('gerencia_usuarios.jsp')">Voltar</button>
+		</div>
+		
+</div> <!-- Class container /main -->
 </body>
 </html>

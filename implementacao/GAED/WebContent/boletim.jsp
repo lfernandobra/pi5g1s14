@@ -46,18 +46,19 @@
 						<fieldset class="fsStyle">
     					<form action = "ObterBoletimTurma" method ="post" class="form-horizontal">
 							<div class="form-group">
-							<label class="col-sm-3 control-label" id="lbl_turma" for="txt_turma">Selecione a turma:</label> 
-	 							<div class="col-sm-5"><select id="sel_turma" name="idTurma" value="${turma.ID}">
+							<label class="col-sm-4 control-label" id="lbl_turma" for="txt_turma">Selecione a turma:</label> 
+	 							<div class="col-sm-6">
+	 							<select id="sel_turma" name="idTurma" value="${turma.ID}" class="form-control">
 		 							<c:forEach var="rowT" items="${resultTurma.rows}">
 	  									<option value="${rowT.ID_Turma}">Turma : ${rowT.Nome_Turma} - ${rowT.Bimestre}° Bimestre - ${rowT.Periodo}</option>
 	  								</c:forEach>
-									</select>
+								</select>
 								</div>	 	
 	 						</div>
 	 						
 	 						<div class="form-group">	
 	 						<label class="col-sm-4 control-label" id="lbl_disciplina" for="txt_disciplina">Selecione a disciplina:</label> 
-	 							<div class="col-sm-4"><select id="sel_disciplina" name="idDisciplina" value="${disciplina.ID}">
+	 							<div class="col-sm-4"><select id="sel_disciplina" name="idDisciplina" value="${disciplina.ID}" class="form-control">
 			  						<c:forEach var="rowD" items="${resultDisciplina.rows}">
 			  							<option value="${rowD.ID_Disciplina}"> ${rowD.Nome_Disciplina}</option>
 			  						</c:forEach>
@@ -66,15 +67,23 @@
 	 			
   							<div class="form-group last">
 				 				<div class="col-sm-offset-1 col-sm-2">
-				 					<button type="submit"  class="btn btn-success">Obter Boletim</button>
+				 					<button type="submit"  class="btn btn-success">Buscar</button>
 	 			 				</div>
 							</div>
 	 						</div> 
- 		 			</form>
- 	 			</fieldset>
+ 		 				</form>
+ 	 				</fieldset>
  	 			</div>
+ 	 			
  	 		</div>
- 	 	</div>
+ 	 	</div> <!-- Class row -->
+			
+			<div class="form-group last">
+ 	 				<button type="submit" class="btn btn-primary" onclick="loadContent('gerencia_boletins.jsp')">Voltar</button>
+ 	 		</div>
+
+ 	 	
+ 	 	
  	</div>
  	 			
  </c:when>
@@ -105,32 +114,41 @@
 	 		
 	 		</sql:query>
 	 		
-			 <div class="container" id="main"> 
-				<div class="row ">
-					<div class="col-sm-7">
-			 		<div class="form-group">
-			 		<form action = "VisualizarBoletimAluno" method = "post">
-				 		<label class="col-sm-5 control-label" id="lbl_bimestre_boletim" for="txt_bimestre_boletim">Selecione o Bimestre - Ano :</label> 
-			  				<div class="col-sm-4">
-			  				<input type = hidden name="idUsuario" value="${login.id}"/>
-			  				<select id="sel_bimestre_boletim" name="idBoletim" value="${boletim.ID}" class="form-control">
-			  					<c:forEach var="rowB" items="${resultBimestre.rows}">
-			  						<option value="${rowB.ID_Boletim}">${rowB.Bimestre}º Bimestre - ${rowB.Ano_Letivo} </option>
-			  					</c:forEach></select>
-			  				</div>
-			  				<div class="form-group last">
-							 	<div class="col-sm-offset-0 col-sm-2">
-							    	<input type = "submit" value = "Visualizar Boletim" class="btn btn-success"/>
-				 			 	</div>
-				 			</div>
-				 	</form>		
+	<div class="container" id="main"> 
+		<div class="row ">
+			<div class="col-sm-7">
+		    	<div class="panel panel-default">
+    				<div class="panel-heading"> <h4>Visualizar Boletim</h4></div>
+    				<br>
+						<fieldset class="fsStyle">
+    						<form action = "VisualizarBoletimAluno" method ="post" class="form-horizontal">
+								<div class="form-group">
+				 					<label class="col-sm-5 control-label" id="lbl_bimestre_boletim" for="txt_bimestre_boletim">Selecione o Bimestre - Ano :</label> 
+			  						<div class="col-sm-4">
+					  					<input type = hidden name="idUsuario" value="${login.id}"/>
+					  					<select id="sel_bimestre_boletim" name="idBoletim" value="${boletim.ID}" class="form-control">
+					  					<c:forEach var="rowB" items="${resultBimestre.rows}">
+					  						<option value="${rowB.ID_Boletim}">${rowB.Bimestre}º Bimestre - ${rowB.Ano_Letivo} </option>
+					  					</c:forEach></select>
+			  						</div>
+					  				<div class="form-group last">
+				 				<div class="col-sm-offset-0 col-sm-2">
+				 					<button type="submit"  class="btn btn-success">Buscar</button>
+	 			 				</div>
+							</div>
+				 				</div>
+				 			</form>
+				 		</fieldset>		
 			 		</div>
 			 	</div>
 			 </div>
-	 		<br>
-	 </div>	  		
-		
+			 
+		 </div>	  		
  		</c:when>
  	</c:choose>
+ 	
+ 	
+ 	
+ 	
 </body>
 </html>

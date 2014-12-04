@@ -81,7 +81,12 @@
 					</form>
 				</div>
 			</div>
-		</div>
+		</div> <!-- Class row -->
+			
+			<div class="form-group last">
+ 	 				<button type="submit" class="btn btn-primary" onclick="loadContent('gerencia_ocorrencias.jsp')">Voltar</button>
+ 	 		</div>
+		
 	</div>
 </body>
 </html>

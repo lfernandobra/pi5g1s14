@@ -20,52 +20,60 @@
 <body>
 
 <div class="container" id="main"> 
-		<div class="row ">
+	<div class="row ">
 			<div class="col-sm-7">
 
-	<c:choose>
-		<c:when test="${empty ocorrencias}">
-			<p>Não há ocorrencias inseridas para o aluno</p>
-		</c:when>
-		
-		<c:otherwise>
-			<fieldset>
-				<legend id = "legenda">Ocorrências</legend>
-					<div class="well well-lg">
-					<div class="form-group">
-						<p><label>Aluno :</label> ${aluno.nome} ${aluno.sobrenome}
-						<label class=" control-label">Serie:</label> ${estudaTurma.turma.serie}
-						<label class=" control-label">Turma:</label> ${estudaTurma.turma.nome}</p>
-						<p><label class=" control-label">Bimestre:</label> ${estudaTurma.turma.bimestre}
-						<p><label class=" control-label">Periodo:</label>${estudaTurma.turma.periodo}</p>
-						<p><label class=" control-label">Ano Letivo:</label>${estudaTurma.turma.ano}</p>
+		<c:choose>
+			<c:when test="${empty ocorrencias}">
+			<div class="col-sm-7">
+				<div class="alert alert-info" role="alert">
+		  			<label>Não há ocorrencias inseridas para o aluno!</label>
+				</div>
+			</div>	
+			</c:when>
+			
+			<c:otherwise>
+				<fieldset>
+					<legend id = "legenda">Boletim Escolar</legend>
+				
+					<div class="panel-footer clearfix">
+		    			<div class="panel-body">
+							<p><label>Aluno :</label> ${aluno.nome} ${aluno.sobrenome}</p>
+							<p><label class=" control-label">Turma:</label> ${estudaTurma.turma.serie}${estudaTurma.turma.nome} ${estudaTurma.turma.periodo}</p>
+							<p><label class=" control-label">Bimestre:</label> ${estudaTurma.turma.bimestre} </p>
+							<p><label class=" control-label">Ano Letivo:</label> ${estudaTurma.turma.ano}</p>
+						</div>
 					</div>
-					</div>
-					
-					<table class="table table-bordered table-striped">
-						<thead>
-						<tr class="info">
-							<td>ID Ocorrencia</td><td>Assunto</td><td>Descrição</td><td>Data</td>
-						</tr>
-					</thead>
-					
-					<tbody>
-						<c:forEach var="linha" items="${ocorrencias}">
-							<tr>
-							<td>${linha.ocorrencia.ID}</td>
-							<td>${linha.ocorrencia.assunto}</td>
-							<td>${linha.ocorrencia.descricao}</td>
-							<td>${linha.ocorrencia.data}</td>
-							</tr>	
-						</c:forEach>
-					</tbody>				
-				</table>
-				</fieldset>
-		</c:otherwise>
-	</c:choose>
+					<br>
+						<table class="table table-bordered table-striped">
+							<thead>
+							<tr class="info">
+								<td>ID Ocorrencia</td><td>Assunto</td><td>Descrição</td><td>Data</td>
+							</tr>
+						</thead>
+						
+						<tbody>
+							<c:forEach var="linha" items="${ocorrencias}">
+								<tr>
+								<td>${linha.ocorrencia.ID}</td>
+								<td>${linha.ocorrencia.assunto}</td>
+								<td>${linha.ocorrencia.descricao}</td>
+								<td>${linha.ocorrencia.data}</td>
+								</tr>	
+							</c:forEach>
+						</tbody>				
+					</table>
+					</fieldset>
+			</c:otherwise>
+		  </c:choose>
+		</div>  <!-- col-sm-7 -->
+</div> <!-- Class row -->	
+		<div class="col-sm-offset-0 col-sm-2">
+		<div class="form-group last">
+ 	 		<button type="submit" class="btn btn-primary" onclick="loadContent('visualizar_ocorrencia.jsp')">Voltar</button>
+ 	 	</div>
 	</div>
-</div>
-</div>
+</div> <!-- Class container /main -->
 
 </body>
 </html>

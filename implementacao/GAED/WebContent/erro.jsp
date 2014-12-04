@@ -13,8 +13,11 @@
 </c:choose>
 
 <c:if test="${not empty erro}">
-	<div id="erro" class="bg-danger">
-		Erro:
-		${erro}
+	<div class="col-sm-6">
+		<div id="erro" class="alert alert-warning" role="alert">
+		<label> Erro:
+			${erro}</label>
+		</div>
 	</div>
 </c:if>
+
