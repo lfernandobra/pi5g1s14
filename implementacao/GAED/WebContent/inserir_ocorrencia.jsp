@@ -30,7 +30,7 @@
 					<sql:query dataSource="${snapshot}" var="resultListaAluno">
 						select a.ID_Aluno,u.Nome,u.Sobrenome,t.Nome_Turma,t.Serie from aluno a,usuario u,turma t,estuda e
 						where a.ID_Usuario = u.ID_Usuario and a.ID_Aluno = e.ID_Aluno and e.ID_Turma = t.ID_Turma 
-						order by a.ID_Aluno
+						order by u.Nome
 	 				</sql:query>
 					<form  class="form-horizontal" id="ocorrencia" method="post" action="adiciona_ocorrencia.jsp">
 						<fieldset class="fsStyle">  				

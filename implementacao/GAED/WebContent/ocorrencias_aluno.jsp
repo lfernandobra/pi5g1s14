@@ -34,17 +34,32 @@
 					<table class="table table-bordered table-striped">
 						<thead>
 						<tr class="info">
-							<td>ID</td><td>Assunto</td><td>Descrição</td><td>Data</td>
+							<td>Nome Completo : </td><td>${aluno.nome} ${aluno.sobrenome}</td>
+						</tr>
+						<tr>	
+							<td>Turma</td><td>Periodo</td><td>Serie</td><td>Ano Letivo</td><td>Bimestre</td>
+						</tr>
+						<tr>	
+							<td>${estudaTurma.turma.nome}</td>
+							<td>${estudaTurma.turma.periodo}</td>
+							<td>${estudaTurma.turma.serie}</td>
+							<td>${estudaTurma.turma.ano}</td>
+							<td>${estudaTurma.turma.bimestre}</td>
+						</tr>
+						
+						<tr class="info">
+							<td>ID Ocorrencia</td><td>Assunto</td><td>Descrição</td><td>Data</td>
 						</tr>
 					</thead>
 					
 					<tbody>
 						<c:forEach var="linha" items="${ocorrencias}">
 							<tr>
-							<td>${linha.ocorrencia.ID}
+							<td>${linha.ocorrencia.ID}</td>
 							<td>${linha.ocorrencia.assunto}</td>
 							<td>${linha.ocorrencia.descricao}</td>
-							<td>${linha.ocorrencia.data}</td></tr>	
+							<td>${linha.ocorrencia.data}</td>
+							</tr>	
 						</c:forEach>
 					</tbody>				
 				</table>

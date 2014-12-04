@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import edu.gaed.dao.AlunoDao;
 import edu.gaed.dao.BoletimDao;
 import edu.gaed.dao.CompoeDao;
 import edu.gaed.dao.EstudaDao;
@@ -283,10 +284,15 @@ public class BoletimServlet extends HttpServlet {
 		String erro = null;
 	
 		BoletimDao boletimDao = new BoletimDao();
-	
+		AlunoDao alunoDao = new AlunoDao();
+		EstudaDao estudaDao = new EstudaDao();
+		
 		//obtem contato e envia usuario para formulario de edição do contato
 		List<Compoe> boletim = boletimDao.obterBoletim(indiceAluno, indiceBimestre);
-			
+		Aluno aluno = alunoDao.obterAluno(indiceAluno);
+		Estuda estudaTurma = estudaDao.obterComposicao(indiceAluno);
+		
+		
 		//se nao houver agenda ou indice contato não estiver na agenda, informa erro
 		if (boletim == null)
 		{
@@ -295,6 +301,8 @@ public class BoletimServlet extends HttpServlet {
 		else
 		{			 
 			request.setAttribute("compoe", boletim);
+			request.setAttribute("aluno", aluno);
+			request.setAttribute("estudaTurma", estudaTurma);
 		}
 	
 		if (erro != null)

@@ -21,7 +21,8 @@
      
      <sql:query dataSource="${snapshot}" var="resultAlunos">
 		select a.ID_Aluno,a.ID_Responsavel,u.ID_Usuario,u.Nome,u.Sobrenome from aluno a,responsavel r,usuario u
-		where u.ID_Usuario = a.ID_Usuario and a.ID_Responsavel = r.ID_Responsavel and r.ID_Usuario = ${login.id};
+		where u.ID_Usuario = a.ID_Usuario and a.ID_Responsavel = r.ID_Responsavel and r.ID_Usuario = ${login.id} 
+		order by u.Nome;
 	 </sql:query>
 	 
 	 <fieldset class="fsStyle">
