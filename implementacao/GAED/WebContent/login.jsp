@@ -21,12 +21,7 @@
 	</script> 
 </head>
 <body>
-    
-    <div id = "login_erro">
-		<jsp:include page="erro.jsp" />
-	</div>
-
-	<nav class="navbar navbar-default col-sm-offset-0 col-sm-12" role="navigation">
+    <nav class="navbar navbar-default col-sm-offset-0 col-sm-12" role="navigation">
 	  <div class="container ">
 	    <div class="navbar-header">
 	      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
@@ -105,7 +100,9 @@
 			                                <input type="password" class="form-control"  name="senha"  value="${param.senha}"/>
 			                            </div>
 			                    </div>
-			 
+			                    <div id = "login_erro">
+									${login_erro}
+								</div>
 			 				<div class="form-group">
 			                     <div class="col-sm-offset-3 col-sm-9">
 			                          <div class="checkbox">
