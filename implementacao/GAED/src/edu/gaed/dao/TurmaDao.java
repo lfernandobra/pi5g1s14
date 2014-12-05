@@ -49,4 +49,37 @@ public class TurmaDao extends BaseDao {
 
         return turmaList;
     }
+    
+    public Turma obterTurma(int idTurma) {
+        
+    	Connection conn = null;
+        Turma turma = new Turma();
+    	        
+        try {
+        	conn = this.getConnection();
+			
+			String sql = "select t.ID_Turma,t.Nome_Turma,t.Periodo,t.Serie,t.Ano_Letivo,t.Bimestre from turma t "
+					+ "where t.ID_Turma = ?;";
+			PreparedStatement stmt = conn.prepareStatement(sql);
+			
+			stmt.setInt(1, idTurma);
+			
+			ResultSet rs = stmt.executeQuery();
+        
+            if(rs.next()) { 
+             
+             turma.setID(rs.getInt("ID_Turma"));
+             turma.setNome(rs.getString("Nome_Turma"));
+             turma.setPeriodo(rs.getString("Periodo"));
+             turma.setSerie(rs.getInt("Serie"));
+             turma.setAno(rs.getInt("Ano_Letivo"));
+             turma.setBimestre(rs.getInt("Bimestre"));
+             
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return turma;
+    }
 }
