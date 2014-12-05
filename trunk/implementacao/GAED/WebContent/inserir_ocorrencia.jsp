@@ -25,7 +25,7 @@
  		<div class="row ">
  			<div class="col-sm-8">
     			<div class="panel panel-default">
-    				<div class="panel-heading"><h3>Cadastrar Ocorrência</h3></div>
+    				<div class="panel-heading"><h4>Cadastrar Ocorrência</h4></div>
     				<br>
 					<sql:query dataSource="${snapshot}" var="resultListaAluno">
 						select a.ID_Aluno,u.Nome,u.Sobrenome,t.Nome_Turma,t.Serie from aluno a,usuario u,turma t,estuda e
@@ -34,7 +34,7 @@
 	 				</sql:query>
 					<form  class="form-horizontal" id="ocorrencia" method="post" action="adiciona_ocorrencia.jsp">
 						<fieldset class="fsStyle">  				
-  							<legend class="legendStyle">Ocorrência</legend>
+  							<legend class="legendStyle"><h4>Ocorrência</h4></legend>
 			    			<div class="form-group">
 			      				<label class="col-sm-2 control-label" for="txt_nome">Aluno:</label>
 									<div class="col-sm-6"> <select id="sel_bimestre_boletim" name ="aluno" value="${param.IDAluno}" class="form-control">
