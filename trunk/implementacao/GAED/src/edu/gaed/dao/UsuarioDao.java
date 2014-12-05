@@ -30,8 +30,6 @@ public class UsuarioDao extends BaseDao{
 			
 			ResultSet resultado = stmt.executeQuery();
 			
-			System.out.println(resultado);
-			
 			if (resultado.next()) {
 				
 				usuario = new Usuario();

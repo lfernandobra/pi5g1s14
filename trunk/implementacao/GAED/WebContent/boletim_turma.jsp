@@ -39,9 +39,11 @@
 		
 		<div class="panel-footer clearfix">
     			<div class="panel-body">
-					<p><label class=" control-label">Turma:</label> ${estudaTurma.turma.serie}${estudaTurma.turma.nome} ${estudaTurma.turma.periodo}</p>
-					<p><label class=" control-label">Bimestre:</label> ${estudaTurma.turma.bimestre} </p>
-					<p><label class=" control-label">Ano Letivo:</label> ${estudaTurma.turma.ano}</p>
+					<p><label class=" control-label">Turma:</label> ${turma.nome}</p>
+					<p><label class=" control-label">Serie:</label> ${turma.serie}</p>
+					<p><label class=" control-label">Periodo:</label> ${turma.periodo}</p>
+					<p><label class=" control-label">Bimestre:</label> ${turma.bimestre} </p>
+					<p><label class=" control-label">Ano Letivo:</label> ${turma.ano}</p>
 				</div>
 			</div>
 			<br>
@@ -49,21 +51,12 @@
 			<table class="table table-bordered table-striped">
 				<thead>
 					<tr class="info">
-						<td>RA</td><td>Nome completo</td><td>Serie</td><td>Turma</td><td>Periodo</td><td>Nota</td><td>Faltas</td></tr>
+						<td>RA</td><td>Nome completo</td><td>Nota</td><td>Faltas</td></tr>
 				</thead>
 				
 			<c:forEach var="linhainserido" items="${alunos}"> 
 			<tr><td>${linhainserido.aluno.ID}</td>
 				<td>${linhainserido.aluno.nome} ${linhainserido.aluno.sobrenome}</td>
-				<c:forEach var ="estudaturma" items="${turmas}">
-					<c:choose> 
-						<c:when test= "${linhainserido.aluno.ID == estudaturma.aluno.ID}">
-							<td>${estudaturma.turma.serie}</td>
-							<td>${estudaturma.turma.nome}</td>
-							<td>${estudaturma.turma.periodo}</td>
-						</c:when>
-					</c:choose>
-				</c:forEach>
 				<c:forEach var="linha" items="${compoe}">
 					<c:choose>
 						<c:when test= "${linha.boletim.ID == linhainserido.boletim.ID && linha.disciplina.ID == idDisciplina}">

@@ -14,12 +14,14 @@ import edu.gaed.dao.BoletimDao;
 import edu.gaed.dao.CompoeDao;
 import edu.gaed.dao.EstudaDao;
 import edu.gaed.dao.InseridoDao;
+import edu.gaed.dao.TurmaDao;
 import edu.gaed.vo.Aluno;
 import edu.gaed.vo.Boletim;
 import edu.gaed.vo.Compoe;
 import edu.gaed.vo.Disciplina;
 import edu.gaed.vo.Estuda;
 import edu.gaed.vo.Inserido;
+import edu.gaed.vo.Turma;
 
 
 /**
@@ -138,13 +140,16 @@ public class BoletimServlet extends HttpServlet {
 		InseridoDao inseridoDao = new InseridoDao();
 		List<Inserido> alunosinseridos = inseridoDao.obterComposicao(boletins);
 		
-		EstudaDao estudaDao = new EstudaDao();
-		List<Estuda> estudaTurma = estudaDao.obterComposicao(alunosinseridos);
+		TurmaDao turmaDao = new TurmaDao();
+		Turma turma = turmaDao.obterTurma(indiceTurma);
+		
+		//EstudaDao estudaDao = new EstudaDao();
+		//List<Estuda> estudaTurma = estudaDao.obterComposicao(alunosinseridos);
 		
 		request.setAttribute("idDisciplina", indiceDisciplina);
 		request.setAttribute("compoe",compoe);
 		request.setAttribute("alunos",alunosinseridos);
-		request.setAttribute("turmas", estudaTurma);	
+		request.setAttribute("turma", turma);	
 		
 		request.setAttribute("conteudo", "/boletim_turma.jsp");
 		
