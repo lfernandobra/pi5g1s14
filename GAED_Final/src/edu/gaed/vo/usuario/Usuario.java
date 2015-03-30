@@ -2,8 +2,6 @@ package edu.gaed.vo.usuario;
 
 import java.util.Date;
 
-import javax.persistence.DiscriminatorColumn;
-import javax.persistence.DiscriminatorType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -18,7 +16,8 @@ import edu.gaed.vo.logradouro.Logradouro;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
-@DiscriminatorColumn(name="Da_Classe", discriminatorType=DiscriminatorType.STRING)
+//@DiscriminatorColumn(name="Da_Classe", discriminatorType=DiscriminatorType.STRING)
+
 public abstract class Usuario {
 	
 	@Id

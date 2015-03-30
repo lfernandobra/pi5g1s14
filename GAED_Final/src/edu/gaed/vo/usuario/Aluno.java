@@ -2,7 +2,9 @@ package edu.gaed.vo.usuario;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
 @Entity
@@ -20,10 +22,14 @@ public class Aluno extends Usuario{
 	@Column(name="serieAtual")
 	private String serieAtual;
 	
-	@ManyToOne
+	@ManyToMany(targetEntity=edu.gaed.vo.usuario.Aluno.class, mappedBy="aluno")
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	
 	@JoinColumn(name="id_responsavel", referencedColumnName="id_usuario",nullable=false)
 	private Responsavel responsavel;
 	
+		
 	public Aluno() {
 		super();
 	}

@@ -18,7 +18,6 @@ public class Municipio {
 	
 	@ManyToOne
 	@JoinColumn(name="id_UF", referencedColumnName="id_UF")
-	
 	private UF uf;
 	
 	@OneToMany(mappedBy="municipio")
