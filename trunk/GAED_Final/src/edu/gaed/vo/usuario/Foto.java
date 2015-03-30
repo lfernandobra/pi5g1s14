@@ -1,4 +1,4 @@
-package edu.gaed.vo;
+package edu.gaed.vo.usuario;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
