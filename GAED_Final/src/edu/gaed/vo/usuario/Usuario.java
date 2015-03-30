@@ -1,19 +1,28 @@
-package edu.gaed.vo;
+package edu.gaed.vo.usuario;
 
 import java.util.Date;
 
+import javax.persistence.DiscriminatorColumn;
+import javax.persistence.DiscriminatorType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 import edu.gaed.vo.logradouro.Logradouro;
 
 @Entity
-public class Usuario {
+@Inheritance(strategy = InheritanceType.JOINED)
+@DiscriminatorColumn(name="Da_Classe", discriminatorType=DiscriminatorType.STRING)
+public abstract class Usuario {
 	
 	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="id_usuario", nullable=false)
 	private int id;
 	
