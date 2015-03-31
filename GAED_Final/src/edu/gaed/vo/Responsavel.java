@@ -1,9 +1,11 @@
-package edu.gaed.vo.usuario;
+package edu.gaed.vo;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.PrimaryKeyJoinColumn;
 
 @Entity
+@PrimaryKeyJoinColumn(name="id_usuario")
 public class Responsavel extends Usuario{
 	
 	@Column(name="adimplente", nullable=false)

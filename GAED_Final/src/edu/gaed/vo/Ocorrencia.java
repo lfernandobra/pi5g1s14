@@ -1,14 +1,13 @@
-package edu.gaed.vo.ocorrencia;
+package edu.gaed.vo;
 
 import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.ForeignKey;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-
-import edu.gaed.vo.usuario.Aluno;
 
 @Entity
 public class Ocorrencia {
@@ -27,7 +26,7 @@ public class Ocorrencia {
 	private String descricao;
 	
 	@ManyToOne
-	@JoinColumn(name="id_usuario", referencedColumnName="id_usuario")
+	@JoinColumn(name="id_usuario", referencedColumnName="id_usuario", foreignKey = @ForeignKey(name="fk_usuario"))
 	private Aluno aluno;
 
 	public int getId() {

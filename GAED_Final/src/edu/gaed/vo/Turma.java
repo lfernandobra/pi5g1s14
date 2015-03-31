@@ -1,4 +1,4 @@
-package edu.gaed.vo.turma;
+package edu.gaed.vo;
 
 
 import java.util.HashSet;
@@ -6,15 +6,12 @@ import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.ForeignKey;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-
-import edu.gaed.vo.disciplina.Disciplina;
-import edu.gaed.vo.usuario.Aluno;
-import edu.gaed.vo.usuario.Professor;
 
 @Entity
 @Table(name = "turma")
@@ -33,11 +30,11 @@ public class Turma {
 	private int qtdAluInseridos;
 	
 	@ManyToOne
-	@JoinColumn(name="id_periodo", referencedColumnName="id_periodo")
+	@JoinColumn(name="id_periodo", referencedColumnName="id_periodo", foreignKey = @ForeignKey(name="fk_periodo"))
 	private Periodo periodo;
 	
 	@ManyToOne
-	@JoinColumn(name="id_serie", referencedColumnName="id_serie")
+	@JoinColumn(name="id_serie", referencedColumnName="id_serie", foreignKey = @ForeignKey(name="fk_serie"))
 	private Serie serie;
 	
 	@OneToMany

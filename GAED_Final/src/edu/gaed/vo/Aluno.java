@@ -1,13 +1,16 @@
-package edu.gaed.vo.usuario;
+package edu.gaed.vo;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.ForeignKey;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
+//import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 
 @Entity
+@PrimaryKeyJoinColumn(name="id_usuario")
 public class Aluno extends Usuario{
 	
 	@Column(name="escolaAnterior")
@@ -22,11 +25,10 @@ public class Aluno extends Usuario{
 	@Column(name="serieAtual")
 	private String serieAtual;
 	
-	@ManyToMany(targetEntity=edu.gaed.vo.usuario.Aluno.class, mappedBy="aluno")
+	//@ManyToMany(targetEntity=edu.gaed.vo.usuario.Aluno.class, mappedBy="aluno")
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-	
-	@JoinColumn(name="id_responsavel", referencedColumnName="id_usuario",nullable=false)
+	@JoinColumn(name="id_responsavel", referencedColumnName="id_usuario", foreignKey = @ForeignKey(name="fk_responsavel"))
 	private Responsavel responsavel;
 	
 		

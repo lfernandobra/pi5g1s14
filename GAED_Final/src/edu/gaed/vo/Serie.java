@@ -1,4 +1,4 @@
-package edu.gaed.vo.turma;
+package edu.gaed.vo;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
