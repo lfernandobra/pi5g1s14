@@ -20,25 +20,25 @@
 			<property name="hibernate.dialect"
  					  value="org.hibernate.dialect.MySQLDialect"/>
  			
- 			<!-- Mostrando o comando sql 
+ 			<!-- Mostrando o comando sql -->
  			<property name="hibernate.show_sql" 
  					  value="true" />
 			<property name="hibernate.format_sql" 
-					  value="true" />
-					  -->
+					  value="true" /> 
+					  
  			<!--Automatização da criacao e evolucao das tabelas  -->
  			<!-- create-drop ok -->
  			<property name="hibernate.hbm2ddl.auto"
  					  value="create" />
- 					  
+ 			  
  			<!-- update ok 
  			<property name="hibernate.hbm2ddl.auto"
  					  value="update" />
  					  --> 
- 			<!-- validate  ok
+ 			<!-- validate  ok 
  			<property name="hibernate.hbm2ddl.auto"
- 					  value="validate" />
- 					  -->
+ 					  value="validate" /> -->
+ 					  
  					  
  					  
 		</properties>

@@ -1,7 +1,8 @@
-package edu.gaed.vo.logradouro;
+package edu.gaed.vo;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.ForeignKey;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -18,7 +19,7 @@ public class Logradouro {
 	private String CEP;
 	
 	@ManyToOne
-	@JoinColumn(name="id_bairro", referencedColumnName="id_bairro")
+	@JoinColumn(name="id_bairro", referencedColumnName="id_bairro", foreignKey = @ForeignKey(name="fk_bairro"))
 	private Bairro bairro;
 	
 	@OneToMany(mappedBy="logradouro")

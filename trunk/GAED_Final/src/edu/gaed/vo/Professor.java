@@ -1,4 +1,4 @@
-package edu.gaed.vo.usuario;
+package edu.gaed.vo;
 
 import java.util.Date;
 import java.util.HashSet;
@@ -7,10 +7,10 @@ import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
-
-import edu.gaed.vo.disciplina.Disciplina;
+import javax.persistence.PrimaryKeyJoinColumn;
 
 @Entity
+@PrimaryKeyJoinColumn(name="id_usuario")
 
 public class Professor extends Usuario{
 		

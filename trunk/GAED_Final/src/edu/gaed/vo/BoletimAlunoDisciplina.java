@@ -1,4 +1,4 @@
-package edu.gaed.vo.boletim;
+package edu.gaed.vo;
 
 import javax.persistence.AssociationOverride;
 import javax.persistence.AssociationOverrides;
@@ -8,9 +8,6 @@ import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.Table;
 import javax.persistence.Transient;
-
-import edu.gaed.vo.disciplina.Disciplina;
-import edu.gaed.vo.usuario.Aluno;
 
 @Entity
 @Table(name = "boletim_aluno_disciplina")
@@ -32,6 +29,7 @@ public class BoletimAlunoDisciplina {
 		private int falta;
 	 
 		public BoletimAlunoDisciplina() {
+			
 		}
 	 
 		@EmbeddedId

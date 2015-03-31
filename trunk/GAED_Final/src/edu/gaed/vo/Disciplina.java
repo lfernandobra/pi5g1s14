@@ -1,6 +1,4 @@
-package edu.gaed.vo.boletim;
-
-import java.util.Date;
+package edu.gaed.vo;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,54 +8,40 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
 @Entity
-public class Bimestre {
+public class Disciplina {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Column(name="id_bimestre", nullable=false)
+	@Column(name="id_disciplina", nullable=false)
 	private int id;
 	
 	@Column(name="nome")
 	private String nome;
 	
-	@Column(name="datainicial")
-	private Date datainic;
+	@Column(name="conteudo")
+	private String conteudo;
 	
-	@Column(name="datafinal", nullable=false)
-	private Date datafin;
-
-	@OneToMany(mappedBy="bimestre")
+		
+	@OneToMany(mappedBy="disciplina")
+	
 	
 	public int getId() {
 		return id;
 	}
-
 	public void setId(int id) {
 		this.id = id;
 	}
-
 	public String getNome() {
 		return nome;
 	}
-
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-
-	public Date getDatainic() {
-		return datainic;
+	public String getConteudo() {
+		return conteudo;
 	}
-
-	public void setDatainic(Date datainic) {
-		this.datainic = datainic;
-	}
-
-	public Date getDatafin() {
-		return datafin;
-	}
-
-	public void setDatafin(Date datafin) {
-		this.datafin = datafin;
+	public void setConteudo(String conteudo) {
+		this.conteudo = conteudo;
 	}
 	
 }

@@ -1,11 +1,10 @@
-package edu.gaed.vo.boletim;
+package edu.gaed.vo;
 
 
 import javax.persistence.Embeddable;
+import javax.persistence.ForeignKey;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-
-import edu.gaed.vo.disciplina.Disciplina;
-import edu.gaed.vo.usuario.Aluno;
 
 @Embeddable
 public class BoletimAlunoDisciplinaID implements java.io.Serializable{
@@ -20,6 +19,7 @@ public class BoletimAlunoDisciplinaID implements java.io.Serializable{
 	
 
 	@ManyToOne
+	@JoinColumn(name="id_boletim", referencedColumnName="id_boletim", foreignKey = @ForeignKey(name="fk_boletim"))
 	public Boletim getBoletim() {
 		return boletim;
 	}
@@ -29,6 +29,7 @@ public class BoletimAlunoDisciplinaID implements java.io.Serializable{
 	}
 
 	@ManyToOne
+	@JoinColumn(name="id_aluno", referencedColumnName="id_aluno", foreignKey = @ForeignKey(name="fk_alu"))
 	public Aluno getAluno() {
 		return aluno;
 	}
@@ -38,6 +39,7 @@ public class BoletimAlunoDisciplinaID implements java.io.Serializable{
 	}
 	
 	@ManyToOne
+	@JoinColumn(name="id_disciplina", referencedColumnName="id_disciplina", foreignKey = @ForeignKey(name="fk_discip"))
 	public Disciplina getDisciplina() {
 		return disciplina;
 	}

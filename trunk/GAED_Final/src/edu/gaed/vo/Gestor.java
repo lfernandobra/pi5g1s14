@@ -1,10 +1,13 @@
-package edu.gaed.vo.usuario;
+package edu.gaed.vo;
 
 import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.PrimaryKeyJoinColumn;
+
 @Entity
+@PrimaryKeyJoinColumn(name="id_usuario")
 public class Gestor extends Usuario{
 	
 	@Column(name="formacAcad", nullable=false)

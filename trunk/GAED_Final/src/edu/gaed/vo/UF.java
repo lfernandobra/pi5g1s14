@@ -1,26 +1,24 @@
-package edu.gaed.vo.logradouro;
+package edu.gaed.vo;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 
 @Entity
-public class Municipio {
+public class UF {
 	@Id
-	@Column(name="id_municipio", nullable=false)
+	@Column(name="id_UF", nullable=false)
 	private int id;
+	
 	@Column(name="nome")
 	private String nome;
 	
-	@ManyToOne
-	@JoinColumn(name="id_UF", referencedColumnName="id_UF")
-	private UF uf;
+	@Column(name="sigla")
+	private String sigla;
 	
-	@OneToMany(mappedBy="municipio")
+	@OneToMany(mappedBy="uf")
 	
 	public int getId() {
 		return id;
@@ -34,12 +32,10 @@ public class Municipio {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	
-	public UF getUf() {
-		return uf;
+	public String getSigla() {
+		return sigla;
 	}
-	
-	public void setUf(UF uf) {
-		this.uf = uf;
+	public void setSigla(String sigla) {
+		this.sigla = sigla;
 	}
 }

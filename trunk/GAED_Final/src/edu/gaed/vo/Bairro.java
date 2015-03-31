@@ -1,7 +1,8 @@
-package edu.gaed.vo.logradouro;
+package edu.gaed.vo;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.ForeignKey;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -17,7 +18,7 @@ public class Bairro {
 	private String nome;
 	
 	@ManyToOne
-	@JoinColumn(name="id_municipio", referencedColumnName="id_municipio")
+	@JoinColumn(name="id_municipio", referencedColumnName="id_municipio", foreignKey = @ForeignKey(name="fk_municipio"))
 	private Municipio municipio;
 	
 	@OneToMany(mappedBy="bairro")

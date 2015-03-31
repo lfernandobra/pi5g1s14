@@ -1,18 +1,16 @@
-package edu.gaed.vo.tarefa;
+package edu.gaed.vo;
 
 import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-
-import edu.gaed.vo.disciplina.Disciplina;
-import edu.gaed.vo.turma.Turma;
 
 @Entity
 public class Tarefa {
@@ -32,11 +30,11 @@ public class Tarefa {
 	private Date fim;
 	
 	@ManyToOne
-	@JoinColumn(name="id_turma", referencedColumnName="id_turma")
+	@JoinColumn(name="id_turma", referencedColumnName="id_turma", foreignKey = @ForeignKey(name="fk_turma"))
 	private Turma turma;
 	
 	@ManyToOne
-	@JoinColumn(name="id_disciplina", referencedColumnName="id_disciplina")
+	@JoinColumn(name="id_disciplina", referencedColumnName="id_disciplina", foreignKey = @ForeignKey(name="fk_disciplina"))
 	private Disciplina disciplina;
 	
 	@OneToMany(mappedBy="tarefa")

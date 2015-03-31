@@ -1,9 +1,10 @@
-package edu.gaed.vo.usuario;
+package edu.gaed.vo;
 
 import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -11,8 +12,6 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-
-import edu.gaed.vo.logradouro.Logradouro;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
@@ -71,15 +70,15 @@ public abstract class Usuario {
 	private Date dataSaida;
 	
 	@ManyToOne
-	@JoinColumn(name="id_logradouro", referencedColumnName="id_logradouro")
+	@JoinColumn(name="id_logradouro", referencedColumnName="id_logradouro", foreignKey = @ForeignKey(name="fk_logradouro"))
 	private Logradouro logradouro;
 	
 	@ManyToOne
-	@JoinColumn(name="id_foto", referencedColumnName="id_foto")
+	@JoinColumn(name="id_foto", referencedColumnName="id_foto", foreignKey = @ForeignKey(name="fk_foto"))
 	private Foto foto;
 	
 	@ManyToOne
-	@JoinColumn(name="id_perfil", referencedColumnName="id_value")
+	@JoinColumn(name="id_perfil", referencedColumnName="id_value", foreignKey = @ForeignKey(name="fk_perfil"))
 	private Perfil perfil;
 	
 	public Usuario(){
