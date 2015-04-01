@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Livro</title>
+</head>
+<body>
+	<form action="controlador" method="get">
+		<input type="hidden" id="idmetodo" name="nmmetodo" value="livro_incluir" />
+		<table>
+			<tr>
+				<td><label for="idisbn">ISBN:</label></td>
+				<td><input type="text" id="idisbn" name="nmisbn" />
+			</tr>
+			<tr>
+				<td><label for="idtitulo">Título:</label></td>
+				<td><input type="text" id="idtitulo" name="nmtitulo" />
+			</tr>
+			<tr>
+				<td><label for="idautor">Autor:</label></td>
+				<td><input type="text" id="idautor" name="nmautor" />
+			</tr>
+			<!-- 
+			<tr>
+				<td><label for="idano">Ano:</label></td>
+				<td><input type="text" id="idautor" name="nmano" />
+			</tr>
+			 -->
+			<tr>
+				<td></td>
+				<td><input type="submit" value="Salvar" />
+			</tr>
+		</table>
+	</form>
+	
+</body>
+</html>
