@@ -1,7 +1,11 @@
 package edu.gaed.vo;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 import javax.persistence.PrimaryKeyJoinColumn;
 
 @Entity
@@ -10,6 +14,9 @@ public class Responsavel extends Usuario{
 	
 	@Column(name="adimplente", nullable=false)
 	private boolean adimplente;
+	
+	@OneToMany
+	private Set<Aluno> aluno = new HashSet<Aluno>(0);
 	
 	public Responsavel() {
 		super();
