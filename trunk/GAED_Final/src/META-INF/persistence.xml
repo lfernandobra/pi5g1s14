@@ -34,8 +34,8 @@
  			<!-- update ok 
  			<property name="hibernate.hbm2ddl.auto"
  					  value="update" />
- 					  --> 
- 			<!-- validate  ok 
+ 					   
+ 			 validate  ok 
  			<property name="hibernate.hbm2ddl.auto"
  					  value="validate" /> -->
  					  
