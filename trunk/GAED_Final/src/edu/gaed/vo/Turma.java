@@ -41,9 +41,6 @@ public class Turma {
 	private Set<Aluno> aluno = new HashSet<Aluno>(0);
 	
 	@OneToMany
-	private Set<Disciplina> disciplina = new HashSet<Disciplina>(0);
-	
-	@OneToMany
 	private Set<Professor> professor = new HashSet<Professor>(0);
 
 	public int getId() {
@@ -116,13 +113,5 @@ public class Turma {
 
 	public void setProfessor(Set<Professor> professor) {
 		this.professor = professor;
-	}
-
-	public Set<Disciplina> getDisciplina() {
-		return disciplina;
-	}
-
-	public void setDisciplina(Set<Disciplina> disciplina) {
-		this.disciplina = disciplina;
 	}
 }

@@ -27,21 +27,14 @@ public class Aluno extends Usuario{
 	
 	//@ManyToMany(targetEntity=edu.gaed.vo.usuario.Aluno.class, mappedBy="aluno")
 	
+	/*
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="id_responsavel", referencedColumnName="id_usuario", foreignKey = @ForeignKey(name="fk_responsavel"))
 	private Responsavel responsavel;
-	
+	*/
 		
 	public Aluno() {
 		super();
-	}
-
-	public Responsavel getResponsavel() {
-		return responsavel;
-	}
-
-	public void setResponsavel(Responsavel responsavel) {
-		this.responsavel = responsavel;
 	}
 
 	public String getEscolaAnterior() {
