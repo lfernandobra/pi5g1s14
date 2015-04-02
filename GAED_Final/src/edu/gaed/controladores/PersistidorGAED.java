@@ -6,7 +6,7 @@ import javax.persistence.Persistence;
 
 //import edu.gaed.vo.Usuario;
 
-public class PersistidorDeUsuario {
+public class PersistidorGAED {
 	public static void main(String[] args) {
 		
 		EntityManagerFactory emf =  Persistence.createEntityManagerFactory("default");
