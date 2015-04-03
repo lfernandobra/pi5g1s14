@@ -37,6 +37,10 @@ public class Tarefa {
 	@JoinColumn(name="id_disciplina", referencedColumnName="id_disciplina", foreignKey = @ForeignKey(name="fk_disciplina"))
 	private Disciplina disciplina;
 	
+	@ManyToOne
+	@JoinColumn(name="id_anexo", referencedColumnName="id_anexo", foreignKey = @ForeignKey(name="fk_anexo"))
+	private Anexo anexo;
+	
 	@OneToMany(mappedBy="tarefa")
 
 	public int getId() {
@@ -85,5 +89,13 @@ public class Tarefa {
 
 	public void setDisciplina(Disciplina disciplina) {
 		this.disciplina = disciplina;
+	}
+
+	public Anexo getAnexo() {
+		return anexo;
+	}
+
+	public void setAnexo(Anexo anexo) {
+		this.anexo = anexo;
 	}
 }

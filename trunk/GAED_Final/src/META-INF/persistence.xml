@@ -7,7 +7,7 @@
 						
 	<persistence-unit name="default">
 		<provider>org.hibernate.ejb.HibernatePersistence</provider>
-		<class>modelos.Livro</class> 
+		<class></class> 
 		<properties>
 			<property name="javax.persistence.jdbc.url"
  					  value="jdbc:mysql://127.0.0.1:3306/gaedbdoficial" />
@@ -27,17 +27,17 @@
 					  value="true" /> 
 					  
  			<!--Automatização da criacao e evolucao das tabelas  -->
- 			<!-- create-drop ok -->
+ 			<!-- create-drop ok --> 
  			<property name="hibernate.hbm2ddl.auto"
- 					  value="create" />
+ 					  value="update" />
  			  
- 			<!-- update ok 
+ 			<!-- 
  			<property name="hibernate.hbm2ddl.auto"
  					  value="update" />
  					   
  			 validate  ok 
  			<property name="hibernate.hbm2ddl.auto"
- 					  value="validate" /> -->
+ 					  value="validate" /> --> 
  					  
  					  
  					  
