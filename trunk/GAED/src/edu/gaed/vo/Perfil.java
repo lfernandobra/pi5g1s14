@@ -2,10 +2,14 @@ package edu.gaed.vo;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "perfil")
 public enum Perfil {
 	 ADMIN(0),
 	 GESTOR(1),
@@ -15,6 +19,7 @@ public enum Perfil {
 	 ALUNO(5);  
 	 
 	 @Id
+	 @GeneratedValue(strategy=GenerationType.AUTO)
 	 @Column(name="id_value", nullable=false)
 	 private int value;
 	 

@@ -3,9 +3,11 @@ package edu.gaed.vo;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.PrimaryKeyJoinColumn;
+import javax.persistence.Table;
 
 @Entity
 @PrimaryKeyJoinColumn(name="id_usuario")
+@Table(name = "aluno")
 public class Aluno extends Usuario{
 	
 	@Column(name="escolaAnterior")
