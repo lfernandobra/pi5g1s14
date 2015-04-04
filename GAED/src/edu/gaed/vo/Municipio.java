@@ -3,15 +3,21 @@ package edu.gaed.vo;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ForeignKey;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 
 @Entity
+@Table(name = "municipio")
 public class Municipio {
+	
 	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="id_municipio", nullable=false)
 	private int id;
 	@Column(name="nome")
