@@ -2,8 +2,10 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:p="http://primefaces.org/ui">
+	
 	<h:body>
-		<p:dataTable value="#{UFBean.ufs}" var="uf" border="1">
+		<h:form>
+		<p:dataTable value="#{UFBean.lista()}" var="uf" border="1">
 			<p:column>
 				<f:facet name="header">ID</f:facet>
 				<h:outputText value="#{uf.id}"/>
@@ -16,6 +18,11 @@
 				<f:facet name="header">Nome</f:facet>
 				<h:outputText value="#{uf.nome}"/>
 			</p:column>
+			<p:column>
+				<h:commandLink action="#{UFBean.excluir(uf)}">excluir</h:commandLink>
+			</p:column>	
 		</p:dataTable>
+		</h:form>
 	</h:body>
+	
 </html>
