@@ -4,13 +4,11 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
-public class BaseDAO {
+public class DAO {
 
-	private static final EntityManagerFactory emf = Persistence
-			.createEntityManagerFactory("default");
+	private static final EntityManagerFactory emf = Persistence.createEntityManagerFactory("default");
 
 	public static EntityManager getEntityManager() {
 		return emf.createEntityManager();
-	}
-	
+	}		
 }
