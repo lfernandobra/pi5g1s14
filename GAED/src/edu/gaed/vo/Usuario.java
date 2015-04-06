@@ -19,7 +19,7 @@ import javax.persistence.Table;
 @Table(name = "usuario")
 //@DiscriminatorColumn(name="Da_Classe", discriminatorType=DiscriminatorType.STRING)
 
-public abstract class Usuario {
+public class Usuario {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
