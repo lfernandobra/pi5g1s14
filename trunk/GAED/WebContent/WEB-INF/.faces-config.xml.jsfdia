@@ -4,10 +4,13 @@
   SHAPE="32,17,0,0" model-entity="JSFProcessGroup">
   <PROCESS-ITEM ID="rules:#login.xhtml:0" NAME="item"
    PATH="/login.xhtml" model-entity="JSFProcessItem">
-   <PROCESS-ITEM-OUTPUT ID="senha::#home.xhtml" NAME="output"
-    PATH="/home.xhtml" TARGET="rules:#home.xhtml" TITLE="senha" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="home::#cadastrarUF.xhtml" NAME="output"
+    PATH="/cadastrarUF.xhtml" TARGET="rules:#cadastrarUF.xhtml"
+    TITLE="home" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="login::#login.xhtml" NAME="output1"
+    PATH="/login.xhtml" TARGET="rules:#login.xhtml" TITLE="login" model-entity="JSFProcessItemOutput"/>
   </PROCESS-ITEM>
  </PROCESS-ITEM>
- <PROCESS-ITEM NAME="rules:#home.xhtml" PATH="/home.xhtml"
-  SHAPE="240,33,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#cadastrarUF.xhtml" PATH="/cadastrarUF.xhtml"
+  SHAPE="256,33,0,0" model-entity="JSFProcessGroup"/>
 </PROCESS>
