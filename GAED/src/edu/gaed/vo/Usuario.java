@@ -8,17 +8,24 @@ import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.DiscriminatorColumn;
+import javax.persistence.DiscriminatorType;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "usuario")
+@Inheritance(strategy = InheritanceType.JOINED)
+@DiscriminatorColumn(name="Da_Classe", discriminatorType=DiscriminatorType.STRING)
 
-public class Usuario {
+public abstract class Usuario {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
+	
 	@Column(name="id_usuario", nullable=false)
 	private int id;
 	

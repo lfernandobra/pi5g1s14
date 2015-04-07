@@ -1,6 +1,6 @@
 package edu.gaed.bean;
  
-import edu.gaed.dao.UserDAO;
+import edu.gaed.dao.UsuarioDao;
 
 import java.io.Serializable;
 
@@ -37,15 +37,15 @@ public class LoginBean implements Serializable {
     }
  
     public String loginProject() {
-        boolean result = UserDAO.login(uname, password);
+        boolean result = UsuarioDao.login(uname, password);
         if (result) {
-            return "home";
+        	return "home";
         } else {
             FacesContext.getCurrentInstance().addMessage(
                     null,
                     new FacesMessage(FacesMessage.SEVERITY_WARN,
-                    "Invalid Login!",
-                    "Please Try Again!"));
+                    "Login invalido!",
+                    "Tente novamente!"));
             return "login";
         }
     }

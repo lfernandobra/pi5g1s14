@@ -8,6 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+
 @Entity
 @Table(name = "foto")
 public class Foto {
@@ -21,7 +22,7 @@ public class Foto {
 	  private String nome;
 	  
 	  @Column(name="imagem",nullable=false)
-	  private byte[] imagem;
+	  private byte[] imagem; 
 	  
 	  @OneToOne(mappedBy="foto")
 	  public int getId() {
@@ -36,11 +37,19 @@ public class Foto {
 	  public void setNome(String nome) {
 	    this.nome = nome;
 	  }
+	  /*
 	  public byte[] getImagem() {
 	    return imagem;
 	  }
 	  public void setImagem(byte[] imagem) {
 	    this.imagem = imagem;
 	  }
-
+	  */
+	public byte[] getImagem() {
+		return imagem;
+	}
+	public void setImagem(byte[] imagem) {
+		this.imagem = imagem;
+	}
+	
 }
