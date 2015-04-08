@@ -8,17 +8,13 @@
         <title>login</title>
     </h:head>
     <h:body>
-        <h:form id="loginForm">
- 
-           
+        <h:form id="loginForm">  
             <p:growl id="msg" showDetail="true" life="3000" />
             <p:panel header="Login" style="width: 360px;">
- 
                 <h:panelGrid id="loginPanel" columns="2">
- 
                     <h:outputText value="Username" />
- 
-                    <p:inputText id="username" value="#{loginBean.uname}" ></p:inputText>
+						
+				<p:inputText id="username" value="#{loginBean.uname}" ></p:inputText>
  
                     <p:spacer></p:spacer>
  

@@ -46,6 +46,10 @@ public class UFBean {
 	public void excluir(UF uf){
 		dao.excluir(uf);
 	}
+	
+	public void alterar(UF uf){
+		//dao.alterar(uf);
+	}
 
 	public List<UF> getUfs() {
 		return ufs;
