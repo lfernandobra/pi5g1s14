@@ -1,32 +1,39 @@
 package edu.gaed.dao;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
-import javax.persistence.Query;
 
 import edu.gaed.controladores.JPAUtil;
+import edu.gaed.vo.Usuario;
  
-public class UsuarioDao extends DAO{      
+public abstract class UsuarioDao extends DAO{      
 	
-	public static boolean login(String user, String password) {
-		EntityManager em = JPAUtil.getEntityManager();
-		try{
-			
-			Query q = em.createQuery("select u.login,u.senha from Usuario u where u.login =:paramlogin and u.senha =:paramsenha");
-			q.setParameter("paramlogin", user);
-			q.setParameter("paramsenha", password);
-						
-			if (q.getSingleResult()!=null) // found
-            {
-				return true;
-            }
-            else {
-            	return false;
-            }	
-			}catch (Exception ex){  
-				return false;
-			}finally {
-				em.close();
-		}
-		
+	protected EntityManager em = JPAUtil.getEntityManager();
+	protected List<Usuario> usuarios;
+	
+	//getters and setters
+	
+	public EntityManager getEm() {
+		return em;
 	}
+
+	public void setEm(EntityManager em) {
+		this.em = em;
+	}
+
+	public List<Usuario> getUsuarios() {
+		return usuarios;
+	}
+
+	public void setUsuarios(List<Usuario> usuarios) {
+		this.usuarios = usuarios;
+	}
+	
+	public UsuarioDao(EntityManager em, List<Usuario> usuarios) {
+		super();
+		this.em = em;
+		this.usuarios = usuarios;
+	}
+	
 }	

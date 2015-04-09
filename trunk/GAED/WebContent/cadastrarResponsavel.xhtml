@@ -1,0 +1,19 @@
+<html xmlns="http://www.w3.org/1999/xhtml"  
+    xmlns:h="http://java.sun.com/jsf/html"  
+    xmlns:f="http://java.sun.com/jsf/core"  
+    xmlns:p="http://primefaces.org/ui">  
+  
+    <h:head>  
+  
+    </h:head>
+
+	<h:body>
+		<h:form>
+			<h:panelGrid columns="2">
+				Nome: <h:inputText value="#{ResponsavelBean.responsavel.nome}"/>
+				Sobrenome: <h:inputText value="#{ResponsavelBean.responsavel.sobrenome}"/>
+				<h:commandButton value="Salvar" action="#{ResponsavelBean.salvar()}" />
+				</h:panelGrid>
+		</h:form>
+	</h:body>
+</html>	

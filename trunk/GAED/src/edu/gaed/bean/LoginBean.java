@@ -1,6 +1,6 @@
 package edu.gaed.bean;
  
-import edu.gaed.dao.UsuarioDao;
+import edu.gaed.dao.LoginDao;
 
 import java.io.Serializable;
 
@@ -37,7 +37,7 @@ public class LoginBean implements Serializable {
     }
  
     public String loginProject() {
-        boolean result = UsuarioDao.login(uname, password);
+        boolean result = LoginDao.login(uname, password);
         if (result) {
         	return "home";
         } else {
