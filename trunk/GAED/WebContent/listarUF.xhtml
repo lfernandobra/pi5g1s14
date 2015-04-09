@@ -13,18 +13,22 @@
 			<p:column>
 				<f:facet name="header">Sigla</f:facet>
 				<h:outputText value="#{uf.sigla}"/>
-				<h:inputText value="#{UFBean.uf.sigla}"/>
+			</p:column>	
+			<p:column>	
+				<h:inputText value="#{uf.sigla}"/>
 			</p:column>
 			<p:column>
 				<f:facet name="header">Nome</f:facet>
 				<h:outputText value="#{uf.nome}"/>
-				<h:inputText value="#{UFBean.uf.nome}"/>
+			</p:column>	
+			<p:column>	
+				<h:inputText value="#{uf.nome}"/>
 			</p:column>
 			<p:column>
 				<h:commandLink action="#{UFBean.excluir(uf)}">excluir</h:commandLink>
 			</p:column>
 			<p:column>
-				<h:commandLink action="#{UFBean.alterar(uf)}">alterar</h:commandLink>
+				<h:commandLink action="#{UFBean.editar(uf)}">editar</h:commandLink>
 			</p:column>		
 		</p:dataTable>
 		</h:form>
