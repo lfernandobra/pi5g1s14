@@ -25,7 +25,7 @@ public class Responsavel extends Usuario{
 		// TODO Auto-generated constructor stub
 	}
 	
-	public boolean isAdimplente() {
+	public boolean getAdimplente() {
 		return adimplente;
 	}
 

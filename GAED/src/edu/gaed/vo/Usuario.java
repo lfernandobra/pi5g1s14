@@ -89,6 +89,33 @@ public abstract class Usuario {
 	public Usuario(){
 		super();
 	}
+	public Usuario(int id, String login, String senha, String nome,
+			String sobrenome, String sexo, Date datanasc, String email,
+			String cPF, String rG, String numero, String complemento,
+			String telefone, boolean status, Date dataIngresso, Date dataSaida,
+			Logradouro logradouro, Foto foto, Perfil perfil) {
+		super();
+		this.id = id;
+		this.login = login;
+		this.senha = senha;
+		this.nome = nome;
+		this.sobrenome = sobrenome;
+		this.sexo = sexo;
+		this.datanasc = datanasc;
+		this.email = email;
+		CPF = cPF;
+		RG = rG;
+		this.numero = numero;
+		this.complemento = complemento;
+		this.telefone = telefone;
+		this.status = status;
+		this.dataIngresso = dataIngresso;
+		this.dataSaida = dataSaida;
+		this.logradouro = logradouro;
+		this.foto = foto;
+		this.perfil = perfil;
+	}
+
 
 	public int getId() {
 		return id;
@@ -211,7 +238,7 @@ public abstract class Usuario {
 		this.complemento = complemento;
 	}
 
-	public boolean isStatus() {
+	public boolean getStatus() {
 		return status;
 	}
 
