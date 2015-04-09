@@ -8,12 +8,14 @@ import javax.persistence.Query;
 import edu.gaed.controladores.JPAUtil;
 import edu.gaed.vo.Municipio;
 
+
 public class MunicipioDao extends DAO{
 	
 	private List<Municipio> municipios;
 	EntityManager em = JPAUtil.getEntityManager();
 	
-	public void add(Municipio munic){
+	//Salvar
+	public void salvar(Municipio munic){
 		
 		em.getTransaction().begin();
 		em.persist(munic);
@@ -21,6 +23,7 @@ public class MunicipioDao extends DAO{
 		em.close();
     }
 	
+	//Listar
 	@SuppressWarnings("unchecked")
 	public List<Municipio> lista() {
 		
@@ -32,6 +35,7 @@ public class MunicipioDao extends DAO{
 		return municipios;
 	}
 	
+	//Excluir
 	public void excluir(Municipio munic){
 
 		try {  
@@ -45,5 +49,26 @@ public class MunicipioDao extends DAO{
 	        em.getTransaction().rollback();  
 	    }
 	}
+	
+	//Editar
+	public void editar(Municipio munic){  
+		EntityManager em = JPAUtil.getEntityManager();
+		try { 	  
+			Municipio munEncontrado = em.find(Municipio.class, munic.getId());
+			em.getTransaction().begin();
+			munEncontrado.setNome(munic.getNome());
+			munEncontrado.setUf(munic.getUf());
+			em.getTransaction().commit();  
+        	} catch (Exception e) {  
+        		e.printStackTrace();
+        		em.getTransaction().rollback();  
+        	}
+	}
+	
+	//Buscar
+	public Municipio buscaMunicipio(Municipio munic) {
+	    return em.find(Municipio.class, munic.getId());
+	}
+
 
 }
