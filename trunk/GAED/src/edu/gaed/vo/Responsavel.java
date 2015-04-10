@@ -33,6 +33,18 @@ public class Responsavel extends Usuario{
 		this.adimplente = adimplente;
 	}
 
+	public Set<Aluno> getAluno() {
+		return aluno;
+	}
+
+	public void setAluno(Set<Aluno> aluno) {
+		this.aluno = aluno;
+	}
+	
+	public void adicionaAluno(Aluno aluno){
+		this.aluno.add(aluno);
+	}
+
 	
 	
 }

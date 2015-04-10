@@ -15,7 +15,7 @@ public class UF {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="id_UF", nullable=false)
-	private int id;
+	private Long id;
 	
 	@Column(name="nome")
 	private String nome;
@@ -25,10 +25,10 @@ public class UF {
 	
 	@OneToMany(mappedBy="uf")
 	
-	public int getId() {
+	public Long getId() {
 		return id;
 	}
-	public void setId(int id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 	public String getNome() {
@@ -43,4 +43,10 @@ public class UF {
 	public void setSigla(String sigla) {
 		this.sigla = sigla;
 	}
+	
+	public void validate(){
+        if(nome == null){
+            throw new IllegalArgumentException("Nome não pode estar nulo");
+        }
+    }
 }

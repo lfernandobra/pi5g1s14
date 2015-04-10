@@ -16,14 +16,15 @@ public class UFBean {
 	private UFDao dao = new UFDao();
 	
     //getters e setters
-    public UF getUf() {
+    	
+	public UF getUf() {
 		return uf;
 	}
-    
+
 	public void setUf(UF uf) {
 		this.uf = uf;
 	}
-	
+
 	public UFDao getDao() {
 		return dao;
 	}
@@ -44,7 +45,7 @@ public class UFBean {
 	//Métodos da classe CRUD
 	
 	//Salvar
-	public void salvar(){
+	public void salvar() throws Exception{
         dao.salvar(uf);
     }
 	//Listar 
@@ -52,15 +53,8 @@ public class UFBean {
 		return dao.lista();
 	}
 	//Excluir 
-	public void excluir(UF uf){
+	public void excluir(UF uf) throws Exception{
 		dao.excluir(uf);
 	}
-	//Alterar
-	public void editar(UF uf){
-		dao.editar(uf);
-	}
-	//Buscar
-	public UF buscar(UF uf){
-		return dao.buscaUF(uf);
-	}
+
 }
