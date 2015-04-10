@@ -25,10 +25,10 @@
 				<h:inputText value="#{uf.nome}"/>
 			</p:column>
 			<p:column>
-				<h:commandLink action="#{UFBean.excluir(uf)}">excluir</h:commandLink>
+				<h:commandLink action="#{UFBean.excluir()}">excluir</h:commandLink>
 			</p:column>
 			<p:column>
-				<h:commandLink action="#{UFBean.editar(uf)}">editar</h:commandLink>
+				<h:commandLink action="#{UFBean.salvar()}">editar</h:commandLink>
 			</p:column>		
 		</p:dataTable>
 		</h:form>
