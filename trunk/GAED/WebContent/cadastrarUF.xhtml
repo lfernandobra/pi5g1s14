@@ -10,9 +10,9 @@
 	<h:body>
 		<h:form id="formPrincipal">
 			<h:panelGrid columns="2">
-				Nome: <h:inputText value="#{uf.nome}"/>
-				Sigla: <h:inputText value="#{uf.sigla}"/>
-				<h:commandButton value="Salvar" action="#{UFBean2.save(uf)}" />
+				Nome: <h:inputText value="#{UFBean.uf.nome}"/>
+				Sigla: <h:inputText value="#{UFBean.uf.sigla}"/>
+				<h:commandButton value="Salvar" action="#{UFBean.salvar(UFBean.uf)}" />
 				</h:panelGrid>
 		</h:form>
 	</h:body>

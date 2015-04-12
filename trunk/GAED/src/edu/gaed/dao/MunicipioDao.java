@@ -5,19 +5,19 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
-import edu.gaed.vo.UF;
+import edu.gaed.vo.Municipio;
 
-public class UFDao extends DAO{
+public class MunicipioDao extends DAO{
 	
-	private List<UF> ufs;
+	private List<Municipio> municipios;
 	
 	//getters and setters
-	public List<UF> getUfs() {
-		return ufs;
+	public List<Municipio> getUfs() {
+		return municipios;
 	}
 
-	public void setUfs(List<UF> ufs) {
-		this.ufs = ufs;
+	public void setUfs(List<Municipio> municipios) {
+		this.municipios = municipios;
 	}
 
 	public EntityManager getEm() {
@@ -28,18 +28,18 @@ public class UFDao extends DAO{
 		this.em = em;
 	}
 	
-	//Salvar
-	public void salvar(UF uf) throws Exception {
+	//Salvar ou Editar
+	public void salvar(Municipio municipio) throws Exception {
 		try {
 			// Inicia uma transação com o banco de dados.
 			tx.begin();
 			// Verifica se a entidade ainda não está salva no banco de dados.
-			if (uf.getId() == null) {
+			if (municipio.getId() == null) {
 				// Salva os dados da pessoa.
-				em.persist(uf);
+				em.persist(municipio);
 			} else {
 				// Atualiza os dados da pessoa.
-				uf = em.merge(uf);
+				municipio = em.merge(municipio);
 			}
 			// Finaliza a transação.
 			tx.commit();
@@ -49,15 +49,15 @@ public class UFDao extends DAO{
 	}	
 	
 	//Excluir
-	public void excluir(UF uf) throws Exception{
+	public void excluir(Municipio municipio) throws Exception{
 
 		try {
 			// Inicia uma transação com o banco de dados.
 			tx.begin();
 			// Consulta a pessoa na base de dados através do seu ID.
-			System.out.println("Excluindo os dados de: " + uf.getNome());
+			System.out.println("Excluindo os dados de: " + municipio.getNome());
 			// Remove a pessoa da base de dados.
-			UF c=em.merge(uf); 
+			Municipio c=em.merge(municipio); 
 			
 			em.remove(c);
 			// Finaliza a transação.
@@ -69,33 +69,33 @@ public class UFDao extends DAO{
 	
 	//Listar
 	@SuppressWarnings("unchecked")
-	public List<UF> lista() {
+	public List<Municipio> lista() {
 		
-		if(this.ufs == null) {
-			Query q = em.createQuery("select uf from UF uf",UF.class);
-			this.ufs= q.getResultList();
+		if(this.municipios == null) {
+			Query q = em.createQuery("select m from Municipio m",Municipio.class);
+			this.municipios= q.getResultList();
 		}	
-		return ufs;
+		return municipios;
 	
 	}
 	
 	//Buscar
-	public UF buscaUF(UF uf) {
-	    return em.find(UF.class, uf.getId());
+	public Municipio buscaMunicipio(Municipio municipio) {
+	    return em.find(Municipio.class, municipio.getId());
 	}
 	
 	
 	//Consulta por ID
-	public UF consultarPorId(Long id) {
+	public Municipio consultarPorId(Long id) {
 	    
-	    UF uf = null;
+	    Municipio municipio = null;
 	    try {
 	      //Consulta uma pessoa pelo seu ID.
-	      uf = em.find(UF.class, id);
+	      municipio = em.find(Municipio.class, id);
 	    } finally {
 	      em.close();
 	    }
-	    return uf;
+	    return municipio;
 	}
 	
 

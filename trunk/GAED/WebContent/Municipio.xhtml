@@ -14,9 +14,9 @@
 		<h:form id="formPrincipal">
 
 
-			<p:dataTable var="lista" value="#{UFBean.ufs}" id="tabelaUFs"
+			<p:dataTable var="lista" value="#{MunicipioBean.munics}" id="tabelaMunicipios"
 				style="width:70%">
-				<f:facet name="header">Lista de UFs Cadastradas</f:facet>
+				<f:facet name="header">Lista de Municipios Cadastradas</f:facet>
 
 				<p:column headerText="Nome">
 					<h:outputText value="#{lista.nome}" />
@@ -24,29 +24,29 @@
 				<p:column>
 					<h:inputText value="#{lista.nome}" />
 				</p:column>
-				<p:column headerText="Sigla">
-					<h:outputText value="#{lista.sigla}" />
-				</p:column>
-				<p:column headerText="sigla">
-					<h:inputText value="#{lista.sigla}" />
+				<p:column headerText="UF">
+					<h:outputText value="#{lista.uf}" />
 				</p:column>
 				<p:column>
-					<h:commandLink action="#{UFBean.excluir(lista)}">excluir</h:commandLink>
+					<h:inputText value="#{lista.uf}" />
 				</p:column>
 				<p:column>
-				<h:commandLink action="#{UFBean.salvar(lista)}">editar</h:commandLink>
+					<h:commandLink action="#{MunicipioBean.excluir(lista)}">excluir</h:commandLink>
+				</p:column>
+				<p:column>
+				<h:commandLink action="#{MunicipioBean.salvar(lista)}">editar</h:commandLink>
 				</p:column>
 				<p:column headerText="Ações">
 					<p:commandLink title="Alterar" update=":formAlterar:Alterar"
 						oncomplete="dialogAlterar.show()" immediate="true">
 						<p:graphicImage value="./imagens/edit_icon.png" />
-						<f:setPropertyActionListener target="#{UFBean.uf}"
+						<f:setPropertyActionListener target="#{MunicipioBean.munic}"
 							value="#{lista}" />
 					</p:commandLink>
 					<p:commandLink title="Excluir" update=":formExcluir:Excluir"
 						oncomplete="confirmation.show()" immediate="true">
 						<p:graphicImage value="./imagens/del_icon.png" />
-						<f:setPropertyActionListener target="#{UFBean.uf}"
+						<f:setPropertyActionListener target="#{MunicipioBean.munic}"
 							value="#{lista}" />
 					</p:commandLink>
 				</p:column>
@@ -62,13 +62,13 @@
                         id="Alterar">
                         <p:panelGrid id="panelAlterar" columns="2">
                                 <h:outputText value="Nome:" />
-                                <p:inputText value="#{UFBean.uf.nome}" />
+                                <p:inputText value="#{MunicipioBean.munic.nome}" />
                                 <h:outputText value="Sigla:" />
-                                <p:inputText value="#{UFBean.uf.sigla}" />
+                                <p:inputText value="#{MunicipioBean.munic.uf}" />
                         </p:panelGrid>
                         <p:commandButton value="Alterar"
-                                action="#{UFBean.salvar(UFBean.uf)}"
-                                update=":formPrincipal:tabelaUFs"
+                                action="#{MunicipioBean.salvar(MunicipioBean.munic)}"
+                                update=":formPrincipal:tabelaMunicipios"
                                 oncomplete="dialogAlterar.hide()" />
                 </p:dialog>
         </h:form>
@@ -77,25 +77,31 @@
                 <p:dialog header="Cadastrar" widgetVar="dialogCadastrar" modal="true">
                         <p:panelGrid id="panelCadastrar" columns="2">
                                 <h:outputText value="Nome:" />
-                                <p:inputText value="#{UFBean.uf.nome}" />
-                                <h:outputText value="Sigla:" />
-                                <p:inputText value="#{UFBean.uf.sigla}" />
+                                <p:inputText value="#{MunicipioBean.munic.nome}" />
+                                
+                                <h:outputText value="Estado:" />
+                                <h:selectOneMenu value="#{MunicipioBean.munic.uf}">
+									<f:selectItem itemLabel="-- Selecione --" noSelectionOption= "true"/>
+									<f:selectItems value="#{UFBean.ufs}"
+									var="uf" itemValue="#{uf}" itemLabel="#{uf.nome}" />
+								</h:selectOneMenu>
+                                
                         </p:panelGrid>
                         <p:commandButton value="Cadastrar"
-                                action="#{UFBean.salvar(UFBean.uf)}"
-                                update=":formPrincipal:tabelaUFs"
+                                action="#{MunicipioBean.salvar(MunicipioBean.munic)}"
+                                update=":formPrincipal:tabelaMunicipios"
                                 oncomplete="dialogCadastrar.hide()" />
                 </p:dialog>
         </h:form>
         <h:form id="formExcluir">
                 <p:confirmDialog id="Excluir"
-                        message="Você gostaria de Deletar o #{UFBean.uf.nome} #{UFBean.uf.id}?"
+                        message="Você gostaria de Deletar o #{MunicipioBean.munic.nome} #{MunicipioBean.munic.id}?"
                         header="Excluir" severity="alert" widgetVar="confirmation">
  
                         <p:commandButton id="confirm" value="Sim"
                                 oncomplete="confirmation.hide()"
-                                action="#{UFBean.excluir(UFBean.uf)}"
-                                update=":formPrincipal:tabelaUFs" />
+                                action="#{MunicipioBean.excluir(MunicipioBean.munic)}"
+                                update=":formPrincipal:tabelaMunicipios" />
                         <p:commandButton id="decline" value="Não"
                                 onclick="confirmation.hide()" type="button" />
  

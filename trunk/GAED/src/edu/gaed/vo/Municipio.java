@@ -19,7 +19,7 @@ public class Municipio {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="id_municipio", nullable=false)
-	private int id;
+	private Long id;
 	@Column(name="nome")
 	private String nome;
 	
@@ -29,10 +29,10 @@ public class Municipio {
 	
 	@OneToMany(mappedBy="municipio")
 	
-	public int getId() {
+	public Long getId() {
 		return id;
 	}
-	public void setId(int id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 	public String getNome() {

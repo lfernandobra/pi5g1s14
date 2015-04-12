@@ -4,16 +4,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ViewScoped; 
+
 
 import edu.gaed.dao.UFDao;
 import edu.gaed.vo.UF;
 
 
 @ManagedBean(name="UFBean")
+@ViewScoped
 public class UFBean {
 	
 	UF uf = new UF();
-		
 	List<UF> ufs = new ArrayList<UF>();
     
 	public UFBean(){
@@ -39,7 +41,7 @@ public class UFBean {
 		ufs = new UFDao().lista();
 		uf = new UF();
     }
-	
+		
 	//Excluir 
 	public void excluir(UF uf) throws Exception{
 		new UFDao().excluir(uf);
