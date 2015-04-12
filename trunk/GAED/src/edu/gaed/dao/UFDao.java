@@ -57,10 +57,11 @@ public class UFDao extends DAO{
 			// Inicia uma transação com o banco de dados.
 			tx.begin();
 			// Consulta a pessoa na base de dados através do seu ID.
-			UF ufEncontrado = em.find(UF.class, uf.getId());
 			System.out.println("Excluindo os dados de: " + uf.getNome());
 			// Remove a pessoa da base de dados.
-			em.remove(ufEncontrado);
+			UF c=em.merge(uf); 
+			
+			em.remove(c);
 			// Finaliza a transação.
 			tx.commit();
 		} finally {
