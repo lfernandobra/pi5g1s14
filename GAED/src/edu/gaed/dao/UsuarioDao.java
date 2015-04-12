@@ -4,14 +4,13 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 
-import edu.gaed.controladores.JPAUtil;
 import edu.gaed.vo.Usuario;
  
 public abstract class UsuarioDao extends DAO{      
 	
-	protected EntityManager em = JPAUtil.getEntityManager();
+	//protected EntityManager em = JPAUtil.getEntityManager();
 	protected List<Usuario> usuarios;
-	
+	protected Usuario usuario;
 	//getters and setters
 	
 	public EntityManager getEm() {
@@ -34,6 +33,14 @@ public abstract class UsuarioDao extends DAO{
 		super();
 		this.em = em;
 		this.usuarios = usuarios;
+	}
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
 	}
 	
 }	

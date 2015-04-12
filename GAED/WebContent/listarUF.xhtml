@@ -2,36 +2,83 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:p="http://primefaces.org/ui">
+<h:head>
+ 
+ 
+</h:head>	
 	
 	<h:body>
+		
 		<h:form id="formPrincipal" >
-		<p:dataTable value="#{UFBean.ufs}" var="uf" border="1">
+		<p:dataTable value="#{UFBean.ufs}" var="uf"
+			id="tabelaUF" style="width:70%"
+			border="1">
 			<p:column>
 				<f:facet name="header">ID</f:facet>
-				<h:outputText value="#{uf.id}"/>
+				<h:outputText value="#{uf.id}" />
 			</p:column>
 			<p:column>
 				<f:facet name="header">Sigla</f:facet>
-				<h:outputText value="#{uf.sigla}"/>
-			</p:column>	
-			<p:column>	
-				<h:inputText value="#{uf.sigla}"/>
+				<h:outputText value="#{uf.sigla}" />
+			</p:column>
+			<p:column>
+				<h:inputText value="#{uf.sigla}" />
 			</p:column>
 			<p:column>
 				<f:facet name="header">Nome</f:facet>
-				<h:outputText value="#{uf.nome}"/>
-			</p:column>	
-			<p:column>	
-				<h:inputText value="#{uf.nome}"/>
+				<h:outputText value="#{uf.nome}" />
+			</p:column>
+			<p:column>
+				<h:inputText value="#{uf.nome}" />
 			</p:column>
 			<p:column>
 				<h:commandLink action="#{UFBean.excluir(uf)}">excluir</h:commandLink>
 			</p:column>
 			<p:column>
 				<h:commandLink action="#{UFBean.salvar(uf)}">editar</h:commandLink>
-			</p:column>		
+				<p:commandLink title="Alterar" update=":formAlterar:Alterar"
+					oncomplete="dialogAlterar.show()" immediate="true">
+					<p:graphicImage value="./imagens/edit_icon.png" />
+					<f:setPropertyActionListener target="#{UFBean.uf}"
+						value="#{uf}" />
+				</p:commandLink>		
+			</p:column>
 		</p:dataTable>
-		</h:form>
-	</h:body>
+	</h:form>
+		
+	<p:commandButton value="Cadastrar" id="cadastrar"
+                                oncomplete="dialogCadastrar.show()" />	
+	<h:form id="formCadastrar">
+		<p:dialog header="Cadastrar" widgetVar="dialogCadastrar" modal="true">
+			<p:panelGrid id="panelCadastrar" columns="2">
+				<h:outputText value="Nome:" />
+				<p:inputText value="#{UFBean.uf.nome}" />
+				<h:outputText value="Sigla:" />
+				<p:inputText value="#{UFBean.uf.sigla}" />
+			</p:panelGrid>
+			<p:commandButton value="Cadastrar"
+				action="#{UFBean.salvar(UFBean.uf)}"
+				update=":formPrincipal:tabelaUF"
+				oncomplete="dialogCadastrar.hide()" />
+		</p:dialog>
+	</h:form>
+	<h:form id="formAlterar">
+		<p:dialog header="Alterar" widgetVar="dialogAlterar" modal="true"
+			id="Alterar">
+			<p:panelGrid id="panelAlterar" columns="2">
+				<h:outputText value="Nome:" />
+				<p:inputText value="#{UFBean.uf.nome}" />
+				<h:outputText value="Sigla:" />
+				<p:inputText value="#{UFBean.uf.sigla}" />
+			</p:panelGrid>
+			<p:commandButton value="Alterar"
+				action="#{UFBean.salvar(UFBean.uf)}"
+				update=":formPrincipal:tabelaUF"
+				oncomplete="dialogAlterar.hide()" />
+		</p:dialog>
+	</h:form>
+
+
+</h:body>
 	
 </html>
