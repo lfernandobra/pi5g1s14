@@ -14,9 +14,9 @@
 		<h:form id="formPrincipal">
 
 
-			<p:dataTable var="lista" value="#{MunicipioBean.munics}" id="tabelaMunicipios"
+			<p:dataTable var="lista" value="#{BairroBean.bairros}" id="tabelaBairros"
 				style="width:70%">
-				<f:facet name="header">Lista de Municipios Cadastradas</f:facet>
+				<f:facet name="header">Lista de Bairros Cadastradas</f:facet>
 
 				<p:column headerText="Nome">
 					<h:outputText value="#{lista.nome}" />
@@ -24,29 +24,29 @@
 				<p:column>
 					<h:inputText value="#{lista.nome}" />
 				</p:column>
-				<p:column headerText="UF">
-					<h:outputText value="#{lista.uf}" />
+				<p:column headerText="Municipio">
+					<h:outputText value="#{lista.municipio}" />
 				</p:column>
 				<p:column>
-					<h:inputText value="#{lista.uf}" />
+					<h:inputText value="#{lista.municipio}" />
 				</p:column>
 				<p:column>
-					<h:commandLink action="#{MunicipioBean.excluir(lista)}">excluir</h:commandLink>
+					<h:commandLink action="#{BairroBean.excluir(lista)}">excluir</h:commandLink>
 				</p:column>
 				<p:column>
-				<h:commandLink action="#{MunicipioBean.salvar(lista)}">editar</h:commandLink>
+				<h:commandLink action="#{BairroBean.salvar(lista)}">editar</h:commandLink>
 				</p:column>
 				<p:column headerText="Ações">
 					<p:commandLink title="Alterar" update=":formAlterar:Alterar"
 						oncomplete="dialogAlterar.show()" immediate="true">
 						<p:graphicImage value="./imagens/edit_icon.png" />
-						<f:setPropertyActionListener target="#{MunicipioBean.munic}"
+						<f:setPropertyActionListener target="#{BairroBean.bairro}"
 							value="#{lista}" />
 					</p:commandLink>
 					<p:commandLink title="Excluir" update=":formExcluir:Excluir"
 						oncomplete="confirmation.show()" immediate="true">
 						<p:graphicImage value="./imagens/del_icon.png" />
-						<f:setPropertyActionListener target="#{MunicipioBean.munic}"
+						<f:setPropertyActionListener target="#{BairroBean.bairro}"
 							value="#{lista}" />
 					</p:commandLink>
 				</p:column>
@@ -62,13 +62,15 @@
                         id="Alterar">
                         <p:panelGrid id="panelAlterar" columns="2">
                                 <h:outputText value="Nome:" />
-                                <p:inputText value="#{MunicipioBean.munic.nome}" />
-                                <h:outputText value="Sigla:" />
-                                <p:inputText value="#{MunicipioBean.munic.uf}" />
+                                <p:inputText value="#{BairroBean.bairro.nome}" />
+                                <h:outputText value="Municipio:" />
+                                <p:inputText value="#{BairroBean.bairro.municipio}" />
+                                <h:outputText value="Estado:" />
+                                <p:inputText value="#{BairroBean.bairro.municipio.uf.nome}" />
                         </p:panelGrid>
                         <p:commandButton value="Alterar"
-                                action="#{MunicipioBean.salvar(MunicipioBean.munic)}"
-                                update=":formPrincipal:tabelaMunicipios"
+                                action="#{BairroBean.salvar(BairroBean.bairro)}"
+                                update=":formPrincipal:tabelaBairros"
                                 oncomplete="dialogAlterar.hide()" />
                 </p:dialog>
         </h:form>
@@ -77,31 +79,30 @@
                 <p:dialog header="Cadastrar" widgetVar="dialogCadastrar" modal="true">
                         <p:panelGrid id="panelCadastrar" columns="2">
                                 <h:outputText value="Nome:" />
-                                <p:inputText value="#{MunicipioBean.munic.nome}" />
-                                
-                                <h:outputText value="Estado:" />
-                                <h:selectOneMenu value="#{MunicipioBean.munic.uf}">
+                                <p:inputText value="#{BairroBean.bairro.nome}" />
+								<h:outputText value="Municipio:" />
+                                <h:selectOneMenu value="#{BairroBean.bairro.municipio}">
 									<f:selectItem itemLabel="-- Selecione --" noSelectionOption= "true"/>
-									<f:selectItems value="#{UFBean.ufs}"
-									var="uf" itemValue="#{uf}" itemLabel="#{uf.nome}" />
+									<f:selectItems value="#{MunicipioBean.munics}"
+									var="mun" itemValue="#{mun}" itemLabel="#{mun.nome}" />
 								</h:selectOneMenu>
                                 
                         </p:panelGrid>
                         <p:commandButton value="Cadastrar"
-                                action="#{MunicipioBean.salvar(MunicipioBean.munic)}"
-                                update=":formPrincipal:tabelaMunicipios"
+                                action="#{BairroBean.salvar(BairroBean.bairro)}"
+                                update=":formPrincipal:tabelaBairros"
                                 oncomplete="dialogCadastrar.hide()" />
                 </p:dialog>
         </h:form>
         <h:form id="formExcluir">
                 <p:confirmDialog id="Excluir"
-                        message="Você gostaria de Deletar o #{MunicipioBean.munic.nome} #{MunicipioBean.munic.id}?"
+                        message="Você gostaria de Deletar o #{BairroBean.bairro.nome} #{BairroBean.bairro.id}?"
                         header="Excluir" severity="alert" widgetVar="confirmation">
  
                         <p:commandButton id="confirm" value="Sim"
                                 oncomplete="confirmation.hide()"
-                                action="#{MunicipioBean.excluir(MunicipioBean.munic)}"
-                                update=":formPrincipal:tabelaMunicipios" />
+                                action="#{BairroBean.excluir(BairroBean.bairro)}"
+                                update=":formPrincipal:tabelaBairros" />
                         <p:commandButton id="decline" value="Não"
                                 onclick="confirmation.hide()" type="button" />
  

@@ -3,8 +3,11 @@ package edu.gaed.bean;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped; 
+
+
 
 
 import edu.gaed.dao.MunicipioDao;
@@ -22,6 +25,15 @@ public class MunicipioBean {
 		munics = new MunicipioDao().lista();
 		munic = new Municipio();
 	}
+	
+	@PostConstruct
+    public void init(){
+        munic = new Municipio();
+        munics = new MunicipioDao().lista();
+    }
+	public String getUFEscolhida(){
+        return munic!=null && munic.getId()!=null ? munic.toString():"Classe não escolhida";
+    }
 	
 	//getters e setters
     	
