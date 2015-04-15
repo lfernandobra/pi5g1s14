@@ -31,9 +31,9 @@ public class UFDao {
  
 		public void alterar(UF uf){
 			session = HibernateUtil.getSessionFactory().openSession();
- 
+			System.out.println(uf);
 			try{
-				session = (Session) HibernateUtil.getSessionFactory().openSession();
+				session = HibernateUtil.getSessionFactory().openSession();
 				session.beginTransaction();
 				session.saveOrUpdate(uf);
 				session.getTransaction().commit();
@@ -45,9 +45,9 @@ public class UFDao {
  
 		public void excluir(UF uf){
 			session = HibernateUtil.getSessionFactory().openSession();
- 
+			System.out.println(uf);
 			try{
-				session = (Session) HibernateUtil.getSessionFactory().openSession();
+				session = HibernateUtil.getSessionFactory().openSession();
 				session.beginTransaction();
 				session.delete(uf);
 				session.getTransaction().commit();

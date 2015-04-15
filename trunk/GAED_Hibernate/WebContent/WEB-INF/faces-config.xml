@@ -8,6 +8,11 @@
   <managed-bean-name>UFBean</managed-bean-name>
   <managed-bean-class>edu.gaed.bean.UFBean</managed-bean-class>
   <managed-bean-scope>request</managed-bean-scope>
- </managed-bean>    
+ </managed-bean>
+ <managed-bean>
+  <managed-bean-name>MunicipioBean</managed-bean-name>
+  <managed-bean-class>edu.gaed.bean.MunicipioBean</managed-bean-class>
+  <managed-bean-scope>request</managed-bean-scope>
+ </managed-bean>     
 
 </faces-config>

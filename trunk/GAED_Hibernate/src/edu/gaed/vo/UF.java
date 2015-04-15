@@ -83,6 +83,6 @@ public class UF implements Serializable{
     }
     @Override
     public String toString() {
-        return "Classe [id=" + id + ", nome=" + nome + "]";
+        return "Classe [id=" + id + ", nome=" + nome + ", sigla=" + sigla + "]";
     }
 }
