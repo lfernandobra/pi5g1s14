@@ -1,5 +1,6 @@
 package edu.gaed.bean;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,8 +14,13 @@ import edu.gaed.dao.MunicipioDao;
  
 @ManagedBean(name="MunicipioBean")
 @ViewScoped
-public class MunicipioBean {
+public class MunicipioBean implements Serializable{
  
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	Municipio municipio = new Municipio();
 	 
 	List<Municipio> municipios = new ArrayList<Municipio>(); 

@@ -5,6 +5,11 @@
     xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd"
     version="2.2">
 <managed-bean>
+  <managed-bean-name>LoginBean</managed-bean-name>
+  <managed-bean-class>edu.gaed.bean.LoginBean</managed-bean-class>
+  <managed-bean-scope>request</managed-bean-scope>
+ </managed-bean>
+<managed-bean>
   <managed-bean-name>UFBean</managed-bean-name>
   <managed-bean-class>edu.gaed.bean.UFBean</managed-bean-class>
   <managed-bean-scope>request</managed-bean-scope>
@@ -14,5 +19,6 @@
   <managed-bean-class>edu.gaed.bean.MunicipioBean</managed-bean-class>
   <managed-bean-scope>request</managed-bean-scope>
  </managed-bean>     
+ 
 
 </faces-config>
