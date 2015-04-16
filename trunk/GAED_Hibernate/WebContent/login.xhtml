@@ -1,48 +1,41 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"  
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:p="http://primefaces.org/ui"
- 
-      >
+      xmlns:p="http://primefaces.org/ui">
     <h:head>
         <title>login</title>
     </h:head>
     <h:body>
-	<h:form>
-		<h:outputLink value="javascript:void(0)" onclick="PF('dlg').show();"
-			title="login">
-			<p:graphicImage name="/demo/images/login.png" />
-		</h:outputLink>
-
-		<p:growl id="growl" sticky="true" showDetail="true" life="3000" />
-
-		<p:dialog header="Login" widgetVar="dlg" resizable="false">
-			<h:panelGrid columns="2" cellpadding="5">
-				<h:outputLabel for="username" value="Username:" />
-				<p:inputText id="username" value="#{userLoginView.username}"
-					required="true" label="username" />
-
-				<h:outputLabel for="password" value="Password:" />
-				<p:password id="password" value="#{userLoginView.password}"
-					required="true" label="password" />
-
-				
-					<p:commandButton value="Login" update="growl"
-						actionListener="#{LoginBean.login}"
-						oncomplete="handleLoginRequest(xhr, status, args)" />
-				
-			</h:panelGrid>
-		</p:dialog>
-	</h:form>
-
-	<script type="text/javascript">
-    function handleLoginRequest(xhr, status, args) {
-        if(args.validationFailed || !args.loggedIn) {
-            PF('dlg').jq.effect("shake", {times:5}, 100);
-        }
-        else {
-            PF('dlg').hide();
-            $('#loginLink').fadeOut();
-        }
-    }
-</script></html>
+        <h:form id="loginForm">  
+            <p:growl id="msg" showDetail="true" life="3000" />
+            <p:panel header="Login" style="width: 360px;">
+                <h:panelGrid id="loginPanel" columns="2">
+                    <h:outputText value="Username" />
+						
+				<p:inputText id="username" value="#{LoginBean.username}" ></p:inputText>
+ 
+                    <p:spacer></p:spacer>
+ 
+                    <p:message for="username" ></p:message>
+ 
+                    <h:outputText value="Password" />
+ 
+                    <p:password id="password" value="#{LoginBean.password}"  feedback="false"></p:password>
+ 
+                    <p:spacer></p:spacer>
+ 
+                    <p:message for="password"></p:message>
+ 
+                    <p:spacer></p:spacer>
+ 
+                    <p:commandButton actionListener="#{LoginBean.loginProject}" value="Login" update="loginForm" ajax="true"></p:commandButton>
+ 
+                </h:panelGrid>
+ 
+            </p:panel>
+ 
+        </h:form>
+ 
+    </h:body> 
+ 
+</html>

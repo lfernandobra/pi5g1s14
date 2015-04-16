@@ -20,7 +20,7 @@ import javax.persistence.Table;
 @Inheritance(strategy = InheritanceType.JOINED)
 @DiscriminatorColumn(name="Da_Classe", discriminatorType=DiscriminatorType.STRING)
 
-public abstract class Usuario {
+public class Usuario {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
@@ -76,15 +76,16 @@ public abstract class Usuario {
 	@ManyToOne
 	@JoinColumn(name="id_logradouro")
 	private Logradouro logradouro;
-	
+	/*
 	@ManyToOne
 	@JoinColumn(name="id_foto")
 	private Foto foto;
-	
+	*/
+	/*
 	@ManyToOne
 	@JoinColumn(name="id_perfil")
 	private Perfil perfil;
-	
+	*/
 	public Usuario(){
 		super();
 	}
@@ -111,8 +112,8 @@ public abstract class Usuario {
 		this.dataIngresso = dataIngresso;
 		this.dataSaida = dataSaida;
 		this.logradouro = logradouro;
-		this.foto = foto;
-		this.perfil = perfil;
+		//this.foto = foto;
+		//this.perfil = perfil;
 	}
 
 
@@ -171,7 +172,7 @@ public abstract class Usuario {
 	public void setTelefone(String telefone) {
 		this.telefone = telefone;
 	}
-
+/*
 	public Perfil getPerfil() {
 		return perfil;
 	}
@@ -179,7 +180,7 @@ public abstract class Usuario {
 	public void setPerfil(Perfil perfil) {
 		this.perfil = perfil;
 	}
-
+*/
 	public String getEmail() {
 		return email;
 	}
@@ -204,7 +205,7 @@ public abstract class Usuario {
 	public void setSenha(String senha) {
 		this.senha = senha;
 	}
-
+/*
 	public Foto getFoto() {
 		return foto;
 	}
@@ -212,7 +213,7 @@ public abstract class Usuario {
 	public void setFoto(Foto foto) {
 		this.foto = foto;
 	}
-
+*/
 	public String getCPF() {
 		return CPF;
 	}
