@@ -9,8 +9,9 @@
 		<property name="connection.password"></property>
 		<property name="show_sql">true</property>
 		<property name="hibernate.hbm2ddl.auto">update</property>
-			
-		<mapping class="edu.gaed.vo.UF" />	
+		<property name="current_session_context_class">thread</property>	
+		<mapping class="edu.gaed.vo.UF" />
+		<mapping class="edu.gaed.vo.Usuario" />	
 		<mapping class="edu.gaed.vo.Municipio" />
 		<mapping class="edu.gaed.vo.Bairro" />
 		<mapping class="edu.gaed.vo.Logradouro" />
