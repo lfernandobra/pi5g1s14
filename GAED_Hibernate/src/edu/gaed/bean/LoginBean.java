@@ -35,14 +35,15 @@ public class LoginBean {
     	LoginDao usuDAO = new LoginDao();
     	Usuario us;
     	String resultado;
-    	
+    
     	try {
     		us = usuDAO.verificaDados(this.usuario);
+    		
     		if(us != null) {
     			FacesContext.getCurrentInstance().getExternalContext()
     					.getSessionMap().put("usuario",us);
-    			resultado = "login";
-    		} else { resultado = "home";}
+    			resultado = "home";
+    		} else { resultado = "login";}
     	} catch (Exception e) {
     		throw e;
     	}
