@@ -51,9 +51,24 @@ public class LoginBean {
     	return resultado;
     }
     
+    public boolean verificarSessao(){
+    	boolean estado;
+    	
+    	if (FacesContext.getCurrentInstance().getExternalContext()
+    			.getSessionMap().get("usuario") == null){
+    		estado = false;
+    	} else {
+    		estado = true;
+    	}
+    	
+    	return estado;
+    	
+    }
+    
+    
     public String encerrarSession(){
     	FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
-    	return "index?faces-redirect=true";
+    	return "login?faces-redirect=true";
     }
     
     
