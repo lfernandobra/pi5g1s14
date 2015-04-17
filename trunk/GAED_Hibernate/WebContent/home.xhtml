@@ -6,8 +6,16 @@
 
 <h:head></h:head> 
 <body> 
+	
+	<h:panelGrid columns="2">
 
-	<h:outputLabel value="Login" />
+		<h:form rendered="#{LoginBean.verificarSessao()}">
 
+			<h:outputLabel value="#{LoginBean.usuario.login}"/>
+
+			<h:commandButton value="Cerrar Sessão" action="#{LoginBean.encerrarSession()}"/>
+		
+		</h:form>	
+	</h:panelGrid>
 </body> 
 </html>
