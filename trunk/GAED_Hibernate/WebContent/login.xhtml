@@ -1,21 +1,29 @@
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"  
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:p="http://primefaces.org/ui">
-    <h:head>
-        <title>login</title>
-    </h:head>
-    <h:body>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:body>
 	<h:form>
-		<h:panelGrid column="2">
-			<h:outputLabel value="Login" />
-			<h:inputText value="#{LoginBean.usuario.login}"/>
-			<h:outputLabel value=" Senha" />
-			<h:inputSecret value="#{LoginBean.usuario.senha}"/>
-	
-			<h:commandButton value="Entrar" action="#{LoginBean.verificarDatos()}"/>
-		</h:panelGrid>	
-    </h:form>    
-    </h:body> 
- 
+		<p:messages showDetail="true" id="mensagem" autoUpdate="true"
+			closable="true" />
+
+		<!-- appendTo="@(body)" -->
+		<p:dialog header="Acesse sua conta" modal="true"
+			widgetVar="modalLogin" resizable="false" dynamic="true"
+			showEffect="clip" hideEffect="clip" />
+		<p:panelGrid columns="2">
+			<p:outputLabel for="email" value="E-mail:" />
+			<p:inputText id="email" value="#{LoginBean.usuario.login}" required="true"
+				requiredMessage="Email obrigatório" />
+
+			<p:outputLabel for="senha" value="Senha:" />
+			<p:password id="senha" value="#{LoginBean.usuario.senha}" required="true"
+				requiredMessage="Informe sua senha" />
+			<p:commandButton value="Acessar" action="#{LoginBean.verificarDatos()}"
+				actionListener="home.xhtml" update="mensagem"/>
+		</p:panelGrid>
+	</h:form>
+</h:body>
 </html>
