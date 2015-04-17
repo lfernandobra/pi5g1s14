@@ -1,20 +1,39 @@
 package edu.gaed.dao;
 
 
-import org.hibernate.Criteria;
+//import org.hibernate.Criteria;
+import org.hibernate.Query;
 import org.hibernate.Session;
-import org.hibernate.Transaction;
-import org.hibernate.criterion.Restrictions;
+//import org.hibernate.Transaction;
+//import org.hibernate.criterion.Restrictions;
 
 import edu.gaed.util.HibernateUtil;
 import edu.gaed.vo.Usuario;
-
-
  
 public class LoginDao{      
 	
-	private static Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+	private Session session;
+	
+	public Usuario verificaDados(Usuario usuario){
+		Usuario us = null;
+		
+		try {
+			session = HibernateUtil.getSessionFactory().openSession();
+			String hql = "FROM Usuario WHERE login = '" +usuario.getLogin() +
+					"' and senha = '" + usuario.getSenha() + "'";
+			Query query = session.createQuery(hql);
+			
+			if(!query.list().isEmpty()){
+				us = (Usuario) query.list().get(0);
+			}
+		}catch (Exception e){
+			throw e;
+		}
+		
+		return us;
+	}
 	//Login
+	/*
 	public static boolean login(String login, String senha) {
 
 		Transaction transaction = null;
@@ -43,5 +62,5 @@ public class LoginDao{
 	        //session.getTransaction().commit();
 	        
 	        return (Usuario) criteria.uniqueResult()!=null;*/        
-	 }
-}	
+}
+	
