@@ -1,58 +1,59 @@
 package edu.gaed.bean;
  
-import javax.faces.application.FacesMessage;
+//import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
 import edu.gaed.dao.LoginDao;
+import edu.gaed.vo.Usuario;
  
 @ManagedBean(name="LoginBean")
 @SessionScoped
 public class LoginBean {
      
-    public LoginBean() {
+	private Usuario usuario = new Usuario();
+	
+	public LoginBean() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public LoginBean(String username, String password) {
-		super();
-		this.username = username;
-		this.password = password;
+	
+	public Usuario getUsuario() {
+		return usuario;
 	}
 
-	private String username;
-     
-    private String password;
+
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}     
+    
  
-    public String getUsername() {
-        return username;
+    public String verificarDatos() throws Exception {
+    	LoginDao usuDAO = new LoginDao();
+    	Usuario us;
+    	String resultado;
+    	
+    	try {
+    		us = usuDAO.verificaDados(this.usuario);
+    		if(us != null) {
+    			FacesContext.getCurrentInstance().getExternalContext()
+    					.getSessionMap().put("usuario",us);
+    			resultado = "login";
+    		} else { resultado = "home";}
+    	} catch (Exception e) {
+    		throw e;
+    	}
+    	
+    	return resultado;
     }
- 
-    public void setUsername(String username) {
-        this.username = username;
+    
+    public String encerrarSession(){
+    	FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+    	return "index?faces-redirect=true";
     }
- 
-    public String getPassword() {
-        return password;
-    }
- 
-    public void setPassword(String password) {
-        this.password = password;
-    }
-   
-    public String loginProject() {
-        boolean result = LoginDao.login(username, password);
-        if (result) {
-        	return "home";
-        } else {
-            FacesContext.getCurrentInstance().addMessage(
-                    null,
-                    new FacesMessage(FacesMessage.SEVERITY_WARN,
-                    "Login invalido!",
-                    "Tente novamente!"));
-            return "login";
-        }
-    }
+    
+    
 }
