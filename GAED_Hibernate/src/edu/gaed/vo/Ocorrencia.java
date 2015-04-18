@@ -1,5 +1,6 @@
 package edu.gaed.vo;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -13,12 +14,17 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "ocorrencia")
-public class Ocorrencia {
+public class Ocorrencia implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="id_ocorrencia", nullable=false)
-	private int id;
+	private Long id;
 	
 	@Column(name="assunto")
 	private String assunto;
@@ -33,11 +39,11 @@ public class Ocorrencia {
 	@JoinColumn(name="id_usuario", referencedColumnName="id_usuario")
 	private Aluno aluno;
 
-	public int getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

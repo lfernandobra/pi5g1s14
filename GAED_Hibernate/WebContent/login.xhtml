@@ -1,29 +1,55 @@
-<html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:p="http://primefaces.org/ui">
-
-<h:body>
-	<h:form>
-		<p:messages showDetail="true" id="mensagem" autoUpdate="true"
-			closable="true" />
-
-		<!-- appendTo="@(body)" -->
-		<p:dialog header="Acesse sua conta" modal="true"
-			widgetVar="modalLogin" resizable="false" dynamic="true"
-			showEffect="clip" hideEffect="clip" />
-		<p:panelGrid columns="2">
-			<p:outputLabel for="email" value="E-mail:" />
-			<p:inputText id="email" value="#{LoginBean.usuario.login}" required="true"
-				requiredMessage="Email obrigatório" />
-
-			<p:outputLabel for="senha" value="Senha:" />
-			<p:password id="senha" value="#{LoginBean.usuario.senha}" required="true"
-				requiredMessage="Informe sua senha" />
-			<p:commandButton value="Acessar" action="#{LoginBean.verificarDatos()}"
-				actionListener="home.xhtml" update="mensagem"/>
-		</p:panelGrid>
-	</h:form>
-</h:body>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"  
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+ 
+      >
+    <h:head>
+        <title>login</title>
+    </h:head>
+    <h:body>
+        <h:form id="loginForm">  
+            <p:messages showDetail="true" id="mensagem" autoUpdate="true" closable="true" />
+            <p:growl id="msg" showDetail="true" life="3000" />
+            	<p:panel header="Autenticação" style="width: 360px;">
+                	<h:panelGrid id="loginPanel" columns="2">
+                	<!-- <h:outputText value="Login" />  -->
+					
+					<p:outputLabel for="login" value="Login:" />
+					<p:inputText id="login" value="#{LoginBean.usuario.login}" required="true"
+					requiredMessage="login obrigatório" />
+					
+					<p:outputLabel for="senha" value="Senha:" />
+					<p:password id="senha" value="#{LoginBean.usuario.senha}" required="true"
+					requiredMessage="Informe sua senha" />
+					
+					<p:commandButton value="Acessar" action="#{LoginBean.verificarDatos()}"
+					actionListener="home.xhtml" update="mensagem"/>
+				
+					</h:panelGrid>
+        		</p:panel>
+        </h:form>		
+				<!--  		
+				<p:inputText id="username" value="#{LoginBean.usuario.login}" ></p:inputText>
+ 
+                    <p:spacer></p:spacer>
+ 
+                    <p:message for="username" ></p:message>
+ 
+                    <h:outputText value="Password" />
+ 
+                    <p:password id="password" value="#{LoginBean.usuario.senha}"  feedback="false"></p:password>
+ 
+                    <p:spacer></p:spacer>
+ 
+                    <p:message for="password"></p:message>
+ 
+                    <p:spacer></p:spacer>
+ 
+                    <p:commandButton action="#{LoginBean.verificarDatos()}" value="Login" update="loginForm" ajax="true"></p:commandButton>
+ 		-->
+                
+ 
+    </h:body> 
+ 
 </html>

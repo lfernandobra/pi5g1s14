@@ -46,6 +46,8 @@ public class ProfessorDisciplinaTurmaID implements java.io.Serializable{
 	public void setDisciplina(Disciplina disciplina) {
 		this.disciplina = disciplina;
 	}
+	
+	
 	/*
  	public boolean equals(Object o) {
         if (this == o) return true;

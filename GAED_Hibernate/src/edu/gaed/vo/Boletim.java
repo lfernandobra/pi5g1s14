@@ -1,5 +1,7 @@
 package edu.gaed.vo;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,23 +13,29 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "boletim")
-public class Boletim {
+public class Boletim implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="id_boletim", nullable=false)
-	private int id;
+	private Long id;
 	
 	
 	@ManyToOne
 	@JoinColumn(name="id_bimestre")
 	private Bimestre bimestre;
 	
-	public int getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
