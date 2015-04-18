@@ -1,5 +1,6 @@
 package edu.gaed.vo;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -20,13 +21,45 @@ import javax.persistence.Table;
 @Inheritance(strategy = InheritanceType.JOINED)
 @DiscriminatorColumn(name="Da_Classe", discriminatorType=DiscriminatorType.STRING)
 
-public class Usuario {
+public class Usuario implements Serializable{
 	
+	public Usuario(Long id, String login, String senha, String nome,
+			String sobrenome, String sexo, Date datanasc, String email,
+			String cPF, String rG, String numero, String complemento,
+			String telefone, boolean status, Date dataIngresso, Date dataSaida,
+			byte[] foto, Logradouro logradouro, Perfil perfil) {
+		super();
+		this.id = id;
+		this.login = login;
+		this.senha = senha;
+		this.nome = nome;
+		this.sobrenome = sobrenome;
+		this.sexo = sexo;
+		this.datanasc = datanasc;
+		this.email = email;
+		CPF = cPF;
+		RG = rG;
+		this.numero = numero;
+		this.complemento = complemento;
+		this.telefone = telefone;
+		this.status = status;
+		this.dataIngresso = dataIngresso;
+		this.dataSaida = dataSaida;
+		this.foto = foto;
+		this.logradouro = logradouro;
+		this.perfil = perfil;
+	}
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	
 	@Column(name="id_usuario", nullable=false)
-	private int id;
+	private Long id;
 	
 	@Column(name="login")
 	private String login;
@@ -73,55 +106,28 @@ public class Usuario {
 	@Column(name="datasaida")
 	private Date dataSaida;
 	
+	@Column(name="foto")
+	private byte[] foto;
+	
 	@ManyToOne
 	@JoinColumn(name="id_logradouro")
 	private Logradouro logradouro;
-	/*
-	@ManyToOne
-	@JoinColumn(name="id_foto")
-	private Foto foto;
-	*/
-	/*
+	
 	@ManyToOne
 	@JoinColumn(name="id_perfil")
 	private Perfil perfil;
-	*/
+		
+	
 	public Usuario(){
 		super();
 	}
-	public Usuario(int id, String login, String senha, String nome,
-			String sobrenome, String sexo, Date datanasc, String email,
-			String cPF, String rG, String numero, String complemento,
-			String telefone, boolean status, Date dataIngresso, Date dataSaida,
-			Logradouro logradouro, Foto foto, Perfil perfil) {
-		super();
-		this.id = id;
-		this.login = login;
-		this.senha = senha;
-		this.nome = nome;
-		this.sobrenome = sobrenome;
-		this.sexo = sexo;
-		this.datanasc = datanasc;
-		this.email = email;
-		CPF = cPF;
-		RG = rG;
-		this.numero = numero;
-		this.complemento = complemento;
-		this.telefone = telefone;
-		this.status = status;
-		this.dataIngresso = dataIngresso;
-		this.dataSaida = dataSaida;
-		this.logradouro = logradouro;
-		//this.foto = foto;
-		//this.perfil = perfil;
-	}
+	
 
-
-	public int getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -269,4 +275,55 @@ public class Usuario {
 	public void setLogradouro(Logradouro logradouro) {
 		this.logradouro = logradouro;
 	}
+	
+	public byte[] getFoto() {
+		return foto;
+	}
+
+
+	public void setFoto(byte[] foto) {
+		this.foto = foto;
+	}
+
+
+	public Perfil getPerfil() {
+		return perfil;
+	}
+
+
+	public void setPerfil(Perfil perfil) {
+		this.perfil = perfil;
+	}
+
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
+	
+	@Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((id == null) ? 0 : id.hashCode());
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Usuario other = (Usuario) obj;
+        if (id == null) {
+            if (other.id != null)
+                return false;
+        } else if (!id.equals(other.id))
+            return false;
+        return true;
+    }
+    
 }

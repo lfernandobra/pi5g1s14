@@ -10,6 +10,11 @@ import javax.persistence.Table;
 @Table(name = "aluno")
 public class Aluno extends Usuario{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Column(name="escolaAnterior")
 	private String escolaAnterior;
 	

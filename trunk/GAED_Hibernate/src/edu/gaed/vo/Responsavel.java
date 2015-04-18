@@ -14,6 +14,11 @@ import javax.persistence.Table;
 @Table(name = "responsavel")
 public class Responsavel extends Usuario{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Column(name="adimplente", nullable=false)
 	private boolean adimplente;
 	

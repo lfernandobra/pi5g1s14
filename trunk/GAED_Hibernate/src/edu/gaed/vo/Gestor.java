@@ -12,6 +12,11 @@ import javax.persistence.Table;
 @Table(name = "gestor")
 public class Gestor extends Usuario{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Column(name="formacAcad", nullable=false)
 	private String formacaoAcad;
 	

@@ -4,7 +4,7 @@
         xmlns:p="http://primefaces.org/ui">
  
 <h:head>
- 
+	<title>Municipio</title>  
  
 </h:head>
  
@@ -12,35 +12,31 @@
  
         <div align="center">
                 <h:form id="formPrincipal">
-            <p:dataTable var="lista" value="#{LogradouroBean.logradouros}"
-                                id="tabelaLogradouro" style="width:70%">
-                 <f:facet name="header">Lista de Logradouro Cadastradas</f:facet>
-  			 <p:column headerText="ID">
+            <p:dataTable var="lista" value="#{MunicipioBean.municipios}"
+                                id="tabelaMunicipio" style="width:70%">
+                 <f:facet name="header">Lista de Municipio Cadastradas</f:facet>
+ 				 <p:column headerText="ID">
                     <h:outputText value="#{lista.id}" />
                  </p:column>
-				<p:column headerText="Rua">
+
+				<p:column headerText="Nome">
 					<h:outputText value="#{lista.nome}" />
 				</p:column>
-				<p:column headerText="Bairro">
-					<h:outputText value="#{lista.bairro.nome}" />
+				<p:column headerText="UF">
+					<h:outputText value="#{lista.uf.nome}" />
 				</p:column>
-				<p:column headerText="Cidade">
-					<h:outputText value="#{lista.bairro.municipio.nome}" />
-				</p:column>
-				<h:outputText value="CEP:" />
-                <p:inputText value="#{LogradouroBean.logradouro.CEP}" />
 				<p:column headerText="Ações">
 					<p:commandLink title="Alterar" update=":formAlterar:Alterar"
 						oncomplete="dialogAlterar.show()" immediate="true">
 						<p:graphicImage value="./imagens/edit_icon.png" />
 
-						<f:setPropertyActionListener target="#{LogradouroBean.logradouro}"
+						<f:setPropertyActionListener target="#{MunicipioBean.municipio}"
 							value="#{lista}" />
 					</p:commandLink>
 					<p:commandLink title="Excluir" update=":formExcluir:Excluir"
 						oncomplete="confirmation.show()" immediate="true">
 						<p:graphicImage value="./imagens/del_icon.png" />
-						<f:setPropertyActionListener target="#{LogradouroBean.logradouro}"
+						<f:setPropertyActionListener target="#{MunicipioBean.municipio}"
 							value="#{lista}" />
 					</p:commandLink>
 				</p:column>
@@ -56,21 +52,19 @@
                         id="Alterar">
                         <p:panelGrid id="panelAlterar" columns="2">   
                                 <h:outputText value="ID:" />
-                                <p:inputText value="#{LogradouroBean.logradouro.id}" />
+                                <p:inputText value="#{MunicipioBean.municipio.id}" />
                                 <h:outputText value="Nome:" />
-                                <p:inputText value="#{LogradouroBean.logradouro.nome}" />
-                                <h:outputText value="Bairro:" />
-                                <h:selectOneMenu value="#{LogradouroBean.logradouro.bairro}">
+                                <p:inputText value="#{MunicipioBean.municipio.nome}" />
+                                <h:outputText value="Estado:" />
+                                <h:selectOneMenu value="#{MunicipioBean.municipio.uf}">
 									<f:selectItem itemLabel="-- Selecione --" noSelectionOption= "true"/>
-									<f:selectItems value="#{BairroBean.bairros}"
-									var="bairro" itemValue="#{bairro}" itemLabel="#{bairro.nome}" />
+									<f:selectItems value="#{UFBean.ufs}"
+									var="uf" itemValue="#{uf}" itemLabel="#{uf.nome}" />
 								</h:selectOneMenu>
-								<h:outputText value="CEP:" />
-                                <p:inputText value="#{LogradouroBean.logradouro.CEP}" />
                         </p:panelGrid>
                         <p:commandButton value="Alterar"
-                                action="#{LogradouroBean.alterar(LogradouroBean.logradouro)}"
-                                update=":formPrincipal:tabelaLogradouro"
+                                action="#{MunicipioBean.alterar(MunicipioBean.municipio)}"
+                                update=":formPrincipal:tabelaMunicipio"
                                 oncomplete="dialogAlterar.hide()" />
                 </p:dialog>
         </h:form>
@@ -79,40 +73,36 @@
                 <p:dialog header="Cadastrar" widgetVar="dialogCadastrar" modal="true">
                         <p:panelGrid id="panelCadastrar" columns="2">
                                 <h:outputText value="Nome:" />
-                                <p:inputText value="#{LogradouroBean.logradouro.nome}" />
-								<h:outputText value="CEP:" />
-                                <p:inputText value="#{LogradouroBean.logradouro.CEP}" />
-                                <h:outputText value="Bairro:" />
-                                <h:selectOneMenu value="#{LogradouroBean.logradouro.bairro}">
+                                <p:inputText value="#{MunicipioBean.municipio.nome}" />
+								<h:outputText value="Estado:" />
+                                <h:selectOneMenu value="#{MunicipioBean.municipio.uf}">
 									<f:selectItem itemLabel="-- Selecione --" noSelectionOption= "true"/>
-									<f:selectItems value="#{BairroBean.bairros}"
-									var="bairro" itemValue="#{bairro}" itemLabel="#{bairro.nome}" />
+									<f:selectItems value="#{UFBean.ufs}"
+									var="uf" itemValue="#{uf}" itemLabel="#{uf.nome}" />
 								</h:selectOneMenu>
                         </p:panelGrid>
                         <p:commandButton value="Cadastrar"
-                                actionListener="#{LogradouroBean.cadastrar}"
-                                update=":formPrincipal:tabelaLogradouro"
+                                actionListener="#{MunicipioBean.cadastrar}"
+                                update=":formPrincipal:tabelaMunicipio"
                                 oncomplete="dialogCadastrar.hide()" />
                 </p:dialog>
         </h:form>
         <h:form id="formExcluir">
-                <p:confirmDialog id="Excluir" message="Você gostaria de Deletar o #{LogradouroBean.logradouro.nome}?"
+                <p:confirmDialog id="Excluir" message="Você gostaria de Deletar o #{MunicipioBean.municipio.nome}?"
                         header="Excluir" severity="alert" widgetVar="confirmation">
  						<p:panelGrid id="panelExcluir" columns="2">
                                 <h:outputText value="ID:" />
-                                <p:inputText value="#{LogradouroBean.logradouro.id}" />
+                                <p:inputText value="#{MunicipioBean.municipio.id}" />
                                 <h:outputText value="Nome:" />
-                                <p:inputText value="#{LogradouroBean.logradouro.nome}" />
-                                <h:outputText value="Bairro:" />
-                                <p:inputText value="#{LogradouroBean.logradouro.bairro.nome}" />
-                                <h:outputText value="CEP:" />
-                                <p:inputText value="#{LogradouroBean.logradouro.CEP}" />
+                                <p:inputText value="#{MunicipioBean.municipio.nome}" />
+                                <h:outputText value="Sigla:" />
+                                <p:inputText value="#{MunicipioBean.municipio.uf}" />
                         </p:panelGrid>
  						
                         <p:commandButton id="confirm" value="Sim"
                                 oncomplete="confirmation.hide()"
-                                actionListener="#{LogradouroBean.excluir}"
-                                update=":formPrincipal:tabelaLogradouro" />
+                                actionListener="#{MunicipioBean.excluir}"
+                                update=":formPrincipal:tabelaMunicipio" />
                         <p:commandButton id="decline" value="Não"
                                 onclick="confirmation.hide()" type="button" />
  

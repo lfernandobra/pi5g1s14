@@ -1,6 +1,7 @@
 package edu.gaed.vo;
 
 
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -16,11 +17,16 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "turma")
-public class Turma {
+public class Turma implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="id_turma", nullable=false)
-	private int id;
+	private Long id;
 	
 	@Column(name="nome")
 	private String nome;
@@ -45,11 +51,11 @@ public class Turma {
 	@OneToMany
 	private Set<Professor> professor = new HashSet<Professor>(0);
 	*/
-	public int getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -116,4 +122,30 @@ public class Turma {
 	public void setProfessor(Set<Professor> professor) {
 		this.professor = professor;
 	}*/
+	
+	@Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((id == null) ? 0 : id.hashCode());
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Turma other = (Turma) obj;
+        if (id == null) {
+            if (other.id != null)
+                return false;
+        } else if (!id.equals(other.id))
+            return false;
+        return true;
+    }
+
 }

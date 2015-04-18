@@ -12,6 +12,11 @@ import javax.persistence.Table;
 @Table(name = "secretaria")
 public class Secretaria extends Usuario{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Column(name="experiAnt", nullable=false)
 	private String experiAnterior;
 	

@@ -7,50 +7,53 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+
 @Entity
-@Table(name = "disciplina")
-public class Disciplina implements Serializable{
-	
+@Table(name = "imagem")
+public class Imagem implements Serializable{
+	  
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Column(name="id_disciplina", nullable=false)
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "id_imagem", nullable = false)
 	private Long id;
-	
-	@Column(name="nome")
+
+	@Column(name = "nome", nullable = false)
 	private String nome;
-	
-	@Column(name="conteudo")
-	private String conteudo;
-	
-		
-	@OneToMany(mappedBy="disciplina")
-	
-	
+
+	@Column(name = "imagem", nullable = false)
+	private byte[] imagem;
+
+	@OneToOne(mappedBy = "imagem")
 	public Long getId() {
 		return id;
 	}
+
 	public void setId(Long id) {
 		this.id = id;
 	}
+
 	public String getNome() {
 		return nome;
 	}
+
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	public String getConteudo() {
-		return conteudo;
+
+	public byte[] getImagem() {
+		return imagem;
 	}
-	public void setConteudo(String conteudo) {
-		this.conteudo = conteudo;
+
+	public void setImagem(byte[] imagem) {
+		this.imagem = imagem;
 	}
 	
 }

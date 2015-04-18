@@ -16,6 +16,11 @@ import javax.persistence.Table;
 
 public class Professor extends Usuario{
 		
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Column(name="escolaAnt", nullable=false)
 	private String escolaAnterior;
 	
