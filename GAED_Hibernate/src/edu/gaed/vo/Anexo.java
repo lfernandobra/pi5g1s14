@@ -28,7 +28,7 @@ public class Anexo implements Serializable{
 	  @Column(name="nome",nullable=false)
 	  private String nome;
 	  
-	  @Column(name="anexo",nullable=false)
+	  @Column(name="anexo",nullable=false,length=1000000)
 	  @Lob
 	  private byte[] anexo;
 	  

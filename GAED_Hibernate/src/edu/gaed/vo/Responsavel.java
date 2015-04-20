@@ -19,7 +19,7 @@ public class Responsavel extends Usuario{
 	 */
 	private static final long serialVersionUID = 1L;
 
-	@Column(name="adimplente", nullable=false)
+	@Column(name="adimplente", columnDefinition = "BIT", length = 1)
 	private boolean adimplente;
 	
 	@OneToMany
