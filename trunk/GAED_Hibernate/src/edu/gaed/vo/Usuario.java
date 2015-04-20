@@ -13,6 +13,7 @@ import javax.persistence.DiscriminatorType;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -97,7 +98,7 @@ public class Usuario implements Serializable{
 	@Column(name="telefone")
 	private String telefone;
 		
-	@Column(name="status")
+	@Column(name="status", columnDefinition = "BIT", length = 1)
 	private boolean status;
 	
 	@Column(name="dataingresso")
@@ -106,7 +107,8 @@ public class Usuario implements Serializable{
 	@Column(name="datasaida")
 	private Date dataSaida;
 	
-	@Column(name="foto")
+	@Column(name="foto", length=10000000)
+	@Lob
 	private byte[] foto;
 	
 	@ManyToOne
