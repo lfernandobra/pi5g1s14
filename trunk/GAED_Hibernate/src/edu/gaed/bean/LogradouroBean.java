@@ -88,6 +88,15 @@ public class LogradouroBean implements Serializable{
  
 	//getters and setters
 	
- 
+	@SuppressWarnings("unchecked")
+	public List<Logradouro> completeLogradouro(){
+        logradouros = new LogradouroDao().listar();
+        return logradouros;
+    }
 	
+	
+	public String clear(){  
+        this.logradouro = null;  
+        return "";  
+    }  
 }

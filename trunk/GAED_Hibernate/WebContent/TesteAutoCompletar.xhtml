@@ -1,0 +1,45 @@
+﻿<html xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title>Exemplo Autocomplete - PrimeFaces</title>
+	<link
+		href="#{facesContext.externalContext.requestContextPath}/css/blitzer/skin.css"
+		rel="stylesheet" type="text/css" />
+</h:head>
+<h:body>       
+    <p:panel header="Auto Complete Example">  
+        <h:form>  
+  
+  
+            <h:panelGrid columns="2">  
+                <h:outputLabel value="Empresa: " />  
+                <p:autoComplete value="#{LogradouroBean.logradouro}"  
+                                completeMethod="#{LogradouroBean.completeLogradouro()}"    
+                                var="logradouro" itemLabel="#{logradouro.CEP}" itemValue="#{logradouro}"  
+                                forceSelection="true">  
+  
+                </p:autoComplete>  
+  
+            </h:panelGrid>  
+            <p:commandButton value="Ver" update="show" ajax="false"/>  
+            <p:commandButton value="Limpar" action="#{LogradouroBean.clear()}" ajax="false"/>  
+  
+            <p:spacer height="10"/>  
+              
+            <h:panelGroup id="show" rendered="#{not empty LogradouroBean.logradouro}">  
+                <h2><h:outputText value="Voce selecionou a empresa: " /></h2>  
+                <h:panelGrid columns="2">  
+                    <h:outputLabel value="Empresa: " />  
+                    <h:outputText value="#{LogradouroBean.logradouro.nome}" />  
+  
+                    <h:outputLabel value="Faturamento: " />  
+                    <h:outputText value="#{LogradouroBean.logradouro.CEP}" />           
+                </h:panelGrid>  
+            </h:panelGroup>  
+              
+        </h:form>  
+    </p:panel>  
+</h:body>  
+</html>

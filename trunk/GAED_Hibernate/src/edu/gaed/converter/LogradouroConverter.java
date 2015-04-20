@@ -7,6 +7,7 @@ import javax.faces.convert.FacesConverter;
 
 import edu.gaed.vo.Logradouro;
 
+
 @FacesConverter(forClass = Logradouro.class)
 public class LogradouroConverter implements Converter{
 	@Override
