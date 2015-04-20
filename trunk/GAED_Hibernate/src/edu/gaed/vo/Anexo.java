@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -28,6 +29,7 @@ public class Anexo implements Serializable{
 	  private String nome;
 	  
 	  @Column(name="anexo",nullable=false)
+	  @Lob
 	  private byte[] anexo;
 	  
 	  @OneToOne(mappedBy="anexo")
