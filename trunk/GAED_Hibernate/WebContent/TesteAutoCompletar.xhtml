@@ -14,7 +14,7 @@
   
   
             <h:panelGrid columns="2">  
-                <h:outputLabel value="Empresa: " />  
+                <h:outputLabel value="Logradouro: " />  
                 <p:autoComplete value="#{LogradouroBean.logradouro}"  
                                 completeMethod="#{LogradouroBean.completeLogradouro()}"    
                                 var="logradouro" itemLabel="#{logradouro.CEP}" itemValue="#{logradouro}"  
@@ -31,10 +31,10 @@
             <h:panelGroup id="show" rendered="#{not empty LogradouroBean.logradouro}">  
                 <h2><h:outputText value="Voce selecionou a empresa: " /></h2>  
                 <h:panelGrid columns="2">  
-                    <h:outputLabel value="Empresa: " />  
+                    <h:outputLabel value="Rua: " />  
                     <h:outputText value="#{LogradouroBean.logradouro.nome}" />  
   
-                    <h:outputLabel value="Faturamento: " />  
+                    <h:outputLabel value="CEP: " />  
                     <h:outputText value="#{LogradouroBean.logradouro.CEP}" />           
                 </h:panelGrid>  
             </h:panelGroup>  

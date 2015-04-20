@@ -4,45 +4,39 @@
 	xmlns:p="http://primefaces.org/ui">
 
 <h:head>
-	<title>UF</title>
+	<title>Responsavel</title>
 </h:head>
 
 <h:body>
 	<div align="center">
 		<h:form id="formPrincipal">
-			<p:dataTable var="lista" value="#{UFBean.ufs}" id="tabelaUF"
-				style="width:70%">
-				<f:facet name="header">Lista de UF Cadastradas</f:facet>
+			<p:dataTable var="lista" value="#{ResponsavelBean.responsavels}"
+				id="tabelaResponsavel" style="width:70%">
+				<f:facet name="header">Lista de Responsavel Cadastrados</f:facet>
 				<p:column headerText="ID">
 					<h:outputText value="#{lista.id}" />
 				</p:column>
-
 				<p:column headerText="Nome">
-
 					<h:outputText value="#{lista.nome}" />
 				</p:column>
-				<p:column headerText="Sigla">
-
-					<h:outputText value="#{lista.sigla}" />
+				<p:column headerText="CEP">
+					<h:outputText value="#{lista.logradouro.CEP}" />
 				</p:column>
 				<p:column headerText="Ações">
 					<p:commandLink title="Alterar" update=":formAlterar:Alterar"
 						oncomplete="dialogAlterar.show()" immediate="true">
 						<p:graphicImage value="./imagens/edit_icon.png" />
-
-						<f:setPropertyActionListener target="#{UFBean.uf}"
-							value="#{lista}" />
+						<f:setPropertyActionListener
+							target="#{ResponsavelBean.responsavel}" value="#{lista}" />
 					</p:commandLink>
 					<p:commandLink title="Excluir" update=":formExcluir:Excluir"
 						oncomplete="confirmation.show()" immediate="true">
 						<p:graphicImage value="./imagens/del_icon.png" />
-						<f:setPropertyActionListener target="#{UFBean.uf}"
-							value="#{lista}" />
+						<f:setPropertyActionListener
+							target="#{ResponsavelBean.responsavel}" value="#{lista}" />
 					</p:commandLink>
 				</p:column>
-
 			</p:dataTable>
-
 			<p:commandButton value="Cadastrar" id="cadastrar"
 				oncomplete="dialogCadastrar.show()" />
 		</h:form>
@@ -51,51 +45,53 @@
 		<p:dialog header="Alterar" widgetVar="dialogAlterar" modal="true"
 			id="Alterar">
 			<p:panelGrid id="panelAlterar" columns="2">
-				<h:inputHidden value="#{UFBean.uf.id}" />
-				<!-- <p:inputText value="#{UFBean.uf.id}"/>  -->
+				<h:inputHidden value="#{ResponsavelBean.responsavel.id}" />
+				<!-- <p:inputText value="#{ResponsavelBean.responsavel.id}"/>  -->
 				<h:outputText value="Nome:" />
-				<p:inputText value="#{UFBean.uf.nome}" />
-				<h:outputText value="Sigla:" />
-				<p:inputText value="#{UFBean.uf.sigla}" />
+				<p:inputText value="#{ResponsavelBean.responsavel.nome}" />
 			</p:panelGrid>
 			<p:commandButton value="Alterar"
-				action="#{UFBean.alterar(UFBean.uf)}"
-				update=":formPrincipal:tabelaUF" oncomplete="dialogAlterar.hide()" />
+				action="#{ResponsavelBean.alterar(ResponsavelBean.responsavel)}"
+				update=":formPrincipal:tabelaResponsavel"
+				oncomplete="dialogAlterar.hide()" />
 		</p:dialog>
 	</h:form>
-
-	<h:form id="formCadastrar">
+	<h:form id="formCadastrar" enctype="multipart/form-data">
 		<p:dialog header="Cadastrar" widgetVar="dialogCadastrar" modal="true">
 			<p:panelGrid id="panelCadastrar" columns="2">
 				<h:outputText value="Nome:" />
-				<p:inputText value="#{UFBean.uf.nome}" />
-				<h:outputText value="Sigla:" />
-				<p:inputText value="#{UFBean.uf.sigla}" />
+				<p:inputText value="#{ResponsavelBean.responsavel.nome}" />
+				<h:outputText value="CEP:" />
+				<p:autoComplete value="#{ResponsavelBean.responsavel.logradouro}"
+					completeMethod="#{LogradouroBean.completeLogradouro()}"
+					var="logradouro" itemLabel="#{logradouro.CEP}"
+					itemValue="#{logradouro}" forceSelection="true">
+				</p:autoComplete>
+				<h:outputText value="Foto:" />
+				<p:fileUpload fileUploadListener="#{ResponsavelBean.fileUpload}" mode="simple" />  
+				
 			</p:panelGrid>
 			<p:commandButton value="Cadastrar"
-				actionListener="#{UFBean.cadastrar}"
-				update=":formPrincipal:tabelaUF" oncomplete="dialogCadastrar.hide()" />
+				actionListener="#{ResponsavelBean.cadastrar}"
+				update=":formPrincipal:tabelaResponsavel"
+				oncomplete="dialogCadastrar.hide()" />
 		</p:dialog>
 	</h:form>
 	<h:form id="formExcluir">
 		<p:confirmDialog id="Excluir"
-			message="Você gostaria de Deletar o #{UFBean.uf.nome}?"
+			message="Você gostaria de Deletar o #{ResponsavelBean.responsavel.nome}?"
 			header="Excluir" severity="alert" widgetVar="confirmation">
-			<h:inputHidden value="#{UFBean.uf.id}" />
+			<h:inputHidden value="#{ResponsavelBean.responsavel.id}" />
 			<p:panelGrid id="panelExcluir" columns="2">
 				<h:outputText value="Nome:" />
-				<h:outputText value="#{UFBean.uf.nome}" />
-				<h:outputText value="Sigla:" />
-				<h:outputText value="#{UFBean.uf.sigla}" />
-
+				<h:outputText value="#{ResponsavelBean.responsavel.nome}" />
 			</p:panelGrid>
-
 			<p:commandButton id="confirm" value="Sim"
-				oncomplete="confirmation.hide()" actionListener="#{UFBean.excluir}"
-				update=":formPrincipal:tabelaUF" />
+				oncomplete="confirmation.hide()"
+				actionListener="#{ResponsavelBean.excluir}"
+				update=":formPrincipal:tabelaResponsavel" />
 			<p:commandButton id="decline" value="Não"
 				onclick="confirmation.hide()" type="button" />
-
 		</p:confirmDialog>
 	</h:form>
 

@@ -14,7 +14,7 @@ import edu.gaed.dao.ResponsavelDao;
  
 @ManagedBean(name="ResponsavelBean")
 @ViewScoped
-public class ResponsavelBean implements Serializable{
+public class ResponsavelBean extends UsuarioBean implements Serializable {
  
 	/**
 	 * 
