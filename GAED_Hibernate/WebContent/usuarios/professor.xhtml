@@ -1,0 +1,270 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>Professor</title>
+</h:head>
+
+<h:body>
+	<div align="center">
+		<h:form id="formPrincipal">
+			<p:dataTable var="lista" value="#{ProfessorBean.professors}"
+				id="tabelaProfessor" style="width:70%">
+				<f:facet name="header">Lista de Professor Cadastrados</f:facet>
+				<p:column headerText="ID">
+					<h:outputText value="#{lista.id}" />
+				</p:column>
+				<p:column headerText="Nome">
+					<h:outputText value="#{lista.nome}" />
+				</p:column>
+				<p:column headerText="CEP">
+					<h:outputText value="#{lista.logradouro.CEP}" />
+				</p:column>
+				<p:column headerText="Ações">
+					<p:commandLink title="Alterar" update=":formAlterar:Alterar"
+						oncomplete="dialogAlterar.show()" immediate="true">
+						<p:graphicImage value="./imagens/edit_icon.png" />
+						<f:setPropertyActionListener
+							target="#{ProfessorBean.professor}" value="#{lista}" />
+					</p:commandLink>
+					<p:commandLink title="Excluir" update=":formExcluir:Excluir"
+						oncomplete="confirmation.show()" immediate="true">
+						<p:graphicImage value="./imagens/del_icon.png" />
+						<f:setPropertyActionListener
+							target="#{ProfessorBean.professor}" value="#{lista}" />
+					</p:commandLink>
+				</p:column>
+			</p:dataTable>
+			<p:commandButton value="Cadastrar" id="cadastrar"
+				oncomplete="dialogCadastrar.show()" />
+		</h:form>
+	</div>
+	<h:form id="formAlterar">
+		<p:dialog header="Alterar" widgetVar="dialogAlterar" modal="true"
+			id="Alterar">
+			<p:panelGrid id="panelAlterar" columns="2">
+				<h:outputText value="Login:" />
+				<p:inputText value="#{ProfessorBean.professor.login}" />
+				<h:outputText value="Senha:" />
+				<p:password value="#{ProfessorBean.professor.senha}" />
+				<h:outputText value="Nome:" />
+				<p:inputText value="#{ProfessorBean.professor.nome}" />
+				<h:outputText value="Sobrenome:" />
+				<p:inputText value="#{ProfessorBean.professor.sobrenome}" />
+				<h:outputText value="Sexo:" />
+				<p:selectOneMenu id="sexo"
+					value="#{ProfessorBean.professor.sexo}" style="width:150px">
+					<f:selectItem itemLabel="Masculino" itemValue="Masculino" />
+					<f:selectItem itemLabel="Feminino" itemValue="Feminio" />
+				</p:selectOneMenu>
+				<h:outputText value="Data de Nascimento: " />
+				<p:inputMask id="dataNascimento"
+					value="#{ProfessorBean.professor.datanasc}" mask="99/99/9999"
+					placeholder="Dia/Mês/Ano">
+					<f:converter converterId="javax.faces.DateTime" />
+					<f:convertDateTime pattern="dd/MM/yyyy" timeZone="GMT-3" />
+				</p:inputMask>
+
+				<h:outputText value="Logradouro:" />
+				<p:autoComplete value="#{ProfessorBean.professor.logradouro}"
+					completeMethod="#{LogradouroBean.completeLogradouro()}"
+					var="logradouro" itemLabel="#{logradouro.CEP}"
+					itemValue="#{logradouro}" forceSelection="true">
+				</p:autoComplete>
+
+				<h:outputText value="Número:" />
+				<p:inputText value="#{ProfessorBean.professor.numero}" />
+
+				<h:outputText value="Complemento:" />
+				<p:inputText value="#{ProfessorBean.professor.complemento}" />
+
+				<h:outputText value="Telefone:" />
+				<p:inputMask id="phoneWithExt"
+					value="#{ProfessorBean.professor.telefone}"
+					mask="(99) 99999-9999" />
+
+				<h:outputText value="E-mail:" />
+				<p:inputText id="email" required="true" label="email" size="40"
+					requiredMessage="Please enter your email address."
+					validatorMessage="Invalid email format"
+					value="#{ProfessorBean.professor.email}">
+
+					<f:validateRegex
+						pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+
+				</p:inputText>
+
+				<h:outputText value="CPF:" />
+				<p:inputMask id="CPFId" value="#{ProfessorBean.professor.CPF}"
+					mask="999999999-99" />
+
+				<h:outputText value="RG:" />
+				<p:inputMask id="RGId" value="#{ProfessorBean.professor.RG}"
+					mask="99999999-9" />
+
+				<h:outputText value="Data de Ingresso: " />
+				<p:inputMask id="dataIngresso"
+					value="#{ProfessorBean.professor.dataIngresso}"
+					mask="99/99/9999" placeholder="Dia/Mês/Ano">
+					<f:converter converterId="javax.faces.DateTime" />
+					<f:convertDateTime pattern="dd/MM/yyyy" timeZone="GMT-3" />
+				</p:inputMask>
+
+				<h:outputText value="Data de Saida: " />
+				<p:inputMask id="dataSaida"
+					value="#{ProfessorBean.professor.dataSaida}" mask="99/99/9999"
+					placeholder="Dia/Mês/Ano">
+					<f:converter converterId="javax.faces.DateTime" />
+					<f:convertDateTime pattern="dd/MM/yyyy" timeZone="GMT-3" />
+				</p:inputMask>
+
+				<!-- Atributos exclusivos da classe Professor : a verificar comportamento-->
+				<h:outputText value="Ano conclusão: " />
+				<p:inputMask id="dataConclusão"
+					value="#{ProfessorBean.professor.anoConclusao}" mask="99/99/9999"
+					placeholder="Dia/Mês/Ano">
+					<f:converter converterId="javax.faces.DateTime" />
+					<f:convertDateTime pattern="dd/MM/yyyy" timeZone="GMT-3" />
+				</p:inputMask>
+				
+				<h:outputText value="Formação Acadêmica:" />
+				<p:inputText value="#{ProfessorBean.professor.formacaoAcad}" />
+				
+				<h:outputText value="Instituição Acadêmica:" />
+				<p:inputText value="#{ProfessorBean.professor.instituicaoAcad}" />
+				
+				<h:outputText value="Escola anterior:" />
+				<p:inputText value="#{ProfessorBean.professor.escolaAnterior}" />
+				
+			</p:panelGrid>
+			<p:commandButton value="Alterar"
+				action="#{ProfessorBean.alterar(ProfessorBean.professor)}"
+				update=":formPrincipal:tabelaProfessor"
+				oncomplete="dialogAlterar.hide()" />
+		</p:dialog>
+	</h:form>
+	<h:form id="formCadastrar" enctype="multipart/form-data">
+		<p:dialog header="Cadastrar" widgetVar="dialogCadastrar" modal="true">
+			<p:panelGrid id="panelCadastrar" columns="2">
+				<h:outputText value="Login:" />
+				<p:inputText value="#{ProfessorBean.professor.login}" />
+				<h:outputText value="Senha:" />
+				<p:password value="#{ProfessorBean.professor.senha}" />
+				<h:outputText value="Nome:" />
+				<p:inputText value="#{ProfessorBean.professor.nome}" />
+				<h:outputText value="Sobrenome:" />
+				<p:inputText value="#{ProfessorBean.professor.sobrenome}" />
+				<h:outputText value="Sexo:" />
+				<p:selectOneMenu id="sexo"
+					value="#{ProfessorBean.professor.sexo}" style="width:150px">
+					<f:selectItem itemLabel="Masculino" itemValue="Masculino" />
+					<f:selectItem itemLabel="Feminino" itemValue="Feminio" />
+				</p:selectOneMenu>
+				<h:outputText value="Data de Nascimento: " />
+				<p:inputMask id="dataNascimento"
+					value="#{ProfessorBean.professor.datanasc}" mask="99/99/9999"
+					placeholder="Dia/Mês/Ano">
+					<f:converter converterId="javax.faces.DateTime" />
+					<f:convertDateTime pattern="dd/MM/yyyy" timeZone="GMT-3" />
+				</p:inputMask>
+
+				<h:outputText value="Logradouro:" />
+				<p:autoComplete value="#{ProfessorBean.professor.logradouro}"
+					completeMethod="#{LogradouroBean.completeLogradouro()}"
+					var="logradouro" itemLabel="#{logradouro.CEP}"
+					itemValue="#{logradouro}" forceSelection="true">
+				</p:autoComplete>
+
+				<h:outputText value="Número:" />
+				<p:inputText value="#{ProfessorBean.professor.numero}" />
+
+				<h:outputText value="Complemento:" />
+				<p:inputText value="#{ProfessorBean.professor.complemento}" />
+
+				<h:outputText value="Telefone:" />
+				<p:inputMask id="phoneWithExt"
+					value="#{ProfessorBean.professor.telefone}"
+					mask="(99) 99999-9999" />
+
+				<h:outputText value="E-mail:" />
+				<p:inputText id="email" required="true" label="email" size="40"
+					requiredMessage="Please enter your email address."
+					validatorMessage="Invalid email format"
+					value="#{ProfessorBean.professor.email}">
+
+					<f:validateRegex
+						pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+
+				</p:inputText>
+
+				<h:outputText value="CPF:" />
+				<p:inputMask id="CPFId" value="#{ProfessorBean.professor.CPF}"
+					mask="999999999-99" />
+
+				<h:outputText value="RG:" />
+				<p:inputMask id="RGId" value="#{ProfessorBean.professor.RG}"
+					mask="99999999-9" />
+
+				<h:outputText value="Data de Ingresso: " />
+				<p:inputMask id="dataIngresso"
+					value="#{ProfessorBean.professor.dataIngresso}"
+					mask="99/99/9999" placeholder="Dia/Mês/Ano">
+					<f:converter converterId="javax.faces.DateTime" />
+					<f:convertDateTime pattern="dd/MM/yyyy" timeZone="GMT-3" />
+				</p:inputMask>
+
+				<h:outputText value="Data de Saida: " />
+				<p:inputMask id="dataSaida"
+					value="#{ProfessorBean.professor.dataSaida}" mask="99/99/9999"
+					placeholder="Dia/Mês/Ano">
+					<f:converter converterId="javax.faces.DateTime" />
+					<f:convertDateTime pattern="dd/MM/yyyy" timeZone="GMT-3" />
+				</p:inputMask>
+
+				<!-- Atributos exclusivos da classe Professor : a verificar comportamento-->
+				<h:outputText value="Ano conclusão: " />
+				<p:inputMask id="dataConclusão"
+					value="#{ProfessorBean.professor.anoConclusao}" mask="99/99/9999"
+					placeholder="Dia/Mês/Ano">
+					<f:converter converterId="javax.faces.DateTime" />
+					<f:convertDateTime pattern="dd/MM/yyyy" timeZone="GMT-3" />
+				</p:inputMask>
+				
+				<h:outputText value="Formação Acadêmica:" />
+				<p:inputText value="#{ProfessorBean.professor.formacaoAcad}" />
+				
+				<h:outputText value="Instituição Acadêmica:" />
+				<p:inputText value="#{ProfessorBean.professor.instituicaoAcad}" />
+				
+				<h:outputText value="Escola anterior:" />
+				<p:inputText value="#{ProfessorBean.professor.escolaAnterior}" />
+				
+			</p:panelGrid>
+			<p:commandButton value="Cadastrar"
+				actionListener="#{ProfessorBean.cadastrar}"
+				update=":formPrincipal:tabelaProfessor"
+				oncomplete="dialogCadastrar.hide()" />
+		</p:dialog>
+	</h:form>
+	<h:form id="formExcluir">
+		<p:confirmDialog id="Excluir"
+			message="Você gostaria de Deletar o #{ProfessorBean.professor.nome}?"
+			header="Excluir" severity="alert" widgetVar="confirmation">
+			<h:inputHidden value="#{ProfessorBean.professor.id}" />
+			<p:panelGrid id="panelExcluir" columns="2">
+				<h:outputText value="Nome:" />
+				<h:outputText value="#{ProfessorBean.professor.nome}" />
+			</p:panelGrid>
+			<p:commandButton id="confirm" value="Sim"
+				oncomplete="confirmation.hide()"
+				actionListener="#{ProfessorBean.excluir}"
+				update=":formPrincipal:tabelaProfessor" />
+			<p:commandButton id="decline" value="Não"
+				onclick="confirmation.hide()" type="button" />
+		</p:confirmDialog>
+	</h:form>
+
+</h:body>
+</html>
