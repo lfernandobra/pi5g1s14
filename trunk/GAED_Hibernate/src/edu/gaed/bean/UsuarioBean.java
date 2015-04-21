@@ -61,7 +61,7 @@ public class UsuarioBean implements Serializable {
 
 	// Métodos dos botões
 	@SuppressWarnings("unchecked")
-	public void cadastrar(ActionEvent actionEvent) {
+	public void cadastrar(ActionEvent actionEvent,FileUploadEvent event) {
 		new UsuarioDao().inserir(usuario);
 		usuarios = new UsuarioDao().listar();
 		usuario = new Usuario();
