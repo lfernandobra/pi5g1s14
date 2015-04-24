@@ -1,0 +1,13 @@
+#cabecalho{
+	background-color: #0080ff;
+}
+.login{
+	border:none;
+}
+.texto{
+		position:absolute;
+		left:45%;
+		top:50%;
+		margin-left:-110px;
+		margin-top:-40px;
+}
