@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
         xmlns:h="http://java.sun.com/jsf/html"
         xmlns:f="http://java.sun.com/jsf/core"
@@ -51,8 +52,7 @@
                 <p:dialog header="Alterar" widgetVar="dialogAlterar" modal="true"
                         id="Alterar">
                         <p:panelGrid id="panelAlterar" columns="2">   
-                                <h:outputText value="ID:" />
-                                <p:inputText value="#{MunicipioBean.municipio.id}" />
+                                <h:inputHidden value="#{MunicipioBean.municipio.id}" />
                                 <h:outputText value="Nome:" />
                                 <p:inputText value="#{MunicipioBean.municipio.nome}" />
                                 <h:outputText value="Estado:" />
@@ -91,12 +91,9 @@
                 <p:confirmDialog id="Excluir" message="Você gostaria de Deletar o #{MunicipioBean.municipio.nome}?"
                         header="Excluir" severity="alert" widgetVar="confirmation">
  						<p:panelGrid id="panelExcluir" columns="2">
-                                <h:outputText value="ID:" />
-                                <p:inputText value="#{MunicipioBean.municipio.id}" />
+                                <h:inputHidden value="#{MunicipioBean.municipio.id}" />
                                 <h:outputText value="Nome:" />
                                 <p:inputText value="#{MunicipioBean.municipio.nome}" />
-                                <h:outputText value="Sigla:" />
-                                <p:inputText value="#{MunicipioBean.municipio.uf}" />
                         </p:panelGrid>
  						
                         <p:commandButton id="confirm" value="Sim"
