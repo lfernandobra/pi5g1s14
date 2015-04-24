@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+	<title>login</title>
+	<link rel="stylesheet" href="styles/layout.css" type="text/css" />
+</h:head>
+<h:body>
+
+	<p:layout fullPage="true">
+
+		<p:layoutUnit position="north">
+			<f:facet name="header" size="70">
+				<h:outputLabel value="GAED - Gerenciamento de Atividades Escolar Digital" />
+			</f:facet>
+		</p:layoutUnit>
+
+		<p:layoutUnit position="center">
+
+			<h:form>
+				<p:messages showDetail="true" id="mensagem" autoUpdate="true" closable="true" />
+				
+				<h:panelGrid columns="2" id="matchGrid" cellpadding="5"	styleClass="texto">
+					<p:outputLabel for="login" value="Login:" />
+					<p:inputText id="login" value="#{LoginBean.usuario.login}" required="true" requiredMessage="login obrigatório" />
+
+					<p:outputLabel for="senha" value="Senha:" />
+					<p:password id="senha" value="#{LoginBean.usuario.senha}" required="true" requiredMessage="Informe sua senha" />
+
+					<p:commandButton value="Acessar"
+						action="#{LoginBean.verificarDatos()}" actionListener="home.xhtml"/>
+				</h:panelGrid>
+			</h:form>
+
+
+
+		</p:layoutUnit>
+
+		<p:layoutUnit position="south" size="50">
+			<f:facet name="header">
+				<h:outputLabel value="Rodapé" />
+			</f:facet>
+		</p:layoutUnit>
+
+	</p:layout>
+
+
+
+
+
+
+</h:body>
+</html>
+
