@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"  
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>login</title>
+    </h:head>
+    <h:body>
+    	<div align="center">
+    	<h:form id="formPrincipal">
+    		<p:dataTable var="lista" value="#{UFBean.ufs}" id="tabelaUF"
+				style="width:70%">
+				<f:facet name="header">Lista de UF Cadastradas</f:facet>
+				<p:column headerText="ID">
+					<h:outputText value="#{lista.id}" />
+				</p:column>
+				<p:column headerText="Nome">
+					<h:outputText value="#{lista.nome}" />
+				</p:column>
+				<p:column headerText="Sigla">
+					<h:outputText value="#{lista.sigla}" />
+				</p:column>
+				<p:column headerText="Ações">
+					<p:commandLink title="Alterar" update=":formAlterar:Alterar"
+						oncomplete="dialogAlterar.show()" immediate="true">
+						<p:graphicImage value="./imagens/edit_icon.png" />
+						<f:setPropertyActionListener target="#{UFBean.uf}"
+							value="#{lista}" />
+					</p:commandLink>
+					<p:commandLink title="Excluir" update=":formExcluir:Excluir"
+						oncomplete="confirmation.show()" immediate="true">
+						<p:graphicImage value="./imagens/del_icon.png" />
+						<f:setPropertyActionListener target="#{UFBean.uf}"
+							value="#{lista}" />
+					</p:commandLink>
+				</p:column>		
+			</p:dataTable>
+			<h:form>
+				<p:commandButton value="Basic" type="button" onclick="PF('dialogCadastrar').show();" />		
+    		</h:form>
+    	</h:form>	
+    	</div>
+    	<!-- Implementado usando primefaces 5.2 -->
+    	<h:form id="formCadastrar">
+		<p:dialog header="Cadastrar" widgetVar="dialogCadastrar" modal="true">
+			<p:fieldset legend="UF" style="margin-bottom:20px">
+				<p:panelGrid id="panelCadastrar" columns="2">
+					<h:outputText value="Nome:" />
+					<p:inputText value="#{UFBean.uf.nome}" />
+					<h:outputText value="Sigla:" />
+					<p:inputText value="#{UFBean.uf.sigla}" />
+				</p:panelGrid>
+				<p:commandButton value="Cadastrar"
+					actionListener="#{UFBean.cadastrar}"
+					update=":formPrincipal:tabelaUF" oncomplete="dialogCadastrar.hide()"
+					ajax = "false" />		
+			</p:fieldset>		
+		</p:dialog>
+		</h:form>
+    	
+    	<h:form id="formAlterar">
+			<p:dialog header="Alterar" widgetVar="dialogAlterar" modal="true"
+				id="Alterar">
+				<p:fieldset legend="UF" style="margin-bottom:20px">
+					<p:panelGrid id="panelAlterar" columns="2">
+						<h:inputHidden value="#{UFBean.uf.id}" />
+						<h:outputText value="Nome:" />
+						<p:inputText value="#{UFBean.uf.nome}" />
+						<h:outputText value="Sigla:" />
+						<p:inputText value="#{UFBean.uf.sigla}" />
+						</p:panelGrid>
+						<p:commandButton value="Alterar"
+							actionListener="#{UFBean.alterar}"
+							update=":formPrincipal:tabelaUF" oncomplete="dialogAlterar.hide()" />
+				</p:fieldset>	
+			</p:dialog>
+		</h:form>
+		
+		<h:form id="formExcluir">
+		<p:confirmDialog id="Excluir"
+			message="Você gostaria de Deletar o #{UFBean.uf.nome}?"
+			header="Excluir" severity="alert" widgetVar="confirmation">
+			<h:inputHidden value="#{UFBean.uf.id}" />
+			<p:panelGrid id="panelExcluir" columns="2">
+				<h:outputText value="Nome:" />
+				<h:outputText value="#{UFBean.uf.nome}" />
+				<h:outputText value="Sigla:" />
+				<h:outputText value="#{UFBean.uf.sigla}" />
+			</p:panelGrid>
+			<p:commandButton id="confirm" value="Sim"
+				oncomplete="confirmation.hide()" actionListener="#{UFBean.excluir}"
+				update=":formPrincipal:tabelaUF" />
+			<p:commandButton id="decline" value="Não"
+				onclick="confirmation.hide()" type="button" />
+		</p:confirmDialog>
+	</h:form>
+    <h:form>
+		<h:panelGrid columns="1" cellpadding="5">
+			<p:commandButton value="Basic" type="button"
+				onclick="PF('dlg1').show();" />
+
+			<p:commandButton value="Modal" type="button"
+				onclick="PF('dlg2').show();" />
+
+			<p:commandButton value="Effects" type="button"
+				onclick="PF('dlg3').show();" />
+		</h:panelGrid>
+		
+		<p:dialog header="Basic Dialog" widgetVar="dlg1" minHeight="40">
+			<h:outputText value="Resistance to PrimeFaces is futile!" />
+		</p:dialog>
+
+		<p:dialog header="Modal Dialog" widgetVar="dlg2" modal="true"
+			height="100">
+			<h:outputText value="This is a Modal Dialog." />
+		</p:dialog>
+
+		<p:dialog header="Effects" widgetVar="dlg3" showEffect="explode"
+			hideEffect="bounce" height="100">
+			<h:outputText value="This dialog has nice effects." />
+		</p:dialog>
+	</h:form>		
+    </h:body> 
+ 
+</html>

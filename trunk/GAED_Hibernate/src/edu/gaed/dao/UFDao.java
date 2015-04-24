@@ -24,8 +24,7 @@ public class UFDao {
 			session.getTransaction().commit();
  
 			}finally{
-			session.close();
- 
+				session.close(); 
 			}
 		}
  

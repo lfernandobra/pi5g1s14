@@ -45,7 +45,7 @@ public class UFBean {
 	}
  
 	@SuppressWarnings("unchecked")
-	public void alterar(UF uf){
+	public void alterar(ActionEvent actionEvent){
 		new UFDao().alterar(uf);
 		ufs = new UFDao().listar();
 		uf = new UF();
