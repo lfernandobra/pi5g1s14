@@ -56,7 +56,7 @@ public class UFBean {
 		ufs = new UFDao().listar();
 		uf = new UF();
 	}
- 
+	
 	//getters and setters
 	
 
@@ -76,5 +76,7 @@ public class UFBean {
 		this.uf = uf;
 	}
  
+	// métodos reset
+	
 	
 }
