@@ -10,8 +10,12 @@
 	<div align="center">
 		<h:form id="formPrincipal">
 			<p:dataTable var="lista" value="#{UFBean.ufs}" id="tabelaUF"
-				style="width:70%">
-				<f:facet name="header">Lista de UF Cadastradas</f:facet>
+				style="width:70%"
+				resizableColumns="true"
+				reflow="true" rows="5" paginator="true">
+				
+				<f:facet name="header">Lista de UF - Unidade Federativa 
+				</f:facet>
 				<p:column headerText="ID">
 					<h:outputText value="#{lista.id}" />
 				</p:column>
@@ -40,61 +44,73 @@
 						icon="ui-icon-closethick">				
 						<p:confirm header="Excluir UF" message="Deseja excluir?" icon="ui-icon-alert" />
 					</p:commandButton>
-					<p:confirmDialog global="true" showEffect="fade"
-						hideEffect="explode">
-						<p:commandButton value="Yes" type="button"
+					<p:confirmDialog global="true" 
+						showEffect="fade"
+						hideEffect="fade">
+						<p:commandButton value="Sim" type="button"
 							styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
-						<p:commandButton value="No" type="button"
+						<p:commandButton value="Não" type="button"
 							styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
 					</p:confirmDialog>
 
 				</p:column>
+				
 			</p:dataTable>
 		</h:form>
 		<h:panelGrid columns="1" cellpadding="5">
-			<p:commandButton value="Cadastrar UF" type="button" onclick="PF('dlg2').show();" 
+			<p:commandButton value="Cadastrar UF" type="button" onclick="PF('dialogCadastrar').show();" 
 							 icon="ui-icon-disk"/>
 		</h:panelGrid>
 		
 		<h:form>
-			<p:dialog header="Cadastrar Unidade Federativa - UF" widgetVar="dlg2" modal="true" height="200">
-				<p:fieldset legend="UF" style="margin-bottom:20px">
-				 
+			<p:dialog header="Cadastrar Unidade Federativa - UF"
+					  widgetVar="dialogCadastrar" 
+					  modal="true" 
+					  resizable="true">
+
 				<p:panelGrid id="panelCadastrar" columns="2">
 					<h:outputText value="Nome:" />
-					<p:inputText value="#{UFBean.uf.nome}" id="text1" required="true"/>
+					<p:inputText value="#{UFBean.uf.nome}" required="true"/>
 					<h:outputText value="Sigla:" />
 					<p:inputText value="#{UFBean.uf.sigla}" />
 					<p:commandButton value="Salvar" 
 									id="withIcon" 
 									actionListener="#{UFBean.cadastrar}" 
 									icon="ui-icon-disk"
-									update=":formPrincipal:tabelaUF"/>
-						
-				</p:panelGrid>					
-				</p:fieldset>
+									update=":formPrincipal:tabelaUF"
+									oncomplete="PF('dialogCadastrar').hide();"/>
+						<p:commandButton value="Limpar" update="panelCadastrar" process="@this">
+							<p:resetInput target="panelCadastrar" />
+						</p:commandButton>
+					</p:panelGrid>					
 			</p:dialog>
 		</h:form>
 	</div>
 	<h:form id="formAlterar">
-		<p:dialog header="Alterar" widgetVar="dialogAlterar" modal="true"
-			id="Alterar">
-			<p:fieldset legend="UF" style="margin-bottom:20px">
+		<p:dialog header="Alterar" 
+				  widgetVar="dialogAlterar"
+				  modal="true"
+				  resizable="true"
+				  id="Alterar">
+			
 			<h:inputHidden value="#{UFBean.uf}" />
 			<p:panelGrid id="panelAlterar" columns="2">
 				<h:outputText value="Nome:" />
 				<p:inputText value="#{UFBean.uf.nome}" />
 				<h:outputText value="Sigla:" />
 				<p:inputText value="#{UFBean.uf.sigla}" />
+				<p:commandButton value="Alterar"
+					actionListener="#{UFBean.alterar}"
+					update=":formPrincipal:tabelaUF" 
+					oncomplete="PF('dialogAlterar').hide();" />
+				<p:commandButton value="Limpar" update="panelAlterar"
+					process="@this">
+				<p:resetInput target="panelAlterar" />
+			</p:commandButton>
 			</p:panelGrid>
-			<p:commandButton value="Alterar"
-				actionListener="#{UFBean.alterar}"
-				update=":formPrincipal:tabelaUF" oncomplete="dialogAlterar.hide()" />
-			</p:fieldset>	
+			
+				
 		</p:dialog>
 	</h:form>					
-	
-	
-	
 	</body>
 </html>
