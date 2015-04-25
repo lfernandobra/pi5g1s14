@@ -45,14 +45,14 @@ public class UFBean {
 	}
  
 	@SuppressWarnings("unchecked")
-	public void alterar(ActionEvent actionEvent){
+	public void alterar(){
 		new UFDao().alterar(uf);
 		ufs = new UFDao().listar();
 		uf = new UF();
 	}
 	@SuppressWarnings("unchecked")
-	public void excluir(ActionEvent actionEvent){
-		new UFDao().excluir(uf);
+	public void excluir(UF ufex){
+		new UFDao().excluir(ufex);
 		ufs = new UFDao().listar();
 		uf = new UF();
 	}
