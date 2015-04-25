@@ -12,7 +12,10 @@
 		<h:form rendered="#{LoginBean.verificarSessao()}">
 
 			<h:outputLabel value="#{LoginBean.usuario.login}"/>
-
+			
+			<h:outputLabel value="#{LoginBean.usuario.login}"/>
+			
+			if("#{LoginBean.usuario.login}")
 			<h:commandButton value="Cerrar Sessão" action="#{LoginBean.encerrarSession()}"/>
 		
 		</h:form>	
