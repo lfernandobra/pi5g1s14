@@ -4,10 +4,24 @@
 .login{
 	border:none;
 }
-.texto{
+.gridLogin{
 		position:absolute;
 		left:45%;
 		top:50%;
 		margin-left:-110px;
 		margin-top:-40px;
+}
+.gridCabecalho{
+	font-family: sans-serif;
+	text-align: center;
+	border-style: none;
+}
+.gridRodape{
+	font-family: sans-serif;
+	text-align: center;
+	font-size: 10px;
+	border-style: none;
+}
+.gridCentral{
+	border-style: none;
 }
