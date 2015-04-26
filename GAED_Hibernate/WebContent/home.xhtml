@@ -1,24 +1,58 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:h="http://java.sun.com/jsf/html"> 
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+	<title>Home</title>
+	<link rel="stylesheet" href="styles/layout.css" type="text/css" />
+</h:head>
+<h:body>
 
-<h:head></h:head> 
-<h:body> 
-	
-	<h:panelGrid columns="2">
+	<p:layout fullPage="true">
 
-		<h:form rendered="#{LoginBean.verificarSessao()}">
+		<p:layoutUnit position="north" size="100" resizable="true" closable="true" collapsible="true">
+			<!-- <ui:include src="Cabecalho.xhtml"></ui:include>-->
+		</p:layoutUnit>
 
-			<h:outputLabel value="#{LoginBean.usuario.login}"/>
-			
-			<h:outputLabel value="#{LoginBean.usuario.login}"/>
-			
-			if("#{LoginBean.usuario.login}")
-			<h:commandButton value="Cerrar Sessão" action="#{LoginBean.encerrarSession()}"/>
+		<p:layoutUnit position="west" size="150" styleClass="gridEsquerda"></p:layoutUnit>
+
+		<p:layoutUnit position="east" size="150" styleClass="gridDireita"></p:layoutUnit>
+
+		<p:layoutUnit position="center" styleClass="centroHome">
 		
-		</h:form>	
-	</h:panelGrid>
-</h:body> 
+			<p:layout>
+					
+				<p:layoutUnit position="center" size="50" styleClass="fotosEscola">
+					<p:panel id="basic" header="Fotos" footer="Movie Details">
+        				<h:panelGrid>
+	            			<h:outputText value="Fotos"	/>
+        				</h:panelGrid>
+    				</p:panel>
+				</p:layoutUnit>
+				
+				<p:layoutUnit position="east" size="50" styleClass="noticiasUol">
+					<p:panel id="basic" header="Noticias UOL" footer="Movie Details">
+        				<h:panelGrid>
+	            			<h:outputText value="Teste UOL."	/>
+        				</h:panelGrid>
+    				</p:panel>
+				</p:layoutUnit>
+				
+				<p:layoutUnit position="west" size ="270" styleClass="calendario">
+					<p:calendar id="inline" value="#{calendarView.date1}" mode="inline" />
+				</p:layoutUnit>
+				
+				<p:layoutUnit position="south" size ="270" styleClass="noticiasCursos">
+					<p:panel id="basic" header="Noticias Cursos" footer="Movie Details">
+					<h:outputText value="Noticias Cursos"/>
+					</p:panel>
+				</p:layoutUnit>
+	
+			</p:layout>
+		</p:layoutUnit>
+
+	</p:layout>
+</h:body>
 </html>
