@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+	<title>Cabecalho</title>
+	<link rel="stylesheet" href="styles/layout.css" type="text/css" />
+</h:head>
+<h:body>
+
+		<p:layout fullPage="true" styleClass="paginaCabecalho">
+		
+		<p:layoutUnit position="center" styleClass="gridMenu" >
+			<f:facet name="header" >
+				<p:graphicImage name="WebContent\imagens\logo_gaed_1.png"></p:graphicImage>
+				<h:outputLabel value="GAED - Gerenciamento de Atividades Escolar Digital"/>
+			</f:facet> 
+			
+			<h:form>  
+			    <p:growl id="messages"/>
+			 
+			    <p:menubar styleClass="menu">
+			        <p:menuitem value="Home" url="http://www.primefaces.org" icon="ui-icon-home" />
+			 
+			        <p:submenu label="Ocorrência" icon="ui-icon-document-b">
+			            <p:menuitem value="Cadastrar" url="#" icon="ui-icon-arrowreturnthick-1-w" />
+			            <p:menuitem value="Alterar" url="#" icon="ui-icon-arrowreturnthick-1-e" />
+			            <p:menuitem value="Consultar" url="#" icon="ui-icon-arrowreturnthick-1-e" />
+			        </p:submenu>
+			 
+			        <p:submenu label="Boletim" icon="ui-icon-document">
+			            <p:menuitem value="Criar" url="#" icon="ui-icon-arrowreturnthick-1-w" />
+			            <p:menuitem value="Inserir Notas/Faltas" url="#" icon="ui-icon-arrowreturnthick-1-e" />
+			            <p:menuitem value="Alterar Notas/Faltas" url="#" icon="ui-icon-arrowreturnthick-1-e" />
+			            <p:menuitem value="Visualizar" url="#" icon="ui-icon-arrowreturnthick-1-e" />
+			        </p:submenu>
+			        
+			        <p:submenu label="Tarefas" icon="ui-icon-note">
+			            <p:menuitem value="Criar" url="#" icon="ui-icon-arrowreturnthick-1-w" />
+			            <p:menuitem value="Alterar" url="#" icon="fa fa-edit" />
+			            <p:menuitem value="Visualizar" url="#" icon="ui-icon-arrowreturnthick-1-e" />
+			        </p:submenu>
+			 
+			        <p:submenu label="Usuarios" icon="ui-icon-person">
+			            <p:submenu label="Aluno" url="#" icon="ui-icon-person" >
+				            <p:menuitem value="Criar" actionListener="#{menuView.save}" icon="ui-icon-arrowreturnthick-1-w" />
+				            <p:menuitem value="Alterar" actionListener="#{menuView.save}" icon="fa fa-edit" />
+			            </p:submenu>
+			            
+			            <p:submenu label="Responsavel" url="#" icon="ui-icon-person" >
+			            	<p:menuitem value="Criar" actionListener="#{menuView.save}" icon="ui-icon-arrowreturnthick-1-w" />
+				            <p:menuitem value="Alterar" actionListener="#{menuView.save}" icon="fa fa-edit" />
+			            </p:submenu>
+			            
+			            <p:submenu label="Professor" url="#" icon="ui-icon-person" >
+			            	<p:menuitem value="Criar" actionListener="#{menuView.save}" icon="ui-icon-arrowreturnthick-1-w" />
+				            <p:menuitem value="Alterar" actionListener="#{menuView.save}" icon="fa fa-edit" />
+			            </p:submenu>
+			            	
+			            <p:submenu label="Gestor" url="#" icon="ui-icon-person" >
+			            	<p:menuitem value="Criar" actionListener="#{menuView.save}" icon="ui-icon-arrowreturnthick-1-w" />
+				            <p:menuitem value="Alterar" actionListener="#{menuView.save}" icon="fa fa-edit" />
+			            </p:submenu>
+			            	
+			            <p:submenu label="Secretária(o)" url="#" icon="ui-icon-person" >
+			            	<p:menuitem value="Criar" actionListener="#{menuView.save}" icon="ui-icon-arrowreturnthick-1-w" />
+				            <p:menuitem value="Alterar" actionListener="#{menuView.save}" icon="fa fa-edit" />
+			            </p:submenu>
+			            
+			        </p:submenu>
+			    </p:menubar>
+			</h:form>
+		</p:layoutUnit>
+		
+		</p:layout>
+</h:body>
+</html>
+
