@@ -58,13 +58,13 @@ public class MunicipioBean implements Serializable{
 	}
  
 	@SuppressWarnings("unchecked")
-	public void alterar(Municipio municipio){
+	public void alterar(){
 		new MunicipioDao().alterar(municipio);
 		municipios = new MunicipioDao().listar();
 		municipio = new Municipio();
 	}
 	@SuppressWarnings("unchecked")
-	public void excluir(ActionEvent actionEvent){
+	public void excluir(Municipio municipio){
 		new MunicipioDao().excluir(municipio);
 		municipios = new MunicipioDao().listar();
 		municipio = new Municipio();
