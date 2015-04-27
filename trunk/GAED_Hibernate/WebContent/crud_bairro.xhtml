@@ -1,24 +1,22 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
-        xmlns:h="http://java.sun.com/jsf/html"
-        xmlns:f="http://java.sun.com/jsf/core"
-        xmlns:p="http://primefaces.org/ui">
- 
-<h:head>
- 		<title>Bairro</title> 
- 
-</h:head>
- 
-<h:body>
- 
-        <div align="center">
-                <h:form id="formPrincipal">
-            <p:dataTable var="lista" value="#{BairroBean.bairros}"
-                                id="tabelaBairro" style="width:70%">
-                 <f:facet name="header">Lista de Bairro Cadastradas</f:facet>
- 				 <p:column headerText="ID">
-                    <h:outputText value="#{lista.id}" />
-                 </p:column>
-
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+	<h:head>
+		<title>Bairro</title>
+	</h:head>
+	<body>
+	<div align="center">
+		<h:form id="formPrincipal">
+			<p:dataTable var="lista" value="#{BairroBean.bairros}" id="tabelaBairro"
+				resizableColumns="true"
+				reflow="true" rows="5" paginator="true">
+				
+				<f:facet name="header">Lista de Bairros</f:facet>
+				<p:column headerText="ID">
+					<h:outputText value="#{lista.id}" />
+				</p:column>
 				<p:column headerText="Nome">
 					<h:outputText value="#{lista.nome}" />
 				</p:column>
@@ -29,88 +27,99 @@
 					<h:outputText value="#{lista.municipio.uf.nome}" />
 				</p:column>
 				<p:column headerText="Ações">
-					<p:commandLink title="Alterar" update=":formAlterar:Alterar"
-						oncomplete="dialogAlterar.show()" immediate="true">
-						<p:graphicImage value="./imagens/edit_icon.png" />
+					
+					<!-- Alterar -->					
+					<p:commandButton value="Alterar" 
+						update=":formAlterar:Alterar"
+						oncomplete="PF('dialogAlterar').show();"
+						icon="ui-icon-pencil">
+						<f:setPropertyActionListener target="#{BairroBean.bairro}"
+							value="#{lista}" />
+					</p:commandButton>
+					
+					
+					<!-- Excluir -->
+					<p:commandButton value="Excluir"
+						actionListener="#{BairroBean.excluir(lista)}" 
+						update=":formPrincipal:tabelaBairro"
+						icon="ui-icon-closethick">				
+						<p:confirm header="Excluir Bairro" message="Deseja excluir?" icon="ui-icon-alert" />
+					</p:commandButton>
+					<p:confirmDialog global="true" 
+						showEffect="fade"
+						hideEffect="fade">
+						<p:commandButton value="Sim" type="button"
+							styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+						<p:commandButton value="Não" type="button"
+							styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+					</p:confirmDialog>
 
-						<f:setPropertyActionListener target="#{BairroBean.bairro}"
-							value="#{lista}" />
-					</p:commandLink>
-					<p:commandLink title="Excluir" update=":formExcluir:Excluir"
-						oncomplete="confirmation.show()" immediate="true">
-						<p:graphicImage value="./imagens/del_icon.png" />
-						<f:setPropertyActionListener target="#{BairroBean.bairro}"
-							value="#{lista}" />
-					</p:commandLink>
 				</p:column>
-
+				
 			</p:dataTable>
- 
-                        <p:commandButton value="Cadastrar" id="cadastrar"
-                                oncomplete="dialogCadastrar.show()" />
-                </h:form>
-        </div>
-        <h:form id="formAlterar">
-                <p:dialog header="Alterar" widgetVar="dialogAlterar" modal="true"
-                        id="Alterar">
-                        <p:panelGrid id="panelAlterar" columns="2">   
-                                <h:outputText value="ID:" />
-                                <p:inputText value="#{BairroBean.bairro.id}" />
-                                <h:outputText value="Nome:" />
-                                <p:inputText value="#{BairroBean.bairro.nome}" />
-                                <h:outputText value="Municipio:" />
-                                <h:selectOneMenu value="#{BairroBean.bairro.municipio}">
-									<f:selectItem itemLabel="-- Selecione --" noSelectionOption= "true"/>
-									<f:selectItems value="#{MunicipioBean.municipios}"
-									var="municipio" itemValue="#{municipio}" itemLabel="#{municipio.nome}" />
-								</h:selectOneMenu>
-                        </p:panelGrid>
-                        <p:commandButton value="Alterar"
-                                action="#{BairroBean.alterar(BairroBean.bairro)}"
-                                update=":formPrincipal:tabelaBairro"
-                                oncomplete="dialogAlterar.hide()" />
-                </p:dialog>
-        </h:form>
- 
-        <h:form id="formCadastrar">
-                <p:dialog header="Cadastrar" widgetVar="dialogCadastrar" modal="true">
-                        <p:panelGrid id="panelCadastrar" columns="2">
-                                <h:outputText value="Nome:" />
-                                <p:inputText value="#{BairroBean.bairro.nome}" />
-								<h:outputText value="Municipio:" />
-                                <h:selectOneMenu value="#{BairroBean.bairro.municipio}">
-									<f:selectItem itemLabel="-- Selecione --" noSelectionOption= "true"/>
-									<f:selectItems value="#{MunicipioBean.municipios}"
-									var="municipio" itemValue="#{municipio}" itemLabel="#{municipio.nome}" />
-								</h:selectOneMenu>
-                        </p:panelGrid>
-                        <p:commandButton value="Cadastrar"
-                                actionListener="#{BairroBean.cadastrar}"
-                                update=":formPrincipal:tabelaBairro"
-                                oncomplete="dialogCadastrar.hide()" />
-                </p:dialog>
-        </h:form>
-        <h:form id="formExcluir">
-                <p:confirmDialog id="Excluir" message="Você gostaria de Deletar o #{BairroBean.bairro.nome}?"
-                        header="Excluir" severity="alert" widgetVar="confirmation">
- 						<p:panelGrid id="panelExcluir" columns="2">
-                                <h:outputText value="ID:" />
-                                <p:inputText value="#{BairroBean.bairro.id}" />
-                                <h:outputText value="Nome:" />
-                                <p:inputText value="#{BairroBean.bairro.nome}" />
-                                <h:outputText value="Municipio:" />
-                                <p:inputText value="#{BairroBean.bairro.municipio}" />
-                        </p:panelGrid>
- 						
-                        <p:commandButton id="confirm" value="Sim"
-                                oncomplete="confirmation.hide()"
-                                actionListener="#{BairroBean.excluir}"
-                                update=":formPrincipal:tabelaBairro" />
-                        <p:commandButton id="decline" value="Não"
-                                onclick="confirmation.hide()" type="button" />
- 
-                </p:confirmDialog>
-        </h:form>
- 
-</h:body>
+		</h:form>
+		<h:panelGrid columns="1" cellpadding="5">
+			<p:commandButton value="Cadastrar Bairro" type="button" onclick="PF('dialogCadastrar').show();" 
+							 icon="ui-icon-disk"/>
+		</h:panelGrid>
+		
+		<h:form>
+			<p:dialog header="Cadastrar Bairro"
+					  widgetVar="dialogCadastrar" 
+					  modal="true" 
+					  resizable="true">
+
+				<p:panelGrid id="panelCadastrar" columns="2">
+					<h:outputText value="Nome:" />
+					<p:inputText value="#{BairroBean.bairro.nome}" />
+					<h:outputText value="Municipio:" />
+					<h:selectOneMenu value="#{BairroBean.bairro.municipio}">
+						<f:selectItem itemLabel="-- Selecione --" noSelectionOption="true" />
+						<f:selectItems value="#{MunicipioBean.municipios}" var="municipio"
+							itemValue="#{municipio}" itemLabel="#{municipio.nome}" />
+					</h:selectOneMenu>
+					<p:commandButton value="Salvar" 
+									id="withIcon" 
+									actionListener="#{BairroBean.cadastrar}" 
+									icon="ui-icon-disk"
+									update=":formPrincipal:tabelaBairro"
+									oncomplete="PF('dialogCadastrar').hide();"/>
+						<p:commandButton value="Limpar" update="panelCadastrar" process="@this">
+							<p:resetInput target="panelCadastrar" />
+						</p:commandButton>
+					</p:panelGrid>					
+			</p:dialog>
+		</h:form>
+	</div>
+	<h:form id="formAlterar">
+		<p:dialog header="Alterar" 
+				  widgetVar="dialogAlterar"
+				  modal="true"
+				  resizable="true"
+				  id="Alterar">
+			
+			<h:inputHidden value="#{BairroBean.bairro}" />
+			<p:panelGrid id="panelAlterar" columns="2">
+				<h:outputText value="Nome:" />
+				<p:inputText value="#{BairroBean.bairro.nome}" />
+				<h:outputText value="Municipio:" />
+				<h:selectOneMenu value="#{BairroBean.bairro.municipio}">
+					<f:selectItem itemLabel="-- Selecione --" noSelectionOption="true" />
+					<f:selectItems value="#{MunicipioBean.municipios}" var="municipio"
+						itemValue="#{municipio}" itemLabel="#{municipio.nome}" />
+				</h:selectOneMenu>
+				<p:commandButton value="Alterar"
+					actionListener="#{BairroBean.alterar}"
+					update=":formPrincipal:tabelaBairro" 
+					oncomplete="PF('dialogAlterar').hide();" />
+				<p:commandButton value="Limpar" update="panelAlterar"
+					process="@this">
+				<p:resetInput target="panelAlterar" />
+			</p:commandButton>
+			</p:panelGrid>
+			
+				
+		</p:dialog>
+	</h:form>					
+	</body>
 </html>
