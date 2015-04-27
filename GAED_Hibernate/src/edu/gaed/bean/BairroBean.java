@@ -58,13 +58,13 @@ public class BairroBean implements Serializable{
 	}
  
 	@SuppressWarnings("unchecked")
-	public void alterar(Bairro bairro){
+	public void alterar(){
 		new BairroDao().alterar(bairro);
 		bairros = new BairroDao().listar();
 		bairro = new Bairro();
 	}
 	@SuppressWarnings("unchecked")
-	public void excluir(ActionEvent actionEvent){
+	public void excluir(Bairro bairro){
 		new BairroDao().excluir(bairro);
 		bairros = new BairroDao().listar();
 		bairro = new Bairro();

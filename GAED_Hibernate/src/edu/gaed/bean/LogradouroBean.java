@@ -58,13 +58,13 @@ public class LogradouroBean implements Serializable{
 	}
  
 	@SuppressWarnings("unchecked")
-	public void alterar(Logradouro logradouro){
+	public void alterar(){
 		new LogradouroDao().alterar(logradouro);
 		logradouros = new LogradouroDao().listar();
 		logradouro = new Logradouro();
 	}
 	@SuppressWarnings("unchecked")
-	public void excluir(ActionEvent actionEvent){
+	public void excluir(Logradouro logradouro){
 		new LogradouroDao().excluir(logradouro);
 		logradouros = new LogradouroDao().listar();
 		logradouro = new Logradouro();
