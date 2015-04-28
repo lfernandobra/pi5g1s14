@@ -58,7 +58,7 @@ public class ResponsavelBean extends UsuarioBean implements Serializable {
 	}
  
 	@SuppressWarnings("unchecked")
-	public void alterar(Responsavel responsavel){
+	public void alterar(){
 		new ResponsavelDao().alterar(responsavel);
 		responsavels = new ResponsavelDao().listar();
 		responsavel = new Responsavel();
