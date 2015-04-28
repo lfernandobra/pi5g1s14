@@ -13,6 +13,9 @@
 			<p:dataTable var="lista" value="#{ResponsavelBean.responsavels}"
 				id="tabelaResponsavel" style="width:70%">
 				<f:facet name="header">Lista de Responsavel Cadastrados</f:facet>
+				<p:column style="width:16px">
+					<p:rowToggler />
+				</p:column>
 				<p:column headerText="ID">
 					<h:outputText value="#{lista.id}" />
 				</p:column>

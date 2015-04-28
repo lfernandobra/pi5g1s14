@@ -13,15 +13,18 @@
 				id="tabelaResponsavel" resizableColumns="true" reflow="true"
 				rows="5" paginator="true">
 
-				<f:facet name="header">Lista de Responsavels</f:facet>
+				<f:facet name="header">Lista de Responsaveis</f:facet>
 				<p:column style="width:16px">
 					<p:rowToggler />
 				</p:column>
-				<p:column headerText="ID" sortBy="#{lista.id}">
+				<p:column headerText="ID">
 					<h:outputText value="#{lista.id}" />
 				</p:column>
-				<p:column headerText="CEP" sortBy="#{lista.CEP}">
-					<h:outputText value="#{lista.CEP}" />
+				<p:column headerText="Nome">
+					<h:outputText value="#{lista.nome}" />
+				</p:column>
+				<p:column headerText="CEP">
+					<h:outputText value="#{lista.logradouro.CEP}" />
 				</p:column>
 
 				<p:rowExpansion>
@@ -29,11 +32,11 @@
 						<h:outputText value="Rua " />
 						<h:outputText value="#{lista.nome}" />
 						<h:outputText value="Bairro " />
-						<h:outputText value="#{lista.bairro.nome}" />
+						<h:outputText value="#{lista.logradouro.nome}" />
 						<h:outputText value="Municipio " />
-						<h:outputText value="#{lista.bairro.municipio.nome}" />
+						<h:outputText value="#{lista.logradouro.bairro.municipio.nome}" />
 						<h:outputText value="Unidade Federativa " />
-						<h:outputText value="#{lista.bairro.municipio.uf.nome}" />
+						<h:outputText value="#{lista.logradouro.bairro.municipio.uf.nome}" />
 					</p:panelGrid>
 				</p:rowExpansion>
 				<p:column headerText="Ações">
