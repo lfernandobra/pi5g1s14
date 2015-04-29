@@ -12,7 +12,7 @@
 
 		<p:layout fullPage="true" styleClass="paginaCabecalho">
 		
-		<p:layoutUnit position="center" styleClass="gridMenu" >
+		<p:layoutUnit position="north" styleClass="gridMenu" >
 			<f:facet name="header" >
 				<p:graphicImage name="WebContent\imagens\logo_gaed_1.png"></p:graphicImage>
 				<h:outputLabel value="GAED - Gerenciamento de Atividades Escolar Digital"/>
@@ -21,7 +21,7 @@
 			<h:form>  
 			    <p:growl id="messages"/>
 			 
-			    <p:menubar styleClass="menu">
+			    <p:menubar styleClass="menu" >
 			        <p:menuitem value="Home" url="http://www.primefaces.org" icon="ui-icon-home" />
 			 
 			        <p:submenu label="Ocorrência" icon="ui-icon-document-b">
@@ -73,6 +73,12 @@
 			    </p:menubar>
 			</h:form>
 		</p:layoutUnit>
+		
+		<p:layoutUnit position="west" size="150" styleClass="gridEsquerda"></p:layoutUnit>
+
+		<p:layoutUnit position="east" size="150" styleClass="gridDireita"></p:layoutUnit>
+
+		<p:layoutUnit position="center" styleClass="centroHome"> </p:layoutUnit>
 		
 		</p:layout>
 </h:body>
