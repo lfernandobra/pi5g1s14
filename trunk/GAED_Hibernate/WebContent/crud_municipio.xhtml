@@ -2,7 +2,8 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:p="http://primefaces.org/ui"
-	xmlns:ui="http://java.sun.com/jsf/facelets">
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions">
 	<h:head>
 		<title>Municipio</title>
 	</h:head>
@@ -14,18 +15,16 @@
 				reflow="true" rows="5" paginator="true">
 				
 				<f:facet name="header">Lista de Municipios</f:facet>
-				<p:column headerText="ID">
+				<p:column headerText="ID" sortBy="#{lista.id}" filterBy="#{lista.id}">
 					<h:outputText value="#{lista.id}" />
 				</p:column>
-				<p:column headerText="Nome">
+				<p:column headerText="Nome" sortBy="#{lista.nome}" filterBy="#{lista.nome}">
 					<h:outputText value="#{lista.nome}" />
 				</p:column>
-				<p:column headerText="Estado">
+				<p:column headerText="Estado" sortBy="#{lista.uf.nome}" filterBy="#{lista.uf.nome}">
 					<h:outputText value="#{lista.uf.nome}" />
 				</p:column>
-				<p:column headerText="Ações">
-					
-					<!-- Alterar -->					
+				<p:column headerText="Ações">					
 					<p:commandButton value="Alterar" 
 						update=":formAlterar:Alterar"
 						oncomplete="PF('dialogAlterar').show();"
@@ -33,9 +32,6 @@
 						<f:setPropertyActionListener target="#{MunicipioBean.municipio}"
 							value="#{lista}" />
 					</p:commandButton>
-					
-					
-					<!-- Excluir -->
 					<p:commandButton value="Excluir"
 						actionListener="#{MunicipioBean.excluir(lista)}" 
 						update=":formPrincipal:tabelaMunicipio"
@@ -52,16 +48,19 @@
 					</p:confirmDialog>
 
 				</p:column>
+				<f:facet name="footer">
+        			Total cadastrado #{fn:length(MunicipioBean.municipios)} municipios
+    			</f:facet>
 				
 			</p:dataTable>
 		</h:form>
 		<h:panelGrid columns="1" cellpadding="5">
-			<p:commandButton value="Cadastrar Municipio" type="button" onclick="PF('dialogCadastrar').show();" 
+			<p:commandButton value="Cadastrar" type="button" onclick="PF('dialogCadastrar').show();" 
 							 icon="ui-icon-disk"/>
 		</h:panelGrid>
 		
 		<h:form>
-			<p:dialog header="Cadastrar Unidade Federativa - Municipio"
+			<p:dialog header="Cadastrar"
 					  widgetVar="dialogCadastrar" 
 					  modal="true" 
 					  resizable="true">
@@ -69,6 +68,7 @@
 				<p:panelGrid id="panelCadastrar" columns="2">
 					<h:outputText value="Nome:" />
 					<p:inputText value="#{MunicipioBean.municipio.nome}" required="true"/>
+					<h:outputText value="Estado:" />
 					<h:selectOneMenu value="#{MunicipioBean.municipio.uf}">
 						<f:selectItem itemLabel="-- Selecione --" noSelectionOption="true" />
 						<f:selectItems value="#{UFBean.ufs}" var="uf" itemValue="#{uf}"

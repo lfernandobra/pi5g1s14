@@ -2,31 +2,36 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:p="http://primefaces.org/ui"
-	xmlns:ui="http://java.sun.com/jsf/facelets">
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	>
 	<h:head>
 		<title>UF</title>
 	</h:head>
 	<body>
 	<div align="center">
+		
+
 		<h:form id="formPrincipal">
+			
 			<p:dataTable var="lista" value="#{UFBean.ufs}" id="tabelaUF"
 				resizableColumns="true"
 				reflow="true" rows="5" paginator="true">
-				
+
 				<f:facet name="header">Lista de UF - Unidade Federativa 
 				</f:facet>
-				<p:column headerText="ID">
+				
+				<p:column headerText="ID" sortBy="#{lista.id}" filterBy="#{lista.id}">
 					<h:outputText value="#{lista.id}" />
 				</p:column>
-				<p:column headerText="Nome">
+				<p:column headerText="Nome" sortBy="#{lista.nome}" filterBy="#{lista.nome}">
 					<h:outputText value="#{lista.nome}" />
 				</p:column>
-				<p:column headerText="Sigla">
+				<p:column headerText="Sigla" sortBy="#{lista.sigla}" filterBy="#{lista.sigla}">
 					<h:outputText value="#{lista.sigla}" />
 				</p:column>
 				<p:column headerText="Ações">
-					
-					<!-- Alterar -->					
+										
 					<p:commandButton value="Alterar" 
 						update=":formAlterar:Alterar"
 						oncomplete="PF('dialogAlterar').show();"
@@ -35,8 +40,6 @@
 							value="#{lista}" />
 					</p:commandButton>
 					
-					
-					<!-- Excluir -->
 					<p:commandButton value="Excluir"
 						actionListener="#{UFBean.excluir(lista)}" 
 						update=":formPrincipal:tabelaUF"
@@ -53,11 +56,13 @@
 					</p:confirmDialog>
 
 				</p:column>
-				
+				<f:facet name="footer">
+        			Total cadastrado #{fn:length(UFBean.ufs)} UF
+    			</f:facet>
 			</p:dataTable>
 		</h:form>
 		<h:panelGrid columns="1" cellpadding="5">
-			<p:commandButton value="Cadastrar UF" type="button" onclick="PF('dialogCadastrar').show();" 
+			<p:commandButton value="Cadastrar" type="button" onclick="PF('dialogCadastrar').show();" 
 							 icon="ui-icon-disk"/>
 		</h:panelGrid>
 		

@@ -2,7 +2,8 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:p="http://primefaces.org/ui"
-	xmlns:ui="http://java.sun.com/jsf/facelets">
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions">
 	<h:head>
 		<title>Bairro</title>
 	</h:head>
@@ -14,21 +15,19 @@
 				reflow="true" rows="5" paginator="true">
 				
 				<f:facet name="header">Lista de Bairros</f:facet>
-				<p:column headerText="ID">
+				<p:column headerText="ID" sortBy="#{lista.id}" filterBy="#{lista.id}">
 					<h:outputText value="#{lista.id}" />
 				</p:column>
-				<p:column headerText="Nome">
+				<p:column headerText="Nome" sortBy="#{lista.nome}" filterBy="#{lista.nome}">
 					<h:outputText value="#{lista.nome}" />
 				</p:column>
-				<p:column headerText="Cidade">
+				<p:column headerText="Cidade" sortBy="#{lista.municipio.nome}" filterBy="#{lista.municipio.nome}">
 					<h:outputText value="#{lista.municipio.nome}" />
 				</p:column>
-				<p:column headerText="Estado">
+				<p:column headerText="Estado" sortBy="#{lista.municipio.uf.nome}" filterBy="#{lista.municipio.uf.nome}">
 					<h:outputText value="#{lista.municipio.uf.nome}" />
 				</p:column>
-				<p:column headerText="Ações">
-					
-					<!-- Alterar -->					
+				<p:column headerText="Ações">					
 					<p:commandButton value="Alterar" 
 						update=":formAlterar:Alterar"
 						oncomplete="PF('dialogAlterar').show();"
@@ -36,9 +35,6 @@
 						<f:setPropertyActionListener target="#{BairroBean.bairro}"
 							value="#{lista}" />
 					</p:commandButton>
-					
-					
-					<!-- Excluir -->
 					<p:commandButton value="Excluir"
 						actionListener="#{BairroBean.excluir(lista)}" 
 						update=":formPrincipal:tabelaBairro"
@@ -55,6 +51,9 @@
 					</p:confirmDialog>
 
 				</p:column>
+				<f:facet name="footer">
+        			Total cadastrado #{fn:length(BairroBean.bairros)} bairros
+    			</f:facet>
 				
 			</p:dataTable>
 		</h:form>
