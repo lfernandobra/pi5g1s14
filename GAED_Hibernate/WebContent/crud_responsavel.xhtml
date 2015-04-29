@@ -109,7 +109,7 @@
 					<h:outputText value="Data de Nascimento: " />
 					<p:inputMask id="dataNascimento"
 						value="#{ResponsavelBean.responsavel.datanasc}" mask="99/99/9999"
-						placeholder="Dia/Mês/Ano">
+						placeholder="dd/mm/aaaa">
 						<f:converter converterId="javax.faces.DateTime" />
 						<f:convertDateTime pattern="dd/MM/yyyy" timeZone="GMT-3" />
 					</p:inputMask>
@@ -146,7 +146,7 @@
 					<h:outputText value="Data de Ingresso: " />
 					<p:inputMask id="dataIngresso"
 						value="#{ResponsavelBean.responsavel.dataIngresso}"
-						mask="99/99/9999" placeholder="Dia/Mês/Ano">
+						mask="99/99/9999" placeholder="dd/mm/aaaa">
 						<f:converter converterId="javax.faces.DateTime" />
 						<f:convertDateTime pattern="dd/MM/yyyy" timeZone="GMT-3" />
 					</p:inputMask>
@@ -154,18 +154,11 @@
 					<h:outputText value="Data de Saida: " />
 					<p:inputMask id="dataSaida"
 						value="#{ResponsavelBean.responsavel.dataSaida}" mask="99/99/9999"
-						placeholder="Dia/Mês/Ano">
+						placeholder="dd/mm/aaaa">
 						<f:converter converterId="javax.faces.DateTime" />
 						<f:convertDateTime pattern="dd/MM/yyyy" timeZone="GMT-3" />
 					</p:inputMask>
 
-					<h:outputText value="Situação: " />
-					<p:selectOneMenu id="adimplente"
-						value="#{ResponsavelBean.responsavel.adimplente}"
-						style="width:150px">
-						<f:selectItem itemLabel="Inadimplente" itemValue="0" />
-						<f:selectItem itemLabel="Adimplente" itemValue="1" />
-					</p:selectOneMenu>
 					<p:commandButton value="Salvar" id="withIcon"
 						actionListener="#{ResponsavelBean.cadastrar}" icon="ui-icon-disk"
 						update=":formPrincipal:tabelaResponsavel"

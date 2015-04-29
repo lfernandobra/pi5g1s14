@@ -64,7 +64,7 @@ public class ResponsavelBean extends UsuarioBean implements Serializable {
 		responsavel = new Responsavel();
 	}
 	@SuppressWarnings("unchecked")
-	public void excluir(ActionEvent actionEvent){
+	public void excluir(Responsavel responsavel){
 		new ResponsavelDao().excluir(responsavel);
 		responsavels = new ResponsavelDao().listar();
 		responsavel = new Responsavel();
