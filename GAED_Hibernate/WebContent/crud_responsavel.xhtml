@@ -16,10 +16,10 @@
 				<p:column style="width:16px">
 					<p:rowToggler />
 				</p:column>
-				<p:column headerText="ID" sortBy="#{lista.id}">
+				<p:column headerText="ID" sortBy="#{lista.id}" filterBy="#{lista.id}">
 					<h:outputText value="#{lista.id}" />
 				</p:column>
-				<p:column headerText="Nome Completo" sortBy="#{lista.nome}">
+				<p:column headerText="Nome Completo" sortBy="#{lista.nome}" filterBy="#{lista.nome}">
 					<h:outputText value="#{lista.nome} #{lista.sobrenome}" />
 				</p:column>
 				<p:rowExpansion>
