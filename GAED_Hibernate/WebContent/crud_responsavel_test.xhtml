@@ -140,10 +140,10 @@
 					<p:inputText value="#{ResponsavelBean.responsavel.complemento}" />
 					<h:outputText value="CPF:" />
 					<p:inputMask id="CPFId" value="#{ResponsavelBean.responsavel.CPF}"
-						mask="999.999.999-99" />
+						mask="999999999-99" />
 					<h:outputText value="RG:" />
 					<p:inputMask id="RGId" value="#{ResponsavelBean.responsavel.RG}"
-						mask="99.999.999-9" />
+						mask="99999999-9" />
 					<h:outputText value="Adimplente: " />
 					<p:selectOneMenu id="adimplente"
 						value="#{ResponsavelBean.responsavel.adimplente}"
@@ -185,7 +185,10 @@
 						<f:converter converterId="javax.faces.DateTime" />
 						<f:convertDateTime pattern="dd/MM/yyyy" timeZone="GMT-3" />
 					</p:inputMask>
+					
 				</p:panelGrid>
+					
+					
 				<p:commandButton value="Salvar" id="withIcon"
 					actionListener="#{ResponsavelBean.cadastrar}" icon="ui-icon-disk"
 					update=":formPrincipal:tabelaResponsavel"
