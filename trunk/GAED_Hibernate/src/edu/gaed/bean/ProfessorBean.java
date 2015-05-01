@@ -58,13 +58,13 @@ public class ProfessorBean implements Serializable{
 	}
  
 	@SuppressWarnings("unchecked")
-	public void alterar(Professor professor){
+	public void alterar(){
 		new ProfessorDao().alterar(professor);
 		professors = new ProfessorDao().listar();
 		professor = new Professor();
 	}
 	@SuppressWarnings("unchecked")
-	public void excluir(ActionEvent actionEvent){
+	public void excluir(Professor professor){
 		new ProfessorDao().excluir(professor);
 		professors = new ProfessorDao().listar();
 		professor = new Professor();

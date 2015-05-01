@@ -58,13 +58,13 @@ public class BoletimBean implements Serializable{
 	}
  
 	@SuppressWarnings("unchecked")
-	public void alterar(Boletim boletim){
+	public void alterar(){
 		new BoletimDao().alterar(boletim);
 		boletims = new BoletimDao().listar();
 		boletim = new Boletim();
 	}
 	@SuppressWarnings("unchecked")
-	public void excluir(ActionEvent actionEvent){
+	public void excluir(Boletim boletim){
 		new BoletimDao().excluir(boletim);
 		boletims = new BoletimDao().listar();
 		boletim = new Boletim();

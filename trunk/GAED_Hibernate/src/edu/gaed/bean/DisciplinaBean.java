@@ -58,13 +58,13 @@ public class DisciplinaBean implements Serializable{
 	}
  
 	@SuppressWarnings("unchecked")
-	public void alterar(Disciplina disciplina){
+	public void alterar(){
 		new DisciplinaDao().alterar(disciplina);
 		disciplinas = new DisciplinaDao().listar();
 		disciplina = new Disciplina();
 	}
 	@SuppressWarnings("unchecked")
-	public void excluir(ActionEvent actionEvent){
+	public void excluir(Disciplina disciplina){
 		new DisciplinaDao().excluir(disciplina);
 		disciplinas = new DisciplinaDao().listar();
 		disciplina = new Disciplina();

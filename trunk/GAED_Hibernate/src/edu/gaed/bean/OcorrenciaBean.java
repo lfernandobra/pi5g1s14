@@ -58,13 +58,13 @@ public class OcorrenciaBean implements Serializable{
 	}
  
 	@SuppressWarnings("unchecked")
-	public void alterar(Ocorrencia ocorrencia){
+	public void alterar(){
 		new OcorrenciaDao().alterar(ocorrencia);
 		ocorrencias = new OcorrenciaDao().listar();
 		ocorrencia = new Ocorrencia();
 	}
 	@SuppressWarnings("unchecked")
-	public void excluir(ActionEvent actionEvent){
+	public void excluir(Ocorrencia ocorrencia){
 		new OcorrenciaDao().excluir(ocorrencia);
 		ocorrencias = new OcorrenciaDao().listar();
 		ocorrencia = new Ocorrencia();

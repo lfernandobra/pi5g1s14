@@ -58,13 +58,13 @@ public class GestorBean implements Serializable{
 	}
  
 	@SuppressWarnings("unchecked")
-	public void alterar(Gestor gestor){
+	public void alterar(){
 		new GestorDao().alterar(gestor);
 		gestors = new GestorDao().listar();
 		gestor = new Gestor();
 	}
 	@SuppressWarnings("unchecked")
-	public void excluir(ActionEvent actionEvent){
+	public void excluir(Gestor gestor){
 		new GestorDao().excluir(gestor);
 		gestors = new GestorDao().listar();
 		gestor = new Gestor();

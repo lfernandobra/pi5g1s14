@@ -12,7 +12,12 @@
 			<p:dataTable var="lista" value="#{ResponsavelBean.responsavels}"
 				id="tabelaResponsavel" resizableColumns="true" reflow="true"
 				rows="5" paginator="true">
-				<f:facet name="header">Lista de Responsaveis</f:facet>
+				<f:facet name="header">Lista de Responsaveis
+					<p:commandButton id="toggler" type="button" value="Colunas"
+						style="float:right" icon="ui-icon-calculator" />
+						<p:columnToggler datasource="tabelaResponsavel" trigger="toggler" />
+
+				</f:facet>
 				<p:column style="width:16px">
 					<p:rowToggler />
 				</p:column>
@@ -21,6 +26,18 @@
 				</p:column>
 				<p:column headerText="Nome Completo" sortBy="#{lista.nome}" filterBy="#{lista.nome}">
 					<h:outputText value="#{lista.nome} #{lista.sobrenome}" />
+				</p:column>
+				<p:column headerText="CPF" sortBy="#{lista.CPF}" filterBy="#{lista.CPF}">
+					<h:outputText value="#{lista.CPF}" />
+				</p:column>
+				<p:column headerText="RG" sortBy="#{lista.RG}" filterBy="#{lista.RG}">
+					<h:outputText value="#{lista.RG}" />
+				</p:column>
+				<p:column headerText="Sexo" sortBy="#{lista.sexo}" filterBy="#{lista.sexo}">
+					<h:outputText value="#{lista.sexo}" />
+				</p:column>
+				<p:column headerText="Situação" sortBy="#{lista.status}" filterBy="#{lista.status}">
+					<h:outputText value="#{lista.status}" />
 				</p:column>
 				<p:rowExpansion>
 					<p:panelGrid columns="2" columnClasses="label,value">
