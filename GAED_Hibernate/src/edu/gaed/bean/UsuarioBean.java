@@ -68,14 +68,14 @@ public class UsuarioBean implements Serializable {
 	}
 
 	@SuppressWarnings("unchecked")
-	public void alterar(Usuario usuario) {
+	public void alterar() {
 		new UsuarioDao().alterar(usuario);
 		usuarios = new UsuarioDao().listar();
 		usuario = new Usuario();
 	}
 
 	@SuppressWarnings("unchecked")
-	public void excluir(ActionEvent actionEvent) {
+	public void excluir(Usuario usuario) {
 		new UsuarioDao().excluir(usuario);
 		usuarios = new UsuarioDao().listar();
 		usuario = new Usuario();

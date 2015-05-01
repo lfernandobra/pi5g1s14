@@ -58,13 +58,13 @@ public class AlunoBean implements Serializable{
 	}
  
 	@SuppressWarnings("unchecked")
-	public void alterar(Aluno aluno){
+	public void alterar(){
 		new AlunoDao().alterar(aluno);
 		alunos = new AlunoDao().listar();
 		aluno = new Aluno();
 	}
 	@SuppressWarnings("unchecked")
-	public void excluir(ActionEvent actionEvent){
+	public void excluir(Aluno aluno){
 		new AlunoDao().excluir(aluno);
 		alunos = new AlunoDao().listar();
 		aluno = new Aluno();

@@ -58,13 +58,13 @@ public class SecretariaBean implements Serializable{
 	}
  
 	@SuppressWarnings("unchecked")
-	public void alterar(Secretaria secretaria){
+	public void alterar(){
 		new SecretariaDao().alterar(secretaria);
 		secretarias = new SecretariaDao().listar();
 		secretaria = new Secretaria();
 	}
 	@SuppressWarnings("unchecked")
-	public void excluir(ActionEvent actionEvent){
+	public void excluir(Secretaria secretaria){
 		new SecretariaDao().excluir(secretaria);
 		secretarias = new SecretariaDao().listar();
 		secretaria = new Secretaria();

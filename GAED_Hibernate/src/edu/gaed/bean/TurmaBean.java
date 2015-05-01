@@ -58,13 +58,13 @@ public class TurmaBean implements Serializable{
 	}
  
 	@SuppressWarnings("unchecked")
-	public void alterar(Turma turma){
+	public void alterar(){
 		new TurmaDao().alterar(turma);
 		turmas = new TurmaDao().listar();
 		turma = new Turma();
 	}
 	@SuppressWarnings("unchecked")
-	public void excluir(ActionEvent actionEvent){
+	public void excluir(Turma turma){
 		new TurmaDao().excluir(turma);
 		turmas = new TurmaDao().listar();
 		turma = new Turma();

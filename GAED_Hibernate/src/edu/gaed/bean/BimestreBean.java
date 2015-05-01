@@ -58,13 +58,13 @@ public class BimestreBean implements Serializable{
 	}
  
 	@SuppressWarnings("unchecked")
-	public void alterar(Bimestre bimestre){
+	public void alterar(){
 		new BimestreDao().alterar(bimestre);
 		bimestres = new BimestreDao().listar();
 		bimestre = new Bimestre();
 	}
 	@SuppressWarnings("unchecked")
-	public void excluir(ActionEvent actionEvent){
+	public void excluir(Bimestre bimestre){
 		new BimestreDao().excluir(bimestre);
 		bimestres = new BimestreDao().listar();
 		bimestre = new Bimestre();

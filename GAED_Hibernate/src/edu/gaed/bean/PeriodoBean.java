@@ -58,13 +58,13 @@ public class PeriodoBean implements Serializable{
 	}
  
 	@SuppressWarnings("unchecked")
-	public void alterar(Periodo periodo){
+	public void alterar(){
 		new PeriodoDao().alterar(periodo);
 		periodos = new PeriodoDao().listar();
 		periodo = new Periodo();
 	}
 	@SuppressWarnings("unchecked")
-	public void excluir(ActionEvent actionEvent){
+	public void excluir(Periodo periodo){
 		new PeriodoDao().excluir(periodo);
 		periodos = new PeriodoDao().listar();
 		periodo = new Periodo();

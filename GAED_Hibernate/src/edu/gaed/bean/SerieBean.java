@@ -58,13 +58,13 @@ public class SerieBean implements Serializable{
 	}
  
 	@SuppressWarnings("unchecked")
-	public void alterar(Serie serie){
+	public void alterar(){
 		new SerieDao().alterar(serie);
 		series = new SerieDao().listar();
 		serie = new Serie();
 	}
 	@SuppressWarnings("unchecked")
-	public void excluir(ActionEvent actionEvent){
+	public void excluir(Serie serie){
 		new SerieDao().excluir(serie);
 		series = new SerieDao().listar();
 		serie = new Serie();
