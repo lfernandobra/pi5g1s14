@@ -96,107 +96,7 @@
     			</f:facet>
 			</p:dataTable>
 		</h:form>
-		<h:panelGrid columns="1" cellpadding="5">
-			<p:commandButton value="Cadastrar" type="button" onclick="PF('dialogCadastrar').show();" 
-							 icon="ui-icon-disk"/>
-		</h:panelGrid>
-		<h:form id="formCadastrar">
-			<p:dialog header="Cadastrar"
-					  widgetVar="dialogCadastrar" 
-					  modal="true" 
-					  resizable="true">
-
-				<p:panelGrid id="panelCadastrar" columns="4">
-					<h:outputText value="Login:" />
-					<p:inputText value="#{ResponsavelBean.responsavel.login}" />
-					<h:outputText value="Senha:" />
-					<p:password value="#{ResponsavelBean.responsavel.senha}" />
-					<h:outputText value="Nome:" />
-					<p:inputText value="#{ResponsavelBean.responsavel.nome}" />
-					<h:outputText value="Sobrenome:" />
-					<p:inputText value="#{ResponsavelBean.responsavel.sobrenome}" />
-					<h:outputText value="Sexo:" />
-					<p:selectOneMenu id="sexo"
-						value="#{ResponsavelBean.responsavel.sexo}" style="width:150px">
-						<f:selectItem itemLabel="Masculino" itemValue="Masculino" />
-						<f:selectItem itemLabel="Feminino" itemValue="Feminino" />
-					</p:selectOneMenu>
-					<h:outputText value="Data de Nascimento: " />
-					<p:inputMask id="dataNascimento"
-						value="#{ResponsavelBean.responsavel.datanasc}" mask="99/99/9999"
-						placeholder="dd/mm/aaaa">
-						<f:converter converterId="javax.faces.DateTime" />
-						<f:convertDateTime pattern="dd/MM/yyyy" timeZone="GMT-3" />
-					</p:inputMask>
-					<h:outputText value="CEP:" />
-					<p:autoComplete value="#{ResponsavelBean.responsavel.logradouro}"
-						completeMethod="#{LogradouroBean.completeLogradouro()}"
-						var="logradouro" itemLabel="#{logradouro.CEP}"
-						itemValue="#{logradouro}" forceSelection="true">
-					</p:autoComplete>
-					<h:outputText value="Número:" />
-					<p:inputText value="#{ResponsavelBean.responsavel.numero}" />
-					<h:outputText value="Complemento:" />
-					<p:inputText value="#{ResponsavelBean.responsavel.complemento}" />
-					<h:outputText value="CPF:" />
-					<p:inputMask id="CPFId" value="#{ResponsavelBean.responsavel.CPF}"
-						mask="999.999.999-99" />
-					<h:outputText value="RG:" />
-					<p:inputMask id="RGId" value="#{ResponsavelBean.responsavel.RG}"
-						mask="99.999.999-9" />
-					<h:outputText value="Adimplente: " />
-					<p:selectOneMenu id="adimplente"
-						value="#{ResponsavelBean.responsavel.adimplente}"
-						style="width:150px">
-						<f:selectItem itemLabel="Não" itemValue="#{false}" />
-						<f:selectItem itemLabel="Sim" itemValue="#{true}" />
-					</p:selectOneMenu>
-					<h:outputText value="Status: " />
-					<p:selectOneMenu id="status"
-						value="#{ResponsavelBean.responsavel.status}"
-						style="width:150px">
-						<f:selectItem itemLabel="Inativo" itemValue="#{false}" />
-						<f:selectItem itemLabel="Ativo" itemValue="#{true}" />
-					</p:selectOneMenu>
-					<h:outputText value="Telefone:" />
-					<p:inputMask id="phoneWithExt"
-						value="#{ResponsavelBean.responsavel.telefone}"
-						mask="(99) 99999-9999" />
-					<h:outputText value="E-mail:" />
-					<p:inputText id="email" required="true" label="email" size="40"
-						requiredMessage="Please enter your email address."
-						validatorMessage="Invalid email format"
-						value="#{ResponsavelBean.responsavel.email}">
-						<f:validateRegex
-							pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
-					</p:inputText>
-					
-					<h:outputText value="Data de ingresso: " />
-					<p:inputMask id="dataIngresso"
-						value="#{ResponsavelBean.responsavel.dataIngresso}"
-						mask="99/99/9999" placeholder="dd/mm/aaaa">
-						<f:converter converterId="javax.faces.DateTime" />
-						<f:convertDateTime pattern="dd/MM/yyyy" timeZone="GMT-3" />
-					</p:inputMask>
-					<h:outputText value="Data de saida: " />
-					<p:inputMask id="dataSaida"
-						value="#{ResponsavelBean.responsavel.dataSaida}" mask="99/99/9999"
-						placeholder="dd/mm/aaaa">
-						<f:converter converterId="javax.faces.DateTime" />
-						<f:convertDateTime pattern="dd/MM/yyyy" timeZone="GMT-3" />
-					</p:inputMask>
-				</p:panelGrid>
-				<p:commandButton value="Salvar" id="withIcon"
-					actionListener="#{ResponsavelBean.cadastrar}" icon="ui-icon-disk"
-					update=":formPrincipal:tabelaResponsavel"
-					oncomplete="PF('dialogCadastrar').hide();" />
-				<p:commandButton value="Limpar" update="panelCadastrar"
-					process="@this">
-					<p:resetInput target="panelCadastrar" />
-				</p:commandButton>
-			</p:dialog>
-		</h:form>
-	</div>
+	</div>	
 	<h:form id="formAlterar">
 		<p:dialog header="Alterar" 
 				  widgetVar="dialogAlterar"
@@ -208,8 +108,6 @@
 			<p:panelGrid id="panelAlterar" columns="4">
 				<h:outputText value="Login:" />
 				<p:inputText value="#{ResponsavelBean.responsavel.login}" />
-				<h:outputText value="Senha:" />
-				<p:password value="#{ResponsavelBean.responsavel.senha}" />
 				<h:outputText value="Nome:" />
 				<p:inputText value="#{ResponsavelBean.responsavel.nome}" />
 				<h:outputText value="Sobrenome:" />
