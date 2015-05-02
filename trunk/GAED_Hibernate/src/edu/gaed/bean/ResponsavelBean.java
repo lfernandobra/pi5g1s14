@@ -7,7 +7,6 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
-import javax.faces.event.ActionEvent;
 
 import edu.gaed.vo.Responsavel;
 import edu.gaed.dao.ResponsavelDao;
@@ -51,10 +50,11 @@ public class ResponsavelBean extends UsuarioBean implements Serializable {
  
 	//Métodos dos botões 
 	@SuppressWarnings("unchecked")
-	public void cadastrar(ActionEvent actionEvent){
+	public String cadastrar(){
 		new ResponsavelDao().inserir(responsavel);
 		responsavels = new ResponsavelDao().listar();
 		responsavel = new Responsavel();
+		return "cadastrado";
 	}
  
 	@SuppressWarnings("unchecked")
