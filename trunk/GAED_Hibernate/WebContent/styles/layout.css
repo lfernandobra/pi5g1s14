@@ -1,6 +1,11 @@
+body{
+	font-size: 13px !important;
+}
+
 .login{
 	border:none;
 }
+
 .gridLogin{
 		position:absolute;
 		left:45%;
@@ -11,7 +16,10 @@
 .gridCabecalho{
 	font-family: sans-serif;
 	text-align: center;
-	border-style: none;
+}
+#fieldsetCabecalho{
+	font-size: 12px !important;
+	
 }
 .gridRodape{
 	font-family: sans-serif;
@@ -20,16 +28,13 @@
 	border-style: none;
 }
 .gridCentral{
-	border-style: none;
 }
 .menu{
-		position:absolute;
-		top:10px;
-		left:60%;
-		margin-left:-550px;
+	position:absolute;
+	top:80px;
+	left: 150px;
 }
 .paginaCabecalho{
-	border-style: 1px !important;
 	height: 100px !important;
 	width: 330px !important;
 }
@@ -39,8 +44,13 @@ z-index: 40 !important;
 overflow: visible !important; 
 } 
 
+.dialogCadastrar{
+z-index: 40 !important; 
+overflow: visible !important; 	
+}
+
 .ui-layout-north .ui-layout-unit-content {
-	z-index: 40 !important;
+	z-index: 60 !important;
 	overflow: visible!important; 
 } 
 
@@ -50,12 +60,11 @@ overflow: visible !important;
 		top:10%;
 		margin-left:-550px;
 		margin-top:-30px;
-		border-style: 1px;
+		border-style: none;
 		height: 100px !important;
 }
 
 .gridHome{
-	border-style: none;
 	position:absolute;
 		left:45%;
 		top:50%;
@@ -63,32 +72,40 @@ overflow: visible !important;
 		margin-top:50px;
 }
 .calendario{
-	border-style: 1px !important;
-	height:270px !important;
-	width:330px !important;
+	height:50% !important;
+	width:25% !important;
 	position: absolute !important;
-	margin-top: 250px !important;
+	top: 48% !important;
+	font-size: 14 !important;
+	border-style: none !important;
 }
 
-.gridEsquerda .gridDireita{
-	border-style: none !importante; 
-}
-.noticiasUol{
-	height:518px !important;
-	width:300px !important;
-}
-.noticiasCursos{
-	height:270px !important;
-	width:360px !important;
-	position: absolute !important;
-	margin-left: 360px !important;
-	margin-top: 250px !important;
-}
-.fotosEscola{
-	height:230px !important;
-	width:720px !important;
-	margin-left: -344px !important;
+.gridEsquerda{
+	border-style: none !important;
+} 
+
+.gridDireita{
+	border-style: none !important;
 }
 .centroHome{
-	border-style: none !importante; 
+	border-style: none !important;
+}
+.noticiasUol{
+	height:390px !important;
+	width:180px !important;
+	right: 5px !important;
+	border-style: none !important;
+}
+.noticiasCursos{
+	height:50% !important;
+	width:47% !important;
+	position: absolute !important;
+	left: 27% !important;
+	border-style: none !important;
+}
+.fotosEscola{
+	height:43% !important;
+	width:74% !important;
+	left: 0% !important;
+	top:2% !important;
 }

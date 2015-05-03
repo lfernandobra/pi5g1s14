@@ -1,43 +1,28 @@
-<!DOCTYPE html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:ui="http://java.sun.com/jsf/facelets">
+
 <h:head>
-	<title>Home</title>
-	<link rel="stylesheet" href="styles/layout.css" type="text/css" />
-</h:head>
-<h:body>
-
-	<p:layout fullPage="true">
-
-		<p:layoutUnit position="north" size="100" resizable="true" closable="true" collapsible="true">
-			<!-- <ui:include src="Cabecalho.xhtml"></ui:include>-->
-		</p:layoutUnit>
-
-		<p:layoutUnit position="west" size="150" styleClass="gridEsquerda"></p:layoutUnit>
-
-		<p:layoutUnit position="east" size="150" styleClass="gridDireita"></p:layoutUnit>
-
-		<p:layoutUnit position="center" styleClass="centroHome">
-		
-			<p:layout>
+<!--UOL Widgets - widgets.uol.com.br -->
+	
+</h:head> 
+<ui:decorate template="/Cabecalho.xhtml">
+        <ui:define name="center">
+            <p:layout>
 					
 				<p:layoutUnit position="center" size="50" styleClass="fotosEscola">
-					<p:panel id="basic" header="Fotos" footer="Movie Details">
-        				<h:panelGrid>
-	            			<h:outputText value="Fotos"	/>
-        				</h:panelGrid>
-    				</p:panel>
+				<p:panel id="basic4" header="Fotos">
+				</p:panel>
+					
 				</p:layoutUnit>
 				
-				<p:layoutUnit position="east" size="50" styleClass="noticiasUol">
-					<p:panel id="basic" header="Noticias UOL" footer="Movie Details">
-        				<h:panelGrid>
-	            			<h:outputText value="Teste UOL."	/>
-        				</h:panelGrid>
-    				</p:panel>
+				<p:layoutUnit position="east" size="30" styleClass="noticiasUol">
+							<div class="UOLWidgetsStyle">
+								<script src="scripts\scriptsUol.js" type="text/javascript"></script>
+							</div>
 				</p:layoutUnit>
 				
 				<p:layoutUnit position="west" size ="270" styleClass="calendario">
@@ -45,14 +30,12 @@
 				</p:layoutUnit>
 				
 				<p:layoutUnit position="south" size ="270" styleClass="noticiasCursos">
-					<p:panel id="basic" header="Noticias Cursos" footer="Movie Details">
-					<h:outputText value="Noticias Cursos"/>
+					<p:panel id="basic3" header="Noticias Cursos">
+						<a href="http://pronatec.mec.gov.br/institucional-90037/cursos-gratuitos" target="_blank"> No Pronatec são oferecidos cursos gratuitos nas escolas</a>
+						<a href="https://www.ceprocamp.sp.gov.br/" target="_blank"> CEPROCAMP Campinas, abre inscrições para varios cursos!</a>
 					</p:panel>
 				</p:layoutUnit>
-	
-			</p:layout>
-		</p:layoutUnit>
-
-	</p:layout>
-</h:body>
+				</p:layout>
+        </ui:define>
+    </ui:decorate>
 </html>
