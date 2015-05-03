@@ -102,7 +102,148 @@
 			<p:commandButton value="Cadastrar" type="button"
 				onclick="PF('dialogCadastrar').show();" icon="ui-icon-disk" />
 		</h:panelGrid>
+		
+		<p:dialog
+                    modal="true"
+                    appendTo="@(body)"
+                    widgetVar="dlgcriar"
+                    width="500"
+                    height="450"
+                    resizable="false"
+                    closable="true"
+                    closeOnEscape="true"
+                    >
 
+                    <h:form id="criar">
+                        <p:focus context="@form"/>
+                        <p:messages closable="true" autoUpdate="true"/>
+                        <p:panelGrid columns="2" styleClass="semBorda">
+                            <p:graphicImage height="100"
+                                            width="100"
+                                            id="pic"
+                                            url="#{usuarioBean.retornaFoto()}"/>         
+                            <h:outputText value="."   rendered="#{usuarioBean.ver eq false}"/>
+                            <p:commandButton onclick="PF('dlgfoto').show();"
+                                             update=":foto"
+                                             id="foto"
+                                             rendered="#{usuarioBean.ver eq false}"
+                                             immediate="true"
+                                             value="foto"
+                                             onstart="PF('statusDialog').show()" 
+                                             onsuccess="PF('statusDialog').hide();"
+                                             style="width: 100px"
+                                             />
+                            <h:outputText value="."/>
+
+                            <p:outputLabel value="Codigo:" rendered="#{usuarioBean.usuario.id ne null}"/>
+                            <h:outputText value="#{usuarioBean.usuario.id}"  rendered="#{usuarioBean.usuario.id ne null}"/>
+
+                            <p:outputLabel value="Usuario:" for="usuario"/>
+                            <p:inputText value="#{usuarioBean.usuario.usuario}"
+                                         maxlength="32"
+                                         required="true"
+                                         id="usuario"
+                                         disabled="#{usuarioBean.ver}"
+                                         placeholder="usuario"
+                                         requiredMessage="preencha o campo usuario"/>
+
+                            <p:outputLabel value="Senha:" for="senha" rendered="#{usuarioBean.usuario.id eq null}"/>
+                            <p:password value="#{usuarioBean.usuario.senha}"
+                                        required="true"
+                                        id="senha"
+                                        disabled="#{usuarioBean.ver}"
+                                        rendered="#{usuarioBean.usuario.id eq null}"
+                                        requiredMessage="preencha o campo senha"
+                                        feedback="true"
+                                        promptLabel="digite a senha"
+                                        placeholder="senha"
+                                        goodLabel="senha boa"
+                                        weakLabel="senha fraca"
+                                        strongLabel="senha forte"
+                                        maxlength="32"/>
+
+
+                            <p:outputLabel value="Email:" for="email"/>
+                            <p:inputText value="#{usuarioBean.usuario.email}"
+                                         maxlength="64"
+                                         size="40"
+                                         required="true"
+                                         id="email"
+                                         disabled="#{usuarioBean.ver}"
+                                         placeholder="email"
+                                         requiredMessage="preencha o campo email"
+                                         validatorMessage="email invalido">
+                                <f:validateRegex pattern="([^.@]+)(\.[^.@]+)*@([^.@]+\.)+([^.@]+)" />
+                            </p:inputText>
+
+                            <p:outputLabel value="Status:" for="status" rendered="#{session.getAttribute('usuarioLogado').nivel eq 'SUPER' or session.getAttribute('usuarioLogado').nivel eq 'ADMINISTRADOR'}"/>
+                            <p:selectOneMenu id='status'
+                                             value="#{usuarioBean.usuario.status}"
+                                             required="true"
+                                             rendered="#{session.getAttribute('usuarioLogado').nivel eq 'SUPER' or session.getAttribute('usuarioLogado').nivel eq 'ADMINISTRADOR'}"
+                                             disabled="#{usuarioBean.ver}"
+                                             requiredMessage="selecione o status">
+                                <f:selectItem itemLabel="selecione..."/>
+                                <f:selectItem itemValue="A" itemLabel="Ativo"/>
+                                <f:selectItem itemValue="I" itemLabel="Inativo"/>
+                                <f:selectItem itemValue="B" itemLabel="Bloqueado"/>
+                            </p:selectOneMenu>
+
+                            <p:outputLabel value="Nivel:" for="nivel"  rendered="#{session.getAttribute('usuarioLogado').nivel ne 'USUARIO'}"/>
+                            <p:selectOneMenu id='nivel'
+                                             rendered="#{session.getAttribute('usuarioLogado').nivel ne 'USUARIO'}"
+                                             disabled="#{usuarioBean.ver}"
+                                             value="#{usuarioBean.usuario.nivel}"
+                                             required="true"
+                                             requiredMessage="selecione o nivel">
+                                <f:selectItem itemLabel="selecione..."/>
+                                <f:selectItem itemValue="ADMINISTRADOR" itemLabel="ADMINISTRADOR"  />
+                                <f:selectItem itemValue="USUARIO" itemLabel="USUARIO"/>
+                            </p:selectOneMenu>
+
+                            <p:outputLabel value="Data Cadastro:" rendered="#{usuarioBean.ver}"  />
+                            <h:outputText value="#{usuarioBean.usuario.dataCadastro}" rendered="#{usuarioBean.ver}" >
+                                <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss"/>
+                            </h:outputText>
+
+                            <p:outputLabel value="Data Alteracao:"  rendered="#{usuarioBean.ver}" />
+                            <h:outputText value="#{usuarioBean.usuario.dataAlteracao}" rendered="#{usuarioBean.ver}" >
+                                <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss"/>
+                            </h:outputText>
+
+                            <p:outputLabel value="Usuario Alteracao:" rendered="#{usuarioBean.ver}" />
+                            <h:outputText value="#{util.nomeUsuario(usuarioBean.usuario.usuarioAlteracao)}" rendered="#{usuarioBean.ver}" />
+
+                            <p:commandButton value="salvar"
+                                             rendered="#{usuarioBean.ver eq false}"
+                                             actionListener="#{usuarioBean.salvar()}"
+                                             update="@form"
+                                             onstart="PF('statusDialog').show()" 
+                                             onsuccess="PF('statusDialog').hide();"
+                                             style="width: 100px">
+                                <p:confirm header="Confirmação" message="Tem certeza?" icon="ui-icon-alert" />
+                            </p:commandButton>
+
+                            <p:commandButton value="cancelar"
+                                             update="@form"
+                                             rendered="#{usuarioBean.ver eq false}"
+                                             immediate="true"
+                                             oncomplete="PF('dlgcriar').hide();"
+                                             onstart="PF('statusDialog').show()" 
+                                             onsuccess="PF('statusDialog').hide();"
+                                             style="width: 100px">
+                                <p:confirm header="Confirmação" message="Tem certeza?" icon="ui-icon-alert" />
+                            </p:commandButton>
+
+                        </p:panelGrid>
+
+
+                    </h:form>
+
+                </p:dialog>
+		
+		
+		
 		<h:form>
 			<p:dialog header="Cadastrar Aluno" widgetVar="dialogCadastrar"
 				modal="true" resizable="true">
