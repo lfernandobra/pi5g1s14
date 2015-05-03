@@ -34,7 +34,7 @@
 				<p:column headerText="Ações">
 										
 					<p:commandButton value="Alterar" 
-						update=":formAlterar:Alterar"
+						update=":formAlterar"
 						oncomplete="PF('dialogAlterar').show();"
 						icon="ui-icon-pencil">
 						<f:setPropertyActionListener target="#{UFBean.uf}"
@@ -101,13 +101,12 @@
 		</p:dialog>
 
 	</div>
-	<h:form id="formAlterar">
-		<p:dialog header="Alterar" 
+	<p:dialog header="Alterar" 
 				  widgetVar="dialogAlterar"
 				  modal="true"
 				  resizable="true"
 				  id="Alterar">
-			
+		<h:form id="formAlterar">
 			<h:inputHidden value="#{UFBean.uf}" />
 			<p:panelGrid id="panelAlterar" columns="2">
 				<h:outputText value="Nome:" />
@@ -123,7 +122,8 @@
 				<p:resetInput target="panelAlterar" />
 			</p:commandButton>
 			</p:panelGrid>		
-		</p:dialog>
-	</h:form>					
+		
+	</h:form>
+	</p:dialog>					
 	</body>
 </html>

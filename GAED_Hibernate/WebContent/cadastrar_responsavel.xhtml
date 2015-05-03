@@ -10,7 +10,7 @@
 <body>
 	<h:form id="formCadastrar">
 		<p:panel id="panel" header="Cadastrar Responsavel">	
-			<p:messages id="msgs" />
+			<p:messagess id="msgs" />
 			<p:panelGrid cellpadding="5" columns="6">
 
 				<p:outputLabel for="login" value="Login:" />
@@ -18,21 +18,21 @@
 					required="true" label="Login" id="login">
 					<f:validateLength minimum="6" />
 				</p:inputText>
-				<p:message for="login" display="icon" />
+				<p:messages for="login" display="icon" />
 
 				<p:outputLabel for="senha" value="Senha:" />
 				<p:password value="#{ResponsavelBean.responsavel.senha}"
 					required="true" label="Senha" id="senha">
 					<f:validateLength minimum="8" />
 				</p:password>
-				<p:message for="senha" display="icon" />
+				<p:messages for="senha" display="icon" />
 
 				<p:outputLabel for="nome" value="Nome:" />
 				<p:inputText value="#{ResponsavelBean.responsavel.nome}"
 					required="true" label="nome" id="nome">
 					<f:validateLength minimum="3" />
 				</p:inputText>
-				<p:message for="nome" display="icon" />
+				<p:messages for="nome" display="icon" />
 
 
 				<p:outputLabel for="sobrenome" value="Sobrenome:" />
@@ -40,7 +40,7 @@
 					required="true" label="sobrenome" id="sobrenome">
 					<f:validateLength minimum="3" />
 				</p:inputText>
-				<p:message for="sobrenome" display="icon" />
+				<p:messages for="sobrenome" display="icon" />
 
 				<p:outputLabel for="sexo" value="Sexo:" />
 				<p:selectOneMenu id="sexo"
@@ -49,7 +49,7 @@
 					<f:selectItem itemLabel="Masculino" itemValue="Masculino" />
 					<f:selectItem itemLabel="Feminino" itemValue="Feminino" />
 				</p:selectOneMenu>
-				<p:message for="sexo" display="icon" />
+				<p:messages for="sexo" display="icon" />
 
 				<p:outputLabel for="datanasc" value="Data de nascimento:" />
 				<p:inputMask value="#{ResponsavelBean.responsavel.datanasc}"
@@ -58,7 +58,7 @@
 					<f:converter converterId="javax.faces.DateTime" />
 					<f:convertDateTime pattern="dd/MM/yyyy" timeZone="GMT-3" />
 				</p:inputMask>
-				<p:message for="datanasc" display="icon" />
+				<p:messages for="datanasc" display="icon" />
 
 
 				<p:outputLabel for="cep" value="CEP:" />
@@ -68,28 +68,28 @@
 					itemValue="#{logradouro}" forceSelection="true" required="true"
 					label="CEP" id="cep">
 				</p:autoComplete>
-				<p:message for="cep" display="icon" />
+				<p:messages for="cep" display="icon" />
 
 				<p:outputLabel for="numero" value="Número:" />
 				<p:inputText value="#{ResponsavelBean.responsavel.numero}"
 					required="true" label="Número" id="numero" />
-				<p:message for="numero" display="icon" />
+				<p:messages for="numero" display="icon" />
 
 
 				<p:outputLabel for="complemento" value="Complemento:" />
 				<p:inputText value="#{ResponsavelBean.responsavel.complemento}"
 					required="true" label="Complemento" id="complemento" />
-				<p:message for="complemento" display="icon" />
+				<p:messages for="complemento" display="icon" />
 
 				<p:outputLabel for="cpf" value="CPF:" />
 				<p:inputMask id="cpf" value="#{ResponsavelBean.responsavel.CPF}"
 					mask="999.999.999-99" required="true" label="CPF" />
-				<p:message for="cpf" display="icon" />
+				<p:messages for="cpf" display="icon" />
 
 				<p:outputLabel for="rg" value="RG:" />
 				<p:inputMask id="rg" value="#{ResponsavelBean.responsavel.RG}"
 					mask="99.999.999-9" required="true" label="RG" />
-				<p:message for="rg" display="icon" />
+				<p:messages for="rg" display="icon" />
 
 				<p:outputLabel for="adimplente" value="Adimplente:" />
 				<p:selectOneMenu id="adimplente"
@@ -98,7 +98,7 @@
 					<f:selectItem itemLabel="Não" itemValue="#{false}" />
 					<f:selectItem itemLabel="Sim" itemValue="#{true}" />
 				</p:selectOneMenu>
-				<p:message for="adimplente" display="icon" />
+				<p:messages for="adimplente" display="icon" />
 
 				<p:outputLabel for="status" value="Situação:" />
 				<p:selectOneMenu id="status"
@@ -107,13 +107,13 @@
 					<f:selectItem itemLabel="Inativo" itemValue="#{false}" />
 					<f:selectItem itemLabel="Ativo" itemValue="#{true}" />
 				</p:selectOneMenu>
-				<p:message for="status" display="icon" />
+				<p:messages for="status" display="icon" />
 
 				<p:outputLabel for="telefone" value="Telefone:" />
 				<p:inputMask value="#{ResponsavelBean.responsavel.telefone}"
 					mask="(99) 99999-9999" required="true" label="Telefone"
 					id="telefone" />
-				<p:message for="telefone" display="icon" />
+				<p:messages for="telefone" display="icon" />
 
 				<p:outputLabel for="email" value="Email:" />
 				<p:inputText id="email" required="true" size="40"
@@ -123,7 +123,7 @@
 					<f:validateRegex
 						pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
 				</p:inputText>
-				<p:message for="email" display="icon" />
+				<p:messages for="email" display="icon" />
 
 
 				<p:outputLabel for="dataIngresso" value="Data de ingresso:" />
@@ -134,7 +134,7 @@
 					<f:converter converterId="javax.faces.DateTime" />
 					<f:convertDateTime pattern="dd/MM/yyyy" timeZone="GMT-3" />
 				</p:inputMask>
-				<p:message for="dataIngresso" display="icon" />
+				<p:messages for="dataIngresso" display="icon" />
 
 
 				<p:outputLabel for="dataSaida" value="Data de saída:" />
@@ -144,7 +144,7 @@
 					<f:converter converterId="javax.faces.DateTime" />
 					<f:convertDateTime pattern="dd/MM/yyyy" timeZone="GMT-3" />
 				</p:inputMask>
-				<p:message for="dataSaida" display="icon" />
+				<p:messages for="dataSaida" display="icon" />
 
 			</p:panelGrid>
 			<p:commandButton value="Salvar"
