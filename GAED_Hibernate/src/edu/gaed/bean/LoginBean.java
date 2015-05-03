@@ -31,24 +31,24 @@ public class LoginBean {
     
  
     public String verificarDatos() throws Exception {
-    	LoginDao usuDAO = new LoginDao();
-    	Usuario us;
-    	String resultado;
-    
-    	try {
-    		us = usuDAO.verificaDados(this.usuario);
-    		
-    		if(us != null) {
-    			FacesContext.getCurrentInstance().getExternalContext()
-    					.getSessionMap().put("usuario",us);
-    			resultado = "home";
-    		} else { resultado = "login";}
-    	} catch (Exception e) {
-    		throw e;
-    	}
-    	
-    	return resultado;
-    }
+		LoginDao usuDAO = new LoginDao();
+		Usuario us;
+		String resultado;
+	
+		try {
+			us = usuDAO.verificaDados(this.usuario);
+			
+			if(us != null) {
+				FacesContext.getCurrentInstance().getExternalContext()
+						.getSessionMap().put("usuario",us);
+				resultado = "home";
+			} else { resultado = "login";}
+		} catch (Exception e) {
+			throw e;
+		}
+		
+		return resultado;
+	}
     
     public boolean verificarSessao(){
     	boolean estado;
