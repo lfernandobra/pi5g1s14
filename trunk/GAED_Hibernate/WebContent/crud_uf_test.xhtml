@@ -37,7 +37,7 @@
 				<p:column headerText="Ações">
 										
 					<p:commandButton value="Alterar" 
-						update=":formAlterar:Alterar"
+						update=":formAlterar"
 						oncomplete="PF('dialogAlterar').show();"
 						icon="ui-icon-pencil">
 						<f:setPropertyActionListener target="#{UFBean.uf}"
@@ -87,7 +87,9 @@
 					<p:inputText value="#{UFBean.uf.sigla}" 
 								 required="true" 
 								 id="sigla"
-								 requiredMessage="Sigla não deve estar vazio!" />
+								 requiredMessage="Sigla não deve estar vazio!"
+								  >			  
+					</p:inputText>			  
 					<p:messages for="sigla" display="icon" closable="true"/>
 				</p:panelGrid>
 				<p:commandButton value="Salvar" id="withIcon"
@@ -103,14 +105,12 @@
 		</p:dialog>
 
 	</div>
-	<h:form id="formAlterar">
-		<p:dialog header="Alterar" 
+	<p:dialog header="Alterar" 
 				  widgetVar="dialogAlterar"
 				  modal="true"
 				  resizable="true"
 				  id="Alterar">
-			
-			<h:inputHidden value="#{UFBean.uf}" />
+		<h:form id="formAlterar">	
 			<p:panelGrid id="panelAlterar" columns="2">
 				<h:outputText value="Nome:" />
 				<p:inputText value="#{UFBean.uf.nome}" />
@@ -125,7 +125,8 @@
 				<p:resetInput target="panelAlterar" />
 			</p:commandButton>
 			</p:panelGrid>		
-		</p:dialog>
-	</h:form>					
+		
+	</h:form>
+	</p:dialog>					
 	</body>
 </html>
