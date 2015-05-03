@@ -10,14 +10,17 @@
 		<script src="scripts/scripts.js" type="text/javascript"></script>
 	</h:head>
 	<body>
-	<div align="center">
-		
-
+	<div align="center">	
 		<h:form id="formPrincipal">
-			
-			<p:dataTable var="lista" value="#{UFBean.ufs}" id="tabelaUF"
-				resizableColumns="true"
-				reflow="true" rows="5" paginator="true">
+				<p:dataTable var="lista" 
+							 value="#{UFBean.ufs}" 
+							 id="tabelaUF"
+							 resizableColumns="true"
+							 reflow="true" 
+							 rows="5"
+							 emptyMessage="Nenhuma UF cadastrada" 
+							 paginator="true"
+							 paginatorPosition="bottom">
 
 				<f:facet name="header">Lista de UF - Unidade Federativa 
 				</f:facet>
@@ -64,36 +67,35 @@
 		</h:form>
 		<h:panelGrid columns="1" cellpadding="5">
 			<p:commandButton value="Cadastrar" type="button" onclick="PF('dialogCadastrar').show();" 
-							 icon="ui-icon-disk" actionListener="#{UFBean.cadastrar}"/>
+							 icon="ui-icon-disk"/>
 		</h:panelGrid>
-
-
-		<p:dialog header="Cadastrar Unidade Federativa - UF"
-				  widgetVar="dialogCadastrar" modal="true" resizable="true"
-			      appendTo="@(body)" 
-			      closable="true" draggable="false"
-			      closeOnEscape="true"
+		<p:dialog header="Cadastrar"
+				  widgetVar="dialogCadastrar" 
+				  modal="true" 
+				  resizable="true"
 			      id="formCad">
 			<h:form id="formCadastrar">
 				<p:focus context="@form" />
-				<p:messages id="msgs" />
 				<p:panelGrid id="panelCadastrar" columns="3">
-
 					<p:outputLabel for="nome" value="Nome:" />
-					<p:inputText value="#{UFBean.uf.nome}" required="true" id="nome" />
-					<p:message for="nome" display="icon" />
-
+					<p:inputText value="#{UFBean.uf.nome}" 
+								 required="true" 
+								 id="nome"
+								 requiredMessage="Nome não deve estar vazio!" />
+					<p:messages for="nome" display="icon" closable="true"/>
 					<p:outputLabel for="sigla" value="Sigla:" />
-					<p:inputText value="#{UFBean.uf.sigla}" required="true" id="sigla" />
-					<p:message for="sigla" display="icon" />
-
-
+					<p:inputText value="#{UFBean.uf.sigla}" 
+								 required="true" 
+								 id="sigla"
+								 requiredMessage="Sigla não deve estar vazio!" />
+					<p:messages for="sigla" display="icon" closable="true"/>
 				</p:panelGrid>
 				<p:commandButton value="Salvar" id="withIcon"
 					actionListener="#{UFBean.cadastrar}" icon="ui-icon-disk"
-					update="@form" 
-					oncomplete="closeDialogIfSucess(xhr, status, args, dialogCadastrar, formCad)" />
-				<p:commandButton value="Limpar" update="panelCadastrar"
+					update=":formPrincipal:tabelaUF @form"
+					oncomplete="closeDialogIfSucess(xhr, status, args, 'dialogCadastrar','formCad')"
+					onsuccess="PF('dialogCadastrar').hide();" />
+				<p:commandButton value="Limpar" update="@form"
 					process="@this">
 					<p:resetInput target="panelCadastrar" />
 				</p:commandButton>
