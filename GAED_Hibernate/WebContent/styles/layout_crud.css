@@ -1,0 +1,11 @@
+@CHARSET "ISO-8859-1";
+body{
+	font-size: 13px !important;
+}
+
+.dialogCadastrar{
+	z-index: 40 !important;
+	overflow: visible !important;
+	border-style: none !important;
+}
+
