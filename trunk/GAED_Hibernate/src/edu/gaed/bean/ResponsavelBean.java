@@ -22,7 +22,8 @@ public class ResponsavelBean extends UsuarioBean implements Serializable {
 
 	Responsavel responsavel = new Responsavel();
 	 
-	List<Responsavel> responsavels = new ArrayList<Responsavel>(); 
+	List<Responsavel> responsavels = new ArrayList<Responsavel>();
+	
 	
 	public ResponsavelBean(Responsavel responsavel, List<Responsavel> responsavels) {
 		super();
@@ -50,11 +51,10 @@ public class ResponsavelBean extends UsuarioBean implements Serializable {
  
 	//Métodos dos botões 
 	@SuppressWarnings("unchecked")
-	public String cadastrar(){
+	public void cadastrar(){
 		new ResponsavelDao().inserir(responsavel);
 		responsavels = new ResponsavelDao().listar();
 		responsavel = new Responsavel();
-		return "cadastrado";
 	}
  
 	@SuppressWarnings("unchecked")
