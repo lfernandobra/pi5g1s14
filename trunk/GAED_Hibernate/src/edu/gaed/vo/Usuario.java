@@ -3,6 +3,7 @@ package edu.gaed.vo;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -13,8 +14,8 @@ import javax.persistence.DiscriminatorType;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
-import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -28,7 +29,7 @@ public class Usuario implements Serializable{
 			String sobrenome, String sexo, Date datanasc, String email,
 			String cPF, String rG, String numero, String complemento,
 			String telefone, boolean status, Date dataIngresso, Date dataSaida,
-			byte[] foto, Logradouro logradouro, Perfil perfil) {
+			Foto foto, Logradouro logradouro, Perfil perfil) {
 		super();
 		this.id = id;
 		this.login = login;
@@ -107,9 +108,15 @@ public class Usuario implements Serializable{
 	@Column(name="datasaida")
 	private Date dataSaida;
 	
+	/*
 	@Column(name="foto", length=10000000)
 	@Lob
 	private byte[] foto;
+	*/
+
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name="id_foto")
+	private Foto foto;
 	
 	@ManyToOne
 	@JoinColumn(name="id_logradouro")
@@ -180,15 +187,7 @@ public class Usuario implements Serializable{
 	public void setTelefone(String telefone) {
 		this.telefone = telefone;
 	}
-/*
-	public Perfil getPerfil() {
-		return perfil;
-	}
 
-	public void setPerfil(Perfil perfil) {
-		this.perfil = perfil;
-	}
-*/
 	public String getEmail() {
 		return email;
 	}
@@ -213,7 +212,7 @@ public class Usuario implements Serializable{
 	public void setSenha(String senha) {
 		this.senha = senha;
 	}
-/*
+
 	public Foto getFoto() {
 		return foto;
 	}
@@ -221,7 +220,7 @@ public class Usuario implements Serializable{
 	public void setFoto(Foto foto) {
 		this.foto = foto;
 	}
-*/
+
 	public String getCPF() {
 		return CPF;
 	}
@@ -276,15 +275,6 @@ public class Usuario implements Serializable{
 
 	public void setLogradouro(Logradouro logradouro) {
 		this.logradouro = logradouro;
-	}
-	
-	public byte[] getFoto() {
-		return foto;
-	}
-
-
-	public void setFoto(byte[] foto) {
-		this.foto = foto;
 	}
 
 
