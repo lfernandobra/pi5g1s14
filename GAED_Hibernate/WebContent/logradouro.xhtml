@@ -110,7 +110,13 @@
 							id="bairro" />
 					</h:selectOneMenu>
 					<p:messages for="bairro" display="icon" closable="true" />
-					
+
+					<p:outputLabel for="cep" value="CEP:" />
+					<p:inputText value="#{LogradouroBean.logradouro.CEP}"
+						required="true" id="cep"
+						requiredMessage="CEP não deve estar vazio!" />
+					<p:messages for="cep" display="icon" closable="true" />
+
 				</p:panelGrid>
 				<p:commandButton value="Salvar" id="withIcon"
 					actionListener="#{LogradouroBean.cadastrar}" icon="ui-icon-disk"
@@ -143,13 +149,13 @@
 						id="bairro" />
 				</h:selectOneMenu>
 				<p:messages for="bairro" display="icon" closable="true" />
-				
+
 				<p:outputLabel for="cep" value="CEP:" />
 				<p:inputText value="#{LogradouroBean.logradouro.CEP}"
 					required="true" id="cep"
 					requiredMessage="CEP não deve estar vazio!" />
 				<p:messages for="cep" display="icon" closable="true" />
-				
+
 			</p:panelGrid>
 			<p:commandButton value="Salvar" id="withIcon"
 				actionListener="#{LogradouroBean.alterar}" icon="ui-icon-disk"

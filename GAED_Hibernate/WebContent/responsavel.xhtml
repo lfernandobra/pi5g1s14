@@ -41,7 +41,7 @@
 						<h:outputText value="Data de nascimento " />
 						<h:outputFormat value="{0, date, dd/MM/yyyy}">
 							<f:param value="#{lista.datanasc}" />
-						</h:outputFormat>
+						</h:outputFormat> 
 						<h:outputText value="Sexo " />
 						<h:outputText value="#{lista.sexo}" />
 						<h:outputText value="RG " />
@@ -138,7 +138,7 @@
 					</p:inputText>
 					<p:messages for="nome" display="icon" closable="true" />
 
-
+					
 					<p:outputLabel for="sobrenome" value="Sobrenome:" />
 					<p:inputText value="#{ResponsavelBean.responsavel.sobrenome}"
 						required="true" label="sobrenome" id="sobrenome"
@@ -255,6 +255,13 @@
 						<f:convertDateTime pattern="dd/MM/yyyy" timeZone="GMT-3" />
 					</p:inputMask>
 					<p:messages for="dataSaida" display="icon" />
+					
+					<p:outputLabel for="foto" value="Foto:" />
+					<p:fileUpload id="foto"  
+								  fileUploadListener="#{ResponsavelBean.uploadAction}" 
+								  auto="true"/>
+					
+					
 				</p:panelGrid>
 				<p:commandButton value="Salvar" id="withIcon"
 					actionListener="#{ResponsavelBean.cadastrar}" icon="ui-icon-disk"

@@ -1,18 +1,22 @@
 package edu.gaed.bean;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
+import javax.faces.bean.SessionScoped;
+
+
+import org.primefaces.event.FileUploadEvent;
 
 import edu.gaed.vo.Responsavel;
 import edu.gaed.dao.ResponsavelDao;
  
 @ManagedBean(name="ResponsavelBean")
-@ViewScoped
+@SessionScoped
 public class ResponsavelBean extends UsuarioBean implements Serializable {
  
 	/**
@@ -23,6 +27,8 @@ public class ResponsavelBean extends UsuarioBean implements Serializable {
 	Responsavel responsavel = new Responsavel();
 	 
 	List<Responsavel> responsavels = new ArrayList<Responsavel>();
+	
+	private FotoBean fotoBean = new FotoBean();
 	
 	
 	public ResponsavelBean(Responsavel responsavel, List<Responsavel> responsavels) {
@@ -69,6 +75,17 @@ public class ResponsavelBean extends UsuarioBean implements Serializable {
 		responsavels = new ResponsavelDao().listar();
 		responsavel = new Responsavel();
 	}
+	
+	//Upload foto
+	
+	public void uploadAction (FileUploadEvent event) throws IOException{
+		/*
+		this.fotoBean.fileUpload(event);
+		this.responsavel.setFoto(this.fotoBean.foto);
+		*/
+		this.fotoBean.fileUpload(event);
+		this.responsavel.setFoto(this.fotoBean.getFoto());
+	}
 
 	public Responsavel getResponsavel() {
 		return responsavel;
@@ -84,6 +101,14 @@ public class ResponsavelBean extends UsuarioBean implements Serializable {
 
 	public void setResponsavels(List<Responsavel> responsavels) {
 		this.responsavels = responsavels;
+	}
+
+	public FotoBean getFotoBean() {
+		return fotoBean;
+	}
+
+	public void setFotoBean(FotoBean fotoBean) {
+		this.fotoBean = fotoBean;
 	}
  
 	//getters and setters

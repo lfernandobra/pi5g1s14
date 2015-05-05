@@ -74,7 +74,7 @@
 						requiredMessage="Nome não deve estar vazio!" />
 					<p:messages for="nome" display="icon" closable="true" />
 
-					<p:outputLabel for="municipio" value="Municipio:" />
+					<p:outputLabel for="municipio" value="Estado:" />
 					<h:selectOneMenu value="#{MunicipioBean.municipio.uf}">
 						<f:selectItem itemLabel="-- Selecione --" noSelectionOption="true" />
 						<f:selectItems value="#{UFBean.ufs}" var="uf" itemValue="#{uf}"
@@ -104,7 +104,7 @@
 					id="nome" requiredMessage="Nome não deve estar vazio!" />
 				<p:messages for="nome" display="icon" closable="true" />
 
-				<p:outputLabel for="municipio" value="Municipio:" />
+				<p:outputLabel for="municipio" value="Estado:" />
 				<h:selectOneMenu value="#{MunicipioBean.municipio.uf}">
 					<f:selectItem itemLabel="-- Selecione --" noSelectionOption="true" />
 					<f:selectItems value="#{UFBean.ufs}" var="uf" itemValue="#{uf}"

@@ -10,7 +10,7 @@
 		<property name="show_sql">true</property>
 		
 		<!-- create-drop,create,update --> 
-		<property name="hibernate.hbm2ddl.auto">create</property>
+		<property name="hibernate.hbm2ddl.auto">update</property>
 		
 		<mapping class="edu.gaed.vo.Aluno" />
 		<mapping class="edu.gaed.vo.Anexo" />
@@ -20,8 +20,9 @@
 		<mapping class="edu.gaed.vo.BoletimAlunoDisciplina" />
 		<mapping class="edu.gaed.vo.BoletimAlunoDisciplinaID" />
 		<mapping class="edu.gaed.vo.Disciplina" />
-		<mapping class="edu.gaed.vo.Imagem" />
+		<mapping class="edu.gaed.vo.Foto" />
 		<mapping class="edu.gaed.vo.Gestor" />
+		<mapping class="edu.gaed.vo.Imagem" />
 		<mapping class="edu.gaed.vo.Logradouro" />
 		<mapping class="edu.gaed.vo.Municipio" />
 		<mapping class="edu.gaed.vo.Ocorrencia" />
