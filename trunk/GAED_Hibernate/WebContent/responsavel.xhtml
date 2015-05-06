@@ -20,6 +20,7 @@
 				         rows="5" 
 				         paginator="true"
 				         emptyMessage="Nenhum responsavel cadastrado">
+				<h:inputHidden value="#{FotoBean.verFoto(lista.foto.foto,lista.nome)}" />          
 				<f:facet name="header">Lista de Responsavel </f:facet>
 				<p:column style="width:16px">
 					<p:rowToggler />
@@ -42,7 +43,8 @@
 						<h:outputFormat value="{0, date, dd/MM/yyyy}">
 							<f:param value="#{lista.datanasc}" />
 						</h:outputFormat>
-						<p:graphicImage url="#{FotoBean.verFoto(lista.foto.foto,lista.nome)}" cache="false" /> 
+						<h:outputText value="Foto " />
+						<h:graphicImage value="/temp/#{lista.nome}.png" />
 						<h:outputText value="Sexo " />
 						<h:outputText value="#{lista.sexo}" />
 						<h:outputText value="RG " />
