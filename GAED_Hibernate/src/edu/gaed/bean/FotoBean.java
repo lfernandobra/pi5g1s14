@@ -1,5 +1,8 @@
 package edu.gaed.bean;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -11,6 +14,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
+import javax.servlet.ServletContext;
 
 import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.UploadedFile;
@@ -126,6 +130,46 @@ public class FotoBean implements Serializable{
 		}
 	}
 	
+	public String verFoto(byte [] foto,String nome) {
+		 
+        try {
+            ServletContext sContext = (ServletContext) FacesContext
+                    .getCurrentInstance().getExternalContext().getContext();
+ 
+            File folder = new File(sContext.getRealPath("/temp"));
+            if (!folder.exists()){
+                folder.mkdirs();
+ 
+            }
+             String nomeArquivo = nome + ".png";
+             String arquivo = sContext.getRealPath("/temp") + File.separator
+                        + nomeArquivo;
+             System.out.println(arquivo);
+             System.out.println(foto);
+             criaArquivo(foto, arquivo);
+             return arquivo;
+             
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return null;	
+    }
+
+	private void criaArquivo(byte[] bytes, String arquivo) {
+	    FileOutputStream fos;
+	
+	    try {
+	        fos = new FileOutputStream(arquivo);
+	        fos.write(bytes);
+	
+	        fos.flush();
+	        fos.close();
+	    } catch (FileNotFoundException ex) {
+	        ex.printStackTrace();
+	    } catch (IOException ex) {
+	        ex.printStackTrace();
+	    }
+	}
 	
 	
 	
