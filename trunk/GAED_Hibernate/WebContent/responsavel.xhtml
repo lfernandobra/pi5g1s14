@@ -114,6 +114,7 @@
 		</h:panelGrid>
 		<p:dialog header="Cadastrar" widgetVar="dialogCadastrar" modal="true"
 			resizable="true" id="formCad">
+			<p:growl id="growl" showDetail="true" life="4000" />
 			<h:form id="formCadastrar">
 				<p:focus context="@form" />
 				<p:panelGrid id="panelCadastrar" columns="6">
@@ -260,11 +261,15 @@
 					<p:messages for="dataSaida" display="icon" />
 					
 					<p:outputLabel for="foto" value="Foto:" />
-					<p:fileUpload id="foto"  
-								  fileUploadListener="#{ResponsavelBean.uploadAction}" 
-								  auto="true"/>
 					
-					
+					<p:fileUpload fileUploadListener="#{ResponsavelBean.uploadAction}" 
+								  mode="advanced" 
+								  dragDropSupport="true"
+           						  update="growl" 
+           						  sizeLimit="100000" 
+           						  fileLimit="1" 
+           						  allowTypes="/(\.|\/)(gif|jpe?g|png)$/"
+           						  id="foto" />
 				</p:panelGrid>
 				<p:commandButton value="Salvar" id="withIcon"
 					actionListener="#{ResponsavelBean.cadastrar}" icon="ui-icon-disk"
