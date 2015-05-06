@@ -11,7 +11,8 @@
 		<link rel="stylesheet" href="styles/layout_crud.css" type="text/css" />
 	</h:head>
 	<body>
-	<div align="center">	
+	<div align="center">
+		<p:growl id="growl" showDetail="true" life="4000" />
 		<h:form id="formPrincipal">
 				<p:dataTable var="lista" 
 							 value="#{UFBean.ufs}" 
@@ -49,7 +50,7 @@
 					
 					<p:commandButton value="Excluir"
 						actionListener="#{UFBean.excluir(lista)}" 
-						update=":formPrincipal:tabelaUF"
+						update=":formPrincipal:tabelaUF growl"
 						icon="ui-icon-closethick">				
 						<p:confirm header="Excluir UF" message="Deseja excluir?" icon="ui-icon-alert" />
 					</p:commandButton>
@@ -80,13 +81,15 @@
 			      styleClass="dialogCadastrar">
 			<h:form id="formCadastrar">
 				<p:focus context="@form" />
-				<p:panelGrid id="panelCadastrar" columns="3">
+				<p:growl id="growl" 
+						 showDetail="true" 
+						 life="4000" />
+				<p:panelGrid id="panelCadastrar" columns="2">
 					<p:outputLabel for="nome" value="Nome:" />
 					<p:inputText value="#{UFBean.uf.nome}" 
 								 required="true" 
 								 id="nome"
 								 requiredMessage="Nome não deve estar vazio!" />
-					<p:messages for="nome" display="icon" closable="true"/>
 					<p:outputLabel for="sigla" value="Sigla:" />
 					<p:inputText value="#{UFBean.uf.sigla}" 
 								 required="true" 
@@ -94,11 +97,10 @@
 								 requiredMessage="Sigla não deve estar vazio!"
 								  >			  
 					</p:inputText>			  
-					<p:messages for="sigla" display="icon" closable="true"/>
 				</p:panelGrid>
 				<p:commandButton value="Salvar" id="withIcon"
 					actionListener="#{UFBean.cadastrar}" icon="ui-icon-disk"
-					update=":formPrincipal:tabelaUF @form"
+					update=":formPrincipal:tabelaUF @form growl"
 					oncomplete="closeDialogIfSucess(xhr, status, args, 'dialogCadastrar','formCad')"
 					onsuccess="PF('dialogCadastrar').hide();" />
 				<p:commandButton value="Limpar" update="@form"
@@ -116,14 +118,16 @@
 			      styleClass="dialogAlterar">
 			<h:form id="formAlterar">
 				<p:focus context="@form" />
+				<p:growl id="growl" 
+						 showDetail="true" 
+						 life="4000" />
 				<h:inputHidden value="#{UFBean.uf}" />	
-				<p:panelGrid id="panelAlterar" columns="3">
+				<p:panelGrid id="panelAlterar" columns="2">
 					<p:outputLabel for="nome" value="Nome:" />
 					<p:inputText value="#{UFBean.uf.nome}" 
 								 required="true" 
 								 id="nome"
 								 requiredMessage="Nome não deve estar vazio!" />
-					<p:messages for="nome" display="icon" closable="true"/>
 					<p:outputLabel for="sigla" value="Sigla:" />
 					<p:inputText value="#{UFBean.uf.sigla}" 
 								 required="true" 
@@ -131,11 +135,10 @@
 								 requiredMessage="Sigla não deve estar vazio!"
 								  >			  
 					</p:inputText>			  
-					<p:messages for="sigla" display="icon" closable="true"/>
 				</p:panelGrid>
 				<p:commandButton value="Salvar" id="withIcon"
 					actionListener="#{UFBean.alterar}" icon="ui-icon-disk"
-					update=":formPrincipal:tabelaUF @form"
+					update=":formPrincipal:tabelaUF @form growl"
 					oncomplete="closeDialogIfSucess(xhr, status, args, 'dialogAlterar','formAlt')"
 					onsuccess="PF('dialogAlterar').hide();" />
 				<p:commandButton value="Limpar" update="@form"
