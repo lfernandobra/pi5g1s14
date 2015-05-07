@@ -1,11 +1,18 @@
 @CHARSET "ISO-8859-1";
+
 body{
-	font-size: 13px !important;
+	font-size: 12px !important;
+	font-family: arial;
 }
 
 .dialogCadastrar{
 	z-index: 40 !important;
 	overflow: visible !important;
-	border-style: none !important;
 }
 
+.ui-paginator-bottom { 
+	text-align: left !important; 
+}
+ #formPrincipal{
+ 	padding-top: 15px !important;
+ }
