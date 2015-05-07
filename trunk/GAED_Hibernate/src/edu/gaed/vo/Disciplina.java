@@ -1,19 +1,31 @@
 package edu.gaed.vo;
 
 import java.io.Serializable;
+import java.util.List;
+
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "disciplina")
 public class Disciplina implements Serializable{
 	
+	public Disciplina() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	public Disciplina(Long id, String nome, String conteudo) {
+		super();
+		this.id = id;
+		this.nome = nome;
+		this.conteudo = conteudo;
+	}
 	/**
 	 * 
 	 */
@@ -30,9 +42,8 @@ public class Disciplina implements Serializable{
 	@Column(name="conteudo")
 	private String conteudo;
 	
-		
-	@OneToMany(mappedBy="disciplina")
-	
+	@ManyToMany(mappedBy="disciplinas")
+    private List<Professor> professores;
 	
 	public Long getId() {
 		return id;
@@ -79,7 +90,14 @@ public class Disciplina implements Serializable{
     }
     @Override
     public String toString() {
-        return "Classe [id=" + id + ", nome=" + nome + ", conteudo=" + conteudo + "]";
+        return "Classe [id=" + id.toString() + ", nome=" + nome + ", conteudo=" + conteudo + "]";
     }
-	
+	/*
+    public List<Professor> getProfessores() {
+		return professores;
+	}
+	public void setProfessores(List<Professor> professores) {
+		this.professores = professores;
+	}
+	*/
 }

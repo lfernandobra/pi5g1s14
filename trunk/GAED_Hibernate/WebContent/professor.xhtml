@@ -292,6 +292,15 @@
 						sizeLimit="100000" fileLimit="1"
 						allowTypes="/(\.|\/)(gif|jpe?g|png)$/" id="foto" 
 						required="true" />
+					<p:outputLabel value="Disciplina:" />
+					<p:selectCheckboxMenu id="menu"
+						value="#{ProfessorBean.professor.disciplinas}" label="Selecione"
+						filter="true" filterMatchMode="startsWith"
+						panelStyle="width:250px">
+						<f:selectItems value="#{DisciplinaBean.disciplinas}"
+							var="disciplina" itemValue="#{disciplina}"
+							itemLabel="#{disciplina.nome}" />
+					</p:selectCheckboxMenu>
 
 				</p:panelGrid>
 				<p:commandButton value="Salvar" id="withIcon"
