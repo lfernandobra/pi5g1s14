@@ -2,6 +2,10 @@ body{
 	font-size: 13px !important;
 }
 
+h2{
+	font-style: normal;
+	font-family: arial;
+}
 .login{
 	border:none;
 }
@@ -18,7 +22,7 @@ body{
 	text-align: center;
 }
 #fieldsetCabecalho{
-	font-size: 12px !important;
+	font-size: 10px !important;
 	
 }
 .gridRodape{
@@ -45,9 +49,10 @@ overflow: visible !important;
 } 
 
 .dialogCadastrar{
-z-index: 40 !important; 
+z-index: 999 !important; 
 overflow: visible !important; 	
 }
+
 
 .ui-layout-north .ui-layout-unit-content {
 	z-index: 60 !important;
@@ -109,3 +114,5 @@ overflow: visible !important;
 	left: 0% !important;
 	top:2% !important;
 }
+
+
