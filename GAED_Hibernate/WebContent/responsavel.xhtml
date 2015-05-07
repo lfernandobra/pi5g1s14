@@ -38,6 +38,7 @@
 					<h:outputText value="#{lista.sobrenome}" />
 				</p:column>
 				<p:rowExpansion>
+					<h:inputHidden value="#{FotoBean.verFoto(lista.foto.foto,lista.nome)}" />
 					<p:panelGrid columns="2" columnClasses="label,value">
 						<h:outputText value="Data de nascimento " />
 						<h:outputFormat value="{0, date, dd/MM/yyyy}">
@@ -45,6 +46,7 @@
 						</h:outputFormat>
 						<h:outputText value="Foto " />
 						<h:graphicImage value="/temp/#{lista.nome}.png" />
+						
 						<h:outputText value="Sexo " />
 						<h:outputText value="#{lista.sexo}" />
 						<h:outputText value="RG " />
@@ -261,7 +263,6 @@
 					<p:messages for="dataSaida" display="icon" />
 					
 					<p:outputLabel for="foto" value="Foto:" />
-					
 					<p:fileUpload fileUploadListener="#{ResponsavelBean.uploadAction}" 
 								  mode="advanced" 
 								  dragDropSupport="true"

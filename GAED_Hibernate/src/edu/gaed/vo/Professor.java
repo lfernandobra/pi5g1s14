@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
@@ -33,7 +34,8 @@ public class Professor extends Usuario{
 	@Column(name="anoConcl", nullable=false)
 	private Date anoConclusao;
 	
-	@OneToMany
+	
+	@OneToMany(cascade=CascadeType.ALL)
 	private Set<Disciplina> disciplina = new HashSet<Disciplina>(0);
 	
 	public String getEscolaAnterior() {
