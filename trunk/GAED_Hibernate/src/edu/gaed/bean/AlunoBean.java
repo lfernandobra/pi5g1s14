@@ -1,5 +1,6 @@
 package edu.gaed.bean;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -9,12 +10,14 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.event.ActionEvent;
 
+import org.primefaces.event.FileUploadEvent;
+
 import edu.gaed.vo.Aluno;
 import edu.gaed.dao.AlunoDao;
  
 @ManagedBean(name="AlunoBean")
 @ViewScoped
-public class AlunoBean implements Serializable{
+public class AlunoBean extends UsuarioBean implements Serializable{
  
 	/**
 	 * 
@@ -22,8 +25,8 @@ public class AlunoBean implements Serializable{
 	private static final long serialVersionUID = 1L;
 
 	Aluno aluno = new Aluno();
-	 
 	List<Aluno> alunos = new ArrayList<Aluno>(); 
+	FotoBean fotoBean = new FotoBean();
 	
 	public AlunoBean(Aluno aluno, List<Aluno> alunos) {
 		super();
@@ -87,7 +90,12 @@ public class AlunoBean implements Serializable{
 	}
  
 	//getters and setters
+	//Upload foto
 	
+	public void uploadAction (FileUploadEvent event) throws IOException{
+		this.fotoBean.fileUpload(event);
+		this.aluno.setFoto(this.fotoBean.getFoto());
+	}
  
 	
 }

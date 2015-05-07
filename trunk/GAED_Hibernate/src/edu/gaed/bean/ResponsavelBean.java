@@ -25,10 +25,8 @@ public class ResponsavelBean extends UsuarioBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	Responsavel responsavel = new Responsavel();
-	 
 	List<Responsavel> responsavels = new ArrayList<Responsavel>();
-	
-	private FotoBean fotoBean = new FotoBean();
+	FotoBean fotoBean = new FotoBean();
 	
 	
 	public ResponsavelBean(Responsavel responsavel, List<Responsavel> responsavels) {
@@ -76,17 +74,8 @@ public class ResponsavelBean extends UsuarioBean implements Serializable {
 		responsavel = new Responsavel();
 	}
 	
-	//Upload foto
+	//getters and setters
 	
-	public void uploadAction (FileUploadEvent event) throws IOException{
-		/*
-		this.fotoBean.fileUpload(event);
-		this.responsavel.setFoto(this.fotoBean.foto);
-		*/
-		this.fotoBean.fileUpload(event);
-		this.responsavel.setFoto(this.fotoBean.getFoto());
-	}
-
 	public Responsavel getResponsavel() {
 		return responsavel;
 	}
@@ -110,8 +99,13 @@ public class ResponsavelBean extends UsuarioBean implements Serializable {
 	public void setFotoBean(FotoBean fotoBean) {
 		this.fotoBean = fotoBean;
 	}
- 
-	//getters and setters
+	
+	//Upload foto
+	
+	public void uploadAction (FileUploadEvent event) throws IOException{
+		this.fotoBean.fileUpload(event);
+		this.responsavel.setFoto(this.fotoBean.getFoto());
+	}
 	
  
 	

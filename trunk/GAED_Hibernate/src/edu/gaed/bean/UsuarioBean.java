@@ -10,7 +10,6 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.event.ActionEvent;
 
 import org.primefaces.event.FileUploadEvent;
-import org.primefaces.model.UploadedFile;
 
 import edu.gaed.vo.Usuario;
 import edu.gaed.dao.UsuarioDao;
@@ -25,10 +24,8 @@ public class UsuarioBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	Usuario usuario = new Usuario();
-
-	private UploadedFile file;
-
 	List<Usuario> usuarios = new ArrayList<Usuario>();
+	FotoBean fotoBean = new FotoBean();
 
 	public UsuarioBean(Usuario usuario, List<Usuario> usuarios) {
 		super();
@@ -93,13 +90,13 @@ public class UsuarioBean implements Serializable {
 	public void setUsuarios(List<Usuario> usuarios) {
 		this.usuarios = usuarios;
 	}
-
-	public UploadedFile getFile() {
-		return file;
+	
+	public FotoBean getFotoBean() {
+		return fotoBean;
 	}
 
-	public void setFile(UploadedFile file) {
-		this.file = file;
+	public void setFotoBean(FotoBean fotoBean) {
+		this.fotoBean = fotoBean;
 	}
 
 }

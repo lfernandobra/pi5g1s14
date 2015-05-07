@@ -37,11 +37,14 @@
 					<h:outputText value="#{lista.sobrenome}" />
 				</p:column>
 				<p:rowExpansion>
+					<h:inputHidden value="#{FotoBean.verFoto(lista.foto.foto,lista.nome)}" />
 					<p:panelGrid columns="2" columnClasses="label,value">
 						<h:outputText value="Data de nascimento " />
 						<h:outputFormat value="{0, date, dd/MM/yyyy}">
 							<f:param value="#{lista.datanasc}" />
 						</h:outputFormat>
+						<h:outputText value="Foto " />
+						<h:graphicImage value="/temp/#{lista.nome}.png" />
 						<h:outputText value="Sexo " />
 						<h:outputText value="#{lista.sexo}" />
 						<h:outputText value="RG " />
@@ -115,6 +118,7 @@
 		</h:panelGrid>
 		<p:dialog header="Cadastrar" widgetVar="dialogCadastrar" modal="true"
 			resizable="true" id="formCad">
+			<p:growl id="growl" showDetail="true" life="4000" />
 			<h:form id="formCadastrar">
 				<p:focus context="@form" />
 				<p:panelGrid id="panelCadastrar" columns="6">
@@ -271,6 +275,16 @@
 						label="serieAtual" id="serieAtual"
 						requiredMessage="Série atual deve ser informada!" />
 					<p:messages for="serieAtual" display="icon" closable="true" />
+					<p:outputLabel for="foto" value="Foto:" />
+					
+					<p:fileUpload fileUploadListener="#{AlunoBean.uploadAction}" 
+								  mode="advanced" 
+								  dragDropSupport="true"
+           						  update="growl" 
+           						  sizeLimit="100000" 
+           						  fileLimit="1" 
+           						  allowTypes="/(\.|\/)(gif|jpe?g|png)$/"
+           						  id="foto" />
 
 				</p:panelGrid>
 				<p:commandButton value="Salvar" id="withIcon"

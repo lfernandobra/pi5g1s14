@@ -130,9 +130,8 @@ public class FotoBean implements Serializable{
 		}
 	}
 	
-	public String verFoto(byte [] foto,String nome) {
-		 
-        try {
+	public void verFoto(byte [] foto,String nome) {
+		try {
             ServletContext sContext = (ServletContext) FacesContext
                     .getCurrentInstance().getExternalContext().getContext();
  
@@ -147,12 +146,11 @@ public class FotoBean implements Serializable{
              System.out.println(arquivo);
              System.out.println(foto);
              criaArquivo(foto, arquivo);
-             return arquivo;
+    
              
         } catch (Exception ex) {
             ex.printStackTrace();
-        }
-        return null;	
+        }	
     }
 
 	private void criaArquivo(byte[] bytes, String arquivo) {

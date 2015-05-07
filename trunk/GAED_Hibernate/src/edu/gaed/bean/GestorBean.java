@@ -1,5 +1,6 @@
 package edu.gaed.bean;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -9,62 +10,67 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.event.ActionEvent;
 
+import org.primefaces.event.FileUploadEvent;
+
 import edu.gaed.vo.Gestor;
 import edu.gaed.dao.GestorDao;
- 
-@ManagedBean(name="GestorBean")
+
+@ManagedBean(name = "GestorBean")
 @ViewScoped
-public class GestorBean implements Serializable{
- 
+public class GestorBean implements Serializable {
+
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 
 	Gestor gestor = new Gestor();
-	 
-	List<Gestor> gestors = new ArrayList<Gestor>(); 
+	List<Gestor> gestors = new ArrayList<Gestor>();
+	FotoBean fotoBean = new FotoBean();
 	
 	public GestorBean(Gestor gestor, List<Gestor> gestors) {
 		super();
 		this.gestor = new Gestor();
 		this.gestors = new ArrayList<Gestor>();
 	}
- 
-	//construtor
+
+	// construtor
 	@SuppressWarnings("unchecked")
-	public GestorBean(){
+	public GestorBean() {
 		gestors = new GestorDao().listar();
 		gestor = new Gestor();
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	@PostConstruct
-    public void init(){
+	public void init() {
 		gestors = new GestorDao().listar();
 		gestor = new Gestor();
-       
-    }
-	public String getGestorEscolhida(){
-        return gestor!=null && gestor.getId()!=null ? gestor.toString():"Classe não escolhida";
-    }
- 
-	//Métodos dos botões 
+
+	}
+
+	public String getGestorEscolhida() {
+		return gestor != null && gestor.getId() != null ? gestor.toString()
+				: "Classe não escolhida";
+	}
+
+	// Métodos dos botões
 	@SuppressWarnings("unchecked")
-	public void cadastrar(ActionEvent actionEvent){
+	public void cadastrar(ActionEvent actionEvent) {
 		new GestorDao().inserir(gestor);
 		gestors = new GestorDao().listar();
 		gestor = new Gestor();
 	}
- 
+
 	@SuppressWarnings("unchecked")
-	public void alterar(){
+	public void alterar() {
 		new GestorDao().alterar(gestor);
 		gestors = new GestorDao().listar();
 		gestor = new Gestor();
 	}
+
 	@SuppressWarnings("unchecked")
-	public void excluir(Gestor gestor){
+	public void excluir(Gestor gestor) {
 		new GestorDao().excluir(gestor);
 		gestors = new GestorDao().listar();
 		gestor = new Gestor();
@@ -85,9 +91,14 @@ public class GestorBean implements Serializable{
 	public void setGestors(List<Gestor> gestors) {
 		this.gestors = gestors;
 	}
- 
-	//getters and setters
-	
- 
-	
+
+	// getters and setters
+
+	// Upload foto
+
+	public void uploadAction(FileUploadEvent event) throws IOException {
+		this.fotoBean.fileUpload(event);
+		this.gestor.setFoto(this.fotoBean.getFoto());
+	}
+
 }
