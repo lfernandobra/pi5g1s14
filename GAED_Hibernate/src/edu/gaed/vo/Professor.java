@@ -1,13 +1,15 @@
 package edu.gaed.vo;
 
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.OneToMany;
+import javax.persistence.JoinTable;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
+
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
@@ -34,10 +36,16 @@ public class Professor extends Usuario{
 	@Column(name="anoConcl", nullable=false)
 	private Date anoConclusao;
 	
+	@ManyToMany(cascade=CascadeType.ALL)
+    @JoinTable(name = "professor_disciplina", joinColumns = @JoinColumn(name = "id_usuario"), 
+    		   inverseJoinColumns = @JoinColumn(name = "id_disciplina"))
+    private List<Disciplina> disciplinas;
 	
+	/*
+	@JoinColumn(name="id_disciplina")
 	@OneToMany(cascade=CascadeType.ALL)
-	private Set<Disciplina> disciplina = new HashSet<Disciplina>(0);
-	
+	private Set<Disciplina> disciplinas = new HashSet<Disciplina>(0);
+	*/
 	public String getEscolaAnterior() {
 		return escolaAnterior;
 	}
@@ -62,11 +70,21 @@ public class Professor extends Usuario{
 	public void setAnoConclusao(Date anoConclusao) {
 		this.anoConclusao = anoConclusao;
 	}
-	public Set<Disciplina> getDisciplina() {
-		return disciplina;
+	
+	/*
+	public Set<Disciplina> getDisciplinas() {
+		return disciplinas;
 	}
-	public void setDisciplina(Set<Disciplina> disciplina) {
-		this.disciplina = disciplina;
+	public void setDisciplinas(Set<Disciplina> disciplinas) {
+		this.disciplinas = disciplinas;
+	}
+	*/
+	
+	public List<Disciplina> getDisciplinas() {
+		return disciplinas;
+	}
+	public void setDisciplinas(List<Disciplina> disciplinas) {
+		this.disciplinas = disciplinas;
 	}
 	
 	
