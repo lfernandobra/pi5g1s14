@@ -8,7 +8,7 @@
 	<title>Gaed</title>
 	<link rel="stylesheet" href="styles/layout.css" type="text/css" />
 </h:head>
-<h:body>
+<body>
 
 		<p:layout fullPage="true" styleClass="paginaCabecalho">
 		
@@ -66,13 +66,11 @@
 			</h:form>
 		</p:layoutUnit>
 		
-		<p:layoutUnit position="west" size="150" styleClass="gridEsquerda"></p:layoutUnit>
-
-		<p:layoutUnit position="east" size="150" styleClass="gridDireita"></p:layoutUnit>
-
-		<p:layoutUnit position="center" styleClass="centroHome" > 
-			<ui:insert name="center"></ui:insert>
-		 </p:layoutUnit>
+		<div id="conteudoCentro">
+			<p:layoutUnit position="center" styleClass="centroHome" > 
+				<ui:insert name="center"></ui:insert>
+			 </p:layoutUnit>
+		 </div>
 		 
 		 <p:layoutUnit position="south" styleClass="gridRodape">
 			<f:facet name="header">
@@ -81,6 +79,7 @@
 		</p:layoutUnit>
 		
 		</p:layout>
-</h:body>
+</body>
 </html>
+
 
