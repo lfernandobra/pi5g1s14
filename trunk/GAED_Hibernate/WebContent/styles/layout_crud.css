@@ -9,7 +9,6 @@ body{
 	z-index: 40 !important;
 	overflow: visible !important;
 }
-
 .ui-paginator-bottom { 
 	text-align: left !important; 
 }
@@ -23,12 +22,23 @@ body{
     border: none !important;
     overflow: hidden !important;
  }
+.formAlterar .ui-widget-content .ui-panelgrid-cell {
+    border: none !important;
+    overflow: hidden !important;
+ } 
+ 
  .ui-panelgrid{
  border-collapse: inherit;
  }
 
 #formCad{ 
  	height: 610px !important;
+  	width: 1291px !important;
+  	position: fixed;
+}
+
+#formAlt{
+	height: 610px !important;
   	width: 1291px !important;
   	position: fixed;
 }
