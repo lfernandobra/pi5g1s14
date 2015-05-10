@@ -251,23 +251,24 @@
 					</div>
 
 				<div id="botoes">
-				<p:commandButton value="Salvar" id="withIcon"
-					actionListener="#{GestorBean.cadastrar}" icon="ui-icon-disk"
-					update=":formPrincipal:tabelaGestor @form"
-					oncomplete="closeDialogIfSucess(xhr, status, args, 'dialogCadastrar','formCad')"
-					onsuccess="PF('dialogCadastrar').hide();" />
-				<p:commandButton value="Limpar" update="@form" process="@this">
-					<p:resetInput target="panelCadastrar" />
-				</p:commandButton>
-			</div>	
+					<p:commandButton value="Salvar" id="withIcon"
+						actionListener="#{GestorBean.cadastrar}" icon="ui-icon-disk"
+						update=":formPrincipal:tabelaGestor @form"
+						oncomplete="closeDialogIfSucess(xhr, status, args, 'dialogCadastrar','formCad')"
+						onsuccess="PF('dialogCadastrar').hide();" />
+					<p:commandButton value="Limpar" update="@form" process="@this">
+						<p:resetInput target="panelCadastrar" />
+					</p:commandButton>
+				</div>	
 			</h:form>
 		</p:dialog>
 
 	</div>
-	<p:dialog header="Alterar" widgetVar="dialogAlterar" modal="true"
-		resizable="true" id="formAlt">
-		<h:form id="formAlterar">
+	<p:dialog header="Alterar" widgetVar="dialogAlterar" modal="true" resizable="true" id="formAlt">
+		<h:form id="formAlterar" styleClass="formAlterar">
 			<p:focus context="@form" />
+			<p:growl id="growl" showDetail="true" life="4000" />
+			
 			<p:panelGrid id="panelAlterar" columns="6">
 				<p:outputLabel for="login" value="Login:" />
 				<p:inputText value="#{GestorBean.gestor.login}" required="true"

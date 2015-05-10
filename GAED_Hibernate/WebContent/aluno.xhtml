@@ -12,6 +12,7 @@
 
 <ui:decorate template="/Cabecalho.xhtml">
 	<ui:define name="center">
+
 	
 	<h2>Lista de Alunos</h2>
 	
@@ -24,7 +25,8 @@
 							onclick="PF('dialogCadastrar').show();" icon="ui-icon-disk" />
 					</f:facet>
 				</p:toolbar>
-					
+			
+				<p:growl id="growl" showDetail="true" life="4000" />	
 				<h:form id="formPrincipal">
 					<p:dataTable var="lista" value="#{AlunoBean.alunos}" id="tabelaAluno" resizableColumns="true" reflow="true" rows="5" paginator="true" paginatorPosition="bottom"  emptyMessage="Nenhum aluno cadastrado">
 						<p:column style="width:16px">
@@ -97,7 +99,7 @@
 						
 						</p:rowExpansion>
 						<p:column headerText="Ações">
-							<p:commandButton value="Alterar" update=":formAlterar" oncomplete="PF('dialogAlterar').show();" icon="ui-icon-pencil">
+							<p:commandButton value="Alterar" update=":formAlterar growl" oncomplete="PF('dialogAlterar').show();" icon="ui-icon-pencil">
 								<f:setPropertyActionListener target="#{AlunoBean.aluno}" value="#{lista}" />
 							</p:commandButton>
 							
@@ -120,15 +122,15 @@
 				
 		<p:dialog header="Cadastrar" widgetVar="dialogCadastrar" modal="true" resizable="true" id="formCad" appendTo="@(body)" 
 					closeOnEscape="true" closable="true" maximizable="true"   >
-				<p:growl id="growl" showDetail="true" life="4000" />
+					
 				<h:form id="formCadastrar" styleClass="formCadastrar">
 					<p:focus context="@form" />
-						
+					<p:growl id="growl" showDetail="true" life="4000" />	
 				<h:outputText value="Campos obrigatórios * " style="font-size: 10px !important; top: 5px !important 	" />	
 				<h4>Dados Pessoais</h4>	
 					
 					<p:separator />
-						
+					
 						<p:panelGrid id="panelCadastrar" columns="6">
 
 							<p:outputLabel for="nome" value="Nome:" />
@@ -249,162 +251,119 @@
 				</p:dialog>
 
 				<p:dialog header="Alterar" widgetVar="dialogAlterar" modal="true" resizable="true" id="formAlt" appendTo="@(body)">
-					<h:form id="formAlterar">
+					<h:form id="formAlterar" styleClass="formAlterar">
 						<p:focus context="@form" />
+						<p:growl id="growl" showDetail="true" life="4000" />
+						<h:outputText value="Campos obrigatórios * " style="font-size: 10px !important; top: 5px !important 	" />	
+						<h4>Dados Pessoais</h4>	
+					
+						<p:separator />
+						
 						<p:panelGrid id="panelAlterar" columns="6">
-							<p:outputLabel for="login" value="Login:" />
-							<p:inputText value="#{AlunoBean.aluno.login}" required="true"
-								label="Login" id="login"
-								requiredMessage="Login não deve estar vazio!">
-								<f:validateLength minimum="6" />
-							</p:inputText>
-							<p:messages for="login" display="icon" closable="true" />
-
+							
 							<p:outputLabel for="nome" value="Nome:" />
-							<p:inputText value="#{AlunoBean.aluno.nome}" required="true"
-								label="nome" id="nome"
-								requiredMessage="Nome não deve estar vazio!">
+							<p:inputText value="#{AlunoBean.aluno.nome}" required="true" label="nome" id="nome"	requiredMessage="Nome não deve estar vazio!">
 								<f:validateLength minimum="3" />
 							</p:inputText>
-							<p:messages for="nome" display="icon" closable="true" />
-
 
 							<p:outputLabel for="sobrenome" value="Sobrenome:" />
-							<p:inputText value="#{AlunoBean.aluno.sobrenome}" required="true"
-								label="sobrenome" id="sobrenome"
-								requiredMessage="Sobrenome não deve estar vazio!">
+							<p:inputText value="#{AlunoBean.aluno.sobrenome}" required="true" label="sobrenome" id="sobrenome"	requiredMessage="Sobrenome não deve estar vazio!">
 								<f:validateLength minimum="3" />
 							</p:inputText>
-							<p:messages for="sobrenome" display="icon" closable="true" />
 
 							<p:outputLabel for="sexo" value="Sexo:" />
-							<p:selectOneMenu id="sexo" value="#{AlunoBean.aluno.sexo}"
-								style="width:150px" required="true" label="Sexo">
+							<p:selectOneMenu id="sexo" value="#{AlunoBean.aluno.sexo}" style="width:150px" required="true" label="Sexo">
 								<f:selectItem itemLabel="Masculino" itemValue="Masculino" />
 								<f:selectItem itemLabel="Feminino" itemValue="Feminino" />
 							</p:selectOneMenu>
-							<p:messages for="sexo" display="icon" closable="true" />
 
 							<p:outputLabel for="datanasc" value="Data de nascimento:" />
-							<p:inputMask value="#{AlunoBean.aluno.datanasc}"
-								mask="99/99/9999" placeholder="dd/mm/aaaa" required="true"
-								label="datanasc" id="datanasc"
+							<p:inputMask value="#{AlunoBean.aluno.datanasc}" mask="99/99/9999" placeholder="dd/mm/aaaa" required="true"	label="datanasc" id="datanasc"
 								requiredMessage="Data de nascimento deve ser informada!">
 								<f:converter converterId="javax.faces.DateTime" />
 								<f:convertDateTime pattern="dd/MM/yyyy" timeZone="GMT-3" />
 							</p:inputMask>
-							<p:messages for="datanasc" display="icon" closable="true" />
 
 							<p:outputLabel for="cep" value="CEP:" />
-							<p:autoComplete value="#{AlunoBean.aluno.logradouro}"
-								completeMethod="#{LogradouroBean.completeLogradouro()}"
-								var="logradouro" itemLabel="#{logradouro.CEP}"
+							<p:autoComplete value="#{AlunoBean.aluno.logradouro}" completeMethod="#{LogradouroBean.completeLogradouro()}" var="logradouro" itemLabel="#{logradouro.CEP}"
 								itemValue="#{logradouro}" forceSelection="true" required="true"
 								requiredMessage="CEP deve ser informado!" label="CEP" id="cep">
 							</p:autoComplete>
-							<p:messages for="cep" display="icon" closable="true" />
 
 							<p:outputLabel for="numero" value="Número:" />
-							<p:inputText value="#{AlunoBean.aluno.numero}" required="true"
-								label="Número" id="numero"
-								requiredMessage="Número deve ser informado!" />
-							<p:messages for="numero" display="icon" closable="true" />
-
+							<p:inputText value="#{AlunoBean.aluno.numero}" required="true" label="Número" id="numero" requiredMessage="Número deve ser informado!" />
 
 							<p:outputLabel for="complemento" value="Complemento:" />
-							<p:inputText value="#{AlunoBean.aluno.complemento}"
-								required="true" label="Complemento" id="complemento"
-								requiredMessage="Complemento deve ser informado!" />
-							<p:messages for="complemento" display="icon" closable="true" />
+							<p:inputText value="#{AlunoBean.aluno.complemento}" required="true" label="Complemento" id="complemento" requiredMessage="Complemento deve ser informado!" />
 
 							<p:outputLabel for="cpf" value="CPF:" />
-							<p:inputMask id="cpf" value="#{AlunoBean.aluno.CPF}"
-								mask="999.999.999-99" required="true" label="CPF"
-								requiredMessage="CPF deve ser informado!" />
-							<p:messages for="cpf" display="icon" closable="true" />
+							<p:inputMask id="cpf" value="#{AlunoBean.aluno.CPF}" mask="999.999.999-99" required="true" label="CPF"	requiredMessage="CPF deve ser informado!" />
 
 							<p:outputLabel for="rg" value="RG:" />
-							<p:inputMask id="rg" value="#{AlunoBean.aluno.RG}"
-								mask="99.999.999-9" required="true" label="RG"
-								requiredMessage="RG deve ser informado!" />
-							<p:messages for="rg" display="icon" closable="true" />
+							<p:inputMask id="rg" value="#{AlunoBean.aluno.RG}" mask="99.999.999-9" required="true" label="RG" requiredMessage="RG deve ser informado!" />
 
 							<p:outputLabel for="status" value="Situação:" />
-							<p:selectOneMenu id="status" value="#{AlunoBean.aluno.status}"
-								style="width:150px" required="true" label="Status">
+							<p:selectOneMenu id="status" value="#{AlunoBean.aluno.status}" style="width:150px" required="true" label="Status">
 								<f:selectItem itemLabel="Inativo" itemValue="#{false}" />
 								<f:selectItem itemLabel="Ativo" itemValue="#{true}" />
 							</p:selectOneMenu>
-							<p:messages for="status" display="icon" closable="true" />
 
 							<p:outputLabel for="telefone" value="Telefone:" />
-							<p:inputMask value="#{AlunoBean.aluno.telefone}"
-								mask="(99) 99999-9999" required="true" label="Telefone"
-								id="telefone" />
-							<p:messages for="telefone" display="icon" closable="true" />
+							<p:inputMask value="#{AlunoBean.aluno.telefone}" mask="(99) 99999-9999" required="true" label="Telefone" id="telefone" />
 
 							<p:outputLabel for="email" value="Email:" />
-							<p:inputText id="email" required="true" size="40"
-								requiredMessage="Insira o endereço de email"
-								validatorMessage="Formato de email invalido"
+							<p:inputText id="email" required="true" size="40" requiredMessage="Insira o endereço de email"	validatorMessage="Formato de email invalido"
 								value="#{AlunoBean.aluno.email}" label="Email">
 								<f:validateRegex
 									pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
 							</p:inputText>
-							<p:messages for="email" display="icon" closable="true" />
 
 							<p:outputLabel for="dataIngresso" value="Data de ingresso:" />
-							<p:inputMask id="dataIngresso"
-								value="#{AlunoBean.aluno.dataIngresso}" mask="99/99/9999"
-								placeholder="dd/mm/aaaa" required="true"
-								label="Data de ingresso"
-								requiredMessage="Data de ingresso deve ser informada!">
+							<p:inputMask id="dataIngresso" value="#{AlunoBean.aluno.dataIngresso}" mask="99/99/9999" placeholder="dd/mm/aaaa" required="true"
+								label="Data de ingresso" requiredMessage="Data de ingresso deve ser informada!">
 								<f:converter converterId="javax.faces.DateTime" />
 								<f:convertDateTime pattern="dd/MM/yyyy" timeZone="GMT-3" />
 							</p:inputMask>
-							<p:messages for="dataIngresso" display="icon" closable="true" />
 
 							<p:outputLabel for="dataSaida" value="Data de saída:" />
-							<p:inputMask id="dataSaida" value="#{AlunoBean.aluno.dataSaida}"
-								mask="99/99/9999" placeholder="dd/mm/aaaa" required="false"
-								label="Data de saída">
+							<p:inputMask id="dataSaida" value="#{AlunoBean.aluno.dataSaida}" mask="99/99/9999" placeholder="dd/mm/aaaa" required="false" label="Data de saída">
 								<f:converter converterId="javax.faces.DateTime" />
 								<f:convertDateTime pattern="dd/MM/yyyy" timeZone="GMT-3" />
 							</p:inputMask>
-							<p:messages for="dataSaida" display="icon" />
 
 							<p:outputLabel for="escolaAnterior" value="Escola anterior:" />
-							<p:inputText value="#{AlunoBean.aluno.escolaAnterior}"
-								required="true" label="escolaAnterior" id="escolaAnterior"
-								requiredMessage="Escola anterior deve ser informada!" />
-							<p:messages for="escolaAnterior" display="icon" closable="true" />
+							<p:inputText value="#{AlunoBean.aluno.escolaAnterior}" required="true" label="escolaAnterior" id="escolaAnterior" requiredMessage="Escola anterior deve ser informada!" />
 
 							<p:outputLabel for="serieAnterior" value="Série anterior:" />
-							<p:inputText value="#{AlunoBean.aluno.serieAnterior}"
-								required="true" label="serieAnterior" id="serieAnterior"
-								requiredMessage="Série anterior deve ser informada!" />
-							<p:messages for="serieAnterior" display="icon" closable="true" />
+							<p:inputText value="#{AlunoBean.aluno.serieAnterior}" required="true" label="serieAnterior" id="serieAnterior"	requiredMessage="Série anterior deve ser informada!" />
 
 							<p:outputLabel for="escolaAtual" value="Escola atual:" />
-							<p:inputText value="#{AlunoBean.aluno.escolaAtual}"
-								required="true" label="escolaAtual" id="escolaAtual"
-								requiredMessage="Escola atual deve ser informada!" />
-							<p:messages for="escolaAtual" display="icon" closable="true" />
+							<p:inputText value="#{AlunoBean.aluno.escolaAtual}" required="true" label="escolaAtual" id="escolaAtual" requiredMessage="Escola atual deve ser informada!" />
 
 							<p:outputLabel for="serieAnterior" value="Série atual:" />
-							<p:inputText value="#{AlunoBean.aluno.serieAtual}"
-								required="true" label="serieAtual" id="serieAtual"
-								requiredMessage="Série atual deve ser informada!" />
-							<p:messages for="serieAtual" display="icon" closable="true" />
+							<p:inputText value="#{AlunoBean.aluno.serieAtual}" required="true" label="serieAtual" id="serieAtual"	requiredMessage="Série atual deve ser informada!" />
 						</p:panelGrid>
-						<p:commandButton value="Salvar" id="withIcon"
-							actionListener="#{AlunoBean.alterar}" icon="ui-icon-disk"
-							update=":formPrincipal:tabelaAluno @form"
-							oncomplete="closeDialogIfSucess(xhr, status, args, 'dialogAlterar','formAlt')"
-							onsuccess="PF('dialogAlterar').hide();" />
+						
+					<div  id="dadosPessoais">	
+						<h4>Dados de Acesso</h4>	
+							<p:separator />
+						
+						<p:panelGrid columns="2">	
+							<p:outputLabel for="login" value="Login:" />
+								<p:inputText value="#{AlunoBean.aluno.login}" required="true" label="Login" id="login"	requiredMessage="Login não deve estar vazio!">
+									<f:validateLength minimum="6" />
+							</p:inputText>
+						</p:panelGrid>
+					</div>
+						
+					<div id="botoes">
+						<p:commandButton value="Salvar" id="withIcon" actionListener="#{AlunoBean.alterar}" icon="ui-icon-disk"	update=":formPrincipal:tabelaAluno @form growl"
+							oncomplete="closeDialogIfSucess(xhr, status, args, 'dialogAlterar','formAlt')" 	onsuccess="PF('dialogAlterar').hide();" />
 						<p:commandButton value="Limpar" update="@form" process="@this">
-							<p:resetInput target="panelAlterar" />
+						<p:resetInput target="panelAlterar" />
 						</p:commandButton>
+					</div>		
+							
 					</h:form>
 				</p:dialog>
 	</ui:define>

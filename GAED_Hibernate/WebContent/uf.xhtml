@@ -61,6 +61,7 @@
     			</f:facet>
 			</p:dataTable>
 		</h:form>
+		
 		<h:panelGrid columns="1" cellpadding="5">
 			<p:commandButton value="Cadastrar" type="button" onclick="PF('dialogCadastrar').show();" 
 							 icon="ui-icon-disk"/>
@@ -92,39 +93,26 @@
 			</h:form>
 		</p:dialog>
 	</div>
-	<p:dialog header="Alterar"
-				  widgetVar="dialogAlterar" 
-				  modal="true" 
-				  resizable="true"
-			      id="formAlt"
-			      styleClass="dialogAlterar">
+	<p:dialog header="Alterar"  widgetVar="dialogAlterar"  modal="true"	  resizable="true"  id="formAlt" styleClass="dialogAlterar">
 			<h:form id="formAlterar">
 				<p:focus context="@form" />
-				<p:growl id="growl" 
-						 showDetail="true" 
-						 life="4000" />
+				<p:growl id="growl" showDetail="true" life="4000" />
 				<h:inputHidden value="#{UFBean.uf}" />	
+				
 				<p:panelGrid id="panelAlterar" columns="2">
 					<p:outputLabel for="nome" value="Nome:" />
 					<p:inputText value="#{UFBean.uf.nome}" 
-								 required="true" 
-								 id="nome"
-								 requiredMessage="Nome não deve estar vazio!" />
+								 required="true" id="nome" requiredMessage="Nome não deve estar vazio!" />
 					<p:outputLabel for="sigla" value="Sigla:" />
-					<p:inputText value="#{UFBean.uf.sigla}" 
-								 required="true" 
-								 id="sigla"
-								 requiredMessage="Sigla não deve estar vazio!"
+					<p:inputText value="#{UFBean.uf.sigla}"  required="true" id="sigla" requiredMessage="Sigla não deve estar vazio!"
 								  >			  
 					</p:inputText>			  
 				</p:panelGrid>
-				<p:commandButton value="Salvar" id="withIcon"
-					actionListener="#{UFBean.alterar}" icon="ui-icon-disk"
-					update=":formPrincipal:tabelaUF @form growl"
-					oncomplete="closeDialogIfSucess(xhr, status, args, 'dialogAlterar','formAlt')"
-					onsuccess="PF('dialogAlterar').hide();" />
-				<p:commandButton value="Limpar" update="@form"
-					process="@this">
+				
+				<p:commandButton value="Salvar" id="withIcon" actionListener="#{UFBean.alterar}" icon="ui-icon-disk" update=":formPrincipal:tabelaUF @form growl"
+					oncomplete="closeDialogIfSucess(xhr, status, args, 'dialogAlterar','formAlt')" onsuccess="PF('dialogAlterar').hide();" />
+				
+				<p:commandButton value="Limpar" update="@form" process="@this">
 					<p:resetInput target="panelAlterar" />
 				</p:commandButton>
 			</h:form>
