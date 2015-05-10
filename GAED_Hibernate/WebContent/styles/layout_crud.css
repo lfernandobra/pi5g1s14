@@ -15,4 +15,45 @@ body{
 }
  #formPrincipal{
  	padding-top: 15px !important;
+ 	font-family: arial;
+ 	font-size: 12px;
  }
+ 
+.formCadastrar .ui-widget-content .ui-panelgrid-cell {
+    border: none !important;
+    overflow: hidden !important;
+ }
+ .ui-panelgrid{
+ border-collapse: inherit;
+ }
+
+#formCad{ 
+ 	height: 610px !important;
+  	width: 1291px !important;
+  	position: fixed;
+}
+#botoes{
+	text-align: center;
+}
+#dadosPessoais{
+	top:10px;
+}
+#DivAluno{
+	overflow: hidden !important;
+}
+
+#Lista {
+  display: inline-block !important;
+  width: 1060px !important;
+  text-align: center;
+}
+#tabelaAluno{
+	border-style: none !important;
+}
+
+
+
+
+
+
+

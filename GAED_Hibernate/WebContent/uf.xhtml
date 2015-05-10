@@ -69,7 +69,9 @@
 			      closeOnEscape="true" closable="true" maximizable="true"   styleClass="dialogCadastrar">
 			<h:form id="formCadastrar">
 				<p:focus context="@form" />
+				
 				<p:growl id="growl" showDetail="true" life="4000" />
+				
 				<p:panelGrid id="panelCadastrar" columns="2">
 					<p:outputLabel for="nome" value="Nome:" />
 					<p:inputText value="#{UFBean.uf.nome}"  required="true" id="nome" requiredMessage="Nome não deve estar vazio!" />
