@@ -12,6 +12,7 @@ import javax.faces.event.ActionEvent;
 
 import org.primefaces.event.FileUploadEvent;
 
+import edu.gaed.vo.Disciplina;
 import edu.gaed.vo.Professor;
 import edu.gaed.dao.ProfessorDao;
 
@@ -27,6 +28,9 @@ public class ProfessorBean implements Serializable {
 	Professor professor = new Professor();
 	List<Professor> professors = new ArrayList<Professor>();
 	FotoBean fotoBean = new FotoBean();
+	private List<Disciplina> selectedDisciplinas;
+	private List<Disciplina> disciplinas;
+	DisciplinaBean disciplinaBean = new DisciplinaBean();
 
 	public ProfessorBean(Professor professor, List<Professor> professors) {
 		super();
@@ -46,7 +50,16 @@ public class ProfessorBean implements Serializable {
 	public void init() {
 		professors = new ProfessorDao().listar();
 		professor = new Professor();
+		disciplinas = new ArrayList<Disciplina>();
 
+		List<Disciplina> disciplinasBeanCadastradas = disciplinaBean.disciplinas;
+
+		disciplinas = new ArrayList<Disciplina>(
+				disciplinasBeanCadastradas.size());
+
+		for (Disciplina d : disciplinasBeanCadastradas) {
+			disciplinas.add(d);
+		}
 	}
 
 	public String getProfessorEscolhida() {
@@ -98,6 +111,22 @@ public class ProfessorBean implements Serializable {
 		new ProfessorDao().excluir(professor);
 		professors = new ProfessorDao().listar();
 		professor = new Professor();
+	}
+
+	public List<Disciplina> getSelectedDisciplinas() {
+		return selectedDisciplinas;
+	}
+
+	public void setSelectedDisciplinas(List<Disciplina> selectedDisciplinas) {
+		this.selectedDisciplinas = selectedDisciplinas;
+		System.out.println(selectedDisciplinas.size());
+		this.professor.setDisciplinas(selectedDisciplinas); 
+		//Problema ocorre aqui, quando é atribuido o array de Disciplinas 
+		//selecionado as disciplinas ministradas do professor 
+	}
+
+	public List<Disciplina> getDisciplinas() {
+		return disciplinas;
 	}
 
 }

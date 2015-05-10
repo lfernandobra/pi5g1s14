@@ -1,0 +1,35 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions">
+<h:head>
+	<title>TesteCheckbox</title>
+	<script src="scripts/scripts.js" type="text/javascript"></script>
+	<link rel="stylesheet" href="styles/layout_crud.css" type="text/css" />
+</h:head>
+<body>
+	<h:form>
+		<h:panelGrid columns="3" cellpadding="5">
+			<h:outputLabel for="menu" value="Location:" />
+			<p:selectCheckboxMenu id="menu"
+				value="#{checkboxView.selectedCities}" label="Cities" filter="true"
+				filterMatchMode="startsWith" panelStyle="width:250px">
+				<f:selectItems value="#{checkboxView.cities}" />
+			</p:selectCheckboxMenu>
+			<p:commandLink value="Submit" update="display" />
+		</h:panelGrid>
+
+		<p:outputPanel id="display"
+			style="width:250px;padding-left:5px;margin-top:10px">
+			<p:dataList value="#{checkboxView.selectedCities}" var="city"
+				emptyMessage="No cities selected">
+            #{city}
+        </p:dataList>
+		</p:outputPanel>
+	</h:form>
+
+
+</body>
+</html>
