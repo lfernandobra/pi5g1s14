@@ -121,7 +121,8 @@ public class ProfessorBean implements Serializable {
 		this.selectedDisciplinas = selectedDisciplinas;
 		System.out.println(selectedDisciplinas.size());
 		this.professor.setDisciplinas(selectedDisciplinas); 
-		//Problema ocorre aqui, quando é atribuido o array de Disciplinas 
+		//Problema ocorre aqui, quando é atribuido o array de Disciplinas (selectedDisciplinas 
+		//as disciplinas do professor (linha 123) 
 		//selecionado as disciplinas ministradas do professor 
 	}
 

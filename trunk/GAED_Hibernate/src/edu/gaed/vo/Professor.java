@@ -6,8 +6,8 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.JoinTable;
-import javax.persistence.JoinColumn;
+//import javax.persistence.JoinTable;
+//import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 
 import javax.persistence.PrimaryKeyJoinColumn;
@@ -37,8 +37,8 @@ public class Professor extends Usuario{
 	private Date anoConclusao;
 	
 	@ManyToMany(cascade=CascadeType.ALL)
-    @JoinTable(name = "professor_disciplina", joinColumns = @JoinColumn(name = "id_usuario"), 
-    		   inverseJoinColumns = @JoinColumn(name = "id_disciplina"))
+    //@JoinTable(name = "professor_disciplina", joinColumns = @JoinColumn(name = "id_usuario"), 
+    //		   inverseJoinColumns = @JoinColumn(name = "id_disciplina"))
     private List<Disciplina> disciplinas;
 	
 	/*
