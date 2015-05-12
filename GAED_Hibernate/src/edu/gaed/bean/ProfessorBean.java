@@ -12,7 +12,7 @@ import javax.faces.event.ActionEvent;
 
 import org.primefaces.event.FileUploadEvent;
 
-import edu.gaed.vo.Disciplina;
+//import edu.gaed.vo.Disciplina;
 import edu.gaed.vo.Professor;
 import edu.gaed.dao.ProfessorDao;
 
@@ -28,9 +28,9 @@ public class ProfessorBean implements Serializable {
 	Professor professor = new Professor();
 	List<Professor> professors = new ArrayList<Professor>();
 	FotoBean fotoBean = new FotoBean();
-	private List<Disciplina> selectedDisciplinas;
-	private List<Disciplina> disciplinas;
-	DisciplinaBean disciplinaBean = new DisciplinaBean();
+	//private List<Disciplina> disciplinas; //disciplinas relacionadas ao professor
+	//private List<Disciplina> disciplinasCad; //disciplinas cadastradas no sistema
+	//DisciplinaBean disciplinaBean = new DisciplinaBean();
 
 	public ProfessorBean(Professor professor, List<Professor> professors) {
 		super();
@@ -50,16 +50,17 @@ public class ProfessorBean implements Serializable {
 	public void init() {
 		professors = new ProfessorDao().listar();
 		professor = new Professor();
-		disciplinas = new ArrayList<Disciplina>();
-
+		/*
+		disciplinasCad = new ArrayList<Disciplina>(); 
+		disciplinas = new ArrayList<Disciplina>(); 
+		
 		List<Disciplina> disciplinasBeanCadastradas = disciplinaBean.disciplinas;
 
-		disciplinas = new ArrayList<Disciplina>(
-				disciplinasBeanCadastradas.size());
+		disciplinasCad = new ArrayList<Disciplina>(disciplinasBeanCadastradas.size());
 
 		for (Disciplina d : disciplinasBeanCadastradas) {
-			disciplinas.add(d);
-		}
+			disciplinasCad.add(d);
+		}*/
 	}
 
 	public String getProfessorEscolhida() {
@@ -94,7 +95,7 @@ public class ProfessorBean implements Serializable {
 	// Métodos dos botões
 	@SuppressWarnings("unchecked")
 	public void cadastrar(ActionEvent actionEvent) {
-		professor.setDisciplinas(disciplinas);
+		//professor.setDisciplinas(disciplinas);
 		new ProfessorDao().inserir(professor);
 		professors = new ProfessorDao().listar();
 		professor = new Professor();
@@ -114,14 +115,12 @@ public class ProfessorBean implements Serializable {
 		professor = new Professor();
 	}
 
-	public List<Disciplina> getSelectedDisciplinas() {
-		return selectedDisciplinas;
-	}
-
+	
+/*
 	public void setSelectedDisciplinas(List<Disciplina> selectedDisciplinas) {
-		this.selectedDisciplinas = selectedDisciplinas;
-		System.out.println(selectedDisciplinas.size());
-		this.professor.setDisciplinas(selectedDisciplinas); 
+		this.disciplinas = selectedDisciplinas;
+		//System.out.println(selectedDisciplinas.size());
+		//this.professor.setDisciplinas(selectedDisciplinas); 
 		//Problema ocorre aqui, quando é atribuido o array de Disciplinas (selectedDisciplinas 
 		//as disciplinas do professor (linha 123) 
 		//selecionado as disciplinas ministradas do professor 
@@ -131,4 +130,24 @@ public class ProfessorBean implements Serializable {
 		return disciplinas;
 	}
 
+	public List<Disciplina> getDisciplinasCad() {
+		return disciplinasCad;
+	}
+
+	public DisciplinaBean getDisciplinaBean() {
+		return disciplinaBean;
+	}
+
+	public void setDisciplinas(List<Disciplina> disciplinas) {
+		this.disciplinas = disciplinas;
+	}
+
+	public void setDisciplinasCad(List<Disciplina> disciplinasCad) {
+		this.disciplinasCad = disciplinasCad;
+	}
+
+	public void setDisciplinaBean(DisciplinaBean disciplinaBean) {
+		this.disciplinaBean = disciplinaBean;
+	}
+*/
 }
