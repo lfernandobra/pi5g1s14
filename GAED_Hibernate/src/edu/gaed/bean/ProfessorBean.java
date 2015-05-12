@@ -94,6 +94,7 @@ public class ProfessorBean implements Serializable {
 	// Métodos dos botões
 	@SuppressWarnings("unchecked")
 	public void cadastrar(ActionEvent actionEvent) {
+		professor.setDisciplinas(disciplinas);
 		new ProfessorDao().inserir(professor);
 		professors = new ProfessorDao().listar();
 		professor = new Professor();

@@ -87,13 +87,9 @@
 						<h:outputFormat value="{0, date, dd/MM/yyyy}">
 							<f:param value="#{lista.anoConclusao}" />
 						</h:outputFormat>
-						<p:commandButton value="Adicionar disciplina"
-							update=":formAdicionarDisciplina"
-							oncomplete="PF('dialogAdicionarDisciplina').show();"
-							icon="ui-icon-pencil">
-							<f:setPropertyActionListener target="#{ProfessorBean.professor}"
-								value="#{lista}" />
-						</p:commandButton>
+						
+						<h:outputText value="Disciplinas" />
+						<h:outputText value="#{lista.disciplinas}" />
 					</p:panelGrid>
 				</p:rowExpansion>
 				<p:column headerText="Ações">
