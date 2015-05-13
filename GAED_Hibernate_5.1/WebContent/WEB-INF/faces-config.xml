@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<faces-config
+    xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd"
+    version="2.2">
+<managed-bean>
+  <managed-bean-name>UFBean</managed-bean-name>
+  <managed-bean-class>edu.gaed.bean.UFBean</managed-bean-class>
+  <managed-bean-scope>request</managed-bean-scope>
+ </managed-bean>
+ <managed-bean>
+  <managed-bean-name>MunicipioBean</managed-bean-name>
+  <managed-bean-class>edu.gaed.bean.MunicipioBean</managed-bean-class>
+  <managed-bean-scope>request</managed-bean-scope>
+ </managed-bean>
+ <managed-bean>
+  <managed-bean-name>BairroBean</managed-bean-name>
+  <managed-bean-class>edu.gaed.bean.BairroBean</managed-bean-class>
+  <managed-bean-scope>request</managed-bean-scope>
+ </managed-bean>
+ <managed-bean>
+  <managed-bean-name>LogradouroBean</managed-bean-name>
+  <managed-bean-class>edu.gaed.bean.LogradouroBean</managed-bean-class>
+  <managed-bean-scope>request</managed-bean-scope>
+ </managed-bean>
+ <managed-bean>
+  <managed-bean-name>DisciplinaBean</managed-bean-name>
+  <managed-bean-class>edu.gaed.bean.DisciplinaBean</managed-bean-class>
+  <managed-bean-scope>request</managed-bean-scope>
+ </managed-bean>
+ <managed-bean>
+  <managed-bean-name>ProfessorBean</managed-bean-name>
+  <managed-bean-class>edu.gaed.bean.ProfessorBean</managed-bean-class>
+  <managed-bean-scope>request</managed-bean-scope>
+ </managed-bean>
+ <managed-bean>
+  <managed-bean-name>UsuarioBean</managed-bean-name>
+  <managed-bean-class>edu.gaed.bean.UsuarioBean</managed-bean-class>
+  <managed-bean-scope>request</managed-bean-scope>
+ </managed-bean>
+ <managed-bean>
+  <managed-bean-name>FotoBean</managed-bean-name>
+  <managed-bean-class>edu.gaed.bean.FotoBean</managed-bean-class>
+  <managed-bean-scope>request</managed-bean-scope>
+ </managed-bean>
+
+</faces-config>
+
