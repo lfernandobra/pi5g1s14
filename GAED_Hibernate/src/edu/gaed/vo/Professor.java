@@ -1,15 +1,15 @@
 package edu.gaed.vo;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-//import javax.persistence.JoinTable;
-//import javax.persistence.JoinColumn;
+import javax.persistence.FetchType;
+import javax.persistence.JoinTable;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
-
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
@@ -36,16 +36,13 @@ public class Professor extends Usuario{
 	@Column(name="anoConcl", nullable=false)
 	private Date anoConclusao;
 	
-	@ManyToMany(cascade=CascadeType.ALL)
-    //@JoinTable(name = "professor_disciplina", joinColumns = @JoinColumn(name = "id_usuario"), 
-    //		   inverseJoinColumns = @JoinColumn(name = "id_disciplina"))
-    private List<Disciplina> disciplinas;
+	@ManyToMany(fetch = FetchType.LAZY)
+	@JoinTable(name = "disciplina_professor",
+	joinColumns = { @JoinColumn(name = "idprofessor", nullable = false,
+	updatable =  false) }, inverseJoinColumns = {
+	@JoinColumn(name = "iddisciplina", nullable = false, updatable = false) })
+    private List<Disciplina> disciplinas = new ArrayList<Disciplina>();
 	
-	/*
-	@JoinColumn(name="id_disciplina")
-	@OneToMany(cascade=CascadeType.ALL)
-	private Set<Disciplina> disciplinas = new HashSet<Disciplina>(0);
-	*/
 	public String getEscolaAnterior() {
 		return escolaAnterior;
 	}
@@ -70,16 +67,7 @@ public class Professor extends Usuario{
 	public void setAnoConclusao(Date anoConclusao) {
 		this.anoConclusao = anoConclusao;
 	}
-	
-	/*
-	public Set<Disciplina> getDisciplinas() {
-		return disciplinas;
-	}
-	public void setDisciplinas(Set<Disciplina> disciplinas) {
-		this.disciplinas = disciplinas;
-	}
-	*/
-	
+
 	public List<Disciplina> getDisciplinas() {
 		return disciplinas;
 	}
