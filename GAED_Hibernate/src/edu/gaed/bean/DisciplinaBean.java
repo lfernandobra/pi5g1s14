@@ -84,10 +84,6 @@ public class DisciplinaBean implements Serializable{
 
 	public void setDisciplinas(List<Disciplina> disciplinas) {
 		this.disciplinas = disciplinas;
-	}
- 
-	//getters and setters
-	
- 
+	} 
 	
 }

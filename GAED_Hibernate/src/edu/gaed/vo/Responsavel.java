@@ -49,6 +49,40 @@ public class Responsavel extends Usuario{
 		this.aluno.add(aluno);
 	}
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result + (adimplente ? 1231 : 1237);
+		result = prime * result + ((aluno == null) ? 0 : aluno.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Responsavel other = (Responsavel) obj;
+		if (adimplente != other.adimplente)
+			return false;
+		if (aluno == null) {
+			if (other.aluno != null)
+				return false;
+		} else if (!aluno.equals(other.aluno))
+			return false;
+		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "Responsavel [adimplente=" + adimplente + ", aluno=" + aluno
+				+ "]";
+	}
+
 	
 	
 }

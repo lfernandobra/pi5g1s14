@@ -83,5 +83,42 @@ public class BoletimAlunoDisciplina {
 
 		public void setFalta(int falta) {
 			this.falta = falta;
+		}
+
+		@Override
+		public int hashCode() {
+			final int prime = 31;
+			int result = 1;
+			result = prime * result + falta;
+			result = prime * result + Float.floatToIntBits(nota);
+			result = prime * result + ((pk == null) ? 0 : pk.hashCode());
+			return result;
+		}
+
+		@Override
+		public boolean equals(Object obj) {
+			if (this == obj)
+				return true;
+			if (obj == null)
+				return false;
+			if (getClass() != obj.getClass())
+				return false;
+			BoletimAlunoDisciplina other = (BoletimAlunoDisciplina) obj;
+			if (falta != other.falta)
+				return false;
+			if (Float.floatToIntBits(nota) != Float.floatToIntBits(other.nota))
+				return false;
+			if (pk == null) {
+				if (other.pk != null)
+					return false;
+			} else if (!pk.equals(other.pk))
+				return false;
+			return true;
+		}
+
+		@Override
+		public String toString() {
+			return "BoletimAlunoDisciplina [pk=" + pk + ", nota=" + nota
+					+ ", falta=" + falta + "]";
 		}			
 }

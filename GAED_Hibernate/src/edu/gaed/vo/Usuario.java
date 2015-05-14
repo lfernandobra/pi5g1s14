@@ -292,30 +292,152 @@ public class Usuario implements Serializable{
 		return serialVersionUID;
 	}
 
-	
-	@Override
-    public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + ((id == null) ? 0 : id.hashCode());
-        return result;
-    }
 
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-        Usuario other = (Usuario) obj;
-        if (id == null) {
-            if (other.id != null)
-                return false;
-        } else if (!id.equals(other.id))
-            return false;
-        return true;
-    }
-    
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((CPF == null) ? 0 : CPF.hashCode());
+		result = prime * result + ((RG == null) ? 0 : RG.hashCode());
+		result = prime * result
+				+ ((complemento == null) ? 0 : complemento.hashCode());
+		result = prime * result
+				+ ((dataIngresso == null) ? 0 : dataIngresso.hashCode());
+		result = prime * result
+				+ ((dataSaida == null) ? 0 : dataSaida.hashCode());
+		result = prime * result
+				+ ((datanasc == null) ? 0 : datanasc.hashCode());
+		result = prime * result + ((email == null) ? 0 : email.hashCode());
+		result = prime * result + ((foto == null) ? 0 : foto.hashCode());
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((login == null) ? 0 : login.hashCode());
+		result = prime * result
+				+ ((logradouro == null) ? 0 : logradouro.hashCode());
+		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
+		result = prime * result + ((numero == null) ? 0 : numero.hashCode());
+		result = prime * result + ((perfil == null) ? 0 : perfil.hashCode());
+		result = prime * result + ((senha == null) ? 0 : senha.hashCode());
+		result = prime * result + ((sexo == null) ? 0 : sexo.hashCode());
+		result = prime * result
+				+ ((sobrenome == null) ? 0 : sobrenome.hashCode());
+		result = prime * result + (status ? 1231 : 1237);
+		result = prime * result
+				+ ((telefone == null) ? 0 : telefone.hashCode());
+		return result;
+	}
+
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Usuario other = (Usuario) obj;
+		if (CPF == null) {
+			if (other.CPF != null)
+				return false;
+		} else if (!CPF.equals(other.CPF))
+			return false;
+		if (RG == null) {
+			if (other.RG != null)
+				return false;
+		} else if (!RG.equals(other.RG))
+			return false;
+		if (complemento == null) {
+			if (other.complemento != null)
+				return false;
+		} else if (!complemento.equals(other.complemento))
+			return false;
+		if (dataIngresso == null) {
+			if (other.dataIngresso != null)
+				return false;
+		} else if (!dataIngresso.equals(other.dataIngresso))
+			return false;
+		if (dataSaida == null) {
+			if (other.dataSaida != null)
+				return false;
+		} else if (!dataSaida.equals(other.dataSaida))
+			return false;
+		if (datanasc == null) {
+			if (other.datanasc != null)
+				return false;
+		} else if (!datanasc.equals(other.datanasc))
+			return false;
+		if (email == null) {
+			if (other.email != null)
+				return false;
+		} else if (!email.equals(other.email))
+			return false;
+		if (foto == null) {
+			if (other.foto != null)
+				return false;
+		} else if (!foto.equals(other.foto))
+			return false;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		if (login == null) {
+			if (other.login != null)
+				return false;
+		} else if (!login.equals(other.login))
+			return false;
+		if (logradouro == null) {
+			if (other.logradouro != null)
+				return false;
+		} else if (!logradouro.equals(other.logradouro))
+			return false;
+		if (nome == null) {
+			if (other.nome != null)
+				return false;
+		} else if (!nome.equals(other.nome))
+			return false;
+		if (numero == null) {
+			if (other.numero != null)
+				return false;
+		} else if (!numero.equals(other.numero))
+			return false;
+		if (perfil != other.perfil)
+			return false;
+		if (senha == null) {
+			if (other.senha != null)
+				return false;
+		} else if (!senha.equals(other.senha))
+			return false;
+		if (sexo == null) {
+			if (other.sexo != null)
+				return false;
+		} else if (!sexo.equals(other.sexo))
+			return false;
+		if (sobrenome == null) {
+			if (other.sobrenome != null)
+				return false;
+		} else if (!sobrenome.equals(other.sobrenome))
+			return false;
+		if (status != other.status)
+			return false;
+		if (telefone == null) {
+			if (other.telefone != null)
+				return false;
+		} else if (!telefone.equals(other.telefone))
+			return false;
+		return true;
+	}
+
+
+	@Override
+	public String toString() {
+		return "Usuario [id=" + id + ", login=" + login + ", senha=" + senha
+				+ ", nome=" + nome + ", sobrenome=" + sobrenome + ", sexo="
+				+ sexo + ", datanasc=" + datanasc + ", email=" + email
+				+ ", CPF=" + CPF + ", RG=" + RG + ", numero=" + numero
+				+ ", complemento=" + complemento + ", telefone=" + telefone
+				+ ", status=" + status + ", dataIngresso=" + dataIngresso
+				+ ", dataSaida=" + dataSaida + ", foto=" + foto
+				+ ", logradouro=" + logradouro + ", perfil=" + perfil + "]";
+	}    
 }
