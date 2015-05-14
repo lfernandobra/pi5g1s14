@@ -19,7 +19,7 @@
 		<div id="Lista">
 				<p:separator />
 				
-				<p:toolbar styleClass="toolbarGestor">
+				<p:toolbar styleClass="toolbar">
 					<f:facet name="left">
 						<p:commandButton value="Cadastrar" type="button"
 							onclick="PF('dialogCadastrar').show();" icon="ui-icon-disk" />
@@ -86,12 +86,10 @@
 								</h:outputFormat>
 								<h:outputText value="Escola anterior " />
 								<h:outputText value="#{lista.escolaAnterior}" />
-								<h:outputText value="Série anterior " />
-								<h:outputText value="#{lista.serieAnterior}" />
-
 								<h:outputText value="Escola atual " />
 								<h:outputText value="#{lista.escolaAtual}" />
-
+								<h:outputText value="Série anterior " />
+								<h:outputText value="#{lista.serieAnterior}" />
 								<h:outputText value="Série atual " />
 								<h:outputText value="#{lista.serieAtual}" />
 
@@ -134,12 +132,12 @@
 						<p:panelGrid id="panelCadastrar" columns="6">
 
 							<p:outputLabel for="nome" value="Nome:" />
-							<p:inputText value="#{AlunoBean.aluno.nome}" required="true" label="nome" id="nome"	requiredMessage="Nome não deve estar vazio!">
+							<p:inputText value="#{AlunoBean.aluno.nome}" size="30" required="true" label="nome" id="nome"	requiredMessage="Nome não deve estar vazio!">
 								<f:validateLength minimum="3" />
 							</p:inputText>
 
 							<p:outputLabel for="sobrenome" value="Sobrenome:" />
-							<p:inputText value="#{AlunoBean.aluno.sobrenome}" required="true" label="sobrenome" id="sobrenome"	requiredMessage="Sobrenome não deve estar vazio!">
+							<p:inputText value="#{AlunoBean.aluno.sobrenome}" size="30" required="true" label="sobrenome" id="sobrenome"	requiredMessage="Sobrenome não deve estar vazio!">
 								<f:validateLength minimum="3" />
 							</p:inputText>
 
@@ -207,11 +205,11 @@
 							<p:outputLabel for="escolaAnterior" value="Escola anterior:" />
 							<p:inputText value="#{AlunoBean.aluno.escolaAnterior}" required="true" label="escolaAnterior" id="escolaAnterior"	requiredMessage="Escola anterior deve ser informada!" />
 
-							<p:outputLabel for="serieAnterior" value="Série anterior:" />
-							<p:inputText value="#{AlunoBean.aluno.serieAnterior}" required="true" label="serieAnterior" id="serieAnterior" requiredMessage="Série anterior deve ser informada!" />
-
 							<p:outputLabel for="escolaAtual" value="Escola atual:" />
 							<p:inputText value="#{AlunoBean.aluno.escolaAtual}" required="true" label="escolaAtual" id="escolaAtual" requiredMessage="Escola atual deve ser informada!" />
+
+							<p:outputLabel for="serieAnterior" value="Série anterior:" />
+							<p:inputText value="#{AlunoBean.aluno.serieAnterior}" required="true" label="serieAnterior" id="serieAnterior" requiredMessage="Série anterior deve ser informada!" />
 
 							<p:outputLabel for="serieAnterior" value="Série atual:" />
 							<p:inputText value="#{AlunoBean.aluno.serieAtual}" 	required="true" label="serieAtual" id="serieAtual"	requiredMessage="Série atual deve ser informada!" />
@@ -334,11 +332,11 @@
 							<p:outputLabel for="escolaAnterior" value="Escola anterior:" />
 							<p:inputText value="#{AlunoBean.aluno.escolaAnterior}" required="true" label="escolaAnterior" id="escolaAnterior" requiredMessage="Escola anterior deve ser informada!" />
 
-							<p:outputLabel for="serieAnterior" value="Série anterior:" />
-							<p:inputText value="#{AlunoBean.aluno.serieAnterior}" required="true" label="serieAnterior" id="serieAnterior"	requiredMessage="Série anterior deve ser informada!" />
-
 							<p:outputLabel for="escolaAtual" value="Escola atual:" />
 							<p:inputText value="#{AlunoBean.aluno.escolaAtual}" required="true" label="escolaAtual" id="escolaAtual" requiredMessage="Escola atual deve ser informada!" />
+
+							<p:outputLabel for="serieAnterior" value="Série anterior:" />
+							<p:inputText value="#{AlunoBean.aluno.serieAnterior}" required="true" label="serieAnterior" id="serieAnterior"	requiredMessage="Série anterior deve ser informada!" />
 
 							<p:outputLabel for="serieAnterior" value="Série atual:" />
 							<p:inputText value="#{AlunoBean.aluno.serieAtual}" required="true" label="serieAtual" id="serieAtual"	requiredMessage="Série atual deve ser informada!" />
