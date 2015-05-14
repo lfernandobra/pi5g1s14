@@ -133,6 +133,9 @@ public class Professor extends Usuario{
 				+ instituicaoAcad + ", anoConclusao=" + anoConclusao
 				+ ", disciplinas=" + disciplinas + "]";
 	}
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
 	
 	
 	

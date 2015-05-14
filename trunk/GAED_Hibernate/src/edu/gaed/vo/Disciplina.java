@@ -124,5 +124,8 @@ public class Disciplina implements Serializable{
 		return "Disciplina [id=" + id + ", nome=" + nome + ", conteudo="
 				+ conteudo + ", professores=" + professores + "]";
 	}
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
 	
 }

@@ -22,8 +22,8 @@
   <managed-bean-scope>request</managed-bean-scope>
  </managed-bean>
  <managed-bean>
-  <managed-bean-name>ProfessorDisciplinaBean</managed-bean-name>
-  <managed-bean-class>edu.gaed.bean.ProfessorDisciplinaBean</managed-bean-class>
+  <managed-bean-name>DisciplinaBean</managed-bean-name>
+  <managed-bean-class>edu.gaed.bean.DisciplinaBean</managed-bean-class>
   <managed-bean-scope>request</managed-bean-scope>
  </managed-bean>
  <converter>
