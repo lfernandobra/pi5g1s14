@@ -2,6 +2,9 @@ package edu.gaed.vo;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
@@ -26,14 +29,10 @@ public class Aluno extends Usuario{
 	
 	@Column(name="serieAtual")
 	private String serieAtual;
-	
-	//@ManyToMany(targetEntity=edu.gaed.vo.usuario.Aluno.class, mappedBy="aluno")
-	
-	/*
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name="id_responsavel", referencedColumnName="id_usuario", foreignKey = @ForeignKey(name="fk_responsavel"))
-	private Responsavel responsavel;
-	*/
+		
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "idturma")
+	private Turma turma;
 		
 	public Aluno() {
 		super();
@@ -123,5 +122,13 @@ public class Aluno extends Usuario{
 		return "Aluno [escolaAnterior=" + escolaAnterior + ", serieAnterior="
 				+ serieAnterior + ", escolaAtual=" + escolaAtual
 				+ ", serieAtual=" + serieAtual + "]";
+	}
+
+	public Turma getTurma() {
+		return turma;
+	}
+
+	public void setTurma(Turma turma) {
+		this.turma = turma;
 	}	
 }

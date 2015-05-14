@@ -45,10 +45,7 @@ public class TurmaBean implements Serializable{
 		turma = new Turma();
        
     }
-	public String getTurmaEscolhida(){
-        return turma!=null && turma.getId()!=null ? turma.toString():"Classe não escolhida";
-    }
- 
+	 
 	//Métodos dos botões 
 	@SuppressWarnings("unchecked")
 	public void cadastrar(ActionEvent actionEvent){
