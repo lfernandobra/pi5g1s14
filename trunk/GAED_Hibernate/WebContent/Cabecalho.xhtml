@@ -14,21 +14,26 @@
 		
 		<p:layoutUnit position="north" styleClass="gridMenu" >
 		
-		<p:toolbar>
-			<f:facet name="left">
+		<div id="cabecalho">	
+		
+			<div id="logo">
 				<h:graphicImage value="/imagens/logo_gaed_1.png" />
-   			</f:facet>
-   			
-			<f:facet name="right">
-					<p:fieldset position="east" styleClass="fieldsetCabecalho" >
+			</div>
+			
+			<div id="fieldset">
+	   			<p:fieldset>
+	   				<div id="label">
 						<h:outputLabel value="Olá,#{LoginBean.usuario.nome}"  />
 						<p:link value="Sair" action="#{LoginBean.encerrarSession()}"></p:link>
+					</div>
+					
+					<div id="foto">	
 						<h:graphicImage value="/imagens/logo_gaed_1.png" />
-					</p:fieldset>
-			</f:facet>
-
-		</p:toolbar> 
-				
+					</div>
+					
+				</p:fieldset>
+			</div>
+			
 			<h:form>  
 			    <p:growl id="messages"/>
 			 
@@ -64,6 +69,7 @@
 			        </p:submenu>
 			    </p:menubar>
 			</h:form>
+			</div>
 		</p:layoutUnit>
 		
 		<div id="conteudoCentro">

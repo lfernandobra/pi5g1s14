@@ -52,7 +52,7 @@
 					<p:panelGrid columns="2" columnClasses="label,value">
 						<h:outputText value="Data de nascimento " />
 						<h:outputFormat value="{0, date, dd/MM/yyyy}">
-							<f:param value="#{lista.datanasc}" />
+						<f:param value="#{lista.datanasc}" />
 						</h:outputFormat>
 						<h:outputText value="Foto " />
 						<h:graphicImage value="/temp/#{lista.nome}.png" />
@@ -142,54 +142,59 @@
 				<p:panelGrid id="panelCadastrar" columns="6">
 
 					<p:outputLabel for="nome" value="Nome:" />
-					<p:inputText value="#{GestorBean.gestor.nome}" required="true" label="nome" id="nome" requiredMessage="Nome não deve estar vazio!">
+					<p:inputText value="#{GestorBean.gestor.nome}" size="30"  required="true" label="nome" id="nome" requiredMessage="Nome não deve estar vazio!">
 						<f:validateLength minimum="3" />
 					</p:inputText>
 
 					<p:outputLabel for="sobrenome" value="Sobrenome:" />
-					<p:inputText value="#{GestorBean.gestor.sobrenome}" required="true" label="sobrenome" id="sobrenome" requiredMessage="Sobrenome não deve estar vazio!">
+					<p:inputText value="#{GestorBean.gestor.sobrenome}" size="30" required="true" label="sobrenome" id="sobrenome" requiredMessage="Sobrenome não deve estar vazio!">
 						<f:validateLength minimum="3" />
 					</p:inputText>
-
+					
 					<p:outputLabel for="sexo" value="Sexo:" />
-					<p:selectOneMenu id="sexo" value="#{GestorBean.gestor.sexo}" style="width:150px" required="true" label="Sexo">
+					<p:selectOneMenu id="sexo" value="#{GestorBean.gestor.sexo}" style="width:150px" required="true" label="Sexo" requiredMessage="Sexo não deve estar vazio!">
 						<f:selectItem itemLabel="Masculino" itemValue="Masculino" />
 						<f:selectItem itemLabel="Feminino" itemValue="Feminino" />
+						<f:validateLength minimum="3" />
 					</p:selectOneMenu>
-
+					
 					<p:outputLabel for="datanasc" value="Data de nascimento:" />
 					<p:inputMask value="#{GestorBean.gestor.datanasc}" mask="99/99/9999" placeholder="dd/mm/aaaa" required="true" label="datanasc" id="datanasc"
 						requiredMessage="Data de nascimento deve ser informada!">
 						<f:converter converterId="javax.faces.DateTime" />
 						<f:convertDateTime pattern="dd/MM/yyyy" timeZone="GMT-3" />
 					</p:inputMask>
+					
+					<p:outputLabel for="cpf" value="CPF:" />
+					<p:inputMask id="cpf" value="#{GestorBean.gestor.CPF}" mask="999.999.999-99" required="true" label="CPF" requiredMessage="CPF deve ser informado!" />
 
+					<p:outputLabel for="rg" value="RG:" />
+					<p:inputMask id="rg" value="#{GestorBean.gestor.RG}" mask="99.999.999-9" required="true" label="RG"	requiredMessage="RG deve ser informado!" />
+					
+					
 					<p:outputLabel for="cep" value="CEP:" />
 					<p:autoComplete value="#{GestorBean.gestor.logradouro}" completeMethod="#{LogradouroBean.completeLogradouro()}"	var="logradouro" itemLabel="#{logradouro.CEP}"
 						itemValue="#{logradouro}" forceSelection="true" required="true" requiredMessage="CEP deve ser informado!" label="CEP" id="cep">
 					</p:autoComplete>
-
+					
 					<p:outputLabel for="numero" value="Número:" />
 					<p:inputText value="#{GestorBean.gestor.numero}" required="true" label="Número" id="numero"	requiredMessage="Número deve ser informado!" />
 
 					<p:outputLabel for="complemento" value="Complemento:" />
 					<p:inputText value="#{GestorBean.gestor.complemento}" required="true" label="Complemento" id="complemento" requiredMessage="Complemento deve ser informado!" />
 
-					<p:outputLabel for="cpf" value="CPF:" />
-					<p:inputMask id="cpf" value="#{GestorBean.gestor.CPF}" mask="999.999.999-99" required="true" label="CPF" requiredMessage="CPF deve ser informado!" />
-
-					<p:outputLabel for="rg" value="RG:" />
-					<p:inputMask id="rg" value="#{GestorBean.gestor.RG}" mask="99.999.999-9" required="true" label="RG"	requiredMessage="RG deve ser informado!" />
-
+					<p:outputLabel for="telefone" value="Telefone:" />
+					<p:inputMask value="#{GestorBean.gestor.telefone}" mask="(99) 99999-9999" required="true" label="Telefone"	id="telefone" />
+					
+					<p:outputLabel for="formacaoAcad" value="Formação acadêmica:" />
+					<p:inputText value="#{GestorBean.gestor.formacaoAcad}" required="true" label="Formação acadêmica" id="formacaoAcad"
+						requiredMessage="Formação acadêmica deve ser informada!" />
+					
 					<p:outputLabel for="status" value="Situação:" />
 					<p:selectOneMenu id="status" value="#{GestorBean.gestor.status}" style="width:150px" required="true" label="Status">
 						<f:selectItem itemLabel="Inativo" itemValue="#{false}" />
 						<f:selectItem itemLabel="Ativo" itemValue="#{true}" />
 					</p:selectOneMenu>
-
-					<p:outputLabel for="telefone" value="Telefone:" />
-					<p:inputMask value="#{GestorBean.gestor.telefone}" mask="(99) 99999-9999" required="true" label="Telefone"	id="telefone" />
-					<p:messages for="telefone" display="icon" closable="true" />
 
 					<p:outputLabel for="dataIngresso" value="Data de ingresso:" />
 					<p:inputMask id="dataIngresso" 	value="#{GestorBean.gestor.dataIngresso}" mask="99/99/9999"	placeholder="dd/mm/aaaa" required="true" label="Data de ingresso"
@@ -202,35 +207,19 @@
 					<p:inputMask id="dataSaida" value="#{GestorBean.gestor.dataSaida}" mask="99/99/9999" placeholder="dd/mm/aaaa" required="false" label="Data de saída">
 						<f:converter converterId="javax.faces.DateTime" />
 						<f:convertDateTime pattern="dd/MM/yyyy" timeZone="GMT-3" />
-					</p:inputMask>
+					</p:inputMask>	
 					
 					<p:outputLabel for="email" value="Email:" />
 					<p:inputText id="email" required="true" size="40" requiredMessage="Insira o endereço de email"	validatorMessage="Formato de email invalido"
 						value="#{GestorBean.gestor.email}" label="Email">
-						<f:validateRegex
-							pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+						<f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
 					</p:inputText>
-					
-
-					<p:outputLabel for="formacaoAcad" value="Formação acadêmica:" />
-					<p:inputText value="#{GestorBean.gestor.formacaoAcad}" required="true" label="Formação acadêmica" id="formacaoAcad"
-						requiredMessage="Formação acadêmica deve ser informada!" />
-
-					<p:outputLabel for="instAcad" value="Instituição acadêmica:" />
-					<p:inputText value="#{GestorBean.gestor.instituicaoAcad}" required="true" label="Instituição acadêmica" id="instAcad"
-						requiredMessage="Instituição acadêmica deve ser informada!" />
-					
-					<p:outputLabel for="anoConclusao" value="Ano conclusão:" />
-					<p:inputMask id="anoConclusao" 	value="#{GestorBean.gestor.anoConclusao}" mask="99/99/9999"	placeholder="dd/mm/aaaa" required="false" label="Ano conclusão">
-						<f:converter converterId="javax.faces.DateTime" />
-						<f:convertDateTime pattern="dd/MM/yyyy" timeZone="GMT-3" />
-					</p:inputMask>	
-						
-
+	
 					<p:outputLabel for="foto" value="Foto:" />
 					<p:fileUpload fileUploadListener="#{GestorBean.uploadAction}" mode="simple" skinSimple="true" update="growl" sizeLimit="100000" fileLimit="1"
 						allowTypes="/(\.|\/)(gif|jpe?g|png)$/" id="foto" />
 
+					
 				</p:panelGrid>
 
 					<h4>Dados de Acesso</h4>	
@@ -239,23 +228,21 @@
 					<div  id="dadosPessoais">
 						<p:panelGrid columns="2">
 							<p:outputLabel for="login" value="Login:" />
-								<p:inputText value="#{GestorBean.gestor.login}" required="true"	label="Login" id="login" requiredMessage="Login não deve estar vazio!">
+								<p:inputText value="#{GestorBean.gestor.login}" size="30" required="true"	label="Login" id="login" requiredMessage="Login não deve estar vazio!">
 									<f:validateLength minimum="6" />
 								</p:inputText>
 			
 								<p:outputLabel for="senha" value="Senha:" />
-								<p:password value="#{GestorBean.gestor.senha}" required="true" 	label="Senha" id="senha" requiredMessage="Senha não deve estar vazio!">
+								<p:password value="#{GestorBean.gestor.senha}" size="30" required="true" 	label="Senha" id="senha" requiredMessage="Senha não deve estar vazio!">
 									<f:validateLength minimum="8" />
 								</p:password>
 						</p:panelGrid>
 					</div>
 
 				<div id="botoes">
-					<p:commandButton value="Salvar" id="withIcon"
-						actionListener="#{GestorBean.cadastrar}" icon="ui-icon-disk"
-						update=":formPrincipal:tabelaGestor @form"
-						oncomplete="closeDialogIfSucess(xhr, status, args, 'dialogCadastrar','formCad')"
-						onsuccess="PF('dialogCadastrar').hide();" />
+					<p:commandButton value="Salvar" id="withIcon" actionListener="#{GestorBean.cadastrar}" icon="ui-icon-disk"	update=":formPrincipal:tabelaGestor @form"
+						oncomplete="closeDialogIfSucess(xhr, status, args, 'dialogCadastrar','formCad')" onsuccess="PF('dialogCadastrar').hide();" />
+					
 					<p:commandButton value="Limpar" update="@form" process="@this">
 						<p:resetInput target="panelCadastrar" />
 					</p:commandButton>

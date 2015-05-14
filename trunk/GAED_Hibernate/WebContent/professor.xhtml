@@ -298,10 +298,10 @@
 
 					<p:outputLabel value="Disciplina:" />
 					<p:selectCheckboxMenu id="menu"
-						value="#{ProfessorBean.professor.disciplinas}" label="Selecione"
+						value="#{ProfessorBean.selectedDisciplinas}" label="Selecione"
 						filter="true" filterMatchMode="startsWith"
 						panelStyle="width:250px">
-						<f:selectItems value="#{DisciplinaBean.disciplinas}" />
+						<f:selectItems value="#{ProfessorBean.disciplinas}" />
 					</p:selectCheckboxMenu>
 
 				</p:panelGrid>
