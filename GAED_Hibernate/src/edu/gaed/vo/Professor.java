@@ -1,9 +1,7 @@
 package edu.gaed.vo;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -12,6 +10,7 @@ import javax.persistence.FetchType;
 import javax.persistence.JoinTable;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
@@ -44,6 +43,9 @@ public class Professor extends Usuario{
 	updatable =  false) }, inverseJoinColumns = {
 	@JoinColumn(name = "iddisciplina", nullable = false, updatable = false) })
     private Set<Disciplina> disciplinas = new HashSet<Disciplina>();
+	
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "professor")
+	private Set<ProfessorTurma> professorTurma = new HashSet<ProfessorTurma>(0);
 	
 	public String getEscolaAnterior() {
 		return escolaAnterior;
@@ -90,6 +92,8 @@ public class Professor extends Usuario{
 				+ ((formacaoAcad == null) ? 0 : formacaoAcad.hashCode());
 		result = prime * result
 				+ ((instituicaoAcad == null) ? 0 : instituicaoAcad.hashCode());
+		result = prime * result
+				+ ((professorTurma == null) ? 0 : professorTurma.hashCode());
 		return result;
 	}
 	@Override
@@ -106,6 +110,11 @@ public class Professor extends Usuario{
 				return false;
 		} else if (!anoConclusao.equals(other.anoConclusao))
 			return false;
+		if (disciplinas == null) {
+			if (other.disciplinas != null)
+				return false;
+		} else if (!disciplinas.equals(other.disciplinas))
+			return false;
 		if (escolaAnterior == null) {
 			if (other.escolaAnterior != null)
 				return false;
@@ -121,6 +130,11 @@ public class Professor extends Usuario{
 				return false;
 		} else if (!instituicaoAcad.equals(other.instituicaoAcad))
 			return false;
+		if (professorTurma == null) {
+			if (other.professorTurma != null)
+				return false;
+		} else if (!professorTurma.equals(other.professorTurma))
+			return false;
 		return true;
 	}
 	@Override
@@ -128,10 +142,17 @@ public class Professor extends Usuario{
 		return "Professor [escolaAnterior=" + escolaAnterior
 				+ ", formacaoAcad=" + formacaoAcad + ", instituicaoAcad="
 				+ instituicaoAcad + ", anoConclusao=" + anoConclusao
-				+ "]";
+				+ ", disciplinas=" + disciplinas + ", professorTurma="
+				+ professorTurma + "]";
 	}
 	public static long getSerialversionuid() {
 		return serialVersionUID;
+	}
+	public Set<ProfessorTurma> getProfessorTurma() {
+		return professorTurma;
+	}
+	public void setProfessorTurma(Set<ProfessorTurma> professorTurma) {
+		this.professorTurma = professorTurma;
 	}
 	
 	

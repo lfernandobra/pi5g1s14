@@ -34,7 +34,13 @@
 					<p:panelGrid columns="2" columnClasses="label,value">
 						<h:outputText value="Conteúdo" />
 						<h:outputText value="#{lista.conteudo}" />
+						<h:outputText value="Professores" />
+						<p:dataList value="#{lista.professores}" var="professor"
+							emptyMessage="Nenhum professor leciona a matéria">
+            				#{professor.nome} #{professor.sobrenome}
+        				</p:dataList>
 					</p:panelGrid>
+					
 				</p:rowExpansion>
 
 				<p:column headerText="Ações">

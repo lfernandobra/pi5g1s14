@@ -88,8 +88,13 @@
 							<f:param value="#{lista.anoConclusao}" />
 						</h:outputFormat>
 						
-						<h:outputText value="Disciplinas" />
-						<h:outputText value="#{lista.disciplinas}" />
+						<h:outputText value="Disciplinas lecionadas" />
+						<p:dataList value="#{lista.disciplinas}" var="discipLecionada"
+							emptyMessage="No cities selected">
+            				#{discipLecionada.nome}
+        				</p:dataList>	
+						
+						
 					</p:panelGrid>
 				</p:rowExpansion>
 				<p:column headerText="Ações">
@@ -299,7 +304,10 @@
 					<p:outputLabel value="Disciplina:" />
 					<p:selectCheckboxMenu id="menu"	value="#{ProfessorBean.professor.disciplinas}" label="Selecione"
 						filter="true" filterMatchMode="startsWith"	panelStyle="width:250px">
-						<f:selectItems value="#{DisciplinaBean.disciplinas}" />
+						<f:selectItems value="#{DisciplinaBean.disciplinas}"
+									   var="disciplina"
+									   itemValue="#{disciplina}"
+									   itemLabel="#{disciplina.nome}" />
 						<f:converter converterId="disciplinaConverter"/>
 					</p:selectCheckboxMenu>
 
