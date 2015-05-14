@@ -124,28 +124,66 @@ public class Turma implements Serializable{
 	}*/
 	
 	@Override
-    public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + ((id == null) ? 0 : id.hashCode());
-        return result;
-    }
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((aluno == null) ? 0 : aluno.hashCode());
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
+		result = prime * result + ((periodo == null) ? 0 : periodo.hashCode());
+		result = prime * result + qtdAluInseridos;
+		result = prime * result + qtdAluLimite;
+		result = prime * result + ((serie == null) ? 0 : serie.hashCode());
+		return result;
+	}
 
     @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-        Turma other = (Turma) obj;
-        if (id == null) {
-            if (other.id != null)
-                return false;
-        } else if (!id.equals(other.id))
-            return false;
-        return true;
-    }
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Turma other = (Turma) obj;
+		if (aluno == null) {
+			if (other.aluno != null)
+				return false;
+		} else if (!aluno.equals(other.aluno))
+			return false;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		if (nome == null) {
+			if (other.nome != null)
+				return false;
+		} else if (!nome.equals(other.nome))
+			return false;
+		if (periodo == null) {
+			if (other.periodo != null)
+				return false;
+		} else if (!periodo.equals(other.periodo))
+			return false;
+		if (qtdAluInseridos != other.qtdAluInseridos)
+			return false;
+		if (qtdAluLimite != other.qtdAluLimite)
+			return false;
+		if (serie == null) {
+			if (other.serie != null)
+				return false;
+		} else if (!serie.equals(other.serie))
+			return false;
+		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "Turma [id=" + id + ", nome=" + nome + ", qtdAluLimite="
+				+ qtdAluLimite + ", qtdAluInseridos=" + qtdAluInseridos
+				+ ", periodo=" + periodo + ", serie=" + serie + ", aluno="
+				+ aluno + "]";
+	}
 
 }

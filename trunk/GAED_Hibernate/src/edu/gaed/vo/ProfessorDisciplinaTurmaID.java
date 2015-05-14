@@ -46,28 +46,53 @@ public class ProfessorDisciplinaTurmaID implements java.io.Serializable{
 	public void setDisciplina(Disciplina disciplina) {
 		this.disciplina = disciplina;
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result
+				+ ((disciplina == null) ? 0 : disciplina.hashCode());
+		result = prime * result
+				+ ((professor == null) ? 0 : professor.hashCode());
+		result = prime * result + ((turma == null) ? 0 : turma.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		ProfessorDisciplinaTurmaID other = (ProfessorDisciplinaTurmaID) obj;
+		if (disciplina == null) {
+			if (other.disciplina != null)
+				return false;
+		} else if (!disciplina.equals(other.disciplina))
+			return false;
+		if (professor == null) {
+			if (other.professor != null)
+				return false;
+		} else if (!professor.equals(other.professor))
+			return false;
+		if (turma == null) {
+			if (other.turma != null)
+				return false;
+		} else if (!turma.equals(other.turma))
+			return false;
+		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "ProfessorDisciplinaTurmaID [professor=" + professor
+				+ ", turma=" + turma + ", disciplina=" + disciplina + "]";
+	}
 	
 	
-	/*
- 	public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
- 
-        ProfessorTurmaDisciplina that = (ProfessorTurmaDisciplina) o;
- 
-        if (Professor != null ? !Professor.equals(that.Professor) : that.Professor != null) return false;
-        if (Turma != null ? !Turma.equals(that.Turma) : that.Turma != null)
-            return false;
-        if (disciplina != null ? !disciplina.equals(that.disciplina) : that.disciplina != null)
-            return false;
- 
-        return true;
-    }
- 	public int hashCode() {
-        int result;
-        result = (stock != null ? stock.hashCode() : 0);
-        result = 31 * result + (category != null ? category.hashCode() : 0);
-        return result;
-    }*/
+	
      
 }

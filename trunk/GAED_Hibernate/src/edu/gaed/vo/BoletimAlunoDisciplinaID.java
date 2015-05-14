@@ -46,26 +46,49 @@ public class BoletimAlunoDisciplinaID implements java.io.Serializable{
 	public void setDisciplina(Disciplina disciplina) {
 		this.disciplina = disciplina;
 	}
-	/*
- 	public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
- 
-        BoletimAlunoDisciplina that = (BoletimAlunoDisciplina) o;
- 
-        if (boletim != null ? !boletim.equals(that.boletim) : that.boletim != null) return false;
-        if (aluno != null ? !aluno.equals(that.aluno) : that.aluno != null)
-            return false;
-        if (disciplina != null ? !disciplina.equals(that.disciplina) : that.disciplina != null)
-            return false;
- 
-        return true;
-    }
- 	public int hashCode() {
-        int result;
-        result = (stock != null ? stock.hashCode() : 0);
-        result = 31 * result + (category != null ? category.hashCode() : 0);
-        return result;
-    }*/
-     
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((aluno == null) ? 0 : aluno.hashCode());
+		result = prime * result + ((boletim == null) ? 0 : boletim.hashCode());
+		result = prime * result
+				+ ((disciplina == null) ? 0 : disciplina.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		BoletimAlunoDisciplinaID other = (BoletimAlunoDisciplinaID) obj;
+		if (aluno == null) {
+			if (other.aluno != null)
+				return false;
+		} else if (!aluno.equals(other.aluno))
+			return false;
+		if (boletim == null) {
+			if (other.boletim != null)
+				return false;
+		} else if (!boletim.equals(other.boletim))
+			return false;
+		if (disciplina == null) {
+			if (other.disciplina != null)
+				return false;
+		} else if (!disciplina.equals(other.disciplina))
+			return false;
+		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "BoletimAlunoDisciplinaID [boletim=" + boletim + ", aluno="
+				+ aluno + ", disciplina=" + disciplina + "]";
+	}
+	
 }

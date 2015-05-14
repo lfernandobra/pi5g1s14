@@ -15,41 +15,40 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "tarefa")
-public class Tarefa implements Serializable{
-	
+public class Tarefa implements Serializable {
+
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Column(name="id_tarefa", nullable=false)
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "id_tarefa", nullable = false)
 	private Long id;
-	
-	@Column(name="descricao")
-	private String descricao;
-	
-	@Column(name="inicio")
-	private Date inicio;
-	
-	@Column(name="fim")
-	private Date fim;
-	
-	@ManyToOne
-	@JoinColumn(name="id_turma")
-	private Turma turma;
-	
-	@ManyToOne
-	@JoinColumn(name="id_disciplina")
-	private Disciplina disciplina;
-	
-	@ManyToOne
-	@JoinColumn(name="id_anexo")
-	private Anexo anexo;
-	
-	@OneToMany(mappedBy="tarefa")
 
+	@Column(name = "descricao")
+	private String descricao;
+
+	@Column(name = "inicio")
+	private Date inicio;
+
+	@Column(name = "fim")
+	private Date fim;
+
+	@ManyToOne
+	@JoinColumn(name = "id_turma")
+	private Turma turma;
+
+	@ManyToOne
+	@JoinColumn(name = "id_disciplina")
+	private Disciplina disciplina;
+
+	@ManyToOne
+	@JoinColumn(name = "id_anexo")
+	private Anexo anexo;
+
+	@OneToMany(mappedBy = "tarefa")
 	public Long getId() {
 		return id;
 	}
@@ -105,30 +104,75 @@ public class Tarefa implements Serializable{
 	public void setAnexo(Anexo anexo) {
 		this.anexo = anexo;
 	}
-	
-	@Override
-    public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + ((id == null) ? 0 : id.hashCode());
-        return result;
-    }
 
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-        Tarefa other = (Tarefa) obj;
-        if (id == null) {
-            if (other.id != null)
-                return false;
-        } else if (!id.equals(other.id))
-            return false;
-        return true;
-    }
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((anexo == null) ? 0 : anexo.hashCode());
+		result = prime * result
+				+ ((descricao == null) ? 0 : descricao.hashCode());
+		result = prime * result
+				+ ((disciplina == null) ? 0 : disciplina.hashCode());
+		result = prime * result + ((fim == null) ? 0 : fim.hashCode());
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((inicio == null) ? 0 : inicio.hashCode());
+		result = prime * result + ((turma == null) ? 0 : turma.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Tarefa other = (Tarefa) obj;
+		if (anexo == null) {
+			if (other.anexo != null)
+				return false;
+		} else if (!anexo.equals(other.anexo))
+			return false;
+		if (descricao == null) {
+			if (other.descricao != null)
+				return false;
+		} else if (!descricao.equals(other.descricao))
+			return false;
+		if (disciplina == null) {
+			if (other.disciplina != null)
+				return false;
+		} else if (!disciplina.equals(other.disciplina))
+			return false;
+		if (fim == null) {
+			if (other.fim != null)
+				return false;
+		} else if (!fim.equals(other.fim))
+			return false;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		if (inicio == null) {
+			if (other.inicio != null)
+				return false;
+		} else if (!inicio.equals(other.inicio))
+			return false;
+		if (turma == null) {
+			if (other.turma != null)
+				return false;
+		} else if (!turma.equals(other.turma))
+			return false;
+		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "Tarefa [id=" + id + ", descricao=" + descricao + ", inicio="
+				+ inicio + ", fim=" + fim + ", turma=" + turma
+				+ ", disciplina=" + disciplina + ", anexo=" + anexo + "]";
+	}
 
 }
