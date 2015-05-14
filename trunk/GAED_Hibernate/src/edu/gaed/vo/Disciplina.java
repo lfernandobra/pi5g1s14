@@ -1,15 +1,16 @@
 package edu.gaed.vo;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
-
-
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinTable;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
@@ -43,8 +44,12 @@ public class Disciplina implements Serializable{
 	@Column(name="conteudo")
 	private String conteudo;
 	
-	@ManyToMany(mappedBy="disciplinas")
-    private List<Professor> professores;
+	@ManyToMany(fetch = FetchType.LAZY)
+	@JoinTable(name = "disciplina_professor",
+	joinColumns = { @JoinColumn(name = "iddisciplina", nullable = false,
+	updatable = false) }, inverseJoinColumns = {
+	@JoinColumn(name = "idprofessor", nullable = false, updatable = false) })
+    private List<Professor> professores = new ArrayList<Professor>();
 	
 	public Long getId() {
 		return id;
