@@ -65,7 +65,7 @@ public class ProfessorBean implements Serializable {
 
 	public String getProfessorEscolhida() {
 		return professor != null && professor.getId() != null ? professor
-				.toString() : "Classe não escolhida";
+				.toString() : "Classe nï¿½o escolhida";
 	}
 
 	// getters and setters
@@ -92,10 +92,9 @@ public class ProfessorBean implements Serializable {
 		this.professor.setFoto(this.fotoBean.getFoto());
 	}
 
-	// Métodos dos botões
+	// Mï¿½todos dos botï¿½es
 	@SuppressWarnings("unchecked")
 	public void cadastrar(ActionEvent actionEvent) {
-		//professor.setDisciplinas(disciplinas);
 		new ProfessorDao().inserir(professor);
 		professors = new ProfessorDao().listar();
 		professor = new Professor();
@@ -121,7 +120,7 @@ public class ProfessorBean implements Serializable {
 		this.disciplinas = selectedDisciplinas;
 		//System.out.println(selectedDisciplinas.size());
 		//this.professor.setDisciplinas(selectedDisciplinas); 
-		//Problema ocorre aqui, quando é atribuido o array de Disciplinas (selectedDisciplinas 
+		//Problema ocorre aqui, quando ï¿½ atribuido o array de Disciplinas (selectedDisciplinas 
 		//as disciplinas do professor (linha 123) 
 		//selecionado as disciplinas ministradas do professor 
 	}

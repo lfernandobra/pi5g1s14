@@ -1,8 +1,9 @@
 package edu.gaed.bean;
 
 import java.io.Serializable;
-import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
@@ -23,12 +24,12 @@ public class DisciplinaBean implements Serializable{
 
 	Disciplina disciplina = new Disciplina();
 	 
-	List<Disciplina> disciplinas = new ArrayList<Disciplina>(); 
+	Set<Disciplina> disciplinas = new HashSet<Disciplina>(); 
 	
 	public DisciplinaBean(Disciplina disciplina, List<Disciplina> disciplinas) {
 		super();
 		this.disciplina = new Disciplina();
-		this.disciplinas = new ArrayList<Disciplina>();
+		this.disciplinas = new HashSet<Disciplina>();
 	}
  
 	//construtor
@@ -46,27 +47,27 @@ public class DisciplinaBean implements Serializable{
        
     }
 	public String getDisciplinaEscolhida(){
-        return disciplina!=null && disciplina.getId()!=null ? disciplina.toString():"Classe não escolhida";
+        return disciplina!=null && disciplina.getId()!=null ? disciplina.toString():"Classe nï¿½o escolhida";
     }
  
-	//Métodos dos botões 
+	//Mï¿½todos dos botï¿½es 
 	@SuppressWarnings("unchecked")
 	public void cadastrar(ActionEvent actionEvent){
 		new DisciplinaDao().inserir(disciplina);
-		disciplinas = new DisciplinaDao().listar();
+//		disciplinas = new DisciplinaDao().listar();
 		disciplina = new Disciplina();
 	}
  
 	@SuppressWarnings("unchecked")
 	public void alterar(){
 		new DisciplinaDao().alterar(disciplina);
-		disciplinas = new DisciplinaDao().listar();
+//		disciplinas = new DisciplinaDao().listar();
 		disciplina = new Disciplina();
 	}
 	@SuppressWarnings("unchecked")
 	public void excluir(Disciplina disciplina){
 		new DisciplinaDao().excluir(disciplina);
-		disciplinas = new DisciplinaDao().listar();
+//		disciplinas = new DisciplinaDao().listar();
 		disciplina = new Disciplina();
 	}
 
@@ -78,11 +79,11 @@ public class DisciplinaBean implements Serializable{
 		this.disciplina = disciplina;
 	}
 
-	public List<Disciplina> getDisciplinas() {
+	public Set<Disciplina> getDisciplinas() {
 		return disciplinas;
 	}
 
-	public void setDisciplinas(List<Disciplina> disciplinas) {
+	public void setDisciplinas(Set<Disciplina> disciplinas) {
 		this.disciplinas = disciplinas;
 	}
 
