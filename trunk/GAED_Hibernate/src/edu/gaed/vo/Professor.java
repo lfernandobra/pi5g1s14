@@ -104,11 +104,6 @@ public class Professor extends Usuario{
 				return false;
 		} else if (!anoConclusao.equals(other.anoConclusao))
 			return false;
-		if (disciplinas == null) {
-			if (other.disciplinas != null)
-				return false;
-		} else if (!disciplinas.equals(other.disciplinas))
-			return false;
 		if (escolaAnterior == null) {
 			if (other.escolaAnterior != null)
 				return false;
@@ -131,7 +126,7 @@ public class Professor extends Usuario{
 		return "Professor [escolaAnterior=" + escolaAnterior
 				+ ", formacaoAcad=" + formacaoAcad + ", instituicaoAcad="
 				+ instituicaoAcad + ", anoConclusao=" + anoConclusao
-				+ ", disciplinas=" + disciplinas + "]";
+				+ "]";
 	}
 	public static long getSerialversionuid() {
 		return serialVersionUID;

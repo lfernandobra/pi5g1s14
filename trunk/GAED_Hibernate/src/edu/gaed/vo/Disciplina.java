@@ -112,11 +112,6 @@ public class Disciplina implements Serializable{
 				return false;
 		} else if (!nome.equals(other.nome))
 			return false;
-		if (professores == null) {
-			if (other.professores != null)
-				return false;
-		} else if (!professores.equals(other.professores))
-			return false;
 		return true;
 	}
 	@Override
