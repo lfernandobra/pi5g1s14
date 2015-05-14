@@ -2,7 +2,9 @@ package edu.gaed.vo;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -41,7 +43,7 @@ public class Professor extends Usuario{
 	joinColumns = { @JoinColumn(name = "idprofessor", nullable = false,
 	updatable =  false) }, inverseJoinColumns = {
 	@JoinColumn(name = "iddisciplina", nullable = false, updatable = false) })
-    private List<Disciplina> disciplinas = new ArrayList<Disciplina>();
+    private Set<Disciplina> disciplinas = new HashSet<Disciplina>();
 	
 	public String getEscolaAnterior() {
 		return escolaAnterior;
@@ -68,11 +70,11 @@ public class Professor extends Usuario{
 		this.anoConclusao = anoConclusao;
 	}
 
-	public List<Disciplina> getDisciplinas() {
+	public Set<Disciplina> getDisciplinas() {
 		return disciplinas;
 	}
-	public void setDisciplinas(List<Disciplina> disciplinas) {
-		this.disciplinas = disciplinas;
+	public void setDisciplinas(Set<Disciplina> disciplinas) {
+		this.disciplinas = (Set<Disciplina>) disciplinas;
 	}
 	@Override
 	public int hashCode() {
