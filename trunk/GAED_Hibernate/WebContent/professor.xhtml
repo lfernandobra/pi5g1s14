@@ -297,10 +297,8 @@
 						allowTypes="/(\.|\/)(gif|jpe?g|png)$/" id="foto" required="true" />
 
 					<p:outputLabel value="Disciplina:" />
-					<p:selectCheckboxMenu id="menu"
-						value="#{ProfessorBean.professor.disciplinas}" label="Selecione"
-						filter="true" filterMatchMode="startsWith"
-						panelStyle="width:250px">
+					<p:selectCheckboxMenu id="menu"	value="#{ProfessorBean.professor.disciplinas}" label="Selecione"
+						filter="true" filterMatchMode="startsWith"	panelStyle="width:250px">
 						<f:selectItems value="#{DisciplinaBean.disciplinas}" />
 						<f:converter converterId="disciplinaConverter"/>
 					</p:selectCheckboxMenu>
