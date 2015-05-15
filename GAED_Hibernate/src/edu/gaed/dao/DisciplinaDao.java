@@ -1,11 +1,8 @@
 package edu.gaed.dao;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
-
 import edu.gaed.vo.Disciplina;
-
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 
@@ -59,7 +56,7 @@ public class DisciplinaDao {
 		}
  
 		
-		@SuppressWarnings("rawtypes")
+		@SuppressWarnings({ "rawtypes", "unchecked" })
 		public Set listar(){
 			session = HibernateUtil.getSessionFactory().openSession();
  
