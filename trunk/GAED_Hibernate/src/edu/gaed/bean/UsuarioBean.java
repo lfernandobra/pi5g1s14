@@ -26,7 +26,7 @@ public class UsuarioBean implements Serializable {
 	Usuario usuario = new Usuario();
 	List<Usuario> usuarios = new ArrayList<Usuario>();
 	FotoBean fotoBean = new FotoBean();
-
+	
 	public UsuarioBean(Usuario usuario, List<Usuario> usuarios) {
 		super();
 		this.usuario = new Usuario();
@@ -74,7 +74,7 @@ public class UsuarioBean implements Serializable {
 		usuarios = new UsuarioDao().listar();
 		usuario = new Usuario();
 	}
-
+	
 	public Usuario getUsuario() {
 		return usuario;
 	}

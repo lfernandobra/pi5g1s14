@@ -90,7 +90,7 @@
 						
 						<h:outputText value="Disciplinas lecionadas" />
 						<p:dataList value="#{lista.disciplinas}" var="discipLecionada"
-							emptyMessage="No cities selected">
+							emptyMessage="Nenhuma disciplina atribuida">
             				#{discipLecionada.nome}
         				</p:dataList>	
 						
@@ -183,35 +183,47 @@
 					</p:inputMask>
 					<p:messages for="datanasc" display="icon" closable="true" />
 
-					<p:outputLabel for="cep" value="CEP:" />
-					<p:autoComplete value="#{ProfessorBean.professor.logradouro}"
-						completeMethod="#{LogradouroBean.completeLogradouro()}"
-						var="logradouro" itemLabel="#{logradouro.CEP}"
-						itemValue="#{logradouro}" forceSelection="true" required="true"
-						requiredMessage="CEP deve ser informado!" label="CEP" id="cep">
-						<p:ajax event="itemSelect" listener="#{LogradouroBean.completeLogradouro()}" update="formCadastrar" /> 
-					</p:autoComplete>
-					<p:outputLabel value="Endereço:" />
-					<p:inputText value="#{ProfessorBean.professor.logradouro.nome}" readonly="true"/>
-					<p:outputLabel value="Bairro:" />
-					<p:inputText value="#{ProfessorBean.professor.logradouro.bairro.nome}" readonly="true"/>
-					<p:outputLabel value="Municipio:" />
-					<p:inputText value="#{ProfessorBean.professor.logradouro.bairro.municipio.nome}" readonly="true" />
-					<p:outputLabel value="Estado:" />
-					<p:inputText value="#{ProfessorBean.professor.logradouro.bairro.municipio.uf.nome}" readonly="true" />
-					
-					<p:outputLabel for="numero" value="Número:" />
-					<p:inputText value="#{ProfessorBean.professor.numero}"
-						required="true" label="Número" id="numero"
-						requiredMessage="Número deve ser informado!" />
-					<p:messages for="numero" display="icon" closable="true" />
+					<p:fieldset legend="Endereço residencial" style="margin-bottom:20px">
+						<h:panelGrid columns="2" cellpadding="5" id="panelGridLogradouro">
+							<p:outputLabel for="cep" value="CEP:" />
+							<p:autoComplete value="#{ProfessorBean.professor.logradouro}"
+								completeMethod="#{LogradouroBean.completeLogradouro()}"
+								var="logradouro" itemLabel="#{logradouro.CEP}"
+								itemValue="#{logradouro}" forceSelection="true" required="true"
+								requiredMessage="CEP deve ser informado!" label="CEP" id="cep">
+								<p:ajax event="itemSelect"
+									listener="#{LogradouroBean.completeLogradouro()}"
+									update="panelGridLogradouro" />
+							</p:autoComplete>
+							<p:outputLabel value="Endereço:" />
+							<p:inputText value="#{ProfessorBean.professor.logradouro.nome}"
+								readonly="true" />
+							<p:outputLabel value="Bairro:" />
+							<p:inputText
+								value="#{ProfessorBean.professor.logradouro.bairro.nome}"
+								readonly="true" />
+							<p:outputLabel value="Municipio:" />
+							<p:inputText
+								value="#{ProfessorBean.professor.logradouro.bairro.municipio.nome}"
+								readonly="true" />
+							<p:outputLabel value="Estado:" />
+							<p:inputText
+								value="#{ProfessorBean.professor.logradouro.bairro.municipio.uf.nome}"
+								readonly="true" />
 
-					<p:outputLabel for="complemento" value="Complemento:" />
-					<p:inputText value="#{ProfessorBean.professor.complemento}"
-						required="true" label="Complemento" id="complemento"
-						requiredMessage="Complemento deve ser informado!" />
-					<p:messages for="complemento" display="icon" closable="true" />
+							<p:outputLabel for="numero" value="Número:" />
+							<p:inputText value="#{ProfessorBean.professor.numero}"
+								required="true" label="Número" id="numero"
+								requiredMessage="Número deve ser informado!" />
+							<p:messages for="numero" display="icon" closable="true" />
 
+							<p:outputLabel for="complemento" value="Complemento:" />
+							<p:inputText value="#{ProfessorBean.professor.complemento}"
+								required="true" label="Complemento" id="complemento"
+								requiredMessage="Complemento deve ser informado!" />
+							<p:messages for="complemento" display="icon" closable="true" />
+						</h:panelGrid>
+					</p:fieldset>
 					<p:outputLabel for="cpf" value="CPF:" />
 					<p:inputMask id="cpf" value="#{ProfessorBean.professor.CPF}"
 						mask="999.999.999-99" required="true" label="CPF"
