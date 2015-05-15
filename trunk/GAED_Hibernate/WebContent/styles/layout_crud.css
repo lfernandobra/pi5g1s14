@@ -32,8 +32,8 @@ body{
  }
 
 #formCad{ 
- 	height: 610px !important;
-  	width: 1291px !important;
+ 	height: 90% !important;
+  	width: 90% !important;
   	position: fixed;
 }
 
@@ -61,6 +61,36 @@ body{
 #tabelaAluno{
 	border-style: none !important;
 }
+.fotoform{
+}
+.panelCadastrar{
+	width: 95% !important;
+	height: 90% !important;
+	position: inherit;
+}
+.colum1{
+	width:20% !important;
+	heigth:100% !important;
+	
+}
+.colum2{
+	width:80% !important;
+	heigth:100% !important;
+}
+#formulario{
+	top: 5px !important;
+}
+.ui-panelgrid .ui-panelgrid-cell{
+	border-style: none !important;
+	font-size: 14px !important;
+}
+#fotoform{
+	top: 10px !important;
+	padding-top: 20px !important;
+	left: 10px !important;
+}
+
+
 
 
 
