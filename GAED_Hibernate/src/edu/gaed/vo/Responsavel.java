@@ -5,6 +5,7 @@ import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
@@ -22,8 +23,8 @@ public class Responsavel extends Usuario{
 	@Column(name="adimplente", columnDefinition = "BIT", length = 1)
 	private boolean adimplente;
 	
-	@OneToMany
-	private Set<Aluno> aluno = new HashSet<Aluno>(0);
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "responsavel")
+	private Set<Aluno> alunos = new HashSet<Aluno>(0);
 	
 	public Responsavel() {
 		super();
@@ -37,24 +38,14 @@ public class Responsavel extends Usuario{
 		this.adimplente = adimplente;
 	}
 
-	public Set<Aluno> getAluno() {
-		return aluno;
-	}
-
-	public void setAluno(Set<Aluno> aluno) {
-		this.aluno = aluno;
-	}
 	
-	public void adicionaAluno(Aluno aluno){
-		this.aluno.add(aluno);
-	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = super.hashCode();
 		result = prime * result + (adimplente ? 1231 : 1237);
-		result = prime * result + ((aluno == null) ? 0 : aluno.hashCode());
+		result = prime * result + ((alunos == null) ? 0 : alunos.hashCode());
 		return result;
 	}
 
@@ -69,18 +60,26 @@ public class Responsavel extends Usuario{
 		Responsavel other = (Responsavel) obj;
 		if (adimplente != other.adimplente)
 			return false;
-		if (aluno == null) {
-			if (other.aluno != null)
+		if (alunos == null) {
+			if (other.alunos != null)
 				return false;
-		} else if (!aluno.equals(other.aluno))
+		} else if (!alunos.equals(other.alunos))
 			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "Responsavel [adimplente=" + adimplente + ", aluno=" + aluno
+		return "Responsavel [adimplente=" + adimplente + ", alunos=" + alunos
 				+ "]";
+	}
+
+	public Set<Aluno> getAlunos() {
+		return alunos;
+	}
+
+	public void setAlunos(Set<Aluno> alunos) {
+		this.alunos = alunos;
 	}
 
 	

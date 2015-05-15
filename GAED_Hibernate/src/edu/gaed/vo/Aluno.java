@@ -31,8 +31,12 @@ public class Aluno extends Usuario{
 	private String serieAtual;
 		
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "idturma")
+	@JoinColumn(name = "id_turma")
 	private Turma turma;
+	
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "id_responsavel")
+	private Responsavel responsavel;
 		
 	public Aluno() {
 		super();
@@ -79,9 +83,12 @@ public class Aluno extends Usuario{
 		result = prime * result
 				+ ((escolaAtual == null) ? 0 : escolaAtual.hashCode());
 		result = prime * result
+				+ ((responsavel == null) ? 0 : responsavel.hashCode());
+		result = prime * result
 				+ ((serieAnterior == null) ? 0 : serieAnterior.hashCode());
 		result = prime * result
 				+ ((serieAtual == null) ? 0 : serieAtual.hashCode());
+		result = prime * result + ((turma == null) ? 0 : turma.hashCode());
 		return result;
 	}
 
@@ -104,6 +111,11 @@ public class Aluno extends Usuario{
 				return false;
 		} else if (!escolaAtual.equals(other.escolaAtual))
 			return false;
+		if (responsavel == null) {
+			if (other.responsavel != null)
+				return false;
+		} else if (!responsavel.equals(other.responsavel))
+			return false;
 		if (serieAnterior == null) {
 			if (other.serieAnterior != null)
 				return false;
@@ -114,6 +126,11 @@ public class Aluno extends Usuario{
 				return false;
 		} else if (!serieAtual.equals(other.serieAtual))
 			return false;
+		if (turma == null) {
+			if (other.turma != null)
+				return false;
+		} else if (!turma.equals(other.turma))
+			return false;
 		return true;
 	}
 
@@ -121,7 +138,8 @@ public class Aluno extends Usuario{
 	public String toString() {
 		return "Aluno [escolaAnterior=" + escolaAnterior + ", serieAnterior="
 				+ serieAnterior + ", escolaAtual=" + escolaAtual
-				+ ", serieAtual=" + serieAtual + "]";
+				+ ", serieAtual=" + serieAtual + ", turma=" + turma
+				+ ", responsavel=" + responsavel + "]";
 	}
 
 	public Turma getTurma() {
@@ -130,5 +148,13 @@ public class Aluno extends Usuario{
 
 	public void setTurma(Turma turma) {
 		this.turma = turma;
+	}
+
+	public Responsavel getResponsavel() {
+		return responsavel;
+	}
+
+	public void setResponsavel(Responsavel responsavel) {
+		this.responsavel = responsavel;
 	}	
 }
