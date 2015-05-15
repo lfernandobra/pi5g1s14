@@ -189,9 +189,17 @@
 						var="logradouro" itemLabel="#{logradouro.CEP}"
 						itemValue="#{logradouro}" forceSelection="true" required="true"
 						requiredMessage="CEP deve ser informado!" label="CEP" id="cep">
+						<p:ajax event="itemSelect" listener="#{LogradouroBean.completeLogradouro()}" update="formCadastrar" /> 
 					</p:autoComplete>
-					<p:messages for="cep" display="icon" closable="true" />
-
+					<p:outputLabel value="Endereço:" />
+					<p:inputText value="#{ProfessorBean.professor.logradouro.nome}" readonly="true"/>
+					<p:outputLabel value="Bairro:" />
+					<p:inputText value="#{ProfessorBean.professor.logradouro.bairro.nome}" readonly="true"/>
+					<p:outputLabel value="Municipio:" />
+					<p:inputText value="#{ProfessorBean.professor.logradouro.bairro.municipio.nome}" readonly="true" />
+					<p:outputLabel value="Estado:" />
+					<p:inputText value="#{ProfessorBean.professor.logradouro.bairro.municipio.uf.nome}" readonly="true" />
+					
 					<p:outputLabel for="numero" value="Número:" />
 					<p:inputText value="#{ProfessorBean.professor.numero}"
 						required="true" label="Número" id="numero"
