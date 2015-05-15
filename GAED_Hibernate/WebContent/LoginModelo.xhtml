@@ -19,10 +19,15 @@
 		</p:layoutUnit>
 
 		<p:layoutUnit position="center" styleClass="gridCentral">
-
+		
+		
+			<div id="logoGaedLogin">
+				<p:graphicImage value="/imagens/gaed_azul.png" styleClass="logoLogin"></p:graphicImage>
+			
+			</div>
 			<h:form>
 				<h:panelGrid columns="3" id="grid" cellpadding="5"	styleClass="gridLogin">
-					
+				
 					<p:outputLabel for="login" value="Login:"/>
 					<p:inputText id="login" value="#{LoginBean.usuario.login}" required="true" requiredMessage="login obrigatório" />
 					<p:message for="login" display="text" />
