@@ -6,15 +6,14 @@ h2{
 	font-style: normal;
 	font-family: arial;
 	text-align: left;
-	margin-left: 182px;
-	top: 2%;
+	margin-left: 150px;
+	top: 20px;
 	position: absolute;
 }
 #cabecalho{
 	background-color: #6aa6e8!important;
 	position: absolute;
 	top: 1px;
-	width: 100% !important;
 	width: 100%;
 	height: 90px;
 }
@@ -53,7 +52,7 @@ h2{
 	width: 80px;
 	size:200px;
 	height: 50px;
-	left: 182px;
+	left: 150px;
 	top: 10px;
 	position:absolute;
 }
@@ -85,7 +84,7 @@ h2{
 .menu{
 	position:absolute;
 	top:90px;
-	left: 182px;
+	left: 150px;
 }
 
 .ui-layout-north { 
