@@ -26,11 +26,7 @@ public class TurmaBean implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 
-	Turma turma = new Turma();
-	
-	@SuppressWarnings("unchecked")
-	Set<Aluno> alunosCadastrados = new AlunoDao().listar();
-	 
+	Turma turma = new Turma();	 
 	List<Turma> turmas = new ArrayList<Turma>(); 
 	
 	public TurmaBean(Turma turma, List<Turma> turmas) {
@@ -89,24 +85,6 @@ public class TurmaBean implements Serializable{
 
 	public void setTurmas(List<Turma> turmas) {
 		this.turmas = turmas;
-	}
- 
-	public void onAlunoDrop(DragDropEvent ddEvent) {
-        Aluno aluno = ((Aluno) ddEvent.getData());
-  
-        turma.getAlunos().add(aluno);
-        //aluno.setTurma(turma);
-        alunosCadastrados.remove(aluno);
-    }
-
-	public Set<Aluno> getAlunosCadastrados() {
-		return alunosCadastrados;
-	}
-
-	public void setAlunosCadastrados(Set<Aluno> alunosCadastrados) {
-		this.alunosCadastrados = alunosCadastrados;
-	}
-	
- 
+	} 
 	
 }

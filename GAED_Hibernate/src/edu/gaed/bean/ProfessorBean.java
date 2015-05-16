@@ -2,14 +2,15 @@ package edu.gaed.bean;
 
 import java.io.IOException;
 import java.io.Serializable;
-import java.util.HashSet;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.event.ActionEvent;
+
 import org.primefaces.event.FileUploadEvent;
+
 import edu.gaed.vo.Professor;
 import edu.gaed.dao.ProfessorDao;
 
@@ -23,13 +24,13 @@ public class ProfessorBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	Professor professor = new Professor();
-	Set<Professor> professors = new HashSet<Professor>();
+	List<Professor> professors = new ArrayList<Professor>();
 	FotoBean fotoBean = new FotoBean();
 
 	public ProfessorBean(Professor professor, List<Professor> professors) {
 		super();
 		this.professor = new Professor();
-		this.professors = new HashSet<Professor>();
+		this.professors = new ArrayList<Professor>();
 	}
 
 	// construtor
@@ -55,14 +56,7 @@ public class ProfessorBean implements Serializable {
 		this.professor = professor;
 	}
 
-	public Set<Professor> getProfessors() {
-		return professors;
-	}
-
-	@SuppressWarnings("unchecked")
-	public void setProfessors(List<Professor> professors) {
-		this.professors = (Set<Professor>) professors;
-	}
+	
 
 	// Upload foto
 
