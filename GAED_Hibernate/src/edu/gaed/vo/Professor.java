@@ -14,6 +14,9 @@ import javax.persistence.OneToMany;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
 @Entity
 @PrimaryKeyJoinColumn(name="id_usuario")
 @Table(name = "professor")
@@ -37,7 +40,8 @@ public class Professor extends Usuario{
 	@Column(name="anoConcl", nullable=false)
 	private Date anoConclusao;
 	
-	@ManyToMany(fetch = FetchType.EAGER)
+	@ManyToMany
+	@LazyCollection(LazyCollectionOption.FALSE)
 	@JoinTable(name = "disciplina_professor",
 	joinColumns = { @JoinColumn(name = "idprofessor", nullable = false,
 	updatable =  false) }, inverseJoinColumns = {
@@ -137,14 +141,8 @@ public class Professor extends Usuario{
 			return false;
 		return true;
 	}
-	@Override
-	public String toString() {
-		return "Professor [escolaAnterior=" + escolaAnterior
-				+ ", formacaoAcad=" + formacaoAcad + ", instituicaoAcad="
-				+ instituicaoAcad + ", anoConclusao=" + anoConclusao
-				+ ", disciplinas=" + disciplinas + ", professorTurma="
-				+ professorTurma + "]";
-	}
+	
+	
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}

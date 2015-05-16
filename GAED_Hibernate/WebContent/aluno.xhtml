@@ -217,15 +217,16 @@
 							<p:outputLabel for="foto" value="Foto:" />
 							<p:fileUpload fileUploadListener="#{AlunoBean.uploadAction}" mode="simple" skinSimple="true" update="growl"	sizeLimit="100000" fileLimit="1"
 										allowTypes="/(\.|\/)(gif|jpe?g|png)$/" id="foto"/>
-										
-							<p:outputLabel for="responsavel" value="Responsavel:" />
-							<p:selectOneMenu id="status" value="#{AlunoBean.aluno.responsavel}"
+							<!--  			
+							<p:outputLabel value="Responsavel:" />
+							<p:selectOneMenu id="responsave" value="#{AlunoBean.aluno.responsavel}"
 									  	     style="width:150px" required="true" label="Status">
 								<f:selectItems value="#{ResponsavelBean.responsavels}"
 									   var="responsavel"
 									   itemValue="#{responsavel}"
 									   itemLabel="#{responsavel.nome} #{responsavel.sobrenome}" />
-							</p:selectOneMenu>			
+							</p:selectOneMenu>	
+							-->		
 						</p:panelGrid >
 					
 					<h4>Dados de Acesso</h4>	

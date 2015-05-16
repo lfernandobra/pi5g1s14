@@ -56,7 +56,7 @@ public class DisciplinaDao {
 		}
  
 		
-		@SuppressWarnings({ "rawtypes", "unchecked" })
+		@SuppressWarnings({"rawtypes", "unchecked"})
 		public Set listar(){
 			session = HibernateUtil.getSessionFactory().openSession();
  

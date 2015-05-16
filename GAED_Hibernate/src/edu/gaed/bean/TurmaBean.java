@@ -3,13 +3,18 @@ package edu.gaed.bean;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.event.ActionEvent;
 
+import org.primefaces.event.DragDropEvent;
+
+import edu.gaed.vo.Aluno;
 import edu.gaed.vo.Turma;
+import edu.gaed.dao.AlunoDao;
 import edu.gaed.dao.TurmaDao;
  
 @ManagedBean(name="TurmaBean")
@@ -22,6 +27,9 @@ public class TurmaBean implements Serializable{
 	private static final long serialVersionUID = 1L;
 
 	Turma turma = new Turma();
+	
+	@SuppressWarnings("unchecked")
+	Set<Aluno> alunosCadastrados = new AlunoDao().listar();
 	 
 	List<Turma> turmas = new ArrayList<Turma>(); 
 	
@@ -83,7 +91,21 @@ public class TurmaBean implements Serializable{
 		this.turmas = turmas;
 	}
  
-	//getters and setters
+	public void onAlunoDrop(DragDropEvent ddEvent) {
+        Aluno aluno = ((Aluno) ddEvent.getData());
+  
+        turma.getAlunos().add(aluno);
+        aluno.setTurma(turma);
+        alunosCadastrados.remove(aluno);
+    }
+
+	public Set<Aluno> getAlunosCadastrados() {
+		return alunosCadastrados;
+	}
+
+	public void setAlunosCadastrados(Set<Aluno> alunosCadastrados) {
+		this.alunosCadastrados = alunosCadastrados;
+	}
 	
  
 	

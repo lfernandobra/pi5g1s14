@@ -114,11 +114,7 @@ public class Disciplina implements Serializable{
 			return false;
 		return true;
 	}
-	@Override
-	public String toString() {
-		return "Disciplina [id=" + id + ", nome=" + nome + ", conteudo="
-				+ conteudo + ", professores=" + professores + "]";
-	}
+	
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
