@@ -2,8 +2,9 @@ package edu.gaed.bean;
 
 import java.io.IOException;
 import java.io.Serializable;
-import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
@@ -25,13 +26,13 @@ public class AlunoBean extends UsuarioBean implements Serializable{
 	private static final long serialVersionUID = 1L;
 
 	Aluno aluno = new Aluno();
-	List<Aluno> alunos = new ArrayList<Aluno>(); 
+	Set<Aluno> alunos = new HashSet<Aluno>(); 
 	FotoBean fotoBean = new FotoBean();
 	
 	public AlunoBean(Aluno aluno, List<Aluno> alunos) {
 		super();
 		this.aluno = new Aluno();
-		this.alunos = new ArrayList<Aluno>();
+		this.alunos = new HashSet<Aluno>();
 	}
  
 	//construtor
@@ -80,14 +81,6 @@ public class AlunoBean extends UsuarioBean implements Serializable{
 	public void setAluno(Aluno aluno) {
 		this.aluno = aluno;
 	}
-
-	public List<Aluno> getAlunos() {
-		return alunos;
-	}
-
-	public void setAlunos(List<Aluno> alunos) {
-		this.alunos = alunos;
-	}
  
 	//getters and setters
 	//Upload foto
@@ -95,6 +88,22 @@ public class AlunoBean extends UsuarioBean implements Serializable{
 	public void uploadAction (FileUploadEvent event) throws IOException{
 		this.fotoBean.fileUpload(event);
 		this.aluno.setFoto(this.fotoBean.getFoto());
+	}
+
+	public Set<Aluno> getAlunos() {
+		return alunos;
+	}
+
+	public void setAlunos(Set<Aluno> alunos) {
+		this.alunos = alunos;
+	}
+
+	public FotoBean getFotoBean() {
+		return fotoBean;
+	}
+
+	public void setFotoBean(FotoBean fotoBean) {
+		this.fotoBean = fotoBean;
 	}
  
 	

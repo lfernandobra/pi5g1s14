@@ -45,8 +45,20 @@
 						<h:outputText value="Quantidade de alunos inseridos" />
 						<h:outputText value="#{lista.qtdAluInseridos}" />
 					</p:panelGrid>
-				</p:rowExpansion>	
-				
+				</p:rowExpansion>
+				<p:column headerText="Adicionar">
+					<p:commandButton value="Alunos" update=":formAdicAluno"
+						oncomplete="PF('dialogAdicAluno').show();" icon="ui-icon-pencil">
+						<f:setPropertyActionListener target="#{TurmaBean.turma}"
+							value="#{lista}" />
+					</p:commandButton>
+					<p:commandButton value="Professores" update=":formAdicProfessor"
+						oncomplete="PF('dialogAdicProfessor').show();"
+						icon="ui-icon-pencil">
+						<f:setPropertyActionListener target="#{TurmaBean.turma}"
+							value="#{lista}" />
+					</p:commandButton>
+				</p:column>
 				<p:column headerText="Ações">
 					<p:commandButton value="Alterar" update=":formAlterar"
 						oncomplete="PF('dialogAlterar').show();" icon="ui-icon-pencil">
@@ -100,8 +112,7 @@
 					<h:selectOneMenu value="#{TurmaBean.turma.serie}">
 						<f:selectItem itemLabel="-- Selecione --" noSelectionOption="true" />
 						<f:selectItems value="#{SerieBean.series}" var="serie"
-							itemValue="#{serie}" itemLabel="#{serie.serie}"
-							id="serie" />
+							itemValue="#{serie}" itemLabel="#{serie.serie}" id="serie" />
 					</h:selectOneMenu>
 					<p:messages for="serie" display="icon" closable="true" />
 
@@ -139,8 +150,7 @@
 				<h:selectOneMenu value="#{TurmaBean.turma.periodo}">
 					<f:selectItem itemLabel="-- Selecione --" noSelectionOption="true" />
 					<f:selectItems value="#{PeriodoBean.periodos}" var="periodo"
-						itemValue="#{periodo}" itemLabel="#{periodo.periodo}"
-						id="periodo" />
+						itemValue="#{periodo}" itemLabel="#{periodo.periodo}" id="periodo" />
 				</h:selectOneMenu>
 				<p:messages for="periodo" display="icon" closable="true" />
 
@@ -148,8 +158,7 @@
 				<h:selectOneMenu value="#{TurmaBean.turma.serie}">
 					<f:selectItem itemLabel="-- Selecione --" noSelectionOption="true" />
 					<f:selectItems value="#{SerieBean.series}" var="serie"
-						itemValue="#{serie}" itemLabel="#{serie.serie}"
-						id="serie" />
+						itemValue="#{serie}" itemLabel="#{serie.serie}" id="serie" />
 				</h:selectOneMenu>
 				<p:messages for="serie" display="icon" closable="true" />
 
@@ -166,6 +175,64 @@
 			<p:commandButton value="Limpar" update="@form" process="@this">
 				<p:resetInput target="panelAlterar" />
 			</p:commandButton>
+		</h:form>
+	</p:dialog>
+	<p:dialog header="Adicionar alunos" widgetVar="dialogAdicAluno"
+		modal="true" resizable="true" id="idAdicAlu"
+		styleClass="dialogCadastrar">
+		<h:form id="formAdicAluno">
+			<p:fieldset id="alunosDisponiveisField" legend="Alunos disponiveis">
+				<p:dataGrid id="alunosDisponiveis" var="aluno" value="#{TurmaBean.alunosCadastrados}"
+					columns="3">
+					<p:panel id="pnl" header="#{aluno.id}" style="text-align:center">
+						<h:panelGrid columns="1" style="width:100%">
+							<p:graphicImage name="/demo/images/car/#{car.brand}.gif" />
+						</h:panelGrid>
+					</p:panel>
+
+					<p:draggable for="pnl" revert="true" handle=".ui-panel-titlebar"
+						stack=".ui-panel" />
+				</p:dataGrid>
+			</p:fieldset>
+
+			<p:fieldset id="Turma" legend="Turma"
+				style="margin-top:20px">
+				<p:outputPanel id="dropArea">
+					<h:outputText value="!!!Drop here!!!"
+						rendered="#{empty TurmaBean.turma.alunos}"
+						style="font-size:24px;" />
+					<p:dataTable id="alunosTurma" var="aluno"
+						value="#{TurmaBean.turma.alunos}"
+						rendered="#{not empty TurmaBean.turma.alunos}">
+						<p:column headerText="Id">
+							<h:outputText value="#{aluno.id}" />
+						</p:column>
+
+						<p:column headerText="Nome">
+							<h:outputText value="#{aluno.nome}" />
+						</p:column>
+
+						<p:column headerText="Sobrenome">
+							<h:outputText value="#{aluno.sobrenome}" />
+						</p:column>
+					</p:dataTable>
+				</p:outputPanel>
+			</p:fieldset>
+
+			<p:droppable for="Turma" tolerance="touch"
+				activeStyleClass="ui-state-highlight" datasource="alunosDisponiveis"
+				onDrop="handleDrop">
+				<p:ajax listener="#{TurmaBean.onAlunoDrop}"
+					update="dropArea alunosDisponiveis" />
+			</p:droppable>
+
+		</h:form>
+	</p:dialog>
+	<p:dialog header="Adicionar professores" widgetVar="dialogAdicProf"
+		modal="true" resizable="true" id="idAdicProf"
+		styleClass="dialogCadastrar">
+		<h:form id="formAdicProfessor">
+
 		</h:form>
 	</p:dialog>
 </body>

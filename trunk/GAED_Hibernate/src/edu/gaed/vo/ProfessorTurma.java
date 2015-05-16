@@ -1,7 +1,7 @@
 package edu.gaed.vo;
 
 import java.io.Serializable;
-import java.util.Date;
+//import java.util.Date;
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
 import javax.persistence.Column;
@@ -12,8 +12,8 @@ import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+//import javax.persistence.Temporal;
+//import javax.persistence.TemporalType;
 
 @SuppressWarnings("serial")
 @Entity
@@ -26,18 +26,18 @@ public class ProfessorTurma implements Serializable {
 			@AttributeOverride(name = "idprofessor", column = @Column(name = "idprofessor", nullable = false)) })
 	private Id id;
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "idturma", nullable = false, insertable = false, updatable = false)
 	private Turma turma;
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "idprofessor", nullable = false, insertable = false, updatable = false)
 	private Professor professor;
-
+	/*
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "horario", length = 19)
 	private Date horario;
-
+	*/
 	// getters e setters omitidos
 
 	// Id da associacao (chave composta no banco)
@@ -115,7 +115,7 @@ public class ProfessorTurma implements Serializable {
 	public void setProfessor(Professor professor) {
 		this.professor = professor;
 	}
-
+	/*
 	public Date getHorario() {
 		return horario;
 	}
@@ -123,4 +123,5 @@ public class ProfessorTurma implements Serializable {
 	public void setHorario(Date horario) {
 		this.horario = horario;
 	}
+	*/
 }

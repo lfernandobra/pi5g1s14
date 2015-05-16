@@ -26,6 +26,9 @@ public class Turma implements Serializable {
 	@Column(name = "id", unique = true, nullable = false)
 	private Long id;
 
+	@Column(name="nome")
+	private String nome;
+	
 	@Column(name="limite")
 	private int qtdAluLimite;
 	
@@ -108,6 +111,7 @@ public class Turma implements Serializable {
 		int result = 1;
 		result = prime * result + ((alunos == null) ? 0 : alunos.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
 		result = prime * result + ((periodo == null) ? 0 : periodo.hashCode());
 		result = prime * result
 				+ ((professorTurma == null) ? 0 : professorTurma.hashCode());
@@ -136,6 +140,11 @@ public class Turma implements Serializable {
 				return false;
 		} else if (!id.equals(other.id))
 			return false;
+		if (nome == null) {
+			if (other.nome != null)
+				return false;
+		} else if (!nome.equals(other.nome))
+			return false;
 		if (periodo == null) {
 			if (other.periodo != null)
 				return false;
@@ -156,6 +165,23 @@ public class Turma implements Serializable {
 		} else if (!serie.equals(other.serie))
 			return false;
 		return true;
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	@Override
+	public String toString() {
+		return "Turma [id=" + id + ", nome=" + nome + ", qtdAluLimite="
+				+ qtdAluLimite + ", qtdAluInseridos=" + qtdAluInseridos
+				+ ", periodo=" + periodo + ", serie=" + serie
+				+ ", professorTurma=" + professorTurma + ", alunos=" + alunos
+				+ "]";
 	}
 
 	
