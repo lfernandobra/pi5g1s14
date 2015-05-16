@@ -1,9 +1,8 @@
 package edu.gaed.vo;
 
+import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
-
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -46,10 +45,11 @@ public class Professor extends Usuario{
 	joinColumns = { @JoinColumn(name = "idprofessor", nullable = false,
 	updatable =  false) }, inverseJoinColumns = {
 	@JoinColumn(name = "iddisciplina", nullable = false, updatable = false) })
-    private Set<Disciplina> disciplinas = new HashSet<Disciplina>();
+    private List<Disciplina> disciplinas = new ArrayList<Disciplina>();
 	
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "professor")
-	private Set<ProfessorTurma> professorTurma = new HashSet<ProfessorTurma>(0);
+	private List<ProfessorTurma> professorTurma = new ArrayList<ProfessorTurma>();
+	
 	
 	public String getEscolaAnterior() {
 		return escolaAnterior;
@@ -76,12 +76,6 @@ public class Professor extends Usuario{
 		this.anoConclusao = anoConclusao;
 	}
 
-	public Set<Disciplina> getDisciplinas() {
-		return disciplinas;
-	}
-	public void setDisciplinas(Set<Disciplina> disciplinas) {
-		this.disciplinas = (Set<Disciplina>) disciplinas;
-	}
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -146,12 +140,19 @@ public class Professor extends Usuario{
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
-	public Set<ProfessorTurma> getProfessorTurma() {
+	public List<Disciplina> getDisciplinas() {
+		return disciplinas;
+	}
+	public void setDisciplinas(List<Disciplina> disciplinas) {
+		this.disciplinas = disciplinas;
+	}
+	public List<ProfessorTurma> getProfessorTurma() {
 		return professorTurma;
 	}
-	public void setProfessorTurma(Set<ProfessorTurma> professorTurma) {
+	public void setProfessorTurma(List<ProfessorTurma> professorTurma) {
 		this.professorTurma = professorTurma;
 	}
+	
 	
 	
 	
