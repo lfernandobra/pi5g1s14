@@ -13,7 +13,7 @@ body{
 	text-align: left !important; 
 }
  #formPrincipal{
- 	padding-top: 3% !important;
+ 	padding-top: 15px !important;
  	font-family: arial;
  	font-size: 12px;
  }
@@ -32,8 +32,13 @@ body{
  }
 
 #formCad{ 
- 	height: 90% !important;
-  	width: 90% !important;
+ 	height: 610px !important;
+  	width: 1291px !important;
+  	position: fixed;
+}
+#formCadFoto{
+	height: 300px !important;
+  	width: 600px !important;
   	position: fixed;
 }
 
@@ -43,7 +48,8 @@ body{
   	position: fixed;
 }
 #botoes{
-	text-align: center;
+	text-align: right !important;
+	padding-top: 60px;
 }
 #dadosPessoais{
 	top:10px;
@@ -54,43 +60,31 @@ body{
 
 #Lista {
   display: inline-block !important;
+  width: 1060px !important;
   text-align: center;
   margin-top: 55px !important;
-  width: 80% !important;
 }
 #tabelaAluno{
 	border-style: none !important;
 }
-.fotoform{
-}
-.panelCadastrar{
-	width: 95% !important;
-	height: 90% !important;
-	position: inherit;
-}
-.colum1{
-	width:20% !important;
-	heigth:100% !important;
-	
-}
-.colum2{
-	width:80% !important;
-	heigth:100% !important;
-}
-#formulario{
-	top: 5px !important;
-}
-.ui-panelgrid .ui-panelgrid-cell{
-	border-style: none !important;
-	font-size: 14px !important;
-}
-#fotoform{
-	top: 10px !important;
-	padding-top: 20px !important;
-	left: 10px !important;
+
+#fieldFoto{
+ 	width: 50px !important;
+ 	height: 70px !important;
+ 		
 }
 
-
+#dadosLogin{
+	padding-left: 50px !important;
+	left: 30% !important;
+	position: absolute;
+	top: 20%;
+}
+#panelCadastrar{
+	top: 80px !important;
+	padding-top: 80px !important;
+	margin-left: 80px;
+}
 
 
 
