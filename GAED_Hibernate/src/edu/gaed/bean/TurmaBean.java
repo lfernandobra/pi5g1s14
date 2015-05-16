@@ -95,7 +95,7 @@ public class TurmaBean implements Serializable{
         Aluno aluno = ((Aluno) ddEvent.getData());
   
         turma.getAlunos().add(aluno);
-        aluno.setTurma(turma);
+        //aluno.setTurma(turma);
         alunosCadastrados.remove(aluno);
     }
 
