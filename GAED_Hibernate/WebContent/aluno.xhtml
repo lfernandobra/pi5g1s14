@@ -169,6 +169,18 @@
 							<p:outputLabel for="rg" value="RG:" />
 							<p:inputMask id="rg" value="#{AlunoBean.aluno.RG}" 	mask="99.999.999-9" required="true" label="RG"	requiredMessage="RG deve ser informado!" />
 				
+							<p:outputLabel for="cep" value="CEP:" />
+							<p:autoComplete value="#{AlunoBean.aluno.logradouro}" completeMethod="#{LogradouroBean.completeLogradouro()}" var="logradouro" itemLabel="#{logradouro.CEP}"
+								itemValue="#{logradouro}" forceSelection="true" required="true"
+								requiredMessage="CEP deve ser informado!" label="CEP" id="cep">
+							</p:autoComplete>	
+
+							<p:outputLabel for="numero" value="Número:" />
+							<p:inputText value="#{AlunoBean.aluno.numero}" required="true" label="Número" id="numero" requiredMessage="Número deve ser informado!" />
+
+							<p:outputLabel for="complemento" value="Complemento:" />
+							<p:inputText value="#{AlunoBean.aluno.complemento}" required="true" label="Complemento" id="complemento" requiredMessage="Complemento deve ser informado!" />
+
 							<p:outputLabel for="telefone" value="Telefone:" />
 							<p:inputMask value="#{AlunoBean.aluno.telefone}" mask="(99) 99999-9999" required="true" label="Telefone" id="telefone" />
 			
@@ -196,7 +208,6 @@
 								<f:converter converterId="javax.faces.DateTime" />
 								<f:convertDateTime pattern="dd/MM/yyyy" timeZone="GMT-3" />
 							</p:inputMask>
-<<<<<<< .mine
 							
 							<p:outputLabel for="email" value="Email:" />
 							<p:inputText id="email" required="true" size="30" requiredMessage="Insira o endereço de email"	validatorMessage="Formato de email invalido"
@@ -212,42 +223,6 @@
 							</p:selectOneMenu>
 							
 							<p:outputLabel for="login" value="Login:" />
-=======
-
-							<p:outputLabel for="escolaAnterior" value="Escola anterior:" />
-							<p:inputText value="#{AlunoBean.aluno.escolaAnterior}" required="true" label="escolaAnterior" id="escolaAnterior"	requiredMessage="Escola anterior deve ser informada!" />
-
-							<p:outputLabel for="escolaAtual" value="Escola atual:" />
-							<p:inputText value="#{AlunoBean.aluno.escolaAtual}" required="true" label="escolaAtual" id="escolaAtual" requiredMessage="Escola atual deve ser informada!" />
-
-							<p:outputLabel for="serieAnterior" value="Série anterior:" />
-							<p:inputText value="#{AlunoBean.aluno.serieAnterior}" required="true" label="serieAnterior" id="serieAnterior" requiredMessage="Série anterior deve ser informada!" />
-
-							<p:outputLabel for="serieAnterior" value="Série atual:" />
-							<p:inputText value="#{AlunoBean.aluno.serieAtual}" 	required="true" label="serieAtual" id="serieAtual"	requiredMessage="Série atual deve ser informada!" />
-
-							<p:outputLabel for="foto" value="Foto:" />
-							<p:fileUpload fileUploadListener="#{AlunoBean.uploadAction}" mode="simple" skinSimple="true" update="growl"	sizeLimit="100000" fileLimit="1"
-										allowTypes="/(\.|\/)(gif|jpe?g|png)$/" id="foto"/>
-							<!--  			
-							<p:outputLabel value="Responsavel:" />
-							<p:selectOneMenu id="responsave" value="#{AlunoBean.aluno.responsavel}"
-									  	     style="width:150px" required="true" label="Status">
-								<f:selectItems value="#{ResponsavelBean.responsavels}"
-									   var="responsavel"
-									   itemValue="#{responsavel}"
-									   itemLabel="#{responsavel.nome} #{responsavel.sobrenome}" />
-							</p:selectOneMenu>	
-							-->		
-						</p:panelGrid >
-					
-					<h4>Dados de Acesso</h4>	
-					<p:separator />
-					
-					<div  id="dadosPessoais">
-						<p:panelGrid columns="2">
-								<p:outputLabel for="login" value="Login:" />
->>>>>>> .r365
 								<p:inputText value="#{AlunoBean.aluno.login}" required="true" label="Login" id="login" requiredMessage="Login não deve estar vazio!">
 									<f:validateLength minimum="6" />
 								</p:inputText>
@@ -256,16 +231,17 @@
 								<p:password value="#{AlunoBean.aluno.senha}" required="true" label="Senha" id="senha"	requiredMessage="Senha não deve estar vazio!">
 									<f:validateLength minimum="8" />
 								</p:password>
-								
-							
+
 						</p:panelGrid >
 					
+						<div id="botoes">
 							<p:commandButton value="Salvar" id="withIcon" actionListener="#{AlunoBean.cadastrar}" icon="ui-icon-disk" update=":formPrincipal:tabelaAluno @form growl"
 								oncomplete="closeDialogIfSucess(xhr, status, args, 'dialogCadastrar','formCad')" onsuccess="PF('dialogCadastrar').hide();" />
 							
 							<p:commandButton value="Limpar" update="@form" process="@this">
 								<p:resetInput target="panelCadastrar" />
 							</p:commandButton>
+						</div>
 						
 					</p:panelGrid>	
 					</h:form>
