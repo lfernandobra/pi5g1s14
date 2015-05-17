@@ -31,9 +31,14 @@
   <managed-bean-class>edu.gaed.bean.ProfessorBean</managed-bean-class>
   <managed-bean-scope>request</managed-bean-scope>
  </managed-bean>
- <converter>
-	<converter-for-class>edu.gaed.vo.Disciplina</converter-for-class>
-	<converter-class>edu.gaed.converter.DisciplinaConverter</converter-class>
+
+<converter>
+     <converter-id>converter.DisciplinaConverter</converter-id>
+     <converter-class>edu.gaed.converter.DisciplinaConverter</converter-class>
+</converter>
+<converter>
+     <converter-id>converter.AlunoConverter</converter-id>
+     <converter-class>edu.gaed.converter.AlunoConverter</converter-class>
 </converter>
  
  <navigation-rule>

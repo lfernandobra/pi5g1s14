@@ -25,6 +25,7 @@ import javax.persistence.Table;
 
 public class Usuario implements Serializable{
 	
+	
 	public Usuario(Long id, String login, String senha, String nome,
 			String sobrenome, String sexo, Date datanasc, String email,
 			String cPF, String rG, String numero, String complemento,
@@ -51,6 +52,7 @@ public class Usuario implements Serializable{
 		this.logradouro = logradouro;
 		this.perfil = perfil;
 	}
+
 
 	/**
 	 * 
