@@ -86,4 +86,20 @@ public class ProfessorBean implements Serializable {
 		professors = new ProfessorDao().listar();
 		professor = new Professor();
 	}
+
+	public List<Professor> getProfessors() {
+		return professors;
+	}
+
+	public void setProfessors(List<Professor> professors) {
+		this.professors = professors;
+	}
+
+	public FotoBean getFotoBean() {
+		return fotoBean;
+	}
+
+	public void setFotoBean(FotoBean fotoBean) {
+		this.fotoBean = fotoBean;
+	}
 }

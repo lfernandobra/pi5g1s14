@@ -20,8 +20,7 @@
 					<p:password id="senha" value="#{LoginBean.usuario.senha}" required="true"
 					requiredMessage="Informe sua senha" />
 					
-					<p:commandButton value="Acessar" action="#{LoginBean.verificarDatos()}"
-					actionListener="home.xhtml" update="mensagem"/>
+					<p:commandButton value="Acessar" action="#{LoginBean.verificarDatos()}"/>
 				
 					</h:panelGrid>
         		</p:panel>

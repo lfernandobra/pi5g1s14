@@ -19,12 +19,16 @@ public class LoginDao{
 		
 		try {
 			session = HibernateUtil.getSessionFactory().openSession();
-			String hql = "FROM Usuario WHERE login = '" +usuario.getLogin() +
+			
+			String hql = "SELECT usuario FROM Usuario usuario WHERE login = '" +usuario.getLogin() +
 					"' and senha = '" + usuario.getSenha() + "'";
 			Query query = session.createQuery(hql);
 			
 			if(!query.list().isEmpty()){
 				us = (Usuario) query.list().get(0);
+				System.out.println("Encontrado");
+			}else{
+				System.out.println("Não Encontrado");
 			}
 		}catch (Exception e){
 			throw e;

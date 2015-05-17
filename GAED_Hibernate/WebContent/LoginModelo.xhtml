@@ -13,31 +13,37 @@
 	<p:layout fullPage="true">
 
 		<p:layoutUnit position="north" styleClass="gridCabecalhoLogin">
-			<f:facet name="header" size="70" >
-				<h:outputLabel value="GAED - Gerenciamento de Atividades Escolar Digital"/>
-			</f:facet> 
+			<f:facet name="header" size="70">
+				<h:outputLabel
+					value="GAED - Gerenciamento de Atividades Escolar Digital" />
+			</f:facet>
 		</p:layoutUnit>
 
 		<p:layoutUnit position="center" styleClass="gridCentral">
-		
-		
+
+
 			<div id="logoGaedLogin">
-				<p:graphicImage value="/imagens/gaed_azul.png" styleClass="logoLogin"></p:graphicImage>
-			
+				<p:graphicImage value="/imagens/gaed_azul.png"
+					styleClass="logoLogin"></p:graphicImage>
+
 			</div>
-			<h:form>
-				<h:panelGrid columns="3" id="grid" cellpadding="5"	styleClass="gridLogin">
-				
-					<p:outputLabel for="login" value="Login:"/>
-					<p:inputText id="login" value="#{LoginBean.usuario.login}" required="true" requiredMessage="login obrigatório" />
+			<h:form id="formLogin">
+				<p:growl id="growl" showDetail="true" life="10000" />
+				<h:panelGrid columns="3" id="grid" cellpadding="5"
+					styleClass="gridLogin">
+
+					<p:outputLabel for="login" value="Login:" />
+					<p:inputText id="login" value="#{LoginBean.usuario.login}"
+						required="true" requiredMessage="Login obrigatório" />
 					<p:message for="login" display="text" />
 
 					<p:outputLabel for="senha" value="Senha:" />
-					<p:password id="senha" value="#{LoginBean.usuario.senha}" required="true" requiredMessage="Informe sua senha" />
+					<p:password id="senha" value="#{LoginBean.usuario.senha}"
+						required="true" requiredMessage="Informe sua senha" />
 					<p:message for="senha" display="text" />
 
 					<p:commandButton value="Acessar"
-						action="#{LoginBean.verificarDatos()}" update="grid"/>
+						action="#{LoginBean.verificarDatos()}" update="grid growl" />
 				</h:panelGrid>
 			</h:form>
 

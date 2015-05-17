@@ -45,7 +45,7 @@ public class Disciplina implements Serializable{
 	@Column(name="conteudo")
 	private String conteudo;
 	
-	@ManyToMany(fetch = FetchType.EAGER)
+	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name = "disciplina_professor",
 	joinColumns = { @JoinColumn(name = "iddisciplina", nullable = false,
 	updatable = false) }, inverseJoinColumns = {
