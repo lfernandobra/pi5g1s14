@@ -128,16 +128,6 @@
 					<h3>Dados de Cadastro</h3>
 					<p:separator/>
 					
-					<p:panelGrid columns="2">
-						<p:panelGrid columns="1">
-							<p:fieldset legend="Foto" style="margin-bottom:5px">
-							<p:graphicImage height="100px" width="80px" value=""></p:graphicImage>
-							</p:fieldset>
-							
-							<p:commandButton value="IncluirFoto" type="button"	onclick="PF('dialogIncluirFoto').show();" icon="ui-icon-disk" />
-						
-						</p:panelGrid>
-							
 						<p:panelGrid id="panelCadastrar" columns="6">
 
 							<p:outputLabel for="nome" value="Nome:" />
@@ -169,18 +159,6 @@
 							<p:outputLabel for="rg" value="RG:" />
 							<p:inputMask id="rg" value="#{AlunoBean.aluno.RG}" 	mask="99.999.999-9" required="true" label="RG"	requiredMessage="RG deve ser informado!" />
 				
-							<p:outputLabel for="cep" value="CEP:" />
-							<p:autoComplete value="#{AlunoBean.aluno.logradouro}" completeMethod="#{LogradouroBean.completeLogradouro()}" var="logradouro" itemLabel="#{logradouro.CEP}"
-								itemValue="#{logradouro}" forceSelection="true" required="true"
-								requiredMessage="CEP deve ser informado!" label="CEP" id="cep">
-							</p:autoComplete>	
-
-							<p:outputLabel for="numero" value="Número:" />
-							<p:inputText value="#{AlunoBean.aluno.numero}" required="true" label="Número" id="numero" requiredMessage="Número deve ser informado!" />
-
-							<p:outputLabel for="complemento" value="Complemento:" />
-							<p:inputText value="#{AlunoBean.aluno.complemento}" required="true" label="Complemento" id="complemento" requiredMessage="Complemento deve ser informado!" />
-
 							<p:outputLabel for="telefone" value="Telefone:" />
 							<p:inputMask value="#{AlunoBean.aluno.telefone}" mask="(99) 99999-9999" required="true" label="Telefone" id="telefone" />
 			
@@ -231,19 +209,52 @@
 								<p:password value="#{AlunoBean.aluno.senha}" required="true" label="Senha" id="senha"	requiredMessage="Senha não deve estar vazio!">
 									<f:validateLength minimum="8" />
 								</p:password>
+								
+								<p:commandButton value="Incluir foto" type="button" onclick="PF('dialogIncluirFoto').show();" icon="ui-icon-disk" />
 
 						</p:panelGrid >
+						
+					<h3>Endereço</h3>
+					<p:separator/>
 					
+					<h:panelGrid columns="6" id="panelGridLogradouro">
+					
+							<p:outputLabel for="cep" value="CEP:" />
+							<p:autoComplete value="#{ProfessorBean.professor.logradouro}" completeMethod="#{LogradouroBean.completeLogradouro()}"
+								var="logradouro" itemLabel="#{logradouro.CEP}" 	itemValue="#{logradouro}" forceSelection="true" required="true"
+								requiredMessage="CEP deve ser informado!" label="CEP" id="cep">
+								<p:ajax event="itemSelect"	listener="#{LogradouroBean.completeLogradouro()}"	update="panelGridLogradouro" />
+							</p:autoComplete>
+							
+							<p:outputLabel value="Endereço:" />
+							<p:inputText value="#{ProfessorBean.professor.logradouro.nome}" size="40" readonly="true" />
+							
+							<p:outputLabel value="Bairro:" />
+							<p:inputText value="#{ProfessorBean.professor.logradouro.bairro.nome}"	readonly="true" />
+							
+							<p:outputLabel value="Municipio:" />
+							<p:inputText value="#{ProfessorBean.professor.logradouro.bairro.municipio.nome}" readonly="true" />
+							
+							<p:outputLabel value="Estado:" />
+							<p:inputText	value="#{ProfessorBean.professor.logradouro.bairro.municipio.uf.nome}"	readonly="true" />
+
+							<p:outputLabel for="numero" value="Número:" />
+							<p:inputText value="#{ProfessorBean.professor.numero}" 	required="true" label="Número" id="numero"	requiredMessage="Número deve ser informado!" />
+
+							<p:outputLabel for="complemento" value="Complemento:" />
+							<p:inputText value="#{ProfessorBean.professor.complemento}"	size="30" required="true" label="Complemento" id="complemento"
+								requiredMessage="Complemento deve ser informado!" />
+						</h:panelGrid>
+						
 						<div id="botoes">
 							<p:commandButton value="Salvar" id="withIcon" actionListener="#{AlunoBean.cadastrar}" icon="ui-icon-disk" update=":formPrincipal:tabelaAluno @form growl"
 								oncomplete="closeDialogIfSucess(xhr, status, args, 'dialogCadastrar','formCad')" onsuccess="PF('dialogCadastrar').hide();" />
 							
 							<p:commandButton value="Limpar" update="@form" process="@this">
-								<p:resetInput target="panelCadastrar" />
+								<p:resetInput target="panelCadastrar panelGridLogradouro" />
 							</p:commandButton>
 						</div>
-						
-					</p:panelGrid>	
+										
 					</h:form>
 				</p:dialog>
 				
@@ -251,7 +262,8 @@
 				<p:dialog header="Incluir Foto" widgetVar="dialogIncluirFoto" modal="true" resizable="true" id="formCadFoto" appendTo="@(body)">
 					<h:form id="IncluirFoto" styleClass="IncluirFoto">
 							<p:focus context="@form" />
-							<h:outputText value="Selecione uma foto para anexar ao cadastro do aluno " style="font-size: 12px !important; top: 5px !important 	" />
+							<h4>Selecione um foto para anexar ao cadastro do aluno:</h4>
+							<p:separator/>
 							<p:fileUpload fileUploadListener="#{AlunoBean.uploadAction}" size="50" mode="advanced" skinSimple="true" update="growl"	sizeLimit="100000" fileLimit="1"
 									allowTypes="/(\.|\/)(gif|jpe?g|png)$/" id="IncluirFoto"/>
 					</h:form>
