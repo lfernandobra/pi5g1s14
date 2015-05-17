@@ -26,6 +26,9 @@ body{
     border: none !important;
     overflow: hidden !important;
  } 
+ .formCadastrar{
+ 	font-size: 13px!important;
+ }
  
  .ui-panelgrid{
  border-collapse: inherit;
@@ -48,8 +51,8 @@ body{
   	position: fixed;
 }
 #botoes{
-	text-align: right !important;
-	padding-top: 60px;
+	text-align: center !important;
+	padding-top: 50px;
 }
 #dadosPessoais{
 	top:10px;

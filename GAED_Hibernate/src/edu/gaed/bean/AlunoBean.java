@@ -6,11 +6,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 
 import org.primefaces.event.FileUploadEvent;
+
 import edu.gaed.vo.Aluno;
 import edu.gaed.dao.AlunoDao;
  
@@ -55,6 +58,8 @@ public class AlunoBean extends UsuarioBean implements Serializable{
 	@SuppressWarnings("unchecked")
 	public void cadastrar(ActionEvent actionEvent){
 		new AlunoDao().inserir(aluno);
+		FacesContext context = FacesContext.getCurrentInstance();
+        context.addMessage(null, new FacesMessage("Cadastrado",  " Aluno(a) " + aluno.getNome() + "  cadastrado(a) com sucesso!") );
 		alunos = new AlunoDao().listar();
 		aluno = new Aluno();
 	}
@@ -62,12 +67,16 @@ public class AlunoBean extends UsuarioBean implements Serializable{
 	@SuppressWarnings("unchecked")
 	public void alterar(){
 		new AlunoDao().alterar(aluno);
+		FacesContext context = FacesContext.getCurrentInstance();
+        context.addMessage(null, new FacesMessage("Alterado",  " Aluno(a) " + aluno.getNome() + "  alterado(a) com sucesso!") );
 		alunos = new AlunoDao().listar();
 		aluno = new Aluno();
 	}
 	@SuppressWarnings("unchecked")
 	public void excluir(Aluno aluno){
 		new AlunoDao().excluir(aluno);
+		FacesContext context = FacesContext.getCurrentInstance();
+        context.addMessage(null, new FacesMessage("Excuído", "Excluído com sucesso!") );
 		alunos = new AlunoDao().listar();
 		aluno = new Aluno();
 	}
