@@ -8,7 +8,7 @@ import edu.gaed.vo.*;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
 import org.primefaces.event.SelectEvent;
@@ -17,7 +17,7 @@ import org.primefaces.event.UnselectEvent;
 import org.primefaces.model.DualListModel;
 
 @ManagedBean(name="TurmaAlunoBean")
-@SessionScoped
+@ViewScoped
 public class TurmaAlunoBean implements Serializable{
 
 	/**
@@ -30,7 +30,7 @@ public class TurmaAlunoBean implements Serializable{
 	private AlunoBean alunoBean;
 	public void init() {
         //Alunos
-        List<Aluno> alunosSource = alunoBean.getAlunos().subList(0, 6);
+        List<Aluno> alunosSource = alunoBean.alunos;
         List<Aluno> alunosTarget = new ArrayList<Aluno>();
         
         alunosDualList = new DualListModel<Aluno>(alunosSource,alunosTarget);
