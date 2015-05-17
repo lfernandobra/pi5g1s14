@@ -1,6 +1,7 @@
 package edu.gaed.bean;
  
 //import javax.faces.application.FacesMessage;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
@@ -41,12 +42,18 @@ public class LoginBean {
 			if(us != null) {
 				FacesContext.getCurrentInstance().getExternalContext()
 						.getSessionMap().put("usuario",us);
+				FacesContext context = FacesContext.getCurrentInstance();
+				context.addMessage(null, new FacesMessage("Autenticação realizada com sucesso",  "Autenticado ") );
 				resultado = "home";
-			} else { resultado = "login";}
+			} else { 
+				FacesContext context = FacesContext.getCurrentInstance();
+		        context.addMessage(null, new FacesMessage("Autenticação falhou",  "Login ou Senha estão incorretos ") );
+				resultado = "login";
+				}
 		} catch (Exception e) {
 			throw e;
 		}
-		
+		System.out.println(resultado);
 		return resultado;
 	}
     
@@ -67,7 +74,7 @@ public class LoginBean {
     
     public String encerrarSession(){
     	FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
-    	return "login?faces-redirect=true";
+    	return "login";
     }
     
     
