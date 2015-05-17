@@ -1,5 +1,7 @@
 package edu.gaed.vo;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -156,5 +158,16 @@ public class Aluno extends Usuario{
 
 	public void setResponsavel(Responsavel responsavel) {
 		this.responsavel = responsavel;
+	}
+
+	public Aluno(Long id, String login, String senha, String nome,
+			String sobrenome, String sexo, Date datanasc, String email,
+			String cPF, String rG, String numero, String complemento,
+			String telefone, boolean status, Date dataIngresso, Date dataSaida,
+			Foto foto, Logradouro logradouro, Perfil perfil) {
+		super(id, login, senha, nome, sobrenome, sexo, datanasc, email, cPF, rG,
+				numero, complemento, telefone, status, dataIngresso, dataSaida, foto,
+				logradouro, perfil);
+		// TODO Auto-generated constructor stub
 	}	
 }

@@ -7,7 +7,7 @@ import javax.faces.convert.FacesConverter;
 
 import edu.gaed.vo.Aluno;
 
-@FacesConverter(forClass = Aluno.class)
+@FacesConverter(value = "alunoConverter")
 public class AlunoConverter implements Converter{
 	@Override
 	public Object getAsObject(FacesContext facesContext, UIComponent uiComponent, String value) {

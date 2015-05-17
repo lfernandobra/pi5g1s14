@@ -3,18 +3,12 @@ package edu.gaed.bean;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.event.ActionEvent;
-
-import org.primefaces.event.DragDropEvent;
-
-import edu.gaed.vo.Aluno;
 import edu.gaed.vo.Turma;
-import edu.gaed.dao.AlunoDao;
 import edu.gaed.dao.TurmaDao;
  
 @ManagedBean(name="TurmaBean")

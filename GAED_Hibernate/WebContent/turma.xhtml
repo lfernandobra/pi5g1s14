@@ -49,7 +49,7 @@
 				<p:column headerText="Adicionar">
 					<p:commandButton value="Alunos" update=":formAdicAluno"
 						oncomplete="PF('dialogAdicAluno').show();" icon="ui-icon-pencil">
-						<f:setPropertyActionListener target="#{TurmaBean.turma}"
+						<f:setPropertyActionListener target="#{TurmaAlunoBean.turma}"
 							value="#{lista}" />
 					</p:commandButton>
 					<p:commandButton value="Professores" update=":formAdicProfessor"
@@ -182,50 +182,54 @@
 		styleClass="dialogCadastrar">
 		<h:form id="formAdicAluno">
 			<p:fieldset id="alunosDisponiveisField" legend="Alunos disponiveis">
-				<p:dataGrid id="alunosDisponiveis" var="aluno" value="#{TurmaBean.alunosCadastrados}"
-					columns="3">
-					<p:panel id="pnl" header="#{aluno.id}" style="text-align:center">
-						<h:panelGrid columns="1" style="width:100%">
-							<p:graphicImage name="/demo/images/car/#{car.brand}.gif" />
-						</h:panelGrid>
-					</p:panel>
+				<p:pickList id="PojoPickList"
+					value="#{TurmaAlunoBean.alunosDualList}" var="aluno"
+					effect="bounce" itemValue="#{aluno}" itemLabel="#{aluno}"
+					showSourceControls="true" showTargetControls="true"
+					showCheckbox="true" showSourceFilter="true" showTargetFilter="true"
+					filterMatchMode="contains" converter="converter.AlunoConverter">
+					
+					<f:facet name="sourceCaption">Available</f:facet>
+					<f:facet name="targetCaption">Starting</f:facet>
 
-					<p:draggable for="pnl" revert="true" handle=".ui-panel-titlebar"
-						stack=".ui-panel" />
-				</p:dataGrid>
+					<p:ajax event="transfer" listener="#{TurmaAlunoBean.onTransfer}"
+						update="msg" />
+					<p:ajax event="select" listener="#{TurmaAlunoBean.onSelect}"
+						update="msg" />
+					<p:ajax event="unselect" listener="#{TurmaAlunoBean.onUnselect}"
+						update="msg" />
+					<p:ajax event="reorder" listener="#{TurmaAlunoBean.onReorder}"
+						update="msg" />
+					<p:column style="width:25%">
+						<h:outputText styleClass="ui-theme ui-theme-#{aluno}" />
+					</p:column>
+
+					<p:column style="width:75%;">
+						<h:outputText value="#{aluno}" />
+					</p:column>
+				</p:pickList>
 			</p:fieldset>
+			<p:commandButton id="pojoSubmit" 
+							 value="Submit" 
+							 update="displayThemes" 
+							 oncomplete="PF('turmaAlunoDialog').show()" 
+							 style="margin-top:5px" />
+			
+			<p:dialog modal="true" showEffect="fade" hideEffect="fade"
+				widgetVar="turmaAlunoDialog">
+				<h:panelGrid id="displayAlunos" columns="2">
+					<h:outputText value="Source: " style="font-weight:bold" />
+					<ui:repeat value="#{TurmaAlunoBean.alunosDualList.source}" var="disponivel">
+						<h:outputText value="#{disponivel.nome}" style="margin-right:5px" />
+					</ui:repeat>
 
-			<p:fieldset id="Turma" legend="Turma"
-				style="margin-top:20px">
-				<p:outputPanel id="dropArea">
-					<h:outputText value="!!!Drop here!!!"
-						rendered="#{empty TurmaBean.turma.alunos}"
-						style="font-size:24px;" />
-					<p:dataTable id="alunosTurma" var="aluno"
-						value="#{TurmaBean.turma.alunos}"
-						rendered="#{not empty TurmaBean.turma.alunos}">
-						<p:column headerText="Id">
-							<h:outputText value="#{aluno.id}" />
-						</p:column>
-
-						<p:column headerText="Nome">
-							<h:outputText value="#{aluno.nome}" />
-						</p:column>
-
-						<p:column headerText="Sobrenome">
-							<h:outputText value="#{aluno.sobrenome}" />
-						</p:column>
-					</p:dataTable>
-				</p:outputPanel>
-			</p:fieldset>
-
-			<p:droppable for="Turma" tolerance="touch"
-				activeStyleClass="ui-state-highlight" datasource="alunosDisponiveis"
-				onDrop="handleDrop">
-				<p:ajax listener="#{TurmaBean.onAlunoDrop}"
-					update="dropArea alunosDisponiveis" />
-			</p:droppable>
-
+					<h:outputText value="Target: " style="font-weight:bold" />
+					<ui:repeat value="#{TurmaAlunoBean.alunosDualList.target}" var="alocado">
+						<h:outputText value="#{alocado.nome}" style="margin-right:5px" />
+					</ui:repeat>
+				</h:panelGrid>
+				
+			</p:dialog>
 		</h:form>
 	</p:dialog>
 	<p:dialog header="Adicionar professores" widgetVar="dialogAdicProf"
