@@ -180,6 +180,7 @@
 	<p:dialog header="Adicionar alunos" widgetVar="dialogAdicAluno"
 		modal="true" resizable="true" id="idAdicAlu"
 		styleClass="dialogCadastrar">
+		 
 		<h:form id="formAdicAluno">
 			<p:fieldset id="alunosDisponiveisField" legend="Alunos disponiveis">
 				<p:pickList id="PojoPickList"
@@ -187,8 +188,8 @@
 					effect="bounce" itemValue="#{aluno}" itemLabel="#{aluno}"
 					showSourceControls="true" showTargetControls="true"
 					showCheckbox="true" showSourceFilter="true" showTargetFilter="true"
-					filterMatchMode="contains" converter="converter.AlunoConverter">
-					
+					filterMatchMode="contains">
+					<f:converter converterId="alunoConverter"/>
 					<f:facet name="sourceCaption">Available</f:facet>
 					<f:facet name="targetCaption">Starting</f:facet>
 
@@ -211,7 +212,7 @@
 			</p:fieldset>
 			<p:commandButton id="pojoSubmit" 
 							 value="Submit" 
-							 update="displayThemes" 
+							 update="displayAlunos" 
 							 oncomplete="PF('turmaAlunoDialog').show()" 
 							 style="margin-top:5px" />
 			
