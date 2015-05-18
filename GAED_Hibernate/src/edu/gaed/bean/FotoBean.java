@@ -101,7 +101,6 @@ public class FotoBean implements Serializable{
 		try {
 			// Instância objetos
 			FotoDao fotoDao = new FotoDao();
-			//Foto im = new Foto();
 
 			// Cria um arquivo UploadFile, para receber o arquivo do evento
 			UploadedFile arq = event.getFile();

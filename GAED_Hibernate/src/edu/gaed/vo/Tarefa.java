@@ -1,17 +1,24 @@
 package edu.gaed.vo;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 @Entity
 @Table(name = "tarefa")
@@ -36,19 +43,28 @@ public class Tarefa implements Serializable {
 	@Column(name = "fim")
 	private Date fim;
 
+	/*
 	@ManyToOne
 	@JoinColumn(name = "id_turma")
 	private Turma turma;
+	*/
+	
+	@ManyToMany
+	@LazyCollection(LazyCollectionOption.FALSE)
+	@JoinTable(name = "tarefa_turma",
+	joinColumns = { @JoinColumn(name = "idturma", nullable = false,
+	updatable =  false) }, inverseJoinColumns = {
+	@JoinColumn(name = "idtarefa", nullable = false, updatable = false) })
+    private List<Turma> turmas = new ArrayList<Turma>();
 
 	@ManyToOne
 	@JoinColumn(name = "id_disciplina")
 	private Disciplina disciplina;
 
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "id_anexo")
 	private Anexo anexo;
 
-	@OneToMany(mappedBy = "tarefa")
 	public Long getId() {
 		return id;
 	}
@@ -80,7 +96,7 @@ public class Tarefa implements Serializable {
 	public void setInicio(Date inicio) {
 		this.inicio = inicio;
 	}
-
+	/*
 	public Turma getTurma() {
 		return turma;
 	}
@@ -88,7 +104,7 @@ public class Tarefa implements Serializable {
 	public void setTurma(Turma turma) {
 		this.turma = turma;
 	}
-
+	*/
 	public Disciplina getDisciplina() {
 		return disciplina;
 	}
@@ -117,7 +133,7 @@ public class Tarefa implements Serializable {
 		result = prime * result + ((fim == null) ? 0 : fim.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((inicio == null) ? 0 : inicio.hashCode());
-		result = prime * result + ((turma == null) ? 0 : turma.hashCode());
+		result = prime * result + ((turmas == null) ? 0 : turmas.hashCode());
 		return result;
 	}
 
@@ -160,19 +176,22 @@ public class Tarefa implements Serializable {
 				return false;
 		} else if (!inicio.equals(other.inicio))
 			return false;
-		if (turma == null) {
-			if (other.turma != null)
+		if (turmas == null) {
+			if (other.turmas != null)
 				return false;
-		} else if (!turma.equals(other.turma))
+		} else if (!turmas.equals(other.turmas))
 			return false;
 		return true;
 	}
 
-	@Override
-	public String toString() {
-		return "Tarefa [id=" + id + ", descricao=" + descricao + ", inicio="
-				+ inicio + ", fim=" + fim + ", turma=" + turma
-				+ ", disciplina=" + disciplina + ", anexo=" + anexo + "]";
+	public List<Turma> getTurmas() {
+		return turmas;
 	}
+
+	public void setTurmas(List<Turma> turmas) {
+		this.turmas = turmas;
+	}
+
+	
 
 }

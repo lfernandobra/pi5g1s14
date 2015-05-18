@@ -33,7 +33,6 @@ public class Anexo implements Serializable {
 	@Lob
 	private byte[] anexo;
 
-	@OneToOne(mappedBy = "anexo")
 	public Long getId() {
 		return id;
 	}
