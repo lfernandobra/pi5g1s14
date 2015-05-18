@@ -246,12 +246,11 @@
 						<p:inputText value="#{GestorBean.gestor.numero}" 	required="true" label="Número" size="30" id="numero"	requiredMessage="Número deve ser informado!" />
 
 						<p:outputLabel for="complemento" value="Complemento:" />
-						<p:inputText value="#{GestorBean.gestor.complemento}"	size="30" required="true" label="Complemento" id="complemento"
-							requiredMessage="Complemento deve ser informado!" />
+						<p:inputText value="#{GestorBean.gestor.complemento}"	size="30" required="true" label="Complemento" id="complemento"	requiredMessage="Complemento deve ser informado!" />
 					</h:panelGrid>
 					
 					<div id="botoes">
-						<p:commandButton value="Salvar" id="withIcon" actionListener="#{GestorBean.cadastrar}" icon="ui-icon-disk" update=":formPrincipal:tabelaGestor @form "
+						<p:commandButton value="Salvar" id="withIcon" actionListener="#{GestorBean.cadastrar}" icon="ui-icon-disk" update=":formPrincipal:tabelaGestor @form growl "
 							oncomplete="closeDialogIfSucess(xhr, status, args, 'dialogCadastrar','formCad')" onsuccess="PF('dialogCadastrar').hide();" />
 							
 						<p:commandButton value="Limpar" update="@form " process="@this" icon="ui-icon-close">

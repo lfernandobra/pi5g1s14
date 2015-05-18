@@ -39,6 +39,13 @@ body{
   	width: 1291px !important;
   	position: fixed;
 }
+
+#formCadMedio{
+	height: 400px !important;
+  	width: 600px !important;
+  	position: fixed;
+	
+}
 #formCadFoto{
 	height: 300px !important;
   	width: 600px !important;
