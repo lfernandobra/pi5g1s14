@@ -91,7 +91,7 @@ public class ProfessorBean implements Serializable {
 	public void excluir(Professor professor) {
 		new ProfessorDao().excluir(professor);
 		FacesContext context = FacesContext.getCurrentInstance();
-        context.addMessage(null, new FacesMessage("Excluído", "Excluído com sucesso!") );
+        context.addMessage(null, new FacesMessage("ExcluÃ­do", "ExcluÃ­do com sucesso!") );
 		professors = new ProfessorDao().listar();
 		professor = new Professor();
 	}

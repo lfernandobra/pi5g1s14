@@ -50,14 +50,14 @@
 					</p:column>
 					
 					<p:rowExpansion>
-						<h:inputHidden	value="#{FotoBean.verFoto(lista.foto.foto,lista.nome)}" />
-						<h3>Informações do Professor(a)</h3>
-						<p:panelGrid columns="2" columnClasses="label,value">
+						<h:inputHidden value="#{FotoBean.verFoto(lista.foto.foto,lista.nome)}" />
+							<h3>Informações do professor</h3>
+							<p:panelGrid columns="2" columnClasses="label,value">
 							<h:outputText value="Foto " />
 							<h:graphicImage width="80" height="100" value="/temp/#{lista.nome}.png" />
 							<h:outputText value="Data de nascimento " />
 							<h:outputFormat value="{0, date, dd/MM/yyyy}">
-								<f:param value="#{lista.datanasc}" />
+							<f:param value="#{lista.datanasc}" />
 							</h:outputFormat>
 							<h:outputText value="Sexo " />
 							<h:outputText value="#{lista.sexo}" />
@@ -131,7 +131,7 @@
 			</p:dataTable>
 		</h:form>
 		
-		
+	</div>	
 	<p:dialog header="Formulario de Cadastro do Professor" widgetVar="dialogCadastrar" modal="true" resizable="true" id="formCad" appendTo="@(body)" closeOnEscape="true" closable="true" maximizable="true"   >
 			<p:growl id="growl" showDetail="true" life="4000" />
 			<h:form id="formCadastrar" styleClass="formCadastrar">
@@ -247,54 +247,52 @@
 				<h:panelGrid columns="6" id="panelGridLogradouro">
 				
 						<p:outputLabel for="cep" value="CEP:" />
-						<p:autoComplete value="#{ProfessorBean.professor.logradouro}" size="30" completeMethod="#{LogradouroBean.completeLogradouro()}"
-							var="logradouro" itemLabel="#{logradouro.CEP}" 	itemValue="#{logradouro}" forceSelection="true" required="true"
-							requiredMessage="CEP deve ser informado!" label="CEP" id="cep">
-							<p:ajax event="itemSelect"	listener="#{LogradouroBean.completeLogradouro()}" update="panelGridLogradouro" />
+						<p:autoComplete value="#{ProfessorBean.professor.logradouro}" completeMethod="#{LogradouroBean.completeLogradouro()}"	var="logradouro" itemLabel="#{logradouro.CEP}"
+							itemValue="#{logradouro}" forceSelection="true" required="true" requiredMessage="CEP deve ser informado!" label="CEP" id="cep">
+							<p:ajax event="itemSelect"	listener="#{LogradouroBean.completeLogradouro()}"	update="panelGridLogradouro" />
 						</p:autoComplete>
 						
-						<p:outputLabel value="Endereço:" />
-						<p:inputText value="#{ProfessorBean.professor.logradouro.nome}"  size="40" />
-						
-						<p:outputLabel value="Bairro:" />
-						<p:inputText value="#{ProfessorBean.professor.logradouro.bairro.nome}" size="30" />
-						
-						<p:outputLabel value="Municipio:" />
-						<p:inputText value="#{ProfessorBean.professor.logradouro.bairro.municipio.nome}" size="30" />
-						
-						<p:outputLabel value="Estado:" />
-						<p:inputText	value="#{ProfessorBean.professor.logradouro.bairro.municipio.uf.nome}" size="30" />
+							<p:outputLabel value="Endereço:" />
+							<p:inputText value="#{ProfessorBean.professor.logradouro.nome}"	readonly="true" />
+							<p:outputLabel value="Bairro:" />
+							<p:inputText
+								value="#{ProfessorBean.professor.logradouro.bairro.nome}" readonly="true" />
+							<p:outputLabel value="Municipio:" />
+							<p:inputText
+								value="#{ProfessorBean.professor.logradouro.bairro.municipio.nome}"	readonly="true" />
+							<p:outputLabel value="Estado:" />
+							<p:inputText
+								value="#{ProfessorBean.professor.logradouro.bairro.municipio.uf.nome}"	readonly="true" />
 
-						<p:outputLabel for="numero" value="Número:" />
-						<p:inputText value="#{ProfessorBean.professor.numero}" 	required="true" label="Número" size="30" id="numero"	requiredMessage="Número deve ser informado!" />
+							<p:outputLabel for="numero" value="Número:" />
+							<p:inputText value="#{ProfessorBean.professor.numero}"	required="true" label="Número" id="numero"	requiredMessage="Número deve ser informado!" />
 
-						<p:outputLabel for="complemento" value="Complemento:" />
-						<p:inputText value="#{ProfessorBean.professor.complemento}"	size="30" required="true" label="Complemento" id="complemento"
-							requiredMessage="Complemento deve ser informado!" />
+							<p:outputLabel for="complemento" value="Complemento:"/>
+							<p:inputText value="#{ProfessorBean.professor.complemento}"	size="30" required="true" label="Complemento" id="complemento"	requiredMessage="Complemento deve ser informado!" />
 					</h:panelGrid>
 					
 					<div id="botoes">
-						<p:commandButton value="Salvar" id="withIcon" actionListener="#{ProfessorBean.cadastrar}" icon="ui-icon-disk" update=":formPrincipal:tabelaProfessor @form "
-							oncomplete="closeDialogIfSucess(xhr, status, args, 'dialogCadastrar','formCad')" onsuccess="PF('dialogCadastrar').hide();" />
+							<p:commandButton value="Salvar" id="withIcon"	actionListener="#{ProfessorBean.cadastrar}" icon="ui-icon-disk"		update=":formPrincipal:tabelaProfessor @form"
+							oncomplete="closeDialogIfSucess(xhr, status, args, 'dialogCadastrar','formCad')"	onsuccess="PF('dialogCadastrar').hide();" />
 							
-						<p:commandButton value="Limpar" update="@form " process="@this" icon="ui-icon-close">
-							<p:resetInput target="panelCadastrar panelGridLogradouro" />
-						</p:commandButton>
+							<p:commandButton value="Limpar" update="@form" process="@this">
+								<p:resetInput target="panelCadastrar panelGridLogradouro" />
+							</p:commandButton>
+							
 					</div>
 			</h:form>
 		</p:dialog>
 
-	</div>
 	
 				<p:dialog header="Incluir Foto" widgetVar="dialogIncluirFoto" modal="true" resizable="true" id="formCadFoto" appendTo="@(body)">
-					<h:form id="IncluirFoto" styleClass="IncluirFoto">
-							<p:focus context="@form" />
-							<h4>Selecione uma foto para anexar ao cadastro do professor:</h4>
-							<p:separator/>
-							<p:fileUpload fileUploadListener="#{ProfessorBean.uploadAction}" size="50" mode="advanced" skinSimple="true" update="growl"	sizeLimit="100000" fileLimit="1"
-									allowTypes="/(\.|\/)(gif|jpe?g|png)$/" id="IncluirFoto"/>
-					</h:form>
-				</p:dialog>
+				<h:form id="IncluirFoto" styleClass="IncluirFoto">
+						<p:focus context="@form" />
+						<h4>Selecione uma foto para anexar ao cadastro do professor:</h4>
+						<p:separator/>
+						<p:fileUpload fileUploadListener="#{ProfessorBean.uploadAction}" size="50" mode="advanced" skinSimple="true" update="growl"	sizeLimit="100000" fileLimit="1"
+								allowTypes="/(\.|\/)(gif|jpe?g|png)$/" id="IncluirFoto"/>
+				</h:form>
+			</p:dialog>
 				
 	
 			<p:dialog header="Alterar" widgetVar="dialogAlterar" modal="true" resizable="true" id="formAlt" appendTo="@(body)">

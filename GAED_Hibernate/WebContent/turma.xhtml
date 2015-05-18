@@ -10,7 +10,23 @@
 	<link rel="stylesheet" href="styles/layout_crud.css" type="text/css" />
 </h:head>
 <body>
-	<div align="center">
+
+<ui:decorate template="/Cabecalho.xhtml">
+	<ui:define name="center">
+
+	
+	<h2>Lista de Turmas</h2>
+	
+		<div id="Lista">
+				<p:separator />
+				
+				<p:toolbar styleClass="toolbar">
+					<f:facet name="left">
+						<p:commandButton value="Criar Turma" type="button" onclick="PF('dialogCadastrar').show();" icon="ui-icon-disk" />
+					</f:facet>
+				</p:toolbar>
+				
+				
 		<h:form id="formPrincipal">
 			<p:dataTable var="lista" value="#{TurmaBean.turmas}" id="tabelaTurma"
 				resizableColumns="true" reflow="true" rows="5"
@@ -85,160 +101,63 @@
     			</f:facet>
 			</p:dataTable>
 		</h:form>
-		<h:panelGrid columns="1" cellpadding="5">
-			<p:commandButton value="Cadastrar" type="button"
-				onclick="PF('dialogCadastrar').show();" icon="ui-icon-disk" />
-		</h:panelGrid>
-		<p:dialog header="Cadastrar" widgetVar="dialogCadastrar" modal="true"
-			resizable="true" id="formCad" styleClass="dialogCadastrar">
-			<h:form id="formCadastrar">
+		
+		<p:dialog header="Formulario de criação da turma" widgetVar="dialogCadastrar" modal="true" resizable="true" id="formCadMedio" appendTo="@(body)" closeOnEscape="true" closable="true" maximizable="true"   >
+			<p:growl id="growl" showDetail="true" life="4000" />		
+				<h:form id="formCadastrar" styleClass="formCadastrar">
 				<p:focus context="@form" />
-				<p:panelGrid id="panelCadastrar" columns="3">
-					<p:outputLabel for="nome" value="Nome:" />
-					<p:inputText value="#{TurmaBean.turma.nome}" required="true"
-						id="nome" requiredMessage="Nome não deve estar vazio!" />
-					<p:messages for="nome" display="icon" closable="true" />
-
-					<p:outputLabel for="periodo" value="Periodo:" />
-					<h:selectOneMenu value="#{TurmaBean.turma.periodo}">
-						<f:selectItem itemLabel="-- Selecione --" noSelectionOption="true" />
-						<f:selectItems value="#{PeriodoBean.periodos}" var="periodo"
-							itemValue="#{periodo}" itemLabel="#{periodo.periodo}"
-							id="periodo" />
-					</h:selectOneMenu>
-					<p:messages for="periodo" display="icon" closable="true" />
-
-					<p:outputLabel for="serie" value="Serie:" />
-					<h:selectOneMenu value="#{TurmaBean.turma.serie}">
-						<f:selectItem itemLabel="-- Selecione --" noSelectionOption="true" />
-						<f:selectItems value="#{SerieBean.series}" var="serie"
-							itemValue="#{serie}" itemLabel="#{serie.serie}" id="serie" />
-					</h:selectOneMenu>
-					<p:messages for="serie" display="icon" closable="true" />
-
-					<p:outputLabel for="qtdLimite" value="Limite de alunos:" />
-					<p:inputText value="#{TurmaBean.turma.qtdAluLimite}"
-						required="true" id="qtdLimite"
-						requiredMessage="Limite deve ser definido!" />
-					<p:messages for="qtdLimite" display="icon" closable="true" />
-
-
-				</p:panelGrid>
-				<p:commandButton value="Salvar" id="withIcon"
-					actionListener="#{TurmaBean.cadastrar}" icon="ui-icon-disk"
-					update=":formPrincipal:tabelaTurma @form"
-					oncomplete="closeDialogIfSucess(xhr, status, args, 'dialogCadastrar','formCad')"
-					onsuccess="PF('dialogCadastrar').hide();" />
-				<p:commandButton value="Limpar" update="@form" process="@this">
-					<p:resetInput target="panelCadastrar" />
-				</p:commandButton>
+					<h:outputText value="Campos obrigatórios * " style="font-size: 10px !important; top: 5px !important 	" />	
+					
+					<h3>Dados de Cadastro</h3>
+					<p:separator/>
+					
+					<p:panelGrid id="panelCadastrar" columns="3">
+						<p:outputLabel for="nome" value="Nome:" />
+						<p:inputText value="#{TurmaBean.turma.nome}" required="true"
+							id="nome" requiredMessage="Nome não deve estar vazio!" />
+						<p:messages for="nome" display="icon" closable="true" />
+	
+						<p:outputLabel for="periodo" value="Periodo:" />
+						<h:selectOneMenu value="#{TurmaBean.turma.periodo}">
+							<f:selectItem itemLabel="-- Selecione --" noSelectionOption="true" />
+							<f:selectItems value="#{PeriodoBean.periodos}" var="periodo"
+								itemValue="#{periodo}" itemLabel="#{periodo.periodo}"
+								id="periodo" />
+						</h:selectOneMenu>
+						<p:messages for="periodo" display="icon" closable="true" />
+	
+						<p:outputLabel for="serie" value="Serie:" />
+						<h:selectOneMenu value="#{TurmaBean.turma.serie}">
+							<f:selectItem itemLabel="-- Selecione --" noSelectionOption="true" />
+							<f:selectItems value="#{SerieBean.series}" var="serie"
+								itemValue="#{serie}" itemLabel="#{serie.serie}" id="serie" />
+						</h:selectOneMenu>
+						<p:messages for="serie" display="icon" closable="true" />
+	
+						<p:outputLabel for="qtdLimite" value="Limite de alunos:" />
+						<p:inputText value="#{TurmaBean.turma.qtdAluLimite}"
+							required="true" id="qtdLimite"
+							requiredMessage="Limite deve ser definido!" />
+						<p:messages for="qtdLimite" display="icon" closable="true" />
+	
+	
+					</p:panelGrid>
+					
+					<div id="botoes">
+						<p:commandButton value="Salvar" id="withIcon"	actionListener="#{TurmaBean.cadastrar}" icon="ui-icon-disk"	update=":formPrincipal:tabelaTurma @form"
+							oncomplete="closeDialogIfSucess(xhr, status, args, 'dialogCadastrar','formCadMedio')"	onsuccess="PF('dialogCadastrar').hide();" />
+							
+						<p:commandButton value="Limpar" update="@form" process="@this">
+						 <p:resetInput target="panelCadastrar" />
+						</p:commandButton>
+					</div>
+				
 			</h:form>
 		</p:dialog>
-	</div>
-	<p:dialog header="Alterar" widgetVar="dialogAlterar" modal="true"
-		resizable="true" id="formAlt" styleClass="dialogAlterar">
-		<h:form id="formAlterar">
-			<p:focus context="@form" />
-			<h:inputHidden value="#{TurmaBean.turma}" />
-			<p:panelGrid id="panelAlterar" columns="3">
-				<p:outputLabel for="nome" value="Nome:" />
-				<p:inputText value="#{TurmaBean.turma.nome}" required="true"
-					id="nome" requiredMessage="Nome não deve estar vazio!" />
-				<p:messages for="nome" display="icon" closable="true" />
-
-				<p:outputLabel for="periodo" value="Periodo:" />
-				<h:selectOneMenu value="#{TurmaBean.turma.periodo}">
-					<f:selectItem itemLabel="-- Selecione --" noSelectionOption="true" />
-					<f:selectItems value="#{PeriodoBean.periodos}" var="periodo"
-						itemValue="#{periodo}" itemLabel="#{periodo.periodo}" id="periodo" />
-				</h:selectOneMenu>
-				<p:messages for="periodo" display="icon" closable="true" />
-
-				<p:outputLabel for="serie" value="Serie:" />
-				<h:selectOneMenu value="#{TurmaBean.turma.serie}">
-					<f:selectItem itemLabel="-- Selecione --" noSelectionOption="true" />
-					<f:selectItems value="#{SerieBean.series}" var="serie"
-						itemValue="#{serie}" itemLabel="#{serie.serie}" id="serie" />
-				</h:selectOneMenu>
-				<p:messages for="serie" display="icon" closable="true" />
-
-				<p:outputLabel for="qtdLimite" value="Limite de alunos:" />
-				<p:inputText value="#{TurmaBean.turma.qtdAluLimite}" required="true"
-					id="qtdLimite" requiredMessage="Limite deve ser definido!" />
-				<p:messages for="qtdLimite" display="icon" closable="true" />
-			</p:panelGrid>
-			<p:commandButton value="Salvar" id="withIcon"
-				actionListener="#{TurmaBean.alterar}" icon="ui-icon-disk"
-				update=":formPrincipal:tabelaTurma @form"
-				oncomplete="closeDialogIfSucess(xhr, status, args, 'dialogAlterar','formAlt')"
-				onsuccess="PF('dialogAlterar').hide();" />
-			<p:commandButton value="Limpar" update="@form" process="@this">
-				<p:resetInput target="panelAlterar" />
-			</p:commandButton>
-		</h:form>
-	</p:dialog>
-	<p:dialog header="Adicionar alunos" widgetVar="dialogAdicAluno"
-		modal="true" resizable="true" id="idAdicAlu"
-		styleClass="dialogCadastrar">
-		 
-		<h:form id="formAdicAluno">
-			<p:fieldset id="alunosDisponiveisField" legend="Alunos disponiveis">
-				<p:pickList id="PojoPickList"
-					value="#{TurmaAlunoBean.alunosDualList}" var="aluno"
-					effect="bounce" itemValue="#{aluno}" itemLabel="#{aluno}"
-					showSourceControls="true" showTargetControls="true"
-					showCheckbox="true" showSourceFilter="true" showTargetFilter="true"
-					filterMatchMode="contains">
-					<f:converter converterId="alunoConverter"/>
-					<f:facet name="sourceCaption">Available</f:facet>
-					<f:facet name="targetCaption">Starting</f:facet>
-
-					<p:ajax event="transfer" listener="#{TurmaAlunoBean.onTransfer}"
-						update="msg" />
-					<p:ajax event="select" listener="#{TurmaAlunoBean.onSelect}"
-						update="msg" />
-					<p:ajax event="unselect" listener="#{TurmaAlunoBean.onUnselect}"
-						update="msg" />
-					<p:ajax event="reorder" listener="#{TurmaAlunoBean.onReorder}"
-						update="msg" />
-					<p:column style="width:25%">
-						<h:outputText styleClass="ui-theme ui-theme-#{aluno}" />
-					</p:column>
-
-					<p:column style="width:75%;">
-						<h:outputText value="#{aluno}" />
-					</p:column>
-				</p:pickList>
-			</p:fieldset>
-			<p:commandButton id="pojoSubmit" 
-							 value="Submit" 
-							 update="displayAlunos" 
-							 oncomplete="PF('turmaAlunoDialog').show()" 
-							 style="margin-top:5px" />
-			
-			<p:dialog modal="true" showEffect="fade" hideEffect="fade"
-				widgetVar="turmaAlunoDialog">
-				<h:panelGrid id="displayAlunos" columns="2">
-					<h:outputText value="Source: " style="font-weight:bold" />
-					<ui:repeat value="#{TurmaAlunoBean.alunosDualList.source}" var="disponivel">
-						<h:outputText value="#{disponivel.nome}" style="margin-right:5px" />
-					</ui:repeat>
-
-					<h:outputText value="Target: " style="font-weight:bold" />
-					<ui:repeat value="#{TurmaAlunoBean.alunosDualList.target}" var="alocado">
-						<h:outputText value="#{alocado.nome}" style="margin-right:5px" />
-					</ui:repeat>
-				</h:panelGrid>
-				
-			</p:dialog>
-		</h:form>
-	</p:dialog>
-	<p:dialog header="Adicionar professores" widgetVar="dialogAdicProf"
-		modal="true" resizable="true" id="idAdicProf"
-		styleClass="dialogCadastrar">
-		<h:form id="formAdicProfessor">
-
-		</h:form>
-	</p:dialog>
+</div>
+</ui:define>
+</ui:decorate>	
+	
+	
 </body>
 </html>
