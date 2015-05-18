@@ -7,7 +7,7 @@ import javax.faces.convert.FacesConverter;
 
 import edu.gaed.vo.Turma;
 
-@FacesConverter(forClass = Turma.class)
+@FacesConverter(value = "turmaConverter")
 public class TurmaConverter implements Converter{
 	@Override
 	public Object getAsObject(FacesContext facesContext, UIComponent uiComponent, String value) {

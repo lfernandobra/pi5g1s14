@@ -97,15 +97,15 @@ public class AnexoBean implements Serializable{
 		try {
 			// Instância objetos
 			AnexoDao anexoDao = new AnexoDao();
-			Anexo im = new Anexo();
+			//anexo = new Anexo();
 
 			// Cria um arquivo UploadFile, para receber o arquivo do evento
 			UploadedFile arq = event.getFile();
 			// Transformar a imagem em bytes para salvar em banco de dados
 			byte[] bimagem = event.getFile().getContents();
-			im.setAnexo(bimagem);
-			im.setNome(arq.getFileName());
-			anexoDao.inserir(im);
+			anexo.setAnexo(bimagem);
+			anexo.setNome(arq.getFileName());
+			anexoDao.inserir(anexo);
 
 			// Essa parte comentada deve ser usada caso queira salvar
 			// o arquivo em um local fisuco do servidor.
