@@ -4,9 +4,12 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 
 import org.primefaces.event.FileUploadEvent;
@@ -69,6 +72,8 @@ public class ProfessorBean implements Serializable {
 	@SuppressWarnings("unchecked")
 	public void cadastrar(ActionEvent actionEvent) {
 		new ProfessorDao().inserir(professor);
+		FacesContext context = FacesContext.getCurrentInstance();
+        context.addMessage(null, new FacesMessage("Cadastrado",  " Professor(a) " + professor.getNome() + "  cadastrado(a) com sucesso!") );
 		professors = new ProfessorDao().listar();
 		professor = new Professor();
 	}
@@ -76,6 +81,8 @@ public class ProfessorBean implements Serializable {
 	@SuppressWarnings("unchecked")
 	public void alterar() {
 		new ProfessorDao().alterar(professor);
+		FacesContext context = FacesContext.getCurrentInstance();
+        context.addMessage(null, new FacesMessage("Alterado",  " Professor(a) " + professor.getNome() + "  alterado(a) com sucesso!") );
 		professors = new ProfessorDao().listar();
 		professor = new Professor();
 	}
@@ -83,6 +90,8 @@ public class ProfessorBean implements Serializable {
 	@SuppressWarnings("unchecked")
 	public void excluir(Professor professor) {
 		new ProfessorDao().excluir(professor);
+		FacesContext context = FacesContext.getCurrentInstance();
+        context.addMessage(null, new FacesMessage("Excluído", "Excluído com sucesso!") );
 		professors = new ProfessorDao().listar();
 		professor = new Professor();
 	}

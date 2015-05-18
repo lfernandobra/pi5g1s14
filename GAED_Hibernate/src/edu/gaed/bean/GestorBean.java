@@ -6,8 +6,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 
 import org.primefaces.event.FileUploadEvent;
@@ -58,6 +60,8 @@ public class GestorBean implements Serializable {
 	@SuppressWarnings("unchecked")
 	public void cadastrar(ActionEvent actionEvent) {
 		new GestorDao().inserir(gestor);
+		FacesContext context = FacesContext.getCurrentInstance();
+        context.addMessage(null, new FacesMessage("Cadastrado",  " Gestor(a) " + gestor.getNome() + "  cadastrado(a) com sucesso!") );
 		gestors = new GestorDao().listar();
 		gestor = new Gestor();
 	}
@@ -65,6 +69,8 @@ public class GestorBean implements Serializable {
 	@SuppressWarnings("unchecked")
 	public void alterar() {
 		new GestorDao().alterar(gestor);
+		FacesContext context = FacesContext.getCurrentInstance();
+        context.addMessage(null, new FacesMessage("Alterado",  " Gestor(a) " + gestor.getNome() + "  alterado(a) com sucesso!") );
 		gestors = new GestorDao().listar();
 		gestor = new Gestor();
 	}
@@ -72,6 +78,8 @@ public class GestorBean implements Serializable {
 	@SuppressWarnings("unchecked")
 	public void excluir(Gestor gestor) {
 		new GestorDao().excluir(gestor);
+		FacesContext context = FacesContext.getCurrentInstance();
+        context.addMessage(null, new FacesMessage("Excluído", "Excluído com sucesso!") );
 		gestors = new GestorDao().listar();
 		gestor = new Gestor();
 	}
