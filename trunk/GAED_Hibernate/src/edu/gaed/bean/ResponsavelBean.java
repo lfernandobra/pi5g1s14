@@ -6,9 +6,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
+
+import javax.faces.context.FacesContext;
 
 import org.primefaces.event.FileUploadEvent;
 
@@ -57,6 +60,8 @@ public class ResponsavelBean extends UsuarioBean implements Serializable {
 	@SuppressWarnings("unchecked")
 	public void cadastrar(){
 		new ResponsavelDao().inserir(responsavel);
+		FacesContext context = FacesContext.getCurrentInstance();
+        context.addMessage(null, new FacesMessage("Cadastrado",  " Responsável " + responsavel.getNome() + "  cadastrado com sucesso!") );
 		responsavels = new ResponsavelDao().listar();
 		responsavel = new Responsavel();
 	}
@@ -64,12 +69,16 @@ public class ResponsavelBean extends UsuarioBean implements Serializable {
 	@SuppressWarnings("unchecked")
 	public void alterar(){
 		new ResponsavelDao().alterar(responsavel);
+		FacesContext context = FacesContext.getCurrentInstance();
+        context.addMessage(null, new FacesMessage("Alterado",  " Responsável " + responsavel.getNome() + "  alterado com sucesso!") );
 		responsavels = new ResponsavelDao().listar();
 		responsavel = new Responsavel();
 	}
 	@SuppressWarnings("unchecked")
 	public void excluir(Responsavel responsavel){
 		new ResponsavelDao().excluir(responsavel);
+		FacesContext context = FacesContext.getCurrentInstance();
+        context.addMessage(null, new FacesMessage("Excluído", "Excluído com sucesso!") );
 		responsavels = new ResponsavelDao().listar();
 		responsavel = new Responsavel();
 	}
