@@ -76,7 +76,7 @@ public class AlunoBean extends UsuarioBean implements Serializable{
 	public void excluir(Aluno aluno){
 		new AlunoDao().excluir(aluno);
 		FacesContext context = FacesContext.getCurrentInstance();
-        context.addMessage(null, new FacesMessage("Excuído", "Excluído com sucesso!") );
+        context.addMessage(null, new FacesMessage("Excluído", "Excluído com sucesso!") );
 		alunos = new AlunoDao().listar();
 		aluno = new Aluno();
 	}
