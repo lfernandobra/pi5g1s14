@@ -5,9 +5,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
+
 import edu.gaed.vo.Turma;
 import edu.gaed.dao.TurmaDao;
  
@@ -44,10 +47,12 @@ public class TurmaBean implements Serializable{
        
     }
 	 
-	//Métodos dos botões 
+	//Mï¿½todos dos botï¿½es 
 	@SuppressWarnings("unchecked")
 	public void cadastrar(ActionEvent actionEvent){
 		new TurmaDao().inserir(turma);
+		FacesContext context = FacesContext.getCurrentInstance();
+        context.addMessage(null, new FacesMessage("Cadastrada",  " Turma " + turma.getNome() + "  criada com sucesso!") );
 		turmas = new TurmaDao().listar();
 		turma = new Turma();
 	}
@@ -55,12 +60,16 @@ public class TurmaBean implements Serializable{
 	@SuppressWarnings("unchecked")
 	public void alterar(){
 		new TurmaDao().alterar(turma);
+		FacesContext context = FacesContext.getCurrentInstance();
+        context.addMessage(null, new FacesMessage("Alterada",  " Turma " + turma.getNome() + "  alterada com sucesso!") );
 		turmas = new TurmaDao().listar();
 		turma = new Turma();
 	}
 	@SuppressWarnings("unchecked")
 	public void excluir(Turma turma){
 		new TurmaDao().excluir(turma);
+		FacesContext context = FacesContext.getCurrentInstance();
+        context.addMessage(null, new FacesMessage("ExcluÃ­da", "ExcluÃ­da com sucesso!") );
 		turmas = new TurmaDao().listar();
 		turma = new Turma();
 	}

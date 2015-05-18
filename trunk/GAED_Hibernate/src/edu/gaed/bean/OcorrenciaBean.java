@@ -5,8 +5,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 
 import edu.gaed.vo.Ocorrencia;
@@ -46,13 +48,15 @@ public class OcorrenciaBean implements Serializable{
        
     }
 	public String getOcorrenciaEscolhida(){
-        return ocorrencia!=null && ocorrencia.getId()!=null ? ocorrencia.toString():"Classe não escolhida";
+        return ocorrencia!=null && ocorrencia.getId()!=null ? ocorrencia.toString():"Classe nÃ£o escolhida";
     }
  
-	//Métodos dos botões 
+	//Mï¿½todos dos botï¿½es 
 	@SuppressWarnings("unchecked")
 	public void cadastrar(ActionEvent actionEvent){
 		new OcorrenciaDao().inserir(ocorrencia);
+		FacesContext context = FacesContext.getCurrentInstance();
+        context.addMessage(null, new FacesMessage("Cadastrado",  "OcorrÃªncia  cadastrada com sucesso") );
 		ocorrencias = new OcorrenciaDao().listar();
 		ocorrencia = new Ocorrencia();
 	}
@@ -60,12 +64,16 @@ public class OcorrenciaBean implements Serializable{
 	@SuppressWarnings("unchecked")
 	public void alterar(){
 		new OcorrenciaDao().alterar(ocorrencia);
+		FacesContext context = FacesContext.getCurrentInstance();
+        context.addMessage(null, new FacesMessage("Alterado", "OcorrÃªncia alterada com sucesso") );
 		ocorrencias = new OcorrenciaDao().listar();
 		ocorrencia = new Ocorrencia();
 	}
 	@SuppressWarnings("unchecked")
 	public void excluir(Ocorrencia ocorrencia){
 		new OcorrenciaDao().excluir(ocorrencia);
+		FacesContext context = FacesContext.getCurrentInstance();
+        context.addMessage(null, new FacesMessage("Excluido",  "OcorrÃªncia excluida com sucesso") );
 		ocorrencias = new OcorrenciaDao().listar();
 		ocorrencia = new Ocorrencia();
 	}
