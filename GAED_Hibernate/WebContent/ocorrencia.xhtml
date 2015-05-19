@@ -79,10 +79,11 @@
 						
 						<p:panelGrid id="panelBusca" columns="4">
 							<p:outputLabel for="turma" value="Turma: " />
-				            <p:selectOneMenu id="turma" value="#{TurmaBean.turma}" required="true">  
+				            <p:selectOneMenu id="turma" value="#{OcorrenciaBean.turmas}" required="true">  
 				                <f:selectItem itemLabel="Selecione a turma" itemValue="" />  
-				                <f:selectItems value="#{OcorrenciaBean.turmas}" />  
-				                <p:ajax update="alunos" listener="#{OcorrenciaBean.handleTurmaChange()}" />  
+				                <f:selectItems value="#{TurmaBean.turmas}" var="turma"	itemValue="#{turma}" itemLabel="#{turma.nome}" />  
+				                <p:ajax update="alunos" listener="#{OcorrenciaBean.handleTurmaChange()}" />
+				                <f:converter converterId="turmaConverter" />  
 				            </p:selectOneMenu>  
 				  
 				  			<p:outputLabel for="alunos" value="Aluno: " />
