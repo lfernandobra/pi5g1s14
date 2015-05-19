@@ -1,10 +1,7 @@
 package edu.gaed.test;
 
-import static org.junit.Assert.*;
-
-import java.text.DateFormat;
 import java.text.ParseException;
-import java.util.Date;
+import java.text.SimpleDateFormat;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -34,11 +31,11 @@ public class ProfessorDaoTeste {
 			professor.setEmail("professor@professor.com");
 			professor.setCPF("12345609876");
 			professor.setComplemento("casa");
-			professor.setAnoConclusao(DateFormat.getInstance().parse("20/12/2008"));
-			professor.setDataIngresso(DateFormat.getInstance().parse("20/12/2008"));
-			professor.setDatanasc(DateFormat.getInstance().parse("30/09/1988"));
-			professor.setDataSaida(DateFormat.getInstance().parse("30/09/2009"));
-			professor.setDisciplinas(disciplinas);
+			professor.setAnoConclusao(new SimpleDateFormat("dd/MM/yyyy").parse("20/12/2008"));
+			professor.setDataIngresso(new SimpleDateFormat("dd/MM/yyyy").parse("20/12/2008"));
+			professor.setDatanasc(new SimpleDateFormat("dd/MM/yyyy").parse("20/12/2008"));
+			professor.setDataSaida(new SimpleDateFormat("dd/MM/yyyy").parse("20/12/2008"));
+			//professor.setDisciplinas("matemática","português");
 			professor.setFoto(null);
 			professor.setLogin("professor0101");
 			professor.setSenha("professor1234134");
