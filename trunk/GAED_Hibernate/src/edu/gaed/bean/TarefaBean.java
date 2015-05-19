@@ -60,19 +60,11 @@ public class TarefaBean {
 	public void excluir(Tarefa tarefaex){
 		new TarefaDao().excluir(tarefaex);
 		FacesContext context = FacesContext.getCurrentInstance();
-        context.addMessage(null, new FacesMessage("Excluido",  "Tarefa ID: " + tarefa.getId() + " excluida com sucesso") );
+        context.addMessage(null, new FacesMessage("Excluido",  "Tarefa ID: " + tarefaex.getId() + " excluida com sucesso") );
 		tarefas = new TarefaDao().listar();
 		tarefa = new Tarefa();
 	}
 	
-	// Upload anexo
-
-	public void uploadAction(FileUploadEvent event) throws IOException {
-		this.anexoBean.fileUpload(event);
-		System.out.println(this.anexoBean.getAnexo().getNome());
-		tarefa.setAnexo(anexoBean.anexo);
-	}
-
 	public Tarefa getTarefa() {
 		return tarefa;
 	}
@@ -97,12 +89,12 @@ public class TarefaBean {
 		this.anexoBean = anexoBean;
 	}
 	
-	//getters and setters
-	
+	// Upload anexo
 
-	
- 
-	// métodos reset
-	
+	public void uploadAction(FileUploadEvent event) throws IOException {
+		this.anexoBean.fileUpload(event);
+		System.out.println(this.anexoBean.getAnexo().getNome());
+		tarefa.setAnexo(anexoBean.anexo);
+	}
 	
 }
