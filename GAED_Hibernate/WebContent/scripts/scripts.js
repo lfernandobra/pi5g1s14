@@ -15,3 +15,11 @@ function handleDrop(event, ui) {
 
     droppedCar.fadeOut('fast');
 }
+
+function start() {
+    PF('statusDialog').show();
+}
+ 
+function stop() {
+    PF('statusDialog').hide();
+}
