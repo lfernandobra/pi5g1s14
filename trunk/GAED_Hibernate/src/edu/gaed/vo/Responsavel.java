@@ -1,11 +1,11 @@
 package edu.gaed.vo;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
@@ -23,8 +23,8 @@ public class Responsavel extends Usuario{
 	@Column(name="adimplente", columnDefinition = "BIT", length = 1)
 	private boolean adimplente;
 	
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "responsavel")
-	private Set<Aluno> alunos = new HashSet<Aluno>(0);
+	@OneToMany(cascade=CascadeType.ALL, mappedBy = "responsavel")
+	private List<Aluno> alunos = new ArrayList<Aluno>();
 	
 	public Responsavel() {
 		super();
@@ -74,13 +74,15 @@ public class Responsavel extends Usuario{
 				+ "]";
 	}
 
-	public Set<Aluno> getAlunos() {
+	public List<Aluno> getAlunos() {
 		return alunos;
 	}
 
-	public void setAlunos(Set<Aluno> alunos) {
+	public void setAlunos(List<Aluno> alunos) {
 		this.alunos = alunos;
 	}
+
+	
 
 	
 	

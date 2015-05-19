@@ -2,6 +2,7 @@ package edu.gaed.vo;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -36,7 +37,7 @@ public class Aluno extends Usuario{
 	@JoinColumn(name = "id_turma")
 	private Turma turma;
 	
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.LAZY,cascade=CascadeType.ALL)
 	@JoinColumn(name = "id_responsavel")
 	private Responsavel responsavel;
 		
