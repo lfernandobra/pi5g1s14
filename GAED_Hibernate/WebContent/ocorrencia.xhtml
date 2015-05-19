@@ -77,7 +77,22 @@
 							<h3>Dados da ocorrência</h3>
 							<p:separator/>
 						
-						<p:panelGrid id="panelCadastrar" columns="2">
+						<p:panelGrid id="panelBusca" columns="4">
+							<p:outputLabel for="turma" value="Turma: " />
+				            <p:selectOneMenu id="turma" value="#{TurmaBean.turma}" required="true">  
+				                <f:selectItem itemLabel="Selecione a turma" itemValue="" />  
+				                <f:selectItems value="#{OcorrenciaBean.turmas}" />  
+				                <p:ajax update="alunos" listener="#{OcorrenciaBean.handleTurmaChange()}" />  
+				            </p:selectOneMenu>  
+				  
+				  			<p:outputLabel for="alunos" value="Aluno: " />
+				            <p:selectOneMenu id="alunos" value="#{OcorrenciaBean.aluno}" required="true">  
+				                <f:selectItem itemLabel="Selecione o aluno " itemValue="" />  
+				                <f:selectItems value="#{OcorrenciaBean.aluno}" />  
+				            </p:selectOneMenu> 
+						</p:panelGrid>				
+						
+						<p:panelGrid id="panelCadastrar" columns="1">
 							<p:outputLabel for="assunto" value="Assunto:" />
 							<p:inputText value="#{OcorrenciaBean.ocorrencia.assunto}" size="80" required="true" id="assunto" requiredMessage="Assunto não deve estar vazio!" />
 							
@@ -88,10 +103,8 @@
 								<f:convertDateTime pattern="dd/MM/yyyy" timeZone="GMT-3" />
 							</p:inputMask>
 							
-							
 							<p:outputLabel for="descricao" value="Descrição:" />
-								<p:editor  widgetVar="editorWidget" value="#{OcorrenciaBean.ocorrencia.descricao}" width="700"  id="descricao" />
-							
+							<p:editor  widgetVar="editorWidget" value="#{OcorrenciaBean.ocorrencia.descricao}" width="700"  id="descricao" />
 						</p:panelGrid>
 						
 						<div id="botoes">
@@ -100,7 +113,7 @@
 								onsuccess="PF('dialogCadastrar').hide();" />
 								
 							<p:commandButton value="Limpar" update="@form" process="@this">
-								<p:resetInput target="panelCadastrar" />
+								<p:resetInput target="panelCadastrar panelBusca" />
 							</p:commandButton>
 						</div>
 						
