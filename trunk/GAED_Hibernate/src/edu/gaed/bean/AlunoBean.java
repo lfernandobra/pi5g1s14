@@ -2,9 +2,9 @@ package edu.gaed.bean;
 
 import java.io.IOException;
 import java.io.Serializable;
-import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
-
+import java.util.Set;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -27,13 +27,13 @@ public class AlunoBean extends UsuarioBean implements Serializable{
 	private static final long serialVersionUID = 1L;
 
 	Aluno aluno = new Aluno();
-	List<Aluno> alunos = new ArrayList<Aluno>();
+	Set<Aluno> alunos = new HashSet<Aluno>();
 	FotoBean fotoBean = new FotoBean();
 	
 	public AlunoBean(Aluno aluno, List<Aluno> alunos) {
 		super();
 		this.aluno = new Aluno();
-		this.alunos = new ArrayList<Aluno>();
+		this.alunos = new HashSet<Aluno>();
 	}
  
 	//construtor
@@ -97,11 +97,13 @@ public class AlunoBean extends UsuarioBean implements Serializable{
 		this.aluno.setFoto(this.fotoBean.getFoto());
 	}
 
-	public List<Aluno> getAlunos() {
+	
+
+	public Set<Aluno> getAlunos() {
 		return alunos;
 	}
 
-	public void setAlunos(List<Aluno> alunos) {
+	public void setAlunos(Set<Aluno> alunos) {
 		this.alunos = alunos;
 	}
 

@@ -2,9 +2,8 @@ package edu.gaed.bean;
 
 import java.io.IOException;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
-
+import java.util.HashSet;
+import java.util.Set;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -27,13 +26,13 @@ public class GestorBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	Gestor gestor = new Gestor();
-	List<Gestor> gestors = new ArrayList<Gestor>();
+	Set<Gestor> gestors = new HashSet<Gestor>();
 	FotoBean fotoBean = new FotoBean();
 	
-	public GestorBean(Gestor gestor, List<Gestor> gestors) {
+	public GestorBean(Gestor gestor, Set<Gestor> gestors) {
 		super();
 		this.gestor = new Gestor();
-		this.gestors = new ArrayList<Gestor>();
+		this.gestors = new HashSet<Gestor>();
 	}
 
 	// construtor
@@ -92,17 +91,25 @@ public class GestorBean implements Serializable {
 		this.gestor = gestor;
 	}
 
-	public List<Gestor> getGestors() {
-		return gestors;
-	}
-
-	public void setGestors(List<Gestor> gestors) {
-		this.gestors = gestors;
-	}
-
 	// getters and setters
 
 	// Upload foto
+
+	public Set<Gestor> getGestors() {
+		return gestors;
+	}
+
+	public FotoBean getFotoBean() {
+		return fotoBean;
+	}
+
+	public void setGestors(Set<Gestor> gestors) {
+		this.gestors = gestors;
+	}
+
+	public void setFotoBean(FotoBean fotoBean) {
+		this.fotoBean = fotoBean;
+	}
 
 	public void uploadAction(FileUploadEvent event) throws IOException {
 		this.fotoBean.fileUpload(event);

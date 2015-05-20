@@ -1,14 +1,15 @@
 package edu.gaed.bean;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import java.util.HashSet;
+import java.util.Set;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
  
+
+
 
 
 
@@ -25,12 +26,12 @@ public class UFBean {
  
 	UF uf = new UF();
 	 
-	List<UF> ufs = new ArrayList<UF>(); 
+	Set<UF> ufs = new HashSet<UF>(); 
 	
-	public UFBean(UF uf, List<UF> ufs) {
+	public UFBean(UF uf, Set<UF> ufs) {
 		super();
 		this.uf = new UF();
-		this.ufs = new ArrayList<UF>();
+		this.ufs = new HashSet<UF>();
 	}
  
 	//construtor
@@ -72,11 +73,11 @@ public class UFBean {
 	//getters and setters
 	
 
-	public List<UF> getUfs() {
+	public Set<UF> getUfs() {
 		return ufs;
 	}
 
-	public void setUfs(List<UF> ufs) {
+	public void setUfs(Set<UF> ufs) {
 		this.ufs = ufs;
 	}
 

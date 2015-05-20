@@ -1,8 +1,8 @@
 package edu.gaed.bean;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
@@ -22,12 +22,12 @@ public class DisciplinaBean implements Serializable{
 
 	Disciplina disciplina = new Disciplina();
 	 
-	List<Disciplina> disciplinas = new ArrayList<Disciplina>(); 
+	Set<Disciplina> disciplinas = new HashSet<Disciplina>(); 
 	
-	public DisciplinaBean(Disciplina disciplina, List<Disciplina> disciplinas) {
+	public DisciplinaBean(Disciplina disciplina, Set<Disciplina> disciplinas) {
 		super();
 		this.disciplina = new Disciplina();
-		this.disciplinas = new ArrayList<Disciplina>();
+		this.disciplinas = new HashSet<Disciplina>();
 	}
  
 	//construtor
@@ -77,11 +77,11 @@ public class DisciplinaBean implements Serializable{
 		this.disciplina = disciplina;
 	}
 
-	public List<Disciplina> getDisciplinas() {
+	public Set<Disciplina> getDisciplinas() {
 		return disciplinas;
 	}
 
-	public void setDisciplinas(List<Disciplina> disciplinas) {
+	public void setDisciplinas(Set<Disciplina> disciplinas) {
 		this.disciplinas = disciplinas;
 	}
 

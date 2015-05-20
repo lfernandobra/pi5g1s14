@@ -1,16 +1,13 @@
 package edu.gaed.bean;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
-
+import java.util.HashSet;
+import java.util.Set;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.event.ActionEvent;
-
 import org.primefaces.event.FileUploadEvent;
-
 import edu.gaed.vo.Usuario;
 import edu.gaed.dao.UsuarioDao;
 
@@ -24,13 +21,13 @@ public class UsuarioBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	Usuario usuario = new Usuario();
-	List<Usuario> usuarios = new ArrayList<Usuario>();
+	Set<Usuario> usuarios = new HashSet<Usuario>();
 	FotoBean fotoBean = new FotoBean();
 	
-	public UsuarioBean(Usuario usuario, List<Usuario> usuarios) {
+	public UsuarioBean(Usuario usuario, Set<Usuario> usuarios) {
 		super();
 		this.usuario = new Usuario();
-		this.usuarios = new ArrayList<Usuario>();
+		this.usuarios = new HashSet<Usuario>();
 	}
 
 	// construtor
@@ -82,15 +79,15 @@ public class UsuarioBean implements Serializable {
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
 	}
-
-	public List<Usuario> getUsuarios() {
+	
+	public Set<Usuario> getUsuarios() {
 		return usuarios;
 	}
 
-	public void setUsuarios(List<Usuario> usuarios) {
+	public void setUsuarios(Set<Usuario> usuarios) {
 		this.usuarios = usuarios;
 	}
-	
+
 	public FotoBean getFotoBean() {
 		return fotoBean;
 	}

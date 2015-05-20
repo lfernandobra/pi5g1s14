@@ -1,10 +1,9 @@
 package edu.gaed.vo;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
-
+import java.util.HashSet;
+import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -55,7 +54,7 @@ public class Tarefa implements Serializable {
 	joinColumns = { @JoinColumn(name = "idturma", nullable = false,
 	updatable =  false) }, inverseJoinColumns = {
 	@JoinColumn(name = "idtarefa", nullable = false, updatable = false) })
-    private List<Turma> turmas = new ArrayList<Turma>();
+    private Set<Turma> turmas = new HashSet<Turma>(0);
 
 	@ManyToOne
 	@JoinColumn(name = "id_disciplina")
@@ -121,6 +120,14 @@ public class Tarefa implements Serializable {
 		this.anexo = anexo;
 	}
 
+	public Set<Turma> getTurmas() {
+		return turmas;
+	}
+
+	public void setTurmas(Set<Turma> turmas) {
+		this.turmas = turmas;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -184,13 +191,7 @@ public class Tarefa implements Serializable {
 		return true;
 	}
 
-	public List<Turma> getTurmas() {
-		return turmas;
-	}
-
-	public void setTurmas(List<Turma> turmas) {
-		this.turmas = turmas;
-	}
+	
 
 	
 
