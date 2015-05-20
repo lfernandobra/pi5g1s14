@@ -2,7 +2,9 @@ package edu.gaed.test;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import org.junit.Test;
@@ -15,7 +17,7 @@ public class ProfessorDaoTeste {
 	@Test
 		public void testSalvar() throws ParseException {
 			Professor professor = new Professor();
-			Set<Disciplina> disciplinas = new HashSet<Disciplina>();
+			List<Disciplina> disciplinas = new ArrayList<Disciplina>();
 			Disciplina disciplina01 = new Disciplina();
 			disciplina01.setNome("matematica");
 			disciplinas.add(disciplina01);
@@ -31,11 +33,12 @@ public class ProfessorDaoTeste {
 			professor.setEmail("professor@professor.com");
 			professor.setCPF("12345609876");
 			professor.setComplemento("casa");
+			professor.setFormacaoAcad("Bacheralado");
 			professor.setAnoConclusao(new SimpleDateFormat("dd/MM/yyyy").parse("20/12/2008"));
 			professor.setDataIngresso(new SimpleDateFormat("dd/MM/yyyy").parse("20/12/2008"));
 			professor.setDatanasc(new SimpleDateFormat("dd/MM/yyyy").parse("20/12/2008"));
 			professor.setDataSaida(new SimpleDateFormat("dd/MM/yyyy").parse("20/12/2008"));
-			//professor.setDisciplinas("matemática","português");
+			professor.setDisciplinas(disciplinas);
 			professor.setFoto(null);
 			professor.setLogin("professor0101");
 			professor.setSenha("professor1234134");

@@ -34,13 +34,17 @@
 						<p:column style="width:16px">
 							<p:rowToggler />
 						</p:column>
-						<p:column headerText="ID" sortBy="#{lista.id}"
-							filterBy="#{lista.id}">
+						<p:column headerText="ID" sortBy="#{lista.id}" filterBy="#{lista.id}">
 							<h:outputText value="#{lista.id}" />
 						</p:column>
-						<p:column headerText="Assunto" sortBy="#{lista.assunto}"
-							filterBy="#{lista.assunto}">
+						<p:column headerText="Assunto" sortBy="#{lista.assunto}" filterBy="#{lista.assunto}">
 							<h:outputText value="#{lista.assunto}" />
+						</p:column>
+						<p:column headerText="Aluno" sortBy="#{lista.aluno.nome}" filterBy="#{lista.aluno}">
+							<h:outputText value="#{lista.aluno.nome}" />
+						</p:column>
+						<p:column headerText="Turma" sortBy="#{lista.aluno.turma.nome}" filterBy="#{lista.assunto}">
+							<h:outputText value="#{lista.aluno.turma.nome}" />
 						</p:column>
 						<p:rowExpansion>
 							<p:panelGrid columns="2" columnClasses="label,value">

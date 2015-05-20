@@ -7,7 +7,7 @@ import javax.faces.convert.FacesConverter;
 
 import edu.gaed.vo.Responsavel;
 
-@FacesConverter(forClass = Responsavel.class)
+@FacesConverter(value = "responsavelConverter")
 public class ResponsavelConverter implements Converter{
 	@Override
 	public Object getAsObject(FacesContext facesContext, UIComponent uiComponent, String value) {
