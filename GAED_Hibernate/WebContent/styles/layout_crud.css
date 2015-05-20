@@ -52,6 +52,9 @@ body{
   	position: fixed;
 	
 }
+#formPrincipal .ui-button-text{
+	font-size: 10px !important;
+}
 
 
 #formCadFoto{
@@ -109,6 +112,7 @@ body{
 	padding-top: 80px !important;
 	margin-left: 80px;
 }
+
 
 
 
