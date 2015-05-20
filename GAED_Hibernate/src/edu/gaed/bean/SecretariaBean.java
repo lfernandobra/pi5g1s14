@@ -2,8 +2,9 @@ package edu.gaed.bean;
 
 import java.io.IOException;
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
@@ -24,13 +25,13 @@ public class SecretariaBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	Secretaria secretaria = new Secretaria();
-	Set<Secretaria> secretarias = new HashSet<Secretaria>();
+	List<Secretaria> secretarias = new ArrayList<Secretaria>();
 	FotoBean fotoBean = new FotoBean();
 
-	public SecretariaBean(Secretaria secretaria, Set<Secretaria> secretarias) {
+	public SecretariaBean(Secretaria secretaria, List<Secretaria> secretarias) {
 		super();
 		this.secretaria = new Secretaria();
-		this.secretarias = new HashSet<Secretaria>();
+		this.secretarias = new ArrayList<Secretaria>();
 	}
 
 	// construtor
@@ -63,21 +64,12 @@ public class SecretariaBean implements Serializable {
 		this.secretaria = secretaria;
 	}
 
-
-	public Set<Secretaria> getSecretarias() {
+	public List<Secretaria> getSecretarias() {
 		return secretarias;
 	}
 
-	public FotoBean getFotoBean() {
-		return fotoBean;
-	}
-
-	public void setSecretarias(Set<Secretaria> secretarias) {
+	public void setSecretarias(List<Secretaria> secretarias) {
 		this.secretarias = secretarias;
-	}
-
-	public void setFotoBean(FotoBean fotoBean) {
-		this.fotoBean = fotoBean;
 	}
 
 	// Métodos dos botões

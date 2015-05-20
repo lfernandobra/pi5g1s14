@@ -1,8 +1,9 @@
 package edu.gaed.bean;
 
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
@@ -22,12 +23,12 @@ public class LogradouroBean implements Serializable{
 
 	Logradouro logradouro = new Logradouro();
 	 
-	Set<Logradouro> logradouros = new HashSet<Logradouro>(); 
+	List<Logradouro> logradouros = new ArrayList<Logradouro>(); 
 	
-	public LogradouroBean(Logradouro logradouro, Set<Logradouro> logradouros) {
+	public LogradouroBean(Logradouro logradouro, List<Logradouro> logradouros) {
 		super();
 		this.logradouro = new Logradouro();
-		this.logradouros = new HashSet<Logradouro>();
+		this.logradouros = new ArrayList<Logradouro>();
 	}
  
 	//construtor
@@ -77,20 +78,18 @@ public class LogradouroBean implements Serializable{
 		this.logradouro = logradouro;
 	}
 
-	
- 
-	//getters and setters
-	
-	public Set<Logradouro> getLogradouros() {
+	public List<Logradouro> getLogradouros() {
 		return logradouros;
 	}
 
-	public void setLogradouros(Set<Logradouro> logradouros) {
+	public void setLogradouros(List<Logradouro> logradouros) {
 		this.logradouros = logradouros;
 	}
-
+ 
+	//getters and setters
+	
 	@SuppressWarnings("unchecked")
-	public Set<Logradouro> completeLogradouro(){
+	public List<Logradouro> completeLogradouro(){
         logradouros = new LogradouroDao().listar();
         return logradouros;
     }

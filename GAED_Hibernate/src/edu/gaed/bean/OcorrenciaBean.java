@@ -1,10 +1,10 @@
 package edu.gaed.bean;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
@@ -36,12 +36,12 @@ public class OcorrenciaBean implements Serializable{
       
 	Ocorrencia ocorrencia = new Ocorrencia();
 	 
-	Set<Ocorrencia> ocorrencias = new HashSet<Ocorrencia>(); 
+	List<Ocorrencia> ocorrencias = new ArrayList<Ocorrencia>(); 
 	
-	public OcorrenciaBean(Ocorrencia ocorrencia, Set<Ocorrencia> ocorrencias) {
+	public OcorrenciaBean(Ocorrencia ocorrencia, List<Ocorrencia> ocorrencias) {
 		super();
 		this.ocorrencia = new Ocorrencia();
-		this.ocorrencias = new HashSet<Ocorrencia>();
+		this.ocorrencias = new ArrayList<Ocorrencia>();
 	}
  
 	//construtor
@@ -104,17 +104,15 @@ public class OcorrenciaBean implements Serializable{
 		this.ocorrencia = ocorrencia;
 	}
 
-	
- 
-	 public Set<Ocorrencia> getOcorrencias() {
+	public List<Ocorrencia> getOcorrencias() {
 		return ocorrencias;
 	}
 
-	public void setOcorrencias(Set<Ocorrencia> ocorrencias) {
+	public void setOcorrencias(List<Ocorrencia> ocorrencias) {
 		this.ocorrencias = ocorrencias;
 	}
-
-	public Turma getTurma() {
+ 
+	 public Turma getTurma() {
 			return turma;
 		}
 

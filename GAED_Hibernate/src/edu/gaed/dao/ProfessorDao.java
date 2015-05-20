@@ -1,10 +1,7 @@
 package edu.gaed.dao;
 
-import java.util.HashSet;
-import java.util.Set;
-
+import java.util.List;
 import edu.gaed.vo.Professor;
-
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 
@@ -58,13 +55,13 @@ public class ProfessorDao {
 		}
  
 		
-		@SuppressWarnings({ "rawtypes", "unchecked" })
-		public Set listar(){
+		@SuppressWarnings("rawtypes")
+		public List listar(){
 			session = HibernateUtil.getSessionFactory().openSession();
  
 			try{
 				Criteria cri = session.createCriteria(Professor.class);
-				return new HashSet(cri.list());
+				return cri.list();
 			}finally{
 				session.close();
  

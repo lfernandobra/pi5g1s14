@@ -1,8 +1,9 @@
 package edu.gaed.bean;
 
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -23,12 +24,12 @@ public class TurmaBean implements Serializable{
 	private static final long serialVersionUID = 1L;
 
 	Turma turma = new Turma();	 
-	Set<Turma> turmas = new HashSet<Turma>(); 
+	List<Turma> turmas = new ArrayList<Turma>(); 
 	
-	public TurmaBean(Turma turma, Set<Turma> turmas) {
+	public TurmaBean(Turma turma, List<Turma> turmas) {
 		super();
 		this.turma = new Turma();
-		this.turmas = new HashSet<Turma>();
+		this.turmas = new ArrayList<Turma>();
 	}
  
 	//construtor
@@ -81,11 +82,11 @@ public class TurmaBean implements Serializable{
 		this.turma = turma;
 	}
 
-	public Set<Turma> getTurmas() {
+	public List<Turma> getTurmas() {
 		return turmas;
 	}
 
-	public void setTurmas(Set<Turma> turmas) {
+	public void setTurmas(List<Turma> turmas) {
 		this.turmas = turmas;
 	} 
 	

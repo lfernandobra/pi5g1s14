@@ -2,8 +2,8 @@ package edu.gaed.bean;
 
 import java.io.IOException;
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
@@ -27,13 +27,13 @@ public class ProfessorBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	Professor professor = new Professor();
-	Set<Professor> professors = new HashSet<Professor>();
+	List<Professor> professors = new ArrayList<Professor>();
 	FotoBean fotoBean = new FotoBean();
 
-	public ProfessorBean(Professor professor, Set<Professor> professors) {
+	public ProfessorBean(Professor professor, List<Professor> professors) {
 		super();
 		this.professor = new Professor();
-		this.professors = new HashSet<Professor>();
+		this.professors = new ArrayList<Professor>();
 	}
 
 	// construtor
@@ -96,12 +96,11 @@ public class ProfessorBean implements Serializable {
 		professor = new Professor();
 	}
 
-	
-	public Set<Professor> getProfessors() {
+	public List<Professor> getProfessors() {
 		return professors;
 	}
 
-	public void setProfessors(Set<Professor> professors) {
+	public void setProfessors(List<Professor> professors) {
 		this.professors = professors;
 	}
 

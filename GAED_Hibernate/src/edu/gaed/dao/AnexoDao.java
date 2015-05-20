@@ -1,9 +1,11 @@
 package edu.gaed.dao;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
+
 import edu.gaed.vo.Anexo;
+
 import org.hibernate.Criteria;
+
 import org.hibernate.Session;
 
 import edu.gaed.util.HibernateUtil;
@@ -56,13 +58,13 @@ public class AnexoDao {
 		}
  
 		
-		@SuppressWarnings({ "rawtypes", "unchecked" })
-		public Set listar(){
+		@SuppressWarnings("rawtypes")
+		public List listar(){
 			session = HibernateUtil.getSessionFactory().openSession();
  
 			try{
 				Criteria cri = session.createCriteria(Anexo.class);
-				return new HashSet(cri.list());
+				return cri.list();
 			}finally{
 				session.close();
  

@@ -2,8 +2,8 @@ package edu.gaed.bean;
 
 import java.io.IOException;
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
@@ -28,14 +28,14 @@ public class ResponsavelBean extends UsuarioBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	Responsavel responsavel = new Responsavel();
-	Set<Responsavel> responsavels = new HashSet<Responsavel>();
+	List<Responsavel> responsavels = new ArrayList<Responsavel>();
 	FotoBean fotoBean = new FotoBean();
 	
 	
-	public ResponsavelBean(Responsavel responsavel, Set<Responsavel> responsavels) {
+	public ResponsavelBean(Responsavel responsavel, List<Responsavel> responsavels) {
 		super();
 		this.responsavel = new Responsavel();
-		this.responsavels = new HashSet<Responsavel>();
+		this.responsavels = new ArrayList<Responsavel>();
 	}
  
 	//construtor
@@ -93,13 +93,11 @@ public class ResponsavelBean extends UsuarioBean implements Serializable {
 		this.responsavel = responsavel;
 	}
 
-	
-
-	public Set<Responsavel> getResponsavels() {
+	public List<Responsavel> getResponsavels() {
 		return responsavels;
 	}
 
-	public void setResponsavels(Set<Responsavel> responsavels) {
+	public void setResponsavels(List<Responsavel> responsavels) {
 		this.responsavels = responsavels;
 	}
 

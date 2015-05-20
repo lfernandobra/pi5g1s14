@@ -1,9 +1,11 @@
 package edu.gaed.dao;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
+
 import edu.gaed.vo.Tarefa;
+
 import org.hibernate.Criteria;
+
 import org.hibernate.Session;
 
 import edu.gaed.util.HibernateUtil;
@@ -51,14 +53,14 @@ public class TarefaDao {
 		}
 	}
 
-	@SuppressWarnings({ "rawtypes", "unchecked" })
-	public Set listar(){
-		session = HibernateUtil.getSessionFactory().openSession();
+	@SuppressWarnings("rawtypes")
+	public List listar() {
 
-		try{
+		try {
+			session = HibernateUtil.getSessionFactory().openSession();
 			Criteria cri = session.createCriteria(Tarefa.class);
-			return new HashSet(cri.list());
-		}finally{
+			return cri.list();
+		} finally {
 			session.close();
 
 		}

@@ -1,8 +1,8 @@
 package edu.gaed.bean;
 
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
@@ -23,12 +23,12 @@ public class BoletimBean implements Serializable{
 
 	Boletim boletim = new Boletim();
 	 
-	Set<Boletim> boletims = new HashSet<Boletim>(); 
+	List<Boletim> boletims = new ArrayList<Boletim>(); 
 	
-	public BoletimBean(Boletim boletim, Set<Boletim> boletims) {
+	public BoletimBean(Boletim boletim, List<Boletim> boletims) {
 		super();
 		this.boletim = new Boletim();
-		this.boletims = new HashSet<Boletim>();
+		this.boletims = new ArrayList<Boletim>();
 	}
  
 	//construtor
@@ -78,15 +78,13 @@ public class BoletimBean implements Serializable{
 		this.boletim = boletim;
 	}
 
-	public Set<Boletim> getBoletims() {
+	public List<Boletim> getBoletims() {
 		return boletims;
 	}
 
-	public void setBoletims(Set<Boletim> boletims) {
+	public void setBoletims(List<Boletim> boletims) {
 		this.boletims = boletims;
 	}
-
-	
  
 	//getters and setters
 	

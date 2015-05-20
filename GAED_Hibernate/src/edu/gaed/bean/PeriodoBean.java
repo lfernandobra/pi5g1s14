@@ -1,8 +1,8 @@
 package edu.gaed.bean;
 
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
@@ -23,12 +23,12 @@ public class PeriodoBean implements Serializable{
 
 	Periodo periodo = new Periodo();
 	 
-	Set<Periodo> periodos = new HashSet<Periodo>(); 
+	List<Periodo> periodos = new ArrayList<Periodo>(); 
 	
-	public PeriodoBean(Periodo periodo, Set<Periodo> periodos) {
+	public PeriodoBean(Periodo periodo, List<Periodo> periodos) {
 		super();
 		this.periodo = new Periodo();
-		this.periodos = new HashSet<Periodo>();
+		this.periodos = new ArrayList<Periodo>();
 	}
  
 	//construtor
@@ -78,15 +78,13 @@ public class PeriodoBean implements Serializable{
 		this.periodo = periodo;
 	}
 
-	public Set<Periodo> getPeriodos() {
+	public List<Periodo> getPeriodos() {
 		return periodos;
 	}
 
-	public void setPeriodos(Set<Periodo> periodos) {
+	public void setPeriodos(List<Periodo> periodos) {
 		this.periodos = periodos;
 	}
-
-	
  
 	//getters and setters
 	
