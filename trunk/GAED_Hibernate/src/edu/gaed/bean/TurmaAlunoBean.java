@@ -6,10 +6,14 @@ import java.util.List;
 
 import edu.gaed.vo.*;
 
+import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
+import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
+import javax.inject.Inject;
 
 import org.primefaces.event.SelectEvent;
 import org.primefaces.event.TransferEvent;
@@ -19,6 +23,10 @@ import org.primefaces.model.DualListModel;
 @ManagedBean(name="TurmaAlunoBean")
 @ViewScoped
 public class TurmaAlunoBean implements Serializable{
+	
+	public TurmaAlunoBean(){
+		//init();
+	}
 
 	/**
 	 * 
@@ -27,9 +35,13 @@ public class TurmaAlunoBean implements Serializable{
 	
 	private Turma turma;
 	private DualListModel<Aluno> alunosDualList;
+	
+	@ManagedProperty(value="#{AlunoBean}")
 	private AlunoBean alunoBean;
+	
+	@SuppressWarnings("unchecked")
+	@PostConstruct
 	public void init() {
-        //Alunos
         List<Aluno> alunosSource = alunoBean.alunos;
         List<Aluno> alunosTarget = new ArrayList<Aluno>();
         
@@ -61,7 +73,7 @@ public class TurmaAlunoBean implements Serializable{
 		this.alunoBean = alunoBean;
 	}
 
-	//métodos
+	//mï¿½todos
 	public void onTransfer(TransferEvent event) {
         StringBuilder builder = new StringBuilder();
         for(Object item : event.getItems()) {
