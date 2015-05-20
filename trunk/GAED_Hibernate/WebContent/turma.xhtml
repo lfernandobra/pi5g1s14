@@ -47,7 +47,7 @@
 					</p:panelGrid>
 				</p:rowExpansion>
 				<p:column headerText="Adicionar">
-					<p:commandButton value="Alunos" update=":formAdicAluno"
+					<p:commandButton value="Alunos" update="formAdicAluno"
 						oncomplete="PF('dialogAdicAluno').show();" icon="ui-icon-pencil">
 						<f:setPropertyActionListener target="#{TurmaAlunoBean.turma}"
 							value="#{lista}" />
@@ -178,11 +178,10 @@
 		</h:form>
 	</p:dialog>
 	<p:dialog header="Adicionar alunos" widgetVar="dialogAdicAluno"
-		modal="true" resizable="true" id="idAdicAlu"
+		modal="true" resizable="true" id="formAltMedio"
 		styleClass="dialogCadastrar">
 		 
 		<h:form id="formAdicAluno">
-			<p:fieldset id="alunosDisponiveisField" legend="Alunos disponiveis">
 				<p:pickList id="PojoPickList"
 					value="#{TurmaAlunoBean.alunosDualList}" var="aluno"
 					effect="bounce" itemValue="#{aluno}" itemLabel="#{aluno}"
@@ -190,17 +189,17 @@
 					showCheckbox="true" showSourceFilter="true" showTargetFilter="true"
 					filterMatchMode="contains">
 					<f:converter converterId="alunoConverter"/>
-					<f:facet name="sourceCaption">Available</f:facet>
-					<f:facet name="targetCaption">Starting</f:facet>
+					<f:facet name="sourceCaption">Alunos</f:facet>
+					<f:facet name="targetCaption">Turma</f:facet>
 
 					<p:ajax event="transfer" listener="#{TurmaAlunoBean.onTransfer}"
-						update="msg" />
+						update="" />
 					<p:ajax event="select" listener="#{TurmaAlunoBean.onSelect}"
-						update="msg" />
+						update="" />
 					<p:ajax event="unselect" listener="#{TurmaAlunoBean.onUnselect}"
-						update="msg" />
+						update="" />
 					<p:ajax event="reorder" listener="#{TurmaAlunoBean.onReorder}"
-						update="msg" />
+						update="" />
 					<p:column style="width:25%">
 						<h:outputText styleClass="ui-theme ui-theme-#{aluno}" />
 					</p:column>
@@ -209,7 +208,6 @@
 						<h:outputText value="#{aluno}" />
 					</p:column>
 				</p:pickList>
-			</p:fieldset>
 			<p:commandButton id="pojoSubmit" 
 							 value="Submit" 
 							 update="displayAlunos" 

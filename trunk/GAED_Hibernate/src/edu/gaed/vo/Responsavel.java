@@ -73,7 +73,7 @@ public class Responsavel extends Usuario{
 
 	@Override
 	public String toString() {
-		return "Responsavel [adimplente=" + adimplente + ", alunos=" + alunos
+		return "Responsavel [adimplente=" + adimplente + ", alunos.size()=" + alunos.size()
 				+ "]";
 	}
 
