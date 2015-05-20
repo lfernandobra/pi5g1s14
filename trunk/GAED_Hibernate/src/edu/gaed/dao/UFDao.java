@@ -1,10 +1,13 @@
 package edu.gaed.dao;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
+
 import edu.gaed.vo.UF;
+
 import org.hibernate.Criteria;
+
 import org.hibernate.Session;
+
 import edu.gaed.util.HibernateUtil;
 
 public class UFDao {
@@ -50,15 +53,14 @@ public class UFDao {
 		}
 	}
 
-	@SuppressWarnings({ "rawtypes", "unchecked" })
-	public Set listar(){
-		session = HibernateUtil.getSessionFactory().openSession();
+	@SuppressWarnings("rawtypes")
+	public List listar() {
 
-		try{
+		try {
+			session = HibernateUtil.getSessionFactory().openSession();
 			Criteria cri = session.createCriteria(UF.class);
-			
-			return new HashSet(cri.list());
-		}finally{
+			return cri.list();
+		} finally {
 			session.close();
 
 		}

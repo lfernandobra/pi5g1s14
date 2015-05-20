@@ -1,8 +1,8 @@
 package edu.gaed.bean;
 
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
@@ -23,12 +23,12 @@ public class MunicipioBean implements Serializable{
 
 	Municipio municipio = new Municipio();
 	 
-	Set<Municipio> municipios = new HashSet<Municipio>(); 
+	List<Municipio> municipios = new ArrayList<Municipio>(); 
 	
-	public MunicipioBean(Municipio municipio, Set<Municipio> municipios) {
+	public MunicipioBean(Municipio municipio, List<Municipio> municipios) {
 		super();
 		this.municipio = new Municipio();
-		this.municipios = new HashSet<Municipio>();
+		this.municipios = new ArrayList<Municipio>();
 	}
  
 	//construtor
@@ -78,15 +78,13 @@ public class MunicipioBean implements Serializable{
 		this.municipio = municipio;
 	}
 
-	public Set<Municipio> getMunicipios() {
+	public List<Municipio> getMunicipios() {
 		return municipios;
 	}
 
-	public void setMunicipios(Set<Municipio> municipios) {
+	public void setMunicipios(List<Municipio> municipios) {
 		this.municipios = municipios;
 	}
-
-	
  
 	//getters and setters
 	

@@ -1,7 +1,10 @@
 package edu.gaed.vo;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -24,7 +27,7 @@ public class Responsavel extends Usuario{
 	private boolean adimplente;
 	
 	@OneToMany(fetch = FetchType.EAGER,cascade=CascadeType.ALL, mappedBy = "responsavel")
-	private Set<Aluno> alunos = new HashSet<Aluno>(0);
+	private Set<Aluno> alunos = new HashSet<Aluno>();
 	
 	public Responsavel() {
 		super();
@@ -38,13 +41,7 @@ public class Responsavel extends Usuario{
 		this.adimplente = adimplente;
 	}
 
-	public Set<Aluno> getAlunos() {
-		return alunos;
-	}
-
-	public void setAlunos(Set<Aluno> alunos) {
-		this.alunos = alunos;
-	}
+	
 
 	@Override
 	public int hashCode() {
@@ -80,7 +77,13 @@ public class Responsavel extends Usuario{
 				+ "]";
 	}
 
-	
+	public Set<Aluno> getAlunos() {
+		return alunos;
+	}
+
+	public void setAlunos(Set<Aluno> alunos) {
+		this.alunos = alunos;
+	}
 
 	
 	

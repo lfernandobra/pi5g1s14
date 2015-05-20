@@ -1,8 +1,8 @@
 package edu.gaed.bean;
 
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
@@ -23,12 +23,12 @@ public class BimestreBean implements Serializable{
 
 	Bimestre bimestre = new Bimestre();
 	 
-	Set<Bimestre> bimestres = new HashSet<Bimestre>(); 
+	List<Bimestre> bimestres = new ArrayList<Bimestre>(); 
 	
-	public BimestreBean(Bimestre bimestre, Set<Bimestre> bimestres) {
+	public BimestreBean(Bimestre bimestre, List<Bimestre> bimestres) {
 		super();
 		this.bimestre = new Bimestre();
-		this.bimestres = new HashSet<Bimestre>();
+		this.bimestres = new ArrayList<Bimestre>();
 	}
  
 	//construtor
@@ -78,15 +78,13 @@ public class BimestreBean implements Serializable{
 		this.bimestre = bimestre;
 	}
 
-	public Set<Bimestre> getBimestres() {
+	public List<Bimestre> getBimestres() {
 		return bimestres;
 	}
 
-	public void setBimestres(Set<Bimestre> bimestres) {
+	public void setBimestres(List<Bimestre> bimestres) {
 		this.bimestres = bimestres;
 	}
-
-	
  
 	//getters and setters
 	

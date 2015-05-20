@@ -1,13 +1,17 @@
 package edu.gaed.bean;
 
 import java.io.IOException;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
+ 
+
+
 import org.primefaces.event.FileUploadEvent;
 
 import edu.gaed.vo.Tarefa;
@@ -18,13 +22,13 @@ import edu.gaed.dao.TarefaDao;
 public class TarefaBean {
  
 	Tarefa tarefa = new Tarefa();
-	Set<Tarefa> tarefas = new HashSet<Tarefa>();
+	List<Tarefa> tarefas = new ArrayList<Tarefa>();
 	AnexoBean anexoBean = new AnexoBean();
 	
-	public TarefaBean(Tarefa tarefa, Set<Tarefa> tarefas) {
+	public TarefaBean(Tarefa tarefa, List<Tarefa> tarefas) {
 		super();
 		this.tarefa = new Tarefa();
-		this.tarefas = new HashSet<Tarefa>();
+		this.tarefas = new ArrayList<Tarefa>();
 	}
  
 	//construtor
@@ -65,7 +69,7 @@ public class TarefaBean {
 		return tarefa;
 	}
 
-	public Set<Tarefa> getTarefas() {
+	public List<Tarefa> getTarefas() {
 		return tarefas;
 	}
 
@@ -73,7 +77,7 @@ public class TarefaBean {
 		this.tarefa = tarefa;
 	}
 
-	public void setTarefas(Set<Tarefa> tarefas) {
+	public void setTarefas(List<Tarefa> tarefas) {
 		this.tarefas = tarefas;
 	}
 

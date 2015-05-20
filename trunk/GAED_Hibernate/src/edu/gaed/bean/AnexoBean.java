@@ -6,8 +6,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
@@ -36,14 +36,14 @@ public class AnexoBean implements Serializable{
 
 	Anexo anexo = new Anexo();
 	 
-	Set<Anexo> anexos = new HashSet<Anexo>();
+	List<Anexo> anexos = new ArrayList<Anexo>();
 	
 	private StreamedContent file;
 		
-	public AnexoBean(Anexo anexo, Set<Anexo> anexos) {
+	public AnexoBean(Anexo anexo, List<Anexo> anexos) {
 		super();
 		this.anexo = new Anexo();
-		this.anexos = new HashSet<Anexo>();
+		this.anexos = new ArrayList<Anexo>();
 	}
  
 	//construtor
@@ -93,16 +93,14 @@ public class AnexoBean implements Serializable{
 		this.anexo = anexo;
 	}
 
-	
- 
-	public Set<Anexo> getAnexos() {
+	public List<Anexo> getAnexos() {
 		return anexos;
 	}
 
-	public void setAnexos(Set<Anexo> anexos) {
+	public void setAnexos(List<Anexo> anexos) {
 		this.anexos = anexos;
 	}
-
+ 
 	public StreamedContent getFile() {
 		return file;
 	}
