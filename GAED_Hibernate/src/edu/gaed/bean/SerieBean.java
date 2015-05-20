@@ -1,9 +1,8 @@
 package edu.gaed.bean;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
-
+import java.util.HashSet;
+import java.util.Set;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
@@ -23,12 +22,12 @@ public class SerieBean implements Serializable{
 
 	Serie serie = new Serie();
 	 
-	List<Serie> series = new ArrayList<Serie>(); 
+	Set<Serie> series = new HashSet<Serie>(); 
 	
-	public SerieBean(Serie serie, List<Serie> series) {
+	public SerieBean(Serie serie, Set<Serie> series) {
 		super();
 		this.serie = new Serie();
-		this.series = new ArrayList<Serie>();
+		this.series = new HashSet<Serie>();
 	}
  
 	//construtor
@@ -78,13 +77,15 @@ public class SerieBean implements Serializable{
 		this.serie = serie;
 	}
 
-	public List<Serie> getSeries() {
+	public Set<Serie> getSeries() {
 		return series;
 	}
 
-	public void setSeries(List<Serie> series) {
+	public void setSeries(Set<Serie> series) {
 		this.series = series;
 	}
+
+	
  
 	//getters and setters
 	

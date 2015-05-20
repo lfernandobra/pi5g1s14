@@ -1,9 +1,8 @@
 package edu.gaed.bean;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
-
+import java.util.HashSet;
+import java.util.Set;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
@@ -23,12 +22,12 @@ public class BairroBean implements Serializable{
 
 	Bairro bairro = new Bairro();
 	 
-	List<Bairro> bairros = new ArrayList<Bairro>(); 
+	Set<Bairro> bairros = new HashSet<Bairro>(); 
 	
-	public BairroBean(Bairro bairro, List<Bairro> bairros) {
+	public BairroBean(Bairro bairro, Set<Bairro> bairros) {
 		super();
 		this.bairro = new Bairro();
-		this.bairros = new ArrayList<Bairro>();
+		this.bairros = new HashSet<Bairro>();
 	}
  
 	//construtor
@@ -78,15 +77,14 @@ public class BairroBean implements Serializable{
 		this.bairro = bairro;
 	}
 
-	public List<Bairro> getBairros() {
+	public Set<Bairro> getBairros() {
 		return bairros;
 	}
 
-	public void setBairros(List<Bairro> bairros) {
+	public void setBairros(Set<Bairro> bairros) {
 		this.bairros = bairros;
 	}
- 
-	//getters and setters
+
 	
  
 	

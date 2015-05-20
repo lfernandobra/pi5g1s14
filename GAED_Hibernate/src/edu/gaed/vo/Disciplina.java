@@ -1,9 +1,8 @@
 package edu.gaed.vo;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
-
+import java.util.HashSet;
+import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -50,7 +49,7 @@ public class Disciplina implements Serializable{
 	joinColumns = { @JoinColumn(name = "iddisciplina", nullable = false,
 	updatable = false) }, inverseJoinColumns = {
 	@JoinColumn(name = "idprofessor", nullable = false, updatable = false) })
-    private List<Professor> professores = new ArrayList<Professor>();
+    private Set<Professor> professores = new HashSet<Professor>(0);
 	
 	public Long getId() {
 		return id;
@@ -70,10 +69,10 @@ public class Disciplina implements Serializable{
 	public void setConteudo(String conteudo) {
 		this.conteudo = conteudo;
 	}
-	public List<Professor> getProfessores() {
+	public Set<Professor> getProfessores() {
 		return professores;
 	}
-	public void setProfessores(List<Professor> professores) {
+	public void setProfessores(Set<Professor> professores) {
 		this.professores = professores;
 	}
 	@Override
@@ -118,5 +117,6 @@ public class Disciplina implements Serializable{
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
+	
 	
 }

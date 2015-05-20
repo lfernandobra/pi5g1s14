@@ -5,9 +5,8 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
-
+import java.util.HashSet;
+import java.util.Set;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -33,12 +32,12 @@ public class FotoBean implements Serializable{
 
 	Foto foto = new Foto();
 	 
-	List<Foto> fotos = new ArrayList<Foto>(); 
+	Set<Foto> fotos = new HashSet<Foto>(); 
 	
-	public FotoBean(Foto foto, List<Foto> fotos) {
+	public FotoBean(Foto foto, Set<Foto> fotos) {
 		super();
 		this.foto = new Foto();
-		this.fotos = new ArrayList<Foto>();
+		this.fotos = new HashSet<Foto>();
 	}
  
 	//construtor
@@ -88,14 +87,14 @@ public class FotoBean implements Serializable{
 		this.foto = foto;
 	}
 
-	public List<Foto> getFotos() {
+	public Set<Foto> getFotos() {
 		return fotos;
 	}
 
-	public void setFotos(List<Foto> fotos) {
+	public void setFotos(Set<Foto> fotos) {
 		this.fotos = fotos;
 	}
- 
+
 	//getters and setters
 	public void fileUpload(FileUploadEvent event) throws IOException {
 		try {

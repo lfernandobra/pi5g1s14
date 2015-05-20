@@ -1,8 +1,8 @@
 package edu.gaed.bean;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
@@ -23,12 +23,12 @@ public class ImagemBean implements Serializable{
 
 	Imagem imagem = new Imagem();
 	 
-	List<Imagem> imagems = new ArrayList<Imagem>(); 
+	Set<Imagem> imagems = new HashSet<Imagem>(); 
 	
-	public ImagemBean(Imagem imagem, List<Imagem> imagems) {
+	public ImagemBean(Imagem imagem, Set<Imagem> imagems) {
 		super();
 		this.imagem = new Imagem();
-		this.imagems = new ArrayList<Imagem>();
+		this.imagems = new HashSet<Imagem>();
 	}
  
 	//construtor
@@ -49,6 +49,14 @@ public class ImagemBean implements Serializable{
         return imagem!=null && imagem.getId()!=null ? imagem.toString():"Classe não escolhida";
     }
  
+	public Set<Imagem> getImagems() {
+		return imagems;
+	}
+
+	public void setImagems(Set<Imagem> imagems) {
+		this.imagems = imagems;
+	}
+
 	//Métodos dos botões 
 	@SuppressWarnings("unchecked")
 	public void cadastrar(ActionEvent actionEvent){
@@ -78,13 +86,7 @@ public class ImagemBean implements Serializable{
 		this.imagem = imagem;
 	}
 
-	public List<Imagem> getImagems() {
-		return imagems;
-	}
-
-	public void setImagems(List<Imagem> imagems) {
-		this.imagems = imagems;
-	}
+	
  
 	//getters and setters
 	
