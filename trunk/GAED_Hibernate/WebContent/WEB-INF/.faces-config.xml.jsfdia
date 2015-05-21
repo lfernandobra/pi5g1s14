@@ -1,16 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <PROCESS model-entity="JSFProcess">
  <PROCESS-ITEM NAME="rules:#LoginModelo.xhtml" PATH="/LoginModelo.xhtml"
-  SHAPE="32,17,0,0" model-entity="JSFProcessGroup">
-  <PROCESS-ITEM ID="rules:#LoginModelo.xhtml:0" NAME="item"
-   PATH="/LoginModelo.xhtml" model-entity="JSFProcessItem">
-   <PROCESS-ITEM-OUTPUT ID="home::#home2.xhtml" NAME="output"
-    PATH="/home2.xhtml" TARGET="rules:#home2.xhtml" TITLE="home" model-entity="JSFProcessItemOutput"/>
-   <PROCESS-ITEM-OUTPUT ID="login::#LoginModelo.xhtml" NAME="output1"
-    PATH="/LoginModelo.xhtml" TARGET="rules:#LoginModelo.xhtml"
-    TITLE="login" model-entity="JSFProcessItemOutput"/>
-  </PROCESS-ITEM>
- </PROCESS-ITEM>
+  SHAPE="32,17,0,0" model-entity="JSFProcessGroup"/>
  <PROCESS-ITEM NAME="rules:#secretaria.xhtml" PATH="/secretaria.xhtml"
   SHAPE="496,72,50,25" model-entity="JSFProcessGroup"/>
  <PROCESS-ITEM NAME="rules:#home2.xhtml" PATH="/home2.xhtml"
@@ -23,6 +14,17 @@
    <PROCESS-ITEM-OUTPUT ID="secretaria::#secretaria.xhtml"
     NAME="output1" PATH="/secretaria.xhtml"
     TARGET="rules:#secretaria.xhtml" TITLE="secretaria" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:#login.xhtml" PATH="/login.xhtml"
+  SHAPE="48,273,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:#login.xhtml:0" NAME="item"
+   PATH="/login.xhtml" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT ID="home::#home2.xhtml" NAME="output"
+    PATH="/home2.xhtml" TARGET="rules:#home2.xhtml" TITLE="home" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="login::#LoginModelo.xhtml" NAME="output1"
+    PATH="/LoginModelo.xhtml" TARGET="rules:#LoginModelo.xhtml"
+    TITLE="login" model-entity="JSFProcessItemOutput"/>
   </PROCESS-ITEM>
  </PROCESS-ITEM>
 </PROCESS>

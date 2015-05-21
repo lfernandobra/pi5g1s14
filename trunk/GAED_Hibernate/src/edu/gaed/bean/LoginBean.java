@@ -6,6 +6,8 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
+import org.apache.commons.codec.digest.DigestUtils;
+
 import edu.gaed.dao.LoginDao;
 import edu.gaed.vo.Usuario;
  
@@ -37,8 +39,12 @@ public class LoginBean {
 		String resultado;
 	
 		try {
-			us = usuDAO.verificaDados(this.usuario);
+			String encript = DigestUtils.md5Hex(this.usuario.getSenha());
+			//String encript = DigestUtils.sha1Hex(this.usuario.getSenha());
+			this.usuario.setSenha(encript);
 			
+			us = usuDAO.verificaDados(this.usuario);
+			this.usuario = us;
 			if(us != null) {
 				FacesContext.getCurrentInstance().getExternalContext()
 						.getSessionMap().put("usuario",us);
