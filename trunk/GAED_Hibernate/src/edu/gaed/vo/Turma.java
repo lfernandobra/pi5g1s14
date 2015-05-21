@@ -48,6 +48,25 @@ public class Turma implements Serializable {
 
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "turma")
 	private Set<Aluno> alunos = new HashSet<Aluno>(0);
+	
+
+	/**
+     * Creates a BI-directional relationship between brand and product
+     * 
+     * @return the boolean
+     */
+	public boolean addAluno(Aluno aluno) {
+		if (this.alunos == null) {
+		    return false;
+		}
+		if (!this.equals(aluno.getTurma())) {
+		    if (aluno.getTurma() != null) {
+		    	aluno.getTurma().getAlunos().remove(aluno);
+		    }
+		    aluno.setTurma(this);
+		}
+		return this.alunos.add(aluno);
+	}
 
 	public Long getId() {
 		return id;
@@ -109,12 +128,8 @@ public class Turma implements Serializable {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((alunos == null) ? 0 : alunos.hashCode());
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
 		result = prime * result + ((periodo == null) ? 0 : periodo.hashCode());
-		result = prime * result
-				+ ((professorTurma == null) ? 0 : professorTurma.hashCode());
 		result = prime * result + qtdAluInseridos;
 		result = prime * result + qtdAluLimite;
 		result = prime * result + ((serie == null) ? 0 : serie.hashCode());
@@ -130,16 +145,6 @@ public class Turma implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Turma other = (Turma) obj;
-		if (alunos == null) {
-			if (other.alunos != null)
-				return false;
-		} else if (!alunos.equals(other.alunos))
-			return false;
-		if (id == null) {
-			if (other.id != null)
-				return false;
-		} else if (!id.equals(other.id))
-			return false;
 		if (nome == null) {
 			if (other.nome != null)
 				return false;
@@ -149,11 +154,6 @@ public class Turma implements Serializable {
 			if (other.periodo != null)
 				return false;
 		} else if (!periodo.equals(other.periodo))
-			return false;
-		if (professorTurma == null) {
-			if (other.professorTurma != null)
-				return false;
-		} else if (!professorTurma.equals(other.professorTurma))
 			return false;
 		if (qtdAluInseridos != other.qtdAluInseridos)
 			return false;
@@ -180,7 +180,7 @@ public class Turma implements Serializable {
 		return "Turma [id=" + id + ", nome=" + nome + ", qtdAluLimite="
 				+ qtdAluLimite + ", qtdAluInseridos=" + qtdAluInseridos
 				+ ", periodo=" + periodo + ", serie=" + serie
-				+ ", professorTurma=" + professorTurma + ", alunos=" + alunos
+				+ ", professorTurma=" + professorTurma
 				+ "]";
 	}
 

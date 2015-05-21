@@ -85,7 +85,8 @@ public class Aluno extends Usuario{
 				+ ((escolaAnterior == null) ? 0 : escolaAnterior.hashCode());
 		result = prime * result
 				+ ((escolaAtual == null) ? 0 : escolaAtual.hashCode());
-	
+		result = prime * result
+				+ ((responsavel == null) ? 0 : responsavel.hashCode());
 		result = prime * result
 				+ ((serieAnterior == null) ? 0 : serieAnterior.hashCode());
 		result = prime * result

@@ -1,8 +1,6 @@
 package edu.gaed.vo;
 
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -41,14 +39,11 @@ public class Responsavel extends Usuario{
 		this.adimplente = adimplente;
 	}
 
-	
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = super.hashCode();
 		result = prime * result + (adimplente ? 1231 : 1237);
-		
 		return result;
 	}
 
@@ -62,11 +57,6 @@ public class Responsavel extends Usuario{
 			return false;
 		Responsavel other = (Responsavel) obj;
 		if (adimplente != other.adimplente)
-			return false;
-		if (alunos == null) {
-			if (other.alunos != null)
-				return false;
-		} else if (!alunos.equals(other.alunos))
 			return false;
 		return true;
 	}
@@ -83,11 +73,6 @@ public class Responsavel extends Usuario{
 
 	public void setAlunos(Set<Aluno> alunos) {
 		this.alunos = alunos;
-	}
-
-	
-	
-
-	
+	}	
 	
 }

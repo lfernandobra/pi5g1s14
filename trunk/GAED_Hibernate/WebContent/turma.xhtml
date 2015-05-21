@@ -206,7 +206,7 @@
 			
 					<p:pickList id="PojoPickList"
 						value="#{TurmaAlunoBean.alunosDualList}" var="aluno"
-						effect="bounce" itemValue="#{aluno}" itemLabel="#{aluno}"
+						effect="bounce" itemValue="#{aluno}" itemLabel="#{aluno.nome} #{aluno.sobrenome}"
 						showSourceControls="true" showTargetControls="true"
 						showCheckbox="true" showSourceFilter="true" showTargetFilter="true"
 						filterMatchMode="contains">
@@ -214,23 +214,19 @@
 						<f:facet name="sourceCaption">Alunos</f:facet>
 						<f:facet name="targetCaption">Turma</f:facet>
 	
-						<p:ajax event="transfer" listener="#{TurmaAlunoBean.onTransfer}" update="" />
-						<p:ajax event="select" listener="#{TurmaAlunoBean.onSelect}" update="" />
-						<p:ajax event="unselect" listener="#{TurmaAlunoBean.onUnselect}" update="" />
-						<p:ajax event="reorder" listener="#{TurmaAlunoBean.onReorder}" 	update="" />
 						<p:column style="width:25%">
 							<h:outputText styleClass="ui-theme ui-theme-#{aluno}" />
 						</p:column>
 	
 						<p:column style="width:75%;">
-							<h:outputText value="#{aluno}" />
+							<h:outputText value="#{aluno.nome} #{aluno.sobrenome}" />
 						</p:column>
 					</p:pickList>
 					
 					<div id="botoes">
 						<p:commandButton id="pojoSubmit" value="Incluir" update=":formPrincipal:tabelaTurma @form" icon="ui-icon-disk" 
-						oncomplete="closeDialogIfSucess(xhr, status, args, 'dialogCadastrar','formAdicAluno')" style="margin-top:5px" actionListener="#{AlunoBean.cadastrar}"
-						onsuccess="PF('dialogCadastrar').hide();" />
+						oncomplete="closeDialogIfSucess(xhr, status, args, 'dialogAdicAluno','formAdicAluno')" style="margin-top:5px" actionListener="#{TurmaAlunoBean.adicionarAlunos}"
+						onsuccess="PF('dialogAdicAluno').hide();" />
 					</div>
 				
 				

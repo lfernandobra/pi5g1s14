@@ -51,10 +51,10 @@ public class AlunoBean extends UsuarioBean implements Serializable{
        
     }
 	public String getAlunoEscolhida(){
-        return aluno!=null && aluno.getId()!=null ? aluno.toString():"Classe não escolhida";
+        return aluno!=null && aluno.getId()!=null ? aluno.toString():"Classe nï¿½o escolhida";
     }
  
-	//Métodos dos botões 
+	//Mï¿½todos dos botï¿½es 
 	@SuppressWarnings("unchecked")
 	public void cadastrar(ActionEvent actionEvent){
 		new AlunoDao().inserir(aluno);
@@ -76,7 +76,7 @@ public class AlunoBean extends UsuarioBean implements Serializable{
 	public void excluir(Aluno aluno){
 		new AlunoDao().excluir(aluno);
 		FacesContext context = FacesContext.getCurrentInstance();
-        context.addMessage(null, new FacesMessage("Excluído", "Excluído com sucesso!") );
+        context.addMessage(null, new FacesMessage("Excluï¿½do", "Excluï¿½do com sucesso!") );
 		alunos = new AlunoDao().listar();
 		aluno = new Aluno();
 	}

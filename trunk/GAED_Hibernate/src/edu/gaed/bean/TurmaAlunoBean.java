@@ -4,50 +4,42 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import edu.gaed.vo.*;
-
-import javax.annotation.PostConstruct;
-import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
-import javax.faces.context.FacesContext;
 
-import org.primefaces.event.SelectEvent;
-import org.primefaces.event.TransferEvent;
-import org.primefaces.event.UnselectEvent;
 import org.primefaces.model.DualListModel;
+
+import edu.gaed.dao.AlunoDao;
+import edu.gaed.vo.Aluno;
+import edu.gaed.vo.Turma;
 
 @ManagedBean(name="TurmaAlunoBean")
 @ViewScoped
 public class TurmaAlunoBean implements Serializable{
 	
-	public TurmaAlunoBean(){
-		//init();
-	}
-
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 8114644463999946372L;
 	
 	private Turma turma;
-	private DualListModel<Aluno> alunosDualList;
+	private DualListModel<Aluno> alunosDualList = new DualListModel<Aluno>(new ArrayList<Aluno>(),new ArrayList<Aluno>());
 	
 	@ManagedProperty(value="#{AlunoBean}")
 	private AlunoBean alunoBean;
-	
-	@SuppressWarnings("unchecked")
-	@PostConstruct
-	public void init() {
-        List<Aluno> alunosSource = alunoBean.alunos;
-        List<Aluno> alunosTarget = new ArrayList<Aluno>();
-        
-        alunosDualList = new DualListModel<Aluno>(alunosSource,alunosTarget);
-	}
 
 	//getters and setters
 	public DualListModel<Aluno> getAlunosDualList() {
+		if (turma != null){
+			List<Aluno> alunosTarget = new ArrayList<Aluno>();
+			alunosTarget.addAll(turma.getAlunos());
+			
+			List<Aluno> alunosSource = alunoBean.alunos;
+			alunosSource.removeAll(alunosTarget);
+			alunosDualList = new DualListModel<Aluno>(alunosSource,alunosTarget);
+			
+		}
 		return alunosDualList;
 	}
 
@@ -70,36 +62,17 @@ public class TurmaAlunoBean implements Serializable{
 	public void setAlunoBean(AlunoBean alunoBean) {
 		this.alunoBean = alunoBean;
 	}
-
-	//m�todos
-	public void onTransfer(TransferEvent event) {
-        StringBuilder builder = new StringBuilder();
-        for(Object item : event.getItems()) {
-            builder.append(((Aluno) item).getNome()).append("<br />");
-        }
-         
-        FacesMessage msg = new FacesMessage();
-        msg.setSeverity(FacesMessage.SEVERITY_INFO);
-        msg.setSummary("Items Transferred");
-        msg.setDetail(builder.toString());
-         
-        FacesContext.getCurrentInstance().addMessage(null, msg);
-    } 
- 
-    public void onSelect(SelectEvent event) {
-        FacesContext context = FacesContext.getCurrentInstance();
-        context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Item Selected", event.getObject().toString()));
-    }
-     
-    public void onUnselect(UnselectEvent event) {
-        FacesContext context = FacesContext.getCurrentInstance();
-        context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Item Unselected", event.getObject().toString()));
-    }
-     
-    public void onReorder() {
-        FacesContext context = FacesContext.getCurrentInstance();
-        context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "List Reordered", null));
-    } 
+	
+	public void adicionarAlunos(){
+		for(Aluno a : alunosDualList.getTarget()){
+			turma.addAluno(a);
+			new AlunoDao().alterar(a);
+		}
+		for(Aluno a : alunosDualList.getSource()){
+			a.setTurma(null);
+			new AlunoDao().alterar(a);
+		}
+	}
 	
 
 }
