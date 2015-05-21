@@ -1,5 +1,9 @@
 package edu.gaed.bean;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -9,6 +13,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
+import javax.servlet.ServletContext;
 
 import org.apache.commons.codec.digest.DigestUtils;
 import org.primefaces.event.FileUploadEvent;
@@ -61,7 +66,7 @@ public class UsuarioBean implements Serializable {
 	public void cadastrar(ActionEvent actionEvent, FileUploadEvent event) {
 		String senhaSCript = senhaMD5(usuario.getSenha());
 		usuario.setSenha(senhaSCript);
-		
+
 		new UsuarioDao().inserir(usuario);
 		usuarios = new UsuarioDao().listar();
 		usuario = new Usuario();
@@ -89,7 +94,7 @@ public class UsuarioBean implements Serializable {
 		try {
 			// Enviando la encriptacion
 			String encript = DigestUtils.md5Hex(this.usuario.getSenha());
-			//String encript = DigestUtils.sha1Hex(this.usuario.getSenha());
+			// String encript = DigestUtils.sha1Hex(this.usuario.getSenha());
 			this.usuario.setSenha(encript);
 
 			us = usuDAO.verificarDatos(this.usuario);
@@ -99,8 +104,8 @@ public class UsuarioBean implements Serializable {
 						.getSessionMap().put("usuario", us);
 
 				resultado = "home"; // recalcar que el faces-redirect=true,
-										// olvida la peticion anterior y se
-										// dirige a la vista
+									// olvida la peticion anterior y se
+									// dirige a la vista
 				System.out.println("Encontrado");
 			} else {
 				resultado = "login";
@@ -131,8 +136,8 @@ public class UsuarioBean implements Serializable {
 				.invalidateSession();
 		return "index";
 	}
-	
-	public String senhaMD5(String senha){
+
+	public String senhaMD5(String senha) {
 		return TransformaStringMD5.md5(senha);
 	}
 
@@ -158,6 +163,48 @@ public class UsuarioBean implements Serializable {
 
 	public void setFotoBean(FotoBean fotoBean) {
 		this.fotoBean = fotoBean;
+	}
+
+	public String verFoto() {
+
+		try {
+			ServletContext sContext = (ServletContext) FacesContext
+					.getCurrentInstance().getExternalContext().getContext();
+
+			File folder = new File(sContext.getRealPath("/temp"));
+			if (!folder.exists()) {
+				folder.mkdirs();
+
+			}
+			String nomeArquivo = usuario.getNome() + ".png";
+			String arquivo = sContext.getRealPath("/temp") + File.separator
+					+ nomeArquivo;
+			System.out.println(arquivo);
+			System.out.println(usuario.getFoto().getFoto());
+			criaArquivo(usuario.getFoto().getFoto(), arquivo);
+
+			return nomeArquivo;
+
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		return null;
+	}
+
+	private void criaArquivo(byte[] bytes, String arquivo) {
+		FileOutputStream fos;
+
+		try {
+			fos = new FileOutputStream(arquivo);
+			fos.write(bytes);
+
+			fos.flush();
+			fos.close();
+		} catch (FileNotFoundException ex) {
+			ex.printStackTrace();
+		} catch (IOException ex) {
+			ex.printStackTrace();
+		}
 	}
 
 }

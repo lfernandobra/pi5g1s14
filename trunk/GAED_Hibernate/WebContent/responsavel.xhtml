@@ -28,7 +28,7 @@
 				<p:growl id="growl" showDetail="true" life="4000" />
 			<p:dataTable var="lista" value="#{ResponsavelBean.responsavels}" id="tabelaResponsavel" resizableColumns="true" 
 						 reflow="true"  rows="5"    paginator="true" emptyMessage="Nenhum responsavel cadastrado">
-				<h:inputHidden value="#{FotoBean.verFoto(lista.foto.foto,lista.nome)}" />          
+				         
 				
 				<p:column style="width:16px">
 					<p:rowToggler />
@@ -47,11 +47,11 @@
 				</p:column>
 				
 				<p:rowExpansion>
-					<h:inputHidden value="#{FotoBean.verFoto(lista.foto.foto,lista.nome)}" />
-					<h3>Informações do gestor (a)</h3>
+					
+					<h3>Informações do responsavel (a)</h3>
 					<p:panelGrid columns="2" columnClasses="label,value">
 						<h:outputText value="Foto " />
-						<h:graphicImage width="80" height="100" value="/temp/#{lista.nome}.png" />
+						<h:graphicImage width="80" height="100" value="/temp/#{FotoBean.verFoto(lista.foto.foto,lista.nome)}" />
 						<h:outputText value="Data de nascimento " />
 						<h:outputFormat value="{0, date, dd/MM/yyyy}">
 							<f:param value="#{lista.datanasc}" />

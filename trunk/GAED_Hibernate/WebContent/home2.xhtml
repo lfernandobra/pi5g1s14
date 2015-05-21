@@ -10,7 +10,7 @@
 	<h:panelGrid columns="2">
 
 		<h:form rendered="#{LoginBean.verificarSessao()}">
-			
+			<h:graphicImage width="80" height="100" value="/temp/#{LoginBean.verFoto()}" />
 			<h:outputLabel value="Login"/>
 			<h:outputLabel value="#{LoginBean.usuario.login}"/>
 			<h:outputLabel value="Senha"/>

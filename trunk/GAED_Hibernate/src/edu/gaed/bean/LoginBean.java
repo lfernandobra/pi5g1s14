@@ -1,10 +1,16 @@
 package edu.gaed.bean;
  
 //import javax.faces.application.FacesMessage;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
+import javax.servlet.ServletContext;
 
 import org.apache.commons.codec.digest.DigestUtils;
 
@@ -82,6 +88,48 @@ public class LoginBean {
     	FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
     	return "login";
     }
+    
+    public String verFoto() {
+		
+    	try {
+            ServletContext sContext = (ServletContext) FacesContext
+                    .getCurrentInstance().getExternalContext().getContext();
+ 
+            File folder = new File(sContext.getRealPath("/temp"));
+            if (!folder.exists()){
+                folder.mkdirs();
+ 
+            }
+             String nomeArquivo = usuario.getNome() + ".png";
+             String arquivo = sContext.getRealPath("/temp") + File.separator
+                        + nomeArquivo;
+             System.out.println(arquivo);
+             System.out.println(usuario.getFoto().getFoto());
+             criaArquivo(usuario.getFoto().getFoto(), arquivo);
+             
+             return nomeArquivo;
+             
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+		return null;	
+    }
+    
+    private void criaArquivo(byte[] bytes, String arquivo) {
+	    FileOutputStream fos;
+	
+	    try {
+	        fos = new FileOutputStream(arquivo);
+	        fos.write(bytes);
+	
+	        fos.flush();
+	        fos.close();
+	    } catch (FileNotFoundException ex) {
+	        ex.printStackTrace();
+	    } catch (IOException ex) {
+	        ex.printStackTrace();
+	    }
+	}
     
     
 }
