@@ -17,7 +17,7 @@ import edu.gaed.dao.SecretariaDao;
 
 @ManagedBean(name = "SecretariaBean")
 @ViewScoped
-public class SecretariaBean implements Serializable {
+public class SecretariaBean extends UsuarioBean implements Serializable {
 
 	/**
 	 * 
@@ -75,6 +75,8 @@ public class SecretariaBean implements Serializable {
 	// Métodos dos botões
 	@SuppressWarnings("unchecked")
 	public void cadastrar(ActionEvent actionEvent) {
+		String senhaSCript = senhaMD5(secretaria.getSenha());
+		secretaria.setSenha(senhaSCript);
 		new SecretariaDao().inserir(secretaria);
 		secretarias = new SecretariaDao().listar();
 		secretaria = new Secretaria();

@@ -7,10 +7,13 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 
+import org.apache.commons.codec.digest.DigestUtils;
 import org.primefaces.event.FileUploadEvent;
 
+import edu.gaed.util.TransformaStringMD5;
 import edu.gaed.vo.Usuario;
 import edu.gaed.dao.UsuarioDao;
 
@@ -26,7 +29,7 @@ public class UsuarioBean implements Serializable {
 	Usuario usuario = new Usuario();
 	List<Usuario> usuarios = new ArrayList<Usuario>();
 	FotoBean fotoBean = new FotoBean();
-	
+
 	public UsuarioBean(Usuario usuario, List<Usuario> usuarios) {
 		super();
 		this.usuario = new Usuario();
@@ -55,7 +58,10 @@ public class UsuarioBean implements Serializable {
 
 	// Mï¿½todos dos botï¿½es
 	@SuppressWarnings("unchecked")
-	public void cadastrar(ActionEvent actionEvent,FileUploadEvent event) {
+	public void cadastrar(ActionEvent actionEvent, FileUploadEvent event) {
+		String senhaSCript = senhaMD5(usuario.getSenha());
+		usuario.setSenha(senhaSCript);
+		
 		new UsuarioDao().inserir(usuario);
 		usuarios = new UsuarioDao().listar();
 		usuario = new Usuario();
@@ -74,7 +80,62 @@ public class UsuarioBean implements Serializable {
 		usuarios = new UsuarioDao().listar();
 		usuario = new Usuario();
 	}
+
+	public String verificarDatos() throws Exception {
+		UsuarioDao usuDAO = new UsuarioDao();
+		Usuario us;
+		String resultado;
+
+		try {
+			// Enviando la encriptacion
+			String encript = DigestUtils.md5Hex(this.usuario.getSenha());
+			//String encript = DigestUtils.sha1Hex(this.usuario.getSenha());
+			this.usuario.setSenha(encript);
+
+			us = usuDAO.verificarDatos(this.usuario);
+			if (us != null) {
+
+				FacesContext.getCurrentInstance().getExternalContext()
+						.getSessionMap().put("usuario", us);
+
+				resultado = "home"; // recalcar que el faces-redirect=true,
+										// olvida la peticion anterior y se
+										// dirige a la vista
+				System.out.println("Encontrado");
+			} else {
+				resultado = "login";
+				System.out.println("Não Encontrado");
+			}
+		} catch (Exception e) {
+			throw e;
+		}
+
+		return resultado;
+	}
+
+	public boolean verificarSesion() {
+		boolean estado;
+
+		if (FacesContext.getCurrentInstance().getExternalContext()
+				.getSessionMap().get("usuario") == null) {
+			estado = false;
+		} else {
+			estado = true;
+		}
+
+		return estado;
+	}
+
+	public String cerrarSesion() {
+		FacesContext.getCurrentInstance().getExternalContext()
+				.invalidateSession();
+		return "index";
+	}
 	
+	public String senhaMD5(String senha){
+		return TransformaStringMD5.md5(senha);
+	}
+
 	public Usuario getUsuario() {
 		return usuario;
 	}
@@ -90,7 +151,7 @@ public class UsuarioBean implements Serializable {
 	public void setUsuarios(List<Usuario> usuarios) {
 		this.usuarios = usuarios;
 	}
-	
+
 	public FotoBean getFotoBean() {
 		return fotoBean;
 	}

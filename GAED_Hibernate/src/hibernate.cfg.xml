@@ -10,7 +10,7 @@
 		<property name="show_sql">true</property>
 		
 		<!-- create-drop,create,update --> 
-		<property name="hibernate.hbm2ddl.auto">update</property>
+		<property name="hibernate.hbm2ddl.auto">validate</property>
 		
 		<mapping class="edu.gaed.vo.Aluno" />
 		<mapping class="edu.gaed.vo.Anexo" />

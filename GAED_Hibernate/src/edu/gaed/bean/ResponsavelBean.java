@@ -4,17 +4,12 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-
-
 import javax.faces.context.FacesContext;
-
 import org.primefaces.event.FileUploadEvent;
-
 import edu.gaed.vo.Responsavel;
 import edu.gaed.dao.ResponsavelDao;
  
@@ -59,6 +54,8 @@ public class ResponsavelBean extends UsuarioBean implements Serializable {
 	//Métodos dos botões 
 	@SuppressWarnings("unchecked")
 	public void cadastrar(){
+		String senhaSCript = senhaMD5(responsavel.getSenha());
+		responsavel.setSenha(senhaSCript);
 		new ResponsavelDao().inserir(responsavel);
 		FacesContext context = FacesContext.getCurrentInstance();
         context.addMessage(null, new FacesMessage("Cadastrado",  " Responsável " + responsavel.getNome() + "  cadastrado com sucesso!") );

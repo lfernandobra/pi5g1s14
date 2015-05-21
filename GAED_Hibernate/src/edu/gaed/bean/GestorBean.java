@@ -19,7 +19,7 @@ import edu.gaed.dao.GestorDao;
 
 @ManagedBean(name = "GestorBean")
 @ViewScoped
-public class GestorBean implements Serializable {
+public class GestorBean extends UsuarioBean implements Serializable {
 
 	/**
 	 * 
@@ -59,6 +59,8 @@ public class GestorBean implements Serializable {
 	// Métodos dos botões
 	@SuppressWarnings("unchecked")
 	public void cadastrar(ActionEvent actionEvent) {
+		String senhaSCript = senhaMD5(gestor.getSenha());
+		gestor.setSenha(senhaSCript);
 		new GestorDao().inserir(gestor);
 		FacesContext context = FacesContext.getCurrentInstance();
         context.addMessage(null, new FacesMessage("Cadastrado",  " Gestor(a) " + gestor.getNome() + "  cadastrado(a) com sucesso!") );

@@ -19,7 +19,7 @@ import edu.gaed.dao.ProfessorDao;
 
 @ManagedBean(name = "ProfessorBean")
 @ViewScoped
-public class ProfessorBean implements Serializable {
+public class ProfessorBean extends UsuarioBean implements Serializable {
 
 	/**
 	 * 
@@ -71,6 +71,9 @@ public class ProfessorBean implements Serializable {
 	// M�todos dos bot�es
 	@SuppressWarnings("unchecked")
 	public void cadastrar(ActionEvent actionEvent) {
+		
+		String senhaSCript = senhaMD5(professor.getSenha());
+		professor.setSenha(senhaSCript);
 		new ProfessorDao().inserir(professor);
 		FacesContext context = FacesContext.getCurrentInstance();
         context.addMessage(null, new FacesMessage("Cadastrado",  " Professor(a) " + professor.getNome() + "  cadastrado(a) com sucesso!") );
