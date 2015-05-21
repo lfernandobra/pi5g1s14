@@ -7,7 +7,7 @@ import javax.faces.convert.FacesConverter;
 
 import edu.gaed.vo.Professor;
 
-@FacesConverter(forClass = Professor.class)
+@FacesConverter(value = "professorConverter")
 public class ProfessorConverter implements Converter{
 	@Override
 	public Object getAsObject(FacesContext facesContext, UIComponent uiComponent, String value) {

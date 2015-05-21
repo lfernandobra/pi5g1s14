@@ -3,13 +3,12 @@ package edu.gaed.vo;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.JoinTable;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
@@ -43,13 +42,18 @@ public class Professor extends Usuario{
 	@LazyCollection(LazyCollectionOption.FALSE)
 	@JoinTable(name = "disciplina_professor",
 	joinColumns = { @JoinColumn(name = "idprofessor", nullable = false,
-	updatable =  false) }, inverseJoinColumns = {
-	@JoinColumn(name = "iddisciplina", nullable = false, updatable = false) })
+	updatable =  false) }, inverseJoinColumns = {@JoinColumn(name = "iddisciplina", nullable = false, updatable = false) })
     private List<Disciplina> disciplinas = new ArrayList<Disciplina>();
 	
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "professor")
-	private List<ProfessorTurma> professorTurma = new ArrayList<ProfessorTurma>();
+	@ManyToMany(mappedBy = "professores")
+	private List<Turma> turmas = new ArrayList<Turma>();
 	
+	public boolean adicionaTurma(Turma turma) {
+		if (turmas != null) {
+			return turmas.add(turma);
+		}
+		return false;
+	}
 	
 	public String getEscolaAnterior() {
 		return escolaAnterior;
@@ -75,6 +79,22 @@ public class Professor extends Usuario{
 	public void setAnoConclusao(Date anoConclusao) {
 		this.anoConclusao = anoConclusao;
 	}
+	
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+	public List<Disciplina> getDisciplinas() {
+		return disciplinas;
+	}
+	public void setDisciplinas(List<Disciplina> disciplinas) {
+		this.disciplinas = disciplinas;
+	}
+	public List<Turma> getTurmas() {
+		return turmas;
+	}
+	public void setTurmas(List<Turma> turmas) {
+		this.turmas = turmas;
+	}
 
 	@Override
 	public int hashCode() {
@@ -83,17 +103,14 @@ public class Professor extends Usuario{
 		result = prime * result
 				+ ((anoConclusao == null) ? 0 : anoConclusao.hashCode());
 		result = prime * result
-				+ ((disciplinas == null) ? 0 : disciplinas.hashCode());
-		result = prime * result
 				+ ((escolaAnterior == null) ? 0 : escolaAnterior.hashCode());
 		result = prime * result
 				+ ((formacaoAcad == null) ? 0 : formacaoAcad.hashCode());
 		result = prime * result
 				+ ((instituicaoAcad == null) ? 0 : instituicaoAcad.hashCode());
-		result = prime * result
-				+ ((professorTurma == null) ? 0 : professorTurma.hashCode());
 		return result;
 	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -107,11 +124,6 @@ public class Professor extends Usuario{
 			if (other.anoConclusao != null)
 				return false;
 		} else if (!anoConclusao.equals(other.anoConclusao))
-			return false;
-		if (disciplinas == null) {
-			if (other.disciplinas != null)
-				return false;
-		} else if (!disciplinas.equals(other.disciplinas))
 			return false;
 		if (escolaAnterior == null) {
 			if (other.escolaAnterior != null)
@@ -128,32 +140,7 @@ public class Professor extends Usuario{
 				return false;
 		} else if (!instituicaoAcad.equals(other.instituicaoAcad))
 			return false;
-		if (professorTurma == null) {
-			if (other.professorTurma != null)
-				return false;
-		} else if (!professorTurma.equals(other.professorTurma))
-			return false;
 		return true;
 	}
-	
-	
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
-	public List<Disciplina> getDisciplinas() {
-		return disciplinas;
-	}
-	public void setDisciplinas(List<Disciplina> disciplinas) {
-		this.disciplinas = disciplinas;
-	}
-	public List<ProfessorTurma> getProfessorTurma() {
-		return professorTurma;
-	}
-	public void setProfessorTurma(List<ProfessorTurma> professorTurma) {
-		this.professorTurma = professorTurma;
-	}
-	
-	
-	
 	
 }
