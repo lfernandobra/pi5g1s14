@@ -6,7 +6,7 @@
 		<property name="hibernate.connection.url">jdbc:mysql://127.0.0.1:3306/gaedbdoficial</property>
 		<property name="hibernate.connection.username">root</property>
 		<property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
-		<property name="connection.password">nosbor</property>
+		<property name="connection.password"></property>
 		<property name="show_sql">true</property>
 		
 		<!-- create-drop,create,update --> 
