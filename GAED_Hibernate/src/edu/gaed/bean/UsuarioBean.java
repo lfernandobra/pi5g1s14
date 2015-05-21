@@ -50,10 +50,10 @@ public class UsuarioBean implements Serializable {
 
 	public String getUsuarioEscolhida() {
 		return usuario != null && usuario.getId() != null ? usuario.toString()
-				: "Classe não escolhida";
+				: "Classe nï¿½o escolhida";
 	}
 
-	// Métodos dos botões
+	// Mï¿½todos dos botï¿½es
 	@SuppressWarnings("unchecked")
 	public void cadastrar(ActionEvent actionEvent,FileUploadEvent event) {
 		new UsuarioDao().inserir(usuario);
