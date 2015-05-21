@@ -12,8 +12,8 @@ import javax.faces.bean.ViewScoped;
 import org.primefaces.model.DualListModel;
 
 import edu.gaed.dao.ProfessorDao;
+import edu.gaed.dao.TurmaDao;
 import edu.gaed.vo.Professor;
-import edu.gaed.vo.ProfessorTurma;
 import edu.gaed.vo.Turma;
 
 @ManagedBean(name="TurmaProfessorBean")
@@ -32,8 +32,8 @@ public class TurmaProfessorBean implements Serializable{
 	public DualListModel<Professor> getProfessoresDualList() {
 		if (turma != null){
 			Set<Professor> profTarget = new HashSet<Professor>();
-			for (ProfessorTurma pf : turma.getProfessorTurma()){
-				profTarget.add(pf.getProfessor());
+			for (Professor professor : turma.getProfessores()){
+				profTarget.add(professor);
 			}
 			List<Professor> profTargetList = new ArrayList<Professor>();
 			profTargetList.addAll(profTarget);
@@ -59,10 +59,15 @@ public class TurmaProfessorBean implements Serializable{
 	}
 	
 	public void adicionarProfessor(){
-		for(Professor a : professoresDualList.getTarget()){
+		for(Professor professor : professoresDualList.getTarget()){
+			turma.adicionaProfessor(professor);
+			new TurmaDao().alterar(turma);
 		}
-		for(Professor a : professoresDualList.getSource()){
-			
+		for(Professor professorRemovido : professoresDualList.getSource()){
+			if (turma.getProfessores().contains(professorRemovido)){
+				turma.getProfessores().remove(professorRemovido);
+			}
+			new TurmaDao().alterar(turma);
 		}
 	}
 	

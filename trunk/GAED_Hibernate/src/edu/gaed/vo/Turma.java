@@ -12,6 +12,8 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -43,11 +45,29 @@ public class Turma implements Serializable {
 	@JoinColumn(name="id_serie")
 	private Serie serie;
 
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "turma")
-	private Set<ProfessorTurma> professorTurma = new HashSet<ProfessorTurma>(0);
+	@ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "professor_turma",
+    		   joinColumns = { @JoinColumn(name = "idturma") }, 
+    		   inverseJoinColumns = { @JoinColumn(name = "idprofessor") })
+	private Set<Professor> professores = new HashSet<Professor>(0);
 
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "turma")
 	private Set<Aluno> alunos = new HashSet<Aluno>(0);
+	
+	public boolean adicionaProfessor(Professor professor) {
+		if (professores != null) {
+			return professores.add(professor);
+		}
+		return false;
+	}
+	
+	public Set<Professor> getProfessores() {
+		return professores;
+	}
+
+	public void setProfessores(Set<Professor> professores) {
+		this.professores = professores;
+	}
 	
 
 	/**
@@ -74,14 +94,6 @@ public class Turma implements Serializable {
 
 	public void setId(Long id) {
 		this.id = id;
-	}
-
-	public Set<ProfessorTurma> getProfessorTurma() {
-		return professorTurma;
-	}
-
-	public void setProfessorTurma(Set<ProfessorTurma> professorTurma) {
-		this.professorTurma = professorTurma;
 	}
 
 	public Set<Aluno> getAlunos() {
@@ -180,7 +192,6 @@ public class Turma implements Serializable {
 		return "Turma [id=" + id + ", nome=" + nome + ", qtdAluLimite="
 				+ qtdAluLimite + ", qtdAluInseridos=" + qtdAluInseridos
 				+ ", periodo=" + periodo + ", serie=" + serie
-				+ ", professorTurma=" + professorTurma
 				+ "]";
 	}
 
