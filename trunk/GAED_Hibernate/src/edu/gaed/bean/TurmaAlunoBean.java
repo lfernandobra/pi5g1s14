@@ -2,9 +2,7 @@ package edu.gaed.bean;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
@@ -34,10 +32,11 @@ public class TurmaAlunoBean implements Serializable{
 	//getters and setters
 	public DualListModel<Aluno> getAlunosDualList() {
 		if (turma != null){
-			Set<Aluno> alunosTarget = new HashSet<Aluno>();
+			List<Aluno> alunosTarget = new ArrayList<Aluno>();
 			alunosTarget.addAll(turma.getAlunos());
 			
-			Set<Aluno> alunosSource = alunoBean.alunos;
+			List<Aluno> alunosSource = new ArrayList<Aluno>();
+			alunosSource.addAll(alunoBean.alunos);
 			alunosSource.removeAll(alunosTarget);
 			alunosDualList = new DualListModel<Aluno>(alunosSource,alunosTarget);
 			
