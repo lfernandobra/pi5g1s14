@@ -2,8 +2,9 @@ package edu.gaed.bean;
 
 import java.io.IOException;
 import java.io.Serializable;
-import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
@@ -27,13 +28,13 @@ public class AlunoBean extends UsuarioBean implements Serializable{
 	private static final long serialVersionUID = 1L;
 
 	Aluno aluno = new Aluno();
-	List<Aluno> alunos = new ArrayList<Aluno>();
+	Set<Aluno> alunos = new HashSet<Aluno>();
 	FotoBean fotoBean = new FotoBean();
 	
 	public AlunoBean(Aluno aluno, List<Aluno> alunos) {
 		super();
 		this.aluno = new Aluno();
-		this.alunos = new ArrayList<Aluno>();
+		this.alunos = new HashSet<Aluno>();
 	}
  
 	//construtor
@@ -51,10 +52,10 @@ public class AlunoBean extends UsuarioBean implements Serializable{
        
     }
 	public String getAlunoEscolhida(){
-        return aluno!=null && aluno.getId()!=null ? aluno.toString():"Classe nï¿½o escolhida";
+        return aluno!=null && aluno.getId()!=null ? aluno.toString():"Classe não escolhida";
     }
  
-	//Mï¿½todos dos botï¿½es 
+	//Métodos dos botões 
 	@SuppressWarnings("unchecked")
 	public void cadastrar(ActionEvent actionEvent){
 		String senhaSCript = senhaMD5(aluno.getSenha());
@@ -78,7 +79,7 @@ public class AlunoBean extends UsuarioBean implements Serializable{
 	public void excluir(Aluno aluno){
 		new AlunoDao().excluir(aluno);
 		FacesContext context = FacesContext.getCurrentInstance();
-        context.addMessage(null, new FacesMessage("Excluï¿½do", "Excluï¿½do com sucesso!") );
+        context.addMessage(null, new FacesMessage("Excluído", "Excluído com sucesso!") );
 		alunos = new AlunoDao().listar();
 		aluno = new Aluno();
 	}
@@ -99,11 +100,13 @@ public class AlunoBean extends UsuarioBean implements Serializable{
 		this.aluno.setFoto(this.fotoBean.getFoto());
 	}
 
-	public List<Aluno> getAlunos() {
+	
+
+	public Set<Aluno> getAlunos() {
 		return alunos;
 	}
 
-	public void setAlunos(List<Aluno> alunos) {
+	public void setAlunos(Set<Aluno> alunos) {
 		this.alunos = alunos;
 	}
 
