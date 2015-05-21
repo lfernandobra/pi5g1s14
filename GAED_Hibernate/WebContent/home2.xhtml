@@ -11,11 +11,14 @@
 
 		<h:form rendered="#{LoginBean.verificarSessao()}">
 			
+			<h:outputLabel value="Login"/>
 			<h:outputLabel value="#{LoginBean.usuario.login}"/>
-			
-			<h:outputLabel value="#{LoginBean.usuario.nome}"/>
-			
+			<h:outputLabel value="Senha"/>
 			<h:outputLabel value="#{LoginBean.usuario.senha}"/>
+			<h:outputLabel value="Nome"/>
+			<h:outputLabel value="#{LoginBean.usuario.nome}"/>
+			<h:outputLabel value="Nome"/>
+			<h:outputLabel value="#{LoginBean.usuario.sobrenome}"/>
 			<h:commandButton value="Cerrar Sessão" action="#{LoginBean.encerrarSession()}"/>
 		
 		</h:form>	
