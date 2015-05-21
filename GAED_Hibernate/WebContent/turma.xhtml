@@ -66,9 +66,9 @@
 								value="#{lista}" />
 						</p:commandButton>
 						<p:commandButton value="Professores" update=":formAdicProfessor"
-							oncomplete="PF('dialogAdicProfessor').show();"
+							oncomplete="PF('dialogAdicProf').show();"
 							icon="ui-icon-pencil">
-							<f:setPropertyActionListener target="#{TurmaBean.turma}"
+							<f:setPropertyActionListener target="#{TurmaProfessorBean.turma}"
 								value="#{lista}" />
 						</p:commandButton>
 					</p:column>
@@ -249,9 +249,56 @@
 		</p:dialog>
 		
 		<p:dialog header="Adicionar professores" widgetVar="dialogAdicProf"
-			modal="true" resizable="true" id="idAdicProf"
+			modal="true" resizable="true" id="idAdicProf" appendTo="@(body)"
 			styleClass="dialogCadastrar">
 			<h:form id="formAdicProfessor">
+			
+				<p:focus context="@form" />
+				<p:growl id="growl" showDetail="true" life="4000" />
+
+				<h3>Selecione os professores para alocar a turma escolhida:</h3>
+				<p:separator />
+		
+				<p:pickList id="TurmaProfessorPickList"
+					value="#{TurmaProfessorBean.professoresDualList}" var="aluno"
+					effect="bounce" itemValue="#{aluno}" itemLabel="#{aluno.nome} #{aluno.sobrenome}"
+					showSourceControls="true" showTargetControls="true"
+					showCheckbox="true" showSourceFilter="true" showTargetFilter="true"
+					filterMatchMode="contains">
+					<f:facet name="sourceCaption">Professores</f:facet>
+					<f:facet name="targetCaption">Turma</f:facet>
+
+					<p:column style="width:25%">
+						<h:outputText styleClass="ui-theme ui-theme-#{aluno}" />
+					</p:column>
+
+					<p:column style="width:75%;">
+						<h:outputText value="#{aluno.nome} #{aluno.sobrenome}" />
+					</p:column>
+				</p:pickList>
+				
+				<div id="botoes">
+					<p:commandButton id="pojoBtnSubmit" value="Incluir" update=":formPrincipal:tabelaTurma @form" icon="ui-icon-disk" 
+					oncomplete="closeDialogIfSucess(xhr, status, args, 'dialogAdicProf','formAdicProfessor')" style="margin-top:5px" actionListener="#{TurmaProfessorBean.adicionarProfessor}"
+					onsuccess="PF('dialogAdicProf').hide();" />
+				</div>
+				
+				
+				<p:dialog modal="true" showEffect="fade" hideEffect="fade"
+					widgetVar="turmaProfessorDialog">
+					<h:panelGrid id="displayProfessores" columns="2">
+						<h:outputText value="Professores" style="font-weight:bold" />
+						<ui:repeat value="#{TurmaProfessorBean.professoresDualList.source}" var="disponivel">
+							<h:outputText value="#{disponivel.nome}" style="margin-right:5px" />
+						</ui:repeat>
+	
+						<h:outputText value="Turma " style="font-weight:bold" />
+						<ui:repeat value="#{TurmaProfessorBean.professoresDualList.target}" var="alocado">
+							<h:outputText value="#{alocado.nome}" style="margin-right:5px" />
+						</ui:repeat>
+					</h:panelGrid>
+					
+				</p:dialog>
 	
 			</h:form>
 		</p:dialog>
