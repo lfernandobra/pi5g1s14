@@ -57,6 +57,8 @@ public class AlunoBean extends UsuarioBean implements Serializable{
 	//M�todos dos bot�es 
 	@SuppressWarnings("unchecked")
 	public void cadastrar(ActionEvent actionEvent){
+		String senhaSCript = senhaMD5(aluno.getSenha());
+		aluno.setSenha(senhaSCript);
 		new AlunoDao().inserir(aluno);
 		FacesContext context = FacesContext.getCurrentInstance();
         context.addMessage(null, new FacesMessage("Cadastrado",  " Aluno(a) " + aluno.getNome() + "  cadastrado(a) com sucesso!") );
