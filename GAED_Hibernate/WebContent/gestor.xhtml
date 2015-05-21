@@ -12,24 +12,28 @@
 <body>
 
 
-<ui:decorate template="/Cabecalho.xhtml">
-	<ui:define name="center">
-	
-	<h2>Lista de Gestores</h2>
-	
-		<div id="Lista">
+	<ui:decorate template="/Cabecalho.xhtml">
+		<ui:define name="center">
+
+			<h2>Lista de Gestores</h2>
+
+			<div id="Lista">
 				<p:separator />
-						
+
 				<p:toolbar styleClass="toolbarAluno">
 					<f:facet name="left">
-						<p:commandButton value="Cadastrar" type="button" onclick="PF('dialogCadastrar').show();" icon="ui-icon-disk" />
+						<p:commandButton value="Cadastrar" type="button"
+							onclick="PF('dialogCadastrar').show();" icon="ui-icon-disk" />
 					</f:facet>
 				</p:toolbar>
-				
+
 				<p:growl id="growl" showDetail="true" life="4000" />
-						
+
 				<h:form id="formPrincipal">
-					<p:dataTable var="lista" value="#{GestorBean.gestors}"	id="tabelaGestor" resizableColumns="true" reflow="true" rows="5" paginator="true" paginatorPosition="bottom" emptyMessage="Nenhum gestor cadastrado">
+					<p:dataTable var="lista" value="#{GestorBean.gestors}"
+						id="tabelaGestor" resizableColumns="true" reflow="true" rows="5"
+						paginator="true" paginatorPosition="bottom"
+						emptyMessage="Nenhum gestor cadastrado">
 						<p:column style="width:16px">
 							<p:rowToggler />
 						</p:column>
@@ -45,16 +49,16 @@
 							filterBy="#{lista.sobrenome}">
 							<h:outputText value="#{lista.sobrenome}" />
 						</p:column>
-						
+
 						<p:rowExpansion>
-							<h:inputHidden value="#{FotoBean.verFoto(lista.foto.foto,lista.nome)}" />
 							<h3>Informações do gestor</h3>
 							<p:panelGrid columns="2" columnClasses="label,value">
 								<h:outputText value="Foto " />
-								<h:graphicImage width="80" height="100" value="/temp/#{lista.nome}.png" />
+								<h:graphicImage width="80" height="100"
+									value="/temp/#{FotoBean.verFoto(lista.foto.foto,lista.nome)}" />
 								<h:outputText value="Data de nascimento " />
 								<h:outputFormat value="{0, date, dd/MM/yyyy}">
-								<f:param value="#{lista.datanasc}" />
+									<f:param value="#{lista.datanasc}" />
 								</h:outputFormat>
 								<h:outputText value="Sexo " />
 								<h:outputText value="#{lista.sexo}" />
@@ -86,320 +90,433 @@
 								<h:outputFormat value="{0, date, dd/MM/yyyy}">
 									<f:param value="#{lista.dataSaida}" />
 								</h:outputFormat>
-		
-		
+
+
 								<h:outputText value="Formação acadêmica " />
 								<h:outputText value="#{lista.formacaoAcad}" />
-		
+
 								<h:outputText value="Instituição acadêmica " />
 								<h:outputText value="#{lista.instituicaoAcad}" />
-		
+
 								<h:outputText value="Ano conclusão " />
 								<h:outputFormat value="{0, date, dd/MM/yyyy}">
 									<f:param value="#{lista.anoConclusao}" />
 								</h:outputFormat>
 							</p:panelGrid>
-							
+
 						</p:rowExpansion>
 						<p:column headerText="Ações">
-							<p:commandButton value="Alterar" update=":formAlterar" oncomplete="PF('dialogAlterar').show();" icon="ui-icon-pencil">
-								<f:setPropertyActionListener target="#{GestorBean.gestor}" value="#{lista}" />
+							<p:commandButton value="Alterar" update=":formAlterar"
+								oncomplete="PF('dialogAlterar').show();" icon="ui-icon-pencil">
+								<f:setPropertyActionListener target="#{GestorBean.gestor}"
+									value="#{lista}" />
 							</p:commandButton>
-							<p:commandButton value="Excluir" actionListener="#{GestorBean.excluir(lista)}" update=":formPrincipal:tabelaGestor growl" icon="ui-icon-closethick">
-								<p:confirm header="Excluir Gestor" message="Deseja excluir?" icon="ui-icon-alert" />
+							<p:commandButton value="Excluir"
+								actionListener="#{GestorBean.excluir(lista)}"
+								update=":formPrincipal:tabelaGestor growl"
+								icon="ui-icon-closethick">
+								<p:confirm header="Excluir Gestor" message="Deseja excluir?"
+									icon="ui-icon-alert" />
 							</p:commandButton>
-							<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
-								<p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
-								<p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+							<p:confirmDialog global="true" showEffect="fade"
+								hideEffect="fade">
+								<p:commandButton value="Sim" type="button"
+									styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+								<p:commandButton value="Não" type="button"
+									styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
 							</p:confirmDialog>
 						</p:column>
 						<f:facet name="footer"> #{fn:length(GestorBean.gestors)} gestor(s)	</f:facet>
 					</p:dataTable>
 				</h:form>
-		</div>
+			</div>
 
-		<p:dialog header="Formulario de Cadastro do Gestor" widgetVar="dialogCadastrar" modal="true" appendTo="@(body)" closeOnEscape="true" closable="true" maximizable="true"
-			resizable="true" id="formCad">
-			<h:form id="formCadastrar" styleClass="formCadastrar">
-				<p:focus context="@form" />
-				<p:growl id="growl" showDetail="true" life="4000" />
-				
-				
-				<h:outputText value="Campos obrigatórios * " style="font-size: 10px !important; top: 5px !important 	" />	
-				<h4>Dados de Cadastro</h4>	
+			<p:dialog header="Formulario de Cadastro do Gestor"
+				widgetVar="dialogCadastrar" modal="true" appendTo="@(body)"
+				closeOnEscape="true" closable="true" maximizable="true"
+				resizable="true" id="formCad">
+				<h:form id="formCadastrar" styleClass="formCadastrar">
+					<p:focus context="@form" />
+					<p:growl id="growl" showDetail="true" life="4000" />
+
+
+					<h:outputText value="Campos obrigatórios * "
+						style="font-size: 10px !important; top: 5px !important 	" />
+					<h4>Dados de Cadastro</h4>
 					<p:separator />
-				
-				<p:panelGrid id="panelCadastrar" columns="6">
 
-					<p:outputLabel for="nome" value="Nome:" />
-					<p:inputText value="#{GestorBean.gestor.nome}" size="30"  required="true" label="nome" id="nome" requiredMessage="Nome não deve estar vazio!">
-						<f:validateLength minimum="3" />
-					</p:inputText>
+					<p:panelGrid id="panelCadastrar" columns="6">
 
-					<p:outputLabel for="sobrenome" value="Sobrenome:" />
-					<p:inputText value="#{GestorBean.gestor.sobrenome}" size="30" required="true" label="sobrenome" id="sobrenome" requiredMessage="Sobrenome não deve estar vazio!">
-						<f:validateLength minimum="3" />
-					</p:inputText>
-					
-					<p:outputLabel for="sexo" value="Sexo:" />
-					<p:selectOneMenu id="sexo" value="#{GestorBean.gestor.sexo}" style="width:150px" required="true" label="Sexo" requiredMessage="Sexo não deve estar vazio!">
-						<f:selectItem itemLabel="Masculino" itemValue="Masculino" />
-						<f:selectItem itemLabel="Feminino" itemValue="Feminino" />
-						<f:validateLength minimum="3" />
-					</p:selectOneMenu>
-					
-					<p:outputLabel for="datanasc" value="Data de nascimento:" />
-					<p:inputMask value="#{GestorBean.gestor.datanasc}" mask="99/99/9999"  size="30" placeholder="dd/mm/aaaa" required="true" label="datanasc" id="datanasc"
-						requiredMessage="Data de nascimento deve ser informada!">
-						<f:converter converterId="javax.faces.DateTime" />
-						<f:convertDateTime pattern="dd/MM/yyyy" timeZone="GMT-3" />
-					</p:inputMask>
-					
-					<p:outputLabel for="cpf" value="CPF:" />
-					<p:inputMask id="cpf" value="#{GestorBean.gestor.CPF}" mask="999.999.999-99"  size="30" required="true" label="CPF" requiredMessage="CPF deve ser informado!" />
+						<p:outputLabel for="nome" value="Nome:" />
+						<p:inputText value="#{GestorBean.gestor.nome}" size="30"
+							required="true" label="nome" id="nome"
+							requiredMessage="Nome não deve estar vazio!">
+							<f:validateLength minimum="3" />
+						</p:inputText>
 
-					<p:outputLabel for="rg" value="RG:" />
-					<p:inputMask id="rg" value="#{GestorBean.gestor.RG}" mask="99.999.999-9" required="true"  size="30" label="RG"	requiredMessage="RG deve ser informado!" />
-					
-					
-					<p:outputLabel for="telefone" value="Telefone:" />
-					<p:inputMask value="#{GestorBean.gestor.telefone}" mask="(99) 99999-9999" required="true"  size="30" label="Telefone"	id="telefone" />
-					
-					<p:outputLabel for="formacaoAcad" value="Formação acadêmica:" />
-					<p:inputText value="#{GestorBean.gestor.formacaoAcad}" required="true" label="Formação acadêmica"  size="30" id="formacaoAcad"
-						requiredMessage="Formação acadêmica deve ser informada!" />
-					
-					<p:outputLabel for="instAcad" value="Instituição acadêmica:" />
-					<p:inputText value="#{GestorBean.gestor.instituicaoAcad}" required="true" label="Instituição acadêmica"  size="30" id="instAcad"
-					requiredMessage="Instituição acadêmica deve ser informada!" />
-					
-					<p:outputLabel for="anoConclusao" value="Ano conclusão:" />
-					<p:inputMask id="anoConclusao"	value="#{GestorBean.gestor.anoConclusao}" mask="99/99/9999"  size="30"
-						placeholder="dd/mm/aaaa" required="false" label="Ano conclusão">
-						<f:converter converterId="javax.faces.DateTime" />
-						<f:convertDateTime pattern="dd/MM/yyyy" timeZone="GMT-3" />
-					</p:inputMask>
-					
-					<p:outputLabel for="dataIngresso" value="Data de ingresso:" />
-					<p:inputMask id="dataIngresso" 	value="#{GestorBean.gestor.dataIngresso}" mask="99/99/9999"	 size="30" placeholder="dd/mm/aaaa" required="true" label="Data de ingresso"
-						requiredMessage="Data de ingresso deve ser informada!">
-						<f:converter converterId="javax.faces.DateTime" />
-						<f:convertDateTime pattern="dd/MM/yyyy" timeZone="GMT-3" />
-					</p:inputMask>
+						<p:outputLabel for="sobrenome" value="Sobrenome:" />
+						<p:inputText value="#{GestorBean.gestor.sobrenome}" size="30"
+							required="true" label="sobrenome" id="sobrenome"
+							requiredMessage="Sobrenome não deve estar vazio!">
+							<f:validateLength minimum="3" />
+						</p:inputText>
 
-					<p:outputLabel for="dataSaida" value="Data de saída:" />
-					<p:inputMask id="dataSaida" value="#{GestorBean.gestor.dataSaida}" mask="99/99/9999"  size="30" placeholder="dd/mm/aaaa" required="false" label="Data de saída">
-						<f:converter converterId="javax.faces.DateTime" />
-						<f:convertDateTime pattern="dd/MM/yyyy" timeZone="GMT-3" />
-					</p:inputMask>	
-					
-					<p:outputLabel for="email" value="Email:" />
-					<p:inputText id="email" required="true" size="40" requiredMessage="Insira o endereço de email"	validatorMessage="Formato de email invalido"
-						value="#{GestorBean.gestor.email}" label="Email">
-						<f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
-					</p:inputText>
-					
-					<p:outputLabel for="status" value="Situação:" />
-					<p:selectOneMenu id="status" value="#{GestorBean.gestor.status}" style="width:150px" required="true" label="Status">
-						<f:selectItem itemLabel="Inativo" itemValue="#{false}" />
-						<f:selectItem itemLabel="Ativo" itemValue="#{true}" />
-					</p:selectOneMenu>
-	
-					<p:outputLabel for="login" value="Login:" />
-					<p:inputText value="#{GestorBean.gestor.login}" size="30" required="true" label="Login" id="login" requiredMessage="Login não deve estar vazio!">
-						<f:validateLength minimum="6" />
-					</p:inputText>
-	
+						<p:outputLabel for="sexo" value="Sexo:" />
+						<p:selectOneMenu id="sexo" value="#{GestorBean.gestor.sexo}"
+							style="width:150px" required="true" label="Sexo"
+							requiredMessage="Sexo não deve estar vazio!">
+							<f:selectItem itemLabel="Masculino" itemValue="Masculino" />
+							<f:selectItem itemLabel="Feminino" itemValue="Feminino" />
+							<f:validateLength minimum="3" />
+						</p:selectOneMenu>
+
+						<p:outputLabel for="datanasc" value="Data de nascimento:" />
+						<p:inputMask value="#{GestorBean.gestor.datanasc}"
+							mask="99/99/9999" size="30" placeholder="dd/mm/aaaa"
+							required="true" label="datanasc" id="datanasc"
+							requiredMessage="Data de nascimento deve ser informada!">
+							<f:converter converterId="javax.faces.DateTime" />
+							<f:convertDateTime pattern="dd/MM/yyyy" timeZone="GMT-3" />
+						</p:inputMask>
+
+						<p:outputLabel for="cpf" value="CPF:" />
+						<p:inputMask id="cpf" value="#{GestorBean.gestor.CPF}"
+							mask="999.999.999-99" size="30" required="true" label="CPF"
+							requiredMessage="CPF deve ser informado!" />
+
+						<p:outputLabel for="rg" value="RG:" />
+						<p:inputMask id="rg" value="#{GestorBean.gestor.RG}"
+							mask="99.999.999-9" required="true" size="30" label="RG"
+							requiredMessage="RG deve ser informado!" />
+
+
+						<p:outputLabel for="telefone" value="Telefone:" />
+						<p:inputMask value="#{GestorBean.gestor.telefone}"
+							mask="(99) 99999-9999" required="true" size="30" label="Telefone"
+							id="telefone" />
+
+						<p:outputLabel for="formacaoAcad" value="Formação acadêmica:" />
+						<p:inputText value="#{GestorBean.gestor.formacaoAcad}"
+							required="true" label="Formação acadêmica" size="30"
+							id="formacaoAcad"
+							requiredMessage="Formação acadêmica deve ser informada!" />
+
+						<p:outputLabel for="instAcad" value="Instituição acadêmica:" />
+						<p:inputText value="#{GestorBean.gestor.instituicaoAcad}"
+							required="true" label="Instituição acadêmica" size="30"
+							id="instAcad"
+							requiredMessage="Instituição acadêmica deve ser informada!" />
+
+						<p:outputLabel for="anoConclusao" value="Ano conclusão:" />
+						<p:inputMask id="anoConclusao"
+							value="#{GestorBean.gestor.anoConclusao}" mask="99/99/9999"
+							size="30" placeholder="dd/mm/aaaa" required="false"
+							label="Ano conclusão">
+							<f:converter converterId="javax.faces.DateTime" />
+							<f:convertDateTime pattern="dd/MM/yyyy" timeZone="GMT-3" />
+						</p:inputMask>
+
+						<p:outputLabel for="dataIngresso" value="Data de ingresso:" />
+						<p:inputMask id="dataIngresso"
+							value="#{GestorBean.gestor.dataIngresso}" mask="99/99/9999"
+							size="30" placeholder="dd/mm/aaaa" required="true"
+							label="Data de ingresso"
+							requiredMessage="Data de ingresso deve ser informada!">
+							<f:converter converterId="javax.faces.DateTime" />
+							<f:convertDateTime pattern="dd/MM/yyyy" timeZone="GMT-3" />
+						</p:inputMask>
+
+						<p:outputLabel for="dataSaida" value="Data de saída:" />
+						<p:inputMask id="dataSaida" value="#{GestorBean.gestor.dataSaida}"
+							mask="99/99/9999" size="30" placeholder="dd/mm/aaaa"
+							required="false" label="Data de saída">
+							<f:converter converterId="javax.faces.DateTime" />
+							<f:convertDateTime pattern="dd/MM/yyyy" timeZone="GMT-3" />
+						</p:inputMask>
+
+						<p:outputLabel for="email" value="Email:" />
+						<p:inputText id="email" required="true" size="40"
+							requiredMessage="Insira o endereço de email"
+							validatorMessage="Formato de email invalido"
+							value="#{GestorBean.gestor.email}" label="Email">
+							<f:validateRegex
+								pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+						</p:inputText>
+
+						<p:outputLabel for="status" value="Situação:" />
+						<p:selectOneMenu id="status" value="#{GestorBean.gestor.status}"
+							style="width:150px" required="true" label="Status">
+							<f:selectItem itemLabel="Inativo" itemValue="#{false}" />
+							<f:selectItem itemLabel="Ativo" itemValue="#{true}" />
+						</p:selectOneMenu>
+
+						<p:outputLabel for="login" value="Login:" />
+						<p:inputText value="#{GestorBean.gestor.login}" size="30"
+							required="true" label="Login" id="login"
+							requiredMessage="Login não deve estar vazio!">
+							<f:validateLength minimum="6" />
+						</p:inputText>
+
 						<p:outputLabel for="senha" value="Senha:" />
-						<p:password value="#{GestorBean.gestor.senha}" size="30" required="true" label="Senha" id="senha"	requiredMessage="Senha não deve estar vazio!">
+						<p:password value="#{GestorBean.gestor.senha}" size="30"
+							required="true" label="Senha" id="senha"
+							requiredMessage="Senha não deve estar vazio!">
 							<f:validateLength minimum="8" />
 						</p:password>
-						
-						<p:commandButton value="Incluir foto" type="button" onclick="PF('dialogIncluirFoto').show();" icon="ui-icon-image" />
-				</p:panelGrid>
 
-				<h3>Endereço</h3>
-				<p:separator/>
-					
-				<h:panelGrid columns="6" id="panelGridLogradouro">
-				
+						<p:commandButton value="Incluir foto" type="button"
+							onclick="PF('dialogIncluirFoto').show();" icon="ui-icon-image" />
+					</p:panelGrid>
+
+					<h3>Endereço</h3>
+					<p:separator />
+
+					<h:panelGrid columns="6" id="panelGridLogradouro">
+
 						<p:outputLabel for="cep" value="CEP:" />
-						<p:autoComplete value="#{GestorBean.gestor.logradouro}" size="30" completeMethod="#{LogradouroBean.completeLogradouro()}"
-							var="logradouro" itemLabel="#{logradouro.CEP}" 	itemValue="#{logradouro}" forceSelection="true" required="true"
+						<p:autoComplete value="#{GestorBean.gestor.logradouro}" size="30"
+							completeMethod="#{LogradouroBean.completeLogradouro()}"
+							var="logradouro" itemLabel="#{logradouro.CEP}"
+							itemValue="#{logradouro}" forceSelection="true" required="true"
 							requiredMessage="CEP deve ser informado!" label="CEP" id="cep">
-							<p:ajax event="itemSelect"	listener="#{LogradouroBean.completeLogradouro()}" update="panelGridLogradouro" />
+							<p:ajax event="itemSelect"
+								listener="#{LogradouroBean.completeLogradouro()}"
+								update="panelGridLogradouro" />
 						</p:autoComplete>
-						
+
 						<p:outputLabel value="Endereço:" />
-						<p:inputText value="#{GestorBean.gestor.logradouro.nome}"  size="40" />
-						
+						<p:inputText value="#{GestorBean.gestor.logradouro.nome}"
+							size="40" />
+
 						<p:outputLabel value="Bairro:" />
-						<p:inputText value="#{GestorBean.gestor.logradouro.bairro.nome}" size="30" />
-						
+						<p:inputText value="#{GestorBean.gestor.logradouro.bairro.nome}"
+							size="30" />
+
 						<p:outputLabel value="Municipio:" />
-						<p:inputText value="#{GestorBean.gestor.logradouro.bairro.municipio.nome}" size="30" />
-						
+						<p:inputText
+							value="#{GestorBean.gestor.logradouro.bairro.municipio.nome}"
+							size="30" />
+
 						<p:outputLabel value="Estado:" />
-						<p:inputText	value="#{GestorBean.gestor.logradouro.bairro.municipio.uf.nome}" size="30" />
+						<p:inputText
+							value="#{GestorBean.gestor.logradouro.bairro.municipio.uf.nome}"
+							size="30" />
 
 						<p:outputLabel for="numero" value="Número:" />
-						<p:inputText value="#{GestorBean.gestor.numero}" 	required="true" label="Número" size="30" id="numero"	requiredMessage="Número deve ser informado!" />
+						<p:inputText value="#{GestorBean.gestor.numero}" required="true"
+							label="Número" size="30" id="numero"
+							requiredMessage="Número deve ser informado!" />
 
 						<p:outputLabel for="complemento" value="Complemento:" />
-						<p:inputText value="#{GestorBean.gestor.complemento}"	size="30" required="true" label="Complemento" id="complemento"	requiredMessage="Complemento deve ser informado!" />
+						<p:inputText value="#{GestorBean.gestor.complemento}" size="30"
+							required="true" label="Complemento" id="complemento"
+							requiredMessage="Complemento deve ser informado!" />
 					</h:panelGrid>
-					
+
 					<div id="botoes">
-						<p:commandButton value="Salvar" id="withIcon" actionListener="#{GestorBean.cadastrar}" icon="ui-icon-disk" update=":formPrincipal:tabelaGestor @form growl "
-							oncomplete="closeDialogIfSucess(xhr, status, args, 'dialogCadastrar','formCad')" onsuccess="PF('dialogCadastrar').hide();" />
-							
-						<p:commandButton value="Limpar" update="@form " process="@this" icon="ui-icon-close">
+						<p:commandButton value="Salvar" id="withIcon"
+							actionListener="#{GestorBean.cadastrar}" icon="ui-icon-disk"
+							update=":formPrincipal:tabelaGestor @form growl "
+							oncomplete="closeDialogIfSucess(xhr, status, args, 'dialogCadastrar','formCad')"
+							onsuccess="PF('dialogCadastrar').hide();" />
+
+						<p:commandButton value="Limpar" update="@form " process="@this"
+							icon="ui-icon-close">
 							<p:resetInput target="panelCadastrar panelGridLogradouro" />
 						</p:commandButton>
 					</div>
 				</h:form>
 			</p:dialog>
-			
-			<p:dialog header="Incluir Foto" widgetVar="dialogIncluirFoto" modal="true" resizable="true" id="formCadFoto" appendTo="@(body)">
+
+			<p:dialog header="Incluir Foto" widgetVar="dialogIncluirFoto"
+				modal="true" resizable="true" id="formCadFoto" appendTo="@(body)">
 				<h:form id="IncluirFoto" styleClass="IncluirFoto">
-						<p:focus context="@form" />
-						<h4>Selecione uma foto para anexar ao cadastro do gestor:</h4>
-						<p:separator/>
-						<p:fileUpload fileUploadListener="#{GestorBean.uploadAction}" size="50" mode="advanced" skinSimple="true" update="growl"	sizeLimit="100000" fileLimit="1"
-								allowTypes="/(\.|\/)(gif|jpe?g|png)$/" id="IncluirFoto"/>
+					<p:focus context="@form" />
+					<h4>Selecione uma foto para anexar ao cadastro do gestor:</h4>
+					<p:separator />
+					<p:fileUpload fileUploadListener="#{GestorBean.uploadAction}"
+						size="50" mode="advanced" skinSimple="true" update="growl"
+						sizeLimit="100000" fileLimit="1"
+						allowTypes="/(\.|\/)(gif|jpe?g|png)$/" id="IncluirFoto" />
 				</h:form>
 			</p:dialog>
-		
-				
-				<p:dialog header="Alterar" widgetVar="dialogAlterar" modal="true" resizable="true" id="formAlt" appendTo="@(body)">
-					<h:form id="formAlterar" styleClass="formAlterar">
-						<p:focus context="@form" />
-						<p:growl id="growl" showDetail="true" life="4000" />
-						<h:outputText value="Campos obrigatórios * " style="font-size: 10px !important; top: 5px !important" />	
-					
-					
+
+
+			<p:dialog header="Alterar" widgetVar="dialogAlterar" modal="true"
+				resizable="true" id="formAlt" appendTo="@(body)">
+				<h:form id="formAlterar" styleClass="formAlterar">
+					<p:focus context="@form" />
+					<p:growl id="growl" showDetail="true" life="4000" />
+					<h:outputText value="Campos obrigatórios * "
+						style="font-size: 10px !important; top: 5px !important" />
+
+
 					<h3>Dados de Cadastro</h3>
-						<p:separator/>
-						<p:panelGrid id="panelAlterar" columns="6">
+					<p:separator />
+					<p:panelGrid id="panelAlterar" columns="6">
 
-							<p:outputLabel for="nome" value="Nome:" />
-							<p:inputText value="#{GestorBean.gestor.nome}" required="true" label="nome" id="nome" requiredMessage="Nome não deve estar vazio!">
-								<f:validateLength minimum="3" />
-							</p:inputText>
-			
-							<p:outputLabel for="sobrenome" value="Sobrenome:" />
-							<p:inputText value="#{GestorBean.gestor.sobrenome}" required="true" label="sobrenome" id="sobrenome"
-								requiredMessage="Sobrenome não deve estar vazio!">
-								<f:validateLength minimum="3" />
-							</p:inputText>
-			
-							<p:outputLabel for="sexo" value="Sexo:" />
-							<p:selectOneMenu id="sexo" value="#{GestorBean.gestor.sexo}" style="width:150px" required="true" label="Sexo">
-								<f:selectItem itemLabel="Masculino" itemValue="Masculino" />
-								<f:selectItem itemLabel="Feminino" itemValue="Feminino" />
-							</p:selectOneMenu>
-			
-							<p:outputLabel for="datanasc" value="Data de nascimento:" />
-							<p:inputMask value="#{GestorBean.gestor.datanasc}" mask="99/99/9999" placeholder="dd/mm/aaaa" required="true" label="datanasc"
-								id="datanasc" requiredMessage="Data de nascimento deve ser informada!">
-								<f:converter converterId="javax.faces.DateTime" />
-								<f:convertDateTime pattern="dd/MM/yyyy" timeZone="GMT-3" />
-							</p:inputMask>
-			
-							<p:outputLabel for="cpf" value="CPF:" />
-							<p:inputMask id="cpf" value="#{GestorBean.gestor.CPF}" 	mask="999.999.999-99" required="true" label="CPF" requiredMessage="CPF deve ser informado!" />
-			
-							<p:outputLabel for="rg" value="RG:" />
-							<p:inputMask id="rg" value="#{GestorBean.gestor.RG}" mask="99.999.999-9" required="true" label="RG" requiredMessage="RG deve ser informado!" />
-			
-							<p:outputLabel for="telefone" value="Telefone:" />
-							<p:inputMask value="#{GestorBean.gestor.telefone}" mask="(99) 99999-9999" required="true" label="Telefone"	id="telefone" />
-								
-							<p:outputLabel for="formacaoAcad" value="Formação acadêmica:" />
-							<p:inputText value="#{GestorBean.gestor.formacaoAcad}" 	required="true" label="Formação acadêmica" id="formacaoAcad" requiredMessage="Formação acadêmica deve ser informada!" />
-			
-							<p:outputLabel for="instAcad" value="Instituição acadêmica:" />
-							<p:inputText value="#{GestorBean.gestor.instituicaoAcad}" required="true" label="Instituição acadêmica" id="instAcad" requiredMessage="Instituição acadêmica deve ser informada!" />
-							
-							<p:outputLabel for="anoConclusao" value="Ano conclusão:" />
-							<p:inputMask id="anoConclusao" value="#{GestorBean.gestor.anoConclusao}" mask="99/99/9999"	placeholder="dd/mm/aaaa" required="false" label="Ano conclusão">
-								<f:converter converterId="javax.faces.DateTime" />
-								<f:convertDateTime pattern="dd/MM/yyyy" timeZone="GMT-3" />
-							</p:inputMask>
-							
-							<p:outputLabel for="dataIngresso" value="Data de ingresso:" />
-							<p:inputMask id="dataIngresso" value="#{GestorBean.gestor.dataIngresso}" mask="99/99/9999"	placeholder="dd/mm/aaaa" required="true" label="Data de ingresso"
-								requiredMessage="Data de ingresso deve ser informada!">
-								<f:converter converterId="javax.faces.DateTime" />
-								<f:convertDateTime pattern="dd/MM/yyyy" timeZone="GMT-3" />
-							</p:inputMask>
-			
-							<p:outputLabel for="dataSaida" value="Data de saída:" />
-							<p:inputMask id="dataSaida" value="#{GestorBean.gestor.dataSaida}" mask="99/99/9999" placeholder="dd/mm/aaaa" required="false"	label="Data de saída">
-								<f:converter converterId="javax.faces.DateTime" />
-								<f:convertDateTime pattern="dd/MM/yyyy" timeZone="GMT-3" />
-							</p:inputMask>
-			
-							<p:outputLabel for="email" value="Email:" />
-							<p:inputText id="email" required="true" size="40" requiredMessage="Insira o endereço de email" validatorMessage="Formato de email invalido"
-								value="#{GestorBean.gestor.email}" label="Email">
-								<f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
-							</p:inputText>
-							
-							<p:outputLabel for="status" value="Situação:" />
-							<p:selectOneMenu id="status" value="#{GestorBean.gestor.status}" style="width:150px" required="true" label="Status">
-								<f:selectItem itemLabel="Inativo" itemValue="#{false}" />
-								<f:selectItem itemLabel="Ativo" itemValue="#{true}" />
-							</p:selectOneMenu>
-		
-							<p:outputLabel for="login" value="Login:" />
-							<p:inputText value="#{GestorBean.gestor.login}" required="true" label="Login" id="login"	requiredMessage="Login não deve estar vazio!">
-								<f:validateLength minimum="6" />
-							</p:inputText>
-		
+						<p:outputLabel for="nome" value="Nome:" />
+						<p:inputText value="#{GestorBean.gestor.nome}" required="true"
+							label="nome" id="nome"
+							requiredMessage="Nome não deve estar vazio!">
+							<f:validateLength minimum="3" />
+						</p:inputText>
+
+						<p:outputLabel for="sobrenome" value="Sobrenome:" />
+						<p:inputText value="#{GestorBean.gestor.sobrenome}"
+							required="true" label="sobrenome" id="sobrenome"
+							requiredMessage="Sobrenome não deve estar vazio!">
+							<f:validateLength minimum="3" />
+						</p:inputText>
+
+						<p:outputLabel for="sexo" value="Sexo:" />
+						<p:selectOneMenu id="sexo" value="#{GestorBean.gestor.sexo}"
+							style="width:150px" required="true" label="Sexo">
+							<f:selectItem itemLabel="Masculino" itemValue="Masculino" />
+							<f:selectItem itemLabel="Feminino" itemValue="Feminino" />
+						</p:selectOneMenu>
+
+						<p:outputLabel for="datanasc" value="Data de nascimento:" />
+						<p:inputMask value="#{GestorBean.gestor.datanasc}"
+							mask="99/99/9999" placeholder="dd/mm/aaaa" required="true"
+							label="datanasc" id="datanasc"
+							requiredMessage="Data de nascimento deve ser informada!">
+							<f:converter converterId="javax.faces.DateTime" />
+							<f:convertDateTime pattern="dd/MM/yyyy" timeZone="GMT-3" />
+						</p:inputMask>
+
+						<p:outputLabel for="cpf" value="CPF:" />
+						<p:inputMask id="cpf" value="#{GestorBean.gestor.CPF}"
+							mask="999.999.999-99" required="true" label="CPF"
+							requiredMessage="CPF deve ser informado!" />
+
+						<p:outputLabel for="rg" value="RG:" />
+						<p:inputMask id="rg" value="#{GestorBean.gestor.RG}"
+							mask="99.999.999-9" required="true" label="RG"
+							requiredMessage="RG deve ser informado!" />
+
+						<p:outputLabel for="telefone" value="Telefone:" />
+						<p:inputMask value="#{GestorBean.gestor.telefone}"
+							mask="(99) 99999-9999" required="true" label="Telefone"
+							id="telefone" />
+
+						<p:outputLabel for="formacaoAcad" value="Formação acadêmica:" />
+						<p:inputText value="#{GestorBean.gestor.formacaoAcad}"
+							required="true" label="Formação acadêmica" id="formacaoAcad"
+							requiredMessage="Formação acadêmica deve ser informada!" />
+
+						<p:outputLabel for="instAcad" value="Instituição acadêmica:" />
+						<p:inputText value="#{GestorBean.gestor.instituicaoAcad}"
+							required="true" label="Instituição acadêmica" id="instAcad"
+							requiredMessage="Instituição acadêmica deve ser informada!" />
+
+						<p:outputLabel for="anoConclusao" value="Ano conclusão:" />
+						<p:inputMask id="anoConclusao"
+							value="#{GestorBean.gestor.anoConclusao}" mask="99/99/9999"
+							placeholder="dd/mm/aaaa" required="false" label="Ano conclusão">
+							<f:converter converterId="javax.faces.DateTime" />
+							<f:convertDateTime pattern="dd/MM/yyyy" timeZone="GMT-3" />
+						</p:inputMask>
+
+						<p:outputLabel for="dataIngresso" value="Data de ingresso:" />
+						<p:inputMask id="dataIngresso"
+							value="#{GestorBean.gestor.dataIngresso}" mask="99/99/9999"
+							placeholder="dd/mm/aaaa" required="true" label="Data de ingresso"
+							requiredMessage="Data de ingresso deve ser informada!">
+							<f:converter converterId="javax.faces.DateTime" />
+							<f:convertDateTime pattern="dd/MM/yyyy" timeZone="GMT-3" />
+						</p:inputMask>
+
+						<p:outputLabel for="dataSaida" value="Data de saída:" />
+						<p:inputMask id="dataSaida" value="#{GestorBean.gestor.dataSaida}"
+							mask="99/99/9999" placeholder="dd/mm/aaaa" required="false"
+							label="Data de saída">
+							<f:converter converterId="javax.faces.DateTime" />
+							<f:convertDateTime pattern="dd/MM/yyyy" timeZone="GMT-3" />
+						</p:inputMask>
+
+						<p:outputLabel for="email" value="Email:" />
+						<p:inputText id="email" required="true" size="40"
+							requiredMessage="Insira o endereço de email"
+							validatorMessage="Formato de email invalido"
+							value="#{GestorBean.gestor.email}" label="Email">
+							<f:validateRegex
+								pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+						</p:inputText>
+
+						<p:outputLabel for="status" value="Situação:" />
+						<p:selectOneMenu id="status" value="#{GestorBean.gestor.status}"
+							style="width:150px" required="true" label="Status">
+							<f:selectItem itemLabel="Inativo" itemValue="#{false}" />
+							<f:selectItem itemLabel="Ativo" itemValue="#{true}" />
+						</p:selectOneMenu>
+
+						<p:outputLabel for="login" value="Login:" />
+						<p:inputText value="#{GestorBean.gestor.login}" required="true"
+							label="Login" id="login"
+							requiredMessage="Login não deve estar vazio!">
+							<f:validateLength minimum="6" />
+						</p:inputText>
+
 					</p:panelGrid>
-					
+
 					<h3>Endereço</h3>
-						<p:separator />
-					
+					<p:separator />
+
 					<h:panelGrid columns="6" id="panelGridAltLogradouro">
-					
-							<p:outputLabel for="cep" value="CEP:" />
-							<p:autoComplete value="#{GestorBean.gestor.logradouro}" completeMethod="#{LogradouroBean.completeLogradouro()}"
-								var="logradouro" itemLabel="#{logradouro.CEP}" 	itemValue="#{logradouro}" forceSelection="true" required="true"
-								requiredMessage="CEP deve ser informado!" label="CEP" id="cep">
-								<p:ajax event="itemSelect"	listener="#{LogradouroBean.completeLogradouro()}"	update="panelGridAltLogradouro" />
-							</p:autoComplete>
-							
-							<p:outputLabel value="Endereço:" />
-							<p:inputText value="#{GestorBean.gestor.logradouro.nome}" size="40" readonly="true" />
-							
-							<p:outputLabel value="Bairro:" />
-							<p:inputText value="#{GestorBean.gestor.logradouro.bairro.nome}"	readonly="true" />
-							
-							<p:outputLabel value="Municipio:" />
-							<p:inputText value="#{GestorBean.gestor.logradouro.bairro.municipio.nome}" readonly="true" />
-							
-							<p:outputLabel value="Estado:" />
-							<p:inputText	value="#{GestorBean.gestor.logradouro.bairro.municipio.uf.nome}"	readonly="true" />
 
-							<p:outputLabel for="numero" value="Número:" />
-							<p:inputText value="#{GestorBean.gestor.numero}" 	required="true" label="Número" id="numero"	requiredMessage="Número deve ser informado!" />
+						<p:outputLabel for="cep" value="CEP:" />
+						<p:autoComplete value="#{GestorBean.gestor.logradouro}"
+							completeMethod="#{LogradouroBean.completeLogradouro()}"
+							var="logradouro" itemLabel="#{logradouro.CEP}"
+							itemValue="#{logradouro}" forceSelection="true" required="true"
+							requiredMessage="CEP deve ser informado!" label="CEP" id="cep">
+							<p:ajax event="itemSelect"
+								listener="#{LogradouroBean.completeLogradouro()}"
+								update="panelGridAltLogradouro" />
+						</p:autoComplete>
 
-							<p:outputLabel for="complemento" value="Complemento:" />
-							<p:inputText value="#{GestorBean.gestor.complemento}"	size="30" required="true" label="Complemento" id="complemento"
-								requiredMessage="Complemento deve ser informado!" />
-						</h:panelGrid>
-						
+						<p:outputLabel value="Endereço:" />
+						<p:inputText value="#{GestorBean.gestor.logradouro.nome}"
+							size="40" readonly="true" />
+
+						<p:outputLabel value="Bairro:" />
+						<p:inputText value="#{GestorBean.gestor.logradouro.bairro.nome}"
+							readonly="true" />
+
+						<p:outputLabel value="Municipio:" />
+						<p:inputText
+							value="#{GestorBean.gestor.logradouro.bairro.municipio.nome}"
+							readonly="true" />
+
+						<p:outputLabel value="Estado:" />
+						<p:inputText
+							value="#{GestorBean.gestor.logradouro.bairro.municipio.uf.nome}"
+							readonly="true" />
+
+						<p:outputLabel for="numero" value="Número:" />
+						<p:inputText value="#{GestorBean.gestor.numero}" required="true"
+							label="Número" id="numero"
+							requiredMessage="Número deve ser informado!" />
+
+						<p:outputLabel for="complemento" value="Complemento:" />
+						<p:inputText value="#{GestorBean.gestor.complemento}" size="30"
+							required="true" label="Complemento" id="complemento"
+							requiredMessage="Complemento deve ser informado!" />
+					</h:panelGrid>
+
 					<div id="botoes">
-						<p:commandButton value="Salvar" id="withIcon" actionListener="#{GestorBean.alterar}" icon="ui-icon-disk"	update=":formPrincipal:tabelaGestor @form growl"
-							oncomplete="closeDialogIfSucess(xhr, status, args, 'dialogAlterar','formAlt')" 	onsuccess="PF('dialogAlterar').hide();" />
-					</div>		
+						<p:commandButton value="Salvar" id="withIcon"
+							actionListener="#{GestorBean.alterar}" icon="ui-icon-disk"
+							update=":formPrincipal:tabelaGestor @form growl"
+							oncomplete="closeDialogIfSucess(xhr, status, args, 'dialogAlterar','formAlt')"
+							onsuccess="PF('dialogAlterar').hide();" />
+					</div>
 				</h:form>
 			</p:dialog>
-	</ui:define>
-</ui:decorate>
-	
+		</ui:define>
+	</ui:decorate>
+
 
 </body>
 </html>
