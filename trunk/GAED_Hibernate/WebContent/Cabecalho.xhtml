@@ -22,15 +22,15 @@
 			
 			<div id="fieldset">
 	   			<p:fieldset>
-	   				<div id="label">
-						<h:outputLabel value="Olá,#{LoginBean.usuario.nome}"  />
-						<p:link value="Sair" action="#{LoginBean.encerrarSession()}"></p:link>
-					</div>
-					
-					<div id="foto">	
-						<h:graphicImage value="/imagens/logo_gaed_1.png" />
-					</div>
-					
+	   				<h:form rendered="#{LoginBean.verificarSessao()}">
+	   					<h:outputLabel value="Olá,#{LoginBean.usuario.nome}"  />
+							<div id="foto">
+								<h:graphicImage width="40" height="80"
+									value="/temp/#{LoginBean.verFoto()}" />
+							</div>
+							<h:commandButton value="Cerrar Sessão"
+							action="#{LoginBean.encerrarSession()}" />
+	   				</h:form>					
 				</p:fieldset>
 			</div>
 			
