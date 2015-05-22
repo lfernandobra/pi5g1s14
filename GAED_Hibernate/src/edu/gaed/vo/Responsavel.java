@@ -5,6 +5,7 @@ import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
@@ -14,6 +15,7 @@ import javax.persistence.Table;
 @Entity
 @PrimaryKeyJoinColumn(name="id_usuario")
 @Table(name = "responsavel")
+@DiscriminatorValue(value="RESPONSAVEL")
 public class Responsavel extends Usuario{
 	
 	/**
@@ -28,7 +30,7 @@ public class Responsavel extends Usuario{
 	private Set<Aluno> alunos = new HashSet<Aluno>();
 	
 	public Responsavel() {
-		super();
+		setPerfil(Perfil.RESPONSAVEL);
 	}
 	
 	public boolean getAdimplente() {

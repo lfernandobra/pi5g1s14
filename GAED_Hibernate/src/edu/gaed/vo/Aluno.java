@@ -4,6 +4,7 @@ import java.util.Date;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
@@ -14,6 +15,7 @@ import javax.persistence.Table;
 @Entity
 @PrimaryKeyJoinColumn(name="id_usuario")
 @Table(name = "aluno")
+@DiscriminatorValue(value="ALUNO")
 public class Aluno extends Usuario{
 	
 	/**
@@ -42,7 +44,7 @@ public class Aluno extends Usuario{
 	private Responsavel responsavel;
 		
 	public Aluno() {
-		super();
+		setPerfil(Perfil.ALUNO);
 	}
 
 	public String getEscolaAnterior() {

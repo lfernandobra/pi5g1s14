@@ -3,6 +3,7 @@ package edu.gaed.vo;
 import java.util.Date;
 
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
@@ -10,7 +11,12 @@ import javax.persistence.Table;
 @Entity
 @PrimaryKeyJoinColumn(name="id_usuario")
 @Table(name = "gestor")
+@DiscriminatorValue(value="GESTOR")
 public class Gestor extends Usuario{
+	
+	public Gestor(){
+		setPerfil(Perfil.GESTOR);
+	}
 	
 	/**
 	 * 
