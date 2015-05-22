@@ -5,12 +5,13 @@ import java.util.Date;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorColumn;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.DiscriminatorColumn;
-import javax.persistence.DiscriminatorType;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
@@ -21,8 +22,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "usuario")
 @Inheritance(strategy = InheritanceType.JOINED)
-@DiscriminatorColumn(name="Da_Classe", discriminatorType=DiscriminatorType.STRING)
-
+@DiscriminatorColumn(name="id_perfil")
 public class Usuario implements Serializable{
 	
 	
@@ -124,8 +124,8 @@ public class Usuario implements Serializable{
 	@JoinColumn(name="id_logradouro")
 	private Logradouro logradouro;
 	
-	@ManyToOne
-	@JoinColumn(name="id_perfil")
+	@Column(name="id_perfil",insertable=false, updatable=false)
+	@Enumerated(EnumType.STRING)
 	private Perfil perfil;
 		
 	
