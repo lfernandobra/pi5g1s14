@@ -29,7 +29,6 @@
 		<mapping class="edu.gaed.vo.Perfil" />
 		<mapping class="edu.gaed.vo.Periodo" />
 		<mapping class="edu.gaed.vo.Professor" />
-		<mapping class="edu.gaed.vo.ProfessorTurma" />
 		
 		<mapping class="edu.gaed.vo.Responsavel" />
 		<mapping class="edu.gaed.vo.Secretaria" />
