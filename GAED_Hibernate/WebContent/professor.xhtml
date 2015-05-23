@@ -58,8 +58,7 @@
 							<h3>Informações do professor</h3>
 							<p:panelGrid columns="2" columnClasses="label,value">
 								<h:outputText value="Foto " />
-								<h:graphicImage width="80" height="100"
-									value="/temp/#{FotoBean.verFoto(lista.foto.foto,lista.nome)}" />
+								<h:graphicImage width="80" height="100" value="/temp/#{FotoBean.verFoto(lista.foto.foto,lista.nome)}" />
 								<h:outputText value="Data de nascimento " />
 								<h:outputFormat value="{0, date, dd/MM/yyyy}">
 									<f:param value="#{lista.datanasc}" />

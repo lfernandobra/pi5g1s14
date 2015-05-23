@@ -26,24 +26,24 @@
 				
 		<h:form id="formPrincipal">
 				<p:growl id="growl" showDetail="true" life="4000" />
-			<p:dataTable var="lista" value="#{ResponsavelBean.responsavels}" id="tabelaResponsavel" resizableColumns="true" 
-						 reflow="true"  rows="5"    paginator="true" emptyMessage="Nenhum responsavel cadastrado">
+			<p:dataTable var="lista" value="#{ResponsavelBean.responsavels}"
+						id="tabelaResponsavel" resizableColumns="true" reflow="true" rows="5"
+						paginator="true" paginatorPosition="bottom"
+						emptyMessage="Nenhum responsável cadastrado">
 				         
-				
 				<p:column style="width:16px">
 					<p:rowToggler />
 				</p:column>
-				<p:column headerText="ID" sortBy="#{lista.id}"
+				<p:column headerText="ID" sortBy="#{lista.id}" style="width:130px"
 					filterBy="#{lista.id}">
 					<h:outputText value="#{lista.id}" />
 				</p:column>
+				<p:column headerText="Foto" style="width:130px">
+				<h:graphicImage width="50" height="60" value="/temp/#{FotoBean.verFoto(lista.foto.foto,lista.nome)}" />
+				</p:column>
 				<p:column headerText="Nome" sortBy="#{lista.nome}"
 					filterBy="#{lista.nome}">
-					<h:outputText value="#{lista.nome}" />
-				</p:column>
-				<p:column headerText="Sobrenome" sortBy="#{lista.sobrenome}"
-					filterBy="#{lista.sobrenome}">
-					<h:outputText value="#{lista.sobrenome}" />
+					<h:outputText value=" #{lista.nome} #{lista.sobrenome}" />
 				</p:column>
 				
 				<p:rowExpansion>
@@ -92,12 +92,12 @@
 
 					</p:panelGrid>
 				</p:rowExpansion>
-				<p:column headerText="Ações">
-					<p:commandButton value="Alterar" update=":formAlterar" oncomplete="PF('dialogAlterar').show();"	 icon="ui-icon-pencil">
+				<p:column style="width:60px">
+					<p:commandButton update=":formAlterar" oncomplete="PF('dialogAlterar').show();"	 icon="ui-icon-pencil">
 						<f:setPropertyActionListener
 							target="#{ResponsavelBean.responsavel}" value="#{lista}" />
 					</p:commandButton>
-					<p:commandButton value="Excluir"
+					<p:commandButton 
 						actionListener="#{ResponsavelBean.excluir(lista)}"
 						update=":formPrincipal:tabelaResponsavel"
 						icon="ui-icon-closethick">
@@ -239,10 +239,21 @@
 		<p:dialog header="Incluir Foto" widgetVar="dialogIncluirFoto" modal="true" resizable="true" id="formCadFoto" appendTo="@(body)">
 			<h:form id="IncluirFoto" styleClass="IncluirFoto">
 					<p:focus context="@form" />
-					<h4>Selecione uma foto para anexar ao cadastro do responsável:</h4>
+					<h4>Selecione uma foto para anexar ao cadastro :</h4>
 					<p:separator/>
-					<p:fileUpload fileUploadListener="#{ResponsavelBean.uploadAction}" size="50" mode="advanced" skinSimple="true" update="growl"	sizeLimit="100000" fileLimit="1"
-							allowTypes="/(\.|\/)(gif|jpe?g|png)$/" id="IncluirFoto"/>
+					<p:fileUpload fileUploadListener="#{ResponsavelBean.uploadAction()}"
+					size="50" mode="advanced" skinSimple="true" update="growl"
+					sizeLimit="1000000" fileLimit="1"
+					allowTypes="/(\.|\/)(doc|docx|xls|xlsx|pdf)$/" 
+					label="Selecionar"
+					uploadLabel="Enviar"
+					cancelLabel="Cancelar"
+					id="IncluirAnexo"
+					invalidSizeMessage="Limite excedido: Não possivel o envio"
+					invalidFileMessage="Formato de arquivo não permitido"
+					dragDropSupport="true">
+					<f:converter converterId="anexoConverter" />
+				</p:fileUpload>
 			</h:form>
 		</p:dialog>
 		
