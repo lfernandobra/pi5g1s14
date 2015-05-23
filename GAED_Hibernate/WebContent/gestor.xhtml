@@ -243,13 +243,6 @@
 								pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
 						</p:inputText>
 
-						<p:outputLabel for="status" value="Situação:" />
-						<p:selectOneMenu id="status" value="#{GestorBean.gestor.status}"
-							style="width:150px" required="true" label="Status">
-							<f:selectItem itemLabel="Inativo" itemValue="#{false}" />
-							<f:selectItem itemLabel="Ativo" itemValue="#{true}" />
-						</p:selectOneMenu>
-
 						<p:outputLabel for="login" value="Login:" />
 						<p:inputText value="#{GestorBean.gestor.login}" size="30"
 							required="true" label="Login" id="login"

@@ -6,8 +6,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 
 import org.primefaces.event.FileUploadEvent;
@@ -77,7 +79,10 @@ public class SecretariaBean extends UsuarioBean implements Serializable {
 	public void cadastrar(ActionEvent actionEvent) {
 		String senhaSCript = senhaMD5(secretaria.getSenha());
 		secretaria.setSenha(senhaSCript);
+		secretaria.setStatus(true);
 		new SecretariaDao().inserir(secretaria);
+		FacesContext context = FacesContext.getCurrentInstance();
+        context.addMessage(null, new FacesMessage("Cadastrado",  " Secretária(o) " + secretaria.getNome() + "  cadastrada(o) com sucesso!") );
 		secretarias = new SecretariaDao().listar();
 		secretaria = new Secretaria();
 	}
@@ -85,6 +90,8 @@ public class SecretariaBean extends UsuarioBean implements Serializable {
 	@SuppressWarnings("unchecked")
 	public void alterar() {
 		new SecretariaDao().alterar(secretaria);
+		FacesContext context = FacesContext.getCurrentInstance();
+        context.addMessage(null, new FacesMessage("Alterado",  " Secretária(o) " + secretaria.getNome() + "  Alterada(o) com sucesso!") );
 		secretarias = new SecretariaDao().listar();
 		secretaria = new Secretaria();
 	}
@@ -92,6 +99,8 @@ public class SecretariaBean extends UsuarioBean implements Serializable {
 	@SuppressWarnings("unchecked")
 	public void excluir(Secretaria secretaria) {
 		new SecretariaDao().excluir(secretaria);
+		FacesContext context = FacesContext.getCurrentInstance();
+        context.addMessage(null, new FacesMessage("Excluído", "Excluído com sucesso!") );
 		secretarias = new SecretariaDao().listar();
 		secretaria = new Secretaria();
 	}

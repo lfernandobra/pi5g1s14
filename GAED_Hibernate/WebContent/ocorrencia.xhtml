@@ -82,19 +82,15 @@
 							<p:separator/>
 						
 						<p:panelGrid id="panelBusca" columns="4">
-							<p:outputLabel for="turma" value="Turma: " />
-				            <p:selectOneMenu id="turma" value="#{OcorrenciaBean.turmas}" required="true">  
-				                <f:selectItem itemLabel="Selecione a turma" itemValue="" />  
-				                <f:selectItems value="#{TurmaBean.turmas}" var="turma"	itemValue="#{turma}" itemLabel="#{turma.nome}" />  
-				                <p:ajax update="alunos" listener="#{OcorrenciaBean.handleTurmaChange()}" />
-				                <f:converter converterId="turmaConverter" />  
-				            </p:selectOneMenu>  
-				  
-				  			<p:outputLabel for="alunos" value="Aluno: " />
-				            <p:selectOneMenu id="alunos" value="#{OcorrenciaBean.aluno}" required="true">  
-				                <f:selectItem itemLabel="Selecione o aluno " itemValue="" />  
-				                <f:selectItems value="#{OcorrenciaBean.aluno}" />  
-				            </p:selectOneMenu> 
+							<p:outputLabel for="aluno" value="Aluno" />
+								<p:autoComplete value="#{OcorrenciaBean.ocorrencia.aluno}"
+									completeMethod="#{AlunoBean.completeAluno()}"
+									var="alunos" itemLabel="#{alunos.nome}"
+									itemValue="#{alunos}" forceSelection="true" required="true"
+									requiredMessage="teste" label="Aluno" id="aluno">
+									<p:ajax event="itemSelect" listener="#{AlunoBean.completeAluno()}"
+										update="panelBusca" />
+								</p:autoComplete> 
 						</p:panelGrid>				
 						
 						<p:panelGrid id="panelCadastrar" columns="1">

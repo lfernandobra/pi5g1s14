@@ -61,6 +61,7 @@ public class GestorBean extends UsuarioBean implements Serializable {
 	public void cadastrar(ActionEvent actionEvent) {
 		String senhaSCript = senhaMD5(gestor.getSenha());
 		gestor.setSenha(senhaSCript);
+		gestor.setStatus(true);
 		new GestorDao().inserir(gestor);
 		FacesContext context = FacesContext.getCurrentInstance();
         context.addMessage(null, new FacesMessage("Cadastrado",  " Gestor(a) " + gestor.getNome() + "  cadastrado(a) com sucesso!") );

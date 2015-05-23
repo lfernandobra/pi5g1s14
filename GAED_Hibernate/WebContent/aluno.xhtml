@@ -42,14 +42,9 @@
 						<h:outputText value="#{lista.id}" />
 					</p:column>
 
-					<p:column headerText="Nome" sortBy="#{lista.nome}"
-						filterBy="#{lista.nome}">
-						<h:outputText value="#{lista.nome}" />
-					</p:column>
-
-					<p:column headerText="Sobrenome" sortBy="#{lista.sobrenome}"
-						filterBy="#{lista.sobrenome}">
-						<h:outputText value="#{lista.sobrenome}" />
+					<p:column headerText="Nome" sortBy="#{lista.nome} #{lista.sobrenome}"
+						filterBy="#{lista.nome} #{lista.sobrenome}">
+						<h:outputText value="#{lista.nome} " />
 					</p:column>
 
 					<p:rowExpansion>
@@ -244,22 +239,14 @@
 							pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
 					</p:inputText>
 
-					<p:outputLabel for="status" value="Situação:" />
-					<p:selectOneMenu id="status" value="#{AlunoBean.aluno.status}"
-						style="width:150px" required="true" label="Status"
-						requiredMessage="O status deve ser informado!">
-						<f:selectItem itemLabel="Inativo" itemValue="#{false}" />
-						<f:selectItem itemLabel="Ativo" itemValue="#{true}" />
-					</p:selectOneMenu>
-
 					<p:outputLabel for="resp" value="Responsável:" />
-					<h:selectOneMenu value="#{AlunoBean.aluno.responsavel}">
-						<f:selectItem itemLabel="-- Selecione --" noSelectionOption="true" />
+					<p:selectOneMenu value="#{AlunoBean.aluno.responsavel}">
+						<f:selectItem itemLabel=" -- Selecione -- " noSelectionOption="true" />
 						<f:selectItems value="#{ResponsavelBean.responsavels}"
 							var="responsavel" itemValue="#{responsavel}"
 							itemLabel="#{responsavel.nome}" id="resp" />
 						<f:converter converterId="responsavelConverter"/>
-					</h:selectOneMenu>
+					</p:selectOneMenu>
 
 					<p:outputLabel for="login" value="Login:" />
 					<p:inputText value="#{AlunoBean.aluno.login}" size="30"
@@ -344,7 +331,7 @@
 			modal="true" resizable="true" id="formCadFoto" appendTo="@(body)">
 			<h:form id="IncluirFoto" styleClass="IncluirFoto">
 				<p:focus context="@form" />
-				<h4>Selecione uma foto para anexar ao cadastro do aluno:</h4>
+				<h4>Selecione uma foto para anexar ao cadastro :</h4>
 				<p:separator />
 				<p:fileUpload fileUploadListener="#{AlunoBean.uploadAction}"
 					size="50" mode="advanced" skinSimple="true" update="growl"
