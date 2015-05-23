@@ -28,20 +28,21 @@
 					<p:growl id="growl" showDetail="true" life="4000" />
 					<p:dataTable var="lista" value="#{OcorrenciaBean.ocorrencias}" id="tabelaOcorrencia" resizableColumns="true" reflow="true" rows="5"	emptyMessage="Nenhum registro encontrado" paginator="true"
 						paginatorPosition="bottom" styleClass="dataTablePrincipal">
+						
+						<p:column style="width:16px">
+						<p:rowToggler />
+						</p:column>
 		
 						<f:facet name="header">Lista de Ocorrencia 	</f:facet>
 						
-						<p:column style="width:16px">
-							<p:rowToggler />
-						</p:column>
-						<p:column headerText="ID" sortBy="#{lista.id}" filterBy="#{lista.id}">
+						<p:column headerText="ID" sortBy="#{lista.id}" filterBy="#{lista.id}" style="width:130px">
 							<h:outputText value="#{lista.id}" />
 						</p:column>
 						<p:column headerText="Assunto" sortBy="#{lista.assunto}" filterBy="#{lista.assunto}">
 							<h:outputText value="#{lista.assunto}" />
 						</p:column>
 						<p:column headerText="Aluno" sortBy="#{lista.aluno.nome}" filterBy="#{lista.aluno}">
-							<h:outputText value="#{lista.aluno.nome}" />
+							<h:outputText value="#{lista.aluno.nome} #{lista.aluno.sobrenome}" />
 						</p:column>
 						<p:column headerText="Turma" sortBy="#{lista.aluno.turma.nome}" filterBy="#{lista.assunto}">
 							<h:outputText value="#{lista.aluno.turma.nome}" />
@@ -53,13 +54,13 @@
 							</p:panelGrid>
 						</p:rowExpansion>
 		
-						<p:column headerText="Ações">
-							<p:commandButton value="Alterar" update=":formAlterar" oncomplete="PF('dialogAlterar').show();" icon="ui-icon-pencil">
+						 <p:column style="width:60px">
+							<p:commandButton update=":formAlterar" oncomplete="PF('dialogAlterar').show();" icon="ui-icon-pencil">
 								<f:setPropertyActionListener target="#{OcorrenciaBean.ocorrencia}"
 									value="#{lista}" />
 							</p:commandButton>
 		
-							<p:commandButton value="Excluir" actionListener="#{OcorrenciaBean.excluir(lista)}" update=":formPrincipal:tabelaOcorrencia" icon="ui-icon-closethick">
+							<p:commandButton actionListener="#{OcorrenciaBean.excluir(lista)}" update=":formPrincipal:tabelaOcorrencia" icon="ui-icon-closethick">
 								<p:confirm header="Excluir Ocorrencia" message="Deseja excluir?" icon="ui-icon-alert" />
 							</p:commandButton>
 							<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
@@ -81,21 +82,21 @@
 							<h3>Dados da ocorrência</h3>
 							<p:separator/>
 						
-						<p:panelGrid id="panelBusca" columns="4">
+						<p:panelGrid id="panelCadastrar" columns="2">
+							
 							<p:outputLabel for="aluno" value="Aluno" />
 								<p:autoComplete value="#{OcorrenciaBean.ocorrencia.aluno}"
 									completeMethod="#{AlunoBean.completeAluno()}"
-									var="alunos" itemLabel="#{alunos.nome}"
-									itemValue="#{alunos}" forceSelection="true" required="true"
+									converter="#{companyConverter}" 
+									var="alunos" itemLabel="#{alunos.nome}  #{alunos.sobrenome}"
+									itemValue="alunos" forceSelection="true" required="true"
 									requiredMessage="teste" label="Aluno" id="aluno">
 									<p:ajax event="itemSelect" listener="#{AlunoBean.completeAluno()}"
-										update="panelBusca" />
+										update="panelCadastrar" />
 								</p:autoComplete> 
-						</p:panelGrid>				
 						
-						<p:panelGrid id="panelCadastrar" columns="1">
 							<p:outputLabel for="assunto" value="Assunto:" />
-							<p:inputText value="#{OcorrenciaBean.ocorrencia.assunto}" size="80" required="true" id="assunto" requiredMessage="Assunto não deve estar vazio!" />
+							<p:inputText value="#{OcorrenciaBean.ocorrencia.assunto}" size="70" required="true" id="assunto" requiredMessage="Assunto não deve estar vazio!" />
 							
 							<p:outputLabel for="data" value="Data:" />
 							<p:inputMask value="#{OcorrenciaBean.ocorrencia.data}" mask="99/99/9999" placeholder="dd/mm/aaaa" required="true"	label="data" id="data"

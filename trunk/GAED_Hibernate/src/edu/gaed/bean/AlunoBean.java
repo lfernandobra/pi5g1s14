@@ -2,6 +2,7 @@ package edu.gaed.bean;
 
 import java.io.IOException;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -100,6 +101,14 @@ public class AlunoBean extends UsuarioBean implements Serializable{
 		this.fotoBean.fileUpload(event);
 		this.aluno.setFoto(this.fotoBean.getFoto());
 	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Aluno> completeAluno(){
+        Set<Aluno> alunos = new AlunoDao().listar();
+        List <Aluno> listAluno = new ArrayList <Aluno> (alunos);
+        listAluno.toString();
+        return listAluno;
+    }
 
 	
 
