@@ -56,6 +56,7 @@ public class ResponsavelBean extends UsuarioBean implements Serializable {
 	public void cadastrar(){
 		String senhaSCript = senhaMD5(responsavel.getSenha());
 		responsavel.setSenha(senhaSCript);
+		responsavel.setStatus(true);
 		new ResponsavelDao().inserir(responsavel);
 		FacesContext context = FacesContext.getCurrentInstance();
         context.addMessage(null, new FacesMessage("Cadastrado",  " Responsável " + responsavel.getNome() + "  cadastrado com sucesso!") );
