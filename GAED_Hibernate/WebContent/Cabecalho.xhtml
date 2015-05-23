@@ -23,7 +23,7 @@
 			<div id="fieldset">
 	   			<p:fieldset>
 	   				<h:form rendered="#{LoginBean.verificarSessao()}">
-	   					<h:outputLabel value="Olá,#{LoginBean.usuario.nome}"  />
+	   					<h:outputLabel value="Olá,#{LoginBean.usuario.nome} #{LoginBean.usuario.sobrenome}" />
 							<div id="foto">
 								<h:graphicImage width="40" height="80"
 									value="/temp/#{LoginBean.verFoto()}" />
@@ -36,37 +36,40 @@
 			
 			<h:form>  
 			    <p:growl id="messages"/>
-			 
 			    <p:menubar styleClass="menu">
-			        <p:menuitem value="Home" url="http://www.primefaces.org" icon="ui-icon-home" action="home.xhtml"/>
-			 
-			        <p:submenu label="Ocorrência" icon="ui-icon-document-b">
-			            <p:menuitem value="Cadastrar" url="#" icon="ui-icon-arrowreturnthick-1-w" />
-			            <p:menuitem value="Consultar" url="#" icon="ui-icon-arrowreturnthick-1-e" />
-			        </p:submenu>
-			 
-			        <p:submenu label="Boletim" icon="ui-icon-document">
-			            <p:menuitem value="Criar" url="#" icon="ui-icon-arrowreturnthick-1-w" />
-			            <p:menuitem value="Visualizar" url="#" icon="ui-icon-arrowreturnthick-1-e" />
-			        </p:submenu>
+			        <p:menuitem value="Home"  
+			        			icon="ui-icon-home" 
+			        			action="home"/>
+			 			        
+			        <p:menuitem value="Ocorrência" 
+			        			icon="ui-icon-document-b" 
+			        			action="ocorrencia"/>
+			 			        
+			        <p:menuitem value="Boletim" 
+			        			icon="ui-icon-document" 
+			        			action="boletim"/>
 			        
-			        <p:submenu label="Tarefas" icon="ui-icon-note">
-			            <p:menuitem value="Criar" url="#" icon="ui-icon-arrowreturnthick-1-w" />
-			            <p:menuitem value="Visualizar" url="#" icon="ui-icon-arrowreturnthick-1-e" />
-			        </p:submenu>
+			        <p:menuitem value="Tarefas"  
+			        			icon="ui-icon-note" 
+			        			action="tarefa"/>
 			 
-			        <p:submenu label="Usuarios" icon="ui-icon-person">
-			         <p:menuitem value="Aluno" url="#" icon="ui-icon-person" > </p:menuitem>
-			            
-			        <p:menuitem value="Responsavel" url="#" icon="ui-icon-person" ></p:menuitem>
-			            
-			        <p:menuitem value="Professor" url="#" icon="ui-icon-person" ></p:menuitem>
-			            	
-			        <p:menuitem value="Gestor" url="#" icon="ui-icon-person" ></p:menuitem>
-			            	
-			        <p:menuitem value="Secretário(a)" url="#" icon="ui-icon-person" ></p:menuitem>
-			            
+			        <p:submenu label="Usuarios" 
+			        		   icon="ui-icon-person" 
+			        	       rendered="#{LoginBean.usuario.perfil.secretaria or LoginBean.usuario.perfil.gestor}">
+			         	<p:menuitem value="Aluno"
+			         			    icon="ui-icon-person" action="aluno"> </p:menuitem>
+			            <p:menuitem value="Responsavel" 
+			            			icon="ui-icon-person" action="responsavel"></p:menuitem>
+			        	<p:menuitem value="Professor" 
+			        				icon="ui-icon-person" action="professor"></p:menuitem>	
+			        	<p:menuitem value="Gestor" url="#" 
+			        				icon="ui-icon-person" action="gestor"></p:menuitem>	
+			        	<p:menuitem value="Secretário(a)" url="#" 
+			        				icon="ui-icon-person" action="secretaria"></p:menuitem>
 			        </p:submenu>
+			        <p:menuitem value="Configurações"  
+			        			icon="fa-navicon" 
+			        			action="config"/>
 			    </p:menubar>
 			</h:form>
 			</div>

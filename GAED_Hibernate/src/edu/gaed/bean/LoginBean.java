@@ -129,7 +129,6 @@ public class LoginBean {
 	    } catch (IOException ex) {
 	        ex.printStackTrace();
 	    }
-	}
-    
+	}    
     
 }
