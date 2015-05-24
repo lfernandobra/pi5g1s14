@@ -74,7 +74,7 @@ public class OcorrenciaBean implements Serializable{
 	public void cadastrar(ActionEvent actionEvent){
 		new OcorrenciaDao().inserir(ocorrencia);
 		FacesContext context = FacesContext.getCurrentInstance();
-        context.addMessage(null, new FacesMessage("Cadastrado",  "Ocorrência  cadastrada com sucesso") );
+        context.addMessage(null, new FacesMessage("Cadastrado",  "Ocorrencia  cadastrada com sucesso") );
 		ocorrencias = new OcorrenciaDao().listar();
 		ocorrencia = new Ocorrencia();
 	}
@@ -83,7 +83,7 @@ public class OcorrenciaBean implements Serializable{
 	public void alterar(){
 		new OcorrenciaDao().alterar(ocorrencia);
 		FacesContext context = FacesContext.getCurrentInstance();
-        context.addMessage(null, new FacesMessage("Alterado", "Ocorrência alterada com sucesso") );
+        context.addMessage(null, new FacesMessage("Alterado", "Ocorrencia alterada com sucesso") );
 		ocorrencias = new OcorrenciaDao().listar();
 		ocorrencia = new Ocorrencia();
 	}
@@ -91,7 +91,7 @@ public class OcorrenciaBean implements Serializable{
 	public void excluir(Ocorrencia ocorrencia){
 		new OcorrenciaDao().excluir(ocorrencia);
 		FacesContext context = FacesContext.getCurrentInstance();
-        context.addMessage(null, new FacesMessage("Excluido",  "Ocorrência excluida com sucesso") );
+        context.addMessage(null, new FacesMessage("Excluido",  "Ocorrencia excluida com sucesso") );
 		ocorrencias = new OcorrenciaDao().listar();
 		ocorrencia = new Ocorrencia();
 	}

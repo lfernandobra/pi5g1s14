@@ -26,58 +26,85 @@
 			
 				<h:form id="formPrincipal">
 					<p:growl id="growl" showDetail="true" life="4000" />
-					<p:dataTable var="lista" value="#{OcorrenciaBean.ocorrencias}" id="tabelaOcorrencia" resizableColumns="true" reflow="true" rows="5"	emptyMessage="Nenhum registro encontrado" paginator="true"
+					<p:dataTable var="lista" value="#{OcorrenciaBean.ocorrencias}" id="tabelaOcorrencia" 
+					resizableColumns="true" reflow="true" rows="5"	emptyMessage="Nenhum registro encontrado" paginator="true"
 						paginatorPosition="bottom" styleClass="dataTablePrincipal">
 						
 						<p:column style="width:16px">
 						<p:rowToggler />
 						</p:column>
 		
-						<f:facet name="header">Lista de Ocorrencia 	</f:facet>
-						
 						<p:column headerText="ID" sortBy="#{lista.id}" filterBy="#{lista.id}" style="width:130px">
 							<h:outputText value="#{lista.id}" />
 						</p:column>
+						
 						<p:column headerText="Assunto" sortBy="#{lista.assunto}" filterBy="#{lista.assunto}">
 							<h:outputText value="#{lista.assunto}" />
 						</p:column>
+						
 						<p:column headerText="Aluno" sortBy="#{lista.aluno.nome}" filterBy="#{lista.aluno}">
 							<h:outputText value="#{lista.aluno.nome} #{lista.aluno.sobrenome}" />
 						</p:column>
-						<p:column headerText="Turma" sortBy="#{lista.aluno.turma.nome}" filterBy="#{lista.assunto}">
-							<h:outputText value="#{lista.aluno.turma.nome}" />
+						
+						<p:column headerText="Turma" sortBy="#{lista.aluno.turma.nome}" filterBy="#{lista.aluno.turma}">
+							<h:outputText value="#{lista.aluno.turma.serie.serie} #{lista.aluno.turma.nome}" />
 						</p:column>
+						
 						<p:rowExpansion>
-							<p:panelGrid columns="2" columnClasses="label,value">
-								<h:outputText value="Conteúdo" />
-								<h:outputText value="#{lista.descricao}" />
-							</p:panelGrid>
+							<h3>Informações da Ocorrência</h3>
+								<p:panelGrid columns="2" columnClasses="label,value">
+									
+									<h:outputText value="Data:" />
+									<h:outputText value="#{lista.data}" />
+									
+									<h:outputText value="Aluno:" />
+									<h:outputText value="#{lista.aluno.nome} #{lista.aluno.sobrenome}" />
+									
+									<h:outputText value="Turma:" />
+									<h:outputText value="#{lista.aluno.turma.serie.serie} #{lista.aluno.turma.nome}" />
+									
+									<h:outputText value="Assunto:" />
+									<h:outputText value="#{lista.assunto}" />
+									
+									<h:outputText value="Descrição:" />
+									<h:outputText id="descricao" value="#{lista.descricao.length() gt 50? lista.descricao.substring(0,47).concat('...') : lista.descricao}" escape="false" >
+									</h:outputText>
+								</p:panelGrid>
 						</p:rowExpansion>
 		
 						 <p:column style="width:60px">
-							<p:commandButton update=":formAlterar" oncomplete="PF('dialogAlterar').show();" icon="ui-icon-pencil">
+							<p:commandButton update=":formAlterar" oncomplete="PF('dialogAlterar').show();"
+							 icon="ui-icon-pencil">
 								<f:setPropertyActionListener target="#{OcorrenciaBean.ocorrencia}"
 									value="#{lista}" />
 							</p:commandButton>
 		
-							<p:commandButton actionListener="#{OcorrenciaBean.excluir(lista)}" update=":formPrincipal:tabelaOcorrencia" icon="ui-icon-closethick">
-								<p:confirm header="Excluir Ocorrencia" message="Deseja excluir?" icon="ui-icon-alert" />
+							<p:commandButton actionListener="#{OcorrenciaBean.excluir(lista)}" update=":formPrincipal:tabelaOcorrencia" icon="ui-icon-trash">
+								<p:confirm header="Excluir Ocorrência" message="Deseja excluir?"
+								icon="ui-icon-alert" />
 							</p:commandButton>
+							
 							<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
-								<p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
-								<p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
-							</p:confirmDialog>
+							<p:commandButton value="Sim" type="button"
+								styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+							<p:commandButton value="Não" type="button"
+								styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+						</p:confirmDialog>
 						</p:column>
 
 						<f:facet name="footer">Total cadastrado #{fn:length(OcorrenciaBean.ocorrencias)} ocorrencias</f:facet>
 					</p:dataTable>
 				</h:form>
 		
-				<p:dialog header="Formulario de Cadastro de ocorrência" widgetVar="dialogCadastrar" modal="true" resizable="true" id="formCadMedio" appendTo="@(body)" closeOnEscape="true" closable="true" maximizable="true"   >
-					<p:growl id="growl" showDetail="true" life="4000" />		
+		<p:dialog header="Formulario de Cadastro de ocorrência"
+						widgetVar="dialogCadastrar" modal="true" resizable="true"
+						id="formCadMedio" appendTo="@(body)" closeOnEscape="true" closable="true"
+						maximizable="true">
+						<p:growl id="growl" showDetail="true" life="4000" />
 						<h:form id="formCadastrar" styleClass="formCadastrar">
-						<p:focus context="@form" />
-							<h:outputText value="Campos obrigatórios * " style="font-size: 10px !important; top: 5px !important 	" />	
+							<p:focus context="@form" />
+							<h:outputText value="Campos obrigatórios * "
+								style="font-size: 10px !important; top: 5px !important 	" />
 							
 							<h3>Dados da ocorrência</h3>
 							<p:separator/>
@@ -85,18 +112,14 @@
 						<p:panelGrid id="panelCadastrar" columns="2">
 							
 							<p:outputLabel for="aluno" value="Aluno" />
-								<p:autoComplete value="#{OcorrenciaBean.ocorrencia.aluno}"
-									completeMethod="#{AlunoBean.completeAluno()}"
-									converter="#{companyConverter}" 
-									var="alunos" itemLabel="#{alunos.nome}  #{alunos.sobrenome}"
-									itemValue="alunos" forceSelection="true" required="true"
-									requiredMessage="teste" label="Aluno" id="aluno">
-									<p:ajax event="itemSelect" listener="#{AlunoBean.completeAluno()}"
-										update="panelCadastrar" />
+								<p:autoComplete value="#{OcorrenciaBean.ocorrencia.aluno}"	completeMethod="#{AlunoBean.completeAluno()}"
+									converter="alunoConverter" 	var="alunos" itemLabel="#{alunos.nome}  #{alunos.sobrenome}"
+									itemValue="#{alunos}" forceSelection="true" required="true"
+									requiredMessage="preenchimeno obrigatório do aluno" label="Aluno" id="aluno" size="50">
 								</p:autoComplete> 
 						
 							<p:outputLabel for="assunto" value="Assunto:" />
-							<p:inputText value="#{OcorrenciaBean.ocorrencia.assunto}" size="70" required="true" id="assunto" requiredMessage="Assunto não deve estar vazio!" />
+							<p:inputText value="#{OcorrenciaBean.ocorrencia.assunto}" size="50" required="true" id="assunto" requiredMessage="Assunto não deve estar vazio!" />
 							
 							<p:outputLabel for="data" value="Data:" />
 							<p:inputMask value="#{OcorrenciaBean.ocorrencia.data}" mask="99/99/9999" placeholder="dd/mm/aaaa" required="true"	label="data" id="data"
@@ -106,16 +129,16 @@
 							</p:inputMask>
 							
 							<p:outputLabel for="descricao" value="Descrição:" />
-							<p:editor  widgetVar="editorWidget" value="#{OcorrenciaBean.ocorrencia.descricao}" width="700"  id="descricao" />
+							<p:editor  widgetVar="editorWidget" required="true" value="#{OcorrenciaBean.ocorrencia.descricao}" width="700"  id="descricao" />
 						</p:panelGrid>
 						
 						<div id="botoes">
 							<p:commandButton value="Salvar" id="withIcon" actionListener="#{OcorrenciaBean.cadastrar}" icon="ui-icon-disk"
-								update=":formPrincipal:tabelaOcorrencia @form growl" oncomplete="closeDialogIfSucess(xhr, status, args, 'dialogCadastrar','formCad')"
+								update=":formPrincipal:tabelaOcorrencia @form growl" oncomplete="closeDialogIfSucess(xhr, status, args, 'dialogCadastrar','formCadMedio')"
 								onsuccess="PF('dialogCadastrar').hide();" />
 								
-							<p:commandButton value="Limpar" update="@form" process="@this">
-								<p:resetInput target="panelCadastrar panelBusca" />
+							<p:commandButton value="Limpar" update="@form" process="@this" icon="ui-icon-close">
+								<p:resetInput target="panelCadastrar" />
 							</p:commandButton>
 						</div>
 						
@@ -133,8 +156,12 @@
 									
 						<h:inputHidden value="#{OcorrenciaBean.ocorrencia}" />
 						<p:panelGrid id="panelAlterar" columns="2">
+							
+							<p:outputLabel for="assunto" value="Aluno:" />
+							<p:inputText value="#{OcorrenciaBean.ocorrencia.aluno.nome}" size="50" required="true" id="aluno"	requiredMessage="Aluno não deve estar vazio!" />
+						
 							<p:outputLabel for="assunto" value="Assunto:" />
-							<p:inputText value="#{OcorrenciaBean.ocorrencia.assunto}" required="true" id="assunto"	requiredMessage="Nome não deve estar vazio!" />
+							<p:inputText value="#{OcorrenciaBean.ocorrencia.assunto}" size="50" required="true" id="assunto"	requiredMessage="Assunto não deve estar vazio!" />
 							
 							<p:outputLabel for="data" value="Data:" />
 							<p:inputMask value="#{OcorrenciaBean.ocorrencia.data}" mask="99/99/9999" placeholder="dd/mm/aaaa" required="true"	label="data" id="data"
@@ -144,13 +171,13 @@
 							</p:inputMask>
 							
 							<p:outputLabel for="descricao" value="Descrição:" />
-							<p:inputText  widgetVar="editorWidget"  value="#{OcorrenciaBean.ocorrencia.descricao}"   width="700" id="descricao" />
+							 <p:editor  value="#{OcorrenciaBean.ocorrencia.descricao}" widgetVar="editor" width="700" id="descricao"/>
 			
 							
 						</p:panelGrid>
 		
-						<p:commandButton value="Salvar" id="withIcon" actionListener="#{OcorrenciaBean.alterar}" icon="ui-icon-disk" update=":formPrincipal:tabelaOcorrencia @form"
-							oncomplete="closeDialogIfSucess(xhr, status, args, 'dialogAlterar','formAlt')" onsuccess="PF('dialogAlterar').hide();" />
+						<p:commandButton value="Salvar"  id="withIcon" actionListener="#{OcorrenciaBean.alterar}" icon="ui-icon-disk" update=":formPrincipal:tabelaOcorrencia @form"
+							oncomplete="closeDialogIfSucess(xhr, status, args, 'dialogAlterar','formAltMedio')" onsuccess="PF('dialogAlterar').hide();" />
 						
 						<p:commandButton value="Limpar" update="@form" process="@this">
 							<p:resetInput target="panelAlterar" />
