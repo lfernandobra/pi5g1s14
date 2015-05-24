@@ -58,7 +58,7 @@ public class Turma implements Serializable {
 	
 	@ManyToMany
 	@LazyCollection(LazyCollectionOption.FALSE)
-	@JoinTable(name = "disciplina_turma",
+	@JoinTable(name = "turma_disciplina",
 	joinColumns = { @JoinColumn(name = "idturma", nullable = false,
 	updatable =  false) }, inverseJoinColumns = {@JoinColumn(name = "iddisciplina", nullable = false, updatable = false) })
     private List<Disciplina> disciplinas = new ArrayList<Disciplina>();

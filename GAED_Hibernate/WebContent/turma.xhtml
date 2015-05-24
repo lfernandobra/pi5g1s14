@@ -289,20 +289,22 @@
 		
 				<p:pickList id="TurmaProfessorPickList"
 					value="#{TurmaProfessorBean.professoresDualList}" var="turmaDisc"
-					effect="bounce" itemValue="#{turmaDisc}" itemLabel="#{turmaDisc.professor.nome} #{turmaDisc.disciplina.nome}"
+					effect="bounce" itemValue="#{turmaDisc}" itemLabel="#{turmaDisc.professor.nome} - #{turmaDisc.disciplina.nome}"
 					showSourceControls="true" showTargetControls="true"
 					showCheckbox="true" showSourceFilter="true" showTargetFilter="true"
 					filterMatchMode="contains">
 					<f:converter converterId="turmaDisciplinaConverter"/>
 					<f:facet name="sourceCaption">Professores/Disciplina</f:facet>
 					<f:facet name="targetCaption">Turma</f:facet>
+					
+					<p:ajax event="transfer" listener="#{TurmaProfessorBean.handleTransfer}" update="growl" />
 
 					<p:column style="width:25%">
 						<h:outputText styleClass="ui-theme ui-theme-#{turmaDisc}" />
 					</p:column>
 
 					<p:column style="width:75%;">
-						<h:outputText value="#{turmaDisc.professor.nome} #{turmaDisc.disciplina.nome}" />
+						<h:outputText value="#{turmaDisc.professor.nome} - #{turmaDisc.disciplina.nome}" />
 					</p:column>
 				</p:pickList>
 				
