@@ -25,8 +25,11 @@
     TARGET="rules:#configuracoes.xhtml" TITLE="config" model-entity="JSFProcessItemOutput"/>
    <PROCESS-ITEM-OUTPUT ID="gestor::#gestor.xhtml" NAME="output5"
     PATH="/gestor.xhtml" TARGET="rules:#gestor.xhtml" TITLE="gestor" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="login::#LoginModelo.xhtml" NAME="output1"
+    PATH="/LoginModelo.xhtml" TARGET="rules:#LoginModelo.xhtml"
+    TITLE="login" model-entity="JSFProcessItemOutput"/>
    <PROCESS-ITEM-OUTPUT ID="ocorrencia::#ocorrencia.xhtml"
-    NAME="output1" PATH="/ocorrencia.xhtml"
+    NAME="output3" PATH="/ocorrencia.xhtml"
     TARGET="rules:#ocorrencia.xhtml" TITLE="ocorrencia" model-entity="JSFProcessItemOutput"/>
    <PROCESS-ITEM-OUTPUT ID="professor::#professor.xhtml" NAME="output6"
     PATH="/professor.xhtml" TARGET="rules:#professor.xhtml"
@@ -37,9 +40,9 @@
    <PROCESS-ITEM-OUTPUT ID="secretaria::#secretaria.xhtml"
     NAME="output8" PATH="/secretaria.xhtml"
     TARGET="rules:#secretaria.xhtml" TITLE="secretaria" model-entity="JSFProcessItemOutput"/>
-   <PROCESS-ITEM-OUTPUT ID="tarefa::#tarefa.xhtml" NAME="output3"
+   <PROCESS-ITEM-OUTPUT ID="tarefa::#tarefa.xhtml" NAME="output9"
     PATH="/tarefa.xhtml" TARGET="rules:#tarefa.xhtml" TITLE="tarefa" model-entity="JSFProcessItemOutput"/>
-   <PROCESS-ITEM-OUTPUT ID="turma::#turma.xhtml" NAME="output9"
+   <PROCESS-ITEM-OUTPUT ID="turma::#turma.xhtml" NAME="output10"
     PATH="/turma.xhtml" TARGET="rules:#turma.xhtml" TITLE="turma" model-entity="JSFProcessItemOutput"/>
   </PROCESS-ITEM>
  </PROCESS-ITEM>
