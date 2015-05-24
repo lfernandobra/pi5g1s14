@@ -104,9 +104,8 @@ public class AlunoBean extends UsuarioBean implements Serializable{
 	
 	@SuppressWarnings("unchecked")
 	public List<Aluno> completeAluno(){
-        Set<Aluno> alunos = new AlunoDao().listar();
+        alunos = new AlunoDao().listar();
         List <Aluno> listAluno = new ArrayList <Aluno> (alunos);
-        listAluno.toString();
         return listAluno;
     }
 
