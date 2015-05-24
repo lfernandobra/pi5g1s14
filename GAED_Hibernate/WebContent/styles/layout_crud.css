@@ -50,7 +50,12 @@ body{
 	height: 400px !important;
   	width: 600px !important;
   	position: fixed;
-	
+}
+
+#formAlteracaoTurmaCadPequeno{
+	height: 400px !important;
+  	width: 600px !important;
+  	position: fixed;
 }
 #formPrincipal .ui-button-text{
 	font-size: 10px !important;

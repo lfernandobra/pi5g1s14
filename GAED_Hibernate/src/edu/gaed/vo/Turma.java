@@ -3,7 +3,9 @@ package edu.gaed.vo;
 import static javax.persistence.GenerationType.IDENTITY;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -17,6 +19,11 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 @SuppressWarnings("serial")
 @Entity
@@ -44,31 +51,43 @@ public class Turma implements Serializable {
 	@ManyToOne
 	@JoinColumn(name="id_serie")
 	private Serie serie;
+	
+	@OneToMany(mappedBy="turma")
+	@Fetch(FetchMode.JOIN)
+	private Set<TurmaDisciplina> turmasDisciplinas = new HashSet<TurmaDisciplina>();
+	
+	@ManyToMany
+	@LazyCollection(LazyCollectionOption.FALSE)
+	@JoinTable(name = "disciplina_turma",
+	joinColumns = { @JoinColumn(name = "idturma", nullable = false,
+	updatable =  false) }, inverseJoinColumns = {@JoinColumn(name = "iddisciplina", nullable = false, updatable = false) })
+    private List<Disciplina> disciplinas = new ArrayList<Disciplina>();
 
-	@ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "professor_turma",
-    		   joinColumns = { @JoinColumn(name = "idturma") }, 
-    		   inverseJoinColumns = { @JoinColumn(name = "idprofessor") })
-	private Set<Professor> professores = new HashSet<Professor>(0);
+	public List<Disciplina> getDisciplinas() {
+		return disciplinas;
+	}
+
+	public void setDisciplinas(List<Disciplina> disciplinas) {
+		this.disciplinas = disciplinas;
+	}
 
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "turma")
 	private Set<Aluno> alunos = new HashSet<Aluno>(0);
 	
-	public boolean adicionaProfessor(Professor professor) {
-		if (professores != null) {
-			return professores.add(professor);
+	public boolean adicionaTurmaDisciplina(TurmaDisciplina turmaDisciplina) {
+		if (turmasDisciplinas != null) {
+			return turmasDisciplinas.add(turmaDisciplina);
 		}
 		return false;
-	}
-	
-	public Set<Professor> getProfessores() {
-		return professores;
+	}	
+
+	public Set<TurmaDisciplina> getTurmasDisciplinas() {
+		return turmasDisciplinas;
 	}
 
-	public void setProfessores(Set<Professor> professores) {
-		this.professores = professores;
+	public void setTurmasDisciplinas(Set<TurmaDisciplina> turmasDisciplinas) {
+		this.turmasDisciplinas = turmasDisciplinas;
 	}
-	
 
 	/**
      * Creates a BI-directional relationship between brand and product

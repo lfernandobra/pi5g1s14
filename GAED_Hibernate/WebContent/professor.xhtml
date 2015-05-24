@@ -493,6 +493,17 @@
 							requiredMessage="Login não deve estar vazio!">
 							<f:validateLength minimum="6" />
 						</p:inputText>
+						
+						<p:outputLabel value="Disciplina:" />
+						<p:selectCheckboxMenu id="menu"
+							value="#{ProfessorBean.professor.disciplinas}" size="30"
+							label="Selecione" filter="true" filterMatchMode="startsWith"
+							panelStyle="width:250px">
+							<f:selectItems value="#{DisciplinaBean.disciplinas}"
+								var="disciplina" itemValue="#{disciplina}"
+								itemLabel="#{disciplina.nome}" />
+							<f:converter converterId="disciplinaConverter" />
+						</p:selectCheckboxMenu>
 
 					</p:panelGrid>
 
