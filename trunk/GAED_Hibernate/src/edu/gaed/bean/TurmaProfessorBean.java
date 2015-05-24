@@ -7,10 +7,10 @@ import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
+import org.primefaces.event.TransferEvent;
 import org.primefaces.model.DualListModel;
 
 import edu.gaed.dao.ProfessorDao;
-import edu.gaed.dao.TurmaDao;
 import edu.gaed.dao.TurmaDisciplinaDao;
 import edu.gaed.vo.Disciplina;
 import edu.gaed.vo.Professor;
@@ -73,6 +73,15 @@ public class TurmaProfessorBean implements Serializable{
 				new TurmaDisciplinaDao().excluir(turmaDisciplina);			
 			}
 		}
+	}
+	
+	public void handleTransfer(TransferEvent event) {
+	     if (event.isAdd()) {
+	          professoresDualList.getTarget().size();
+	     }
+	     if (event.isRemove()) {
+	          event.getItems().size();
+	     }
 	}
 	
 

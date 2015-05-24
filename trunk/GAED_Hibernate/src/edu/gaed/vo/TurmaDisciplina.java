@@ -13,7 +13,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "disciplina_turma")	
+@Table(name = "turma_disciplina_professor")	
 public class TurmaDisciplina implements Serializable{
 	
 	public TurmaDisciplina(){
