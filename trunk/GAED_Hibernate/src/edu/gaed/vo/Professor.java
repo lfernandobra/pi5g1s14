@@ -1,8 +1,8 @@
 package edu.gaed.vo;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
@@ -10,9 +10,12 @@ import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
@@ -48,18 +51,24 @@ public class Professor extends Usuario{
 	@JoinTable(name = "disciplina_professor",
 	joinColumns = { @JoinColumn(name = "idprofessor", nullable = false,
 	updatable =  false) }, inverseJoinColumns = {@JoinColumn(name = "iddisciplina", nullable = false, updatable = false) })
-    private List<Disciplina> disciplinas = new ArrayList<Disciplina>();
+    private Set<Disciplina> disciplinas = new HashSet<Disciplina>();
 	
-	@ManyToMany(mappedBy = "professores")
-	private List<Turma> turmas = new ArrayList<Turma>();
+	@OneToMany(mappedBy="professor")
+	@Fetch(FetchMode.JOIN)
+	private Set<TurmaDisciplina> turmas = new HashSet<TurmaDisciplina>();
 	
-	public boolean adicionaTurma(Turma turma) {
-		if (turmas != null) {
-			return turmas.add(turma);
-		}
-		return false;
+	public Set<Disciplina> getDisciplinas() {
+		return disciplinas;
 	}
-	
+	public void setDisciplinas(Set<Disciplina> disciplinas) {
+		this.disciplinas = disciplinas;
+	}
+	public Set<TurmaDisciplina> getTurmas() {
+		return turmas;
+	}
+	public void setTurmas(Set<TurmaDisciplina> turmas) {
+		this.turmas = turmas;
+	}
 	public String getEscolaAnterior() {
 		return escolaAnterior;
 	}
@@ -87,18 +96,6 @@ public class Professor extends Usuario{
 	
 	public static long getSerialversionuid() {
 		return serialVersionUID;
-	}
-	public List<Disciplina> getDisciplinas() {
-		return disciplinas;
-	}
-	public void setDisciplinas(List<Disciplina> disciplinas) {
-		this.disciplinas = disciplinas;
-	}
-	public List<Turma> getTurmas() {
-		return turmas;
-	}
-	public void setTurmas(List<Turma> turmas) {
-		this.turmas = turmas;
 	}
 
 	@Override
