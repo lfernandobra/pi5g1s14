@@ -107,18 +107,22 @@
 
 						</p:rowExpansion>
 						<p:column headerText="" style="width:60px">
-							<p:commandButton update=":formAlterar"
+							<p:commandButton update=":formAlterar" id="botaoAlterar"
 								oncomplete="PF('dialogAlterar').show();" icon="ui-icon-pencil">
 								<f:setPropertyActionListener target="#{GestorBean.gestor}"
 									value="#{lista}" />
 							</p:commandButton>
+							<p:tooltip id="toolTipAlterar" for="botaoAlterar" value="Alterar cadastro do gestor" escape="false" />
+							
 							<p:commandButton 
-								actionListener="#{GestorBean.excluir(lista)}"
+								actionListener="#{GestorBean.excluir(lista)}" id="botaoExcluir"
 								update=":formPrincipal:tabelaGestor growl"
-								icon="ui-icon-closethick">
+								icon="ui-icon-trash">
 								<p:confirm header="Excluir Gestor" message="Deseja excluir?"
 									icon="ui-icon-alert" />
 							</p:commandButton>
+							<p:tooltip id="toolTipExcluir" for="botaoExcluir" value="Excluir gestor" escape="false" />
+							
 							<p:confirmDialog global="true" showEffect="fade"
 								hideEffect="fade">
 								<p:commandButton value="Sim" type="button"

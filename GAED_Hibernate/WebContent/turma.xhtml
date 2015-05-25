@@ -14,7 +14,7 @@
 	<ui:define name="center">
 
 
-		<h2>Lista de Alunos</h2>
+		<h2>Lista de Turmas</h2>
 
 		<div id="Lista">
 			<p:separator />
@@ -38,30 +38,44 @@
 						filterBy="#{lista.id}">
 						<h:outputText value="#{lista.id}" />
 					</p:column>
-					<p:column headerText="Nome" sortBy="#{lista.nome}"
+					<p:column headerText="Turma" sortBy="#{lista.nome}"
 						filterBy="#{lista.nome}">
-						<h:outputText value="#{lista.nome}" />
+						<h:outputText value="#{lista.serie.serie} #{lista.nome} " />
 					</p:column>
 					<p:column headerText="Periodo" sortBy="#{lista.periodo.periodo}"
 						filterBy="#{lista.periodo.periodo}">
 						<h:outputText value="#{lista.periodo.periodo}" />
 					</p:column>
-					<p:column headerText="Série" sortBy="#{lista.serie}"
-						filterBy="#{lista.serie}">
-						<h:outputText value="#{lista.serie}" />
-					</p:column>
+					
 					<p:rowExpansion>
 						<h3>Informações da Turma</h3>
 						<p:panelGrid columns="2" columnClasses="label,value">
 							<h:outputText value="Limite de alunos" />
 							<h:outputText value="#{lista.qtdAluLimite}" />
+							
 							<h:outputText value="Quantidade de alunos inseridos" />
 							<h:outputText value="#{lista.qtdAluInseridos}" />
-							<h:outputText value="Disciplinas lecionadas" />
+							
+							<h:outputText value="Disciplinas" />
 							<p:dataList value="#{lista.disciplinas}" var="discipLecionada"
-								emptyMessage="Nenhuma disciplina atribuida">
-            				#{discipLecionada.nome}
+								emptyMessage="Nenhuma disciplina atribuida a essa turma">
+            					#{discipLecionada.nome}
             				</p:dataList>
+            				
+            				<h:outputText value="Alunos:" />
+            				<p:dataList value="#{lista.alunos}" var="alunos" 
+	            				emptyMessage="nenhum aluno atribuído a essa turma">
+	            				#{alunos.nome} #{alunos.sobrenome}
+            				</p:dataList>
+            				
+            				<h:outputText value="Professores:" />
+            				<p:dataList value="#{lista.turmasDisciplinas}" var="professores" 
+	            				emptyMessage="nenhum professor atrbuído a essa turma">
+	            				#{professores.nome} #{professores.sobrenome}
+            				</p:dataList>
+            				
+            				
+            				
 						</p:panelGrid>
 					</p:rowExpansion>
 					<p:column headerText="Adicionar">
@@ -77,19 +91,22 @@
 								value="#{lista}" />
 						</p:commandButton>
 					</p:column>
-					<p:column headerText="Ações">
-						<p:commandButton value="Alterar" update=":formAlterar"
+					<p:column style="width:60px">
+						<p:commandButton  update=":formAlterar" id="botaoAlterar"
 							oncomplete="PF('dialogAlterar').show();" icon="ui-icon-pencil">
 							<f:setPropertyActionListener target="#{TurmaBean.turma}"
 								value="#{lista}" />
 						</p:commandButton>
+						<p:tooltip id="toolTipAlterar" for="botaoAlterar" value="Alterar cadastro da turma" escape="false" />
 	
-						<p:commandButton value="Excluir"
-							actionListener="#{TurmaBean.excluir(lista)}"
-							update=":formPrincipal:tabelaTurma" icon="ui-icon-closethick">
+						<p:commandButton
+							actionListener="#{TurmaBean.excluir(lista)}" id="botaoExcluir"
+							update=":formPrincipal:tabelaTurma" icon="ui-icon-trash">
 							<p:confirm header="Excluir Turma" message="Deseja excluir?"
 								icon="ui-icon-alert" />
 						</p:commandButton>
+						<p:tooltip id="toolTipExcluir" for="botaoExcluir" value="Excluir turma" escape="false" />
+						
 						<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
 							<p:commandButton value="Sim" type="button"
 								styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
@@ -111,39 +128,35 @@
 				resizable="true" id="formCadPequeno" styleClass="dialogCadastrar">
 				<h:form id="formCadastrar" styleClass="formCadastrar">
 					<p:focus context="@form" />
-					<p:panelGrid id="panelCadastrar" columns="3">
+					<p:panelGrid id="panelCadastrar" columns="2">
 						<p:outputLabel for="nome" value="Nome:" />
 						<p:inputText value="#{TurmaBean.turma.nome}" required="true"
 							id="nome" requiredMessage="Nome nÃ£o deve estar vazio!" />
-						<p:messages for="nome" display="icon" closable="true" />
 	
 						<p:outputLabel for="periodo" value="Periodo:" />
-						<h:selectOneMenu value="#{TurmaBean.turma.periodo}">
+						<p:selectOneMenu value="#{TurmaBean.turma.periodo}">
 							<f:selectItem itemLabel="-- Selecione --" noSelectionOption="true" />
 							<f:selectItems value="#{PeriodoBean.periodos}" var="periodo"
 								itemValue="#{periodo}" itemLabel="#{periodo.periodo}"
 								id="periodo" />
-						</h:selectOneMenu>
-						<p:messages for="periodo" display="icon" closable="true" />
+						</p:selectOneMenu>
 	
 						<p:outputLabel for="serie" value="Serie:" />
-						<h:selectOneMenu value="#{TurmaBean.turma.serie}">
+						<p:selectOneMenu value="#{TurmaBean.turma.serie}">
 							<f:selectItem itemLabel="-- Selecione --" noSelectionOption="true" />
 							<f:selectItems value="#{SerieBean.series}" var="serie"
 								itemValue="#{serie}" itemLabel="#{serie.serie}" id="serie" />
-						</h:selectOneMenu>
-						<p:messages for="serie" display="icon" closable="true" />
+						</p:selectOneMenu>
 	
 						<p:outputLabel for="qtdLimite" value="Limite de alunos:" />
 						<p:inputText value="#{TurmaBean.turma.qtdAluLimite}"
 							required="true" id="qtdLimite"
 							requiredMessage="Limite deve ser definido!" />
-						<p:messages for="qtdLimite" display="icon" closable="true" />
 						
 						<p:outputLabel value="Disciplina:" />
 						<p:selectCheckboxMenu id="menu"
 							value="#{TurmaBean.turma.disciplinas}" size="30"
-							label="Selecione" filter="true" filterMatchMode="startsWith"
+							label=" -- Selecione -- " filter="true" filterMatchMode="startsWith"
 							panelStyle="width:250px">
 							<f:selectItems value="#{DisciplinaBean.disciplinas}"
 								var="disciplina" itemValue="#{disciplina}"
@@ -180,19 +193,19 @@
 					<p:messages for="nome" display="icon" closable="true" />
 	
 					<p:outputLabel for="periodo" value="Periodo:" />
-					<h:selectOneMenu value="#{TurmaBean.turma.periodo}">
+					<p:selectOneMenu value="#{TurmaBean.turma.periodo}">
 						<f:selectItem itemLabel="-- Selecione --" noSelectionOption="true" />
 						<f:selectItems value="#{PeriodoBean.periodos}" var="periodo"
 							itemValue="#{periodo}" itemLabel="#{periodo.periodo}" id="periodo" />
-					</h:selectOneMenu>
+					</p:selectOneMenu>
 					<p:messages for="periodo" display="icon" closable="true" />
 	
 					<p:outputLabel for="serie" value="Serie:" />
-					<h:selectOneMenu value="#{TurmaBean.turma.serie}">
+					<p:selectOneMenu value="#{TurmaBean.turma.serie}">
 						<f:selectItem itemLabel="-- Selecione --" noSelectionOption="true" />
 						<f:selectItems value="#{SerieBean.series}" var="serie"
 							itemValue="#{serie}" itemLabel="#{serie.serie}" id="serie" />
-					</h:selectOneMenu>
+					</p:selectOneMenu>
 					<p:messages for="serie" display="icon" closable="true" />
 	
 					<p:outputLabel for="qtdLimite" value="Limite de alunos:" />
@@ -289,7 +302,7 @@
 		
 				<p:pickList id="TurmaProfessorPickList"
 					value="#{TurmaProfessorBean.professoresDualList}" var="turmaDisc"
-					effect="bounce" itemValue="#{turmaDisc}" itemLabel="#{turmaDisc.professor.nome} - #{turmaDisc.disciplina.nome}"
+					effect="bounce" itemValue="#{turmaDisc}" itemLabel="#{turmaDisc.professor.nome} #{turmaDisc.professor.sobrenome} - #{turmaDisc.disciplina.nome}"
 					showSourceControls="true" showTargetControls="true"
 					showCheckbox="true" showSourceFilter="true" showTargetFilter="true"
 					filterMatchMode="contains">
