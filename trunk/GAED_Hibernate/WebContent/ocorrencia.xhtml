@@ -67,22 +67,23 @@
 									<h:outputText value="#{lista.assunto}" />
 									
 									<h:outputText value="Descrição:" />
-									<h:outputText id="descricao" value="#{lista.descricao.length() gt 50? lista.descricao.substring(0,47).concat('...') : lista.descricao}" escape="false" >
-									</h:outputText>
+									<h:outputText id="descricao" value=" #{lista.descricao}" escape="false"/> 
 								</p:panelGrid>
 						</p:rowExpansion>
 		
 						 <p:column style="width:60px">
-							<p:commandButton update=":formAlterar" oncomplete="PF('dialogAlterar').show();"
+							<p:commandButton update=":formAlterar" oncomplete="PF('dialogAlterar').show();" id="botaoAlterar"
 							 icon="ui-icon-pencil">
 								<f:setPropertyActionListener target="#{OcorrenciaBean.ocorrencia}"
 									value="#{lista}" />
 							</p:commandButton>
+							<p:tooltip id="toolTipAlterar" for="botaoAlterar" value="Alterar ocorrência" escape="false" />
 		
-							<p:commandButton actionListener="#{OcorrenciaBean.excluir(lista)}" update=":formPrincipal:tabelaOcorrencia" icon="ui-icon-trash">
+							<p:commandButton actionListener="#{OcorrenciaBean.excluir(lista)}" update=":formPrincipal:tabelaOcorrencia" icon="ui-icon-trash" id="botaoExcluir">
 								<p:confirm header="Excluir Ocorrência" message="Deseja excluir?"
 								icon="ui-icon-alert" />
 							</p:commandButton>
+							<p:tooltip id="toolTipExcluir" for="botaoExcluir" value="Excluir ocorrência" escape="false" />
 							
 							<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
 							<p:commandButton value="Sim" type="button"

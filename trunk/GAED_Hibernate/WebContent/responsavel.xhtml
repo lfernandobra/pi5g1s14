@@ -94,17 +94,21 @@
 					</p:panelGrid>
 				</p:rowExpansion>
 				<p:column style="width:60px">
-					<p:commandButton update=":formAlterar" oncomplete="PF('dialogAlterar').show();"	 icon="ui-icon-pencil">
+					<p:commandButton update=":formAlterar" oncomplete="PF('dialogAlterar').show();"	 icon="ui-icon-pencil" id="botaoAlterar">
 						<f:setPropertyActionListener
 							target="#{ResponsavelBean.responsavel}" value="#{lista}" />
 					</p:commandButton>
+					<p:tooltip id="toolTipAlterar" for="botaoAlterar" value="Alterar cadastro do responsável" escape="false" />
+					
 					<p:commandButton 
-						actionListener="#{ResponsavelBean.excluir(lista)}"
+						actionListener="#{ResponsavelBean.excluir(lista)}" id="botaoExcluir"
 						update=":formPrincipal:tabelaResponsavel"
-						icon="ui-icon-closethick">
+						icon="ui-icon-trash">
 						<p:confirm header="Excluir Responsavel" message="Deseja excluir?"
 							icon="ui-icon-alert" />
 					</p:commandButton>
+					<p:tooltip id="toolTipExcluir" for="botaoExcluir" value="Excluir responsável" escape="false" />
+					
 					<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
 						<p:commandButton value="Sim" type="button"
 							styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
