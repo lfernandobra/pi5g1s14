@@ -18,12 +18,12 @@
 	<managed-bean>
 		<managed-bean-name>UFBean</managed-bean-name>
 		<managed-bean-class>edu.gaed.bean.UFBean</managed-bean-class>
-		<managed-bean-scope>request</managed-bean-scope>
+		<managed-bean-scope>view</managed-bean-scope>
 	</managed-bean>
 	<managed-bean>
 		<managed-bean-name>MunicipioBean</managed-bean-name>
 		<managed-bean-class>edu.gaed.bean.MunicipioBean</managed-bean-class>
-		<managed-bean-scope>request</managed-bean-scope>
+		<managed-bean-scope>view</managed-bean-scope>
 	</managed-bean>
 	<managed-bean>
 		<managed-bean-name>LogradouroBean</managed-bean-name>
@@ -96,6 +96,13 @@
 		<navigation-case>
 			<from-outcome>turma</from-outcome>
 			<to-view-id>/turma.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>/ocorrencia.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>login</from-outcome>
+			<to-view-id>/LoginModelo.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
 	<application />

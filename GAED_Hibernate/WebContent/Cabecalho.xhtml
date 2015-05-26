@@ -5,7 +5,7 @@
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:ui="http://java.sun.com/jsf/facelets">
 <h:head>
-	<title>Gaed</title>
+	<title>GAED</title>
 	<link rel="stylesheet" href="styles/layout.css" type="text/css" />
 </h:head>
 <body>
@@ -28,8 +28,10 @@
 								<h:graphicImage width="40" height="80"
 									value="/temp/#{LoginBean.verFoto()}" />
 							</div>
+					 	<h:outputLabel rendered="#{LoginBean.usuario.perfil.aluno}" 
+					 				   value="Olá,#{LoginBean.aluno.responsavel.nome}" />		
 							<h:commandButton value="Cerrar Sessão"
-							action="#{LoginBean.encerrarSession()}" />
+											 action="#{LoginBean.encerrarSession()}" />
 	   				</h:form>					
 				</p:fieldset>
 			</div>
@@ -51,11 +53,12 @@
 			        
 			        <p:menuitem value="Tarefas"  
 			        			icon="ui-icon-clipboard" 
-			        			action="tarefa"/>
+			        			action="tarefa"/>			
 			 
 			        <p:submenu label="Usuarios" 
 			        		   icon="ui-icon-person" 
 			        	       rendered="#{LoginBean.usuario.perfil.secretaria or LoginBean.usuario.perfil.gestor}">
+			         		<h:outputText value="#{LoginBean.secretaria.instituicaoAnterior}" />
 			         	<p:menuitem value="Aluno"
 			         			    icon="ui-icon-person" action="aluno"> </p:menuitem>
 			            <p:menuitem value="Responsavel" 
