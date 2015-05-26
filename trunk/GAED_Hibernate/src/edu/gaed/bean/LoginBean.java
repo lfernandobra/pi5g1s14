@@ -15,6 +15,11 @@ import javax.servlet.ServletContext;
 import org.apache.commons.codec.digest.DigestUtils;
 
 import edu.gaed.dao.LoginDao;
+import edu.gaed.vo.Aluno;
+import edu.gaed.vo.Gestor;
+import edu.gaed.vo.Professor;
+import edu.gaed.vo.Responsavel;
+import edu.gaed.vo.Secretaria;
 import edu.gaed.vo.Usuario;
  
 @ManagedBean(name="LoginBean")
@@ -22,6 +27,12 @@ import edu.gaed.vo.Usuario;
 public class LoginBean {
      
 	private Usuario usuario = new Usuario();
+	private Aluno aluno = new Aluno();
+	private Gestor gestor = new Gestor();
+	private Professor professor = new Professor();
+	private Responsavel responsavel = new Responsavel();
+	private Secretaria secretaria = new Secretaria();
+	
 	
 	public LoginBean() {
 		super();
@@ -32,14 +43,61 @@ public class LoginBean {
 		return usuario;
 	}
 
-
-
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
 	}     
-    
- 
-    public String verificarDatos() throws Exception {
+     
+    public Aluno getAluno() {
+		return aluno;
+	}
+
+
+	public void setAluno(Aluno aluno) {
+		this.aluno = aluno;
+	}
+	
+
+	public Gestor getGestor() {
+		return gestor;
+	}
+
+
+	public void setGestor(Gestor gestor) {
+		this.gestor = gestor;
+	}
+
+
+	public Professor getProfessor() {
+		return professor;
+	}
+
+
+	public void setProfessor(Professor professor) {
+		this.professor = professor;
+	}
+
+
+	public Responsavel getResponsavel() {
+		return responsavel;
+	}
+
+
+	public void setResponsavel(Responsavel responsavel) {
+		this.responsavel = responsavel;
+	}
+
+
+	public Secretaria getSecretaria() {
+		return secretaria;
+	}
+
+
+	public void setSecretaria(Secretaria secretaria) {
+		this.secretaria = secretaria;
+	}
+
+
+	public String verificarDatos() throws Exception {
 		LoginDao usuDAO = new LoginDao();
 		Usuario us;
 		String resultado;
@@ -50,14 +108,44 @@ public class LoginBean {
 			this.usuario.setSenha(encript);
 			
 			us = usuDAO.verificaDados(this.usuario);
+			
 			this.usuario = us;
-			if(us != null) {
-				FacesContext.getCurrentInstance().getExternalContext()
-						.getSessionMap().put("usuario",us);
+			if(us != null && us.getPerfil().isAluno()) {
+				FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("usuario",us);
 				FacesContext context = FacesContext.getCurrentInstance();
-				context.addMessage(null, new FacesMessage("Autenticação realizada com sucesso",  "Autenticado ") );
+				context.addMessage(null, new FacesMessage("Autenticação realizada com sucesso",  "Autenticado "));
+				this.aluno = (Aluno) usuario;
 				resultado = "home";
-			} else { 
+			}
+			else if(us != null && us.getPerfil().isGestor()){
+				FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("usuario",us);
+				FacesContext context = FacesContext.getCurrentInstance();
+				context.addMessage(null, new FacesMessage("Autenticação realizada com sucesso",  "Autenticado "));
+				this.gestor = (Gestor) usuario;
+				resultado = "home";
+			}
+			else if(us != null && us.getPerfil().isProfessor()){
+				FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("usuario",us);
+				FacesContext context = FacesContext.getCurrentInstance();
+				context.addMessage(null, new FacesMessage("Autenticação realizada com sucesso",  "Autenticado "));
+				this.professor = (Professor) usuario;
+				resultado = "home";
+			}
+			else if(us != null && us.getPerfil().isResponsavel()){
+				FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("usuario",us);
+				FacesContext context = FacesContext.getCurrentInstance();
+				context.addMessage(null, new FacesMessage("Autenticação realizada com sucesso",  "Autenticado "));
+				this.responsavel = (Responsavel) usuario;
+				resultado = "home";
+			}
+			else if(us != null && us.getPerfil().isResponsavel()){
+				FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("usuario",us);
+				FacesContext context = FacesContext.getCurrentInstance();
+				context.addMessage(null, new FacesMessage("Autenticação realizada com sucesso",  "Autenticado "));
+				this.setSecretaria((Secretaria) usuario);
+				resultado = "home";
+			}
+			else { 
 				FacesContext context = FacesContext.getCurrentInstance();
 		        context.addMessage(null, new FacesMessage("Autenticação falhou",  "Login ou Senha estão incorretos ") );
 				resultado = "login";

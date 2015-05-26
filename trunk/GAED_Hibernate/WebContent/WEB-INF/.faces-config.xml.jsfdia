@@ -46,24 +46,31 @@
     PATH="/turma.xhtml" TARGET="rules:#turma.xhtml" TITLE="turma" model-entity="JSFProcessItemOutput"/>
   </PROCESS-ITEM>
  </PROCESS-ITEM>
- <PROCESS-ITEM NAME="rules:#ocorrencia.xhtml" PATH="/ocorrencia.xhtml"
-  SHAPE="544,240,50,25" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#configuracoes.xhtml"
+  PATH="/configuracoes.xhtml" SHAPE="544,144,50,25" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#gestor.xhtml" PATH="/gestor.xhtml"
+  SHAPE="544,192,50,25" model-entity="JSFProcessGroup"/>
  <PROCESS-ITEM NAME="rules:#boletim.xhtml" PATH="/boletim.xhtml"
   SHAPE="544,96,50,25" model-entity="JSFProcessGroup"/>
  <PROCESS-ITEM NAME="rules:#tarefa.xhtml" PATH="/tarefa.xhtml"
   SHAPE="544,432,50,25" model-entity="JSFProcessGroup"/>
  <PROCESS-ITEM NAME="rules:#aluno.xhtml" PATH="/aluno.xhtml"
   SHAPE="544,48,50,25" model-entity="JSFProcessGroup"/>
- <PROCESS-ITEM NAME="rules:#professor.xhtml" PATH="/professor.xhtml"
-  SHAPE="544,288,50,25" model-entity="JSFProcessGroup"/>
- <PROCESS-ITEM NAME="rules:#gestor.xhtml" PATH="/gestor.xhtml"
-  SHAPE="544,192,50,25" model-entity="JSFProcessGroup"/>
- <PROCESS-ITEM NAME="rules:#secretaria.xhtml" PATH="/secretaria.xhtml"
-  SHAPE="544,384,50,25" model-entity="JSFProcessGroup"/>
  <PROCESS-ITEM NAME="rules:#responsavel.xhtml" PATH="/responsavel.xhtml"
   SHAPE="544,336,50,25" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#professor.xhtml" PATH="/professor.xhtml"
+  SHAPE="544,288,50,25" model-entity="JSFProcessGroup"/>
  <PROCESS-ITEM NAME="rules:#turma.xhtml" PATH="/turma.xhtml"
   SHAPE="544,480,50,25" model-entity="JSFProcessGroup"/>
- <PROCESS-ITEM NAME="rules:#configuracoes.xhtml"
-  PATH="/configuracoes.xhtml" SHAPE="544,144,50,25" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#ocorrencia.xhtml" PATH="/ocorrencia.xhtml"
+  SHAPE="664,240,50,41" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:#ocorrencia.xhtml:0" NAME="item"
+   PATH="/ocorrencia.xhtml" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT ID="login::#LoginModelo.xhtml" NAME="output"
+    PATH="/LoginModelo.xhtml" TARGET="rules:#LoginModelo.xhtml"
+    TITLE="login" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:#secretaria.xhtml" PATH="/secretaria.xhtml"
+  SHAPE="544,384,50,25" model-entity="JSFProcessGroup"/>
 </PROCESS>

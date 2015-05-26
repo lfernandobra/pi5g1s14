@@ -18,9 +18,11 @@
 		<div id="Lista">
 				<p:separator />
 				
-				<p:toolbar styleClass="toolbar">
+				<p:toolbar styleClass="toolbar" rendered="#{LoginBean.usuario.perfil.professor or 
+										 								 LoginBean.usuario.perfil.gestor}">
 					<f:facet name="left">
-						<p:commandButton value="Cadastrar" type="button" onclick="PF('dialogCadastrar').show();" icon="ui-icon-disk" />
+						<p:commandButton value="Cadastrar" type="button" onclick="PF('dialogCadastrar').show();" 
+										 icon="ui-icon-disk" />
 					</f:facet>
 				</p:toolbar>
 			
