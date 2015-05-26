@@ -74,7 +74,12 @@ body{
   	position: fixed;
 }
 #formAltMedio{
-	height: 600px !important;
+	height: 700px !important;
+  	width: 900px !important;
+  	position: fixed;
+}
+#idAdicProf{
+	height: 700px !important;
   	width: 900px !important;
   	position: fixed;
 }
@@ -117,8 +122,10 @@ body{
 	padding-top: 80px !important;
 	margin-left: 80px;
 }
-
-
+ .ui-picklist .ui-picklist-list{
+  height:400px;
+  width: 350px 
+  } 
 
 
 

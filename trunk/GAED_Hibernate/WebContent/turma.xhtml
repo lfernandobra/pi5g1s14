@@ -21,7 +21,7 @@
 
 			<p:toolbar styleClass="toolbar">
 				<f:facet name="left">
-					<p:commandButton value="Criar Turma" type="button" onclick="PF('dialogCadastrar').show();" icon="ui-icon-disk" />
+					<p:commandButton value="Criar Turma" type="button" onclick="PF('dialogCadastrar').show();" icon="ui-icon-plusthick" />
 				</f:facet>
 			</p:toolbar>
 				
@@ -322,7 +322,7 @@
 				</p:pickList>
 				
 				<div id="botoes">
-					<p:commandButton id="pojoBtnSubmit" value="Incluir" update=":formPrincipal:tabelaTurma @form" icon="ui-icon-disk" 
+					<p:commandButton id="pojoBtnSubmit" value="Incluir" update=":formPrincipal:tabelaTurma @form growl" icon="ui-icon-disk" 
 					oncomplete="closeDialogIfSucess(xhr, status, args, 'dialogAdicProf','formAdicProfessor')" style="margin-top:5px" actionListener="#{TurmaProfessorBean.adicionarProfessor}"
 					onsuccess="PF('dialogAdicProf').hide();" />
 				</div>

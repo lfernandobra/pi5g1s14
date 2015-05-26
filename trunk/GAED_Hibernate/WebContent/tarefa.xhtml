@@ -10,7 +10,24 @@
 	<link rel="stylesheet" href="styles/layout_crud.css" type="text/css" />
 </h:head>
 <body>
-	<div align="center">
+	
+	
+<ui:decorate template="/Cabecalho.xhtml">
+	<ui:define name="center">
+
+
+		<h2>Lista de Tarefas</h2>
+
+		<div id="Lista">
+			<p:separator />
+
+			<p:toolbar styleClass="toolbar">
+				<f:facet name="left">
+					<p:commandButton value="Cadastrar" type="button" onclick="PF('dialogCadastrar').show();" icon="ui-icon-plusthick" />
+				</f:facet>
+			</p:toolbar>	
+			
+	
 		<p:growl id="growl" showDetail="true" life="4000" />
 		<h:form id="formPrincipal">
 			<p:dataTable var="lista" value="#{TarefaBean.tarefas}"
@@ -91,10 +108,6 @@
 			</p:dataTable>
 		</h:form>
 
-		<h:panelGrid columns="1" cellpadding="5">
-			<p:commandButton value="Cadastrar" type="button"
-				onclick="PF('dialogCadastrar').show();" icon="ui-icon-disk" />
-		</h:panelGrid>
 		<p:dialog header="Cadastrar" widgetVar="dialogCadastrar" modal="true"
 			resizable="true" id="formCad" closeOnEscape="true" closable="true"
 			maximizable="true" styleClass="dialogCadastrar">
@@ -214,5 +227,9 @@
 			</p:commandButton>
 		</h:form>
 	</p:dialog>
+	
+	
+	</ui:define>
+	</ui:decorate>
 </body>
 </html>
