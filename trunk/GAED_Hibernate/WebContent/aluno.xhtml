@@ -22,7 +22,7 @@
 			<p:toolbar styleClass="toolbar">
 				<f:facet name="left">
 					<p:commandButton value="Cadastrar" type="button"
-						onclick="PF('dialogCadastrar').show();" icon="ui-icon-disk" />
+						onclick="PF('dialogCadastrar').show();" icon="ui-icon-plusthick" />
 				</f:facet>
 			</p:toolbar>
 			<h:form id="formPrincipal">
@@ -249,7 +249,7 @@
 						<f:selectItem itemLabel=" -- Selecione -- " noSelectionOption="true" />
 						<f:selectItems value="#{ResponsavelBean.responsavels}"
 							var="responsavel" itemValue="#{responsavel}"
-							itemLabel="#{responsavel.nome}" id="resp" />
+							itemLabel="#{responsavel.nome} #{responsavel.sobrenome}" id="resp" />
 						<f:converter converterId="responsavelConverter"/>
 					</p:selectOneMenu>
 

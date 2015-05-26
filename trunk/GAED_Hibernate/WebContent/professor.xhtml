@@ -23,7 +23,7 @@
 				<p:toolbar styleClass="toolbar">
 					<f:facet name="left">
 						<p:commandButton value="Cadastrar" type="button"
-							onclick="PF('dialogCadastrar').show();" icon="ui-icon-disk" />
+							onclick="PF('dialogCadastrar').show();" icon="ui-icon-plusthick" />
 					</f:facet>
 				</p:toolbar>
 
@@ -116,19 +116,21 @@
 
 						</p:rowExpansion>
 						<p:column style="width:60px">
-							<p:commandButton  update=":formAlterar growl"
+							<p:commandButton  update=":formAlterar growl" id="botaoAlterar"
 								oncomplete="PF('dialogAlterar').show();" icon="ui-icon-pencil">
 								<f:setPropertyActionListener target="#{ProfessorBean.professor}"
 									value="#{lista}" />
 							</p:commandButton>
-
+							<p:tooltip id="toolTipAlterar" for="botaoAlterar" value="Alterar cadastro do professor" escape="false" />
+							
 							<p:commandButton 
-								actionListener="#{ProfessorBean.excluir(lista)}"
+								actionListener="#{ProfessorBean.excluir(lista)}" id="botaoExcluir"
 								update=":formPrincipal:tabelaProfessor growl"
 								icon="ui-icon-trash">
 								<p:confirm header="Excluir Professor" message="Deseja excluir?"
 									icon="ui-icon-alert" />
 							</p:commandButton>
+							<p:tooltip id="toolTipExcluir" for="botaoExcluir" value="Excluir professor" escape="false" />
 
 							<p:confirmDialog global="true" showEffect="fade"
 								hideEffect="fade">
