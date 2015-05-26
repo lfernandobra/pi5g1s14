@@ -159,7 +159,7 @@
 						<p:panelGrid id="panelAlterar" columns="2">
 							
 							<p:outputLabel for="assunto" value="Aluno:" />
-							<p:inputText value="#{OcorrenciaBean.ocorrencia.aluno.nome}" size="50" required="true" id="aluno"	requiredMessage="Aluno não deve estar vazio!" />
+							<p:inputText value="#{OcorrenciaBean.ocorrencia.aluno.nome} #{OcorrenciaBean.ocorrencia.aluno.sobrenome}" size="50" required="true" id="aluno"	requiredMessage="Aluno não deve estar vazio!" />
 						
 							<p:outputLabel for="assunto" value="Assunto:" />
 							<p:inputText value="#{OcorrenciaBean.ocorrencia.assunto}" size="50" required="true" id="assunto"	requiredMessage="Assunto não deve estar vazio!" />
@@ -177,12 +177,9 @@
 							
 						</p:panelGrid>
 		
-						<p:commandButton value="Salvar"  id="withIcon" actionListener="#{OcorrenciaBean.alterar}" icon="ui-icon-disk" update=":formPrincipal:tabelaOcorrencia @form"
+						<p:commandButton value="Salvar"  id="withIcon"  actionListener="#{OcorrenciaBean.alterar}" icon="ui-icon-disk" update=":formPrincipal:tabelaOcorrencia @form growl" 
 							oncomplete="closeDialogIfSucess(xhr, status, args, 'dialogAlterar','formAltMedio')" onsuccess="PF('dialogAlterar').hide();" />
 						
-						<p:commandButton value="Limpar" update="@form" process="@this">
-							<p:resetInput target="panelAlterar" />
-						</p:commandButton>
 					</h:form>
 				</p:dialog>
 		

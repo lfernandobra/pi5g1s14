@@ -4,8 +4,10 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
 
 import org.primefaces.event.TransferEvent;
 import org.primefaces.model.DualListModel;
@@ -65,7 +67,9 @@ public class TurmaProfessorBean implements Serializable{
 	public void adicionarProfessor(){
 		for(TurmaDisciplina turmaDisciplina : professoresDualList.getTarget()){
 			if (turmaDisciplina.getId() == null){
-				new TurmaDisciplinaDao().inserir(turmaDisciplina);				
+				new TurmaDisciplinaDao().inserir(turmaDisciplina);	
+				FacesContext context = FacesContext.getCurrentInstance();
+		        context.addMessage(null, new FacesMessage("Atribuíto",  " Professor(a) atribuído com sucesso!") );
 			}
 		}
 		for(TurmaDisciplina turmaDisciplina : professoresDualList.getSource()){
