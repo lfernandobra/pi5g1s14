@@ -95,6 +95,11 @@ public class OcorrenciaBean implements Serializable{
 		ocorrencias = new OcorrenciaDao().listar();
 		ocorrencia = new Ocorrencia();
 	}
+	
+	@SuppressWarnings("rawtypes")
+	public List listarOcorrenciaAluno(Aluno aluno){
+		return new OcorrenciaDao().listarPorAluno(aluno);
+	}
 
 	public Ocorrencia getOcorrencia() {
 		return ocorrencia;
