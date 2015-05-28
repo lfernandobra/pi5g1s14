@@ -2,10 +2,10 @@ package edu.gaed.dao;
 
 import java.util.List;
 
+import edu.gaed.vo.Aluno;
 import edu.gaed.vo.Ocorrencia;
 
 import org.hibernate.Criteria;
-
 import org.hibernate.Session;
 
 import edu.gaed.util.HibernateUtil;
@@ -64,6 +64,20 @@ public class OcorrenciaDao {
  
 			try{
 				Criteria cri = session.createCriteria(Ocorrencia.class);
+				return cri.list();
+			}finally{
+				session.close();
+ 
+			}
+		}
+		
+		@SuppressWarnings("rawtypes")
+		public List listarPorAluno(Aluno aluno){
+			session = HibernateUtil.getSessionFactory().openSession();
+ 
+			try{
+				Criteria cri = session.createCriteria(Ocorrencia.class);
+				
 				return cri.list();
 			}finally{
 				session.close();
