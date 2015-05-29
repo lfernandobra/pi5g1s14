@@ -30,6 +30,7 @@ public class AlunoBean extends UsuarioBean implements Serializable{
 
 	Aluno aluno = new Aluno();
 	Set<Aluno> alunos = new HashSet<Aluno>();
+	Set<Aluno> alunosSemTurma = new HashSet<Aluno>();
 	FotoBean fotoBean = new FotoBean();
 	
 	public AlunoBean(Aluno aluno, List<Aluno> alunos) {
@@ -42,6 +43,7 @@ public class AlunoBean extends UsuarioBean implements Serializable{
 	@SuppressWarnings("unchecked")
 	public AlunoBean(){
 		alunos = new AlunoDao().listar();
+		alunosSemTurma = new AlunoDao().listaAlunoSemTurma();
 		aluno = new Aluno();
 	}
 	
@@ -53,10 +55,10 @@ public class AlunoBean extends UsuarioBean implements Serializable{
        
     }
 	public String getAlunoEscolhida(){
-        return aluno!=null && aluno.getId()!=null ? aluno.toString():"Classe não escolhida";
+        return aluno!=null && aluno.getId()!=null ? aluno.toString():"Classe nï¿½o escolhida";
     }
  
-	//Métodos dos botões 
+	//Mï¿½todos dos botï¿½es 
 	@SuppressWarnings("unchecked")
 	public void cadastrar(ActionEvent actionEvent){
 		String senhaSCript = senhaMD5(aluno.getSenha());
@@ -81,7 +83,7 @@ public class AlunoBean extends UsuarioBean implements Serializable{
 	public void excluir(Aluno aluno){
 		new AlunoDao().excluir(aluno);
 		FacesContext context = FacesContext.getCurrentInstance();
-        context.addMessage(null, new FacesMessage("Excluído", "Excluído com sucesso!") );
+        context.addMessage(null, new FacesMessage("Excluï¿½do", "Excluï¿½do com sucesso!") );
 		alunos = new AlunoDao().listar();
 		aluno = new Aluno();
 	}
