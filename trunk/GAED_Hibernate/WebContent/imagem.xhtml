@@ -1,0 +1,36 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions">
+<h:head>
+	<title>Imagens</title>
+	<script src="scripts/scripts.js" type="text/javascript"></script>
+	<link rel="stylesheet" href="styles/layout_crud.css" type="text/css" />
+</h:head>
+<h:body>
+	<h:form id="IncluirFoto" styleClass="IncluirFoto">
+		<p:focus context="@form" />
+		<h4>Selecione uma foto para anexar ao cadastro :</h4>
+		<p:separator />
+		<p:growl id="growl" showDetail="true" life="4000" />
+		<p:fileUpload fileUploadListener="#{ImagemBean.fileUpload}" size="50"
+			mode="advanced" skinSimple="true" update="growl" sizeLimit="1000000000"
+			fileLimit="1" allowTypes="/(\.|\/)(gif|jpe?g|png)$/"
+			label="Selecionar" uploadLabel="Enviar" cancelLabel="Cancelar"
+			id="IncluirAnexo"
+			invalidSizeMessage="Limite excedido: Não possivel o envio"
+			invalidFileMessage="Formato de arquivo não permitido"
+			dragDropSupport="true">
+			<f:converter converterId="anexoConverter" />
+		</p:fileUpload>
+
+		<p:galleria value="#{ImagemBean.imagems}" var="imagem" panelWidth="500"
+			panelHeight="313" showCaption="true">
+			<p:graphicImage value="temp/#{ImagemBean.verImagem(imagem.imagem,imagem.nome)}"
+				alt="Image Description for #{imagem.nome}" title="#{imagem.nome}" />
+		</p:galleria>
+	</h:form>
+</h:body>
+</html>
