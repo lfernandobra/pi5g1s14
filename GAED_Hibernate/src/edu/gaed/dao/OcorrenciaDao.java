@@ -6,6 +6,7 @@ import edu.gaed.vo.Aluno;
 import edu.gaed.vo.Ocorrencia;
 
 import org.hibernate.Criteria;
+import org.hibernate.Query;
 import org.hibernate.Session;
 
 import edu.gaed.util.HibernateUtil;
@@ -76,9 +77,13 @@ public class OcorrenciaDao {
 			session = HibernateUtil.getSessionFactory().openSession();
  
 			try{
-				Criteria cri = session.createCriteria(Ocorrencia.class);
+				String hql = "FROM Ocorrencia Oc WHERE Oc.aluno = :aluno";
+				Query query = session.createQuery(hql);
+				query.setParameter("aluno",aluno);
+				List results = query.list();
+				//Criteria cri = session.createCriteria(Ocorrencia.class);
 				
-				return cri.list();
+				return results;
 			}finally{
 				session.close();
  
