@@ -36,7 +36,7 @@ public class TurmaAlunoBean implements Serializable{
 			alunosTarget.addAll(turma.getAlunos());
 			
 			List<Aluno> alunosSource = new ArrayList<Aluno>();
-			alunosSource.addAll(alunoBean.alunos);
+			alunosSource.addAll(alunoBean.alunosSemTurma);
 			alunosSource.removeAll(alunosTarget);
 			alunosDualList = new DualListModel<Aluno>(alunosSource,alunosTarget);
 			
