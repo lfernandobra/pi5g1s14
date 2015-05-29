@@ -36,7 +36,9 @@ public class OcorrenciaBean implements Serializable{
       
 	Ocorrencia ocorrencia = new Ocorrencia();
 	 
-	List<Ocorrencia> ocorrencias = new ArrayList<Ocorrencia>(); 
+	List<Ocorrencia> ocorrencias = new ArrayList<Ocorrencia>();
+	
+	private List<Ocorrencia> ocorrenciasAluno = new ArrayList<Ocorrencia>(); 
 	
 	public OcorrenciaBean(Ocorrencia ocorrencia, List<Ocorrencia> ocorrencias) {
 		super();
@@ -117,7 +119,15 @@ public class OcorrenciaBean implements Serializable{
 		this.ocorrencias = ocorrencias;
 	}
  
-	 public Turma getTurma() {
+	 public List<Ocorrencia> getOcorrenciasAluno() {
+		return ocorrenciasAluno;
+	}
+
+	public void setOcorrenciasAluno(List<Ocorrencia> ocorrenciasAluno) {
+		this.ocorrenciasAluno = ocorrenciasAluno;
+	}
+
+	public Turma getTurma() {
 			return turma;
 		}
 
