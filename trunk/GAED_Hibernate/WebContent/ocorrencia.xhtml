@@ -249,6 +249,9 @@
 							filterBy="#{aluno.turma.nome}">
 							<h:outputText value="#{aluno.turma.nome}" />
 						</p:column>
+						<p:column headerText="Quantidade de ocorrências">
+							<h:outputText value="#{OcorrenciaBean.listarOcorrenciaAluno(aluno).size()}" />
+						</p:column>
 					</p:dataTable>
 				</h:form>
 			</div>
