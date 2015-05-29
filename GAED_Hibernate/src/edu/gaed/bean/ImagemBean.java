@@ -1,13 +1,23 @@
 package edu.gaed.bean;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
+import javax.servlet.ServletContext;
+
+import org.primefaces.event.FileUploadEvent;
+import org.primefaces.model.UploadedFile;
 
 import edu.gaed.vo.Imagem;
 import edu.gaed.dao.ImagemDao;
@@ -88,6 +98,67 @@ public class ImagemBean implements Serializable{
  
 	//getters and setters
 	
- 
+	public void fileUpload(FileUploadEvent event) throws IOException {
+		try {
+			// Instância objetos
+			ImagemDao imagemDao = new ImagemDao();
+
+			// Cria um arquivo UploadFile, para receber o arquivo do evento
+			UploadedFile arq = event.getFile();
+			// Transformar a imagem em bytes para salvar em banco de dados
+			byte[] bimagem = event.getFile().getContents();
+			imagem.setImagem(bimagem);
+			imagem.setNome(arq.getFileName());
+			imagemDao.inserir(imagem);
+
+			FacesMessage msg = new FacesMessage("O Arquivo ", arq.getFileName()
+					+ " salvo em banco de dados.");
+			FacesContext.getCurrentInstance().addMessage("msgUpdate", msg);
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+	}
 	
+	public String verImagem(byte [] foto,String nome) {
+		
+		try {
+            ServletContext sContext = (ServletContext) FacesContext
+                    .getCurrentInstance().getExternalContext().getContext();
+ 
+            File folder = new File(sContext.getRealPath("/temp"));
+            if (!folder.exists()){
+                folder.mkdirs();
+ 
+            }
+             String nomeArquivo = nome + ".png";
+             String arquivo = sContext.getRealPath("/temp") + File.separator
+                        + nomeArquivo;
+             System.out.println(arquivo);
+             System.out.println(foto);
+             criaArquivo(foto, arquivo);
+             
+             return nomeArquivo;
+             
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+		return null;	
+    }
+
+	private void criaArquivo(byte[] bytes, String arquivo) {
+	    FileOutputStream fos;
+	
+	    try {
+	        fos = new FileOutputStream(arquivo);
+	        fos.write(bytes);
+	
+	        fos.flush();
+	        fos.close();
+	    } catch (FileNotFoundException ex) {
+	        ex.printStackTrace();
+	    } catch (IOException ex) {
+	        ex.printStackTrace();
+	    }
+	}
+ 
 }
