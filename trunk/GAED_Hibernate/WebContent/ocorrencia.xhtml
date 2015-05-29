@@ -229,7 +229,7 @@
 
 			<!-- Responsavel -->
 			<div id="divResp">
-				<h:form id="formOcorrenciaAluno"
+				<h:form id="formOcorrenciaRespAluno"
 					rendered="#{LoginBean.usuario.perfil.responsavel}">
 					<p:growl id="growl" showDetail="true" life="4000" />
 					<p:dataTable var="aluno" value="#{LoginBean.responsavel.alunos}"
@@ -237,6 +237,9 @@
 						rows="5" emptyMessage="Nenhum registro encontrado"
 						paginator="true" paginatorPosition="bottom"
 						styleClass="dataTablePrincipal">
+						<p:column style="width:16px">
+							<p:rowToggler />
+						</p:column>
 						<p:column headerText="Foto">
 							<h:graphicImage width="50" height="60"
 								value="/temp/#{FotoBean.verFoto(aluno.foto.foto,aluno.nome)}" />
@@ -252,9 +255,76 @@
 						<p:column headerText="Quantidade de ocorrências">
 							<h:outputText value="#{OcorrenciaBean.listarOcorrenciaAluno(aluno).size()}" />
 						</p:column>
+						<p:rowExpansion>
+							<h3>Informações da Ocorrência</h3>
+							<p:panelGrid columns="2" columnClasses="label,value">
+								<p:dataTable var="lista"
+									value="#{OcorrenciaBean.listarOcorrenciaAluno(aluno)}"
+									id="tabelaOcorrenciaAluno1" resizableColumns="true"
+									reflow="true" rows="5"
+									emptyMessage="Nenhum registro encontrado" paginator="true"
+									paginatorPosition="bottom" styleClass="dataTablePrincipal">
+
+									<p:column style="width:16px">
+										<p:rowToggler />
+									</p:column>
+
+									<p:column headerText="ID" sortBy="#{lista.id}"
+										filterBy="#{lista.id}" style="width:130px">
+										<h:outputText value="#{lista.id}" />
+									</p:column>
+
+									<p:column headerText="Assunto" sortBy="#{lista.assunto}"
+										filterBy="#{lista.assunto}">
+										<h:outputText value="#{lista.assunto}" />
+									</p:column>
+
+								</p:dataTable>
+
+
+							</p:panelGrid>
+						</p:rowExpansion>
+						<p:column style="width:60px">
+						<p:commandButton 
+							oncomplete="PF('dialogOcorrenciaAluno').show();" id="botaoListarOcAlu"
+							icon="ui-icon-pencil">
+							<f:setPropertyActionListener
+								target="#{OcorrenciaBean.ocorrenciasAluno}" 
+								value="#{OcorrenciaBean.listarOcorrenciaAluno(aluno)}" />
+						</p:commandButton>
+						<p:tooltip id="toolTipListarOcorrenciaAluno" for="botaoListarOcAlu"
+							value="Listar ocorrência" escape="false" />
+						</p:column>	
 					</p:dataTable>
 				</h:form>
 			</div>
+			<p:dialog header="Ocorrências" widgetVar="dialogOcorrenciaAluno" modal="true"
+				resizable="true" id="formAltMedio1" appendTo="@(body)">
+				<h:form id="formOcorrenciasAluno" styleClass="formAlterar">
+					
+					<p:dataTable var="lista" value="#{OcorrenciaBean.ocorrenciasAluno}"
+								 id="tabelaOcorrenciaAluno" resizableColumns="true" reflow="true"
+								 rows="5" emptyMessage="Nenhum registro encontrado" paginator="true"
+								 paginatorPosition="bottom" styleClass="dataTablePrincipal">
+
+					<p:column style="width:16px">
+						<p:rowToggler />
+					</p:column>
+
+					<p:column headerText="ID" sortBy="#{lista.id}"
+						filterBy="#{lista.id}" style="width:130px">
+						<h:outputText value="#{lista.id}" />
+					</p:column>
+
+					<p:column headerText="Assunto" sortBy="#{lista.assunto}"
+						filterBy="#{lista.assunto}">
+						<h:outputText value="#{lista.assunto}" />
+					</p:column>
+
+					</p:dataTable>
+
+				</h:form>
+			</p:dialog>
 
 		</div>
 	</ui:define>
