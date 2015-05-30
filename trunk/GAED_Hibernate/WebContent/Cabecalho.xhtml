@@ -30,7 +30,7 @@
 							</div>
 					 	<h:outputLabel rendered="#{LoginBean.usuario.perfil.aluno}" 
 					 				   value="Olá,#{LoginBean.aluno.responsavel.nome}" />		
-							<h:commandButton value="Cerrar Sessão"
+							<h:commandButton value="Sair"
 											 action="#{LoginBean.encerrarSession()}" />
 	   				</h:form>					
 				</p:fieldset>
@@ -58,7 +58,7 @@
 			        <p:submenu label="Usuarios" 
 			        		   icon="ui-icon-person" 
 			        	       rendered="#{LoginBean.usuario.perfil.secretaria or LoginBean.usuario.perfil.gestor}">
-			         		<h:outputText value="#{LoginBean.secretaria.instituicaoAnterior}" />
+			         		
 			         	<p:menuitem value="Aluno"
 			         			    icon="ui-icon-person" action="aluno"> </p:menuitem>
 			            <p:menuitem value="Responsavel" 
@@ -72,7 +72,8 @@
 			        </p:submenu>
 			        <p:menuitem value="Configurações"  
 			        			icon="ui-icon-gear" 
-			        			action="config"/>
+			        			action="config"
+			        			rendered="#{LoginBean.usuario.perfil.secretaria or LoginBean.usuario.perfil.gestor}"/>
 			    </p:menubar>
 			</h:form>
 			</div>

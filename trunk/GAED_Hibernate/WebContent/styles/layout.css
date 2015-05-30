@@ -83,7 +83,7 @@ h2{
 }
 .menu{
 	position:absolute;
-	top:90px;
+	top:93px;
 	left: 150px;
 }
 
@@ -124,10 +124,20 @@ overflow: visible !important;
 	height:50% !important;
 	width:25% !important;
 	position: absolute !important;
-	top: 53% !important;
+	top: 56% !important;
 	font-size: 14 !important;
 	border-style: none !important;
 	left: 11% !important;
+}
+
+.notificacoes{
+	height:50% !important;
+	width:25% !important;
+	position: absolute !important;
+	top: 30px !important;
+	font-size: 14 !important;
+	border-style: none !important;
+	left: 55% !important;
 }
 
 .centroHome{
@@ -140,13 +150,15 @@ overflow: visible !important;
 	position: absolute !important;
 	left: 31% !important;
 	border-style: none !important;
-	top:53% !important;
+	top:56% !important;
 }
 .fotosEscola{
 	position:absolute;
 	left: 11% !important;
 	top:30px !important;
-	
+	width:510px !important;
+	height:50% !important;
+	border-style: none !important;
 }
 	
 #conteudoCentro{
