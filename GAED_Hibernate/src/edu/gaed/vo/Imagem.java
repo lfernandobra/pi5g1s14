@@ -28,8 +28,18 @@ public class Imagem implements Serializable{
 
 	@Column(name = "nome", nullable = false)
 	private String nome;
+	
+	@Column(name = "descricao")
+	private String descricao;
 
-	@Column(name="imagem",length=1000000000)
+	public String getDescricao() {
+		return descricao;
+	}
+
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
+	}
+	@Column(name="imagem",length=2000000000)
 	@Lob
 	private byte[] imagem;
 
