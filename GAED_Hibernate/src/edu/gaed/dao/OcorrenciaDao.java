@@ -4,6 +4,7 @@ import java.util.List;
 
 import edu.gaed.vo.Aluno;
 import edu.gaed.vo.Ocorrencia;
+import edu.gaed.vo.Responsavel;
 
 import org.hibernate.Criteria;
 import org.hibernate.Query;
@@ -83,6 +84,22 @@ public class OcorrenciaDao {
 				List results = query.list();
 				//Criteria cri = session.createCriteria(Ocorrencia.class);
 				
+				return results;
+			}finally{
+				session.close();
+ 
+			}
+		}
+		
+		@SuppressWarnings("rawtypes")
+		public List listarPorResponsavel(Responsavel responsavel){
+			session = HibernateUtil.getSessionFactory().openSession();
+ 
+			try{
+				String hql = "FROM Ocorrencia Oc WHERE Oc.aluno.responsavel = :responsavel";
+				Query query = session.createQuery(hql);
+				query.setParameter("responsavel",responsavel);
+				List results = query.list();
 				return results;
 			}finally{
 				session.close();

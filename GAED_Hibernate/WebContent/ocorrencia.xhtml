@@ -68,8 +68,9 @@
 						<p:panelGrid columns="2" columnClasses="label,value">
 
 							<h:outputText value="Data:" />
-							<h:outputText value="#{lista.data}" />
-
+							<h:outputFormat value="{0, date, dd/MM/yyyy}">
+								<f:param value="#{lista.data}" />
+							</h:outputFormat>
 							<h:outputText value="Aluno:" />
 							<h:outputText
 								value="#{lista.aluno.nome} #{lista.aluno.sobrenome}" />
@@ -232,7 +233,7 @@
 				<h:form id="formOcorrenciaRespAluno"
 					rendered="#{LoginBean.usuario.perfil.responsavel}">
 					<p:growl id="growl" showDetail="true" life="4000" />
-					<p:dataTable var="aluno" value="#{LoginBean.responsavel.alunos}"
+					<p:dataTable var="ocorrencia" value="#{OcorrenciaBean.listarOcorrenciaResponsavel(LoginBean.responsavel)}"
 						id="tabelaOcorrenciaAluno" resizableColumns="true" reflow="true"
 						rows="5" emptyMessage="Nenhum registro encontrado"
 						paginator="true" paginatorPosition="bottom"
@@ -240,92 +241,42 @@
 						<p:column style="width:16px">
 							<p:rowToggler />
 						</p:column>
-						<p:column headerText="Foto">
-							<h:graphicImage width="50" height="60"
-								value="/temp/#{FotoBean.verFoto(aluno.foto.foto,aluno.nome)}" />
+						<p:column headerText="ID" sortBy="#{ocorrencia.id}"
+							filterBy="#{ocorrencia.id}">
+							<h:outputText value="#{ocorrencia.id}" />
 						</p:column>
-						<p:column headerText="Nome completo" sortBy="#{aluno.nome}"
-							filterBy="#{aluno.nome}">
-							<h:outputText value="#{aluno.nome} #{aluno.sobrenome}" />
+						<p:column headerText="Assunto" sortBy="#{ocorrencia.assunto}"
+							filterBy="#{ocorrencia.assunto}">
+							<h:outputText value="#{ocorrencia.assunto}" />
 						</p:column>
-						<p:column headerText="Turma" sortBy="#{aluno.turma.nome}"
-							filterBy="#{aluno.turma.nome}">
-							<h:outputText value="#{aluno.turma.nome}" />
+						<p:column headerText="Data" sortBy="#{ocorrencia.data}"
+							filterBy="#{ocorrencia.data}">
+							<h:outputFormat value="{0, date, dd/MM/yyyy}">
+								<f:param value="#{ocorrencia.data}" />
+							</h:outputFormat>
 						</p:column>
-						<p:column headerText="Quantidade de ocorrências">
-							<h:outputText value="#{OcorrenciaBean.listarOcorrenciaAluno(aluno).size()}" />
+						<p:column headerText="Aluno" sortBy="#{ocorrencia.aluno.nome}"
+							filterBy="#{ocorrencia.aluno.nome}">
+							<h:outputText value="#{ocorrencia.aluno.nome} #{ocorrencia.aluno.sobrenome}" />
 						</p:column>
 						<p:rowExpansion>
-							<h3>Informações da Ocorrência</h3>
+							<h4>Informações da Ocorrência</h4>
 							<p:panelGrid columns="2" columnClasses="label,value">
-								<p:dataTable var="lista"
-									value="#{OcorrenciaBean.listarOcorrenciaAluno(aluno)}"
-									id="tabelaOcorrenciaAluno1" resizableColumns="true"
-									reflow="true" rows="5"
-									emptyMessage="Nenhum registro encontrado" paginator="true"
-									paginatorPosition="bottom" styleClass="dataTablePrincipal">
-
-									<p:column style="width:16px">
-										<p:rowToggler />
-									</p:column>
-
-									<p:column headerText="ID" sortBy="#{lista.id}"
-										filterBy="#{lista.id}" style="width:130px">
-										<h:outputText value="#{lista.id}" />
-									</p:column>
-
-									<p:column headerText="Assunto" sortBy="#{lista.assunto}"
-										filterBy="#{lista.assunto}">
-										<h:outputText value="#{lista.assunto}" />
-									</p:column>
-
-								</p:dataTable>
-
-
-							</p:panelGrid>
-						</p:rowExpansion>
-						<p:column style="width:60px">
-						<p:commandButton 
-							oncomplete="PF('dialogOcorrenciaAluno').show();" id="botaoListarOcAlu"
-							icon="ui-icon-pencil">
-							<f:setPropertyActionListener
-								target="#{OcorrenciaBean.ocorrenciasAluno}" 
-								value="#{OcorrenciaBean.listarOcorrenciaAluno(aluno)}" />
-						</p:commandButton>
-						<p:tooltip id="toolTipListarOcorrenciaAluno" for="botaoListarOcAlu"
-							value="Listar ocorrência" escape="false" />
-						</p:column>	
+							<h:outputText value="Data:" />
+							<h:outputFormat value="{0, date, dd/MM/yyyy}">
+								<f:param value="#{ocorrencia.data}" />
+							</h:outputFormat>
+							<h:outputText value="Turma:" />
+							<h:outputText value="#{ocorrencia.aluno.turma.serie.serie} #{ocorrencia.aluno.turma.nome}" />
+							<h:outputText value="Assunto:" />
+							<h:outputText value="#{ocorrencia.assunto}" />
+							<h:outputText value="Descrição:" />
+							<h:outputText id="descricao" value=" #{ocorrencia.descricao}" escape="false" />
+						</p:panelGrid>
+						</p:rowExpansion>	
 					</p:dataTable>
 				</h:form>
 			</div>
-			<p:dialog header="Ocorrências" widgetVar="dialogOcorrenciaAluno" modal="true"
-				resizable="true" id="formAltMedio1" appendTo="@(body)">
-				<h:form id="formOcorrenciasAluno" styleClass="formAlterar">
-					
-					<p:dataTable var="lista" value="#{OcorrenciaBean.ocorrenciasAluno}"
-								 id="tabelaOcorrenciaAluno" resizableColumns="true" reflow="true"
-								 rows="5" emptyMessage="Nenhum registro encontrado" paginator="true"
-								 paginatorPosition="bottom" styleClass="dataTablePrincipal">
-
-					<p:column style="width:16px">
-						<p:rowToggler />
-					</p:column>
-
-					<p:column headerText="ID" sortBy="#{lista.id}"
-						filterBy="#{lista.id}" style="width:130px">
-						<h:outputText value="#{lista.id}" />
-					</p:column>
-
-					<p:column headerText="Assunto" sortBy="#{lista.assunto}"
-						filterBy="#{lista.assunto}">
-						<h:outputText value="#{lista.assunto}" />
-					</p:column>
-
-					</p:dataTable>
-
-				</h:form>
-			</p:dialog>
-
 		</div>
 	</ui:define>
 </ui:decorate>

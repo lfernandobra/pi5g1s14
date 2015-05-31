@@ -23,31 +23,11 @@
 					</p:galleria>
 				</p:layoutUnit>
 				
-				<p:layoutUnit position="west" size ="270" styleClass="notificacoes">
+				<p:layoutUnit position="west" size ="270" styleClass="notificacoes" rendered="#{LoginBean.usuario.perfil.responsavel}">
 					<p:panel id="basic4" header="Notificações">
-					<h:form id="formOcorrenciaRespAluno"
-						rendered="#{LoginBean.usuario.perfil.responsavel}">
-						<p:growl id="growl" showDetail="true" life="4000" />
-						<p:dataTable var="aluno" value="#{LoginBean.responsavel.alunos}"
-							id="tabelaOcorrenciaAluno" resizableColumns="true" reflow="true"
-							rows="5" emptyMessage="Nenhum registro encontrado"
-							styleClass="dataTablePrincipal">
-							
-							<p:column headerText="Aluno">
-								<h:outputText value="#{aluno.nome} #{aluno.sobrenome}" />
-							</p:column>
-							<p:column headerText="Ocorrências">
-								<h:outputText value="#{OcorrenciaBean.listarOcorrenciaAluno(aluno).size()}" />
-							</p:column>
-							<p:column headerText="Tarefas">
-								
-							</p:column>
-							<p:column headerText="Boletins">
-								
-							</p:column>	
-						</p:dataTable>
-					</h:form>		
-				</p:panel>
+						Ocorrências <h:outputText value="#{OcorrenciaBean.listarOcorrenciaResponsavel(LoginBean.responsavel).size()}" /><p/>
+						Tarefas <h:outputText value="#{OcorrenciaBean.listarOcorrenciaResponsavel(LoginBean.responsavel).size()}" />		
+				    </p:panel>
 				</p:layoutUnit>
 				
 				<p:layoutUnit position="east" size ="270" styleClass="calendario">
@@ -56,8 +36,8 @@
 				</p:layoutUnit>
 				
 				<p:layoutUnit position="south" size ="270" styleClass="noticiasCursos">
-					<p:panel id="basic3" header="Noticias Cursos">
-						<a href="http://pronatec.mec.gov.br/institucional-90037/cursos-gratuitos" target="_blank"> No Pronatec são oferecidos cursos gratuitos nas escolas</a>
+					<p:panel id="basic3" header="Noticias sobre cursos">
+						<a href="http://pronatec.mec.gov.br/institucional-90037/cursos-gratuitos" target="_blank"> No Pronatec são oferecidos cursos gratuitos nas escolas</a><p/>
 						<a href="https://www.ceprocamp.sp.gov.br/" target="_blank"> CEPROCAMP Campinas, abre inscrições para varios cursos!</a>
 					</p:panel>
 				</p:layoutUnit>
