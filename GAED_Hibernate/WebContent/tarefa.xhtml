@@ -41,7 +41,7 @@
 					<p:rowToggler />
 				</p:column>
 				<p:column headerText="ID" sortBy="#{lista.id}"
-					filterBy="#{lista.id}">
+					filterBy="#{lista.id}" style="width:230px">
 					<h:outputText value="#{lista.id}" />
 				</p:column>
 				<p:column headerText="Disciplina" sortBy="#{lista.disciplina.nome}"
@@ -64,7 +64,7 @@
 									var="turma"
 							   		emptyMessage="Nenhuma disciplina atribuida"
 							   		type="definition">
-	            				#{turma.nome} | Série : #{turma.serie.serie} | Periodo : #{turma.periodo.periodo}
+	            				Série : #{turma.serie.serie} #{turma.nome} | Periodo : #{turma.periodo.periodo}
 	        			</p:dataList>
 						<h:outputText value="Descrição " />
 						<h:outputText value="#{lista.descricao}" />
@@ -79,20 +79,25 @@
 						</h:form>
 					</p:panelGrid>
 				</p:rowExpansion>
-				<p:column headerText="Ações">
+				<p:column style="width:60px">
 
-					<p:commandButton value="Alterar" update=":formAlterar"
+					<p:commandButton  update=":formAlterar" id="botaoAlterar"
 						oncomplete="PF('dialogAlterar').show();" icon="ui-icon-pencil">
 						<f:setPropertyActionListener target="#{TarefaBean.tarefa}"
 							value="#{lista}" />
 					</p:commandButton>
+					<p:tooltip id="toolTipAlterar" for="botaoAlterar"
+							value="Alterar tarefa" escape="false" />
 
-					<p:commandButton value="Excluir"
-						actionListener="#{TarefaBean.excluir(lista)}"
+					<p:commandButton 
+						actionListener="#{TarefaBean.excluir(lista)}" id="botaoExcluir"
 						update=":formPrincipal:tabelaTarefa growl"
 						icon="ui-icon-closethick">
 						<p:confirm header="Excluir Tarefa" message="Deseja excluir?"
 							icon="ui-icon-alert" />
+						<p:tooltip id="toolTipExcluir" for="botaoExcluir"
+							value="Excluir tarefa" escape="false" />	
+							
 					</p:commandButton>
 					<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
 						<p:commandButton value="Sim" type="button"
