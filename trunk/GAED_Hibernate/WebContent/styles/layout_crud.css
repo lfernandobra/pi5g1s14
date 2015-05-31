@@ -79,7 +79,7 @@ body{
   	position: fixed;
 }
 #idAdicProf{
-	height: 700px !important;
+	height: 600px !important;
   	width: 900px !important;
   	position: fixed;
 }
@@ -87,6 +87,10 @@ body{
 #botoes{
 	text-align: center !important;
 	padding-top: 40px;
+}
+#botoesMedio{
+	text-align: center !important;
+	padding-top: 20px !important;
 }
 #dadosPessoais{
 	top:10px;
@@ -123,9 +127,20 @@ body{
 	margin-left: 80px;
 }
  .ui-picklist .ui-picklist-list{
-  height:400px;
+  height:370px;
   width: 350px 
   } 
+  
+ .label{
+  width: 240px !important;
+ } 
+ .gridDataTable{
+ 	width: 700px !important;
+ 	text-align: left;
+ }
+ .ui-datalist-content .ui-widget-content{
+	border-style: none !important;
+ }
 
 
 
