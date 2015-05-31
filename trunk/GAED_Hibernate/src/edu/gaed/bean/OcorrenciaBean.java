@@ -15,6 +15,7 @@ import javax.faces.event.ActionEvent;
 
 import edu.gaed.vo.Aluno;
 import edu.gaed.vo.Ocorrencia;
+import edu.gaed.vo.Responsavel;
 import edu.gaed.vo.Turma;
 import edu.gaed.dao.OcorrenciaDao;
  
@@ -101,6 +102,11 @@ public class OcorrenciaBean implements Serializable{
 	@SuppressWarnings("rawtypes")
 	public List listarOcorrenciaAluno(Aluno aluno){
 		return new OcorrenciaDao().listarPorAluno(aluno);
+	}
+	
+	@SuppressWarnings("rawtypes")
+	public List listarOcorrenciaResponsavel(Responsavel responsavel){
+		return new OcorrenciaDao().listarPorResponsavel(responsavel);
 	}
 
 	public Ocorrencia getOcorrencia() {
