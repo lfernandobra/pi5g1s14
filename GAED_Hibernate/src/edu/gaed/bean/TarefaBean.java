@@ -3,17 +3,14 @@ package edu.gaed.bean;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
- 
-
-
 import org.primefaces.event.FileUploadEvent;
-
+import edu.gaed.vo.Aluno;
+import edu.gaed.vo.Responsavel;
 import edu.gaed.vo.Tarefa;
 import edu.gaed.dao.TarefaDao;
  
@@ -95,6 +92,18 @@ public class TarefaBean {
 		this.anexoBean.fileUpload(event);
 		System.out.println(this.anexoBean.getAnexo().getNome());
 		tarefa.setAnexo(anexoBean.anexo);
+	}
+	
+	// Visualizar Tarefas por Aluno
+	
+	@SuppressWarnings("rawtypes")
+	public List listarTarefaAluno(Aluno aluno){
+		return new TarefaDao().listarPorAluno(aluno);
+	}
+	
+	@SuppressWarnings("rawtypes")
+	public List listarTarefaResponsavel(Responsavel responsavel){
+		return new TarefaDao().listarPorResponsavel(responsavel);
 	}
 	
 }

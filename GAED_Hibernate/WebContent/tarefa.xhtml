@@ -10,232 +10,257 @@
 	<link rel="stylesheet" href="styles/layout_crud.css" type="text/css" />
 </h:head>
 <body>
-	
-	
-<ui:decorate template="/Cabecalho.xhtml">
-	<ui:define name="center">
 
 
-		<h2>Lista de Tarefas</h2>
+	<ui:decorate template="/Cabecalho.xhtml">
+		<ui:define name="center">
 
-		<div id="Lista">
-			<p:separator />
 
-			<p:toolbar styleClass="toolbar">
-				<f:facet name="left">
-					<p:commandButton value="Cadastrar" type="button" onclick="PF('dialogCadastrar').show();" icon="ui-icon-plusthick" />
-				</f:facet>
-			</p:toolbar>	
-			
-	
-		<p:growl id="growl" showDetail="true" life="4000" />
-		<h:form id="formPrincipal">
-			<p:dataTable var="lista" value="#{TarefaBean.tarefas}"
-				id="tabelaTarefa" resizableColumns="true" reflow="true" rows="5"
-				emptyMessage="Nenhum registro encontrado" paginator="true"
-				paginatorPosition="bottom" styleClass="dataTablePrincipal">
+			<h2>Lista de Tarefas</h2>
 
-				<f:facet name="header">Lista de Tarefas 
-				</f:facet>
-				<p:column style="width:16px">
-					<p:rowToggler />
-				</p:column>
-				<p:column headerText="ID" sortBy="#{lista.id}"
-					filterBy="#{lista.id}" style="width:230px">
-					<h:outputText value="#{lista.id}" />
-				</p:column>
-				<p:column headerText="Disciplina" sortBy="#{lista.disciplina.nome}"
-					filterBy="#{lista.disciplina.nome}">
-					<h:outputText value="#{lista.disciplina.nome}" />
-				</p:column>
-				<p:rowExpansion>
-					<h3>Informações da tarefa</h3>
-					<p:panelGrid columns="2" columnClasses="label,value">
-						<h:outputText value="Data inicio " />
-						<h:outputFormat value="{0, date, dd/MM/yyyy}">
-							<f:param value="#{lista.inicio}" />
-						</h:outputFormat>
-						<h:outputText value="Data final " />
-						<h:outputFormat value="{0, date, dd/MM/yyyy}">
-							<f:param value="#{lista.fim}" />
-						</h:outputFormat>
-						<h:outputText value="Turmas" />
-						<p:dataList value="#{lista.turmas}" 
-									var="turma"
-							   		emptyMessage="Nenhuma disciplina atribuida"
-							   		type="definition">
-	            				Série : #{turma.serie.serie} #{turma.nome} | Periodo : #{turma.periodo.periodo}
-	        			</p:dataList>
-						<h:outputText value="Descrição " />
-						<h:outputText value="#{lista.descricao}" />
-						<h:outputText value="Anexo " />
-						<h:form>
-							<h:inputHidden value="#{AnexoBean.verAnexo(lista.anexo.anexo,lista.anexo.nome)}" />
-							<p:commandButton value="Download" ajax="false"
-								
-								icon="ui-icon-arrowthick-1-s">
-								<p:fileDownload value="#{AnexoBean.downloadFile(lista.anexo.nome)}" />
-							</p:commandButton>
-						</h:form>
-					</p:panelGrid>
-				</p:rowExpansion>
-				<p:column style="width:60px">
+			<div id="Lista">
+				<p:separator />
 
-					<p:commandButton  update=":formAlterar" id="botaoAlterar"
-						oncomplete="PF('dialogAlterar').show();" icon="ui-icon-pencil">
-						<f:setPropertyActionListener target="#{TarefaBean.tarefa}"
-							value="#{lista}" />
-					</p:commandButton>
-					<p:tooltip id="toolTipAlterar" for="botaoAlterar"
-							value="Alterar tarefa" escape="false" />
+				<p:toolbar styleClass="toolbar">
+					<f:facet name="left">
+						<p:commandButton value="Cadastrar" type="button"
+							onclick="PF('dialogCadastrar').show();" icon="ui-icon-plusthick" />
+					</f:facet>
+				</p:toolbar>
 
-					<p:commandButton 
-						actionListener="#{TarefaBean.excluir(lista)}" id="botaoExcluir"
-						update=":formPrincipal:tabelaTarefa growl"
-						icon="ui-icon-closethick">
-						<p:confirm header="Excluir Tarefa" message="Deseja excluir?"
-							icon="ui-icon-alert" />
-						<p:tooltip id="toolTipExcluir" for="botaoExcluir"
-							value="Excluir tarefa" escape="false" />	
-							
-					</p:commandButton>
-					<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
-						<p:commandButton value="Sim" type="button"
-							styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
-						<p:commandButton value="Não" type="button"
-							styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
-					</p:confirmDialog>
-
-				</p:column>
-				<f:facet name="footer">
-        			Total cadastrado #{fn:length(TarefaBean.tarefas)} Tarefa
-    			</f:facet>
-			</p:dataTable>
-		</h:form>
-
-		<p:dialog header="Cadastrar tarefa" widgetVar="dialogCadastrar" modal="true"
-			resizable="true" id="formCadPequeno" appendTo="@(body)" closeOnEscape="true" closable="true"
-			maximizable="true">
-			<h:form id="formCadastrar" styleClass="formCadastrar">
-				<p:focus context="@form" />
 
 				<p:growl id="growl" showDetail="true" life="4000" />
+				<h:form id="formPrincipal">
+					<p:dataTable var="lista" value="#{TarefaBean.tarefas}"
+						id="tabelaTarefa" resizableColumns="true" reflow="true" rows="5"
+						emptyMessage="Nenhum registro encontrado" paginator="true"
+						paginatorPosition="bottom" styleClass="dataTablePrincipal">
 
-				<p:panelGrid id="panelCadastrar" columns="2">
-					<p:outputLabel for="disciplina" value="Disciplina:" />
-					<p:selectOneMenu value="#{TarefaBean.tarefa.disciplina}">
-						<f:selectItem itemLabel="-- Selecione --" noSelectionOption="true" />
-						<f:selectItems value="#{DisciplinaBean.disciplinas}"
-							var="disciplina" itemValue="#{disciplina}"
-							itemLabel="#{disciplina.nome}" required="true" id="disciplina" />
-						<f:converter converterId="disciplinaConverter" />	
-					</p:selectOneMenu>
+						<f:facet name="header">Lista de Tarefas 
+				</f:facet>
+						<p:column style="width:16px">
+							<p:rowToggler />
+						</p:column>
+						<p:column headerText="ID" sortBy="#{lista.id}"
+							filterBy="#{lista.id}" style="width:230px">
+							<h:outputText value="#{lista.id}" />
+						</p:column>
+						<p:column headerText="Disciplina"
+							sortBy="#{lista.disciplina.nome}"
+							filterBy="#{lista.disciplina.nome}">
+							<h:outputText value="#{lista.disciplina.nome}" />
+						</p:column>
+						<p:rowExpansion>
+							<h3>Informações da tarefa</h3>
+							<p:panelGrid columns="2" columnClasses="label,value">
+								<h:outputText value="Data inicio " />
+								<h:outputFormat value="{0, date, dd/MM/yyyy}">
+									<f:param value="#{lista.inicio}" />
+								</h:outputFormat>
+								<h:outputText value="Data final " />
+								<h:outputFormat value="{0, date, dd/MM/yyyy}">
+									<f:param value="#{lista.fim}" />
+								</h:outputFormat>
+								<h:outputText value="Turmas" />
+								<p:dataList value="#{lista.turmas}" var="turma"
+									emptyMessage="Nenhuma disciplina atribuida" type="definition">
+	            				Série : #{turma.serie.serie} #{turma.nome} | Periodo : #{turma.periodo.periodo}
+	        			</p:dataList>
+								<h:outputText value="Descrição " />
+								<h:outputText value="#{lista.descricao}" />
+								<h:outputText value="Anexo " />
+								<h:form>
+									<h:inputHidden
+										value="#{AnexoBean.verAnexo(lista.anexo.anexo,lista.anexo.nome)}" />
+									<p:commandButton value="Download" ajax="false"
+										icon="ui-icon-arrowthick-1-s">
+										<p:fileDownload
+											value="#{AnexoBean.downloadFile(lista.anexo.nome)}" />
+									</p:commandButton>
+								</h:form>
+							</p:panelGrid>
+						</p:rowExpansion>
+						<p:column style="width:60px">
 
-					<p:outputLabel for="inicio" value="Inicio:" />
-					<p:inputMask value="#{TarefaBean.tarefa.inicio}" mask="99/99/9999"
-						size="30" placeholder="dd/mm/aaaa" required="true"
-						label="datanasc"
-						requiredMessage="Data de inicio deve ser informada!" id="inicio">
-						<f:converter converterId="javax.faces.DateTime" />
-						<f:convertDateTime pattern="dd/MM/yyyy" timeZone="GMT-3" />
-					</p:inputMask>
+							<p:commandButton update=":formAlterar" id="botaoAlterar"
+								oncomplete="PF('dialogAlterar').show();" icon="ui-icon-pencil">
+								<f:setPropertyActionListener target="#{TarefaBean.tarefa}"
+									value="#{lista}" />
+							</p:commandButton>
+							<p:tooltip id="toolTipAlterar" for="botaoAlterar"
+								value="Alterar tarefa" escape="false" />
 
-					<p:outputLabel for="fim" value="Fim:" />
-					<p:inputMask value="#{TarefaBean.tarefa.fim}" mask="99/99/9999"
-						size="30" placeholder="dd/mm/aaaa" required="true"
-						label="datanasc" id="fim"
-						requiredMessage="Data final deve ser informada!">
-						<f:converter converterId="javax.faces.DateTime" />
-						<f:convertDateTime pattern="dd/MM/yyyy" timeZone="GMT-3" />
-					</p:inputMask>
+							<p:commandButton actionListener="#{TarefaBean.excluir(lista)}"
+								id="botaoExcluir" update=":formPrincipal:tabelaTarefa growl"
+								icon="ui-icon-closethick">
+								<p:confirm header="Excluir Tarefa" message="Deseja excluir?"
+									icon="ui-icon-alert" />
+								<p:tooltip id="toolTipExcluir" for="botaoExcluir"
+									value="Excluir tarefa" escape="false" />
 
-					<p:outputLabel for="turmaCheck" value="Turma:" />
-					<p:selectCheckboxMenu id="turmaCheck"
-						value="#{TarefaBean.tarefa.turmas}" size="40" label="Selecione"
-						filter="true" filterMatchMode="startsWith"
-						panelStyle="width:250px">
-						<f:selectItems value="#{TurmaBean.turmas}" var="turma"
-							itemValue="#{turma}" itemLabel="#{turma.nome}" />
-						<f:converter converterId="turmaConverter" />
-					</p:selectCheckboxMenu>
+							</p:commandButton>
+							<p:confirmDialog global="true" showEffect="fade"
+								hideEffect="fade">
+								<p:commandButton value="Sim" type="button"
+									styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+								<p:commandButton value="Não" type="button"
+									styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+							</p:confirmDialog>
 
-					<p:outputLabel for="descricao" value="Descrição:" />
-					<p:inputText value="#{TarefaBean.tarefa.descricao}" required="true" size="40"
-						id="descricao" requiredMessage="Descrição não deve estar vazio!">
-					</p:inputText>
-					<p:outputLabel for="anexo" value="Anexo:" />
-					<p:commandButton value="Incluir anexo" type="button"
-						onclick="PF('dialogIncluirAnexo').show();" icon="ui-icon-image"
-						id="anexo" />
-				</p:panelGrid>
+						</p:column>
+						<f:facet name="footer">
+        			Total cadastrado #{fn:length(TarefaBean.tarefas)} Tarefa
+    			</f:facet>
+					</p:dataTable>
+				</h:form>
 
-			<div id="botoes">
-				<p:commandButton value="Salvar" id="withIcon"
-					actionListener="#{TarefaBean.cadastrar}" icon="ui-icon-disk"
-					update=":formPrincipal:tabelaTarefa @form growl"
-					oncomplete="closeDialogIfSucess(xhr, status, args, 'dialogCadastrar','formCad')"
-					onsuccess="PF('dialogCadastrar').hide();" />
+				<p:dialog header="Cadastrar tarefa" widgetVar="dialogCadastrar"
+					modal="true" resizable="true" id="formCadPequeno"
+					appendTo="@(body)" closeOnEscape="true" closable="true"
+					maximizable="true">
+					<h:form id="formCadastrar" styleClass="formCadastrar">
+						<p:focus context="@form" />
 
-				<p:commandButton value="Limpar" update="@form" process="@this">
-					<p:resetInput target="panelCadastrar" />
-				</p:commandButton>
+						<p:growl id="growl" showDetail="true" life="4000" />
+
+						<p:panelGrid id="panelCadastrar" columns="2">
+							<p:outputLabel for="disciplina" value="Disciplina:" />
+							<p:selectOneMenu value="#{TarefaBean.tarefa.disciplina}">
+								<f:selectItem itemLabel="-- Selecione --"
+									noSelectionOption="true" />
+								<f:selectItems value="#{DisciplinaBean.disciplinas}"
+									var="disciplina" itemValue="#{disciplina}"
+									itemLabel="#{disciplina.nome}" required="true" id="disciplina" />
+								<f:converter converterId="disciplinaConverter" />
+							</p:selectOneMenu>
+
+							<p:outputLabel for="inicio" value="Inicio:" />
+							<p:inputMask value="#{TarefaBean.tarefa.inicio}"
+								mask="99/99/9999" size="30" placeholder="dd/mm/aaaa"
+								required="true" label="datanasc"
+								requiredMessage="Data de inicio deve ser informada!" id="inicio">
+								<f:converter converterId="javax.faces.DateTime" />
+								<f:convertDateTime pattern="dd/MM/yyyy" timeZone="GMT-3" />
+							</p:inputMask>
+
+							<p:outputLabel for="fim" value="Fim:" />
+							<p:inputMask value="#{TarefaBean.tarefa.fim}" mask="99/99/9999"
+								size="30" placeholder="dd/mm/aaaa" required="true"
+								label="datanasc" id="fim"
+								requiredMessage="Data final deve ser informada!">
+								<f:converter converterId="javax.faces.DateTime" />
+								<f:convertDateTime pattern="dd/MM/yyyy" timeZone="GMT-3" />
+							</p:inputMask>
+
+							<p:outputLabel for="turmaCheck" value="Turma:" />
+							<p:selectCheckboxMenu id="turmaCheck"
+								value="#{TarefaBean.tarefa.turmas}" size="40" label="Selecione"
+								filter="true" filterMatchMode="startsWith"
+								panelStyle="width:250px">
+								<f:selectItems value="#{TurmaBean.turmas}" var="turma"
+									itemValue="#{turma}" itemLabel="#{turma.nome}" />
+								<f:converter converterId="turmaConverter" />
+							</p:selectCheckboxMenu>
+
+							<p:outputLabel for="descricao" value="Descrição:" />
+							<p:inputText value="#{TarefaBean.tarefa.descricao}"
+								required="true" size="40" id="descricao"
+								requiredMessage="Descrição não deve estar vazio!">
+							</p:inputText>
+							<p:outputLabel for="anexo" value="Anexo:" />
+							<p:commandButton value="Incluir anexo" type="button"
+								onclick="PF('dialogIncluirAnexo').show();" icon="ui-icon-image"
+								id="anexo" />
+						</p:panelGrid>
+
+						<div id="botoes">
+							<p:commandButton value="Salvar" id="withIcon"
+								actionListener="#{TarefaBean.cadastrar}" icon="ui-icon-disk"
+								update=":formPrincipal:tabelaTarefa @form growl"
+								oncomplete="closeDialogIfSucess(xhr, status, args, 'dialogCadastrar','formCad')"
+								onsuccess="PF('dialogCadastrar').hide();" />
+
+							<p:commandButton value="Limpar" update="@form" process="@this">
+								<p:resetInput target="panelCadastrar" />
+							</p:commandButton>
+						</div>
+					</h:form>
+				</p:dialog>
+				<p:dialog header="Incluir anexo" widgetVar="dialogIncluirAnexo"
+					modal="true" resizable="true" id="formCadAnexo" appendTo="@(body)">
+					<h:form id="IncluirAnexo" styleClass="IncluirFoto">
+						<p:focus context="@form" />
+
+						<p:fileUpload fileUploadListener="#{TarefaBean.uploadAction}"
+							size="50" mode="advanced" skinSimple="true" update="growl"
+							sizeLimit="1000000" fileLimit="1"
+							allowTypes="/(\.|\/)(doc|docx|xls|xlsx|pdf)$/" label="Selecionar"
+							uploadLabel="Enviar" cancelLabel="Cancelar" id="IncluirAnexo"
+							invalidSizeMessage="Limite excedido: Não possivel o envio"
+							invalidFileMessage="Formato de arquivo não permitido"
+							dragDropSupport="true">
+							<f:converter converterId="anexoConverter" />
+						</p:fileUpload>
+						<p:separator />
+						<h5>Selecione um arquivo para anexar à tarefa ou arraste para
+							aqui - Tamanho permitido : 900k</h5>
+					</h:form>
+				</p:dialog>
 			</div>
-		</h:form>
-		</p:dialog>
-		<p:dialog header="Incluir anexo" widgetVar="dialogIncluirAnexo"
-			modal="true" resizable="true" id="formCadAnexo" appendTo="@(body)">
-			<h:form id="IncluirAnexo" styleClass="IncluirFoto">
-				<p:focus context="@form" />
-				
-				<p:fileUpload fileUploadListener="#{TarefaBean.uploadAction}"
-					size="50" mode="advanced" skinSimple="true" update="growl"
-					sizeLimit="1000000" fileLimit="1"
-					allowTypes="/(\.|\/)(doc|docx|xls|xlsx|pdf)$/" 
-					label="Selecionar"
-					uploadLabel="Enviar"
-					cancelLabel="Cancelar"
-					id="IncluirAnexo"
-					invalidSizeMessage="Limite excedido: Não possivel o envio"
-					invalidFileMessage="Formato de arquivo não permitido"
-					dragDropSupport="true">
-					<f:converter converterId="anexoConverter" />
-				</p:fileUpload>
-				<p:separator />
-				<h5>Selecione um arquivo para anexar à tarefa ou arraste para aqui - Tamanho permitido : 900k</h5>	
-			</h:form>
-		</p:dialog>
-	</div>
-	<p:dialog header="Alterar" widgetVar="dialogAlterar" modal="true"
-		resizable="true" id="formAlt" styleClass="dialogAlterar">
-		<h:form id="formAlterar">
-			<p:focus context="@form" />
-			<p:growl id="growl" showDetail="true" life="4000" />
-			<h:inputHidden value="#{TarefaBean.tarefa}" />
+			<p:dialog header="Alterar" widgetVar="dialogAlterar" modal="true"
+				resizable="true" id="formAlt" styleClass="dialogAlterar">
+				<h:form id="formAlterar">
+					<p:focus context="@form" />
+					<p:growl id="growl" showDetail="true" life="4000" />
+					<h:inputHidden value="#{TarefaBean.tarefa}" />
 
-			<p:panelGrid id="panelAlterar" columns="2">
-				<p:outputLabel for="nome" value="Nome:" />
-				<p:inputText value="#{TarefaBean.tarefa.descricao}" required="true"
-					id="nome" requiredMessage="Nome não deve estar vazio!" />
-				<p:outputLabel for="sigla" value="Sigla:" />
-				<p:inputText value="#{TarefaBean.tarefa.descricao}" required="true"
-					id="sigla" requiredMessage="Sigla não deve estar vazio!">
-				</p:inputText>
-			</p:panelGrid>
+					<p:panelGrid id="panelAlterar" columns="2">
+						<p:outputLabel for="nome" value="Nome:" />
+						<p:inputText value="#{TarefaBean.tarefa.descricao}"
+							required="true" id="nome"
+							requiredMessage="Nome não deve estar vazio!" />
+						<p:outputLabel for="sigla" value="Sigla:" />
+						<p:inputText value="#{TarefaBean.tarefa.descricao}"
+							required="true" id="sigla"
+							requiredMessage="Sigla não deve estar vazio!">
+						</p:inputText>
+					</p:panelGrid>
 
-			<p:commandButton value="Salvar" id="withIcon"
-				actionListener="#{TarefaBean.alterar}" icon="ui-icon-disk"
-				update=":formPrincipal:tabelaTarefa @form growl"
-				oncomplete="closeDialogIfSucess(xhr, status, args, 'dialogAlterar','formAlt')"
-				onsuccess="PF('dialogAlterar').hide();" />
+					<p:commandButton value="Salvar" id="withIcon"
+						actionListener="#{TarefaBean.alterar}" icon="ui-icon-disk"
+						update=":formPrincipal:tabelaTarefa @form growl"
+						oncomplete="closeDialogIfSucess(xhr, status, args, 'dialogAlterar','formAlt')"
+						onsuccess="PF('dialogAlterar').hide();" />
 
-			<p:commandButton value="Limpar" update="@form" process="@this">
-				<p:resetInput target="panelAlterar" />
-			</p:commandButton>
-		</h:form>
-	</p:dialog>
-	
-	
-	</ui:define>
+					<p:commandButton value="Limpar" update="@form" process="@this">
+						<p:resetInput target="panelAlterar" />
+					</p:commandButton>
+				</h:form>
+			</p:dialog>
+			<div id="divAluno">
+				<h:form id="formOcorrenciaAluno"
+					rendered="#{LoginBean.usuario.perfil.aluno}">
+					<p:dataTable var="tarefa"
+						value="#{TarefaBean.listarTarefaAluno(LoginBean.aluno)}"
+						id="tabelaOcorrenciaAluno" resizableColumns="true" reflow="true"
+						rows="5" emptyMessage="Nenhum registro encontrado"
+						paginator="true" paginatorPosition="bottom"
+						styleClass="dataTablePrincipal">
+						<p:column style="width:16px">
+							<p:rowToggler />
+						</p:column>
+						<p:column headerText="ID" sortBy="#{tarefa.id}"
+							filterBy="#{tarefa.id}">
+							<h:outputText value="#{tarefa.id}" />
+						</p:column>
+						<p:rowExpansion>
+							<h4>Informações da Ocorrência</h4>
+						</p:rowExpansion>
+					</p:dataTable>
+				</h:form>
+			</div>
+
+		</ui:define>
 	</ui:decorate>
 </body>
 </html>
