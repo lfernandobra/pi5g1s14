@@ -108,23 +108,23 @@
 			</p:dataTable>
 		</h:form>
 
-		<p:dialog header="Cadastrar" widgetVar="dialogCadastrar" modal="true"
-			resizable="true" id="formCad" closeOnEscape="true" closable="true"
-			maximizable="true" styleClass="dialogCadastrar">
-			<h:form id="formCadastrar">
+		<p:dialog header="Cadastrar tarefa" widgetVar="dialogCadastrar" modal="true"
+			resizable="true" id="formCadPequeno" appendTo="@(body)" closeOnEscape="true" closable="true"
+			maximizable="true">
+			<h:form id="formCadastrar" styleClass="formCadastrar">
 				<p:focus context="@form" />
 
 				<p:growl id="growl" showDetail="true" life="4000" />
 
 				<p:panelGrid id="panelCadastrar" columns="2">
 					<p:outputLabel for="disciplina" value="Disciplina:" />
-					<h:selectOneMenu value="#{TarefaBean.tarefa.disciplina}">
+					<p:selectOneMenu value="#{TarefaBean.tarefa.disciplina}">
 						<f:selectItem itemLabel="-- Selecione --" noSelectionOption="true" />
 						<f:selectItems value="#{DisciplinaBean.disciplinas}"
 							var="disciplina" itemValue="#{disciplina}"
 							itemLabel="#{disciplina.nome}" required="true" id="disciplina" />
 						<f:converter converterId="disciplinaConverter" />	
-					</h:selectOneMenu>
+					</p:selectOneMenu>
 
 					<p:outputLabel for="inicio" value="Inicio:" />
 					<p:inputMask value="#{TarefaBean.tarefa.inicio}" mask="99/99/9999"
@@ -146,7 +146,7 @@
 
 					<p:outputLabel for="turmaCheck" value="Turma:" />
 					<p:selectCheckboxMenu id="turmaCheck"
-						value="#{TarefaBean.tarefa.turmas}" size="30" label="Selecione"
+						value="#{TarefaBean.tarefa.turmas}" size="40" label="Selecione"
 						filter="true" filterMatchMode="startsWith"
 						panelStyle="width:250px">
 						<f:selectItems value="#{TurmaBean.turmas}" var="turma"
@@ -155,7 +155,7 @@
 					</p:selectCheckboxMenu>
 
 					<p:outputLabel for="descricao" value="Descrição:" />
-					<p:inputText value="#{TarefaBean.tarefa.descricao}" required="true"
+					<p:inputText value="#{TarefaBean.tarefa.descricao}" required="true" size="40"
 						id="descricao" requiredMessage="Descrição não deve estar vazio!">
 					</p:inputText>
 					<p:outputLabel for="anexo" value="Anexo:" />
@@ -164,6 +164,7 @@
 						id="anexo" />
 				</p:panelGrid>
 
+			<div id="botoes">
 				<p:commandButton value="Salvar" id="withIcon"
 					actionListener="#{TarefaBean.cadastrar}" icon="ui-icon-disk"
 					update=":formPrincipal:tabelaTarefa @form growl"
@@ -173,8 +174,8 @@
 				<p:commandButton value="Limpar" update="@form" process="@this">
 					<p:resetInput target="panelCadastrar" />
 				</p:commandButton>
-
-			</h:form>
+			</div>
+		</h:form>
 		</p:dialog>
 		<p:dialog header="Incluir anexo" widgetVar="dialogIncluirAnexo"
 			modal="true" resizable="true" id="formCadAnexo" appendTo="@(body)">
