@@ -2,10 +2,12 @@ package edu.gaed.dao;
 
 import java.util.List;
 
+import edu.gaed.vo.Aluno;
+import edu.gaed.vo.Responsavel;
 import edu.gaed.vo.Tarefa;
 
 import org.hibernate.Criteria;
-
+import org.hibernate.Query;
 import org.hibernate.Session;
 
 import edu.gaed.util.HibernateUtil;
@@ -61,6 +63,39 @@ public class TarefaDao {
 			Criteria cri = session.createCriteria(Tarefa.class);
 			return cri.list();
 		} finally {
+			session.close();
+
+		}
+	}
+	
+	@SuppressWarnings("rawtypes")
+	public List listarPorAluno(Aluno aluno){
+		session = HibernateUtil.getSessionFactory().openSession();
+
+		try{
+			String hql = "FROM Tarefa tf WHERE tf.turmas. = :aluno";
+			Query query = session.createQuery(hql);
+			query.setParameter("aluno",aluno);
+			List results = query.list();
+			
+			return results;
+		}finally{
+			session.close();
+
+		}
+	}
+	
+	@SuppressWarnings("rawtypes")
+	public List listarPorResponsavel(Responsavel responsavel){
+		session = HibernateUtil.getSessionFactory().openSession();
+
+		try{
+			String hql = "FROM Ocorrencia Oc WHERE Oc.aluno.responsavel = :responsavel";
+			Query query = session.createQuery(hql);
+			query.setParameter("responsavel",responsavel);
+			List results = query.list();
+			return results;
+		}finally{
 			session.close();
 
 		}
