@@ -32,6 +32,7 @@ public class TurmaProfessorBean implements Serializable{
 	private DualListModel<TurmaDisciplina> professoresDualList = new DualListModel<TurmaDisciplina>(new ArrayList<TurmaDisciplina>(),new ArrayList<TurmaDisciplina>());
 
 	//getters and setters
+	@SuppressWarnings("unchecked")
 	public DualListModel<TurmaDisciplina> getProfessoresDualList() {
 		if (turma != null){
 			

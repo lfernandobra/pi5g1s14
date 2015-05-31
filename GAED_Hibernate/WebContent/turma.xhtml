@@ -49,34 +49,33 @@
 					
 					<p:rowExpansion>
 						<h3>Informações da Turma</h3>
-						<p:panelGrid columns="2" columnClasses="label,value">
-							<h:outputText value="Limite de alunos" />
+						<div id="center">
+						<p:panelGrid columns="2" columnClasses="label,value" styleClass="gridDataTable">
+							<h:outputText value="Limite de alunos:" style="font-weight: bold;" />
 							<h:outputText value="#{lista.qtdAluLimite}" />
 							
-							<h:outputText value="Quantidade de alunos inseridos" />
+							<h:outputText value="Quantidade de alunos inseridos:" style="font-weight: bold;" />
 							<h:outputText value="#{lista.qtdAluInseridos}" />
 							
-							<h:outputText value="Disciplinas" />
+							<h:outputText value="Disciplinas:" style="font-weight: bold;" />
 							<p:dataList value="#{lista.disciplinas}" var="discipLecionada"
 								emptyMessage="Nenhuma disciplina atribuida a essa turma">
             					#{discipLecionada.nome}
             				</p:dataList>
             				
-            				<h:outputText value="Alunos:" />
+            				<h:outputText value="Alunos:"  style="font-weight: bold;"/>
             				<p:dataList value="#{lista.alunos}" var="alunos" 
 	            				emptyMessage="nenhum aluno atribuído a essa turma">
 	            				#{alunos.nome} #{alunos.sobrenome}
             				</p:dataList>
             				
-            				<h:outputText value="Professores:" />
+            				<h:outputText value="Professores:" style="font-weight: bold;" />
             				<p:dataList value="#{lista.turmasDisciplinas}" var="professores" 
 	            				emptyMessage="nenhum professor atribuído a essa turma">
 	            				#{professores.nome} #{professores.sobrenome}
             				</p:dataList>
-            				
-            				
-            				
 						</p:panelGrid>
+						</div>
 					</p:rowExpansion>
 					<p:column headerText="Adicionar">
 						<p:commandButton value="Alunos" update="formAdicAluno"
@@ -242,7 +241,7 @@
 				<p:focus context="@form" />
 					<p:growl id="growl" showDetail="true" life="4000" />
 	
-					<h3>Selecione os alunos para atribuír a turma escolhida:</h3>
+					<h4>Selecione os alunos para atribuír a turma:</h4>
 					<p:separator />
 			
 					<p:pickList id="PojoPickList"
@@ -264,7 +263,7 @@
 						</p:column>
 					</p:pickList>
 					
-					<div id="botoes">
+					<div id="botoesMedio">
 						<p:commandButton id="pojoSubmit" value="Incluir" update=":formPrincipal:tabelaTurma @form" icon="ui-icon-disk" 
 						oncomplete="closeDialogIfSucess(xhr, status, args, 'dialogAdicAluno','formAdicAluno')" style="margin-top:5px" actionListener="#{TurmaAlunoBean.adicionarAlunos}"
 						onsuccess="PF('dialogAdicAluno').hide();" />
@@ -297,7 +296,7 @@
 				<p:focus context="@form" />
 				<p:growl id="growl" showDetail="true" life="4000" />
 
-				<h3>Selecione os professores para alocar a turma escolhida:</h3>
+				<h4>Selecione os professores para alocar a turma escolhida:</h4>
 				<p:separator />
 		
 				<p:pickList id="TurmaProfessorPickList"
@@ -321,7 +320,7 @@
 					</p:column>
 				</p:pickList>
 				
-				<div id="botoes">
+				<div id="botoesMedio">
 					<p:commandButton id="pojoBtnSubmit" value="Incluir" update=":formPrincipal:tabelaTurma @form growl" icon="ui-icon-disk" 
 					oncomplete="closeDialogIfSucess(xhr, status, args, 'dialogAdicProf','formAdicProfessor')" style="margin-top:5px" actionListener="#{TurmaProfessorBean.adicionarProfessor}"
 					onsuccess="PF('dialogAdicProf').hide();" />
