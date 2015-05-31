@@ -29,9 +29,8 @@
 
 
 
-			<h:form id="formPrincipal"
-				rendered="#{LoginBean.usuario.perfil.professor or 
-										 								 LoginBean.usuario.perfil.gestor}">
+			<h:form id="formPrincipal" 
+					rendered="#{LoginBean.usuario.perfil.professor or LoginBean.usuario.perfil.gestor}">
 				<p:growl id="growl" showDetail="true" life="4000" />
 				<p:dataTable var="lista" value="#{OcorrenciaBean.ocorrencias}"
 					id="tabelaOcorrencia" resizableColumns="true" reflow="true"
@@ -234,6 +233,54 @@
 					rendered="#{LoginBean.usuario.perfil.responsavel}">
 					<p:growl id="growl" showDetail="true" life="4000" />
 					<p:dataTable var="ocorrencia" value="#{OcorrenciaBean.listarOcorrenciaResponsavel(LoginBean.responsavel)}"
+						id="tabelaOcorrenciaRespAluno" resizableColumns="true" reflow="true"
+						rows="5" emptyMessage="Nenhum registro encontrado"
+						paginator="true" paginatorPosition="bottom"
+						styleClass="dataTablePrincipal">
+						<p:column style="width:16px">
+							<p:rowToggler />
+						</p:column>
+						<p:column headerText="ID" sortBy="#{ocorrencia.id}"
+							filterBy="#{ocorrencia.id}">
+							<h:outputText value="#{ocorrencia.id}" />
+						</p:column>
+						<p:column headerText="Assunto" sortBy="#{ocorrencia.assunto}"
+							filterBy="#{ocorrencia.assunto}">
+							<h:outputText value="#{ocorrencia.assunto}" />
+						</p:column>
+						<p:column headerText="Data" sortBy="#{ocorrencia.data}"
+							filterBy="#{ocorrencia.data}">
+							<h:outputFormat value="{0, date, dd/MM/yyyy}">
+								<f:param value="#{ocorrencia.data}" />
+							</h:outputFormat>
+						</p:column>
+						<p:column headerText="Aluno" sortBy="#{ocorrencia.aluno.nome}"
+							filterBy="#{ocorrencia.aluno.nome}">
+							<h:outputText value="#{ocorrencia.aluno.nome} #{ocorrencia.aluno.sobrenome}" />
+						</p:column>
+						<p:rowExpansion>
+							<h4>Informações da Ocorrência</h4>
+							<p:panelGrid columns="2" columnClasses="label,value">
+							<h:outputText value="Data:" />
+							<h:outputFormat value="{0, date, dd/MM/yyyy}">
+								<f:param value="#{ocorrencia.data}" />
+							</h:outputFormat>
+							<h:outputText value="Turma:" />
+							<h:outputText value="#{ocorrencia.aluno.turma.serie.serie} #{ocorrencia.aluno.turma.nome}" />
+							<h:outputText value="Assunto:" />
+							<h:outputText value="#{ocorrencia.assunto}" />
+							<h:outputText value="Descrição:" />
+							<h:outputText id="descricao" value=" #{ocorrencia.descricao}" escape="false" />
+						</p:panelGrid>
+						</p:rowExpansion>	
+					</p:dataTable>
+				</h:form>			
+			</div>
+			<!-- Aluno -->
+			<div id="divAluno">
+				<h:form id="formOcorrenciaAluno"
+					rendered="#{LoginBean.usuario.perfil.aluno}">
+					<p:dataTable var="ocorrencia" value="#{OcorrenciaBean.listarOcorrenciaAluno(LoginBean.aluno)}"
 						id="tabelaOcorrenciaAluno" resizableColumns="true" reflow="true"
 						rows="5" emptyMessage="Nenhum registro encontrado"
 						paginator="true" paginatorPosition="bottom"
@@ -277,7 +324,7 @@
 					</p:dataTable>
 				</h:form>
 			</div>
-		</div>
+		</div>	
 	</ui:define>
 </ui:decorate>
 </html>

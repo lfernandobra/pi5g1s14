@@ -23,10 +23,16 @@
 					</p:galleria>
 				</p:layoutUnit>
 				
-				<p:layoutUnit position="west" size ="270" styleClass="notificacoes" rendered="#{LoginBean.usuario.perfil.responsavel}">
+				<p:layoutUnit position="west" size ="270" styleClass="notificacoes" rendered="#{LoginBean.usuario.perfil.responsavel or LoginBean.usuario.perfil.aluno}">
 					<p:panel id="basic4" header="Notificações">
-						Ocorrências <h:outputText value="#{OcorrenciaBean.listarOcorrenciaResponsavel(LoginBean.responsavel).size()}" /><p/>
-						Tarefas <h:outputText value="#{OcorrenciaBean.listarOcorrenciaResponsavel(LoginBean.responsavel).size()}" />		
+						Ocorrências <h:outputText value="#{OcorrenciaBean.listarOcorrenciaResponsavel(LoginBean.responsavel).size()}"
+												  rendered="#{LoginBean.usuario.perfil.responsavel}"/>
+												  <h:outputText value="#{OcorrenciaBean.listarOcorrenciaAluno(LoginBean.aluno).size()}"
+												  rendered="#{LoginBean.usuario.perfil.aluno}"/><p/>
+						Tarefas <h:outputText value="#{OcorrenciaBean.listarOcorrenciaResponsavel(LoginBean.responsavel).size()}"
+											  rendered="#{LoginBean.usuario.perfil.responsavel}" />
+								<h:outputText value="#{OcorrenciaBean.listarOcorrenciaAluno(LoginBean.aluno).size()}"
+												  rendered="#{LoginBean.usuario.perfil.aluno}"/>			  		
 				    </p:panel>
 				</p:layoutUnit>
 				
