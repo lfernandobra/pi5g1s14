@@ -30,8 +30,6 @@
 								<h:graphicImage width="40" height="80"
 									value="/temp/#{LoginBean.verFoto()}" />
 							</div>
-							<h:outputLabel rendered="#{LoginBean.usuario.perfil.aluno}"
-								value="Olá,#{LoginBean.aluno.responsavel.nome}" />
 							<h:commandButton value="Sair"
 								action="#{LoginBean.encerrarSession()}" />
 						</h:form>
