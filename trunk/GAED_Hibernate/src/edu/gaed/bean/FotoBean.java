@@ -109,7 +109,7 @@ public class FotoBean implements Serializable{
 			foto.setFoto(bimagem);
 			foto.setNome(arq.getFileName());
 			fotoDao.inserir(foto);
-
+		
 			// Essa parte comentada deve ser usada caso queira salvar
 			// o arquivo em um local fisuco do servidor.
 			/*

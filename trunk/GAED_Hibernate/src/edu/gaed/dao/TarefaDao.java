@@ -73,7 +73,7 @@ public class TarefaDao {
 		session = HibernateUtil.getSessionFactory().openSession();
 
 		try{
-			String hql = "FROM Tarefa tf WHERE tf.turmas. = :aluno";
+			String hql = "select tar from Tarefa tar join tar.turmas as turma join turma.alunos as aluno where aluno = :aluno"; 
 			Query query = session.createQuery(hql);
 			query.setParameter("aluno",aluno);
 			List results = query.list();

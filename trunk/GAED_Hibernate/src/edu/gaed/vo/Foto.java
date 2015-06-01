@@ -31,7 +31,7 @@ public class Foto implements Serializable{
 	private String nome;
 
 		
-	@Column(name="foto",length=1000000)
+	@Column(name="foto",length=2000000000)
 	@Lob
 	private byte[] foto;
 
