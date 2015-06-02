@@ -54,22 +54,22 @@
 						<p:rowExpansion>
 							<h3>Informações da tarefa</h3>
 							<p:panelGrid columns="2" columnClasses="label,value">
-								<h:outputText value="Data inicio " />
+								<h:outputText value="Data inicio " style="font-weight: bold;" />
 								<h:outputFormat value="{0, date, dd/MM/yyyy}">
 									<f:param value="#{lista.inicio}" />
 								</h:outputFormat>
-								<h:outputText value="Data final " />
+								<h:outputText value="Data final " style="font-weight: bold;" />
 								<h:outputFormat value="{0, date, dd/MM/yyyy}">
 									<f:param value="#{lista.fim}" />
 								</h:outputFormat>
-								<h:outputText value="Turmas" />
+								<h:outputText value="Turmas" style="font-weight: bold;" />
 								<p:dataList value="#{lista.turmas}" var="turma"
 									emptyMessage="Nenhuma disciplina atribuida" type="definition">
 	            				Série : #{turma.serie.serie} #{turma.nome} | Periodo : #{turma.periodo.periodo}
 	        			</p:dataList>
-								<h:outputText value="Descrição " />
+								<h:outputText value="Descrição " style="font-weight: bold;"/>
 								<h:outputText value="#{lista.descricao}" />
-								<h:outputText value="Anexo " />
+								<h:outputText value="Anexo " style="font-weight: bold;" />
 								<h:form>
 									<h:inputHidden
 										value="#{AnexoBean.verAnexo(lista.anexo.anexo,lista.anexo.nome)}" />
@@ -208,7 +208,7 @@
 							aqui - Tamanho permitido : 900k</h5>
 					</h:form>
 				</p:dialog>
-			</div>
+			
 			<p:dialog header="Alterar" widgetVar="dialogAlterar" modal="true"
 				resizable="true" id="formAlt" styleClass="dialogAlterar">
 				<h:form id="formAlterar">
@@ -264,17 +264,17 @@
 						<p:rowExpansion>
 							<h3>Informações da tarefa</h3>
 							<p:panelGrid columns="2" columnClasses="label,value">
-								<h:outputText value="Data inicio " />
+								<h:outputText value="Data inicio: " style="font-weight: bold;" />
 								<h:outputFormat value="{0, date, dd/MM/yyyy}">
 									<f:param value="#{tarefa.inicio}" />
 								</h:outputFormat>
-								<h:outputText value="Data final " />
+								<h:outputText value="Data final: " style="font-weight: bold;" />
 								<h:outputFormat value="{0, date, dd/MM/yyyy}">
 									<f:param value="#{tarefa.fim}" />
 								</h:outputFormat>
-								<h:outputText value="Descrição " />
+								<h:outputText value="Descrição: " style="font-weight: bold;" />
 								<h:outputText value="#{tarefa.descricao}" />
-								<h:outputText value="Anexo " />
+								<h:outputText value="Anexo: " style="font-weight: bold;"/>
 								<h:form>
 									<h:inputHidden
 										value="#{AnexoBean.verAnexo(tarefa.anexo.anexo,tarefa.anexo.nome)}" />
@@ -300,37 +300,37 @@
 						paginator="true" paginatorPosition="bottom"
 						styleClass="dataTablePrincipal">
 						<f:facet name="header">Lista de Tarefas </f:facet>
-						<p:column style="width:20px">
+						<p:column style="width:10px">
 							<p:rowToggler />
 						</p:column>
-						<p:column headerText="ID" sortBy="#{tarefa.id}"
-							filterBy="#{tarefa.id}" style="width:10px">
+						<p:column headerText="ID" sortBy="#{tarefa.id}" style="width:130px"
+							filterBy="#{tarefa.id}" >
 							<h:outputText value="#{tarefa.id}" />
 						</p:column>
 						<p:column headerText="Disciplina"
 							sortBy="#{tarefa.disciplina.nome}"
-							filterBy="#{tarefa.disciplina.nome}" style="width:30px">
+							filterBy="#{tarefa.disciplina.nome}" >
 							<h:outputText value="#{tarefa.disciplina.nome}" />
 						</p:column>
 						<p:rowExpansion>
 							<h3>Informações da tarefa</h3>
-							<p:panelGrid columns="2" columnClasses="label,value">
-								<h:outputText value="Turmas" />
+							<p:panelGrid columns="2" columnClasses="label,value" styleClass="gridDataTable">
+								<h:outputText value="Turmas:" style="font-weight: bold;"/>
 								<p:dataList value="#{tarefa.turmas}" var="turma"
 											emptyMessage="Nenhuma turma atribuida" type="definition">
 	            							Série : #{turma.serie.serie} #{turma.nome} | Periodo : #{turma.periodo.periodo}
 	        					</p:dataList>
-								<h:outputText value="Data inicio " />
+								<h:outputText value="Data inicio: " style="font-weight: bold;" />
 								<h:outputFormat value="{0, date, dd/MM/yyyy}">
 									<f:param value="#{tarefa.inicio}" />
 								</h:outputFormat>
-								<h:outputText value="Data final " />
+								<h:outputText value="Data final: " style="font-weight: bold;" />
 								<h:outputFormat value="{0, date, dd/MM/yyyy}">
 									<f:param value="#{tarefa.fim}" />
 								</h:outputFormat>
-								<h:outputText value="Descrição " />
+								<h:outputText value="Descrição: " style="font-weight: bold;"/>
 								<h:outputText value="#{tarefa.descricao}" />
-								<h:outputText value="Anexo " />
+								<h:outputText value="Anexo: " style="font-weight: bold;" />
 								<h:form>
 									<h:inputHidden
 										value="#{AnexoBean.verAnexo(tarefa.anexo.anexo,tarefa.anexo.nome)}" />
@@ -345,7 +345,7 @@
 					</p:dataTable>
 				</h:form>
 			</div>
-
+		</div>
 		</ui:define>
 	</ui:decorate>
 </body>
