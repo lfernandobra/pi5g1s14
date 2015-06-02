@@ -142,13 +142,18 @@
 					</p:inputText>
 
 					<p:outputLabel for="sexo" value="Sexo:" />
-					<p:selectOneMenu id="sexo" value="#{ResponsavelBean.responsavel.sexo}" style="width:150px"	required="true" label="Sexo">
-						<f:selectItem itemLabel="Masculino" itemValue="Masculino" />
-						<f:selectItem itemLabel="Feminino" itemValue="Feminino" />
-					</p:selectOneMenu>
+						<p:selectOneMenu id="sexo" value="#{ResponsavelBean.responsavel.sexo}"
+							style="width:150px" required="true" label="Sexo"
+							requiredMessage="Sexo não deve estar vazio!">
+							<f:selectItem itemLabel="-- Selecione --" noSelectionOption="true" />
+							<f:selectItem itemLabel="Masculino" itemValue="Masculino" />
+							<f:selectItem itemLabel="Feminino" itemValue="Feminino" />
+							<f:validateLength minimum="3" />
+						</p:selectOneMenu>
+
 
 					<p:outputLabel for="datanasc" value="Data de nascimento:" />
-					<p:inputMask value="#{ResponsavelBean.responsavel.datanasc}" mask="99/99/9999" placeholder="dd/mm/aaaa"  size="30" required="true"	label="datanasc" id="datanasc"
+					<p:inputMask value="#{ResponsavelBean.responsavel.datanasc}" mask="99/99/9999" placeholder="dd/mm/aaaa"  size="10" required="true"	label="datanasc" id="datanasc"
 						requiredMessage="Data de nascimento deve ser informada!">
 						<f:converter converterId="javax.faces.DateTime" />
 						<f:convertDateTime pattern="dd/MM/yyyy" timeZone="GMT-3" />
@@ -164,14 +169,14 @@
 					<p:inputMask value="#{ResponsavelBean.responsavel.telefone}" mask="(99) 99999-9999" size="30" required="true" label="Telefone" id="telefone" />
 					
 					<p:outputLabel for="dataIngresso" value="Data de ingresso:" />
-					<p:inputMask id="dataIngresso" 	value="#{ResponsavelBean.responsavel.dataIngresso}"  size="30"  mask="99/99/9999" placeholder="dd/mm/aaaa" required="true"
+					<p:inputMask id="dataIngresso" 	value="#{ResponsavelBean.responsavel.dataIngresso}"  size="10"  mask="99/99/9999" placeholder="dd/mm/aaaa" required="true"
 						label="Data de ingresso" requiredMessage="Data de ingresso deve ser informada!">
 						<f:converter converterId="javax.faces.DateTime" />
 						<f:convertDateTime pattern="dd/MM/yyyy" timeZone="GMT-3" />
 					</p:inputMask>
 
 					<p:outputLabel for="dataSaida" value="Data de saída:" />
-					<p:inputMask id="dataSaida" value="#{ResponsavelBean.responsavel.dataSaida}"  mask="99/99/9999"	placeholder="dd/mm/aaaa" required="false" label="Data de saída">
+					<p:inputMask id="dataSaida" value="#{ResponsavelBean.responsavel.dataSaida}" size="10" mask="99/99/9999" placeholder="dd/mm/aaaa" required="false" label="Data de saída">
 						<f:converter converterId="javax.faces.DateTime" />
 						<f:convertDateTime pattern="dd/MM/yyyy" timeZone="GMT-3" />
 					</p:inputMask>
@@ -221,7 +226,7 @@
 							<p:inputText	value="#{ResponsavelBean.responsavel.logradouro.bairro.municipio.uf.nome}" size="30" />
 
 							<p:outputLabel for="numero" value="Número:" />
-							<p:inputText value="#{ResponsavelBean.responsavel.numero}" 	required="true" label="Número" size="30" id="numero"	requiredMessage="Número deve ser informado!" />
+							<p:inputText value="#{ResponsavelBean.responsavel.numero}" 	required="true" label="Número" size="5" id="numero"	requiredMessage="Número deve ser informado!" />
 
 							<p:outputLabel for="complemento" value="Complemento:" />
 							<p:inputText value="#{ResponsavelBean.responsavel.complemento}"	size="30" required="true" label="Complemento" id="complemento"

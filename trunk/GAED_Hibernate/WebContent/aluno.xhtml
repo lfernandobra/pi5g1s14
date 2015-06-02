@@ -39,18 +39,19 @@
 						filterBy="#{lista.id}">
 						<h:outputText value="#{lista.id}" />
 					</p:column>
-					
+
 					<p:column headerText="Foto" style="width:130px">
-						<h:graphicImage width="50" height="60" value="/temp/#{FotoBean.verFoto(lista.foto.foto,lista.nome)}" />
+						<h:graphicImage width="50" height="60"
+							value="/temp/#{FotoBean.verFoto(lista.foto.foto,lista.nome)}" />
 					</p:column>
 
-					<p:column headerText="Nome" sortBy="#{lista.nome} #{lista.sobrenome}"
-						filterBy="#{lista.nome}">
+					<p:column headerText="Nome"
+						sortBy="#{lista.nome} #{lista.sobrenome}" filterBy="#{lista.nome}">
 						<h:outputText value="#{lista.nome} #{lista.sobrenome}" />
 					</p:column>
 
 					<p:rowExpansion>
-						
+
 						<h3>Informações do aluno (a)</h3>
 						<p:panelGrid columns="2" columnClasses="label,value">
 
@@ -108,16 +109,18 @@
 							<f:setPropertyActionListener target="#{AlunoBean.aluno}"
 								value="#{lista}" />
 						</p:commandButton>
-						<p:tooltip id="toolTipAlterar" for="botaoAlterar" value="Alterar cadastro do aluno" escape="false" />
-						
+						<p:tooltip id="toolTipAlterar" for="botaoAlterar"
+							value="Alterar cadastro do aluno" escape="false" />
 
-						<p:commandButton
-							actionListener="#{AlunoBean.excluir(lista)}" id="botaoExcluir"
-							update=":formPrincipal:tabelaAluno growl" icon="ui-icon-trash">
+
+						<p:commandButton actionListener="#{AlunoBean.excluir(lista)}"
+							id="botaoExcluir" update=":formPrincipal:tabelaAluno growl"
+							icon="ui-icon-trash">
 							<p:confirm header="Excluir Aluno" message="Deseja excluir?"
 								icon="ui-icon-alert" />
 						</p:commandButton>
-						<p:tooltip id="toolTipExcluir" for="botaoExcluir" value="Excluir aluno" escape="false" />
+						<p:tooltip id="toolTipExcluir" for="botaoExcluir"
+							value="Excluir aluno" escape="false" />
 
 						<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
 							<p:commandButton value="Sim" type="button"
@@ -166,14 +169,16 @@
 					<p:outputLabel for="sexo" value="Sexo:" />
 					<p:selectOneMenu id="sexo" value="#{AlunoBean.aluno.sexo}"
 						style="width:150px" required="true" label="Sexo"
-						requiredMessage="O sexo deve ser informado!">
+						requiredMessage="Sexo não deve estar vazio!">
+						<f:selectItem itemLabel="-- Selecione --" noSelectionOption="true" />
 						<f:selectItem itemLabel="Masculino" itemValue="Masculino" />
 						<f:selectItem itemLabel="Feminino" itemValue="Feminino" />
+						<f:validateLength minimum="3" />
 					</p:selectOneMenu>
 
 					<p:outputLabel for="datanasc" value="Data de nascimento:" />
 					<p:inputMask value="#{AlunoBean.aluno.datanasc}" mask="99/99/9999"
-						size="30" placeholder="dd/mm/aaaa" required="true"
+						size="10" placeholder="dd/mm/aaaa" required="true"
 						label="datanasc" id="datanasc"
 						requiredMessage="Data de nascimento deve ser informada!">
 						<f:converter converterId="javax.faces.DateTime" />
@@ -192,32 +197,50 @@
 
 					<p:outputLabel for="telefone" value="Telefone:" />
 					<p:inputMask value="#{AlunoBean.aluno.telefone}"
-						mask="(99) 99999-9999" size="30" required="true" label="Telefone"
+						mask="(99) 99999-9999" size="15" required="true" label="Telefone"
 						id="telefone" />
 
 					<p:outputLabel for="escolaAnterior" value="Escola anterior:" />
-					<p:inputText value="#{AlunoBean.aluno.escolaAnterior}" size="30"
-						required="true" label="escolaAnterior" id="escolaAnterior"
-						requiredMessage="Escola anterior deve ser informada!" />
-
+					<p:selectOneMenu id="escolaAnterior"
+						value="#{AlunoBean.aluno.escolaAnterior}"
+						required="true" 
+						requiredMessage="Escola anterior deve ser informada!">
+						<f:selectItem itemLabel="-- Selecione --" noSelectionOption="true" />
+						<f:selectItem itemLabel="E.E.P.G Prof. Antônio Vilela Junior" itemValue="E.E.P.G Prof. Antônio Vilela Junior" />
+						<f:selectItem itemLabel="E.E.P.G Prof. Gerson Fernando Camargo" itemValue="E.E.P.G Prof. Gerson Fernando Camargo" />
+						<f:selectItem itemLabel="E.E.P.G Prof. Luiza Helena Favaretto" itemValue="E.E.P.G Prof. Luiza Helena Camargo" />
+						<f:selectItem itemLabel="E.E.P.G Prof. Sabrina Armani" itemValue="E.E.P.G Prof. Sabrina Armani" />
+					</p:selectOneMenu>
+				
 					<p:outputLabel for="escolaAtual" value="Escola atual:" />
-					<p:inputText value="#{AlunoBean.aluno.escolaAtual}" size="30"
-						required="true" label="escolaAtual" id="escolaAtual"
-						requiredMessage="Escola atual deve ser informada!" />
+					<p:selectOneMenu id="escolaAtual"
+						value="#{AlunoBean.aluno.escolaAtual}"
+						required="true" 
+						requiredMessage="Escola atual deve ser informada!">
+						<f:selectItem itemLabel="-- Selecione --" noSelectionOption="true" />
+						<f:selectItem itemLabel="E.E.P.G Prof. Antônio Vilela Junior" itemValue="E.E.P.G Prof. Antônio Vilela Junior" />
+						<f:selectItem itemLabel="E.E.P.G Prof. Gerson Fernando Camargo" itemValue="E.E.P.G Prof. Gerson Fernando Camargo" />
+						<f:selectItem itemLabel="E.E.P.G Prof. Luiza Helena Favaretto" itemValue="E.E.P.G Prof. Luiza Helena Camargo" />
+						<f:selectItem itemLabel="E.E.P.G Prof. Sabrina Armani" itemValue="E.E.P.G Prof. Sabrina Armani" />
+					</p:selectOneMenu>	
 
-					<p:outputLabel for="serieAnterior" value="Série anterior:" />
-					<p:inputText value="#{AlunoBean.aluno.serieAnterior}"
-						required="true" size="30" label="serieAnterior" id="serieAnterior"
-						requiredMessage="Série anterior deve ser informada!" />
+					<p:outputLabel for="serieAnterior" value="Série anterior:" />				
+					<p:selectOneMenu value="#{AlunoBean.aluno.serieAnterior}">
+						<f:selectItem itemLabel="-- Selecione --" noSelectionOption="true" />
+						<f:selectItems value="#{SerieBean.series}" var="serie" itemValue="#{serie.serie}"
+							itemLabel="#{serie.serie} Série" required="true" id="serieAnterior" />
+					</p:selectOneMenu>	
 
-					<p:outputLabel for="serieAnterior" value="Série atual:" />
-					<p:inputText value="#{AlunoBean.aluno.serieAtual}" required="true"
-						size="30" label="serieAtual" id="serieAtual"
-						requiredMessage="Série atual deve ser informada!" />
+					<p:outputLabel for="serieAtual" value="Série atual:" />
+					<p:selectOneMenu value="#{AlunoBean.aluno.serieAtual}">
+						<f:selectItem itemLabel="-- Selecione --" noSelectionOption="true" />
+						<f:selectItems value="#{SerieBean.series}" var="serie" itemValue="#{serie.serie}"
+							itemLabel="#{serie.serie} Série" required="true" id="serieAtual" />
+					</p:selectOneMenu>	
 
 					<p:outputLabel for="dataIngresso" value="Data de ingresso:" />
 					<p:inputMask id="dataIngresso"
-						value="#{AlunoBean.aluno.dataIngresso}" size="30"
+						value="#{AlunoBean.aluno.dataIngresso}" size="10"
 						mask="99/99/9999" placeholder="dd/mm/aaaa" required="true"
 						label="Data de ingresso"
 						requiredMessage="Data de ingresso deve ser informada!">
@@ -227,7 +250,7 @@
 
 					<p:outputLabel for="dataSaida" value="Data de saída:" />
 					<p:inputMask id="dataSaida" value="#{AlunoBean.aluno.dataSaida}"
-						size="30" mask="99/99/9999" placeholder="dd/mm/aaaa"
+						size="10" mask="99/99/9999" placeholder="dd/mm/aaaa"
 						required="false" label="Data de saída">
 						<f:converter converterId="javax.faces.DateTime" />
 						<f:convertDateTime pattern="dd/MM/yyyy" timeZone="GMT-3" />
@@ -244,11 +267,13 @@
 
 					<p:outputLabel for="resp" value="Responsável:" />
 					<p:selectOneMenu value="#{AlunoBean.aluno.responsavel}">
-						<f:selectItem itemLabel=" -- Selecione -- " noSelectionOption="true" />
+						<f:selectItem itemLabel=" -- Selecione -- "
+							noSelectionOption="true" />
 						<f:selectItems value="#{ResponsavelBean.responsavels}"
 							var="responsavel" itemValue="#{responsavel}"
-							itemLabel="#{responsavel.nome} #{responsavel.sobrenome}" id="resp" />
-						<f:converter converterId="responsavelConverter"/>
+							itemLabel="#{responsavel.nome} #{responsavel.sobrenome}"
+							id="resp" />
+						<f:converter converterId="responsavelConverter" />
 					</p:selectOneMenu>
 
 					<p:outputLabel for="login" value="Login:" />
@@ -305,7 +330,7 @@
 
 					<p:outputLabel for="numero" value="Número:" />
 					<p:inputText value="#{AlunoBean.aluno.numero}" required="true"
-						label="Número" size="30" id="numero"
+						label="Número" size="5" id="numero"
 						requiredMessage="Número deve ser informado!" />
 
 					<p:outputLabel for="complemento" value="Complemento:" />
@@ -339,11 +364,8 @@
 				<p:fileUpload fileUploadListener="#{AlunoBean.uploadAction}"
 					size="50" mode="advanced" skinSimple="true" update="growl"
 					sizeLimit="2000000000" fileLimit="1"
-					allowTypes="/(\.|\/)(gif|jpe?g|png)$/" 
-					label="Selecionar"
-					uploadLabel="Enviar"
-					cancelLabel="Cancelar"
-					id="IncluirAnexo"
+					allowTypes="/(\.|\/)(gif|jpe?g|png)$/" label="Selecionar"
+					uploadLabel="Enviar" cancelLabel="Cancelar" id="IncluirAnexo"
 					invalidSizeMessage="Limite excedido: Não possivel o envio"
 					invalidFileMessage="Formato de arquivo não permitido"
 					dragDropSupport="true">
@@ -411,24 +433,38 @@
 						id="telefone" />
 
 					<p:outputLabel for="escolaAnterior" value="Escola anterior:" />
-					<p:inputText value="#{AlunoBean.aluno.escolaAnterior}"
-						required="true" label="escolaAnterior" id="escolaAnterior"
-						requiredMessage="Escola anterior deve ser informada!" />
-
+					<p:selectOneMenu id="escolaAnterior"
+						value="#{AlunoBean.aluno.escolaAnterior}"
+						required="true" 
+						requiredMessage="Escola anterior deve ser informada!">
+						<f:selectItem itemLabel="E.E.P.G Prof. Antônio Vilela Junior" itemValue="E.E.P.G Prof. Antônio Vilela Junior" />
+						<f:selectItem itemLabel="E.E.P.G Prof. Gerson Fernando Camargo" itemValue="E.E.P.G Prof. Gerson Fernando Camargo" />
+						<f:selectItem itemLabel="E.E.P.G Prof. Luiza Helena Favaretto" itemValue="E.E.P.G Prof. Luiza Helena Camargo" />
+						<f:selectItem itemLabel="E.E.P.G Prof. Sabrina Armani" itemValue="E.E.P.G Prof. Sabrina Armani" />
+					</p:selectOneMenu>
+				
 					<p:outputLabel for="escolaAtual" value="Escola atual:" />
-					<p:inputText value="#{AlunoBean.aluno.escolaAtual}" required="true"
-						label="escolaAtual" id="escolaAtual"
-						requiredMessage="Escola atual deve ser informada!" />
+					<p:selectOneMenu id="escolaAtual"
+						value="#{AlunoBean.aluno.escolaAtual}"
+						required="true" 
+						requiredMessage="Escola atual deve ser informada!">
+						<f:selectItem itemLabel="E.E.P.G Prof. Antônio Vilela Junior" itemValue="E.E.P.G Prof. Antônio Vilela Junior" />
+						<f:selectItem itemLabel="E.E.P.G Prof. Gerson Fernando Camargo" itemValue="E.E.P.G Prof. Gerson Fernando Camargo" />
+						<f:selectItem itemLabel="E.E.P.G Prof. Luiza Helena Favaretto" itemValue="E.E.P.G Prof. Luiza Helena Camargo" />
+						<f:selectItem itemLabel="E.E.P.G Prof. Sabrina Armani" itemValue="E.E.P.G Prof. Sabrina Armani" />
+					</p:selectOneMenu>	
 
-					<p:outputLabel for="serieAnterior" value="Série anterior:" />
-					<p:inputText value="#{AlunoBean.aluno.serieAnterior}"
-						required="true" label="serieAnterior" id="serieAnterior"
-						requiredMessage="Série anterior deve ser informada!" />
+					<p:outputLabel for="serieAnterior" value="Série anterior:" />				
+					<p:selectOneMenu value="#{AlunoBean.aluno.serieAnterior}">
+						<f:selectItems value="#{SerieBean.series}" var="serie" itemValue="#{serie.serie}"
+							itemLabel="#{serie.serie} Série" required="true" id="serieAnterior" />
+					</p:selectOneMenu>	
 
-					<p:outputLabel for="serieAnterior" value="Série atual:" />
-					<p:inputText value="#{AlunoBean.aluno.serieAtual}" required="true"
-						label="serieAtual" id="serieAtual"
-						requiredMessage="Série atual deve ser informada!" />
+					<p:outputLabel for="serieAtual" value="Série atual:" />
+					<p:selectOneMenu value="#{AlunoBean.aluno.serieAtual}">
+						<f:selectItems value="#{SerieBean.series}" var="serie" itemValue="#{serie.serie}"
+							itemLabel="#{serie.serie} Série" required="true" id="serieAtual" />
+					</p:selectOneMenu>
 
 					<p:outputLabel for="dataIngresso" value="Data de ingresso:" />
 					<p:inputMask id="dataIngresso"
