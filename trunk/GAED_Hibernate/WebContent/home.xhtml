@@ -29,9 +29,9 @@
 												  rendered="#{LoginBean.usuario.perfil.responsavel}"/>
 												  <h:outputText value="#{OcorrenciaBean.listarOcorrenciaAluno(LoginBean.aluno).size()}"
 												  rendered="#{LoginBean.usuario.perfil.aluno}"/><p/>
-						Tarefas <h:outputText value="#{OcorrenciaBean.listarOcorrenciaResponsavel(LoginBean.responsavel).size()}"
+						Tarefas <h:outputText value="#{TarefaBean.listarTarefaResponsavel(LoginBean.responsavel).size()}"
 											  rendered="#{LoginBean.usuario.perfil.responsavel}" />
-								<h:outputText value="#{OcorrenciaBean.listarOcorrenciaAluno(LoginBean.aluno).size()}"
+								<h:outputText value="#{TarefaBean.listarTarefaAluno(LoginBean.aluno).size()}"
 												  rendered="#{LoginBean.usuario.perfil.aluno}"/>			  		
 				    </p:panel>
 				</p:layoutUnit>

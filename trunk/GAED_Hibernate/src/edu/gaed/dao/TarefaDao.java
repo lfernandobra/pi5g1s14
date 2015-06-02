@@ -90,7 +90,10 @@ public class TarefaDao {
 		session = HibernateUtil.getSessionFactory().openSession();
 
 		try{
-			String hql = "FROM Ocorrencia Oc WHERE Oc.aluno.responsavel = :responsavel";
+			String hql = "select tar from Tarefa tar "+
+			             "join tar.turmas as turma "+
+			             "join turma.alunos as aluno "+
+			             "where aluno.responsavel = :responsavel";
 			Query query = session.createQuery(hql);
 			query.setParameter("responsavel",responsavel);
 			List results = query.list();
