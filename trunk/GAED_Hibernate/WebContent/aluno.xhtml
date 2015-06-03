@@ -248,14 +248,6 @@
 						<f:convertDateTime pattern="dd/MM/yyyy" timeZone="GMT-3" />
 					</p:inputMask>
 
-					<p:outputLabel for="dataSaida" value="Data de saída:" />
-					<p:inputMask id="dataSaida" value="#{AlunoBean.aluno.dataSaida}"
-						size="10" mask="99/99/9999" placeholder="dd/mm/aaaa"
-						required="false" label="Data de saída">
-						<f:converter converterId="javax.faces.DateTime" />
-						<f:convertDateTime pattern="dd/MM/yyyy" timeZone="GMT-3" />
-					</p:inputMask>
-
 					<p:outputLabel for="email" value="Email:" />
 					<p:inputText id="email" required="true" size="40"
 						requiredMessage="Insira o endereço de email"

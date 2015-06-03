@@ -56,8 +56,6 @@
 						<p:rowExpansion>
 							<h3>Informações do professor</h3>
 							<p:panelGrid columns="2" columnClasses="label,value">
-								<h:outputText value="Foto " />
-								<h:graphicImage width="80" height="100" value="/temp/#{FotoBean.verFoto(lista.foto.foto,lista.nome)}" />
 								<h:outputText value="Data de nascimento " />
 								<h:outputFormat value="{0, date, dd/MM/yyyy}">
 									<f:param value="#{lista.datanasc}" />
@@ -89,9 +87,10 @@
 									<f:param value="#{lista.dataIngresso}" />
 								</h:outputFormat>
 								<h:outputText value="Data de saida " />
-								<h:outputFormat value="{0, date, dd/MM/yyyy}">
+								<h:outputFormat value="{0, date, dd/MM/yyyy}" rendered="#{!empty lista.dataSaida}" >
 									<f:param value="#{lista.dataSaida}" />
 								</h:outputFormat>
+								<h:outputText value="Não definida" rendered="#{lista.dataSaida eq null}"/>
 
 								<h:outputText value="Escola anterior " />
 								<h:outputText value="#{lista.escolaAnterior}" />
@@ -179,13 +178,17 @@
 
 						<p:outputLabel for="sexo" value="Sexo:" />
 						<p:selectOneMenu id="sexo" value="#{ProfessorBean.professor.sexo}"
-							size="30" style="width:150px" required="true" label="Sexo">
+							style="width:150px" required="true" label="Sexo"
+							requiredMessage="Sexo não deve estar vazio!">
+							<f:selectItem itemLabel="-- Selecione --"
+								noSelectionOption="true" />
 							<f:selectItem itemLabel="Masculino" itemValue="Masculino" />
 							<f:selectItem itemLabel="Feminino" itemValue="Feminino" />
+							<f:validateLength minimum="3" />
 						</p:selectOneMenu>
 
 						<p:outputLabel for="datanasc" value="Data de nascimento:" />
-						<p:inputMask value="#{ProfessorBean.professor.datanasc}" size="30"
+						<p:inputMask value="#{ProfessorBean.professor.datanasc}" size="10"
 							mask="99/99/9999" placeholder="dd/mm/aaaa" required="true"
 							label="datanasc" id="datanasc"
 							requiredMessage="Data de nascimento deve ser informada!">
@@ -206,50 +209,63 @@
 
 						<p:outputLabel for="telefone" value="Telefone:" />
 						<p:inputMask value="#{ProfessorBean.professor.telefone}"
-							mask="(99) 99999-9999" size="30" required="true" label="Telefone"
+							mask="(99) 99999-9999" size="15" required="true" label="Telefone"
 							id="telefone" />
 
 						<p:outputLabel for="formacaoAcad" value="Formação acadêmica:" />
-						<p:inputText value="#{ProfessorBean.professor.formacaoAcad}"
-							size="30" required="true" label="Formação acadêmica"
-							id="formacaoAcad"
-							requiredMessage="Formação acadêmica deve ser informada!" />
+						<p:selectOneMenu id="formacaoAcad" value="#{ProfessorBean.professor.formacaoAcad}"
+							style="width:150px" required="true" label="Formação acadêmica"
+							requiredMessage="Formação acadêmica deve ser informada!">
+							<f:selectItem itemLabel="-- Selecione --" noSelectionOption="true" />
+							<f:selectItem itemLabel="Bacharelado" itemValue="Bacharelado" />
+							<f:selectItem itemLabel="Licenciatura" itemValue="Licenciatura" />
+							<f:selectItem itemLabel="Mestrado" itemValue="Mestrado" />
+							<f:selectItem itemLabel="Doutorado" itemValue="Doutorado" />
+						</p:selectOneMenu>
 
 						<p:outputLabel for="instAcad" value="Instituição acadêmica:" />
-						<p:inputText value="#{ProfessorBean.professor.instituicaoAcad}"
-							size="30" required="true" label="Instituição acadêmica"
-							id="instAcad"
-							requiredMessage="Instituição acadêmica deve ser informada!" />
+							<p:selectOneMenu id="instAcad" value="#{ProfessorBean.professor.instituicaoAcad}"
+							style="width:150px" required="true" label="Formação acadêmica"
+							requiredMessage="Instituição acadêmica deve ser informada!">
+							<f:selectItem itemLabel="-- Selecione --" noSelectionOption="true" />
+							<f:selectItem itemLabel="Unicamp" itemValue="Unicamp" />
+							<f:selectItem itemLabel="Unip" itemValue="Unip" />
+							<f:selectItem itemLabel="Metrocamp" itemValue="Metrocamp" />
+							<f:selectItem itemLabel="Anhanguera" itemValue="Anhanguera" />
+						</p:selectOneMenu>
+
 
 						<p:outputLabel for="anoConclusao" value="Ano conclusão:" />
 						<p:inputMask id="anoConclusao"
-							value="#{ProfessorBean.professor.anoConclusao}" size="30"
+							value="#{ProfessorBean.professor.anoConclusao}" size="10"
 							mask="99/99/9999" placeholder="dd/mm/aaaa" required="false"
 							label="Ano conclusão">
 							<f:converter converterId="javax.faces.DateTime" />
 							<f:convertDateTime pattern="dd/MM/yyyy" timeZone="GMT-3" />
 						</p:inputMask>
 
-						<p:outputLabel for="escolaAnt" value="Escola anterior:" />
-						<p:inputText value="#{ProfessorBean.professor.escolaAnterior}"
-							required="true" size="30" label="Escola anterior" id="escolaAnt"
-							requiredMessage="Escola anterior deve ser informada!" />
+						<p:outputLabel for="escolaAnterior" value="Escola anterior:" />
+						<p:selectOneMenu id="escolaAnterior"
+							value="#{ProfessorBean.professor.escolaAnterior}" required="true"
+							requiredMessage="Escola anterior deve ser informada!">
+							<f:selectItem itemLabel="-- Selecione --"
+								noSelectionOption="true" />
+							<f:selectItem itemLabel="E.E.P.G Prof. Antônio Vilela Junior"
+								itemValue="E.E.P.G Prof. Antônio Vilela Junior" />
+							<f:selectItem itemLabel="E.E.P.G Prof. Gerson Fernando Camargo"
+								itemValue="E.E.P.G Prof. Gerson Fernando Camargo" />
+							<f:selectItem itemLabel="E.E.P.G Prof. Luiza Helena Favaretto"
+								itemValue="E.E.P.G Prof. Luiza Helena Camargo" />
+							<f:selectItem itemLabel="E.E.P.G Prof. Sabrina Armani"
+								itemValue="E.E.P.G Prof. Sabrina Armani" />
+						</p:selectOneMenu>
 
 						<p:outputLabel for="dataIngresso" value="Data de ingresso:" />
 						<p:inputMask id="dataIngresso"
-							value="#{ProfessorBean.professor.dataIngresso}" size="30"
+							value="#{ProfessorBean.professor.dataIngresso}" size="10"
 							mask="99/99/9999" placeholder="dd/mm/aaaa" required="true"
 							label="Data de ingresso"
 							requiredMessage="Data de ingresso deve ser informada!">
-							<f:converter converterId="javax.faces.DateTime" />
-							<f:convertDateTime pattern="dd/MM/yyyy" timeZone="GMT-3" />
-						</p:inputMask>
-
-						<p:outputLabel for="dataSaida" value="Data de saída:" />
-						<p:inputMask id="dataSaida"
-							value="#{ProfessorBean.professor.dataSaida}" size="30"
-							mask="99/99/9999" placeholder="dd/mm/aaaa" required="false"
-							label="Data de saída">
 							<f:converter converterId="javax.faces.DateTime" />
 							<f:convertDateTime pattern="dd/MM/yyyy" timeZone="GMT-3" />
 						</p:inputMask>
@@ -265,7 +281,7 @@
 
 						<p:outputLabel value="Disciplina:" />
 						<p:selectCheckboxMenu id="menu"
-							value="#{ProfessorBean.professor.disciplinas}" size="30"
+							value="#{ProfessorBean.professor.disciplinas}" size="20"
 							label="Selecione" filter="true" filterMatchMode="startsWith"
 							panelStyle="width:250px">
 							<f:selectItems value="#{DisciplinaBean.disciplinas}"
@@ -327,7 +343,7 @@
 						<p:outputLabel for="numero" value="Número:" />
 						<p:inputText value="#{ProfessorBean.professor.numero}"
 							required="true" label="Número" id="numero"
-							requiredMessage="Número deve ser informado!" />
+							requiredMessage="Número deve ser informado!" size="5" />
 
 						<p:outputLabel for="complemento" value="Complemento:" />
 						<p:inputText value="#{ProfessorBean.professor.complemento}"
@@ -403,9 +419,13 @@
 
 						<p:outputLabel for="sexo" value="Sexo:" />
 						<p:selectOneMenu id="sexo" value="#{ProfessorBean.professor.sexo}"
-							style="width:150px" required="true" label="Sexo">
+							style="width:150px" required="true" label="Sexo"
+							requiredMessage="Sexo não deve estar vazio!">
+							<f:selectItem itemLabel="-- Selecione --"
+								noSelectionOption="true" />
 							<f:selectItem itemLabel="Masculino" itemValue="Masculino" />
 							<f:selectItem itemLabel="Feminino" itemValue="Feminino" />
+							<f:validateLength minimum="3" />
 						</p:selectOneMenu>
 
 						<p:outputLabel for="datanasc" value="Data de nascimento:" />
@@ -433,14 +453,26 @@
 							id="telefone" />
 
 						<p:outputLabel for="formacaoAcad" value="Formação acadêmica:" />
-						<p:inputText value="#{ProfessorBean.professor.formacaoAcad}"
-							required="true" label="Formação acadêmica" id="formacaoAcad"
-							requiredMessage="Formação acadêmica deve ser informada!" />
+						<p:selectOneMenu id="formacaoAcad" value="#{ProfessorBean.professor.formacaoAcad}"
+							style="width:150px" required="true" label="Formação acadêmica"
+							requiredMessage="Formação acadêmica deve ser informada!">
+							<f:selectItem itemLabel="-- Selecione --" noSelectionOption="true" />
+							<f:selectItem itemLabel="Bacharelado" itemValue="Bacharelado" />
+							<f:selectItem itemLabel="Licenciatura" itemValue="Licenciatura" />
+							<f:selectItem itemLabel="Mestrado" itemValue="Mestrado" />
+							<f:selectItem itemLabel="Doutorado" itemValue="Doutorado" />
+						</p:selectOneMenu>
 
 						<p:outputLabel for="instAcad" value="Instituição acadêmica:" />
-						<p:inputText value="#{ProfessorBean.professor.instituicaoAcad}"
-							required="true" label="Instituição acadêmica" id="instAcad"
-							requiredMessage="Instituição acadêmica deve ser informada!" />
+							<p:selectOneMenu id="instAcad" value="#{ProfessorBean.professor.instituicaoAcad}"
+							style="width:150px" required="true" label="Formação acadêmica"
+							requiredMessage="Instituição acadêmica deve ser informada!">
+							<f:selectItem itemLabel="-- Selecione --" noSelectionOption="true" />
+							<f:selectItem itemLabel="Unicamp" itemValue="Unicamp" />
+							<f:selectItem itemLabel="Unip" itemValue="Unip" />
+							<f:selectItem itemLabel="Metrocamp" itemValue="Metrocamp" />
+							<f:selectItem itemLabel="Anhanguera" itemValue="Anhanguera" />
+						</p:selectOneMenu>
 
 						<p:outputLabel for="anoConclusao" value="Ano conclusão:" />
 						<p:inputMask id="anoConclusao"
@@ -450,10 +482,21 @@
 							<f:convertDateTime pattern="dd/MM/yyyy" timeZone="GMT-3" />
 						</p:inputMask>
 
-						<p:outputLabel for="escolaAnt" value="Escola anterior:" />
-						<p:inputText value="#{ProfessorBean.professor.escolaAnterior}"
-							required="true" label="Escola anterior" id="escolaAnt"
-							requiredMessage="Escola anterior deve ser informada!" />
+						<p:outputLabel for="escolaAnterior" value="Escola anterior:" />
+						<p:selectOneMenu id="escolaAnterior"
+							value="#{ProfessorBean.professor.escolaAnterior}" required="true"
+							requiredMessage="Escola anterior deve ser informada!">
+							<f:selectItem itemLabel="-- Selecione --"
+								noSelectionOption="true" />
+							<f:selectItem itemLabel="E.E.P.G Prof. Antônio Vilela Junior"
+								itemValue="E.E.P.G Prof. Antônio Vilela Junior" />
+							<f:selectItem itemLabel="E.E.P.G Prof. Gerson Fernando Camargo"
+								itemValue="E.E.P.G Prof. Gerson Fernando Camargo" />
+							<f:selectItem itemLabel="E.E.P.G Prof. Luiza Helena Favaretto"
+								itemValue="E.E.P.G Prof. Luiza Helena Camargo" />
+							<f:selectItem itemLabel="E.E.P.G Prof. Sabrina Armani"
+								itemValue="E.E.P.G Prof. Sabrina Armani" />
+						</p:selectOneMenu>
 
 						<p:outputLabel for="dataIngresso" value="Data de ingresso:" />
 						<p:inputMask id="dataIngresso"
@@ -498,7 +541,7 @@
 						
 						<p:outputLabel value="Disciplina:" />
 						<p:selectCheckboxMenu id="menu"
-							value="#{ProfessorBean.professor.disciplinas}" size="30"
+							value="#{ProfessorBean.professor.disciplinas}" size="15"
 							label="Selecione" filter="true" filterMatchMode="startsWith"
 							panelStyle="width:250px">
 							<f:selectItems value="#{DisciplinaBean.disciplinas}"
@@ -547,7 +590,7 @@
 						<p:outputLabel for="numero" value="Número:" />
 						<p:inputText value="#{ProfessorBean.professor.numero}"
 							required="true" label="Número" id="numero"
-							requiredMessage="Número deve ser informado!" />
+							requiredMessage="Número deve ser informado!" size="5" />
 
 						<p:outputLabel for="complemento" value="Complemento:" />
 						<p:inputText value="#{ProfessorBean.professor.complemento}"
