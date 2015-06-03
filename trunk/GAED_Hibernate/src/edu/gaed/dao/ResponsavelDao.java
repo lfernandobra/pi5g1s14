@@ -3,9 +3,7 @@ package edu.gaed.dao;
 import java.util.List;
 
 import edu.gaed.vo.Responsavel;
-
-import org.hibernate.Criteria;
-
+import org.hibernate.Query;
 import org.hibernate.Session;
 
 import edu.gaed.util.HibernateUtil;
@@ -63,8 +61,12 @@ public class ResponsavelDao {
 			session = HibernateUtil.getSessionFactory().openSession();
  
 			try{
-				Criteria cri = session.createCriteria(Responsavel.class);
-				return cri.list();
+				String hql = "select resp from Responsavel resp group by resp.id"; 
+				Query query = session.createQuery(hql);
+				
+				List results = query.list();
+				
+				return results;
 			}finally{
 				session.close();
  

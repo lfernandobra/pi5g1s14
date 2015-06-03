@@ -88,8 +88,13 @@
 						<h:outputFormat value="{0, date, dd/MM/yyyy}">
 							<f:param value="#{lista.dataSaida}" />
 						</h:outputFormat>
+						<h:outputText value="Alunos" />
+							<p:dataList value="#{lista.alunos}" var="aluno"
+								emptyMessage="Nenhuma aluno atribuido">
+	            				#{aluno.nome} #{aluno.sobrenome}  
+	        				</p:dataList>
 
-					</p:panelGrid>
+						</p:panelGrid>
 				</p:rowExpansion>
 				<p:column style="width:60px">
 					<p:commandButton update=":formAlterar" oncomplete="PF('dialogAlterar').show();"	 icon="ui-icon-pencil" id="botaoAlterar">
