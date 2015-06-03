@@ -88,9 +88,12 @@
 								<f:param value="#{lista.dataIngresso}" />
 							</h:outputFormat>
 							<h:outputText value="Data de saida " />
-							<h:outputFormat value="{0, date, dd/MM/yyyy}">
+							<h:outputFormat value="{0, date, dd/MM/yyyy}"
+								rendered="#{!empty lista.dataSaida}">
 								<f:param value="#{lista.dataSaida}" />
 							</h:outputFormat>
+							<h:outputText value="Não definida"
+								rendered="#{lista.dataSaida eq null}" />
 							<h:outputText value="Escola anterior " />
 							<h:outputText value="#{lista.escolaAnterior}" />
 							<h:outputText value="Escola atual " />
@@ -202,41 +205,49 @@
 
 					<p:outputLabel for="escolaAnterior" value="Escola anterior:" />
 					<p:selectOneMenu id="escolaAnterior"
-						value="#{AlunoBean.aluno.escolaAnterior}"
-						required="true" 
+						value="#{AlunoBean.aluno.escolaAnterior}" required="true"
 						requiredMessage="Escola anterior deve ser informada!">
 						<f:selectItem itemLabel="-- Selecione --" noSelectionOption="true" />
-						<f:selectItem itemLabel="E.E.P.G Prof. Antônio Vilela Junior" itemValue="E.E.P.G Prof. Antônio Vilela Junior" />
-						<f:selectItem itemLabel="E.E.P.G Prof. Gerson Fernando Camargo" itemValue="E.E.P.G Prof. Gerson Fernando Camargo" />
-						<f:selectItem itemLabel="E.E.P.G Prof. Luiza Helena Favaretto" itemValue="E.E.P.G Prof. Luiza Helena Camargo" />
-						<f:selectItem itemLabel="E.E.P.G Prof. Sabrina Armani" itemValue="E.E.P.G Prof. Sabrina Armani" />
+						<f:selectItem itemLabel="E.E.P.G Prof. Antônio Vilela Junior"
+							itemValue="E.E.P.G Prof. Antônio Vilela Junior" />
+						<f:selectItem itemLabel="E.E.P.G Prof. Gerson Fernando Camargo"
+							itemValue="E.E.P.G Prof. Gerson Fernando Camargo" />
+						<f:selectItem itemLabel="E.E.P.G Prof. Luiza Helena Favaretto"
+							itemValue="E.E.P.G Prof. Luiza Helena Camargo" />
+						<f:selectItem itemLabel="E.E.P.G Prof. Sabrina Armani"
+							itemValue="E.E.P.G Prof. Sabrina Armani" />
 					</p:selectOneMenu>
-				
+
 					<p:outputLabel for="escolaAtual" value="Escola atual:" />
 					<p:selectOneMenu id="escolaAtual"
-						value="#{AlunoBean.aluno.escolaAtual}"
-						required="true" 
+						value="#{AlunoBean.aluno.escolaAtual}" required="true"
 						requiredMessage="Escola atual deve ser informada!">
 						<f:selectItem itemLabel="-- Selecione --" noSelectionOption="true" />
-						<f:selectItem itemLabel="E.E.P.G Prof. Antônio Vilela Junior" itemValue="E.E.P.G Prof. Antônio Vilela Junior" />
-						<f:selectItem itemLabel="E.E.P.G Prof. Gerson Fernando Camargo" itemValue="E.E.P.G Prof. Gerson Fernando Camargo" />
-						<f:selectItem itemLabel="E.E.P.G Prof. Luiza Helena Favaretto" itemValue="E.E.P.G Prof. Luiza Helena Camargo" />
-						<f:selectItem itemLabel="E.E.P.G Prof. Sabrina Armani" itemValue="E.E.P.G Prof. Sabrina Armani" />
-					</p:selectOneMenu>	
+						<f:selectItem itemLabel="E.E.P.G Prof. Antônio Vilela Junior"
+							itemValue="E.E.P.G Prof. Antônio Vilela Junior" />
+						<f:selectItem itemLabel="E.E.P.G Prof. Gerson Fernando Camargo"
+							itemValue="E.E.P.G Prof. Gerson Fernando Camargo" />
+						<f:selectItem itemLabel="E.E.P.G Prof. Luiza Helena Favaretto"
+							itemValue="E.E.P.G Prof. Luiza Helena Camargo" />
+						<f:selectItem itemLabel="E.E.P.G Prof. Sabrina Armani"
+							itemValue="E.E.P.G Prof. Sabrina Armani" />
+					</p:selectOneMenu>
 
-					<p:outputLabel for="serieAnterior" value="Série anterior:" />				
+					<p:outputLabel for="serieAnterior" value="Série anterior:" />
 					<p:selectOneMenu value="#{AlunoBean.aluno.serieAnterior}">
 						<f:selectItem itemLabel="-- Selecione --" noSelectionOption="true" />
-						<f:selectItems value="#{SerieBean.series}" var="serie" itemValue="#{serie.serie}"
-							itemLabel="#{serie.serie} Série" required="true" id="serieAnterior" />
-					</p:selectOneMenu>	
+						<f:selectItems value="#{SerieBean.series}" var="serie"
+							itemValue="#{serie}" itemLabel="#{serie.serie} Série"
+							required="true" id="serieAnterior" />
+					</p:selectOneMenu>
 
 					<p:outputLabel for="serieAtual" value="Série atual:" />
 					<p:selectOneMenu value="#{AlunoBean.aluno.serieAtual}">
 						<f:selectItem itemLabel="-- Selecione --" noSelectionOption="true" />
-						<f:selectItems value="#{SerieBean.series}" var="serie" itemValue="#{serie.serie}"
-							itemLabel="#{serie.serie} Série" required="true" id="serieAtual" />
-					</p:selectOneMenu>	
+						<f:selectItems value="#{SerieBean.series}" var="serie"
+							itemValue="#{serie}" itemLabel="#{serie.serie} Série"
+							required="true" id="serieAtual" />
+					</p:selectOneMenu>
 
 					<p:outputLabel for="dataIngresso" value="Data de ingresso:" />
 					<p:inputMask id="dataIngresso"
@@ -426,36 +437,44 @@
 
 					<p:outputLabel for="escolaAnterior" value="Escola anterior:" />
 					<p:selectOneMenu id="escolaAnterior"
-						value="#{AlunoBean.aluno.escolaAnterior}"
-						required="true" 
+						value="#{AlunoBean.aluno.escolaAnterior}" required="true"
 						requiredMessage="Escola anterior deve ser informada!">
-						<f:selectItem itemLabel="E.E.P.G Prof. Antônio Vilela Junior" itemValue="E.E.P.G Prof. Antônio Vilela Junior" />
-						<f:selectItem itemLabel="E.E.P.G Prof. Gerson Fernando Camargo" itemValue="E.E.P.G Prof. Gerson Fernando Camargo" />
-						<f:selectItem itemLabel="E.E.P.G Prof. Luiza Helena Favaretto" itemValue="E.E.P.G Prof. Luiza Helena Camargo" />
-						<f:selectItem itemLabel="E.E.P.G Prof. Sabrina Armani" itemValue="E.E.P.G Prof. Sabrina Armani" />
+						<f:selectItem itemLabel="E.E.P.G Prof. Antônio Vilela Junior"
+							itemValue="E.E.P.G Prof. Antônio Vilela Junior" />
+						<f:selectItem itemLabel="E.E.P.G Prof. Gerson Fernando Camargo"
+							itemValue="E.E.P.G Prof. Gerson Fernando Camargo" />
+						<f:selectItem itemLabel="E.E.P.G Prof. Luiza Helena Favaretto"
+							itemValue="E.E.P.G Prof. Luiza Helena Camargo" />
+						<f:selectItem itemLabel="E.E.P.G Prof. Sabrina Armani"
+							itemValue="E.E.P.G Prof. Sabrina Armani" />
 					</p:selectOneMenu>
-				
+
 					<p:outputLabel for="escolaAtual" value="Escola atual:" />
 					<p:selectOneMenu id="escolaAtual"
-						value="#{AlunoBean.aluno.escolaAtual}"
-						required="true" 
+						value="#{AlunoBean.aluno.escolaAtual}" required="true"
 						requiredMessage="Escola atual deve ser informada!">
-						<f:selectItem itemLabel="E.E.P.G Prof. Antônio Vilela Junior" itemValue="E.E.P.G Prof. Antônio Vilela Junior" />
-						<f:selectItem itemLabel="E.E.P.G Prof. Gerson Fernando Camargo" itemValue="E.E.P.G Prof. Gerson Fernando Camargo" />
-						<f:selectItem itemLabel="E.E.P.G Prof. Luiza Helena Favaretto" itemValue="E.E.P.G Prof. Luiza Helena Camargo" />
-						<f:selectItem itemLabel="E.E.P.G Prof. Sabrina Armani" itemValue="E.E.P.G Prof. Sabrina Armani" />
-					</p:selectOneMenu>	
+						<f:selectItem itemLabel="E.E.P.G Prof. Antônio Vilela Junior"
+							itemValue="E.E.P.G Prof. Antônio Vilela Junior" />
+						<f:selectItem itemLabel="E.E.P.G Prof. Gerson Fernando Camargo"
+							itemValue="E.E.P.G Prof. Gerson Fernando Camargo" />
+						<f:selectItem itemLabel="E.E.P.G Prof. Luiza Helena Favaretto"
+							itemValue="E.E.P.G Prof. Luiza Helena Camargo" />
+						<f:selectItem itemLabel="E.E.P.G Prof. Sabrina Armani"
+							itemValue="E.E.P.G Prof. Sabrina Armani" />
+					</p:selectOneMenu>
 
-					<p:outputLabel for="serieAnterior" value="Série anterior:" />				
+					<p:outputLabel for="serieAnterior" value="Série anterior:" />
 					<p:selectOneMenu value="#{AlunoBean.aluno.serieAnterior}">
-						<f:selectItems value="#{SerieBean.series}" var="serie" itemValue="#{serie.serie}"
-							itemLabel="#{serie.serie} Série" required="true" id="serieAnterior" />
-					</p:selectOneMenu>	
+						<f:selectItems value="#{SerieBean.series}" var="serie"
+							itemValue="#{serie}" itemLabel="#{serie.serie} Série"
+							required="true" id="serieAnterior" />
+					</p:selectOneMenu>
 
 					<p:outputLabel for="serieAtual" value="Série atual:" />
 					<p:selectOneMenu value="#{AlunoBean.aluno.serieAtual}">
-						<f:selectItems value="#{SerieBean.series}" var="serie" itemValue="#{serie.serie}"
-							itemLabel="#{serie.serie} Série" required="true" id="serieAtual" />
+						<f:selectItems value="#{SerieBean.series}" var="serie"
+							itemValue="#{serie}" itemLabel="#{serie.serie} Série"
+							required="true" id="serieAtual" />
 					</p:selectOneMenu>
 
 					<p:outputLabel for="dataIngresso" value="Data de ingresso:" />

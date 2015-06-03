@@ -12,250 +12,302 @@
 <ui:decorate template="/Cabecalho.xhtml">
 	<ui:define name="center">
 
-	
-	<h2>Lista de Responsáveis</h2>
-	
+
+		<h2>Lista de Responsáveis</h2>
+
 		<div id="Lista">
-				<p:separator />
-				
-				<p:toolbar styleClass="toolbar">
-					<f:facet name="left">
-						<p:commandButton value="Cadastrar" type="button" onclick="PF('dialogCadastrar').show();" icon="ui-icon-plusthick" />
-					</f:facet>
-				</p:toolbar>
-				
-		<h:form id="formPrincipal">
+			<p:separator />
+
+			<p:toolbar styleClass="toolbar">
+				<f:facet name="left">
+					<p:commandButton value="Cadastrar" type="button"
+						onclick="PF('dialogCadastrar').show();" icon="ui-icon-plusthick" />
+				</f:facet>
+			</p:toolbar>
+
+			<h:form id="formPrincipal">
 				<p:growl id="growl" showDetail="true" life="4000" />
-			<p:dataTable var="lista" value="#{ResponsavelBean.responsavels}"
-						id="tabelaResponsavel" resizableColumns="true" reflow="true" rows="5"
-						paginator="true" paginatorPosition="bottom"
-						emptyMessage="Nenhum responsável cadastrado">
-				
-				<p:column style="width:16px">
+				<p:dataTable var="lista" value="#{ResponsavelBean.responsavels}"
+					id="tabelaResponsavel" resizableColumns="true" reflow="true"
+					rows="5" paginator="true" paginatorPosition="bottom"
+					emptyMessage="Nenhum responsável cadastrado">
+
+					<p:column style="width:16px">
 						<p:rowToggler />
-						</p:column>		
-				         
-				<p:column headerText="ID" sortBy="#{lista.id}" style="width:130px"
-					filterBy="#{lista.id}">
-					<h:outputText value="#{lista.id}" />
-				</p:column>
-				<p:column headerText="Foto" style="width:130px">
-				<h:graphicImage width="50" height="60" value="/temp/#{FotoBean.verFoto(lista.foto.foto,lista.nome)}" />
-				</p:column>
-				<p:column headerText="Nome" sortBy="#{lista.nome}"
-					filterBy="#{lista.nome}">
-					<h:outputText value=" #{lista.nome} #{lista.sobrenome}" />
-				</p:column>
-				
-				<p:rowExpansion>
-					
-					<h3>Informações do responsavel (a)</h3>
-					<p:panelGrid columns="2" columnClasses="label,value">
-						<h:outputText value="Data de nascimento " />
-						<h:outputFormat value="{0, date, dd/MM/yyyy}">
-							<f:param value="#{lista.datanasc}" />
-						</h:outputFormat>
-						<h:outputText value="Sexo " />
-						<h:outputText value="#{lista.sexo}" />
-						<h:outputText value="RG " />
-						<h:outputText value="#{lista.RG}" />
-						<h:outputText value="CPF " />
-						<h:outputText value="#{lista.CPF}" />
-						<h:outputText value="Adimplente " />
-						<h:outputText value="Sim" rendered="#{lista.adimplente}" />
-						<h:outputText value="Não" rendered="#{not lista.adimplente}" />
-						<h:outputText value="Situação " />
-						<h:outputText value="Ativo" rendered="#{lista.status}" />
-						<h:outputText value="Inativo" rendered="#{not lista.status}" />
-						<h:outputText value="E-mail " />
-						<h:outputText value="#{lista.email}" />
-						<h:outputText value="Telefone " />
-						<h:outputText value="#{lista.telefone}" />
-						<h:outputText value="Endereço " />
-						<h:outputText
-							value="#{lista.logradouro.nome} 
+					</p:column>
+
+					<p:column headerText="ID" sortBy="#{lista.id}" style="width:130px"
+						filterBy="#{lista.id}">
+						<h:outputText value="#{lista.id}" />
+					</p:column>
+					<p:column headerText="Foto" style="width:130px">
+						<h:graphicImage width="50" height="60"
+							value="/temp/#{FotoBean.verFoto(lista.foto.foto,lista.nome)}" />
+					</p:column>
+					<p:column headerText="Nome" sortBy="#{lista.nome}"
+						filterBy="#{lista.nome}">
+						<h:outputText value=" #{lista.nome} #{lista.sobrenome}" />
+					</p:column>
+
+					<p:rowExpansion>
+
+						<h3>Informações do responsavel (a)</h3>
+						<p:panelGrid columns="2" columnClasses="label,value">
+							<h:outputText value="Data de nascimento " />
+							<h:outputFormat value="{0, date, dd/MM/yyyy}">
+								<f:param value="#{lista.datanasc}" />
+							</h:outputFormat>
+							<h:outputText value="Sexo " />
+							<h:outputText value="#{lista.sexo}" />
+							<h:outputText value="RG " />
+							<h:outputText value="#{lista.RG}" />
+							<h:outputText value="CPF " />
+							<h:outputText value="#{lista.CPF}" />
+							<h:outputText value="Adimplente " />
+							<h:outputText value="Sim" rendered="#{lista.adimplente}" />
+							<h:outputText value="Não" rendered="#{not lista.adimplente}" />
+							<h:outputText value="Situação " />
+							<h:outputText value="Ativo" rendered="#{lista.status}" />
+							<h:outputText value="Inativo" rendered="#{not lista.status}" />
+							<h:outputText value="E-mail " />
+							<h:outputText value="#{lista.email}" />
+							<h:outputText value="Telefone " />
+							<h:outputText value="#{lista.telefone}" />
+							<h:outputText value="Endereço " />
+							<h:outputText
+								value="#{lista.logradouro.nome} 
 											 #{lista.numero} 
 											 #{lista.logradouro.bairro.nome}
 											 #{lista.logradouro.bairro.municipio.nome}
 											 #{lista.logradouro.bairro.municipio.uf.nome}
 											 #{lista.complemento}
 											 #{lista.logradouro.CEP}" />
-						<h:outputText value="Data de ingresso " />
-						<h:outputFormat value="{0, date, dd/MM/yyyy}">
-							<f:param value="#{lista.dataIngresso}" />
-						</h:outputFormat>
-						<h:outputText value="Data de saida " />
-						<h:outputFormat value="{0, date, dd/MM/yyyy}">
-							<f:param value="#{lista.dataSaida}" />
-						</h:outputFormat>
-						<h:outputText value="Alunos" />
+							<h:outputText value="Data de ingresso " />
+							<h:outputFormat value="{0, date, dd/MM/yyyy}">
+								<f:param value="#{lista.dataIngresso}" />
+							</h:outputFormat>
+							<h:outputText value="Data de saida " />
+							<h:outputFormat value="{0, date, dd/MM/yyyy}"
+								rendered="#{!empty lista.dataSaida}">
+								<f:param value="#{lista.dataSaida}" />
+							</h:outputFormat>
+							<h:outputText value="Não definida"
+								rendered="#{lista.dataSaida eq null}" />
+							<h:outputText value="Alunos" />
 							<p:dataList value="#{lista.alunos}" var="aluno"
 								emptyMessage="Nenhuma aluno atribuido">
 	            				#{aluno.nome} #{aluno.sobrenome}  
 	        				</p:dataList>
 
 						</p:panelGrid>
-				</p:rowExpansion>
-				<p:column style="width:60px">
-					<p:commandButton update=":formAlterar" oncomplete="PF('dialogAlterar').show();"	 icon="ui-icon-pencil" id="botaoAlterar">
-						<f:setPropertyActionListener
-							target="#{ResponsavelBean.responsavel}" value="#{lista}" />
-					</p:commandButton>
-					<p:tooltip id="toolTipAlterar" for="botaoAlterar" value="Alterar cadastro do responsável" escape="false" />
-					
-					<p:commandButton 
-						actionListener="#{ResponsavelBean.excluir(lista)}" id="botaoExcluir"
-						update=":formPrincipal:tabelaResponsavel"
-						icon="ui-icon-trash">
-						<p:confirm header="Excluir Responsavel" message="Deseja excluir?"
-							icon="ui-icon-alert" />
-					</p:commandButton>
-					<p:tooltip id="toolTipExcluir" for="botaoExcluir" value="Excluir responsável" escape="false" />
-					
-					<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
-						<p:commandButton value="Sim" type="button"
-							styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
-						<p:commandButton value="Não" type="button"
-							styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
-					</p:confirmDialog>
-				</p:column>
-				<f:facet name="footer"> #{fn:length(ResponsavelBean.responsavels)} responsaveis cadastrado(s)</f:facet>
-			</p:dataTable>
-		</h:form>
-	</div>	
-		
-		
-		<p:dialog header="Formulario de Cadastro do Responsável" widgetVar="dialogCadastrar" modal="true" resizable="true" id="formCad" appendTo="@(body)" closeOnEscape="true" closable="true" maximizable="true"   >
+					</p:rowExpansion>
+					<p:column style="width:60px">
+						<p:commandButton update=":formAlterar"
+							oncomplete="PF('dialogAlterar').show();" icon="ui-icon-pencil"
+							id="botaoAlterar">
+							<f:setPropertyActionListener
+								target="#{ResponsavelBean.responsavel}" value="#{lista}" />
+						</p:commandButton>
+						<p:tooltip id="toolTipAlterar" for="botaoAlterar"
+							value="Alterar cadastro do responsável" escape="false" />
+
+						<p:commandButton
+							actionListener="#{ResponsavelBean.excluir(lista)}"
+							id="botaoExcluir" update=":formPrincipal:tabelaResponsavel"
+							icon="ui-icon-trash">
+							<p:confirm header="Excluir Responsavel" message="Deseja excluir?"
+								icon="ui-icon-alert" />
+						</p:commandButton>
+						<p:tooltip id="toolTipExcluir" for="botaoExcluir"
+							value="Excluir responsável" escape="false" />
+
+						<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+							<p:commandButton value="Sim" type="button"
+								styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+							<p:commandButton value="Não" type="button"
+								styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+						</p:confirmDialog>
+					</p:column>
+					<f:facet name="footer"> #{fn:length(ResponsavelBean.responsavels)} responsaveis cadastrado(s)</f:facet>
+				</p:dataTable>
+			</h:form>
+		</div>
+
+
+		<p:dialog header="Formulario de Cadastro do Responsável"
+			widgetVar="dialogCadastrar" modal="true" resizable="true"
+			id="formCad" appendTo="@(body)" closeOnEscape="true" closable="true"
+			maximizable="true">
 			<p:growl id="growl" showDetail="true" life="4000" />
 			<h:form id="formCadastrar" styleClass="formCadastrar">
 				<p:focus context="@form" />
-				<h:outputText value="Campos obrigatórios * " style="font-size: 10px !important; top: 5px !important 	" />
-				
+				<h:outputText value="Campos obrigatórios * "
+					style="font-size: 10px !important; top: 5px !important 	" />
+
 				<h3>Dados de Cadastro</h3>
-					<p:separator/>
-				
+				<p:separator />
+
 				<p:panelGrid id="panelCadastrar" columns="6">
 
 					<p:outputLabel for="nome" value="Nome:" />
-					<p:inputText value="#{ResponsavelBean.responsavel.nome}"  size="30" required="true" label="nome" id="nome"	requiredMessage="Nome não deve estar vazio!">
+					<p:inputText value="#{ResponsavelBean.responsavel.nome}" size="30"
+						required="true" label="nome" id="nome"
+						requiredMessage="Nome não deve estar vazio!">
 						<f:validateLength minimum="3" />
 					</p:inputText>
-					
+
 					<p:outputLabel for="sobrenome" value="Sobrenome:" />
-					<p:inputText value="#{ResponsavelBean.responsavel.sobrenome}"  size="30" required="true" label="sobrenome" id="sobrenome"	requiredMessage="Sobrenome não deve estar vazio!">
+					<p:inputText value="#{ResponsavelBean.responsavel.sobrenome}"
+						size="30" required="true" label="sobrenome" id="sobrenome"
+						requiredMessage="Sobrenome não deve estar vazio!">
 						<f:validateLength minimum="3" />
 					</p:inputText>
 
 					<p:outputLabel for="sexo" value="Sexo:" />
-						<p:selectOneMenu id="sexo" value="#{ResponsavelBean.responsavel.sexo}"
-							style="width:150px" required="true" label="Sexo"
-							requiredMessage="Sexo não deve estar vazio!">
-							<f:selectItem itemLabel="-- Selecione --" noSelectionOption="true" />
-							<f:selectItem itemLabel="Masculino" itemValue="Masculino" />
-							<f:selectItem itemLabel="Feminino" itemValue="Feminino" />
-							<f:validateLength minimum="3" />
-						</p:selectOneMenu>
+					<p:selectOneMenu id="sexo"
+						value="#{ResponsavelBean.responsavel.sexo}" style="width:150px"
+						required="true" label="Sexo"
+						requiredMessage="Sexo não deve estar vazio!">
+						<f:selectItem itemLabel="-- Selecione --" noSelectionOption="true" />
+						<f:selectItem itemLabel="Masculino" itemValue="Masculino" />
+						<f:selectItem itemLabel="Feminino" itemValue="Feminino" />
+						<f:validateLength minimum="3" />
+					</p:selectOneMenu>
 
 
 					<p:outputLabel for="datanasc" value="Data de nascimento:" />
-					<p:inputMask value="#{ResponsavelBean.responsavel.datanasc}" mask="99/99/9999" placeholder="dd/mm/aaaa"  size="10" required="true"	label="datanasc" id="datanasc"
+					<p:inputMask value="#{ResponsavelBean.responsavel.datanasc}"
+						mask="99/99/9999" placeholder="dd/mm/aaaa" size="10"
+						required="true" label="datanasc" id="datanasc"
 						requiredMessage="Data de nascimento deve ser informada!">
 						<f:converter converterId="javax.faces.DateTime" />
 						<f:convertDateTime pattern="dd/MM/yyyy" timeZone="GMT-3" />
 					</p:inputMask>
-					
+
 					<p:outputLabel for="cpf" value="CPF:" />
-					<p:inputMask id="cpf" value="#{ResponsavelBean.responsavel.CPF}" mask="999.999.999-99"  size="30" required="true" label="CPF" requiredMessage="CPF deve ser informado!" />
+					<p:inputMask id="cpf" value="#{ResponsavelBean.responsavel.CPF}"
+						mask="999.999.999-99" size="30" required="true" label="CPF"
+						requiredMessage="CPF deve ser informado!" />
 
 					<p:outputLabel for="rg" value="RG:" />
-					<p:inputMask id="rg" value="#{ResponsavelBean.responsavel.RG}"	mask="99.999.999-9"  size="30" required="true" label="RG"	requiredMessage="RG deve ser informado!" />
+					<p:inputMask id="rg" value="#{ResponsavelBean.responsavel.RG}"
+						mask="99.999.999-9" size="30" required="true" label="RG"
+						requiredMessage="RG deve ser informado!" />
 
 					<p:outputLabel for="telefone" value="Telefone:" />
-					<p:inputMask value="#{ResponsavelBean.responsavel.telefone}" mask="(99) 99999-9999" size="30" required="true" label="Telefone" id="telefone" />
-					
+					<p:inputMask value="#{ResponsavelBean.responsavel.telefone}"
+						mask="(99) 99999-9999" size="30" required="true" label="Telefone"
+						id="telefone" />
+
 					<p:outputLabel for="dataIngresso" value="Data de ingresso:" />
-					<p:inputMask id="dataIngresso" 	value="#{ResponsavelBean.responsavel.dataIngresso}"  size="10"  mask="99/99/9999" placeholder="dd/mm/aaaa" required="true"
-						label="Data de ingresso" requiredMessage="Data de ingresso deve ser informada!">
+					<p:inputMask id="dataIngresso"
+						value="#{ResponsavelBean.responsavel.dataIngresso}" size="10"
+						mask="99/99/9999" placeholder="dd/mm/aaaa" required="true"
+						label="Data de ingresso"
+						requiredMessage="Data de ingresso deve ser informada!">
 						<f:converter converterId="javax.faces.DateTime" />
 						<f:convertDateTime pattern="dd/MM/yyyy" timeZone="GMT-3" />
 					</p:inputMask>
-					
+
 					<p:outputLabel for="email" value="Email:" />
-					<p:inputText id="email" required="true" size="40" requiredMessage="Insira o endereço de email"	validatorMessage="Formato de email invalido"
+					<p:inputText id="email" required="true" size="40"
+						requiredMessage="Insira o endereço de email"
+						validatorMessage="Formato de email invalido"
 						value="#{ResponsavelBean.responsavel.email}" label="Email">
 						<f:validateRegex
 							pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
 					</p:inputText>
-					
+
 					<p:outputLabel for="login" value="Login:" />
-								<p:inputText value="#{ResponsavelBean.responsavel.login}" size="30" required="true" label="Login" id="login" requiredMessage="Login não deve estar vazio!">
-									<f:validateLength minimum="6" />
-								</p:inputText>
-			
-								<p:outputLabel for="senha" value="Senha:" />
-								<p:password value="#{ResponsavelBean.responsavel.senha}" size="30" required="true" label="Senha" id="senha"	requiredMessage="Senha não deve estar vazio!">
-									<f:validateLength minimum="8" />
-								</p:password>
-					
-					<p:commandButton value="Incluir foto" type="button" onclick="PF('dialogIncluirFoto').show();" icon="ui-icon-image" />
-					
+					<p:inputText value="#{ResponsavelBean.responsavel.login}" size="30"
+						required="true" label="Login" id="login"
+						requiredMessage="Login não deve estar vazio!">
+						<f:validateLength minimum="6" />
+					</p:inputText>
+
+					<p:outputLabel for="senha" value="Senha:" />
+					<p:password value="#{ResponsavelBean.responsavel.senha}" size="30"
+						required="true" label="Senha" id="senha"
+						requiredMessage="Senha não deve estar vazio!">
+						<f:validateLength minimum="8" />
+					</p:password>
+
+					<p:commandButton value="Incluir foto" type="button"
+						onclick="PF('dialogIncluirFoto').show();" icon="ui-icon-image" />
+
 				</p:panelGrid>
 				<h3>Endereço</h3>
-					<p:separator/>
-					
-					<h:panelGrid columns="6" id="panelGridLogradouro">
-					
-							<p:outputLabel for="cep" value="CEP:" />
-							<p:autoComplete value="#{ResponsavelBean.responsavel.logradouro}" size="30" completeMethod="#{LogradouroBean.completeLogradouro()}"
-								var="logradouro" itemLabel="#{logradouro.CEP}" 	itemValue="#{logradouro}" forceSelection="true" required="true"
-								requiredMessage="CEP deve ser informado!" label="CEP" id="cep">
-								<p:ajax event="itemSelect"	listener="#{LogradouroBean.completeLogradouro()}" update="panelGridLogradouro" />
-							</p:autoComplete>
-							
-							<p:outputLabel value="Endereço:" />
-							<p:inputText value="#{ResponsavelBean.responsavel.logradouro.nome}"  size="40" />
-							
-							<p:outputLabel value="Bairro:" />
-							<p:inputText value="#{ResponsavelBean.responsavel.logradouro.bairro.nome}" size="30" />
-							
-							<p:outputLabel value="Municipio:" />
-							<p:inputText value="#{ResponsavelBean.responsavel.logradouro.bairro.municipio.nome}" size="30" />
-							
-							<p:outputLabel value="Estado:" />
-							<p:inputText	value="#{ResponsavelBean.responsavel.logradouro.bairro.municipio.uf.nome}" size="30" />
+				<p:separator />
 
-							<p:outputLabel for="numero" value="Número:" />
-							<p:inputText value="#{ResponsavelBean.responsavel.numero}" 	required="true" label="Número" size="5" id="numero"	requiredMessage="Número deve ser informado!" />
+				<h:panelGrid columns="6" id="panelGridLogradouro">
 
-							<p:outputLabel for="complemento" value="Complemento:" />
-							<p:inputText value="#{ResponsavelBean.responsavel.complemento}"	size="30" required="true" label="Complemento" id="complemento"
-								requiredMessage="Complemento deve ser informado!" />
-						</h:panelGrid>
-						
-						<div id="botoes">
-							<p:commandButton value="Salvar" id="withIcon" actionListener="#{ResponsavelBean.cadastrar}" icon="ui-icon-disk" update=":formPrincipal:tabelaResponsavel @form growl"
-								oncomplete="closeDialogIfSucess(xhr, status, args, 'dialogCadastrar','formCad')" onsuccess="PF('dialogCadastrar').hide();" />
-							
-							<p:commandButton value="Limpar" update="@form " process="@this" icon="ui-icon-close">
-								<p:resetInput target="panelCadastrar panelGridLogradouro" />
-							</p:commandButton>
-						</div>
+					<p:outputLabel for="cep" value="CEP:" />
+					<p:autoComplete value="#{ResponsavelBean.responsavel.logradouro}"
+						size="30" completeMethod="#{LogradouroBean.completeLogradouro()}"
+						var="logradouro" itemLabel="#{logradouro.CEP}"
+						itemValue="#{logradouro}" forceSelection="true" required="true"
+						requiredMessage="CEP deve ser informado!" label="CEP" id="cep">
+						<p:ajax event="itemSelect"
+							listener="#{LogradouroBean.completeLogradouro()}"
+							update="panelGridLogradouro" />
+					</p:autoComplete>
+
+					<p:outputLabel value="Endereço:" />
+					<p:inputText value="#{ResponsavelBean.responsavel.logradouro.nome}"
+						size="40" />
+
+					<p:outputLabel value="Bairro:" />
+					<p:inputText
+						value="#{ResponsavelBean.responsavel.logradouro.bairro.nome}"
+						size="30" />
+
+					<p:outputLabel value="Municipio:" />
+					<p:inputText
+						value="#{ResponsavelBean.responsavel.logradouro.bairro.municipio.nome}"
+						size="30" />
+
+					<p:outputLabel value="Estado:" />
+					<p:inputText
+						value="#{ResponsavelBean.responsavel.logradouro.bairro.municipio.uf.nome}"
+						size="30" />
+
+					<p:outputLabel for="numero" value="Número:" />
+					<p:inputText value="#{ResponsavelBean.responsavel.numero}"
+						required="true" label="Número" size="5" id="numero"
+						requiredMessage="Número deve ser informado!" />
+
+					<p:outputLabel for="complemento" value="Complemento:" />
+					<p:inputText value="#{ResponsavelBean.responsavel.complemento}"
+						size="30" required="true" label="Complemento" id="complemento"
+						requiredMessage="Complemento deve ser informado!" />
+				</h:panelGrid>
+
+				<div id="botoes">
+					<p:commandButton value="Salvar" id="withIcon"
+						actionListener="#{ResponsavelBean.cadastrar}" icon="ui-icon-disk"
+						update=":formPrincipal:tabelaResponsavel @form growl"
+						oncomplete="closeDialogIfSucess(xhr, status, args, 'dialogCadastrar','formCad')"
+						onsuccess="PF('dialogCadastrar').hide();" />
+
+					<p:commandButton value="Limpar" update="@form " process="@this"
+						icon="ui-icon-close">
+						<p:resetInput target="panelCadastrar panelGridLogradouro" />
+					</p:commandButton>
+				</div>
 			</h:form>
 		</p:dialog>
-		
-		<p:dialog header="Incluir Foto" widgetVar="dialogIncluirFoto" modal="true" resizable="true" id="formCadFoto" appendTo="@(body)">
+
+		<p:dialog header="Incluir Foto" widgetVar="dialogIncluirFoto"
+			modal="true" resizable="true" id="formCadFoto" appendTo="@(body)">
 			<h:form id="IncluirFoto" styleClass="IncluirFoto">
-					<p:focus context="@form" />
-					<h4>Selecione uma foto para anexar ao cadastro :</h4>
-					<p:separator/>
-					<p:fileUpload fileUploadListener="#{ResponsavelBean.uploadAction}"
+				<p:focus context="@form" />
+				<h4>Selecione uma foto para anexar ao cadastro :</h4>
+				<p:separator />
+				<p:fileUpload fileUploadListener="#{ResponsavelBean.uploadAction}"
 					size="50" mode="advanced" skinSimple="true" update="growl"
 					sizeLimit="2000000000" fileLimit="1"
-					allowTypes="/(\.|\/)(gif|jpe?g|png)$/" 
-					label="Selecionar"
-					uploadLabel="Enviar"
-					cancelLabel="Cancelar"
-					id="IncluirAnexo"
+					allowTypes="/(\.|\/)(gif|jpe?g|png)$/" label="Selecionar"
+					uploadLabel="Enviar" cancelLabel="Cancelar" id="IncluirAnexo"
 					invalidSizeMessage="Limite excedido: Não possivel o envio"
 					invalidFileMessage="Formato de arquivo não permitido"
 					dragDropSupport="true">
@@ -263,131 +315,179 @@
 				</p:fileUpload>
 			</h:form>
 		</p:dialog>
-		
-		
 
-	<p:dialog header="Alterar" widgetVar="dialogAlterar" modal="true" resizable="true" id="formAlt" appendTo="@(body)">
+
+
+		<p:dialog header="Alterar" widgetVar="dialogAlterar" modal="true"
+			resizable="true" id="formAlt" appendTo="@(body)">
 			<h:form id="formAlterar" styleClass="formAlterar">
 				<p:focus context="@form" />
 				<p:growl id="growl" showDetail="true" life="4000" />
-				<h:outputText value="Campos obrigatórios * " style="font-size: 10px !important; top: 5px !important" />
-				
+				<h:outputText value="Campos obrigatórios * "
+					style="font-size: 10px !important; top: 5px !important" />
+
 				<h3>Dados de Cadastro</h3>
-					<p:separator/>
-					<p:panelGrid id="panelAlterar" columns="6">
-				
+				<p:separator />
+				<p:panelGrid id="panelAlterar" columns="6">
+
 					<p:outputLabel for="nome" value="Nome:" />
-					<p:inputText value="#{ResponsavelBean.responsavel.nome}" required="true" size="30" label="nome" id="nome"	requiredMessage="Nome não deve estar vazio!">
+					<p:inputText value="#{ResponsavelBean.responsavel.nome}"
+						required="true" size="30" label="nome" id="nome"
+						requiredMessage="Nome não deve estar vazio!">
 						<f:validateLength minimum="3" />
 					</p:inputText>
-					
+
 					<p:outputLabel for="sobrenome" value="Sobrenome:" />
-					<p:inputText value="#{ResponsavelBean.responsavel.sobrenome}" required="true" size="30" label="sobrenome" id="sobrenome"	requiredMessage="Sobrenome não deve estar vazio!">
+					<p:inputText value="#{ResponsavelBean.responsavel.sobrenome}"
+						required="true" size="30" label="sobrenome" id="sobrenome"
+						requiredMessage="Sobrenome não deve estar vazio!">
 						<f:validateLength minimum="3" />
 					</p:inputText>
-				
+
 					<p:outputLabel for="sexo" value="Sexo:" />
-					<p:selectOneMenu id="sexo" value="#{ResponsavelBean.responsavel.sexo}" style="width:150px" required="true" label="Sexo">
+					<p:selectOneMenu id="sexo"
+						value="#{ResponsavelBean.responsavel.sexo}" style="width:150px"
+						required="true" label="Sexo">
 						<f:selectItem itemLabel="Masculino" itemValue="Masculino" />
 						<f:selectItem itemLabel="Feminino" itemValue="Feminino" />
 					</p:selectOneMenu>
-					
+
 					<p:outputLabel for="datanasc" value="Data de nascimento:" />
-					<p:inputMask value="#{ResponsavelBean.responsavel.datanasc}" mask="99/99/9999" size="30" placeholder="dd/mm/aaaa" required="true"	label="datanasc" id="datanasc"
+					<p:inputMask value="#{ResponsavelBean.responsavel.datanasc}"
+						mask="99/99/9999" size="30" placeholder="dd/mm/aaaa"
+						required="true" label="datanasc" id="datanasc"
 						requiredMessage="Data de nascimento deve ser informada!">
 						<f:converter converterId="javax.faces.DateTime" />
 						<f:convertDateTime pattern="dd/MM/yyyy" timeZone="GMT-3" />
 					</p:inputMask>
 
-					
+
 					<p:outputLabel for="cpf" value="CPF:" />
-					<p:inputMask id="cpf" value="#{ResponsavelBean.responsavel.CPF}" mask="999.999.999-99" size="30" required="true" label="CPF"	requiredMessage="CPF deve ser informado!" />
+					<p:inputMask id="cpf" value="#{ResponsavelBean.responsavel.CPF}"
+						mask="999.999.999-99" size="30" required="true" label="CPF"
+						requiredMessage="CPF deve ser informado!" />
 
 					<p:outputLabel for="rg" value="RG:" />
-					<p:inputMask id="rg" value="#{ResponsavelBean.responsavel.RG}" 	mask="99.999.999-9" size="30" required="true" label="RG"	requiredMessage="RG deve ser informado!" />
+					<p:inputMask id="rg" value="#{ResponsavelBean.responsavel.RG}"
+						mask="99.999.999-9" size="30" required="true" label="RG"
+						requiredMessage="RG deve ser informado!" />
 
 					<p:outputLabel for="telefone" value="Telefone:" />
-					<p:inputMask value="#{ResponsavelBean.responsavel.telefone}" mask="(99) 99999-9999" size="30" required="true" label="Telefone" id="telefone" />
-					
+					<p:inputMask value="#{ResponsavelBean.responsavel.telefone}"
+						mask="(99) 99999-9999" size="30" required="true" label="Telefone"
+						id="telefone" />
+
 					<p:outputLabel for="dataIngresso" value="Data de ingresso:" />
-					<p:inputMask id="dataIngresso" 	value="#{ResponsavelBean.responsavel.dataIngresso}" size="30"	mask="99/99/9999" placeholder="dd/mm/aaaa" required="true"
-						label="Data de ingresso"	requiredMessage="Data de ingresso deve ser informada!">
+					<p:inputMask id="dataIngresso"
+						value="#{ResponsavelBean.responsavel.dataIngresso}" size="30"
+						mask="99/99/9999" placeholder="dd/mm/aaaa" required="true"
+						label="Data de ingresso"
+						requiredMessage="Data de ingresso deve ser informada!">
 						<f:converter converterId="javax.faces.DateTime" />
 						<f:convertDateTime pattern="dd/MM/yyyy" timeZone="GMT-3" />
 					</p:inputMask>
-					
+
 					<p:outputLabel for="dataSaida" value="Data de saída:" />
-					<p:inputMask id="dataSaida"	value="#{ResponsavelBean.responsavel.dataSaida}" size="30" mask="99/99/9999"	placeholder="dd/mm/aaaa" required="false" label="Data de saída">
+					<p:inputMask id="dataSaida"
+						value="#{ResponsavelBean.responsavel.dataSaida}" size="30"
+						mask="99/99/9999" placeholder="dd/mm/aaaa" required="false"
+						label="Data de saída">
 						<f:converter converterId="javax.faces.DateTime" />
 						<f:convertDateTime pattern="dd/MM/yyyy" timeZone="GMT-3" />
 					</p:inputMask>
-					
+
 					<p:outputLabel for="adimplente" value="Adimplente:" />
-					<p:selectOneMenu id="adimplente" value="#{ResponsavelBean.responsavel.adimplente}" size="30" style="width:150px" required="true" label="Adimplente">
+					<p:selectOneMenu id="adimplente"
+						value="#{ResponsavelBean.responsavel.adimplente}" size="30"
+						style="width:150px" required="true" label="Adimplente">
 						<f:selectItem itemLabel="Não" itemValue="#{false}" />
 						<f:selectItem itemLabel="Sim" itemValue="#{true}" />
 					</p:selectOneMenu>
-					
+
 					<p:outputLabel for="email" value="Email:" />
-					<p:inputText id="email" required="true" size="40" requiredMessage="Insira o endereço de email"	validatorMessage="Formato de email invalido"
+					<p:inputText id="email" required="true" size="40"
+						requiredMessage="Insira o endereço de email"
+						validatorMessage="Formato de email invalido"
 						value="#{ResponsavelBean.responsavel.email}" label="Email">
 						<f:validateRegex
 							pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
 					</p:inputText>
 
 					<p:outputLabel for="status" value="Situação:" />
-					<p:selectOneMenu id="status" value="#{ResponsavelBean.responsavel.status}" size="30" style="width:150px"	required="true" label="Status">
+					<p:selectOneMenu id="status"
+						value="#{ResponsavelBean.responsavel.status}" size="30"
+						style="width:150px" required="true" label="Status">
 						<f:selectItem itemLabel="Inativo" itemValue="#{false}" />
 						<f:selectItem itemLabel="Ativo" itemValue="#{true}" />
 					</p:selectOneMenu>
 
-					
+
 					<p:outputLabel for="login" value="Login:" />
-					<p:inputText value="#{ResponsavelBean.responsavel.login}"  size="30" required="true" label="Login" id="login"	requiredMessage="Login não deve estar vazio!">
+					<p:inputText value="#{ResponsavelBean.responsavel.login}" size="30"
+						required="true" label="Login" id="login"
+						requiredMessage="Login não deve estar vazio!">
 						<f:validateLength minimum="6" />
 					</p:inputText>
-					
+
 				</p:panelGrid>
 				<h3>Endereço</h3>
-						<p:separator />
-						
-						<h:panelGrid columns="6" id="panelGridAltLogradouro">
-					
-							<p:outputLabel for="cep" value="CEP:" />
-							<p:autoComplete value="#{ResponsavelBean.responsavel.logradouro}" size="30" completeMethod="#{LogradouroBean.completeLogradouro()}"
-								var="logradouro" itemLabel="#{logradouro.CEP}" 	itemValue="#{logradouro}" forceSelection="true" required="true"
-								requiredMessage="CEP deve ser informado!" label="CEP" id="cep">
-								<p:ajax event="itemSelect"	listener="#{LogradouroBean.completeLogradouro()}"	update="panelGridAltLogradouro" />
-							</p:autoComplete>
-							
-							<p:outputLabel value="Endereço:" />
-							<p:inputText value="#{ResponsavelBean.responsavel.logradouro.nome}" size="40" readonly="true" />
-							
-							<p:outputLabel value="Bairro:" />
-							<p:inputText value="#{ResponsavelBean.responsavel.logradouro.bairro.nome}" size="30"	readonly="true" />
-							
-							<p:outputLabel value="Municipio:" />
-							<p:inputText value="#{ResponsavelBean.responsavel.logradouro.bairro.municipio.nome}"  size="30" readonly="true" />
-							
-							<p:outputLabel value="Estado:" />
-							<p:inputText	value="#{ResponsavelBean.responsavel.logradouro.bairro.municipio.uf.nome}" size="30"	readonly="true" />
+				<p:separator />
 
-							<p:outputLabel for="numero" value="Número:" />
-							<p:inputText value="#{ResponsavelBean.responsavel.numero}" 	 size="30" required="true" label="Número" id="numero"	requiredMessage="Número deve ser informado!" />
+				<h:panelGrid columns="6" id="panelGridAltLogradouro">
 
-							<p:outputLabel for="complemento" value="Complemento:" />
-							<p:inputText value="#{ResponsavelBean.responsavel.complemento}"	size="30" required="true" label="Complemento" id="complemento" 	requiredMessage="Complemento deve ser informado!" />
-						
-						</h:panelGrid>
-						
-						<div id="botoes">
-							<p:commandButton value="Salvar" id="withIcon" actionListener="#{ResponsavelBean.alterar}" icon="ui-icon-disk"	update=":formPrincipal:tabelaResponsavel @form growl"
-								oncomplete="closeDialogIfSucess(xhr, status, args, 'dialogAlterar','formAlt')" 	onsuccess="PF('dialogAlterar').hide();" />
-						</div>		
-				
+					<p:outputLabel for="cep" value="CEP:" />
+					<p:autoComplete value="#{ResponsavelBean.responsavel.logradouro}"
+						size="30" completeMethod="#{LogradouroBean.completeLogradouro()}"
+						var="logradouro" itemLabel="#{logradouro.CEP}"
+						itemValue="#{logradouro}" forceSelection="true" required="true"
+						requiredMessage="CEP deve ser informado!" label="CEP" id="cep">
+						<p:ajax event="itemSelect"
+							listener="#{LogradouroBean.completeLogradouro()}"
+							update="panelGridAltLogradouro" />
+					</p:autoComplete>
+
+					<p:outputLabel value="Endereço:" />
+					<p:inputText value="#{ResponsavelBean.responsavel.logradouro.nome}"
+						size="40" readonly="true" />
+
+					<p:outputLabel value="Bairro:" />
+					<p:inputText
+						value="#{ResponsavelBean.responsavel.logradouro.bairro.nome}"
+						size="30" readonly="true" />
+
+					<p:outputLabel value="Municipio:" />
+					<p:inputText
+						value="#{ResponsavelBean.responsavel.logradouro.bairro.municipio.nome}"
+						size="30" readonly="true" />
+
+					<p:outputLabel value="Estado:" />
+					<p:inputText
+						value="#{ResponsavelBean.responsavel.logradouro.bairro.municipio.uf.nome}"
+						size="30" readonly="true" />
+
+					<p:outputLabel for="numero" value="Número:" />
+					<p:inputText value="#{ResponsavelBean.responsavel.numero}"
+						size="30" required="true" label="Número" id="numero"
+						requiredMessage="Número deve ser informado!" />
+
+					<p:outputLabel for="complemento" value="Complemento:" />
+					<p:inputText value="#{ResponsavelBean.responsavel.complemento}"
+						size="30" required="true" label="Complemento" id="complemento"
+						requiredMessage="Complemento deve ser informado!" />
+
+				</h:panelGrid>
+
+				<div id="botoes">
+					<p:commandButton value="Salvar" id="withIcon"
+						actionListener="#{ResponsavelBean.alterar}" icon="ui-icon-disk"
+						update=":formPrincipal:tabelaResponsavel @form growl"
+						oncomplete="closeDialogIfSucess(xhr, status, args, 'dialogAlterar','formAlt')"
+						onsuccess="PF('dialogAlterar').hide();" />
+				</div>
+
 			</h:form>
 		</p:dialog>
-		</ui:define>
-		</ui:decorate>
-		
+	</ui:define>
+</ui:decorate>
+
 </html>
