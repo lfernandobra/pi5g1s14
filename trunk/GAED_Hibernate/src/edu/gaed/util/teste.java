@@ -12,7 +12,6 @@ public class teste {
  
 		//realizando operação para salvar no banco
 		session.beginTransaction();
-		
 		session.getTransaction().commit();
 		session.close();
 	}

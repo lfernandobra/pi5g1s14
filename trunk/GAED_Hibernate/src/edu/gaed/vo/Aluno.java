@@ -27,13 +27,13 @@ public class Aluno extends Usuario{
 	private String escolaAnterior;
 	
 	@Column(name="serieAnterior")
-	private String serieAnterior;
+	private Serie serieAnterior;
 	
 	@Column(name="escolaAtual")
 	private String escolaAtual;
 	
 	@Column(name="serieAtual")
-	private String serieAtual;
+	private Serie serieAtual;
 		
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "id_turma")
@@ -55,14 +55,6 @@ public class Aluno extends Usuario{
 		this.escolaAnterior = escolaAnterior;
 	}
 
-	public String getSerieAnterior() {
-		return serieAnterior;
-	}
-
-	public void setSerieAnterior(String serieAnterior) {
-		this.serieAnterior = serieAnterior;
-	}
-
 	public String getEscolaAtual() {
 		return escolaAtual;
 	}
@@ -71,11 +63,19 @@ public class Aluno extends Usuario{
 		this.escolaAtual = escolaAtual;
 	}
 
-	public String getSerieAtual() {
+	public Serie getSerieAnterior() {
+		return serieAnterior;
+	}
+
+	public void setSerieAnterior(Serie serieAnterior) {
+		this.serieAnterior = serieAnterior;
+	}
+
+	public Serie getSerieAtual() {
 		return serieAtual;
 	}
 
-	public void setSerieAtual(String serieAtual) {
+	public void setSerieAtual(Serie serieAtual) {
 		this.serieAtual = serieAtual;
 	}
 

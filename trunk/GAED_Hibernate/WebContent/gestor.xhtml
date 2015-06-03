@@ -85,9 +85,10 @@
 									<f:param value="#{lista.dataIngresso}" />
 								</h:outputFormat>
 								<h:outputText value="Data de saida " />
-								<h:outputFormat value="{0, date, dd/MM/yyyy}">
+								<h:outputFormat value="{0, date, dd/MM/yyyy}" rendered="#{!empty lista.dataSaida}" >
 									<f:param value="#{lista.dataSaida}" />
 								</h:outputFormat>
+								<h:outputText value="Não definida" rendered="#{lista.dataSaida eq null}"/>
 								
 								<h:outputText value="Formação acadêmica " />
 								<h:outputText value="#{lista.formacaoAcad}" />
