@@ -293,45 +293,48 @@
 			<div id="divResponsavel">
 				<h:form id="formTarefaResponsavel"
 					rendered="#{LoginBean.usuario.perfil.responsavel}">
-					<p:dataTable var="tarefa"
-						value="#{TarefaBean.listarTarefaResponsavel(LoginBean.responsavel)}"
+					<p:dataTable var="aluno"
+						value="#{LoginBean.responsavel.alunos}"
 						id="tabelaTarefaResponsavel" resizableColumns="true" reflow="true"
-						rows="5" emptyMessage="Nenhum registro encontrado"
+						rows="5" emptyMessage="Nenhum aluno atribuido"
 						paginator="true" paginatorPosition="bottom"
 						styleClass="dataTablePrincipal">
-						<f:facet name="header">Lista de Tarefas </f:facet>
-						<p:column style="width:10px">
-							<p:rowToggler />
-						</p:column>
-						<p:column headerText="ID" sortBy="#{tarefa.id}" style="width:130px"
-							filterBy="#{tarefa.id}" >
-							<h:outputText value="#{tarefa.id}" />
-						</p:column>
-						<p:column headerText="Disciplina"
-							sortBy="#{tarefa.disciplina.nome}"
-							filterBy="#{tarefa.disciplina.nome}" >
-							<h:outputText value="#{tarefa.disciplina.nome}" />
-						</p:column>
-						<p:rowExpansion>
-							<h3>Informações da tarefa</h3>
-							<p:panelGrid columns="2" columnClasses="label,value" styleClass="gridDataTable">
-								<h:outputText value="Turmas:" style="font-weight: bold;"/>
-								<p:dataList value="#{tarefa.turmas}" var="turma"
-											emptyMessage="Nenhuma turma atribuida" type="definition">
-	            							Série : #{turma.serie.serie} #{turma.nome} | Periodo : #{turma.periodo.periodo}
-	        					</p:dataList>
-								<h:outputText value="Data inicio: " style="font-weight: bold;" />
-								<h:outputFormat value="{0, date, dd/MM/yyyy}">
+						<f:facet name="header">Tarefas atribuidas a seus filhos</f:facet>
+							<p:columnGroup type="header">
+								<p:row>
+									<p:column rowspan="2" headerText="Aluno" />
+									<p:column colspan="4" headerText="" />
+								</p:row>
+								<p:row>
+									<p:column headerText="ID" />
+									<p:column headerText="Disciplina" />
+									<p:column headerText="Descrição" />
+									<p:column headerText="Download" />
+								</p:row>
+							</p:columnGroup>
+							
+							<p:subTable var="tarefa" value="#{TarefaBean.listarTarefaAluno(aluno)}">
+								<f:facet name="header">
+									<h:outputText value="#{aluno.nome} #{aluno.sobrenome}" />
+								</f:facet>
+								<p:column>
+									<h:outputFormat value="{0, date, dd/MM/yyyy}">
 									<f:param value="#{tarefa.inicio}" />
-								</h:outputFormat>
-								<h:outputText value="Data final: " style="font-weight: bold;" />
-								<h:outputFormat value="{0, date, dd/MM/yyyy}">
+									</h:outputFormat> à
+									<h:outputFormat value="{0, date, dd/MM/yyyy}">
 									<f:param value="#{tarefa.fim}" />
-								</h:outputFormat>
-								<h:outputText value="Descrição: " style="font-weight: bold;"/>
-								<h:outputText value="#{tarefa.descricao}" />
-								<h:outputText value="Anexo: " style="font-weight: bold;" />
-								<h:form>
+									</h:outputFormat>
+								</p:column>
+								<p:column>
+									<h:outputText value="#{tarefa.id}" />
+								</p:column>
+								<p:column>
+									<h:outputText value="#{tarefa.disciplina.nome}" />
+								</p:column>
+								<p:column>
+									<h:outputText value="#{tarefa.descricao}" />
+								</p:column>
+								<p:column>
 									<h:inputHidden
 										value="#{AnexoBean.verAnexo(tarefa.anexo.anexo,tarefa.anexo.nome)}" />
 									<p:commandButton value="Download" ajax="false"
@@ -339,8 +342,14 @@
 										<p:fileDownload
 											value="#{AnexoBean.downloadFile(tarefa.anexo.nome)}" />
 									</p:commandButton>
-								</h:form>
-							</p:panelGrid>
+								</p:column>
+								<p:columnGroup type="footer">
+									
+								</p:columnGroup>
+							</p:subTable>
+
+							<p:rowExpansion>
+							
 						</p:rowExpansion>
 					</p:dataTable>
 				</h:form>

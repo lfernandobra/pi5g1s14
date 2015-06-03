@@ -1,8 +1,7 @@
 package edu.gaed.vo;
 
-import java.util.HashSet;
-import java.util.Set;
-
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
@@ -27,7 +26,7 @@ public class Responsavel extends Usuario{
 	private boolean adimplente;
 	
 	@OneToMany(fetch = FetchType.EAGER,cascade=CascadeType.ALL, mappedBy = "responsavel")
-	private Set<Aluno> alunos = new HashSet<Aluno>();
+	private List<Aluno> alunos = new ArrayList<Aluno>();
 	
 	public Responsavel() {
 		setPerfil(Perfil.RESPONSAVEL);
@@ -39,6 +38,14 @@ public class Responsavel extends Usuario{
 
 	public void setAdimplente(boolean adimplente) {
 		this.adimplente = adimplente;
+	}
+
+	public List<Aluno> getAlunos() {
+		return alunos;
+	}
+
+	public void setAlunos(List<Aluno> alunos) {
+		this.alunos = alunos;
 	}
 
 	@Override
@@ -69,12 +76,6 @@ public class Responsavel extends Usuario{
 				+ "]";
 	}
 
-	public Set<Aluno> getAlunos() {
-		return alunos;
-	}
-
-	public void setAlunos(Set<Aluno> alunos) {
-		this.alunos = alunos;
-	}	
+	
 	
 }
