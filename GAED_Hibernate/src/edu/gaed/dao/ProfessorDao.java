@@ -1,8 +1,10 @@
 package edu.gaed.dao;
 
 import java.util.List;
+
 import edu.gaed.vo.Professor;
-import org.hibernate.Criteria;
+
+import org.hibernate.Query;
 import org.hibernate.Session;
 
 import edu.gaed.util.HibernateUtil;
@@ -60,8 +62,12 @@ public class ProfessorDao {
 			session = HibernateUtil.getSessionFactory().openSession();
  
 			try{
-				Criteria cri = session.createCriteria(Professor.class);
-				return cri.list();
+				String hql = "select prof from Professor prof group by prof.id"; 
+				Query query = session.createQuery(hql);
+				
+				List results = query.list();
+				
+				return results;
 			}finally{
 				session.close();
  
