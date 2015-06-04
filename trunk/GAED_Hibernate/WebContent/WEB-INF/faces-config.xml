@@ -15,31 +15,7 @@
 		<managed-bean-class>edu.gaed.bean.LoginBean</managed-bean-class>
 		<managed-bean-scope>session</managed-bean-scope>
 	</managed-bean>
-	<managed-bean>
-		<managed-bean-name>UFBean</managed-bean-name>
-		<managed-bean-class>edu.gaed.bean.UFBean</managed-bean-class>
-		<managed-bean-scope>view</managed-bean-scope>
-	</managed-bean>
-	<managed-bean>
-		<managed-bean-name>MunicipioBean</managed-bean-name>
-		<managed-bean-class>edu.gaed.bean.MunicipioBean</managed-bean-class>
-		<managed-bean-scope>view</managed-bean-scope>
-	</managed-bean>
-	<managed-bean>
-		<managed-bean-name>LogradouroBean</managed-bean-name>
-		<managed-bean-class>edu.gaed.bean.LogradouroBean</managed-bean-class>
-		<managed-bean-scope>request</managed-bean-scope>
-	</managed-bean>
-	<managed-bean>
-		<managed-bean-name>DisciplinaBean</managed-bean-name>
-		<managed-bean-class>edu.gaed.bean.DisciplinaBean</managed-bean-class>
-		<managed-bean-scope>request</managed-bean-scope>
-	</managed-bean>
-	<managed-bean>
-		<managed-bean-name>ProfessorBean</managed-bean-name>
-		<managed-bean-class>edu.gaed.bean.ProfessorBean</managed-bean-class>
-		<managed-bean-scope>request</managed-bean-scope>
-	</managed-bean>
+	
 	<navigation-rule>
 		<from-view-id>/login.xhtml</from-view-id>
 		<navigation-case>
