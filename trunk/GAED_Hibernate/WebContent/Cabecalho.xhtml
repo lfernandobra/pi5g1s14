@@ -37,13 +37,15 @@
 				</div>
 
 				<h:form>
-				<f:ajax render=":contentForm:reload">
 					<p:growl id="messages" />
 					<p:menubar styleClass="menu">
-						<p:menuitem value="Home" icon="ui-icon-home" action="#{indexController.SetaPagina('home.xhtml')}" update=":contentForm:reload" />
-						<p:menuitem value="Ocorrências" icon="ui-icon-alert" action="#{indexController.SetaPagina('ocorrencia.xhtml')}" />
-						<p:menuitem value="Boletins" icon="ui-icon-document" action="#{indexController.SetaPagina('boletim.xhtml')}" />
-						<p:menuitem value="Tarefas" icon="ui-icon-clipboard" action="#{indexController.SetaPagina('tarefa.xhtml')}" />
+						<p:menuitem value="Home" icon="ui-icon-home" action="home" />
+						<p:menuitem value="Ocorrências" icon="ui-icon-alert"
+							action="ocorrencia" />
+						<p:menuitem value="Boletins" icon="ui-icon-document"
+							action="boletim" />
+						<p:menuitem value="Tarefas" icon="ui-icon-clipboard"
+							action="tarefa" />
 						<p:submenu label="Usuarios" icon="ui-icon-person"
 							rendered="#{LoginBean.usuario.perfil.secretaria or LoginBean.usuario.perfil.gestor}">
 							<p:menuitem value="Aluno" icon="ui-icon-person" action="aluno">
@@ -61,7 +63,6 @@
 							action="config"
 							rendered="#{LoginBean.usuario.perfil.secretaria or LoginBean.usuario.perfil.gestor}" />
 					</p:menubar>
-					</f:ajax>
 				</h:form>
 			</div>
 		</p:layoutUnit>
