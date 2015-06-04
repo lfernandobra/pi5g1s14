@@ -14,14 +14,14 @@ public class LoginDao{
 	
 	private Session session;
 	
-	public Usuario verificaDados(Usuario usuario){
+	public Usuario verificaDados(String login,String senha){
 		Usuario us = null;
 		
 		try {
 			session = HibernateUtil.getSessionFactory().openSession();
 			
-			String hql = "SELECT usuario FROM Usuario usuario WHERE login = '" +usuario.getLogin() +
-					"' and senha = '" + usuario.getSenha() + "'";
+			String hql = "SELECT usuario FROM Usuario usuario WHERE login = '" +login +
+					"' and senha = '" + senha + "'";
 			Query query = session.createQuery(hql);
 			
 			if(!query.list().isEmpty()){

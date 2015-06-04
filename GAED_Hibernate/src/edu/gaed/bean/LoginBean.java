@@ -27,6 +27,8 @@ import edu.gaed.vo.Usuario;
 public class LoginBean {
      
 	private Usuario usuario = new Usuario();
+	private String login = new String();
+	private String senha = new String();
 	private Aluno aluno = new Aluno();
 	private Gestor gestor = new Gestor();
 	private Professor professor = new Professor();
@@ -39,6 +41,26 @@ public class LoginBean {
 	}
 
 	
+	public String getLogin() {
+		return login;
+	}
+
+
+	public void setLogin(String login) {
+		this.login = login;
+	}
+
+
+	public String getSenha() {
+		return senha;
+	}
+
+
+	public void setSenha(String senha) {
+		this.senha = senha;
+	}
+
+
 	public Usuario getUsuario() {
 		return usuario;
 	}
@@ -100,14 +122,14 @@ public class LoginBean {
 	public String verificarDatos() throws Exception {
 		LoginDao usuDAO = new LoginDao();
 		Usuario us;
-		String resultado;
+		String resultado = null;
 	
 		try {
-			String encript = DigestUtils.md5Hex(this.usuario.getSenha());
+			String encript = DigestUtils.md5Hex(this.senha);
 			//String encript = DigestUtils.sha1Hex(this.usuario.getSenha());
-			this.usuario.setSenha(encript);
+			//this.usuario.setSenha(encript);
 			
-			us = usuDAO.verificaDados(this.usuario);
+			us = usuDAO.verificaDados(login,encript);
 			
 			this.usuario = us;
 			if(us != null && us.getPerfil().isAluno()) {
@@ -145,7 +167,7 @@ public class LoginBean {
 				this.setSecretaria((Secretaria) usuario);
 				resultado = "home";
 			}
-			else { 
+			else if(us == null){ 
 				FacesContext context = FacesContext.getCurrentInstance();
 		        context.addMessage(null, new FacesMessage("Autenticação falhou",  "Login ou Senha estão incorretos ") );
 				resultado = "login";
