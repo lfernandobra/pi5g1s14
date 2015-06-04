@@ -68,6 +68,7 @@ public class TurmaAlunoBean implements Serializable{
 		for(Aluno a : alunosDualList.getTarget()){
 			turma.addAluno(a);
 			new AlunoDao().alterar(a);
+			turma.setQtdAluInseridos(turma.getQtdAluInseridos()+1);
 		}
 		for(Aluno a : alunosDualList.getSource()){
 			a.setTurma(null);
