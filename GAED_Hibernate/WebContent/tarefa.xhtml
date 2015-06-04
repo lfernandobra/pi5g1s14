@@ -12,7 +12,9 @@
 <body>
 
 
-	<ui:composition>
+	<ui:decorate template="/Cabecalho.xhtml">
+		<ui:define name="center">
+
 
 			<h2>Lista de Tarefas</h2>
 
@@ -353,5 +355,7 @@
 				</h:form>
 			</div>
 		</div>
-		</ui:composition>
+		</ui:define>
+	</ui:decorate>
+</body>
 </html>
