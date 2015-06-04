@@ -89,6 +89,12 @@
 							<f:setPropertyActionListener target="#{TurmaProfessorBean.turma}"
 								value="#{lista}" />
 						</p:commandButton>
+						<p:commandButton value="Boletins" update=":formAdicBoletim"
+							oncomplete="PF('dialogAdicBoletim').show();"
+							icon="ui-icon-pencil">
+							<f:setPropertyActionListener target="#{TurmaProfessorBean.turma}"
+								value="#{lista}" />
+						</p:commandButton>
 					</p:column>
 					<p:column style="width:60px">
 						<p:commandButton  update=":formAlterar" id="botaoAlterar"
@@ -130,7 +136,7 @@
 					<p:panelGrid id="panelCadastrar" columns="2">
 						<p:outputLabel for="nome" value="Nome:" />
 						<p:inputText value="#{TurmaBean.turma.nome}" required="true"
-							id="nome" requiredMessage="Nome nÃ£o deve estar vazio!" />
+							id="nome" requiredMessage="Nome não deve estar vazio!" />
 	
 						<p:outputLabel for="periodo" value="Periodo:" />
 						<p:selectOneMenu value="#{TurmaBean.turma.periodo}">
@@ -323,6 +329,37 @@
 				<div id="botoesMedio">
 					<p:commandButton id="pojoBtnSubmit" value="Incluir" update=":formPrincipal:tabelaTurma @form growl" icon="ui-icon-disk" 
 					oncomplete="closeDialogIfSucess(xhr, status, args, 'dialogAdicProf','formAdicProfessor')" style="margin-top:5px" actionListener="#{TurmaProfessorBean.adicionarProfessor}"
+					onsuccess="PF('dialogAdicProf').hide();" />
+				</div>
+	
+			</h:form>
+		</p:dialog>
+		
+		<p:dialog header="Adicionar Boletim" widgetVar="dialogAdicBoletim"
+			modal="true" resizable="true" id="idAdicBoletim" appendTo="@(body)"
+			styleClass="dialogCadastrar">
+			<h:form id="formAdicBoletim">
+			
+				<p:focus context="@form" />
+				<p:growl id="growl" showDetail="true" life="4000" />
+
+				<h4>Selecione o boletim a ser incluido à turma</h4>
+				<p:separator />
+
+				<p:outputLabel value="Boletins:" />
+					<p:selectOneMenu value="#{BoletimAlunoDisciplinaBean.boletimAlunoDisciplina.boletim}">
+						<f:selectItem itemLabel=" -- Selecione -- "
+							noSelectionOption="true" />
+						<f:selectItems value="#{BoletimBean.boletims}"
+							var="boletim" itemValue="#{boletim}"
+							itemLabel="ID : #{boletim.id} - Bimestre : #{boletim.bimestre.nome}" />
+						<f:converter converterId="boletimConverter" />
+					</p:selectOneMenu>
+
+				<div id="botoesMedio">
+					<p:commandButton id="pojoBtnSubmit" value="Incluir" update=":formPrincipal:tabelaTurma @form growl" 
+					icon="ui-icon-disk" oncomplete="closeDialogIfSucess(xhr, status, args, 'dialogAdicProf','formAdicProfessor')" 
+					style="margin-top:5px" actionListener="#{BoletimAlunoDisciplinaBean.cadastrar(TurmaBean.turma)}"
 					onsuccess="PF('dialogAdicProf').hide();" />
 				</div>
 	
