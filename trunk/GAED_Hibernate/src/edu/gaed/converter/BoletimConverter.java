@@ -7,7 +7,7 @@ import javax.faces.convert.FacesConverter;
 
 import edu.gaed.vo.Boletim;
 
-@FacesConverter(forClass = Boletim.class)
+@FacesConverter(value = "boletimConverter")
 public class BoletimConverter implements Converter{
 	@Override
 	public Object getAsObject(FacesContext facesContext, UIComponent uiComponent, String value) {
