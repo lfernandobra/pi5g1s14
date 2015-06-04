@@ -1,15 +1,10 @@
 package edu.gaed.dao;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
-
 import edu.gaed.vo.Aluno;
-
 import org.hibernate.Criteria;
 import org.hibernate.Session;
-import org.hibernate.criterion.ProjectionList;
-import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 
 import edu.gaed.util.HibernateUtil;
