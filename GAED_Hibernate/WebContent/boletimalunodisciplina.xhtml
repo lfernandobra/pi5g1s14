@@ -1,0 +1,56 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions">
+<h:head>
+	<title>Tarefa</title>
+	<script src="scripts/scripts.js" type="text/javascript"></script>
+	<link rel="stylesheet" href="styles/layout_crud.css" type="text/css" />
+</h:head>
+<body>
+	<ui:decorate template="/Cabecalho.xhtml">
+		<ui:define name="center">
+			<h2>Lista de Boletins</h2>
+			<div id="Lista">
+			<div id="divAluno">
+				<h:form id="formBoletimAluno"
+					rendered="#{LoginBean.usuario.perfil.aluno}">
+					<p:dataTable var="boletim"
+						value="#{BoletimAlunoDisciplinaBean.listarBoletimAluno(LoginBean.aluno)}"
+						id="tabelaBoletimAluno" resizableColumns="true" reflow="true"
+						rows="5" emptyMessage="Nenhum registro encontrado"
+						paginator="true" paginatorPosition="bottom"
+						styleClass="dataTablePrincipal">
+						<f:facet name="header">Lista de Boletins </f:facet>
+						<p:column>
+							<p:rowToggler />
+						</p:column>
+						<p:column headerText="Bimestre" sortBy="#{boletim.pk.boletim.bimestre.nome}"
+							filterBy="#{boletim.pk.boletim.bimestre.nome}" style="width:230px">
+							<h:outputText value="#{boletim.pk.boletim.bimestre.nome}" />
+						</p:column>
+						<p:column headerText="Disciplina"
+							sortBy="#{boletim.pk.disciplina.nome}"
+							filterBy="#{boletim.pk.disciplina.nome}">
+							<h:outputText value="#{boletim.pk.disciplina.nome}" />
+						</p:column>
+						<p:column headerText="Nota"
+							sortBy="#{boletim.nota}"
+							filterBy="#{boletim.nota}">
+							<h:outputText value="#{boletim.nota}" />
+						</p:column>
+						<p:column headerText="Faltas"
+							sortBy="#{boletim.falta}"
+							filterBy="#{boletim.falta}">
+							<h:outputText value="#{boletim.falta}" />
+						</p:column>
+					</p:dataTable>
+				</h:form>
+			</div>
+			</div>
+		</ui:define>
+	</ui:decorate>
+</body>
+</html>

@@ -3,9 +3,11 @@ package edu.gaed.dao;
 import java.util.List;
 
 import org.hibernate.Criteria;
+import org.hibernate.Query;
 import org.hibernate.Session;
 
 import edu.gaed.util.HibernateUtil;
+import edu.gaed.vo.Aluno;
 import edu.gaed.vo.BoletimAlunoDisciplina;
 
 public class BoletimAlunoDisciplinaDao {
@@ -62,4 +64,21 @@ public class BoletimAlunoDisciplinaDao {
 
                 }
         }
+        
+        @SuppressWarnings("rawtypes")
+    	public List listarPorAluno(Aluno aluno){
+    		session = HibernateUtil.getSessionFactory().openSession();
+
+    		try{
+    			String hql = "select boletimAluDisc from BoletimAlunoDisciplina boletimAluDisc where boletimAluDisc.pk.aluno =:aluno"; 
+    			Query query = session.createQuery(hql);
+    			query.setParameter("aluno",aluno);
+    			List results = query.list();
+    			
+    			return results;
+    		}finally{
+    			session.close();
+
+    		}
+    	}
 }
