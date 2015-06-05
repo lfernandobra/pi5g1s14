@@ -5,7 +5,7 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:fn="http://java.sun.com/jsp/jstl/functions">
 <h:head>
-	<title>Tarefa</title>
+	<title>Boletim</title>
 	<script src="scripts/scripts.js" type="text/javascript"></script>
 	<link rel="stylesheet" href="styles/layout_crud.css" type="text/css" />
 </h:head>
@@ -24,9 +24,6 @@
 						paginator="true" paginatorPosition="bottom"
 						styleClass="dataTablePrincipal">
 						<f:facet name="header">Lista de Boletins </f:facet>
-						<p:column>
-							<p:rowToggler />
-						</p:column>
 						<p:column headerText="Bimestre" sortBy="#{boletim.pk.boletim.bimestre.nome}"
 							filterBy="#{boletim.pk.boletim.bimestre.nome}" style="width:230px">
 							<h:outputText value="#{boletim.pk.boletim.bimestre.nome}" />
@@ -47,6 +44,45 @@
 							<h:outputText value="#{boletim.falta}" />
 						</p:column>
 					</p:dataTable>
+				</h:form>
+			</div>
+			<div id="divResponsavel">
+				<h:form id="formTarefaResponsavel"
+					rendered="#{LoginBean.usuario.perfil.responsavel}">
+					<p:dataTable var="aluno"
+						value="#{LoginBean.responsavel.alunos}"
+						id="tabelaTarefaResponsavel" resizableColumns="true" reflow="true"
+						rows="5" emptyMessage="Nenhum aluno atribuido"
+						paginator="true" paginatorPosition="bottom"
+						styleClass="dataTablePrincipal">
+						<f:facet name="header">Boletins atribuidos a seus filhos</f:facet>
+							<p:columnGroup type="header">
+								<p:row>
+									<p:column headerText="Bimestre" />
+									<p:column headerText="Disciplina" />
+									<p:column headerText="Nota" />
+									<p:column headerText="Falta" />
+								</p:row>
+							</p:columnGroup>
+							
+							<p:subTable var="boletim" value="#{BoletimAlunoDisciplinaBean.listarBoletimAluno(aluno)}">
+								<f:facet name="header">
+									<h:outputText value="#{aluno.nome} #{aluno.sobrenome}" />
+								</f:facet>
+								<p:column>
+									<h:outputText value="#{boletim.pk.boletim.bimestre.nome}" />
+								</p:column>
+								<p:column>
+									<h:outputText value="#{boletim.pk.disciplina.nome}" />
+								</p:column>
+								<p:column>
+									<h:outputText value="#{boletim.nota}" />
+								</p:column>
+								<p:column>
+									<h:outputText value="#{boletim.falta}" />
+								</p:column>
+							</p:subTable>
+				</p:dataTable>
 				</h:form>
 			</div>
 			</div>
