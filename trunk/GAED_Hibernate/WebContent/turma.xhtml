@@ -1,370 +1,371 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:p="http://primefaces.org/ui"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:fn="http://java.sun.com/jsp/jstl/functions">
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:p="http://primefaces.org/ui"
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:fn="http://java.sun.com/jsp/jstl/functions">
 <h:head>
-	<title>Turma</title>
-	<script src="scripts/scripts.js" type="text/javascript"></script>
-	<link rel="stylesheet" href="styles/layout_crud.css" type="text/css" />
+        <title>Turma</title>
+        <script src="scripts/scripts.js" type="text/javascript"></script>
+        <link rel="stylesheet" href="styles/layout_crud.css" type="text/css" />
 </h:head>
 
 <ui:decorate template="/Cabecalho.xhtml">
-	<ui:define name="center">
+        <ui:define name="center">
 
 
-		<h2>Lista de Turmas</h2>
+                <h2>Lista de Turmas</h2>
 
-		<div id="Lista">
-			<p:separator />
+                <div id="Lista">
+                        <p:separator />
 
-			<p:toolbar styleClass="toolbar">
-				<f:facet name="left">
-					<p:commandButton value="Criar Turma" type="button" onclick="PF('dialogCadastrar').show();" icon="ui-icon-plusthick" />
-				</f:facet>
-			</p:toolbar>
-				
-			<h:form id="formPrincipal">
-				<p:dataTable var="lista" value="#{TurmaBean.turmas}" id="tabelaTurma"
-					resizableColumns="true" reflow="true" rows="5"
-					emptyMessage="Nenhum registro encontrado" paginator="true"
-					paginatorPosition="bottom" styleClass="dataTablePrincipal">
-	
-					<p:column style="width:16px">
-						<p:rowToggler />
-					</p:column>
-					<p:column headerText="ID" sortBy="#{lista.id}"
-						filterBy="#{lista.id}">
-						<h:outputText value="#{lista.id}" />
-					</p:column>
-					<p:column headerText="Turma" sortBy="#{lista.nome}"
-						filterBy="#{lista.nome}">
-						<h:outputText value="#{lista.serie.serie} #{lista.nome} " />
-					</p:column>
-					<p:column headerText="Periodo" sortBy="#{lista.periodo.periodo}"
-						filterBy="#{lista.periodo.periodo}">
-						<h:outputText value="#{lista.periodo.periodo}" />
-					</p:column>
-					
-					<p:rowExpansion>
-						<h3>Informações da Turma</h3>
-						<div id="center">
-						<p:panelGrid columns="2" columnClasses="label,value" styleClass="gridDataTable">
-							<h:outputText value="Limite de alunos:" style="font-weight: bold;" />
-							<h:outputText value="#{lista.qtdAluLimite}" />
-							
-							<h:outputText value="Quantidade de alunos inseridos:" style="font-weight: bold;" />
-							<h:outputText value="#{lista.alunos.size()}" />
-							
-							<h:outputText value="Disciplinas:" style="font-weight: bold;" />
-							<p:dataList value="#{lista.disciplinas}" var="discipLecionada"
-								emptyMessage="Nenhuma disciplina atribuida a essa turma">
-            					#{discipLecionada.nome}
-            				</p:dataList>
-            				
-            				<h:outputText value="Alunos:"  style="font-weight: bold;"/>
-            				<p:dataList value="#{lista.alunos}" var="alunos" 
-	            				emptyMessage="nenhum aluno atribuído a essa turma">
-	            				#{alunos.nome} #{alunos.sobrenome}
-            				</p:dataList>
-            				
-            				<h:outputText value="Professores:" style="font-weight: bold;" />
-            				<p:dataList value="#{lista.turmasDisciplinas}" var="professores" 
-	            				emptyMessage="nenhum professor atribuído a essa turma">
-	            				#{professores.nome} #{professores.sobrenome}
-            				</p:dataList>
-						</p:panelGrid>
-						</div>
-					</p:rowExpansion>
-					<p:column headerText="Adicionar">
-						<p:commandButton value="Alunos" update="formAdicAluno"
-							oncomplete="PF('dialogAdicAluno').show();" icon="ui-icon-pencil">
-							<f:setPropertyActionListener target="#{TurmaAlunoBean.turma}"
-								value="#{lista}" />
-						</p:commandButton>
-						<p:commandButton value="Professores" update=":formAdicProfessor"
-							oncomplete="PF('dialogAdicProf').show();"
-							icon="ui-icon-pencil">
-							<f:setPropertyActionListener target="#{TurmaProfessorBean.turma}"
-								value="#{lista}" />
-						</p:commandButton>
-						<p:commandButton value="Boletins" update=":formAdicBoletim"
-							oncomplete="PF('dialogAdicBoletim').show();"
-							icon="ui-icon-pencil">
-							<f:setPropertyActionListener target="#{TurmaProfessorBean.turma}"
-								value="#{lista}" />
-						</p:commandButton>
-					</p:column>
-					<p:column style="width:60px">
-						<p:commandButton  update=":formAlterar" id="botaoAlterar"
-							oncomplete="PF('dialogAlterar').show();" icon="ui-icon-pencil">
-							<f:setPropertyActionListener target="#{TurmaBean.turma}"
-								value="#{lista}" />
-						</p:commandButton>
-						<p:tooltip id="toolTipAlterar" for="botaoAlterar" value="Alterar cadastro da turma" escape="false" />
-	
-						<p:commandButton
-							actionListener="#{TurmaBean.excluir(lista)}" id="botaoExcluir"
-							update=":formPrincipal:tabelaTurma" icon="ui-icon-trash">
-							<p:confirm header="Excluir Turma" message="Deseja excluir?"
-								icon="ui-icon-alert" />
-						</p:commandButton>
-						<p:tooltip id="toolTipExcluir" for="botaoExcluir" value="Excluir turma" escape="false" />
-						
-						<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
-							<p:commandButton value="Sim" type="button"
-								styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
-							<p:commandButton value="NÃ£o" type="button"
-								styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
-						</p:confirmDialog>
-	
-					</p:column>
-					
-					<f:facet name="footer">
-	        			Total cadastrado #{fn:length(TurmaBean.turmas)} Turma
-	    			</f:facet>
-				</p:dataTable>
-			</h:form>
-			
+                        <p:toolbar styleClass="toolbar">
+                                <f:facet name="left">
+                                        <p:commandButton value="Criar Turma" type="button" onclick="PF('dialogCadastrar').show();" icon="ui-icon-plusthick" />
+                                </f:facet>
+                        </p:toolbar>
+                                
+                        <h:form id="formPrincipal">
+                                <p:dataTable var="lista" value="#{TurmaBean.turmas}" id="tabelaTurma"
+                                        resizableColumns="true" reflow="true" rows="5"
+                                        emptyMessage="Nenhum registro encontrado" paginator="true"
+                                        paginatorPosition="bottom" styleClass="dataTablePrincipal">
+        
+                                        <p:column style="width:16px">
+                                                <p:rowToggler />
+                                        </p:column>
+                                        <p:column headerText="ID" sortBy="#{lista.id}"
+                                                filterBy="#{lista.id}">
+                                                <h:outputText value="#{lista.id}" />
+                                        </p:column>
+                                        <p:column headerText="Turma" sortBy="#{lista.nome}"
+                                                filterBy="#{lista.nome}">
+                                                <h:outputText value="#{lista.serie.serie} #{lista.nome} " />
+                                        </p:column>
+                                        <p:column headerText="Periodo" sortBy="#{lista.periodo.periodo}"
+                                                filterBy="#{lista.periodo.periodo}">
+                                                <h:outputText value="#{lista.periodo.periodo}" />
+                                        </p:column>
+                                        
+                                        <p:rowExpansion>
+                                                <h3>Informações da Turma</h3>
+                                                <div id="center">
+                                                <p:panelGrid columns="2" columnClasses="label,value" styleClass="gridDataTable">
+                                                        <h:outputText value="Limite de alunos:" style="font-weight: bold;" />
+                                                        <h:outputText value="#{lista.qtdAluLimite}" />
+                                                        
+                                                        <h:outputText value="Quantidade de alunos inseridos:" style="font-weight: bold;" />
+                                                        <h:outputText value="#{lista.alunos.size()}" />
+                                                        
+                                                        <h:outputText value="Disciplinas:" style="font-weight: bold;" />
+                                                        <p:dataList value="#{lista.disciplinas}" var="discipLecionada"
+                                                                emptyMessage="Nenhuma disciplina atribuida a essa turma">
+                                                #{discipLecionada.nome}
+                                        </p:dataList>
+                                        
+                                        <h:outputText value="Alunos:"  style="font-weight: bold;"/>
+                                        <p:dataList value="#{lista.alunos}" var="alunos" 
+                                                emptyMessage="nenhum aluno atribuído a essa turma">
+                                                #{alunos.nome} #{alunos.sobrenome}
+                                        </p:dataList>
+                                        
+                                        <h:outputText value="Professores:" style="font-weight: bold;" />
+                                        <p:dataList value="#{lista.turmasDisciplinas}" var="professores" 
+                                                emptyMessage="nenhum professor atribuído a essa turma">
+                                                #{professores.nome} #{professores.sobrenome}
+                                        </p:dataList>
+                                                </p:panelGrid>
+                                                </div>
+                                        </p:rowExpansion>
+                                        <p:column headerText="Adicionar">
+                                                <p:commandButton value="Alunos" update="formAdicAluno"
+                                                        oncomplete="PF('dialogAdicAluno').show();" icon="ui-icon-pencil">
+                                                        <f:setPropertyActionListener target="#{TurmaAlunoBean.turma}"
+                                                                value="#{lista}" />
+                                                </p:commandButton>
+                                                <p:commandButton value="Professores" update=":formAdicProfessor"
+                                                        oncomplete="PF('dialogAdicProf').show();"
+                                                        icon="ui-icon-pencil">
+                                                        <f:setPropertyActionListener target="#{TurmaProfessorBean.turma}"
+                                                                value="#{lista}" />
+                                                </p:commandButton>
+                                                <p:commandButton value="Boletins" update=":formAdicBoletim"
+                                                        oncomplete="PF('dialogAdicBoletim').show();"
+                                                        icon="ui-icon-pencil">
+                                                        <f:setPropertyActionListener target="#{BoletimAlunoDisciplinaBean.turma}"
+                                                                value="#{lista}" />
+                                                </p:commandButton>
+                                        </p:column>
+                                        <p:column style="width:60px">
+                                                <p:commandButton  update=":formAlterar" id="botaoAlterar"
+                                                        oncomplete="PF('dialogAlterar').show();" icon="ui-icon-pencil">
+                                                        <f:setPropertyActionListener target="#{TurmaBean.turma}"
+                                                                value="#{lista}" />
+                                                </p:commandButton>
+                                                <p:tooltip id="toolTipAlterar" for="botaoAlterar" value="Alterar cadastro da turma" escape="false" />
+        
+                                                <p:commandButton
+                                                        actionListener="#{TurmaBean.excluir(lista)}" id="botaoExcluir"
+                                                        update=":formPrincipal:tabelaTurma" icon="ui-icon-trash">
+                                                        <p:confirm header="Excluir Turma" message="Deseja excluir?"
+                                                                icon="ui-icon-alert" />
+                                                </p:commandButton>
+                                                <p:tooltip id="toolTipExcluir" for="botaoExcluir" value="Excluir turma" escape="false" />
+                                                
+                                                <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                                                        <p:commandButton value="Sim" type="button"
+                                                                styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                                                        <p:commandButton value="NÃ£o" type="button"
+                                                                styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+                                                </p:confirmDialog>
+        
+                                        </p:column>
+                                        
+                                        <f:facet name="footer">
+                                        Total cadastrado #{fn:length(TurmaBean.turmas)} Turma
+                                </f:facet>
+                                </p:dataTable>
+                        </h:form>
+                        
 
 
-			<p:dialog header="Cadastrar" widgetVar="dialogCadastrar" modal="true" appendTo="@(body)"
-				resizable="true" id="formCadPequeno" styleClass="dialogCadastrar">
-				<h:form id="formCadastrar" styleClass="formCadastrar">
-					<p:focus context="@form" />
-					<p:panelGrid id="panelCadastrar" columns="2">
-						<p:outputLabel for="nome" value="Nome:" />
-						<p:inputText value="#{TurmaBean.turma.nome}" required="true"
-							id="nome" requiredMessage="Nome não deve estar vazio!" />
-	
-						<p:outputLabel for="periodo" value="Periodo:" />
-						<p:selectOneMenu value="#{TurmaBean.turma.periodo}">
-							<f:selectItem itemLabel="-- Selecione --" noSelectionOption="true" />
-							<f:selectItems value="#{PeriodoBean.periodos}" var="periodo"
-								itemValue="#{periodo}" itemLabel="#{periodo.periodo}"
-								id="periodo" />
-						</p:selectOneMenu>
-	
-						<p:outputLabel for="serie" value="Serie:" />
-						<p:selectOneMenu value="#{TurmaBean.turma.serie}">
-							<f:selectItem itemLabel="-- Selecione --" noSelectionOption="true" />
-							<f:selectItems value="#{SerieBean.series}" var="serie"
-								itemValue="#{serie}" itemLabel="#{serie.serie}" id="serie" />
-						</p:selectOneMenu>
-	
-						<p:outputLabel for="qtdLimite" value="Limite de alunos:" />
-						<p:inputText value="#{TurmaBean.turma.qtdAluLimite}"
-							required="true" id="qtdLimite"
-							requiredMessage="Limite deve ser definido!" />
-						
-						<p:outputLabel value="Disciplina:" />
-						<p:selectCheckboxMenu id="menu"
-							value="#{TurmaBean.turma.disciplinas}" size="30"
-							label=" -- Selecione -- " filter="true" filterMatchMode="startsWith"
-							panelStyle="width:250px">
-							<f:selectItems value="#{DisciplinaBean.disciplinas}"
-								var="disciplina" itemValue="#{disciplina}"
-								itemLabel="#{disciplina.nome}" />
-							<f:converter converterId="disciplinaConverter" />
-						</p:selectCheckboxMenu>
-	
-					</p:panelGrid>
-					
-					<div id="botoes">
-						<p:commandButton value="Salvar" id="withIcon"
-							actionListener="#{TurmaBean.cadastrar}" icon="ui-icon-disk"
-							update=":formPrincipal:tabelaTurma @form"
-							oncomplete="closeDialogIfSucess(xhr, status, args, 'dialogCadastrar','formCad')"
-							onsuccess="PF('dialogCadastrar').hide();" />
-							
-						<p:commandButton value="Limpar" update="@form" process="@this">
-							<p:resetInput target="panelCadastrar" />
-						</p:commandButton>
-					</div>
-					
-				</h:form>
-			</p:dialog>
-		</div>
-		<p:dialog header="Alterar" widgetVar="dialogAlterar" modal="true" appendTo="@(body)"
-			resizable="true" id="formAlteracaoTurmaCadPequeno" styleClass="dialogAlterar">
-			<h:form id="formAlterar" styleClass="formAlterar">
-				<p:focus context="@form" />
-				<h:inputHidden value="#{TurmaBean.turma}" />
-				<p:panelGrid id="panelAlterar" columns="3">
-					<p:outputLabel for="nome" value="Nome:" />
-					<p:inputText value="#{TurmaBean.turma.nome}" required="true"
-						id="nome" requiredMessage="Nome nÃ£o deve estar vazio!" />
-					<p:messages for="nome" display="icon" closable="true" />
-	
-					<p:outputLabel for="periodo" value="Periodo:" />
-					<p:selectOneMenu value="#{TurmaBean.turma.periodo}">
-						<f:selectItem itemLabel="-- Selecione --" noSelectionOption="true" />
-						<f:selectItems value="#{PeriodoBean.periodos}" var="periodo"
-							itemValue="#{periodo}" itemLabel="#{periodo.periodo}" id="periodo" />
-					</p:selectOneMenu>
-					<p:messages for="periodo" display="icon" closable="true" />
-	
-					<p:outputLabel for="serie" value="Serie:" />
-					<p:selectOneMenu value="#{TurmaBean.turma.serie}">
-						<f:selectItem itemLabel="-- Selecione --" noSelectionOption="true" />
-						<f:selectItems value="#{SerieBean.series}" var="serie"
-							itemValue="#{serie}" itemLabel="#{serie.serie}" id="serie" />
-					</p:selectOneMenu>
-					<p:messages for="serie" display="icon" closable="true" />
-	
-					<p:outputLabel for="qtdLimite" value="Limite de alunos:" />
-					<p:inputText value="#{TurmaBean.turma.qtdAluLimite}" required="true"
-						id="qtdLimite" requiredMessage="Limite deve ser definido!" />
-					<p:messages for="qtdLimite" display="icon" closable="true" />
-					
-					<p:outputLabel value="Disciplina:" />
-						<p:selectCheckboxMenu id="menu"
-							value="#{TurmaBean.turma.disciplinas}" size="30"
-							label="Selecione" filter="true" filterMatchMode="startsWith"
-							panelStyle="width:250px">
-							<f:selectItems value="#{DisciplinaBean.disciplinas}"
-								var="disciplina" itemValue="#{disciplina}"
-								itemLabel="#{disciplina.nome}" />
-							<f:converter converterId="disciplinaConverter" />
-						</p:selectCheckboxMenu>
-				</p:panelGrid>
-				<p:commandButton value="Salvar" id="withIcon"
-					actionListener="#{TurmaBean.alterar}" icon="ui-icon-disk"
-					update=":formPrincipal:tabelaTurma @form"
-					oncomplete="closeDialogIfSucess(xhr, status, args, 'dialogAlterar','formAlt')"
-					onsuccess="PF('dialogAlterar').hide();" />
-				<p:commandButton value="Limpar" update="@form" process="@this">
-					<p:resetInput target="panelAlterar" />
-				</p:commandButton>
-			</h:form>
-		</p:dialog>
-		
-		<p:dialog header="Adicionar alunos" widgetVar="dialogAdicAluno"
-			modal="true" resizable="true" id="formAltMedio" appendTo="@(body)"	styleClass="dialogCadastrar">
-			 
-			<h:form id="formAdicAluno">
-				<p:focus context="@form" />
-					<p:growl id="growl" showDetail="true" life="4000" />
-	
-					<h4>Selecione os alunos para atribuír a turma:</h4>
-					<p:separator />
-			
-					<p:pickList id="PojoPickList"
-						value="#{TurmaAlunoBean.alunosDualList}" var="aluno"
-						effect="bounce" itemValue="#{aluno}" itemLabel="#{aluno.nome} #{aluno.sobrenome}"
-						showSourceControls="true" showTargetControls="true"
-						showCheckbox="true" showSourceFilter="true" showTargetFilter="true"
-						filterMatchMode="contains">
-						<f:converter converterId="alunoConverter"/>
-						<f:facet name="sourceCaption">Alunos</f:facet>
-						<f:facet name="targetCaption">Turma</f:facet>
-	
-						<p:column style="width:25%">
-							<h:outputText styleClass="ui-theme ui-theme-#{aluno}" />
-						</p:column>
-	
-						<p:column style="width:75%;">
-							<h:outputText value="#{aluno.nome} #{aluno.sobrenome}" />
-						</p:column>
-					</p:pickList>
-					
-					<div id="botoesMedio">
-						<p:commandButton id="pojoSubmit" value="Incluir" update=":formPrincipal:tabelaTurma @form" icon="ui-icon-disk" 
-						oncomplete="closeDialogIfSucess(xhr, status, args, 'dialogAdicAluno','formAdicAluno')" style="margin-top:5px" actionListener="#{TurmaAlunoBean.adicionarAlunos}"
-						onsuccess="PF('dialogAdicAluno').hide();" />
-					</div>
-				
-				
-				<p:dialog modal="true" showEffect="fade" hideEffect="fade"
-					widgetVar="turmaAlunoDialog">
-					<h:panelGrid id="displayAlunos" columns="2">
-						<h:outputText value="Alunos " style="font-weight:bold" />
-						<ui:repeat value="#{TurmaAlunoBean.alunosDualList.source}" var="disponivel">
-							<h:outputText value="#{disponivel.nome}" style="margin-right:5px" />
-						</ui:repeat>
-	
-						<h:outputText value="Turma " style="font-weight:bold" />
-						<ui:repeat value="#{TurmaAlunoBean.alunosDualList.target}" var="alocado">
-							<h:outputText value="#{alocado.nome}" style="margin-right:5px" />
-						</ui:repeat>
-					</h:panelGrid>
-					
-				</p:dialog>
-			</h:form>
-		</p:dialog>
-		
-		<p:dialog header="Adicionar professores" widgetVar="dialogAdicProf"
-			modal="true" resizable="true" id="idAdicProf" appendTo="@(body)"
-			styleClass="dialogCadastrar">
-			<h:form id="formAdicProfessor">
-			
-				<p:focus context="@form" />
-				<p:growl id="growl" showDetail="true" life="4000" />
+                        <p:dialog header="Cadastrar" widgetVar="dialogCadastrar" modal="true" appendTo="@(body)"
+                                resizable="true" id="formCadPequeno" styleClass="dialogCadastrar">
+                                <h:form id="formCadastrar" styleClass="formCadastrar">
+                                        <p:focus context="@form" />
+                                        <p:panelGrid id="panelCadastrar" columns="2">
+                                                <p:outputLabel for="nome" value="Nome:" />
+                                                <p:inputText value="#{TurmaBean.turma.nome}" required="true"
+                                                        id="nome" requiredMessage="Nome não deve estar vazio!" />
+        
+                                                <p:outputLabel for="periodo" value="Periodo:" />
+                                                <p:selectOneMenu value="#{TurmaBean.turma.periodo}">
+                                                        <f:selectItem itemLabel="-- Selecione --" noSelectionOption="true" />
+                                                        <f:selectItems value="#{PeriodoBean.periodos}" var="periodo"
+                                                                itemValue="#{periodo}" itemLabel="#{periodo.periodo}"
+                                                                id="periodo" />
+                                                </p:selectOneMenu>
+        
+                                                <p:outputLabel for="serie" value="Serie:" />
+                                                <p:selectOneMenu value="#{TurmaBean.turma.serie}">
+                                                        <f:selectItem itemLabel="-- Selecione --" noSelectionOption="true" />
+                                                        <f:selectItems value="#{SerieBean.series}" var="serie"
+                                                                itemValue="#{serie}" itemLabel="#{serie.serie}" id="serie" />
+                                                </p:selectOneMenu>
+        
+                                                <p:outputLabel for="qtdLimite" value="Limite de alunos:" />
+                                                <p:inputText value="#{TurmaBean.turma.qtdAluLimite}"
+                                                        required="true" id="qtdLimite"
+                                                        requiredMessage="Limite deve ser definido!" />
+                                                
+                                                <p:outputLabel value="Disciplina:" />
+                                                <p:selectCheckboxMenu id="menu"
+                                                        value="#{TurmaBean.turma.disciplinas}" size="30"
+                                                        label=" -- Selecione -- " filter="true" filterMatchMode="startsWith"
+                                                        panelStyle="width:250px">
+                                                        <f:selectItems value="#{DisciplinaBean.disciplinas}"
+                                                                var="disciplina" itemValue="#{disciplina}"
+                                                                itemLabel="#{disciplina.nome}" />
+                                                        <f:converter converterId="disciplinaConverter" />
+                                                </p:selectCheckboxMenu>
+        
+                                        </p:panelGrid>
+                                        
+                                        <div id="botoes">
+                                                <p:commandButton value="Salvar" id="withIcon"
+                                                        actionListener="#{TurmaBean.cadastrar}" icon="ui-icon-disk"
+                                                        update=":formPrincipal:tabelaTurma @form"
+                                                        oncomplete="closeDialogIfSucess(xhr, status, args, 'dialogCadastrar','formCad')"
+                                                        onsuccess="PF('dialogCadastrar').hide();" />
+                                                        
+                                                <p:commandButton value="Limpar" update="@form" process="@this">
+                                                        <p:resetInput target="panelCadastrar" />
+                                                </p:commandButton>
+                                        </div>
+                                        
+                                </h:form>
+                        </p:dialog>
+                </div>
+                <p:dialog header="Alterar" widgetVar="dialogAlterar" modal="true" appendTo="@(body)"
+                        resizable="true" id="formAlteracaoTurmaCadPequeno" styleClass="dialogAlterar">
+                        <h:form id="formAlterar" styleClass="formAlterar">
+                                <p:focus context="@form" />
+                                <h:inputHidden value="#{TurmaBean.turma}" />
+                                <p:panelGrid id="panelAlterar" columns="3">
+                                        <p:outputLabel for="nome" value="Nome:" />
+                                        <p:inputText value="#{TurmaBean.turma.nome}" required="true"
+                                                id="nome" requiredMessage="Nome nÃ£o deve estar vazio!" />
+                                        <p:messages for="nome" display="icon" closable="true" />
+        
+                                        <p:outputLabel for="periodo" value="Periodo:" />
+                                        <p:selectOneMenu value="#{TurmaBean.turma.periodo}">
+                                                <f:selectItem itemLabel="-- Selecione --" noSelectionOption="true" />
+                                                <f:selectItems value="#{PeriodoBean.periodos}" var="periodo"
+                                                        itemValue="#{periodo}" itemLabel="#{periodo.periodo}" id="periodo" />
+                                        </p:selectOneMenu>
+                                        <p:messages for="periodo" display="icon" closable="true" />
+        
+                                        <p:outputLabel for="serie" value="Serie:" />
+                                        <p:selectOneMenu value="#{TurmaBean.turma.serie}">
+                                                <f:selectItem itemLabel="-- Selecione --" noSelectionOption="true" />
+                                                <f:selectItems value="#{SerieBean.series}" var="serie"
+                                                        itemValue="#{serie}" itemLabel="#{serie.serie}" id="serie" />
+                                        </p:selectOneMenu>
+                                        <p:messages for="serie" display="icon" closable="true" />
+        
+                                        <p:outputLabel for="qtdLimite" value="Limite de alunos:" />
+                                        <p:inputText value="#{TurmaBean.turma.qtdAluLimite}" required="true"
+                                                id="qtdLimite" requiredMessage="Limite deve ser definido!" />
+                                        <p:messages for="qtdLimite" display="icon" closable="true" />
+                                        
+                                        <p:outputLabel value="Disciplina:" />
+                                                <p:selectCheckboxMenu id="menu"
+                                                        value="#{TurmaBean.turma.disciplinas}" size="30"
+                                                        label="Selecione" filter="true" filterMatchMode="startsWith"
+                                                        panelStyle="width:250px">
+                                                        <f:selectItems value="#{DisciplinaBean.disciplinas}"
+                                                                var="disciplina" itemValue="#{disciplina}"
+                                                                itemLabel="#{disciplina.nome}" />
+                                                        <f:converter converterId="disciplinaConverter" />
+                                                </p:selectCheckboxMenu>
+                                </p:panelGrid>
+                                <p:commandButton value="Salvar" id="withIcon"
+                                        actionListener="#{TurmaBean.alterar}" icon="ui-icon-disk"
+                                        update=":formPrincipal:tabelaTurma @form"
+                                        oncomplete="closeDialogIfSucess(xhr, status, args, 'dialogAlterar','formAlt')"
+                                        onsuccess="PF('dialogAlterar').hide();" />
+                                <p:commandButton value="Limpar" update="@form" process="@this">
+                                        <p:resetInput target="panelAlterar" />
+                                </p:commandButton>
+                        </h:form>
+                </p:dialog>
+                
+                <p:dialog header="Adicionar alunos" widgetVar="dialogAdicAluno"
+                        modal="true" resizable="true" id="formAltMedio" appendTo="@(body)"      styleClass="dialogCadastrar">
+                         
+                        <h:form id="formAdicAluno">
+                                <p:focus context="@form" />
+                                        <p:growl id="growl" showDetail="true" life="4000" />
+        
+                                        <h4>Selecione os alunos para atribuír a turma:</h4>
+                                        <p:separator />
+                        
+                                        <p:pickList id="PojoPickList"
+                                                value="#{TurmaAlunoBean.alunosDualList}" var="aluno"
+                                                effect="bounce" itemValue="#{aluno}" itemLabel="#{aluno.nome} #{aluno.sobrenome}"
+                                                showSourceControls="true" showTargetControls="true"
+                                                showCheckbox="true" showSourceFilter="true" showTargetFilter="true"
+                                                filterMatchMode="contains">
+                                                <f:converter converterId="alunoConverter"/>
+                                                <f:facet name="sourceCaption">Alunos</f:facet>
+                                                <f:facet name="targetCaption">Turma</f:facet>
+        
+                                                <p:column style="width:25%">
+                                                        <h:outputText styleClass="ui-theme ui-theme-#{aluno}" />
+                                                </p:column>
+        
+                                                <p:column style="width:75%;">
+                                                        <h:outputText value="#{aluno.nome} #{aluno.sobrenome}" />
+                                                </p:column>
+                                        </p:pickList>
+                                        
+                                        <div id="botoesMedio">
+                                                <p:commandButton id="pojoSubmit" value="Incluir" update=":formPrincipal:tabelaTurma @form" icon="ui-icon-disk" 
+                                                oncomplete="closeDialogIfSucess(xhr, status, args, 'dialogAdicAluno','formAdicAluno')" style="margin-top:5px" actionListener="#{TurmaAlunoBean.adicionarAlunos}"
+                                                onsuccess="PF('dialogAdicAluno').hide();" />
+                                        </div>
+                                
+                                
+                                <p:dialog modal="true" showEffect="fade" hideEffect="fade"
+                                        widgetVar="turmaAlunoDialog">
+                                        <h:panelGrid id="displayAlunos" columns="2">
+                                                <h:outputText value="Alunos " style="font-weight:bold" />
+                                                <ui:repeat value="#{TurmaAlunoBean.alunosDualList.source}" var="disponivel">
+                                                        <h:outputText value="#{disponivel.nome}" style="margin-right:5px" />
+                                                </ui:repeat>
+        
+                                                <h:outputText value="Turma " style="font-weight:bold" />
+                                                <ui:repeat value="#{TurmaAlunoBean.alunosDualList.target}" var="alocado">
+                                                        <h:outputText value="#{alocado.nome}" style="margin-right:5px" />
+                                                </ui:repeat>
+                                        </h:panelGrid>
+                                        
+                                </p:dialog>
+                        </h:form>
+                </p:dialog>
+                
+                <p:dialog header="Adicionar professores" widgetVar="dialogAdicProf"
+                        modal="true" resizable="true" id="idAdicProf" appendTo="@(body)"
+                        styleClass="dialogCadastrar">
+                        <h:form id="formAdicProfessor">
+                        
+                                <p:focus context="@form" />
+                                <p:growl id="growl" showDetail="true" life="4000" />
 
-				<h4>Selecione os professores para alocar a turma escolhida:</h4>
-				<p:separator />
-		
-				<p:pickList id="TurmaProfessorPickList"
-					value="#{TurmaProfessorBean.professoresDualList}" var="turmaDisc"
-					 itemValue="#{turmaDisc}" itemLabel="#{turmaDisc.professor.nome} #{turmaDisc.professor.sobrenome} - #{turmaDisc.disciplina.nome}"
-					showSourceControls="true" showTargetControls="true"
-					showCheckbox="true" showSourceFilter="true" showTargetFilter="true"
-					filterMatchMode="contains">
-					<f:converter converterId="turmaDisciplinaConverter"/>
-					<f:facet name="sourceCaption">Professores/Disciplina</f:facet>
-					<f:facet name="targetCaption">Turma</f:facet>
-					
-					<p:ajax event="transfer" listener="#{TurmaProfessorBean.handleTransfer}" update="growl" />
+                                <h4>Selecione os professores para alocar a turma escolhida:</h4>
+                                <p:separator />
+                
+                                <p:pickList id="TurmaProfessorPickList"
+                                        value="#{TurmaProfessorBean.professoresDualList}" var="turmaDisc"
+                                         itemValue="#{turmaDisc}" itemLabel="#{turmaDisc.professor.nome} #{turmaDisc.professor.sobrenome} - #{turmaDisc.disciplina.nome}"
+                                        showSourceControls="true" showTargetControls="true"
+                                        showCheckbox="true" showSourceFilter="true" showTargetFilter="true"
+                                        filterMatchMode="contains">
+                                        <f:converter converterId="turmaDisciplinaConverter"/>
+                                        <f:facet name="sourceCaption">Professores/Disciplina</f:facet>
+                                        <f:facet name="targetCaption">Turma</f:facet>
+                                        
+                                        <p:ajax event="transfer" listener="#{TurmaProfessorBean.handleTransfer}" update="growl" />
 
-					<p:column style="width:25%">
-						<h:outputText styleClass="ui-theme ui-theme-#{turmaDisc}" />
-					</p:column>
+                                        <p:column style="width:25%">
+                                                <h:outputText styleClass="ui-theme ui-theme-#{turmaDisc}" />
+                                        </p:column>
 
-					<p:column style="width:75%;">
-						<h:outputText value="#{turmaDisc.professor.nome} - #{turmaDisc.disciplina.nome}" />
-					</p:column>
-				</p:pickList>
-				
-				<div id="botoesMedio">
-					<p:commandButton id="pojoBtnSubmit" value="Incluir" update=":formPrincipal:tabelaTurma @form growl" icon="ui-icon-disk" 
-					oncomplete="closeDialogIfSucess(xhr, status, args, 'dialogAdicProf','formAdicProfessor')" style="margin-top:5px" actionListener="#{TurmaProfessorBean.adicionarProfessor}"
-					onsuccess="PF('dialogAdicProf').hide();" />
-				</div>
-	
-			</h:form>
-		</p:dialog>
-		
-		<p:dialog header="Adicionar Boletim" widgetVar="dialogAdicBoletim"
-			modal="true" resizable="true" id="idAdicBoletim" appendTo="@(body)"
-			styleClass="dialogCadastrar">
-			<h:form id="formAdicBoletim">
-			
-				<p:focus context="@form" />
-				<p:growl id="growl" showDetail="true" life="4000" />
+                                        <p:column style="width:75%;">
+                                                <h:outputText value="#{turmaDisc.professor.nome} - #{turmaDisc.disciplina.nome}" />
+                                        </p:column>
+                                </p:pickList>
+                                
+                                <div id="botoesMedio">
+                                        <p:commandButton id="pojoBtnSubmit" value="Incluir" update=":formPrincipal:tabelaTurma @form growl" icon="ui-icon-disk" 
+                                        oncomplete="closeDialogIfSucess(xhr, status, args, 'dialogAdicProf','formAdicProfessor')" style="margin-top:5px" actionListener="#{TurmaProfessorBean.adicionarProfessor}"
+                                        onsuccess="PF('dialogAdicProf').hide();" />
+                                </div>
+        
+                        </h:form>
+                </p:dialog>
+                
+                <p:dialog header="Adicionar Boletim" widgetVar="dialogAdicBoletim"
+                        modal="true" resizable="true" id="idAdicBoletim" appendTo="@(body)"
+                        styleClass="dialogCadastrar">
+                        <h:form id="formAdicBoletim">
+                        
+                                <p:focus context="@form" />
+                                <p:growl id="growl" showDetail="true" life="4000" />
 
-				<h4>Selecione o boletim a ser incluido à turma</h4>
-				<p:separator />
+                                <h4>Selecione o boletim a ser incluido à turma</h4>
+                                <p:separator />
 
-				<p:outputLabel value="Boletins:" />
-					<p:selectOneMenu value="#{BoletimAlunoDisciplinaBean.boletimAlunoDisciplina.boletim}">
-						<f:selectItem itemLabel=" -- Selecione -- "
-							noSelectionOption="true" />
-						<f:selectItems value="#{BoletimBean.boletims}"
-							var="boletim" itemValue="#{boletim}"
-							itemLabel="ID : #{boletim.id} - Bimestre : #{boletim.bimestre.nome}" />
-						<f:converter converterId="boletimConverter" />
-					</p:selectOneMenu>
+                                <p:outputLabel value="Boletins:" />
+                                        <p:selectOneMenu value="#{BoletimAlunoDisciplinaBean.boletimAlunoDisciplina.boletim}">
+                                                <f:selectItem itemLabel=" -- Selecione -- "
+                                                        noSelectionOption="true" />
+                                                <f:selectItems value="#{BoletimBean.boletims}"
+                                                        var="boletim" itemValue="#{boletim}"
+                                                        itemLabel="ID : #{boletim.id} - Bimestre : #{boletim.bimestre.nome}" />
+                                                <f:converter converterId="boletimConverter" />
+                                        </p:selectOneMenu>
+                                        
 
-				<div id="botoesMedio">
-					<p:commandButton id="pojoBtnSubmit" value="Incluir" update=":formPrincipal:tabelaTurma @form growl" 
-					icon="ui-icon-disk" oncomplete="closeDialogIfSucess(xhr, status, args, 'dialogAdicProf','formAdicProfessor')" 
-					style="margin-top:5px" actionListener="#{BoletimAlunoDisciplinaBean.cadastrar(TurmaBean.turma)}"
-					onsuccess="PF('dialogAdicProf').hide();" />
-				</div>
-	
-			</h:form>
-		</p:dialog>
+                                <div id="botoesMedio">
+                                        <p:commandButton id="pojoBtnSubmit" value="Incluir" update=":formPrincipal:tabelaTurma @form growl" 
+                                        icon="ui-icon-disk" oncomplete="closeDialogIfSucess(xhr, status, args, 'dialogAdicBoletim','formAdicBoletim')" 
+                                        style="margin-top:5px" actionListener="#{BoletimAlunoDisciplinaBean.cadastrar}"
+                                        onsuccess="PF('dialogAdicProf').hide();" />
+                                </div>
+        
+                        </h:form>
+                </p:dialog>
 </ui:define>
 </ui:decorate>
 </html>

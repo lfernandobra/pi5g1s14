@@ -9,58 +9,57 @@ import edu.gaed.util.HibernateUtil;
 import edu.gaed.vo.BoletimAlunoDisciplina;
 
 public class BoletimAlunoDisciplinaDao {
-	private Session session;
+        private Session session;
 
-	public void inserir(BoletimAlunoDisciplina boletimalunodisciplina) {
-		try {
-			session = HibernateUtil.getSessionFactory().openSession();
-			session.beginTransaction();
-			session.save(boletimalunodisciplina);
-			session.getTransaction().commit();
+        public void inserir(BoletimAlunoDisciplina boletimalunodisciplina) {
+                try {
+                        session = HibernateUtil.getSessionFactory().openSession();
+                        session.beginTransaction();
+                        session.save(boletimalunodisciplina);
+                        session.getTransaction().commit();
 
-		} finally {
-			session.close();
-		}
-	}
+                } finally {
+                        session.close();
+                }
+        }
 
-	public void alterar(BoletimAlunoDisciplina boletimalunodisciplina) {
-		System.out.println(boletimalunodisciplina);
-		try {
-			session = HibernateUtil.getSessionFactory().openSession();
-			session.beginTransaction();
-			session.saveOrUpdate(boletimalunodisciplina);
-			session.getTransaction().commit();
-		} finally {
-			session.close();
+        public void alterar(BoletimAlunoDisciplina boletimalunodisciplina) {
+                System.out.println(boletimalunodisciplina);
+                try {
+                        session = HibernateUtil.getSessionFactory().openSession();
+                        session.beginTransaction();
+                        session.saveOrUpdate(boletimalunodisciplina);
+                        session.getTransaction().commit();
+                } finally {
+                        session.close();
 
-		}
-	}
+                }
+        }
 
-	public void excluir(BoletimAlunoDisciplina boletimalunodisciplina) {
-		System.out.println(boletimalunodisciplina);
-		try {
-			session = HibernateUtil.getSessionFactory().openSession();
-			session.beginTransaction();
-			session.delete(boletimalunodisciplina);
-			session.getTransaction().commit();
+        public void excluir(BoletimAlunoDisciplina boletimalunodisciplina) {
+                System.out.println(boletimalunodisciplina);
+                try {
+                        session = HibernateUtil.getSessionFactory().openSession();
+                        session.beginTransaction();
+                        session.delete(boletimalunodisciplina);
+                        session.getTransaction().commit();
 
-		} finally {
-			session.close();
+                } finally {
+                        session.close();
 
-		}
-	}
+                }
+        }
 
-	@SuppressWarnings("rawtypes")
-	public List listar() {
+        @SuppressWarnings("rawtypes")
+        public List listar() {
 
-		try {
-			session = HibernateUtil.getSessionFactory().openSession();
-			Criteria cri = session.createCriteria(BoletimAlunoDisciplina.class);
-			return cri.list();
-		} finally {
-			session.close();
+                try {
+                        session = HibernateUtil.getSessionFactory().openSession();
+                        Criteria cri = session.createCriteria(BoletimAlunoDisciplina.class);
+                        return cri.list();
+                } finally {
+                        session.close();
 
-		}
-	}
+                }
+        }
 }
-
