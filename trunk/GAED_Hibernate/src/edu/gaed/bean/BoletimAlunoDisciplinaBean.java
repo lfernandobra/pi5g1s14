@@ -92,7 +92,12 @@ public class BoletimAlunoDisciplinaBean {
 			this.turma = turma;
 		}
  
-        // métodos reset
+        // métodos
+		
+		@SuppressWarnings("rawtypes")
+		public List listarBoletimAluno(Aluno aluno){
+			return new BoletimAlunoDisciplinaDao().listarPorAluno(aluno);
+		}
         
         
 }

@@ -18,9 +18,10 @@
    <PROCESS-ITEM-OUTPUT ID="aluno::#aluno.xhtml" NAME="output4"
     PATH="/aluno.xhtml" SHAPE="313,216,418,216,418,48,423,48"
     TARGET="rules:#aluno.xhtml" TITLE="aluno" model-entity="JSFProcessItemOutput"/>
-   <PROCESS-ITEM-OUTPUT ID="boletim::#boletim.xhtml" NAME="output2"
-    PATH="/boletim.xhtml" SHAPE="313,232,530,232,530,48,535,48"
-    TARGET="rules:#boletim.xhtml" TITLE="boletim" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="boletim::#boletimalunodisciplina.xhtml"
+    NAME="output2" PATH="/boletimalunodisciplina.xhtml"
+    SHAPE="313,232,530,232,530,168,591,168"
+    TARGET="rules:#boletimalunodisciplina.xhtml" TITLE="boletim" model-entity="JSFProcessItemOutput"/>
    <PROCESS-ITEM-OUTPUT ID="config::#configuracoes.xhtml" NAME="output"
     PATH="/configuracoes.xhtml" SHAPE="313,248,624,248,624,48,631,48"
     TARGET="rules:#configuracoes.xhtml" TITLE="config" model-entity="JSFProcessItemOutput"/>
@@ -70,16 +71,6 @@
    <PROCESS-ITEM-OUTPUT ID="login::#login.xhtml" NAME="output"
     PATH="/login.xhtml"
     SHAPE="809,72,824,72,824,504,24,504,24,32,103,32"
-    TARGET="rules:#login.xhtml" TITLE="login" model-entity="JSFProcessItemOutput"/>
-  </PROCESS-ITEM>
- </PROCESS-ITEM>
- <PROCESS-ITEM NAME="rules:#boletim.xhtml" PATH="/boletim.xhtml"
-  SHAPE="536,40,50,41" model-entity="JSFProcessGroup">
-  <PROCESS-ITEM ID="rules:#boletim.xhtml:0" NAME="item"
-   PATH="/boletim.xhtml" model-entity="JSFProcessItem">
-   <PROCESS-ITEM-OUTPUT ID="login::#login.xhtml" NAME="output"
-    PATH="/login.xhtml"
-    SHAPE="585,72,592,72,592,488,72,488,72,32,103,32"
     TARGET="rules:#login.xhtml" TITLE="login" model-entity="JSFProcessItemOutput"/>
   </PROCESS-ITEM>
  </PROCESS-ITEM>
@@ -151,6 +142,14 @@
     PATH="/login.xhtml"
     SHAPE="1025,248,1120,248,1120,472,80,472,80,32,103,32"
     TARGET="rules:#login.xhtml" TITLE="login" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:#boletimalunodisciplina.xhtml"
+  PATH="/boletimalunodisciplina.xhtml" SHAPE="592,161,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:#boletimalunodisciplina.xhtml:0" NAME="item"
+   PATH="/boletimalunodisciplina.xhtml" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT ID="login::#login.xhtml" NAME="output"
+    PATH="/login.xhtml" TARGET="rules:#login.xhtml" TITLE="login" model-entity="JSFProcessItemOutput"/>
   </PROCESS-ITEM>
  </PROCESS-ITEM>
 </PROCESS>
