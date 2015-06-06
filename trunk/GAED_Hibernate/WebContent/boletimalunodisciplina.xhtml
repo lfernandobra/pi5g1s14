@@ -12,8 +12,9 @@
 <body>
 	<ui:decorate template="/Cabecalho.xhtml">
 		<ui:define name="center">
-			<h2>Lista de Boletins</h2>
+			<h2>Boletim</h2>
 			<div id="Lista">
+			<p:separator />
 			<div id="divAluno">
 				<h:form id="formBoletimAluno"
 					rendered="#{LoginBean.usuario.perfil.aluno}">
@@ -22,25 +23,37 @@
 						id="tabelaBoletimAluno" resizableColumns="true" reflow="true"
 						rows="5" emptyMessage="Nenhum registro encontrado"
 						paginator="true" paginatorPosition="bottom"
-						styleClass="dataTablePrincipal">
-						<f:facet name="header">Lista de Boletins </f:facet>
-						<p:column headerText="Bimestre" sortBy="#{boletim.pk.boletim.bimestre.nome}"
-							filterBy="#{boletim.pk.boletim.bimestre.nome}" style="width:230px">
-							<h:outputText value="#{boletim.pk.boletim.bimestre.nome}" />
+						styleClass="dataTablePrincipal"
+						widgetVar="boletimTable">
+						<f:facet name="header">Aluno : #{LoginBean.usuario.nome} #{LoginBean.usuario.sobrenome} 
+											 - Turma : #{LoginBean.aluno.turma.serie.serie} #{LoginBean.aluno.turma.nome} 
+											   Periodo : #{LoginBean.aluno.turma.periodo.periodo}</f:facet>
+						
+						<p:column filterBy="#{boletim.pk.boletim.bimestre}" headerText="Bimestre"
+								  filterMatchMode="exact" style="width:130px">
+							<f:facet name="filter">
+								<p:selectOneMenu onchange="PF('boletimTable').filter()">
+									<f:selectItem itemLabel="Todos" itemValue="#{null}"
+											noSelectionOption="true"/>
+									<f:selectItems value="#{BimestreBean.bimestres}"
+												   var="bimestre"
+												   itemValue="#{bimestre}" 
+												   itemLabel="#{bimestre.nome}º"
+												   required="true" id="selectAtual"  />
+								</p:selectOneMenu>
+							</f:facet>
+								<h:outputText value="#{boletim.pk.boletim.bimestre.nome}" />
 						</p:column>
-						<p:column headerText="Disciplina"
+
+							<p:column headerText="Disciplina"
 							sortBy="#{boletim.pk.disciplina.nome}"
 							filterBy="#{boletim.pk.disciplina.nome}">
 							<h:outputText value="#{boletim.pk.disciplina.nome}" />
 						</p:column>
-						<p:column headerText="Nota"
-							sortBy="#{boletim.nota}"
-							filterBy="#{boletim.nota}">
+						<p:column headerText="Nota">
 							<h:outputText value="#{boletim.nota}" />
 						</p:column>
-						<p:column headerText="Faltas"
-							sortBy="#{boletim.falta}"
-							filterBy="#{boletim.falta}">
+						<p:column headerText="Faltas">
 							<h:outputText value="#{boletim.falta}" />
 						</p:column>
 					</p:dataTable>
@@ -55,10 +68,10 @@
 						rows="5" emptyMessage="Nenhum aluno atribuido"
 						paginator="true" paginatorPosition="bottom"
 						styleClass="dataTablePrincipal">
-						<f:facet name="header">Boletins atribuidos a seus filhos</f:facet>
+						<f:facet name="header">Boletins dos alunos</f:facet>
 							<p:columnGroup type="header">
 								<p:row>
-									<p:column headerText="Bimestre" />
+									<p:column headerText="Bimestre"/>
 									<p:column headerText="Disciplina" />
 									<p:column headerText="Nota" />
 									<p:column headerText="Falta" />
@@ -67,7 +80,9 @@
 							
 							<p:subTable var="boletim" value="#{BoletimAlunoDisciplinaBean.listarBoletimAluno(aluno)}">
 								<f:facet name="header">
-									<h:outputText value="#{aluno.nome} #{aluno.sobrenome}" />
+									<h:outputText value="Aluno : #{aluno.nome} #{aluno.sobrenome} - 
+									                     Turma : #{aluno.turma.serie.serie} #{aluno.turma.nome}
+									                     Periodo : #{aluno.turma.periodo.periodo}" />
 								</f:facet>
 								<p:column>
 									<h:outputText value="#{boletim.pk.boletim.bimestre.nome}" />
