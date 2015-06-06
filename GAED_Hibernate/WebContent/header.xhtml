@@ -43,7 +43,9 @@
 						<p:menuitem value="Ocorrências" icon="ui-icon-alert"
 							action="ocorrencia" />
 						<p:menuitem value="Boletins" icon="ui-icon-document"
-							action="boletim" />
+							action="boletim" 
+							rendered="#{LoginBean.usuario.perfil.aluno or LoginBean.usuario.perfil.professor 
+										or LoginBean.usuario.perfil.responsavel}"/>
 						<p:menuitem value="Tarefas" icon="ui-icon-clipboard"
 							action="tarefa" />
 						<p:submenu label="Usuarios" icon="ui-icon-person"
