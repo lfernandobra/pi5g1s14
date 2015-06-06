@@ -194,7 +194,7 @@
                                 <p:panelGrid id="panelAlterar" columns="3">
                                         <p:outputLabel for="nome" value="Nome:" />
                                         <p:inputText value="#{TurmaBean.turma.nome}" required="true"
-                                                id="nome" requiredMessage="Nome nÃ£o deve estar vazio!" />
+                                                id="nome" requiredMessage="Nome não deve estar vazio!" />
                                         <p:messages for="nome" display="icon" closable="true" />
         
                                         <p:outputLabel for="periodo" value="Periodo:" />
@@ -252,7 +252,7 @@
                         
                                         <p:pickList id="PojoPickList"
                                                 value="#{TurmaAlunoBean.alunosDualList}" var="aluno"
-                                                effect="bounce" itemValue="#{aluno}" itemLabel="#{aluno.nome} #{aluno.sobrenome}"
+                                                effect="bounce" itemValue="#{aluno}" itemLabel="#{aluno.nome} #{aluno.sobrenome} #{aluno.serieAtual}"
                                                 showSourceControls="true" showTargetControls="true"
                                                 showCheckbox="true" showSourceFilter="true" showTargetFilter="true"
                                                 filterMatchMode="contains">
