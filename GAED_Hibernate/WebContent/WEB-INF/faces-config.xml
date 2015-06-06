@@ -123,6 +123,10 @@
 			<from-outcome>login</from-outcome>
 			<to-view-id>/login.xhtml</to-view-id>
 		</navigation-case>
+		<navigation-case>
+			<from-outcome>boletim</from-outcome>
+			<to-view-id>/boletimalunodisciplina.xhtml</to-view-id>
+		</navigation-case>
 	</navigation-rule>
 	<navigation-rule>
 		<from-view-id>/secretaria.xhtml</from-view-id>

@@ -102,6 +102,9 @@
     PATH="/login.xhtml"
     SHAPE="1025,176,1096,176,1096,448,48,448,48,32,103,32"
     TARGET="rules:#login.xhtml" TITLE="login" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="boletim::#boletimalunodisciplina.xhtml"
+    NAME="output1" PATH="/boletimalunodisciplina.xhtml"
+    TARGET="rules:#boletimalunodisciplina.xhtml" TITLE="boletim" model-entity="JSFProcessItemOutput"/>
   </PROCESS-ITEM>
  </PROCESS-ITEM>
  <PROCESS-ITEM NAME="rules:#professor.xhtml" PATH="/professor.xhtml"

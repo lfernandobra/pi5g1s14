@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+	<title>GAED</title>
+	<link rel="stylesheet" href="styles/layout.css" type="text/css" />
+</h:head>
+<body>
+
+	<p:layout fullPage="true" styleClass="paginaCabecalho">
+
+		<p:layoutUnit position="north" styleClass="gridMenu">
+
+			<div id="cabecalho">
+
+				<div id="logo">
+					<h:graphicImage value="/imagens/gaed_branco.png"
+						styleClass="logoGaed" />
+				</div>
+
+				<div id="fieldset">
+					<p:fieldset>
+						<h:form rendered="#{LoginBean.verificarSessao()}">
+							<h:outputLabel
+								value="Olá,#{LoginBean.usuario.nome} #{LoginBean.usuario.sobrenome}" />
+							<div id="foto">
+								<h:graphicImage width="60" height="80" border-style="1px"
+									value="/temp/#{LoginBean.verFoto()}" />
+							</div>
+							<h:commandButton value="Sair"
+								action="#{LoginBean.encerrarSession()}" />
+						</h:form>
+					</p:fieldset>
+				</div>
+
+				<h:form>
+					<p:growl id="messages" />
+					<p:menubar styleClass="menu">
+						<p:menuitem value="Home" icon="ui-icon-home" action="home" />
+						<p:menuitem value="Ocorrências" icon="ui-icon-alert"
+							action="ocorrencia" />
+						<p:menuitem value="Boletins" icon="ui-icon-document"
+							action="boletim" />
+						<p:menuitem value="Tarefas" icon="ui-icon-clipboard"
+							action="tarefa" />
+						<p:submenu label="Usuarios" icon="ui-icon-person"
+							rendered="#{LoginBean.usuario.perfil.secretaria or LoginBean.usuario.perfil.gestor}">
+							<p:menuitem value="Aluno" icon="ui-icon-person" action="aluno">
+							</p:menuitem>
+							<p:menuitem value="Responsavel" icon="ui-icon-person"
+								action="responsavel"></p:menuitem>
+							<p:menuitem value="Professor" icon="ui-icon-person"
+								action="professor"></p:menuitem>
+							<p:menuitem value="Gestor" url="#" icon="ui-icon-person"
+								action="gestor"></p:menuitem>
+							<p:menuitem value="Secretário(a)" url="#" icon="ui-icon-person"
+								action="secretaria"></p:menuitem>
+						</p:submenu>
+						<p:menuitem value="Configurações" icon="ui-icon-gear"
+							action="config"
+							rendered="#{LoginBean.usuario.perfil.secretaria or LoginBean.usuario.perfil.gestor}" />
+					</p:menubar>
+				</h:form>
+			</div>
+		</p:layoutUnit>
+
+		<div id="conteudoCentro">
+			<p:layoutUnit position="center" styleClass="centroHome">
+				<ui:insert name="center"></ui:insert>
+			</p:layoutUnit>
+		</div>
+
+		<p:layoutUnit position="south" styleClass="gridRodape">
+			<f:facet name="header">
+				<h:outputLabel
+					value=" © 2013-2015 GAED - Gerenciamento de Atividades Escolares Digital" />
+			</f:facet>
+		</p:layoutUnit>
+
+	</p:layout>
+</body>
+</html>
