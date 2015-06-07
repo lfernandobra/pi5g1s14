@@ -52,7 +52,7 @@
 							<h:outputText value="#{lista.disciplina.nome}" />
 						</p:column>
 						<p:rowExpansion>
-							<h3>Informações da tarefa</h3>
+							<h3 id="h3">Informações da tarefa</h3>
 							<p:panelGrid columns="2" columnClasses="label,value" styleClass="gridDataTable">
 								<h:outputText value="Data inicio: " style="font-weight: bold;" />
 								<h:outputFormat value="{0, date, dd/MM/yyyy}">
@@ -188,9 +188,12 @@
 					</h:form>
 				</p:dialog>
 				<p:dialog header="Incluir anexo" widgetVar="dialogIncluirAnexo"
-					modal="true" resizable="true" id="formCadAnexo" appendTo="@(body)">
+					modal="true" resizable="true" id="formCadFoto" appendTo="@(body)">
 					<h:form id="IncluirAnexo" styleClass="IncluirFoto">
 						<p:focus context="@form" />
+						<h5>Selecione um arquivo para anexar à tarefa ou arraste para
+							aqui - Tamanho permitido : 900k</h5>
+							<p:separator />
 
 						<p:fileUpload fileUploadListener="#{TarefaBean.uploadAction}"
 							size="50" mode="advanced" skinSimple="true" update="growl"
@@ -202,9 +205,7 @@
 							dragDropSupport="true">
 							<f:converter converterId="anexoConverter" />
 						</p:fileUpload>
-						<p:separator />
-						<h5>Selecione um arquivo para anexar à tarefa ou arraste para
-							aqui - Tamanho permitido : 900k</h5>
+						
 					</h:form>
 				</p:dialog>
 			
