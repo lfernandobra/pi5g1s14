@@ -20,7 +20,7 @@
 				rendered="#{LoginBean.usuario.perfil.professor or LoginBean.usuario.perfil.gestor}">
 				<f:facet name="left">
 					<p:commandButton value="Cadastrar" type="button"
-						onclick="PF('dialogCadastrar').show();" icon="ui-icon-disk" />
+						onclick="PF('dialogCadastrar').show();" icon="ui-icon-plusthick" />
 				</f:facet>
 			</p:toolbar>
 
@@ -62,24 +62,24 @@
 
 					<p:rowExpansion>
 						<h3>Informações da Ocorrência</h3>
-						<p:panelGrid columns="2" columnClasses="label,value">
+						<p:panelGrid columns="2" columnClasses="label,value" styleClass="gridDataTable">
 
-							<h:outputText value="Data:" />
+							<h:outputText value="Data:"  style="font-weight: bold;" />
 							<h:outputFormat value="{0, date, dd/MM/yyyy}">
 								<f:param value="#{lista.data}" />
 							</h:outputFormat>
-							<h:outputText value="Aluno:" />
+							<h:outputText value="Aluno:"  style="font-weight: bold;" />
 							<h:outputText
 								value="#{lista.aluno.nome} #{lista.aluno.sobrenome}" />
 
-							<h:outputText value="Turma:" />
+							<h:outputText value="Turma:"  style="font-weight: bold;" />
 							<h:outputText
 								value="#{lista.aluno.turma.serie.serie} #{lista.aluno.turma.nome}" />
 
-							<h:outputText value="Assunto:" />
+							<h:outputText value="Assunto:"  style="font-weight: bold;"  />
 							<h:outputText value="#{lista.assunto}" />
 
-							<h:outputText value="Descrição:" />
+							<h:outputText value="Descrição:"  style="font-weight: bold;"  />
 							<h:outputText id="descricao" value=" #{lista.descricao}"
 								escape="false" />
 						</p:panelGrid>
@@ -167,7 +167,7 @@
 							onsuccess="PF('dialogCadastrar').hide();" />
 
 						<p:commandButton value="Limpar" update="@form" process="@this"
-							icon="ui-icon-close">
+							icon="fa fa-eraser">
 							<p:resetInput target="panelCadastrar" />
 						</p:commandButton>
 					</div>

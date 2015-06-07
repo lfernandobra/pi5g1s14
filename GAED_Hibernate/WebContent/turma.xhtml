@@ -34,7 +34,7 @@
                                         <p:column style="width:16px">
                                                 <p:rowToggler />
                                         </p:column>
-                                        <p:column headerText="ID" sortBy="#{lista.id}"
+                                        <p:column headerText="ID" sortBy="#{lista.id}" style="width:130px"
                                                 filterBy="#{lista.id}">
                                                 <h:outputText value="#{lista.id}" />
                                         </p:column>
@@ -48,7 +48,7 @@
                                         </p:column>
                                         
                                         <p:rowExpansion>
-                                                <h3>Informações da Turma</h3>
+                                                <h3 id="h3">Informações da Turma</h3>
                                                 <div id="center">
                                                 <p:panelGrid columns="2" columnClasses="label,value" styleClass="gridDataTable">
                                                         <h:outputText value="Limite de alunos:" style="font-weight: bold;" />
@@ -178,7 +178,7 @@
                                                         oncomplete="closeDialogIfSucess(xhr, status, args, 'dialogCadastrar','formCad')"
                                                         onsuccess="PF('dialogCadastrar').hide();" />
                                                         
-                                                <p:commandButton value="Limpar" update="@form" process="@this">
+                                                <p:commandButton value="Limpar" update="@form" process="@this" icon="fa fa-eraser">
                                                         <p:resetInput target="panelCadastrar" />
                                                 </p:commandButton>
                                         </div>
@@ -234,7 +234,7 @@
                                         update=":formPrincipal:tabelaTurma @form"
                                         oncomplete="closeDialogIfSucess(xhr, status, args, 'dialogAlterar','formAlt')"
                                         onsuccess="PF('dialogAlterar').hide();" />
-                                <p:commandButton value="Limpar" update="@form" process="@this">
+                                <p:commandButton value="Limpar" update="@form" process="@this" icon="fa fa-eraser">
                                         <p:resetInput target="panelAlterar" />
                                 </p:commandButton>
                         </h:form>
@@ -335,17 +335,19 @@
                         </h:form>
                 </p:dialog>
                 
-                <p:dialog header="Adicionar Boletim" widgetVar="dialogAdicBoletim"
+                <p:dialog header="Adicionar Boletim" widgetVar="dialogAdicBoletim" 
                         modal="true" resizable="true" id="idAdicBoletim" appendTo="@(body)"
-                        styleClass="dialogCadastrar">
-                        <h:form id="formAdicBoletim">
+                        styleClass="dialogCadastrar" closeOnEscape="true" closable="true">
+						
                         
+                        <h:form id="formAdicBoletim" styleClass="formCadastrar">
                                 <p:focus context="@form" />
                                 <p:growl id="growl" showDetail="true" life="4000" />
 
                                 <h4>Selecione o boletim a ser incluido à turma</h4>
                                 <p:separator />
 
+							<p:panelGrid id="panelCadastrar" columns="2">
                                 <p:outputLabel value="Boletins:" />
                                         <p:selectOneMenu value="#{BoletimAlunoDisciplinaBean.boletimAlunoDisciplina.boletim}">
                                                 <f:selectItem itemLabel=" -- Selecione -- "
@@ -355,7 +357,7 @@
                                                         itemLabel="ID : #{boletim.id} - Bimestre : #{boletim.bimestre.nome}" />
                                                 <f:converter converterId="boletimConverter" />
                                         </p:selectOneMenu>
-                                        
+                              </p:panelGrid>          
 
                                 <div id="botoesMedio">
                                         <p:commandButton id="pojoBtnSubmit" value="Incluir" update=":formPrincipal:tabelaTurma @form growl" 

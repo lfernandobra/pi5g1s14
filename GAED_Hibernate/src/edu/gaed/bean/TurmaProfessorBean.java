@@ -70,7 +70,7 @@ public class TurmaProfessorBean implements Serializable{
 			if (turmaDisciplina.getId() == null){
 				new TurmaDisciplinaDao().inserir(turmaDisciplina);	
 				FacesContext context = FacesContext.getCurrentInstance();
-		        context.addMessage(null, new FacesMessage("Atribuíto",  " Professor(a) atribuído com sucesso!") );
+		        context.addMessage(null, new FacesMessage("Atribuido",  " Professor(a) atribuido com sucesso!") );
 			}
 		}
 		for(TurmaDisciplina turmaDisciplina : professoresDualList.getSource()){
