@@ -54,18 +54,18 @@
 						<p:rowExpansion>
 							<h3>Informações da tarefa</h3>
 							<p:panelGrid columns="2" columnClasses="label,value" styleClass="gridDataTable">
-								<h:outputText value="Data inicio " style="font-weight: bold;" />
+								<h:outputText value="Data inicio: " style="font-weight: bold;" />
 								<h:outputFormat value="{0, date, dd/MM/yyyy}">
 									<f:param value="#{lista.inicio}" />
 								</h:outputFormat>
-								<h:outputText value="Data final " style="font-weight: bold;" />
+								<h:outputText value="Data final: " style="font-weight: bold;" />
 								<h:outputFormat value="{0, date, dd/MM/yyyy}">
 									<f:param value="#{lista.fim}" />
 								</h:outputFormat>
-								<h:outputText value="Turmas" style="font-weight: bold;" />
+								<h:outputText value="Turmas:" style="font-weight: bold;" />
 								<p:dataList value="#{lista.turmas}" var="turma"
 									emptyMessage="Nenhuma disciplina atribuida" type="definition">
-	            				Série : #{turma.serie.serie} #{turma.nome} | Periodo : #{turma.periodo.periodo}
+	            				Série : #{turma.serie.serie} #{turma.nome} - Periodo : #{turma.periodo.periodo}
 	        			</p:dataList>
 								<h:outputText value="Descrição " style="font-weight: bold;"/>
 								<h:outputText value="#{lista.descricao}" />
@@ -73,8 +73,7 @@
 								<h:form>
 									<h:inputHidden
 										value="#{AnexoBean.verAnexo(lista.anexo.anexo,lista.anexo.nome)}" />
-									<p:commandButton value="Download" ajax="false"
-										icon="ui-icon-arrowthick-1-s">
+									<p:commandButton value="Download" ajax="false"	icon="fa fa-download">
 										<p:fileDownload
 											value="#{AnexoBean.downloadFile(lista.anexo.nome)}" />
 									</p:commandButton>
@@ -171,7 +170,7 @@
 							</p:inputText>
 							<p:outputLabel for="anexo" value="Anexo:" />
 							<p:commandButton value="Incluir anexo" type="button"
-								onclick="PF('dialogIncluirAnexo').show();" icon="ui-icon-image"
+								onclick="PF('dialogIncluirAnexo').show();" icon="fa fa-paperclip"
 								id="anexo" />
 						</p:panelGrid>
 
@@ -182,7 +181,7 @@
 								oncomplete="closeDialogIfSucess(xhr, status, args, 'dialogCadastrar','formCad')"
 								onsuccess="PF('dialogCadastrar').hide();" />
 
-							<p:commandButton value="Limpar" update="@form" process="@this">
+							<p:commandButton value="Limpar" update="@form" process="@this" icon="fa fa-eraser">
 								<p:resetInput target="panelCadastrar" />
 							</p:commandButton>
 						</div>

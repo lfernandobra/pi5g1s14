@@ -23,7 +23,7 @@
 				<p:toolbar styleClass="toolbarAluno">
 					<f:facet name="left">
 						<p:commandButton value="Cadastrar" type="button"
-							onclick="PF('dialogCadastrar').show();" icon="ui-icon-disk" />
+							onclick="PF('dialogCadastrar').show();" icon="ui-icon-plusthick" />
 					</f:facet>
 				</p:toolbar>
 
@@ -52,51 +52,51 @@
 						</p:column>
 
 						<p:rowExpansion>
-							<h3>Informações do gestor</h3>
-							<p:panelGrid columns="2" columnClasses="label,value" >
-								<h:outputText value="Data de nascimento " />
+							<h3 id="h3">Informações do gestor</h3>
+							<p:panelGrid columns="2" columnClasses="label,value" styleClass="gridDataTable" >
+								<h:outputText value="Data de nascimento: " style="font-weight: bold;" />
 								<h:outputFormat value="{0, date, dd/MM/yyyy}">
 									<f:param value="#{lista.datanasc}" />
 								</h:outputFormat>
-								<h:outputText value="Sexo " />
+								<h:outputText value="Sexo: " style="font-weight: bold;"/>
 								<h:outputText value="#{lista.sexo}" />
-								<h:outputText value="RG " />
+								<h:outputText value="RG: " style="font-weight: bold;" />
 								<h:outputText value="#{lista.RG}" />
-								<h:outputText value="CPF " />
+								<h:outputText value="CPF: " style="font-weight: bold;" />
 								<h:outputText value="#{lista.CPF}" />
-								<h:outputText value="Situação " />
+								<h:outputText value="Situação: " style="font-weight: bold;" />
 								<h:outputText value="Ativo" rendered="#{lista.status}" />
 								<h:outputText value="Inativo" rendered="#{not lista.status}" />
-								<h:outputText value="E-mail " />
+								<h:outputText value="E-mail: " style="font-weight: bold;" />
 								<h:outputText value="#{lista.email}" />
-								<h:outputText value="Telefone " />
+								<h:outputText value="Telefone: " style="font-weight: bold;" />
 								<h:outputText value="#{lista.telefone}" />
-								<h:outputText value="Endereço " />
+								<h:outputText value="Endereço: " style="font-weight: bold;" />
 								<h:outputText
 									value="#{lista.logradouro.nome} 
-													 #{lista.numero} 
-													 #{lista.logradouro.bairro.nome}
-													 #{lista.logradouro.bairro.municipio.nome}
-													 #{lista.logradouro.bairro.municipio.uf.nome}
-													 #{lista.complemento}
+													 #{lista.numero}, 
+													 #{lista.logradouro.bairro.nome} -
+													 #{lista.logradouro.bairro.municipio.nome} -
+													 #{lista.logradouro.bairro.municipio.uf.nome} -
+													 #{lista.complemento} 
 													 #{lista.logradouro.CEP}" />
-								<h:outputText value="Data de ingresso " />
+								<h:outputText value="Data de ingresso: " style="font-weight: bold;" />
 								<h:outputFormat value="{0, date, dd/MM/yyyy}">
 									<f:param value="#{lista.dataIngresso}" />
 								</h:outputFormat>
-								<h:outputText value="Data de saida " />
+								<h:outputText value="Data de saida: " style="font-weight: bold;" />
 								<h:outputFormat value="{0, date, dd/MM/yyyy}" rendered="#{!empty lista.dataSaida}" >
 									<f:param value="#{lista.dataSaida}" />
 								</h:outputFormat>
 								<h:outputText value="Não definida" rendered="#{lista.dataSaida eq null}"/>
 								
-								<h:outputText value="Formação acadêmica " />
+								<h:outputText value="Formação acadêmica: " style="font-weight: bold;" />
 								<h:outputText value="#{lista.formacaoAcad}" />
 
-								<h:outputText value="Instituição acadêmica " />
+								<h:outputText value="Instituição acadêmica: " style="font-weight: bold;" />
 								<h:outputText value="#{lista.instituicaoAcad}" />
 
-								<h:outputText value="Ano conclusão " />
+								<h:outputText value="Ano conclusão: " style="font-weight: bold;" />
 								<h:outputFormat value="{0, date, dd/MM/yyyy}">
 									<f:param value="#{lista.anoConclusao}" />
 								</h:outputFormat>
@@ -319,7 +319,7 @@
 							onsuccess="PF('dialogCadastrar').hide();" />
 
 						<p:commandButton value="Limpar" update="@form " process="@this"
-							icon="ui-icon-close">
+							icon="fa fa-eraser">
 							<p:resetInput target="panelCadastrar panelGridLogradouro" />
 						</p:commandButton>
 					</div>
