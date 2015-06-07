@@ -61,7 +61,7 @@
 					</p:column>
 
 					<p:rowExpansion>
-						<h3>Informações da Ocorrência</h3>
+						<h3 id="h3">Informações da Ocorrência</h3>
 						<p:panelGrid columns="2" columnClasses="label,value" styleClass="gridDataTable">
 
 							<h:outputText value="Data:"  style="font-weight: bold;" />
@@ -126,7 +126,7 @@
 					<h:outputText value="Campos obrigatórios * "
 						style="font-size: 10px !important; top: 5px !important 	" />
 
-					<h3>Dados da ocorrência</h3>
+					<h3 >Dados da ocorrência</h3>
 					<p:separator />
 					<p:panelGrid id="panelCadastrar" columns="2">
 						<p:outputLabel for="aluno" value="Aluno" />
@@ -257,17 +257,17 @@
 							<h:outputText value="#{ocorrencia.aluno.nome} #{ocorrencia.aluno.sobrenome}" />
 						</p:column>
 						<p:rowExpansion>
-							<h4>Informações da Ocorrência</h4>
-							<p:panelGrid columns="2" columnClasses="label,value">
-							<h:outputText value="Data:" />
+							<h3 id="h3">Informações da Ocorrência</h3>
+							<p:panelGrid columns="2" columnClasses="label,value" styleClass="gridDataTable">
+							<h:outputText value="Data:" style="font-weight: bold;" />
 							<h:outputFormat value="{0, date, dd/MM/yyyy}">
 								<f:param value="#{ocorrencia.data}" />
 							</h:outputFormat>
-							<h:outputText value="Turma:" />
+							<h:outputText value="Turma:" style="font-weight: bold;" />
 							<h:outputText value="#{ocorrencia.aluno.turma.serie.serie} #{ocorrencia.aluno.turma.nome}" />
-							<h:outputText value="Assunto:" />
+							<h:outputText value="Assunto:" style="font-weight: bold;" />
 							<h:outputText value="#{ocorrencia.assunto}" />
-							<h:outputText value="Descrição:" />
+							<h:outputText value="Descrição:" style="font-weight: bold;" />
 							<h:outputText id="descricao" value=" #{ocorrencia.descricao}" escape="false" />
 						</p:panelGrid>
 						</p:rowExpansion>	
@@ -305,17 +305,17 @@
 							<h:outputText value="#{ocorrencia.aluno.nome} #{ocorrencia.aluno.sobrenome}" />
 						</p:column>
 						<p:rowExpansion>
-							<h4>Informações da Ocorrência</h4>
-							<p:panelGrid columns="2" columnClasses="label,value">
-							<h:outputText value="Data:" />
+							<h3 id="h3">Informações da Ocorrência</h3>
+							<p:panelGrid columns="2" columnClasses="label,value" styleClass="gridDataTable">
+							<h:outputText value="Data:" style="font-weight: bold;"/>
 							<h:outputFormat value="{0, date, dd/MM/yyyy}">
 								<f:param value="#{ocorrencia.data}" />
 							</h:outputFormat>
-							<h:outputText value="Turma:" />
+							<h:outputText value="Turma:" style="font-weight: bold;" />
 							<h:outputText value="#{ocorrencia.aluno.turma.serie.serie} #{ocorrencia.aluno.turma.nome}" />
-							<h:outputText value="Assunto:" />
+							<h:outputText value="Assunto:" style="font-weight: bold;" />
 							<h:outputText value="#{ocorrencia.assunto}" />
-							<h:outputText value="Descrição:" />
+							<h:outputText value="Descrição:" style="font-weight: bold;" />
 							<h:outputText id="descricao" value=" #{ocorrencia.descricao}" escape="false" />
 						</p:panelGrid>
 						</p:rowExpansion>	
