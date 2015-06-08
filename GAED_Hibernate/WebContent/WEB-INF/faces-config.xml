@@ -43,6 +43,10 @@
 			<to-view-id>/configuracoes.xhtml</to-view-id>
 		</navigation-case>
 		<navigation-case>
+			<from-outcome>disciplina</from-outcome>
+			<to-view-id>/disciplina.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
 			<from-outcome>gestor</from-outcome>
 			<to-view-id>/gestor.xhtml</to-view-id>
 		</navigation-case>
