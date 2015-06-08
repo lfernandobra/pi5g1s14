@@ -39,10 +39,8 @@
 					<p:growl id="messages" />
 					<p:menubar styleClass="menu">
 						<p:menuitem value="Home" icon="fa fa-home" action="home" />
-						<p:menuitem value="Ocorrências" icon="fa fa-warning"
-							action="ocorrencia" />
-						<p:menuitem value="Boletins" icon="ui-icon-document"
-							action="boletim" 
+						<p:menuitem value="Ocorrências" icon="fa fa-warning"	action="ocorrencia" />
+						<p:menuitem value="Boletins" icon="fa fa-file-text-o"	action="boletim" 
 							rendered="#{LoginBean.usuario.perfil.aluno or LoginBean.usuario.perfil.professor 
 										or LoginBean.usuario.perfil.responsavel}"/>
 						<p:menuitem value="Tarefas" icon="fa fa-book"
