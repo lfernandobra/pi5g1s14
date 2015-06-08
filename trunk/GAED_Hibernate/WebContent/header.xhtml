@@ -48,10 +48,11 @@
 										or LoginBean.usuario.perfil.responsavel}"/>
 						<p:menuitem value="Tarefas" icon="ui-icon-clipboard"
 							action="tarefa" />
+						<p:menuitem value="Turmas" icon="ui-icon-clipboard"
+							action="turma" />	
 						<p:submenu label="Usuarios" icon="ui-icon-person"
 							rendered="#{LoginBean.usuario.perfil.secretaria or LoginBean.usuario.perfil.gestor}">
-							<p:menuitem value="Aluno" icon="ui-icon-person" action="aluno">
-							</p:menuitem>
+							<p:menuitem value="Aluno" icon="ui-icon-person" action="aluno"></p:menuitem>
 							<p:menuitem value="Responsavel" icon="ui-icon-person"
 								action="responsavel"></p:menuitem>
 							<p:menuitem value="Professor" icon="ui-icon-person"
@@ -61,9 +62,21 @@
 							<p:menuitem value="Secretário(a)" url="#" icon="ui-icon-person"
 								action="secretaria"></p:menuitem>
 						</p:submenu>
-						<p:menuitem value="Configurações" icon="ui-icon-gear"
-							action="config"
-							rendered="#{LoginBean.usuario.perfil.secretaria or LoginBean.usuario.perfil.gestor}" />
+						<p:submenu label="Configurações" icon="ui-icon-person"
+							rendered="#{LoginBean.usuario.perfil.secretaria or LoginBean.usuario.perfil.gestor}">
+							<p:menuitem value="Bimestre" icon="ui-icon-person" action="bimestre"></p:menuitem>
+							<p:menuitem value="Boletim" icon="ui-icon-person" action="boletim"></p:menuitem>
+							<p:menuitem value="Disciplinas" icon="ui-icon-person" action="disciplina"></p:menuitem>
+							<p:submenu label="Endereço" icon="ui-icon-person">
+								<p:menuitem value="Bairro" icon="ui-icon-person" action="bairro"></p:menuitem>
+								<p:menuitem value="Logradouro" icon="ui-icon-person" action="logradouro"></p:menuitem>
+								<p:menuitem value="Municipio" icon="ui-icon-person" action="municipio"></p:menuitem>
+								<p:menuitem value="UF" icon="ui-icon-person" action="uf"></p:menuitem>
+							</p:submenu>
+							<p:menuitem value="Imagem" icon="ui-icon-person" action="imagem"></p:menuitem>
+							<p:menuitem value="Periodo" icon="ui-icon-person" action="periodo"></p:menuitem>
+							<p:menuitem value="Serie" icon="ui-icon-person" action="serie"></p:menuitem>
+						</p:submenu>
 					</p:menubar>
 				</h:form>
 			</div>

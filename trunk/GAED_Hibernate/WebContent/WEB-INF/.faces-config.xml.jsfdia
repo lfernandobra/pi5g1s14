@@ -25,13 +25,12 @@
    <PROCESS-ITEM-OUTPUT ID="config::#configuracoes.xhtml" NAME="output"
     PATH="/configuracoes.xhtml" SHAPE="313,248,624,248,624,48,631,48"
     TARGET="rules:#configuracoes.xhtml" TITLE="config" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="disciplina::#disciplina.xhtml"
+    NAME="output1" PATH="/disciplina.xhtml"
+    TARGET="rules:#disciplina.xhtml" TITLE="disciplina" model-entity="JSFProcessItemOutput"/>
    <PROCESS-ITEM-OUTPUT ID="gestor::#gestor.xhtml" NAME="output5"
     PATH="/gestor.xhtml" SHAPE="313,264,754,264,754,48,759,48"
     TARGET="rules:#gestor.xhtml" TITLE="gestor" model-entity="JSFProcessItemOutput"/>
-   <PROCESS-ITEM-OUTPUT ID="login::#login.xhtml" NAME="output1"
-    PATH="/login.xhtml"
-    SHAPE="313,280,360,280,360,432,40,432,40,32,103,32"
-    TARGET="rules:#login.xhtml" TITLE="login" model-entity="JSFProcessItemOutput"/>
    <PROCESS-ITEM-OUTPUT ID="ocorrencia::#ocorrencia.xhtml"
     NAME="output3" PATH="/ocorrencia.xhtml"
     SHAPE="313,296,858,296,858,48,863,48"
@@ -152,4 +151,6 @@
     PATH="/login.xhtml" TARGET="rules:#login.xhtml" TITLE="login" model-entity="JSFProcessItemOutput"/>
   </PROCESS-ITEM>
  </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:#disciplina.xhtml" PATH="/disciplina.xhtml"
+  SHAPE="592,593,0,0" model-entity="JSFProcessGroup"/>
 </PROCESS>
