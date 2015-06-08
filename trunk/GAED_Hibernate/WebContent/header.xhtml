@@ -30,8 +30,7 @@
 								<h:graphicImage width="60" height="80" border-style="1px"
 									value="/temp/#{LoginBean.verFoto()}" />
 							</div>
-							<h:commandButton value="Sair"
-								action="#{LoginBean.encerrarSession()}" />
+							<h:commandButton value="Sair" icon="fa fa-sign-out"	action="#{LoginBean.encerrarSession()}" />
 						</h:form>
 					</p:fieldset>
 				</div>
@@ -39,43 +38,43 @@
 				<h:form>
 					<p:growl id="messages" />
 					<p:menubar styleClass="menu">
-						<p:menuitem value="Home" icon="ui-icon-home" action="home" />
-						<p:menuitem value="Ocorrências" icon="ui-icon-alert"
+						<p:menuitem value="Home" icon="fa fa-home" action="home" />
+						<p:menuitem value="Ocorrências" icon="fa fa-warning"
 							action="ocorrencia" />
 						<p:menuitem value="Boletins" icon="ui-icon-document"
 							action="boletim" 
 							rendered="#{LoginBean.usuario.perfil.aluno or LoginBean.usuario.perfil.professor 
 										or LoginBean.usuario.perfil.responsavel}"/>
-						<p:menuitem value="Tarefas" icon="ui-icon-clipboard"
+						<p:menuitem value="Tarefas" icon="fa fa-book"
 							action="tarefa" />
-						<p:menuitem value="Turmas" icon="ui-icon-clipboard"
+						<p:menuitem value="Turmas" icon="fa fa-slideshare"
 							action="turma" />	
-						<p:submenu label="Usuarios" icon="ui-icon-person"
+						<p:submenu label="Usuarios" icon="fa fa-users"
 							rendered="#{LoginBean.usuario.perfil.secretaria or LoginBean.usuario.perfil.gestor}">
-							<p:menuitem value="Aluno" icon="ui-icon-person" action="aluno"></p:menuitem>
-							<p:menuitem value="Responsavel" icon="ui-icon-person"
+							<p:menuitem value="Aluno" icon="fa fa-user" action="aluno"></p:menuitem>
+							<p:menuitem value="Responsavel" icon="fa fa-user"
 								action="responsavel"></p:menuitem>
-							<p:menuitem value="Professor" icon="ui-icon-person"
+							<p:menuitem value="Professor" icon="fa fa-user"
 								action="professor"></p:menuitem>
-							<p:menuitem value="Gestor" url="#" icon="ui-icon-person"
+							<p:menuitem value="Gestor" url="#" icon="fa fa-user"
 								action="gestor"></p:menuitem>
-							<p:menuitem value="Secretário(a)" url="#" icon="ui-icon-person"
+							<p:menuitem value="Secretário(a)" url="#" icon="fa fa-user"
 								action="secretaria"></p:menuitem>
 						</p:submenu>
-						<p:submenu label="Configurações" icon="ui-icon-person"
+						<p:submenu label="Configurações" icon="fa fa-cogs"
 							rendered="#{LoginBean.usuario.perfil.secretaria or LoginBean.usuario.perfil.gestor}">
-							<p:menuitem value="Bimestre" icon="ui-icon-person" action="bimestre"></p:menuitem>
-							<p:menuitem value="Boletim" icon="ui-icon-person" action="boletim"></p:menuitem>
-							<p:menuitem value="Disciplinas" icon="ui-icon-person" action="disciplina"></p:menuitem>
-							<p:submenu label="Endereço" icon="ui-icon-person">
-								<p:menuitem value="Bairro" icon="ui-icon-person" action="bairro"></p:menuitem>
-								<p:menuitem value="Logradouro" icon="ui-icon-person" action="logradouro"></p:menuitem>
-								<p:menuitem value="Municipio" icon="ui-icon-person" action="municipio"></p:menuitem>
-								<p:menuitem value="UF" icon="ui-icon-person" action="uf"></p:menuitem>
+							<p:menuitem value="Bimestre" icon="fa fa-calendar-o" action="bimestre"></p:menuitem>
+							<p:menuitem value="Boletim" icon="fa fa-file-text-o" action="boletim"></p:menuitem>
+							<p:menuitem value="Disciplinas" icon="fa fa-files-o" action="disciplina"></p:menuitem>
+							<p:submenu label="Endereço" icon="fa fa-map-marker">
+								<p:menuitem value="Bairro" action="bairro"></p:menuitem>
+								<p:menuitem value="Logradouro"  action="logradouro"></p:menuitem>
+								<p:menuitem value="Municipio"  action="municipio"></p:menuitem>
+								<p:menuitem value="UF" action="uf"></p:menuitem>
 							</p:submenu>
-							<p:menuitem value="Imagem" icon="ui-icon-person" action="imagem"></p:menuitem>
-							<p:menuitem value="Periodo" icon="ui-icon-person" action="periodo"></p:menuitem>
-							<p:menuitem value="Serie" icon="ui-icon-person" action="serie"></p:menuitem>
+							<p:menuitem value="Imagem" icon="fa fa-file-image-o" action="imagem"></p:menuitem>
+							<p:menuitem value="Periodo" icon="fa fa-clipboard" action="periodo"></p:menuitem>
+							<p:menuitem value="Serie" icon="fa fa-list-alt" action="serie"></p:menuitem>
 						</p:submenu>
 					</p:menubar>
 				</h:form>
