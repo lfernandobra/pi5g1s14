@@ -17,7 +17,8 @@
 			<p:separator />
 
 			<p:toolbar styleClass="toolbar"
-				rendered="#{LoginBean.usuario.perfil.professor or LoginBean.usuario.perfil.gestor}">
+				rendered="#{LoginBean.usuario.perfil.professor or LoginBean.usuario.perfil.gestor or
+				LoginBean.usuario.perfil.secretaria}">
 				<f:facet name="left">
 					<p:commandButton value="Cadastrar" type="button"
 						onclick="PF('dialogCadastrar').show();" icon="ui-icon-plusthick" />
@@ -28,7 +29,7 @@
 
 
 			<h:form id="formPrincipal" 
-					rendered="#{LoginBean.usuario.perfil.professor or LoginBean.usuario.perfil.gestor}">
+					rendered="#{LoginBean.usuario.perfil.professor or LoginBean.usuario.perfil.gestor or LoginBean.usuario.perfil.secretaria}">
 				<p:growl id="growl" showDetail="true" life="4000" />
 				<p:dataTable var="lista" value="#{OcorrenciaBean.ocorrencias}"
 					id="tabelaOcorrencia" resizableColumns="true" reflow="true"

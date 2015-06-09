@@ -68,6 +68,14 @@
     PATH="/login.xhtml"
     SHAPE="1025,336,1112,336,1112,456,56,456,56,32,103,32"
     TARGET="rules:#login.xhtml" TITLE="login" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="ocorrencia::#ocorrencia.xhtml"
+    NAME="output1" PATH="/ocorrencia.xhtml"
+    TARGET="rules:#ocorrencia.xhtml" TITLE="ocorrencia" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="boletimalunodisciplina::#boletimalunodisciplina.xhtml"
+    NAME="output2" PATH="/boletimalunodisciplina.xhtml"
+    TARGET="rules:#boletimalunodisciplina.xhtml"
+    TITLE="boletimalunodisciplina" model-entity="JSFProcessItemOutput"/>
   </PROCESS-ITEM>
  </PROCESS-ITEM>
  <PROCESS-ITEM NAME="rules:#aluno.xhtml" PATH="/aluno.xhtml"
@@ -118,6 +126,11 @@
     PATH="/login.xhtml"
     SHAPE="913,72,944,72,944,512,16,512,16,32,103,32"
     TARGET="rules:#login.xhtml" TITLE="login" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="tarefa::#tarefa.xhtml" NAME="output1"
+    PATH="/tarefa.xhtml" TARGET="rules:#tarefa.xhtml" TITLE="tarefa" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="boletim::#boletimalunodisciplina.xhtml"
+    NAME="output2" PATH="/boletimalunodisciplina.xhtml"
+    TARGET="rules:#boletimalunodisciplina.xhtml" TITLE="boletim" model-entity="JSFProcessItemOutput"/>
   </PROCESS-ITEM>
  </PROCESS-ITEM>
  <PROCESS-ITEM NAME="rules:#secretaria.xhtml" PATH="/secretaria.xhtml"
