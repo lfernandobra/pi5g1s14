@@ -9,28 +9,54 @@
 	<script src="scripts/scripts.js" type="text/javascript"></script>
 	<link rel="stylesheet" href="styles/layout_crud.css" type="text/css" />
 </h:head>
-<h:body>
-	<h:form id="IncluirFoto" styleClass="IncluirFoto">
-		<p:focus context="@form" />
-		<h4>Selecione uma foto para anexar ao cadastro :</h4>
-		<p:separator />
-		<p:growl id="growl" showDetail="true" life="4000" />
-		<p:fileUpload fileUploadListener="#{ImagemBean.fileUpload}" size="50"
-			mode="advanced" skinSimple="true" update="growl" sizeLimit="2000000000"
-			fileLimit="1" allowTypes="/(\.|\/)(gif|jpe?g|png)$/"
-			label="Selecionar" uploadLabel="Enviar" cancelLabel="Cancelar"
-			id="IncluirAnexo"
-			invalidSizeMessage="Limite excedido: Não possivel o envio"
-			invalidFileMessage="Formato de arquivo não permitido"
-			dragDropSupport="true">
-			<f:converter converterId="anexoConverter" />
-		</p:fileUpload>
+<body>
 
+<ui:decorate template="/header.xhtml">
+	<ui:define name="center">
+
+
+		<h2>Imagens</h2>
+
+		<div id="Lista">
+			<p:separator />
+
+			<p:toolbar styleClass="toolbar">
+				<f:facet name="left">
+				<p:commandButton value="Incluir foto" type="button" onclick="PF('dialogIncluirFoto').show();" icon="ui-icon-image" />
+				</f:facet>
+			</p:toolbar>
+			
+			
+			<p:dialog header="Incluir Foto" widgetVar="dialogIncluirFoto"
+			modal="true" resizable="true" id="formCadFoto" appendTo="@(body)">
+			<h:form id="IncluirFoto" styleClass="IncluirFoto">
+				<p:focus context="@form" />
+				<h4>Selecione uma foto :</h4>
+				<p:separator />
+			<p:growl id="growl" showDetail="true" life="4000" />
+				<p:fileUpload fileUploadListener="#{ImagemBean.fileUpload}" size="50"
+					mode="advanced" skinSimple="true" update="growl" sizeLimit="2000000000"
+					fileLimit="1" allowTypes="/(\.|\/)(gif|jpe?g|png)$/"
+					label="Selecionar" uploadLabel="Enviar" cancelLabel="Cancelar"
+					id="IncluirAnexo"
+					invalidSizeMessage="Limite excedido: Não possivel o envio"
+					invalidFileMessage="Formato de arquivo não permitido"
+					dragDropSupport="true">
+					<f:converter converterId="anexoConverter" />
+				</p:fileUpload>
+				</h:form>
+			</p:dialog>
+			
+		<div id="immg">
 		<p:galleria value="#{ImagemBean.imagems}" var="imagem" panelWidth="500"
 			panelHeight="320" showCaption="true">
 			<p:graphicImage value="temp/#{ImagemBean.verImagem(imagem.imagem,imagem.nome)}"
 				alt="Image Description for #{imagem.nome}" title="#{imagem.nome}" />
 		</p:galleria>
-	</h:form>
-</h:body>
+		</div>
+		
+	</div>
+	</ui:define>
+	</ui:decorate>
+</body>
 </html>
