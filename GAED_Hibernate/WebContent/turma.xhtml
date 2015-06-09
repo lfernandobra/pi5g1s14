@@ -70,9 +70,9 @@
                                         </p:dataList>
                                         
                                         <h:outputText value="Professores:" style="font-weight: bold;" />
-                                        <p:dataList value="#{lista.turmasDisciplinas}" var="professores" 
+                                        <p:dataList value="#{lista.turmasDisciplinas}" var="turmaDisciplina" 
                                                 emptyMessage="nenhum professor atribuído a essa turma">
-                                                #{professores.nome} #{professores.sobrenome}
+                                                #{turmaDisciplina.professor.nome} #{turmaDisciplina.professor.sobrenome}
                                         </p:dataList>
                                                 </p:panelGrid>
                                                 </div>
