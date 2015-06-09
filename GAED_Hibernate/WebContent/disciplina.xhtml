@@ -33,7 +33,7 @@
 				<p:rowExpansion>
 					<p:panelGrid columns="2" columnClasses="label,value">
 						<h:outputText value="Conteúdo" />
-						<h:outputText value="#{lista.conteudo}" />
+						<h:outputText value="#{lista.conteudo}" escape="false"/>
 						<h:outputText value="Professores" />
 						<p:dataList value="#{lista.professores}" var="professor"
 							emptyMessage="Nenhum professor leciona a matéria">

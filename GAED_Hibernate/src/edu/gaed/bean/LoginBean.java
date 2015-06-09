@@ -160,7 +160,7 @@ public class LoginBean {
 				this.responsavel = (Responsavel) usuario;
 				resultado = "home";
 			}
-			else if(us != null && us.getPerfil().isResponsavel()){
+			else if(us != null && us.getPerfil().isSecretaria()){
 				FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("usuario",us);
 				FacesContext context = FacesContext.getCurrentInstance();
 				context.addMessage(null, new FacesMessage("Autenticação realizada com sucesso",  "Autenticado "));

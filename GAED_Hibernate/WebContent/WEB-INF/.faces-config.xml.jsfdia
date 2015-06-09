@@ -18,34 +18,31 @@
    <PROCESS-ITEM-OUTPUT ID="aluno::#aluno.xhtml" NAME="output4"
     PATH="/aluno.xhtml" SHAPE="313,216,418,216,418,48,423,48"
     TARGET="rules:#aluno.xhtml" TITLE="aluno" model-entity="JSFProcessItemOutput"/>
-   <PROCESS-ITEM-OUTPUT ID="boletim::#boletimalunodisciplina.xhtml"
-    NAME="output2" PATH="/boletimalunodisciplina.xhtml"
-    SHAPE="313,232,530,232,530,168,591,168"
-    TARGET="rules:#boletimalunodisciplina.xhtml" TITLE="boletim" model-entity="JSFProcessItemOutput"/>
-   <PROCESS-ITEM-OUTPUT ID="config::#configuracoes.xhtml" NAME="output"
-    PATH="/configuracoes.xhtml" SHAPE="313,248,624,248,624,48,631,48"
-    TARGET="rules:#configuracoes.xhtml" TITLE="config" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="boletimalunodisciplina::#boletimalunodisciplina.xhtml"
+    NAME="output" PATH="/boletimalunodisciplina.xhtml"
+    TARGET="rules:#boletimalunodisciplina.xhtml"
+    TITLE="boletimalunodisciplina" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="config::#configuracoes.xhtml" NAME="output1"
+    PATH="/configuracoes.xhtml" TARGET="rules:#configuracoes.xhtml"
+    TITLE="config" model-entity="JSFProcessItemOutput"/>
    <PROCESS-ITEM-OUTPUT ID="disciplina::#disciplina.xhtml"
-    NAME="output1" PATH="/disciplina.xhtml"
+    NAME="output2" PATH="/disciplina.xhtml"
     TARGET="rules:#disciplina.xhtml" TITLE="disciplina" model-entity="JSFProcessItemOutput"/>
    <PROCESS-ITEM-OUTPUT ID="gestor::#gestor.xhtml" NAME="output5"
-    PATH="/gestor.xhtml" SHAPE="313,264,754,264,754,48,759,48"
+    PATH="/gestor.xhtml" SHAPE="313,280,754,280,754,48,759,48"
     TARGET="rules:#gestor.xhtml" TITLE="gestor" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="login::#login.xhtml" NAME="output3"
+    PATH="/login.xhtml" TARGET="rules:#login.xhtml" TITLE="login" model-entity="JSFProcessItemOutput"/>
    <PROCESS-ITEM-OUTPUT ID="ocorrencia::#ocorrencia.xhtml"
-    NAME="output3" PATH="/ocorrencia.xhtml"
-    SHAPE="313,296,858,296,858,48,863,48"
+    NAME="output6" PATH="/ocorrencia.xhtml"
     TARGET="rules:#ocorrencia.xhtml" TITLE="ocorrencia" model-entity="JSFProcessItemOutput"/>
-   <PROCESS-ITEM-OUTPUT ID="professor::#professor.xhtml" NAME="output6"
-    PATH="/professor.xhtml" SHAPE="313,312,960,312,960,48,975,48"
-    TARGET="rules:#professor.xhtml" TITLE="professor" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="professor::#professor.xhtml" NAME="output7"
+    PATH="/professor.xhtml" TARGET="rules:#professor.xhtml"
+    TITLE="professor" model-entity="JSFProcessItemOutput"/>
    <PROCESS-ITEM-OUTPUT ID="responsavel::#responsavel.xhtml"
-    NAME="output7" PATH="/responsavel.xhtml"
-    SHAPE="313,328,960,328,960,152,975,152"
+    NAME="output8" PATH="/responsavel.xhtml"
     TARGET="rules:#responsavel.xhtml" TITLE="responsavel" model-entity="JSFProcessItemOutput"/>
-   <PROCESS-ITEM-OUTPUT ID="secretaria::#secretaria.xhtml"
-    NAME="output8" PATH="/secretaria.xhtml"
-    SHAPE="313,344,928,344,928,224,975,224"
-    TARGET="rules:#secretaria.xhtml" TITLE="secretaria" model-entity="JSFProcessItemOutput"/>
    <PROCESS-ITEM-OUTPUT ID="tarefa::#tarefa.xhtml" NAME="output9"
     PATH="/tarefa.xhtml" SHAPE="313,360,968,360,968,312,975,312"
     TARGET="rules:#tarefa.xhtml" TITLE="tarefa" model-entity="JSFProcessItemOutput"/>
@@ -54,15 +51,7 @@
   </PROCESS-ITEM>
  </PROCESS-ITEM>
  <PROCESS-ITEM NAME="rules:#configuracoes.xhtml"
-  PATH="/configuracoes.xhtml" SHAPE="632,40,50,41" model-entity="JSFProcessGroup">
-  <PROCESS-ITEM ID="rules:#configuracoes.xhtml:0" NAME="item"
-   PATH="/configuracoes.xhtml" model-entity="JSFProcessItem">
-   <PROCESS-ITEM-OUTPUT ID="login::#login.xhtml" NAME="output"
-    PATH="/login.xhtml"
-    SHAPE="681,72,688,72,688,496,16,496,16,32,103,32"
-    TARGET="rules:#login.xhtml" TITLE="login" model-entity="JSFProcessItemOutput"/>
-  </PROCESS-ITEM>
- </PROCESS-ITEM>
+  PATH="/configuracoes.xhtml" SHAPE="632,40,50,41" model-entity="JSFProcessGroup"/>
  <PROCESS-ITEM NAME="rules:#gestor.xhtml" PATH="/gestor.xhtml"
   SHAPE="760,40,50,41" model-entity="JSFProcessGroup">
   <PROCESS-ITEM ID="rules:#gestor.xhtml:0" NAME="item"

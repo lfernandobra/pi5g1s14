@@ -40,13 +40,13 @@
 					<p:menubar styleClass="menu">
 						<p:menuitem value="Home" icon="fa fa-home" action="home" />
 						<p:menuitem value="Ocorrências" icon="fa fa-warning"	action="ocorrencia" />
-						<p:menuitem value="Boletins" icon="fa fa-file-text-o"	action="boletim" 
+						<p:menuitem value="Boletins" icon="fa fa-file-text-o"	action="boletimalunodisciplina" 
 							rendered="#{LoginBean.usuario.perfil.aluno or LoginBean.usuario.perfil.professor 
 										or LoginBean.usuario.perfil.responsavel}"/>
 						<p:menuitem value="Tarefas" icon="fa fa-book"
 							action="tarefa" />
 						<p:menuitem value="Turmas" icon="fa fa-slideshare"
-							action="turma" />	
+							action="turma" rendered="#{LoginBean.usuario.perfil.secretaria or LoginBean.usuario.perfil.gestor}"/>	
 						<p:submenu label="Usuarios" icon="fa fa-users"
 							rendered="#{LoginBean.usuario.perfil.secretaria or LoginBean.usuario.perfil.gestor}">
 							<p:menuitem value="Aluno" icon="fa fa-user" action="aluno"></p:menuitem>

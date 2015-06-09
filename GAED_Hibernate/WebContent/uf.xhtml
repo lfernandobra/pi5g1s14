@@ -11,12 +11,16 @@
 		<link rel="stylesheet" href="styles/layout_crud.css" type="text/css" />
 	</h:head>
 	<body>
-	<div align="center">
+	<ui:decorate template="/header.xhtml">
+		<ui:define name="center">
+		<div>
 		<p:growl id="growl" showDetail="true" life="4000" />
 		<h:form id="formPrincipal">
-				<p:dataTable var="lista"  value="#{UFBean.ufs}" id="tabelaUF" resizableColumns="true" reflow="true" rows="5" emptyMessage="Nenhum registro encontrado" 
-							 paginator="true" paginatorPosition="bottom" styleClass="dataTablePrincipal"
-							 >
+				<p:dataTable var="lista"  value="#{UFBean.ufs}" id="tabelaUF" 
+							 resizableColumns="true" reflow="true" rows="5" 
+							 emptyMessage="Nenhum registro encontrado" 
+							 paginator="true" paginatorPosition="bottom" 
+							 styleClass="dataTablePrincipal">
 
 				<f:facet name="header">Lista de UF - Unidade Federativa 
 				</f:facet>
@@ -116,6 +120,8 @@
 					<p:resetInput target="panelAlterar" />
 				</p:commandButton>
 			</h:form>
-		</p:dialog>						
+		</p:dialog>
+		</ui:define>
+		</ui:decorate>						
 	</body>
 </html>
