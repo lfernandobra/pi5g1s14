@@ -31,7 +31,7 @@
 
 				<h:form id="formPrincipal">
 					<p:dataTable var="lista" value="#{GestorBean.gestors}"
-						id="tabelaGestor" resizableColumns="true" reflow="true" rows="5"
+						id="tabelaGestor" resizableColumns="true" reflow="true" rows="10"
 						paginator="true" paginatorPosition="bottom"
 						emptyMessage="Nenhum gestor cadastrado">
 						
@@ -44,8 +44,8 @@
 							<h:outputText value="#{lista.id}" />
 						</p:column>
 							<p:column headerText="Foto" style="width:130px">
-						<h:graphicImage width="50" height="60" value="/temp/#{FotoBean.verFoto(lista.foto.foto,lista.nome)}" />
-						</p:column>
+								<h:graphicImage width="50" height="60" value="/temp/#{FotoBean.verFoto(lista.foto.foto,lista.nome)}" />
+							</p:column>
 								<p:column headerText="Nome" sortBy="#{lista.nome}"
 							filterBy="#{lista.nome}">
 							<h:outputText value="#{lista.nome} #{lista.sobrenome}" />
@@ -104,10 +104,8 @@
 
 						</p:rowExpansion>
 						<p:column headerText="" style="width:60px">
-							<p:commandButton update=":formAlterar" id="botaoAlterar"
-								oncomplete="PF('dialogAlterar').show();" icon="ui-icon-pencil">
-								<f:setPropertyActionListener target="#{GestorBean.gestor}"
-									value="#{lista}" />
+							<p:commandButton update=":formAlterar" id="botaoAlterar" oncomplete="PF('dialogAlterar').show();" icon="ui-icon-pencil">
+								<f:setPropertyActionListener target="#{GestorBean.gestor}"	value="#{lista}" />
 							</p:commandButton>
 							<p:tooltip id="toolTipAlterar" for="botaoAlterar" value="Alterar cadastro do gestor" escape="false" />
 							

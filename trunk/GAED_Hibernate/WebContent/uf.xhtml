@@ -11,21 +11,31 @@
 		<link rel="stylesheet" href="styles/layout_crud.css" type="text/css" />
 	</h:head>
 	<body>
+	
+	
 	<ui:decorate template="/header.xhtml">
 		<ui:define name="center">
-		<div>
+		
+		<h2>Lista de Unidade Federativa</h2>
+		
+		<div id="Lista">
+		<p:separator />
+		
+		<p:toolbar styleClass="toolbarAluno">
+			<f:facet name="left">
+				<p:commandButton value="Cadastrar" type="button" onclick="PF('dialogCadastrar').show();"  icon="ui-icon-plusthick"/>
+			</f:facet>
+		</p:toolbar>
+		
 		<p:growl id="growl" showDetail="true" life="4000" />
 		<h:form id="formPrincipal">
 				<p:dataTable var="lista"  value="#{UFBean.ufs}" id="tabelaUF" 
-							 resizableColumns="true" reflow="true" rows="5" 
+							 resizableColumns="true" reflow="true" rows="10" 
 							 emptyMessage="Nenhum registro encontrado" 
 							 paginator="true" paginatorPosition="bottom" 
 							 styleClass="dataTablePrincipal">
 
-				<f:facet name="header">Lista de UF - Unidade Federativa 
-				</f:facet>
-				
-				<p:column headerText="ID" sortBy="#{lista.id}" filterBy="#{lista.id}">
+				<p:column headerText="ID" sortBy="#{lista.id}" filterBy="#{lista.id}" style="width:130px">
 					<h:outputText value="#{lista.id}" />
 				</p:column>
 				<p:column headerText="Nome" sortBy="#{lista.nome}" filterBy="#{lista.nome}">
@@ -34,25 +44,20 @@
 				<p:column headerText="Sigla" sortBy="#{lista.sigla}" filterBy="#{lista.sigla}">
 					<h:outputText value="#{lista.sigla}" />
 				</p:column>
-				<p:column headerText="Ações">
-										
-					<p:commandButton value="Alterar" 
-						update=":formAlterar"
-						oncomplete="PF('dialogAlterar').show();"
-						icon="ui-icon-pencil">
-						<f:setPropertyActionListener target="#{UFBean.uf}"
-							value="#{lista}" />
+				
+				<p:column style="width:60px">
+					<p:commandButton update=":formAlterar"	id="botaoAlterar" oncomplete="PF('dialogAlterar').show();" icon="ui-icon-pencil">
+						<f:setPropertyActionListener target="#{UFBean.uf}"	value="#{lista}" />
 					</p:commandButton>
+					<p:tooltip id="toolTipAlterar" for="botaoAlterar" value="Alterar cadastro" escape="false" />
 					
-					<p:commandButton value="Excluir"
-						actionListener="#{UFBean.excluir(lista)}" 
-						update=":formPrincipal:tabelaUF growl"
-						icon="ui-icon-closethick">				
+					<p:commandButton actionListener="#{UFBean.excluir(lista)}" id="botaoExcluir" update=":formPrincipal:tabelaUF growl"
+						icon="ui-icon-trash">				
 						<p:confirm header="Excluir UF" message="Deseja excluir?" icon="ui-icon-alert" />
 					</p:commandButton>
-					<p:confirmDialog global="true" 
-						showEffect="fade"
-						hideEffect="fade">
+					<p:tooltip id="toolTipExcluir" for="botaoExcluir" value="Excluir UF" escape="false" />
+					
+					<p:confirmDialog global="true"	showEffect="fade"	hideEffect="fade">
 						<p:commandButton value="Sim" type="button"
 							styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
 						<p:commandButton value="Não" type="button"
@@ -66,16 +71,18 @@
 			</p:dataTable>
 		</h:form>
 		
-		<h:panelGrid columns="1" cellpadding="5">
-			<p:commandButton value="Cadastrar" type="button" onclick="PF('dialogCadastrar').show();" 
-							 icon="ui-icon-disk"/>
-		</h:panelGrid>
-		<p:dialog header="Cadastrar" widgetVar="dialogCadastrar"  modal="true" resizable="true"	id="formCad"
-			      closeOnEscape="true" closable="true" maximizable="true"   styleClass="dialogCadastrar">
-			<h:form id="formCadastrar">
+		<p:dialog header="Cadastrar" widgetVar="dialogCadastrar"  modal="true" resizable="true"	id="formCadMini"
+			      closeOnEscape="true" closable="true" maximizable="true" appendTo="@(body)"  styleClass="dialogCadastrar">
+			<h:form id="formCadastrar" styleClass="formCadastrar">
 				<p:focus context="@form" />
 				
 				<p:growl id="growl" showDetail="true" life="4000" />
+				<h:outputText value="Campos obrigatórios * "
+						style="font-size: 10px !important; top: 5px !important" />
+
+
+					<h4>Dados da Unidade Federativa</h4>
+					<p:separator />
 				
 				<p:panelGrid id="panelCadastrar" columns="2">
 					<p:outputLabel for="nome" value="Nome:" />
@@ -86,22 +93,33 @@
 					</p:inputText>			  
 				</p:panelGrid>
 				
+				<div id="botoes">
+				
 				<p:commandButton value="Salvar" id="withIcon" actionListener="#{UFBean.cadastrar}" icon="ui-icon-disk"
 					update=":formPrincipal:tabelaUF @form growl" oncomplete="closeDialogIfSucess(xhr, status, args, 'dialogCadastrar','formCad')"
 					onsuccess="PF('dialogCadastrar').hide();" />
 					
-				<p:commandButton value="Limpar" update="@form" process="@this">
+				<p:commandButton value="Limpar" update="@form" process="@this" icon="fa fa-eraser">
 					<p:resetInput target="panelCadastrar" />
 				</p:commandButton>
+				
+				</div>
 				
 			</h:form>
 		</p:dialog>
 	</div>
-	<p:dialog header="Alterar"  widgetVar="dialogAlterar"  modal="true"	  resizable="true"  id="formAlt" styleClass="dialogAlterar">
-			<h:form id="formAlterar">
+	<p:dialog header="Alterar"  widgetVar="dialogAlterar"  modal="true"	  resizable="true"  id="formAltMini" styleClass="dialogAlterar" appendTo="@(body)">
+			<h:form id="formAlterar" styleClass="formAlterar" >
 				<p:focus context="@form" />
 				<p:growl id="growl" showDetail="true" life="4000" />
-				<h:inputHidden value="#{UFBean.uf}" />	
+				<h:inputHidden value="#{UFBean.uf}" />
+				
+				<h:outputText value="Campos obrigatórios * "
+						style="font-size: 10px !important; top: 5px !important" />
+
+
+					<h3>Dados da Unidade Federativa</h3>
+					<p:separator />	
 				
 				<p:panelGrid id="panelAlterar" columns="2">
 					<p:outputLabel for="nome" value="Nome:" />
@@ -113,12 +131,15 @@
 					</p:inputText>			  
 				</p:panelGrid>
 				
+				<div id="botoes">
 				<p:commandButton value="Salvar" id="withIcon" actionListener="#{UFBean.alterar}" icon="ui-icon-disk" update=":formPrincipal:tabelaUF @form growl"
 					oncomplete="closeDialogIfSucess(xhr, status, args, 'dialogAlterar','formAlt')" onsuccess="PF('dialogAlterar').hide();" />
 				
-				<p:commandButton value="Limpar" update="@form" process="@this">
+				<p:commandButton value="Limpar" update="@form" process="@this" icon="fa fa-eraser">
 					<p:resetInput target="panelAlterar" />
 				</p:commandButton>
+				</div>
+				
 			</h:form>
 		</p:dialog>
 		</ui:define>
