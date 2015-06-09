@@ -28,7 +28,7 @@
 			<h:form id="formPrincipal">
 				<p:growl id="growl" showDetail="true" life="4000" />
 				<p:dataTable var="lista" value="#{AlunoBean.alunos}"
-					id="tabelaAluno" resizableColumns="true" reflow="true" rows="5"
+					id="tabelaAluno" resizableColumns="true" reflow="true" rows="10"
 					paginator="true" paginatorPosition="bottom"
 					emptyMessage="Nenhum aluno cadastrado">
 					<p:column style="width:16px">
@@ -235,6 +235,8 @@
 							itemValue="E.E.P.G Prof. Luiza Helena Camargo" />
 						<f:selectItem itemLabel="E.E.P.G Prof. Sabrina Armani"
 							itemValue="E.E.P.G Prof. Sabrina Armani" />
+						<f:selectItem itemLabel="E.E.P.G Prof. Anselmo Lotufo"
+							itemValue="E.E.P.G Prof. Alselmo Lotufo" />
 					</p:selectOneMenu>
 
 					<p:outputLabel for="serieAnterior" value="Série anterior:" />

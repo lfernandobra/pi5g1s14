@@ -10,19 +10,34 @@
 	<link rel="stylesheet" href="styles/layout_crud.css" type="text/css" />
 </h:head>
 <body>
-	<div align="center">
+
+<ui:decorate template="/header.xhtml">
+	<ui:define name="center">
+
+
+		<h2>Lista de Disciplinas</h2>
+
+		<div id="Lista">
+			<p:separator />
+
+			<p:toolbar styleClass="toolbar">
+				<f:facet name="left">
+						<p:commandButton value="Cadastrar" type="button"
+				onclick="PF('dialogCadastrar').show();" icon="ui-icon-plusthick" />
+				</f:facet>
+			</p:toolbar>
+
+
 		<h:form id="formPrincipal">
 			<p:dataTable var="lista" value="#{DisciplinaBean.disciplinas}"
-				id="tabelaDisciplina" resizableColumns="true" reflow="true" rows="5"
+				id="tabelaDisciplina" resizableColumns="true" reflow="true" rows="10"
 				emptyMessage="Nenhum registro encontrado" paginator="true"
 				paginatorPosition="bottom" styleClass="dataTablePrincipal">
 
-				<f:facet name="header">Lista de Disciplina 
-				</f:facet>
 				<p:column style="width:16px">
 					<p:rowToggler />
 				</p:column>
-				<p:column headerText="ID" sortBy="#{lista.id}"
+				<p:column headerText="ID" sortBy="#{lista.id}" style="width:130px"
 					filterBy="#{lista.id}">
 					<h:outputText value="#{lista.id}" />
 				</p:column>
@@ -31,10 +46,11 @@
 					<h:outputText value="#{lista.nome}" />
 				</p:column>
 				<p:rowExpansion>
-					<p:panelGrid columns="2" columnClasses="label,value">
-						<h:outputText value="Conteúdo" />
+				<h3 id="h3">Informações da disciplina</h3>
+					<p:panelGrid columns="2" columnClasses="label,value" styleClass="gridDataTable">
+						<h:outputText value="Conteúdo:"  style="font-weight: bold;" />
 						<h:outputText value="#{lista.conteudo}" escape="false"/>
-						<h:outputText value="Professores" />
+						<h:outputText value="Professores:"  style="font-weight: bold;" />
 						<p:dataList value="#{lista.professores}" var="professor"
 							emptyMessage="Nenhum professor leciona a matéria">
             				#{professor.nome} #{professor.sobrenome}
@@ -43,19 +59,22 @@
 					
 				</p:rowExpansion>
 
-				<p:column headerText="Ações">
-					<p:commandButton value="Alterar" update=":formAlterar"
+				<p:column style="width:60px">
+					<p:commandButton id="botaoAlterar" update=":formAlterar"
 						oncomplete="PF('dialogAlterar').show();" icon="ui-icon-pencil">
 						<f:setPropertyActionListener target="#{DisciplinaBean.disciplina}"
 							value="#{lista}" />
 					</p:commandButton>
+					<p:tooltip id="toolTipAlterar" for="botaoAlterar"	value="Alterar cadastro" escape="false" />
 
-					<p:commandButton value="Excluir"
+					<p:commandButton id="botaoExcluir"
 						actionListener="#{DisciplinaBean.excluir(lista)}"
-						update=":formPrincipal:tabelaDisciplina" icon="ui-icon-closethick">
+						update=":formPrincipal:tabelaDisciplina" icon="ui-icon-trash	">
 						<p:confirm header="Excluir Disciplina" message="Deseja excluir?"
 							icon="ui-icon-alert" />
 					</p:commandButton>
+					<p:tooltip id="toolTipExcluir" for="botaoExcluir" value="Excluir disciplina" escape="false" />
+					
 					<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
 						<p:commandButton value="Sim" type="button"
 							styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
@@ -69,20 +88,25 @@
     			</f:facet>
 			</p:dataTable>
 		</h:form>
-		<h:panelGrid columns="1" cellpadding="5">
-			<p:commandButton value="Cadastrar" type="button"
-				onclick="PF('dialogCadastrar').show();" icon="ui-icon-disk" />
-		</h:panelGrid>
+
+
 		<p:dialog header="Cadastrar" widgetVar="dialogCadastrar" modal="true"
-			resizable="true" id="formCad" styleClass="dialogCadastrar">
-			<h:form id="formCadastrar">
+			resizable="true" id="formCadMedio" appendTo="@(body)" styleClass="dialogCadastrar">
+			<h:form id="formCadastrar" styleClass="formCadastrar">
 				<p:focus context="@form" />
-				<p:panelGrid id="panelCadastrar" columns="3">
+				
+				<h:outputText value="Campos obrigatórios * "
+					style="font-size: 10px !important; top: 5px !important 	" />
+
+				<h3>Dados da disciplina</h3>
+				<p:separator />
+				
+				
+				<p:panelGrid id="panelCadastrar" columns="2">
 					<p:outputLabel for="nome" value="Disciplina:" />
 					<p:inputText value="#{DisciplinaBean.disciplina.nome}"
 						required="true" id="nome"
 						requiredMessage="Nome não deve estar vazio!" />
-					<p:messages for="nome" display="icon" closable="true" />
 
 					<p:outputLabel for="conteudo" value="Conteúdo:" />
 					<p:editor  
@@ -90,9 +114,10 @@
 					   value="#{DisciplinaBean.disciplina.conteudo}" 
 					   width="500" 
 					   id="conteudo" />
-					<p:messages for="conteudo" display="icon" closable="true" />
 
 				</p:panelGrid>
+				
+				<div id="botoes">
 				<p:commandButton value="Salvar" id="withIcon"
 					actionListener="#{DisciplinaBean.cadastrar}" icon="ui-icon-disk"
 					update=":formPrincipal:tabelaDisciplina @form"
@@ -101,14 +126,24 @@
 				<p:commandButton value="Limpar" update="@form" process="@this">
 					<p:resetInput target="panelCadastrar" />
 				</p:commandButton>
+				</div>
 			</h:form>
 		</p:dialog>
 	</div>
+	
+	
 	<p:dialog header="Alterar" widgetVar="dialogAlterar" modal="true"
-		resizable="true" id="formAlt" styleClass="dialogAlterar">
-		<h:form id="formAlterar">
+		resizable="true" id="formAltMedio" appendTo="@(body)" styleClass="dialogAlterar">
+		<h:form id="formAlterar" styleClass="formAlterar">
 			<p:focus context="@form" />
 			<h:inputHidden value="#{DisciplinaBean.disciplina}" />
+			
+			<h:outputText value="Campos obrigatórios * "
+					style="font-size: 10px !important; top: 5px !important 	" />
+
+				<h3>Dados da disciplina</h3>
+				<p:separator />
+			
 			<p:panelGrid id="panelAlterar" columns="3">
 				<p:outputLabel for="nome" value="Disciplina:" />
 				<p:inputText value="#{DisciplinaBean.disciplina.nome}"
@@ -122,17 +157,22 @@
 					   value="#{DisciplinaBean.disciplina.conteudo}" 
 					   width="500" 
 					   id="conteudo" />
-				<p:messages for="conteudo" display="icon" closable="true" />
 			</p:panelGrid>
-			<p:commandButton value="Salvar" id="withIcon"
-				actionListener="#{DisciplinaBean.alterar}" icon="ui-icon-disk"
-				update=":formPrincipal:tabelaDisciplina @form"
-				oncomplete="closeDialogIfSucess(xhr, status, args, 'dialogAlterar','formAlt')"
-				onsuccess="PF('dialogAlterar').hide();" />
-			<p:commandButton value="Limpar" update="@form" process="@this">
-				<p:resetInput target="panelAlterar" />
-			</p:commandButton>
+			
+			<div id="botoes">
+				<p:commandButton value="Salvar" id="withIcon"
+					actionListener="#{DisciplinaBean.alterar}" icon="ui-icon-disk"
+					update=":formPrincipal:tabelaDisciplina @form"
+					oncomplete="closeDialogIfSucess(xhr, status, args, 'dialogAlterar','formAlt')"
+					onsuccess="PF('dialogAlterar').hide();" />
+				<p:commandButton value="Limpar" update="@form" process="@this">
+					<p:resetInput target="panelAlterar" />
+				</p:commandButton>
+			</div>
 		</h:form>
 	</p:dialog>
+	
+	</ui:define>
+	</ui:decorate>
 </body>
 </html>
