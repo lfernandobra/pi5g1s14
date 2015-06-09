@@ -83,6 +83,14 @@
 			<to-view-id>/login.xhtml</to-view-id>
 			<redirect/>
 		</navigation-case>
+		<navigation-case>
+			<from-outcome>tarefa</from-outcome>
+			<to-view-id>/tarefa.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>boletim</from-outcome>
+			<to-view-id>/boletimalunodisciplina.xhtml</to-view-id>
+		</navigation-case>
 	</navigation-rule>
 	<navigation-rule>
 		<from-view-id>/tarefa.xhtml</from-view-id>
@@ -90,6 +98,14 @@
 			<from-outcome>login</from-outcome>
 			<to-view-id>/login.xhtml</to-view-id>
 			<redirect/>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>ocorrencia</from-outcome>
+			<to-view-id>/ocorrencia.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>boletimalunodisciplina</from-outcome>
+			<to-view-id>/boletimalunodisciplina.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
 	<navigation-rule>
