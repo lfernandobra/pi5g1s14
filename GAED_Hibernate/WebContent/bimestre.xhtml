@@ -10,17 +10,30 @@
 	<link rel="stylesheet" href="styles/layout_crud.css" type="text/css" />
 </h:head>
 <body>
-	<div align="center">
+
+<ui:decorate template="/header.xhtml">
+		<ui:define name="center">
+		
+		<h2>Lista de Bimestres</h2>
+		
+		<div id="Lista">
+		<p:separator />
+		
+		<p:toolbar styleClass="toolbarAluno">
+			<f:facet name="left">
+			<p:commandButton value="Cadastrar" type="button" onclick="PF('dialogCadastrar').show();" icon="ui-icon-plusthick" />
+			</f:facet>
+		</p:toolbar>
+		
+		<p:growl id="growl" showDetail="true" life="4000" />
+
 		<h:form id="formPrincipal">
 			<p:dataTable var="lista" value="#{BimestreBean.bimestres}"
 				id="tabelaBimestre" resizableColumns="true" reflow="true" rows="5"
 				emptyMessage="Nenhum registro encontrado" paginator="true"
 				paginatorPosition="bottom" styleClass="dataTablePrincipal">
 
-				<f:facet name="header">Lista de Bimestre 
-				</f:facet>
-
-				<p:column headerText="ID" sortBy="#{lista.id}"
+				<p:column headerText="ID" sortBy="#{lista.id}"  style="width:130px"
 					filterBy="#{lista.id}">
 					<h:outputText value="#{lista.id}" />
 				</p:column>
@@ -41,19 +54,21 @@
 					</h:outputFormat>
 				</p:column>
 
-				<p:column headerText="Ações">
-					<p:commandButton value="Alterar" update=":formAlterar"
+				<p:column style="width:60px">
+					<p:commandButton update=":formAlterar" id="botaoAlterar"
 						oncomplete="PF('dialogAlterar').show();" icon="ui-icon-pencil">
 						<f:setPropertyActionListener target="#{BimestreBean.bimestre}"
 							value="#{lista}" />
 					</p:commandButton>
+					<p:tooltip id="toolTipAlterar" for="botaoAlterar" value="Alterar cadastro" escape="false" />
 
-					<p:commandButton value="Excluir"
-						actionListener="#{BimestreBean.excluir(lista)}"
-						update=":formPrincipal:tabelaBimestre" icon="ui-icon-closethick">
+					<p:commandButton actionListener="#{BimestreBean.excluir(lista)}" id="botaoExcluir"
+						update=":formPrincipal:tabelaBimestre" icon="ui-icon-trash">
 						<p:confirm header="Excluir Bimestre" message="Deseja excluir?"
 							icon="ui-icon-alert" />
 					</p:commandButton>
+					<p:tooltip id="toolTipExcluir" for="botaoExcluir" value="Excluir Bimestre" escape="false" />
+					
 					<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
 						<p:commandButton value="Sim" type="button"
 							styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
@@ -67,15 +82,23 @@
     			</f:facet>
 			</p:dataTable>
 		</h:form>
-		<h:panelGrid columns="1" cellpadding="5">
-			<p:commandButton value="Cadastrar" type="button"
-				onclick="PF('dialogCadastrar').show();" icon="ui-icon-disk" />
-		</h:panelGrid>
+
+
+
+
 		<p:dialog header="Cadastrar" widgetVar="dialogCadastrar" modal="true"
-			resizable="true" id="formCad" styleClass="dialogCadastrar">
-			<h:form id="formCadastrar">
+			resizable="true" id="formCadMini" appendTo="@(body)" styleClass="dialogCadastrar">
+			<h:form id="formCadastrar" styleClass="formCadastrar">
 				<p:focus context="@form" />
-				<p:panelGrid id="panelCadastrar" columns="3">
+				
+				<p:growl id="growl" showDetail="true" life="4000" />
+				<h:outputText value="Campos obrigatórios * "
+						style="font-size: 10px !important; top: 5px !important" />
+
+					<h4>Dados do Bimestre</h4>
+					<p:separator />
+				
+				<p:panelGrid id="panelCadastrar" columns="2">
 					<p:outputLabel for="bimestre" value="Bimestre:" />
 					<p:selectOneMenu value="#{BimestreBean.bimestre.nome}"
 						style="width:150px" required="true" id="bimestre"
@@ -85,7 +108,6 @@
 						<f:selectItem itemLabel="3 Bimestre" itemValue="3" />
 						<f:selectItem itemLabel="4 Bimestre" itemValue="4" />
 					</p:selectOneMenu>
-					<p:messages for="bimestre" display="icon" closable="true" />
 
 					<p:outputLabel for="datainic" value="Data inicial:" />
 					<p:inputMask value="#{BimestreBean.bimestre.datainic}"
@@ -95,7 +117,6 @@
 						<f:converter converterId="javax.faces.DateTime" />
 						<f:convertDateTime pattern="dd/MM/yyyy" timeZone="GMT-3" />
 					</p:inputMask>
-					<p:messages for="datainic" display="icon" closable="true" />
 
 					<p:outputLabel for="datafinal" value="Data final:" />
 					<p:inputMask value="#{BimestreBean.bimestre.datafin}"
@@ -105,26 +126,38 @@
 						<f:converter converterId="javax.faces.DateTime" />
 						<f:convertDateTime pattern="dd/MM/yyyy" timeZone="GMT-3" />
 					</p:inputMask>
-					<p:messages for="datafinal" display="icon" closable="true" />
 
 				</p:panelGrid>
-				<p:commandButton value="Salvar" id="withIcon"
-					actionListener="#{BimestreBean.cadastrar}" icon="ui-icon-disk"
-					update=":formPrincipal:tabelaBimestre @form"
-					oncomplete="closeDialogIfSucess(xhr, status, args, 'dialogCadastrar','formCad')"
-					onsuccess="PF('dialogCadastrar').hide();" />
-				<p:commandButton value="Limpar" update="@form" process="@this">
-					<p:resetInput target="panelCadastrar" />
-				</p:commandButton>
+				
+				<div id="botoes">
+					<p:commandButton value="Salvar" id="withIcon"
+						actionListener="#{BimestreBean.cadastrar}" icon="ui-icon-disk"
+						update=":formPrincipal:tabelaBimestre @form"
+						oncomplete="closeDialogIfSucess(xhr, status, args, 'dialogCadastrar','formCad')"
+						onsuccess="PF('dialogCadastrar').hide();" />
+					<p:commandButton value="Limpar" update="@form" process="@this"  icon="fa fa-eraser">
+						<p:resetInput target="panelCadastrar" />
+					</p:commandButton>
+				</div>
 			</h:form>
 		</p:dialog>
 	</div>
-	<p:dialog header="Alterar" widgetVar="dialogAlterar" modal="true"
-		resizable="true" id="formAlt" styleClass="dialogAlterar">
-		<h:form id="formAlterar">
+	
+	
+	<p:dialog header="Alterar" widgetVar="dialogAlterar" modal="true" id="formAltMini" appendTo="@(body)"
+		resizable="true"  styleClass="dialogAlterar">
+		<h:form id="formAlterar" styleClass="formAlterar" >
 			<p:focus context="@form" />
 			<h:inputHidden value="#{BimestreBean.bimestre}" />
-			<p:panelGrid id="panelAlterar" columns="3">
+			
+			<p:growl id="growl" showDetail="true" life="4000" />
+				<h:outputText value="Campos obrigatórios * "
+						style="font-size: 10px !important; top: 5px !important" />
+
+					<h4>Dados do Bimestre</h4>
+					<p:separator />
+			
+			<p:panelGrid id="panelAlterar" columns="2">
 				<p:outputLabel for="bimestre" value="Bimestre:" />
 				<p:selectOneMenu value="#{BimestreBean.bimestre.nome}"
 					style="width:150px" required="true" id="bimestre"
@@ -134,7 +167,6 @@
 					<f:selectItem itemLabel="3 Bimestre" itemValue="3 Bimestre" />
 					<f:selectItem itemLabel="4 Bimestre" itemValue="4 Bimestre" />
 				</p:selectOneMenu>
-				<p:messages for="bimestre" display="icon" closable="true" />
 
 				<p:outputLabel for="datainic" value="Data inicial:" />
 				<p:inputMask value="#{BimestreBean.bimestre.datainic}"
@@ -144,7 +176,6 @@
 					<f:converter converterId="javax.faces.DateTime" />
 					<f:convertDateTime pattern="dd/MM/yyyy" timeZone="GMT-3" />
 				</p:inputMask>
-				<p:messages for="datainic" display="icon" closable="true" />
 
 				<p:outputLabel for="datafinal" value="Data final:" />
 				<p:inputMask value="#{BimestreBean.bimestre.datafin}"
@@ -154,8 +185,9 @@
 					<f:converter converterId="javax.faces.DateTime" />
 					<f:convertDateTime pattern="dd/MM/yyyy" timeZone="GMT-3" />
 				</p:inputMask>
-				<p:messages for="datafinal" display="icon" closable="true" />
 			</p:panelGrid>
+			
+			<div id="botoes">
 			<p:commandButton value="Salvar" id="withIcon"
 				actionListener="#{BimestreBean.alterar}" icon="ui-icon-disk"
 				update=":formPrincipal:tabelaBimestre @form"
@@ -164,7 +196,11 @@
 			<p:commandButton value="Limpar" update="@form" process="@this">
 				<p:resetInput target="panelAlterar" />
 			</p:commandButton>
+			</div>
 		</h:form>
 	</p:dialog>
+	
+</ui:define>
+</ui:decorate>	
 </body>
 </html>

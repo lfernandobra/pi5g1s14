@@ -11,7 +11,26 @@
 		<link rel="stylesheet" href="styles/layout_crud.css" type="text/css" />
 	</h:head>
 	<body>
-	<div align="center">	
+	
+	<ui:decorate template="/header.xhtml">
+		<ui:define name="center">
+
+			<h2>Lista de Períodos</h2>
+
+			<div id="Lista">
+				<p:separator />
+
+				<p:toolbar styleClass="toolbarAluno">
+					<f:facet name="left">
+					<p:commandButton value="Cadastrar" type="button" onclick="PF('dialogCadastrar').show();" 
+							 icon="ui-icon-plusthick"/>
+					</f:facet>
+				</p:toolbar>
+
+				<p:growl id="growl" showDetail="true" life="4000" />
+	
+	
+		
 		<h:form id="formPrincipal">
 				<p:dataTable var="lista" 
 							 value="#{PeriodoBean.periodos}" 
@@ -25,30 +44,25 @@
 							 styleClass="dataTablePrincipal"
 							 >
 
-				<f:facet name="header">Lista de Periodo 
-				</f:facet>
-				
-				<p:column headerText="ID" sortBy="#{lista.id}" filterBy="#{lista.id}">
+				<p:column headerText="ID" sortBy="#{lista.id}" filterBy="#{lista.id}" style="width:130px">
 					<h:outputText value="#{lista.id}" />
 				</p:column>
 				<p:column headerText="Periodo" sortBy="#{lista.periodo}" filterBy="#{lista.periodo}">
 					<h:outputText value="#{lista.periodo}" />
 				</p:column>
-				<p:column headerText="Ações">			
-					<p:commandButton value="Alterar" 
-						update=":formAlterar"
-						oncomplete="PF('dialogAlterar').show();"
-						icon="ui-icon-pencil">
+				<p:column style="width:60px">			
+					<p:commandButton update=":formAlterar"	id= "botaoAlterar" oncomplete="PF('dialogAlterar').show();" icon="ui-icon-pencil">
 						<f:setPropertyActionListener target="#{PeriodoBean.periodo}"
 							value="#{lista}" />
 					</p:commandButton>
+					<p:tooltip id="toolTipAlterar" for="botaoAlterar" value="Alterar cadastro" escape="false" />
 					
-					<p:commandButton value="Excluir"
-						actionListener="#{PeriodoBean.excluir(lista)}" 
-						update=":formPrincipal:tabelaPeriodo"
-						icon="ui-icon-closethick">				
+					<p:commandButton actionListener="#{PeriodoBean.excluir(lista)}" update=":formPrincipal:tabelaPeriodo"
+						icon="ui-icon-trash" id="botaoExcluir">				
 						<p:confirm header="Excluir Periodo" message="Deseja excluir?" icon="ui-icon-alert" />
 					</p:commandButton>
+					<p:tooltip id="toolTipExcluir" for="botaoExcluir" value="Excluir período" escape="false" />
+					
 					<p:confirmDialog global="true" 
 						showEffect="fade"
 						hideEffect="fade">
@@ -64,18 +78,19 @@
     			</f:facet>
 			</p:dataTable>
 		</h:form>
-		<h:panelGrid columns="1" cellpadding="5">
-			<p:commandButton value="Cadastrar" type="button" onclick="PF('dialogCadastrar').show();" 
-							 icon="ui-icon-disk"/>
-		</h:panelGrid>
-		<p:dialog header="Cadastrar"
-				  widgetVar="dialogCadastrar" 
-				  modal="true" 
-				  resizable="true"
-			      id="formCad"
-			      styleClass="dialogCadastrar">
-			<h:form id="formCadastrar">
+
+
+		<p:dialog header="Cadastrar"  widgetVar="dialogCadastrar"  modal="true"	  resizable="true"
+			      id="formCadMini" styleClass="dialogCadastrar" appendTo="@(body)">
+			<h:form id="formCadastrar" styleClass="formCadastrar">
 				<p:focus context="@form" />
+				<p:growl id="growl" showDetail="true" life="4000" />
+				<h:outputText value="Campos obrigatórios * "
+						style="font-size: 10px !important; top: 5px !important" />
+
+					<h4>Dados do Período</h4>
+					<p:separator />
+				
 				<p:panelGrid id="panelCadastrar" columns="3">
 					<p:outputLabel for="periodo" value="Periodo:" />
 					<p:inputText value="#{PeriodoBean.periodo.periodo}" 
@@ -84,45 +99,56 @@
 								 requiredMessage="Periodo não deve estar vazio!" />
 					<p:messages for="periodo" display="icon" closable="true"/>
 				</p:panelGrid>
-				<p:commandButton value="Salvar" id="withIcon"
-					actionListener="#{PeriodoBean.cadastrar}" icon="ui-icon-disk"
-					update=":formPrincipal:tabelaPeriodo @form"
-					oncomplete="closeDialogIfSucess(xhr, status, args, 'dialogCadastrar','formCad')"
-					onsuccess="PF('dialogCadastrar').hide();" />
-				<p:commandButton value="Limpar" update="@form"
-					process="@this">
-					<p:resetInput target="panelCadastrar" />
-				</p:commandButton>
+				
+				<div id="botoes">
+					<p:commandButton value="Salvar" id="withIcon"
+						actionListener="#{PeriodoBean.cadastrar}" icon="ui-icon-disk"
+						update=":formPrincipal:tabelaPeriodo @form"
+						oncomplete="closeDialogIfSucess(xhr, status, args, 'dialogCadastrar','formCad')"
+						onsuccess="PF('dialogCadastrar').hide();" />
+					<p:commandButton value="Limpar" update="@form"
+						process="@this" icon="fa fa-eraser">
+						<p:resetInput target="panelCadastrar" />
+					</p:commandButton>
+				</div>
 			</h:form>
 		</p:dialog>
 	</div>
-	<p:dialog header="Alterar"
-				  widgetVar="dialogAlterar" 
-				  modal="true" 
-				  resizable="true"
-			      id="formAlt"
-			      styleClass="dialogAlterar">
-			<h:form id="formAlterar">
+	<p:dialog header="Alterar"  widgetVar="dialogAlterar"  modal="true"	  resizable="true"
+			  styleClass="dialogAlterar" id="formAltMini" appendTo="@(body)">
+			<h:form id="formAlterar" styleClass="formAlterar" >
 				<p:focus context="@form" />
 				<h:inputHidden value="#{PeriodoBean.periodo}" />	
+				
+				<h:outputText value="Campos obrigatórios * "
+						style="font-size: 10px !important; top: 5px !important" />
+
+					<h4>Dados do Período</h4>
+					<p:separator />
+				
 				<p:panelGrid id="panelAlterar" columns="3">
 					<p:outputLabel for="periodo" value="Periodo:" />
-					<p:inputText value="#{PeriodoBean.periodo.periodo}" 
-								 required="true" 
-								 id="periodo"
+					<p:inputText value="#{PeriodoBean.periodo.periodo}"  required="true" id="periodo"
 								 requiredMessage="Periodo não deve estar vazio!" />
 					<p:messages for="periodo" display="icon" closable="true"/>		  
 				</p:panelGrid>
+				
+				<div id="botoes">
 				<p:commandButton value="Salvar" id="withIcon"
 					actionListener="#{PeriodoBean.alterar}" icon="ui-icon-disk"
 					update=":formPrincipal:tabelaPeriodo @form"
 					oncomplete="closeDialogIfSucess(xhr, status, args, 'dialogAlterar','formAlt')"
 					onsuccess="PF('dialogAlterar').hide();" />
-				<p:commandButton value="Limpar" update="@form"
+				<p:commandButton value="Limpar" update="@form" icon="fa fa-eraser"
 					process="@this">
 					<p:resetInput target="panelAlterar" />
 				</p:commandButton>
+				</div>
 			</h:form>
-		</p:dialog>						
+		</p:dialog>	
+							
+</ui:define>
+</ui:decorate>
+	
 	</body>
 </html>
