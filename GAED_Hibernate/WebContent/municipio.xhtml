@@ -10,17 +10,30 @@
 	<link rel="stylesheet" href="styles/layout_crud.css" type="text/css" />
 </h:head>
 <body>
-	<div align="center">
+
+<ui:decorate template="/header.xhtml">
+		<ui:define name="center">
+		
+		<h2>Lista de Municípios</h2>
+		
+		<div id="Lista">
+		<p:separator />
+		
+		<p:toolbar styleClass="toolbarAluno">
+			<f:facet name="left">
+				<p:commandButton value="Cadastrar" type="button" onclick="PF('dialogCadastrar').show();" icon="ui-icon-plusthick" />
+			</f:facet>
+		</p:toolbar>
+		
+		<p:growl id="growl" showDetail="true" life="4000" />
+
 		<h:form id="formPrincipal">
 			<p:dataTable var="lista" value="#{MunicipioBean.municipios}"
-				id="tabelaMunicipio" resizableColumns="true" reflow="true" rows="5"
+				id="tabelaMunicipio" resizableColumns="true" reflow="true" rows="10"
 				emptyMessage="Nenhum registro encontrado" paginator="true"
 				paginatorPosition="bottom" styleClass="dataTablePrincipal">
 
-				<f:facet name="header">Lista de Municipio - Unidade Federativa 
-				</f:facet>
-
-				<p:column headerText="ID" sortBy="#{lista.id}"
+				<p:column headerText="ID" sortBy="#{lista.id}" style="width:130px"
 					filterBy="#{lista.id}">
 					<h:outputText value="#{lista.id}" />
 				</p:column>
@@ -32,20 +45,22 @@
 					filterBy="#{lista.uf.nome}">
 					<h:outputText value="#{lista.uf.nome}" />
 				</p:column>
-				<p:column headerText="Ações">
-
-					<p:commandButton value="Alterar" update=":formAlterar"
+				
+				<p:column  style="width:60px">
+					<p:commandButton  update=":formAlterar" id="botaoAlterar"
 						oncomplete="PF('dialogAlterar').show();" icon="ui-icon-pencil">
 						<f:setPropertyActionListener target="#{MunicipioBean.municipio}"
 							value="#{lista}" />
 					</p:commandButton>
+					<p:tooltip id="toolTipAlterar" for="botaoAlterar" value="Alterar cadastro" escape="false" />
 
-					<p:commandButton value="Excluir"
-						actionListener="#{MunicipioBean.excluir(lista)}"
-						update=":formPrincipal:tabelaMunicipio" icon="ui-icon-closethick">
+					<p:commandButton actionListener="#{MunicipioBean.excluir(lista)}" id="botaoExcluir"
+						update=":formPrincipal:tabelaMunicipio" icon="ui-icon-trash">
 						<p:confirm header="Excluir Municipio" message="Deseja excluir?"
 							icon="ui-icon-alert" />
 					</p:commandButton>
+					<p:tooltip id="toolTipExcluir" for="botaoExcluir" value="Excluir Município" escape="false" />
+					
 					<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
 						<p:commandButton value="Sim" type="button"
 							styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
@@ -55,18 +70,24 @@
 
 				</p:column>
 				<f:facet name="footer">
-        			Total cadastrado #{fn:length(MunicipioBean.municipios)} Municipio
+        			Total cadastrado #{fn:length(MunicipioBean.municipios)} Municipios
     			</f:facet>
 			</p:dataTable>
 		</h:form>
-		<h:panelGrid columns="1" cellpadding="5">
-			<p:commandButton value="Cadastrar" type="button"
-				onclick="PF('dialogCadastrar').show();" icon="ui-icon-disk" />
-		</h:panelGrid>
+		
+		
 		<p:dialog header="Cadastrar" widgetVar="dialogCadastrar" modal="true"
-			resizable="true" id="formCad" styleClass="dialogCadastrar">
-			<h:form id="formCadastrar">
+			resizable="true" id="formCadMini" appendTo="@(body)" styleClass="dialogCadastrar">
+			<h:form id="formCadastrar" styleClass="formCadastrar">
 				<p:focus context="@form" />
+				
+				<p:growl id="growl" showDetail="true" life="4000" />
+				<h:outputText value="Campos obrigatórios * "
+						style="font-size: 10px !important; top: 5px !important" />
+
+					<h4>Dados do Município</h4>
+					<p:separator />
+				
 				<p:panelGrid id="panelCadastrar" columns="3">
 					<p:outputLabel for="nome" value="Nome:" />
 					<p:inputText value="#{MunicipioBean.municipio.nome}"
@@ -75,29 +96,42 @@
 					<p:messages for="nome" display="icon" closable="true" />
 
 					<p:outputLabel for="municipio" value="Estado:" />
-					<h:selectOneMenu value="#{MunicipioBean.municipio.uf}">
+					<p:selectOneMenu value="#{MunicipioBean.municipio.uf}">
 						<f:selectItem itemLabel="-- Selecione --" noSelectionOption="true" />
 						<f:selectItems value="#{UFBean.ufs}" var="uf" itemValue="#{uf}"
 							itemLabel="#{uf.nome}" required="true" id="municipio" />
-					</h:selectOneMenu>
+					</p:selectOneMenu>
 					<p:messages for="municipio" display="icon" closable="true" />
 				</p:panelGrid>
-				<p:commandButton value="Salvar" id="withIcon"
-					actionListener="#{MunicipioBean.cadastrar}" icon="ui-icon-disk"
-					update=":formPrincipal:tabelaMunicipio @form"
-					oncomplete="closeDialogIfSucess(xhr, status, args, 'dialogCadastrar','formCad')"
-					onsuccess="PF('dialogCadastrar').hide();" />
-				<p:commandButton value="Limpar" update="@form" process="@this">
-					<p:resetInput target="panelCadastrar" />
-				</p:commandButton>
+				
+				<div id="botoes">
+					<p:commandButton value="Salvar" id="withIcon"
+						actionListener="#{MunicipioBean.cadastrar}" icon="ui-icon-disk"
+						update=":formPrincipal:tabelaMunicipio @form growl"
+						oncomplete="closeDialogIfSucess(xhr, status, args, 'dialogCadastrar','formCad')"
+						onsuccess="PF('dialogCadastrar').hide();" />
+					<p:commandButton value="Limpar" update="@form" process="@this" icon="fa fa-eraser">
+						<p:resetInput target="panelCadastrar" />
+					</p:commandButton>
+				</div>
+				
 			</h:form>
 		</p:dialog>
 	</div>
-	<p:dialog header="Alterar" widgetVar="dialogAlterar" modal="true"
-		resizable="true" id="formAlt" styleClass="dialogAlterar">
-		<h:form id="formAlterar">
+	<p:dialog header="Alterar" widgetVar="dialogAlterar" modal="true" id="formAltMini" appendTo="@(body)"
+		resizable="true"  styleClass="dialogAlterar">
+		<h:form id="formAlterar" styleClass="formAlterar" >
 			<p:focus context="@form" />
+			<p:growl id="growl" showDetail="true" life="4000" />
 			<h:inputHidden value="#{MunicipioBean.municipio}" />
+			
+			<h:outputText value="Campos obrigatórios * "
+						style="font-size: 10px !important; top: 5px !important" />
+
+
+					<h4>Dados do Município</h4>
+					<p:separator />	
+			
 			<p:panelGrid id="panelAlterar" columns="3">
 				<p:outputLabel for="nome" value="Nome:" />
 				<p:inputText value="#{MunicipioBean.municipio.nome}" required="true"
@@ -105,22 +139,28 @@
 				<p:messages for="nome" display="icon" closable="true" />
 
 				<p:outputLabel for="municipio" value="Estado:" />
-				<h:selectOneMenu value="#{MunicipioBean.municipio.uf}">
+				<p:selectOneMenu value="#{MunicipioBean.municipio.uf}">
 					<f:selectItem itemLabel="-- Selecione --" noSelectionOption="true" />
 					<f:selectItems value="#{UFBean.ufs}" var="uf" itemValue="#{uf}"
 						itemLabel="#{uf.nome}" required="true" id="municipio" />
-				</h:selectOneMenu>
+				</p:selectOneMenu>
 				<p:messages for="municipio" display="icon" closable="true" />
 			</p:panelGrid>
-			<p:commandButton value="Salvar" id="withIcon"
-				actionListener="#{MunicipioBean.alterar}" icon="ui-icon-disk"
-				update=":formPrincipal:tabelaMunicipio @form"
-				oncomplete="closeDialogIfSucess(xhr, status, args, 'dialogAlterar','formAlt')"
-				onsuccess="PF('dialogAlterar').hide();" />
-			<p:commandButton value="Limpar" update="@form" process="@this">
-				<p:resetInput target="panelAlterar" />
-			</p:commandButton>
+			
+			<div id="botoes">
+				<p:commandButton value="Salvar" id="withIcon"
+					actionListener="#{MunicipioBean.alterar}" icon="ui-icon-disk"
+					update=":formPrincipal:tabelaMunicipio @form growl" 
+					oncomplete="closeDialogIfSucess(xhr, status,   'dialogAlterar','formAlt')"
+					onsuccess="PF('dialogAlterar').hide();" />
+				<p:commandButton value="Limpar" update="@form" process="@this" icon="fa fa-eraser">
+					<p:resetInput target="panelAlterar" />
+				</p:commandButton>
+			</div>
 		</h:form>
 	</p:dialog>
+</ui:define>
+</ui:decorate>	
+	
 </body>
 </html>

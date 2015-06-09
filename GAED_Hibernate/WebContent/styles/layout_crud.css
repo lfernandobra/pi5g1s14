@@ -51,6 +51,16 @@ body{
   	width: 600px !important;
   	position: fixed;
 }
+#formCadMini{
+	height: 350px !important;
+  	width: 400px !important;
+  	position: fixed;
+}
+#formAltMini{
+	height: 350px !important;
+  	width: 400px !important;
+  	position: fixed
+}
 
 #formAlteracaoTurmaCadPequeno{
 	height: 400px !important;
