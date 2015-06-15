@@ -148,7 +148,7 @@
 						<p:outputLabel for="data" value="Data:" />
 						<p:inputMask value="#{OcorrenciaBean.ocorrencia.data}"
 							mask="99/99/9999" placeholder="dd/mm/aaaa" required="true"
-							label="data" id="data"
+							label="data" id="data" size="13"
 							requiredMessage="Data de nascimento deve ser informada!">
 							<f:converter converterId="javax.faces.DateTime" />
 							<f:convertDateTime pattern="dd/MM/yyyy" timeZone="GMT-3" />

@@ -29,14 +29,14 @@ public class AlunoBean extends UsuarioBean implements Serializable{
 	private static final long serialVersionUID = 1L;
 
 	Aluno aluno = new Aluno();
-	Set<Aluno> alunos = new HashSet<Aluno>();
+	List<Aluno> alunos = new ArrayList<Aluno>();
 	Set<Aluno> alunosSemTurma = new HashSet<Aluno>();
 	FotoBean fotoBean = new FotoBean();
 	
 	public AlunoBean(Aluno aluno, List<Aluno> alunos) {
 		super();
 		this.aluno = new Aluno();
-		this.alunos = new HashSet<Aluno>();
+		this.alunos = new ArrayList<Aluno>();
 	}
  
 	//construtor
@@ -113,11 +113,11 @@ public class AlunoBean extends UsuarioBean implements Serializable{
 
 	
 
-	public Set<Aluno> getAlunos() {
+	public List<Aluno> getAlunos() {
 		return alunos;
 	}
 
-	public void setAlunos(Set<Aluno> alunos) {
+	public void setAlunos(ArrayList<Aluno> alunos) {
 		this.alunos = alunos;
 	}
 

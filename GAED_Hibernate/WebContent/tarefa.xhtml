@@ -136,7 +136,7 @@
 
 							<p:outputLabel for="inicio" value="Inicio:" />
 							<p:inputMask value="#{TarefaBean.tarefa.inicio}"
-								mask="99/99/9999" size="30" placeholder="dd/mm/aaaa"
+								mask="99/99/9999" size="12" placeholder="dd/mm/aaaa"
 								required="true" label="datanasc"
 								requiredMessage="Data de inicio deve ser informada!" id="inicio">
 								<f:converter converterId="javax.faces.DateTime" />
@@ -145,7 +145,7 @@
 
 							<p:outputLabel for="fim" value="Fim:" />
 							<p:inputMask value="#{TarefaBean.tarefa.fim}" mask="99/99/9999"
-								size="30" placeholder="dd/mm/aaaa" required="true"
+								size="12" placeholder="dd/mm/aaaa" required="true"
 								label="datanasc" id="fim"
 								requiredMessage="Data final deve ser informada!">
 								<f:converter converterId="javax.faces.DateTime" />
