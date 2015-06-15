@@ -229,7 +229,9 @@
                                                         <f:converter converterId="disciplinaConverter" />
                                                 </p:selectCheckboxMenu>
                                 </p:panelGrid>
-                                <p:commandButton value="Salvar" id="withIcon"
+                                
+                                <div id="botoes">
+                                 <p:commandButton value="Salvar" id="withIcon"
                                         actionListener="#{TurmaBean.alterar}" icon="ui-icon-disk"
                                         update=":formPrincipal:tabelaTurma @form"
                                         oncomplete="closeDialogIfSucess(xhr, status, args, 'dialogAlterar','formAlt')"
@@ -237,6 +239,7 @@
                                 <p:commandButton value="Limpar" update="@form" process="@this" icon="fa fa-eraser">
                                         <p:resetInput target="panelAlterar" />
                                 </p:commandButton>
+                                </div>
                         </h:form>
                 </p:dialog>
                 
